@@ -10,12 +10,12 @@ const useStyles = makeStyles({
     title: {
         fontSize: 14,
     },
-    description:{
-        paddingTop:"10px"
+    description: {
+        paddingTop: "10px"
     }
 })
 
-function DiaryCard({title, subtitle, description, color }) {
+function DiaryCard({ title, subtitle, description, color }) {
 
     //Styles
     const classes = useStyles();
@@ -27,35 +27,22 @@ function DiaryCard({title, subtitle, description, color }) {
     const resultString = more ? description.slice(0, 100) + '...' : description;
 
     function ShowMore() {
-        setMore(false);
+        more ? setMore(false) : setMore(true)
     }
 
-    function ShowLess() {
-        setMore(true)
-    }
 
     return (
         <div>
-            <Card className={classes.root} style={{backgroundColor:`${color}`}}>
+            <Card className={classes.root} style={{ backgroundColor: `${color}` }}>
                 <CardContent>
                     <Typography variant="h5">{title}</Typography>
                     <Typography color="textSecondary">{subtitle}</Typography>
                     <Typography variant="body2" className={classes.description}>{resultString}</Typography>
                 </CardContent>
 
-
-                {
-                    more ?
-
-                        <CardActions>
-                            <Button size="small" onClick={ShowMore}>Show More</Button>
-                        </CardActions>
-                        :
-
-                        <CardActions>
-                            <Button size="small" onClick={ShowLess}>Show Less</Button>
-                        </CardActions>
-                }
+                <CardActions>
+                    <Button size="small" onClick={ShowMore}>Show {more ? "MORE" : "LESS"}</Button>
+                </CardActions>
 
             </Card>
         </div>

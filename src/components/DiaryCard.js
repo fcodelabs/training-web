@@ -21,7 +21,7 @@ const DiaryCard = ({tittle, subtitle, description , color}) => {
 
     const showDescription = showMore ? description.slice(0,100)+'...' : description;
 
-    function isShowMore() {
+    function toggleShowMore() {
         setShowMore(!showMore)
     }
 
@@ -39,7 +39,7 @@ const DiaryCard = ({tittle, subtitle, description , color}) => {
             </Typography>
           </CardContent>
           <CardActions>
-          <Button size="small" onClick={isShowMore}>{isShowMore ? 'SHOW MORE' : 'SHOW LESS'}</Button>
+          <Button size="small" onClick={toggleShowMore}>{toggleShowMore ? 'SHOW MORE' : 'SHOW LESS'}</Button>
           </CardActions>
         </Card>
       );

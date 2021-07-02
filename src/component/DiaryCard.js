@@ -13,7 +13,7 @@ import Box from "@material-ui/core/Box";
 export default function DiaryCard({title,subtitle,description,cardColor}) {
   const classes = useStyles();
   const [readmore,setReadMore] =useState(true);
-  const displaydisciption= readmore? description.slice(0,100):description;
+  const displayDiscription= readmore? description.slice(0,100):description;
   const onClick=()=>{
       setReadMore(!readmore);
       console.log("show");
@@ -35,7 +35,7 @@ export default function DiaryCard({title,subtitle,description,cardColor}) {
           </Typography>
 
           <Typography variant="body2" component="p">
-            {displaydisciption}
+            {displayDiscription}
           </Typography>
         </CardContent>
         <CardActions>

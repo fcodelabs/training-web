@@ -1,8 +1,8 @@
 import "./component/DiaryCard";
-import DiaryCard from "./component/DiaryCard";
+import DiaryHome from "./component/DiaryHome";
 
 const App = () => {
-  return <DiaryCard />;
+  return <DiaryHome />;
 };
 
 export default App;

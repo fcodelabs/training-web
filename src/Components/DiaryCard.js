@@ -26,8 +26,8 @@ function DiaryCard({ title, subtitle, description, color }) {
     //Change String Size
     const resultString = more ? description.slice(0, 100) + '...' : description;
 
-    function ShowMore() {
-        more ? setMore(false) : setMore(true)
+    function showMore() {
+        setMore(!more)
     }
 
 

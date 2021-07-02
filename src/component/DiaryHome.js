@@ -17,20 +17,20 @@ export default function DiaryHome() {
   };
 
   return (
-    <Box p={2} bgcolor="background.paper">
-      <form className={classes.root} noValidate autoComplete="off">
+    <form className={classes.root} noValidate autoComplete="off">
+      <Box m={2} pt={2} bgcolor="background.paper" flexDirection="column">
         <TextField
-          underlineShow={true}
+          underlineShow={false}
           color="white"
           id="Title"
           placeholder="Submit New"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          inputStyle={{ color: "white", padding: "0 15px" }}
+          inputStyle={{ color: "white", padding: "0 25px" }}
           style={{ background: "#fed8b1", borderRadius: 25 }}
         />
-        <br />
-        <br />
+      </Box>
+      <Box m={2} pt={2} bgcolor="background.paper" flexDirection="column">
         <TextareaAutosize
           id="Description"
           label="Description"
@@ -43,20 +43,20 @@ export default function DiaryHome() {
           style={{ background: "#fed8b1", borderRadius: 25 }}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <br />
+      </Box>
+      <Box m={2} pt={2} bgcolor="background.paper" flexDirection="column">
         <Button className={classes.btn} size="small" onClick={onClick}>
           Submit
         </Button>
-      </form>
-    </Box>
+      </Box>
+    </form>
   );
 }
 
 const useStyles = makeStyles({
   root: {
     "& > *": {
-      padding: "10px 10px 10px 10px",
-      width: "25ch",
+      width: "200px",
     },
   },
   btn: {
@@ -68,6 +68,4 @@ const useStyles = makeStyles({
     height: 48,
     padding: "0 30px",
   },
-
- 
 });

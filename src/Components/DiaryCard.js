@@ -41,7 +41,7 @@ function DiaryCard({ title, subtitle, description, color }) {
                 </CardContent>
 
                 <CardActions>
-                    <Button size="small" onClick={ShowMore}>Show {more ? "MORE" : "LESS"}</Button>
+                    <Button size="small" onClick={showMore}>Show {more ? "MORE" : "LESS"}</Button>
                 </CardActions>
 
             </Card>

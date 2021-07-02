@@ -39,7 +39,7 @@ const DiaryCard = ({tittle, subtitle, description , color}) => {
             </Typography>
           </CardContent>
           <CardActions>
-          <Button size="small" onClick={toggleShowMore}>{toggleShowMore ? 'SHOW MORE' : 'SHOW LESS'}</Button>
+          <Button size="small" onClick={toggleShowMore}>{showMore ? 'SHOW MORE' : 'SHOW LESS'}</Button>
           </CardActions>
         </Card>
       );

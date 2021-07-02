@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
         margin: theme.spacing(1),
-        width: '25ch',
+        width: '500px',
       },
     },
   }));
@@ -20,6 +20,7 @@ const DairyHome = () => {
     const onClick=(e)=>{
         console.log("title="+title+ " description="+description);
         e.preventDefault();
+        
         
         setDescription("");
         setSubTitle("");
@@ -36,7 +37,7 @@ const DairyHome = () => {
             <TextField id="standard-basic" label="SubTitle" value={subTitle} onChange={(e) =>setSubTitle(e.target.value)}/>
             <br/>
             <label/>
-            <TextareaAutosize aria-label="minimum height" rowsMin={3} placeholder="Description" value={description} onChange={(e) =>setDescription(e.target.value)}/>
+            <TextareaAutosize aria-label="minimum height" rowsMin={8} placeholder="Description" value={description} onChange={(e) =>setDescription(e.target.value)}/>
             <br/>
             <Button color="green"text="submit" onClick={onClick}/>
             </form>

@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button1 from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
     root: {
@@ -27,14 +26,14 @@ const useStyles = makeStyles({
 function DairyCard({title,subtitle,description}) {
 
 
-    const [readmore,setReadMore] =useState(true);
-    const displaydisciption= readmore? description.slice(0,100):description;
+    const [readMore,setReadMore] =useState(true);
+    const displayDescription= readMore? description.slice(0,100):description;
     const onClick=()=>{
-        setReadMore(!readmore);
-        console.log("ddd");
+        setReadMore(!readMore);
+        
     }
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
+    
     return (
         <Card className={classes.root}>
         <CardContent>
@@ -46,12 +45,12 @@ function DairyCard({title,subtitle,description}) {
             {subtitle}
           </Typography>
           <Typography variant="body2" component="p">
-            {displaydisciption}
+            {displayDescription}
             
           </Typography>
         </CardContent>
         <CardActions>
-            <Button text={readmore?"read more":"read less"} onClick={onClick}/>
+            <Button text={readMore?"read more":"read less"} onClick={onClick}/>
             
           
         </CardActions>
@@ -61,9 +60,9 @@ function DairyCard({title,subtitle,description}) {
 
 
 DairyCard.defaultProps={
-    title:'task name',
-    subtitle:'sub task name',
-    description:"I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
+    title:'',
+    subtitle:'',
+    description:"",
 }
 DairyCard.propTypes = {
     title:PropTypes.string,

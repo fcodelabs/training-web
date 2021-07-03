@@ -1,5 +1,6 @@
 import DiaryCard from "./Components/DiaryCard";
-
+import DiaryHome
+ from "./Components/DiaryHome";
 function App() {
   return (
     <div className="App">
@@ -9,6 +10,8 @@ function App() {
       description="Veniam occaecat minim Lorem magna sit pariatur dolore in cillum ad incididunt Lorem.Veniam occaecat minim Lorem magna sit pariatur dolore in cillum ad incididunt Lorem.
       Veniam occaecat minim Lorem magna sit pariatur dolore in cillum ad incididunt Lorem."
       />
+
+      <DiaryHome/>
       
     </div>
   );

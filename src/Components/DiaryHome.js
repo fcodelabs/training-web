@@ -50,18 +50,9 @@ function DiaryHome() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-    //Read title input
-    function titleHandle(e) {
-        setTitle(e.target.value)
-    }
-    //Read description input
-    function descriptionHandle(e) {
-        setDescription(e.target.value);
-    }
-
-    //print data with button
-    function printData(e) {
-        console.log("Title : " + title + "Description : " + description);
+   
+    function onClick(e) {
+        console.log("Title : " + title + " Description : " + description);
         e.preventDefault();
         setTitle("");
         setDescription("");
@@ -69,12 +60,12 @@ function DiaryHome() {
 
     return (
         <div className={classes.root}>
-            <form onSubmit={printData}>
+            <form onSubmit={onClick}>
                 <input
                     type="text"
                     className={classes.title}
                     placeholder="Submit New"
-                    onChange={titleHandle}
+                    onChange={(e)=>{setTitle(e.target.value)}}
                     value={title}
                     required />
 
@@ -84,7 +75,7 @@ function DiaryHome() {
                     rows="5"
                     className={classes.discription}
                     placeholder="Enter Description"
-                    onChange={descriptionHandle}
+                    onChange={(e)=>{setDescription(e.target.value)}}
                     value={description}
                     required /><br></br>
 

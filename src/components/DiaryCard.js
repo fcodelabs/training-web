@@ -4,7 +4,8 @@ import {Card, CardContent , Typography , CardActions , Button } from '@material-
 
 const useStyles = makeStyles({
     root: {
-        width: 275,
+        minWidth: 275,
+        borderRadius: 17,
       },
       title: {
         fontSize: 24,

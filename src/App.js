@@ -27,8 +27,7 @@ function App() {
 
     else {
       let newCardData = { "title": title, "description": description }
-      let newArray = cards.concat(newCardData)
-      setCards(newArray)
+      setCards([...cards, newCardData]);
       setCard(true);
       setTitle("");
       setDescription("")

@@ -16,17 +16,18 @@ function App() {
   function onClick(e) {
     e.preventDefault();
 
-    if (title.trim().length === 0 || description.trim().length === 0) {
-      if (title.trim().length === 0) {
-        console.log("Title is missing")
-      }
-      if (description.trim().length === 0) {
-        console.log("Description is missing")
-      }
+    if (title.trim().length === 0) {
+      console.log("Title is missing");
+      return
     }
+    if (description.trim().length === 0) {
+      console.log("Description is missing")
+      return
+    }
+
     else {
-      let newCardData = {"title" : title, "description": description}
-      let newArray =cards.concat(newCardData)
+      let newCardData = { "title": title, "description": description }
+      let newArray = cards.concat(newCardData)
       setCards(newArray)
       setCard(true);
       setTitle("");

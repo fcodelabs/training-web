@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 
@@ -43,41 +43,28 @@ const useStyle = makeStyles((themes) => ({
     }
 }))
 
-function DiaryHome() {
+function DiaryHome(props) {
 
     const classes = useStyle();
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-
-   
-    function onClick(e) {
-        console.log("Title : " + title + " Description : " + description);
-        e.preventDefault();
-        setTitle("");
-        setDescription("");
-    }
-
     return (
         <div className={classes.root}>
-            <form onSubmit={onClick}>
+            <form onSubmit={props.onClick}>
                 <input
                     type="text"
                     className={classes.title}
                     placeholder="Submit New"
-                    onChange={(e)=>{setTitle(e.target.value)}}
-                    value={title}
-                    required />
-
-
+                    onChange={props.onChangeTitle}
+                    value={props.title}
+                   />
 
                 <textarea
                     rows="5"
                     className={classes.discription}
                     placeholder="Enter Description"
-                    onChange={(e)=>{setDescription(e.target.value)}}
-                    value={description}
-                    required /><br></br>
+                    onChange={props.onChangeDescription}
+                    value={props.description}
+                    /><br></br>
 
                 <Button variant="contained" className={classes.submit} type="Submit" >SUBMIT</Button>
             </form>

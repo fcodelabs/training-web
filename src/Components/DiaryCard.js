@@ -6,6 +6,7 @@ const useStyles = makeStyles({
 
     root: {
         width: "250px",
+        margin:"10px"
     },
     title: {
         fontSize: 14,

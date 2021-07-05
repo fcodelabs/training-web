@@ -1,45 +1,71 @@
 import React ,{useState}from 'react'
-
+import { Save } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from './Button'
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 const useStyles = makeStyles((theme) => ({
     root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '500px',
-      },
+     
     },
+    root1:{
+        background:'linear-gradient(45deg , #FE6B8B , #FF8E53)',
+        border:0,
+        margin:15,
+        
+        borderRadius:15,
+        color:'white',
+        padding:'5px 30px'
+    },
+    textArea1:{
+        background:'linear-gradient(45deg , #FE6B8B , #FF8E53)',
+        width:'95%',
+    }
   }));
 
-const DairyHome = () => {
+const DairyHome = ({onAdd}) => {
     const [title,setTitle] =useState("");
-    const [subTitle,setSubTitle] =useState("");
+    const [add,setAdd]=useState(false);
     const [description,setDescription] =useState("");
     const onClick=(e)=>{
         console.log("title="+title+ " description="+description);
         e.preventDefault();
+        if(!title){
+            console.log('missing title')
+            alert('missing title')
+            return
+        }
+        if(!description){
+            alert('missing discription')
+            console.log('missing discription')
+            return
+        }
+        onAdd({title,description});
+        setAdd(false)
+
         
         
         setDescription("");
-        setSubTitle("");
+        
         setTitle("");
         
         
     }
     const classes = useStyles();
     return (
-        <div>
+        <div className={classes.root1}>
             <form className={classes.root} noValidate autoComplete="off">
-            <TextField id="standard-basic" label="Title" value={title}  onChange={(e) =>setTitle(e.target.value)} />
+            
+            <TextField id="standard-basic" label="Title" value={title}  onChange={(e) =>setTitle(e.target.value)} onFocus={()=>{setAdd(true)} }  />
+            
             <br/>
-            <TextField id="standard-basic" label="SubTitle" value={subTitle} onChange={(e) =>setSubTitle(e.target.value)}/>
+            
             <br/>
             <label/>
-            <TextareaAutosize aria-label="minimum height" rowsMin={8} placeholder="Description" value={description} onChange={(e) =>setDescription(e.target.value)}/>
+            {add&&<TextareaAutosize className={classes.textArea1}  aria-label="minimum height" rowsMin={8} placeholder="Description" value={description} onChange={(e) =>setDescription(e.target.value)} />}
+            
             <br/>
-            <Button color="green"text="submit" onClick={onClick}/>
+            <Button color="green"text="submit" onClick={onClick} startIcon={<Save/>}/>
             </form>
             
             

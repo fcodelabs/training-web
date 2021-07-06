@@ -1,71 +1,88 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import TextField from "@material-ui/core/TextField";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Button from "@material-ui/core/Button";
+import {TextField,Button, TextareaAutosize, Box } from "@material-ui/core";
 
-export default function DiaryHome() {
+const DiaryHome = ({ onAdd }) => {
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [add, setAdd] = useState(false);
   const onClick = (e) => {
-    console.log("title=" + title + " description=" + description);
     e.preventDefault();
-    setTitle("");
+    if (!title) {
+      console.log("Missing Title");
+      alert("Missing Title");
+      return;
+    }
+    if (!description) {
+      alert("Missing Description");
+      console.log("Missing Description");
+      return;
+    }
+    onAdd({ title, description });
+    setAdd(false);
     setDescription("");
+    setTitle("");
   };
 
+  
   return (
-    <form className={classes.root} noValidate autoComplete="off">
-      <Box m={2} pt={2} bgcolor="background.paper" flexDirection="column">
+    <div className={classes.root}>
+      <form className={classes.root} noValidate autoComplete="off">
+        <Box m={2} pt={2}  flexDirection="column">
         <TextField
-          underlineShow={false}
-          color="white"
-          id="Title"
+          id="standard-basic"
           placeholder="Submit New"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          inputStyle={{ color: "white", padding: "0 25px" }}
-          style={{ background: "#fed8b1", borderRadius: 25 }}
+          onFocus={() => {
+            setAdd(true);
+          }}
         />
-      </Box>
-      <Box m={2} pt={2} bgcolor="background.paper" flexDirection="column">
-        <TextareaAutosize
-          id="Description"
-          label="Description"
-          variant="filled"
-          color="secondary"
-          aria-label="minimum height"
-          rowsMin={4}
-          placeholder="Enter Description"
-          value={description}
-          style={{ background: "#fed8b1", borderRadius: 25 }}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </Box>
-      <Box m={2} pt={2} bgcolor="background.paper" flexDirection="column">
-        <Button className={classes.btn} size="small" onClick={onClick}>
-          Submit
-        </Button>
-      </Box>
-    </form>
-  );
-}
+        </Box>
 
-const useStyles = makeStyles({
+        <Box m={2} pt={2} flexDirection="column">
+        {add && (
+          <TextareaAutosize
+            className={classes.textArea}
+            aria-label="minimum height"
+            rowsMin={4}
+            placeholder="Enter Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        )}
+        </Box>
+
+        <Button className={classes.btn} size="small" onClick={onClick} >
+          SUBMIT</Button>
+      </form>
+    </div>
+  );
+};
+
+const useStyles = makeStyles((theme) => ({  
   root: {
-    "& > *": {
-      width: "200px",
-    },
+    background: "linear-gradient(50deg ,#ffffff ,#4169e1)",   
+    margin: 15,
+    borderRadius: 15,
+    color: "white",
+    padding: "5px 30px",
+  },
+  textArea: {
+    background: "linear-gradient(50deg ,#ffffff ,#4169e1)",
+    borderRadius: 15,
+    width: "95%",
   },
   btn: {
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    background: "linear-gradient(120deg, #615259 , #975474)",
     border: 0,
     borderRadius: 3,
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     color: "white",
-    height: 48,
-    padding: "0 30px",
+    height: 35,
+    padding: "5px 30px",
   },
-});
+}));
+
+export default DiaryHome;

@@ -1,74 +1,83 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import {Card,  CardActions, CardContent, Typography, Button, Box  } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import PropTypes from 'prop-types'
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 
-
-
-export default function DiaryCard({title,subtitle,description,cardColor}) {
+export default function DiaryCard({ title, subtitle, description }) {
   const classes = useStyles();
-  const [readmore,setReadMore] =useState(true);
-  const displayDiscription= readmore? description.slice(0,100):description;
-  const onClick=()=>{
-      setReadMore(!readmore);
-      console.log("show");
-  }
-
+  const [showMore, setShowMore] = useState(true);
+  const displayDescription =
+    description.length > 100
+      ? showMore
+        ? description.slice(0, 100) + "..."
+        : description
+      : description;
+  const onClick = () => {
+    setShowMore(!showMore);
+  };
+ 
   return (
-    <Box p={1} bgcolor="background.paper">
+    <Box p={1} >
       <Card className={classes.root} variant="outlined">
         <CardContent>
-          <Typography variant="h5" component="h2">
+          <Typography 
+          variant="h5" 
+          component="h2"
+          >
            {title}
           </Typography>
           <Typography
-            className={classes.title}
+            className={classes.title} 
             color="textSecondary"
             gutterBottom
           >
             {subtitle}
           </Typography>
-
           <Typography variant="body2" component="p">
-            {displayDiscription}
+            {displayDescription}
           </Typography>
         </CardContent>
         <CardActions>
-         
-          <Button className={classes.btn} size="small" text={readmore?"read more":"read less"} onClick={onClick}>
-            Show More
-          </Button>
-        </CardActions>
+        {description.length > 100 ? (    
+          <Button className={classes.btn}
+            text={showMore?"read more":"read less"}
+            onClick={onClick}
+          />
+        ) : (
+          ""
+        )}
+      </CardActions>
       </Card>
     </Box>
   )
 }
 
-DiaryCard.defaultProps={
-  title:'Task-Name',
-  subtitle:'SubTask-Name',
-  description:'Clarissa is a tragic heroine, pressured by her unscrupulous nouveau-riche family to marry a wealthy. Clarissa is a tragic heroine, pressured by her unscrupulous nouveau-riche family to marry a wealthy.',
-  cardColor:'white',
-}
+DiaryCard.defaultProps = {
+  title: "",
+  subtitle: "",
+  description: "",
+};
 DiaryCard.propTypes = {
-  title:PropTypes.string,
-  subtitle:PropTypes.string,
-  description:PropTypes.string,
-  cardColor:PropTypes.string,
-  
-}
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  description: PropTypes.string,
+};
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 175,
-    borderRadius: 3,
-    borderColor: "#ffffff",
-    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    width: 330,
+    background: "linear-gradient(75deg , #E58C8A , #FF8E53)",
+    wordWrap: "break-word",
+    margin: 5,
+    minHeight: 240,
+
+    borderRadius: 15,
+    color: "white",
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
   },
   title: {
     fontSize: 14,
@@ -76,13 +85,6 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-  btn: {
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-    border: 0,
-    borderRadius: 3,
-    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-    color: "white",
-    height: 48,
-    padding: "0 30px",
-  },
+  des: {},
 });
+

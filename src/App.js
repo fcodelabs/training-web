@@ -1,36 +1,37 @@
 import React, { useState } from "react";
-import DiaryCard from "./Components/DiaryCard";
+import { useSelector, useDispatch } from 'react-redux';
+import DiaryCard from '../src/Components/DiaryCard';
 import DiaryHome from "./Components/DiaryHome";
+
 
 function App() {
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  //read input data
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
 
-  //State for show new card
-  const [card, setCard] = useState(false);
 
-  //Object Array to map cards
-  const [cards, setCards] = useState([])
+  //Dispatch
+  const dispatch = useDispatch();
+
+  //Subscribe
+  const cards = useSelector(state => state.cards);
 
   function onClick(e) {
     e.preventDefault();
 
-    if (title.trim().length === 0) {
+    if (newTitle.trim().length === 0) {
       console.log("Title is missing");
       return
     }
-    if (description.trim().length === 0) {
+    if (newDescription.trim().length === 0) {
       console.log("Description is missing")
       return
     }
-
     else {
-      let newCardData = { "title": title, "description": description }
-      setCards([...cards, newCardData]);
-      setCard(true);
-      setTitle("");
-      setDescription("")
+      dispatch({ type: "addNew", sendTitle: newTitle, sendDescription: newDescription, status: true });
+      setNewTitle("");
+      setNewDescription("")
     }
   }
 
@@ -38,26 +39,26 @@ function App() {
     <div className="App">
 
       <DiaryHome
+        onChangeTitle={(e) => { setNewTitle(e.target.value) }}
+        onChangeDescription={(e) => { setNewDescription(e.target.value) }}
+        title={newTitle}
+        description={newDescription}
         onClick={onClick}
-        onChangeTitle={(e) => { setTitle(e.target.value) }}
-        onChangeDescription={(e) => { setDescription(e.target.value) }}
-        title={title}
-        description={description} />
-
-      {card ?
-        cards.map((cards, index) => {
+      />
+      {
+        cards.slice(1).map((cards, index) => {
           return (
-            <div key={index}>
-              <DiaryCard title={cards.title} description={cards.description} subtitle="Akash" color="#e3f2fd" />
-            </div>
+
+            <DiaryCard key={index + 1} title={cards.title} description={cards.description} color={"#bbdefb"} />
+
           )
         })
+      }
 
-        :
-        <div><h5>Nothing to Show</h5></div>}
     </div>
   );
 }
+
 
 export default App;
 

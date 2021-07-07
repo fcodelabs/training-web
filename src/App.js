@@ -1,32 +1,15 @@
-import { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import './App.css';
 import DiaryCard from './components/DiaryCard';
 import DiaryHome from './components/DiaryHome';
+import {connect} from 'react-redux';
 
 
 
-function App() {
-  const[ notes , setNotes ] = useState([
-    // {
-    //   tittle: 'This is task 1',
-    //   description: 'this is the descriptin of task 1'
-    // },
-    // {
-    //   tittle: 'Task2',
-    //   description: 'this is the description of task 2'
-    // }
-  ]);
-
-  const addTask = (task) => {
-    const id = Math.floor(Math.random() * 10000)+1
-    const newTask = {id, ...task}
-    setNotes([...notes, newTask])
-  }
-
+function App({notes}) {
   return (
     <container>
-      <DiaryHome onAdd={addTask}/>
+      <DiaryHome />
       {notes.length > 0 ?
       (<Grid container spacing={1}>
         {notes.map((note)=>(
@@ -39,4 +22,8 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  notes: state.notes
+})
+
+export default connect(mapStateToProps)(App);

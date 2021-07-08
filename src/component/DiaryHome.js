@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import {connect} from 'react-redux';
 import {TextField,Button, TextareaAutosize, Box } from "@material-ui/core";
 
-const DiaryHome = ({ onAdd }) => {
+const DiaryHome = ({ createNew }) => {
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [add, setAdd] = useState(false);
+  
   const onClick = (e) => {
     e.preventDefault();
     if (!title) {
@@ -19,30 +20,32 @@ const DiaryHome = ({ onAdd }) => {
       console.log("Missing Description");
       return;
     }
-    onAdd({ title, description });
-    setAdd(false);
+
+    const id = Math.floor(Math.random() * 10000)+1
+    createNew({id, title , description})
     setDescription("");
     setTitle("");
+   
   };
 
   
   return (
     <div className={classes.root}>
-      <form className={classes.root} noValidate autoComplete="off">
+      <form className={classes.root} noValidate autoComplete="off" >
         <Box m={2} pt={2}  flexDirection="column">
         <TextField
           id="standard-basic"
           placeholder="Submit New"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          onFocus={() => {
-            setAdd(true);
-          }}
+          // onFocus={() => {
+          //   setAdd(true);
+          // }}
         />
         </Box>
 
         <Box m={2} pt={2} flexDirection="column">
-        {add && (
+        {/* {add && ( */}
           <TextareaAutosize
             className={classes.textArea}
             aria-label="minimum height"
@@ -51,7 +54,7 @@ const DiaryHome = ({ onAdd }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-        )}
+        {/* )} */}
         </Box>
 
         <Button className={classes.btn} size="small" onClick={onClick} >
@@ -60,6 +63,15 @@ const DiaryHome = ({ onAdd }) => {
     </div>
   );
 };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createNew: ({id, tittle , description})=>dispatch({
+          type:"newCard",
+          payload: {id,tittle , description}
+      })
+  }
+}
 
 const useStyles = makeStyles((theme) => ({  
   root: {
@@ -85,4 +97,5 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default DiaryHome;
+
+export default connect(null,mapDispatchToProps)(DiaryHome);

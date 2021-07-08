@@ -1,13 +1,12 @@
 import DiaryHome from "./component/DiaryHome";
 import DiaryCard from "./component/DiaryCard";
-import {connect} from 'react-redux';
+import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 
-
-function App({cards}) {
+function App() {
   const classes = useStyles();
-  //const cards = useSelector(state => state.cards);
+  const cards = useSelector((state) => state.cards);
   // const addCard = (card) => {
   //   const id = Math.floor(Math.random() * 1000) + 1;
   //   const newCard = { id, ...card };
@@ -17,7 +16,7 @@ function App({cards}) {
   return (
     <div className={classes.root}>
       <h1 className="h1">HOME</h1>
-      <DiaryHome  />
+      <DiaryHome />
       <div className={classes.cardsList}>
         <Box
           display="flex"
@@ -52,10 +51,6 @@ function App({cards}) {
   );
 }
 
-const mapStateToProps = state => ({
-  cards: state.cards
-})
-
 const useStyles = makeStyles({
   root: {
     margin: "auto",
@@ -63,13 +58,11 @@ const useStyles = makeStyles({
     minHeight: "800px",
     color: "white",
   },
-  
+
   cardsList: {
     width: "100%",
     minHeight: "100px",
   },
 });
 
-
-
-export default connect(mapStateToProps)(App);
+export default App;

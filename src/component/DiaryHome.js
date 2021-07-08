@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {connect} from 'react-redux';
-import {TextField,Button, TextareaAutosize, Box } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { TextField, Button, TextareaAutosize, Box } from "@material-ui/core";
 
-const DiaryHome = ({ createNew }) => {
+const DiaryHome = ({ onAdd }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  
+  const [add, setAdd] = useState(false);
   const onClick = (e) => {
     e.preventDefault();
     if (!title) {
@@ -20,62 +21,56 @@ const DiaryHome = ({ createNew }) => {
       console.log("Missing Description");
       return;
     }
-
-    const id = Math.floor(Math.random() * 10000)+1
-    createNew({id, title , description})
+    dispatch({
+      type: "createNew",
+      sendTitle: title,
+      sendDescription: description,
+      status: true,
+    });
+    setAdd(false);
     setDescription("");
     setTitle("");
-   
   };
 
-  
   return (
     <div className={classes.root}>
-      <form className={classes.root} noValidate autoComplete="off" >
-        <Box m={2} pt={2}  flexDirection="column">
-        <TextField
-          id="standard-basic"
-          placeholder="Submit New"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          // onFocus={() => {
-          //   setAdd(true);
-          // }}
-        />
+      <form className={classes.root} noValidate autoComplete="off">
+        <Box m={2} pt={2} flexDirection="column">
+          <TextField
+            id="standard-basic"
+            placeholder="Submit New"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            onFocus={() => {
+              setAdd(true);
+            }}
+          />
         </Box>
 
         <Box m={2} pt={2} flexDirection="column">
-        {/* {add && ( */}
-          <TextareaAutosize
-            className={classes.textArea}
-            aria-label="minimum height"
-            rowsMin={4}
-            placeholder="Enter Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        {/* )} */}
+          {add && (
+            <TextareaAutosize
+              className={classes.textArea}
+              aria-label="minimum height"
+              rowsMin={4}
+              placeholder="Enter Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          )}
         </Box>
 
-        <Button className={classes.btn} size="small" onClick={onClick} >
-          SUBMIT</Button>
+        <Button className={classes.btn} size="small" onClick={onClick}>
+          SUBMIT
+        </Button>
       </form>
     </div>
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    createNew: ({id, tittle , description})=>dispatch({
-          type:"newCard",
-          payload: {id,tittle , description}
-      })
-  }
-}
-
-const useStyles = makeStyles((theme) => ({  
+const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(50deg ,#ffffff ,#4169e1)",   
+    background: "linear-gradient(50deg ,#ffffff ,#4169e1)",
     margin: 15,
     borderRadius: 15,
     color: "white",
@@ -97,5 +92,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-export default connect(null,mapDispatchToProps)(DiaryHome);
+export default DiaryHome;

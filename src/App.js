@@ -2,11 +2,13 @@ import Grid from '@material-ui/core/Grid';
 import './App.css';
 import DiaryCard from './components/DiaryCard';
 import DiaryHome from './components/DiaryHome';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 
 
-function App({notes}) {
+function App() {
+
+  const notes = useSelector(state=>state.notes)
   return (
     <container>
       <DiaryHome />
@@ -22,8 +24,4 @@ function App({notes}) {
   );
 }
 
-const mapStateToProps = state => ({
-  notes: state.notes
-})
-
-export default connect(mapStateToProps)(App);
+export default App;

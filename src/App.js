@@ -3,20 +3,29 @@ import "./App.css";
 import DairyHome from "./Components/DairyHome";
 import { useState } from "react";
 import DairyCard from "./Components/DairyCard";
-import AppBar from "@material-ui/core/AppBar";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import { CenterFocusStrong } from "@material-ui/icons";
 
+import { useSelector, useDispatch } from "react-redux";
 function App() {
+  const dispatch = useDispatch();
+
+  const cards1 = useSelector((state) => state.cards);
+
   const classes = useStyles();
-  const [cards, setCards] = useState([]);
+
   const addTask = (task) => {
     const id = Math.floor(Math.random() * 1000) + 1;
-    const newCard = { id, ...task };
+
     console.log(task);
-    setCards([...cards, newCard]);
-    console.log(cards);
+    dispatch({
+      id: id,
+      type: "ADD_NEW",
+      subtitle: task.subtitle,
+      title: task.title,
+      description: task.description,
+    });
   };
   return (
     <div className={classes.root}>
@@ -31,8 +40,8 @@ function App() {
           flexWrap="wrap"
           className={classes.container}
         >
-          {cards.length > 0 ? (
-            cards.map((card) => (
+          {cards1.length > 0 ? (
+            cards1.map((card) => (
               <Box p={1}>
                 <DairyCard
                   title={card.title}

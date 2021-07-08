@@ -46,7 +46,8 @@ function App() {
         onClick={onClick}
       />
       {
-        cards.slice(1).map((cards, index) => {
+        cards.map((cards, index) => {
+          
           return (
 
             <DiaryCard key={index + 1} title={cards.title} description={cards.description} color={"#bbdefb"} />

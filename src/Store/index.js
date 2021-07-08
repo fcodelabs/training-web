@@ -2,12 +2,7 @@ import { createStore } from "redux";
 
 const initialState = {
     visible: false,
-    cards: [
-        {
-            title: "",
-            description: ""
-        }
-    ],
+    cards: [],
 
 }
 

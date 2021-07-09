@@ -49,9 +49,8 @@ export default function DiaryCard({ title, subtitle, description }) {
           {description.length > 100 ? (
             <Button
               className={classes.btn}
-              text={showMore ? "read more" : "read less"}
               onClick={showMoreClick}
-            />
+            >Show {showMore ? "MORE" : "LESS"}</Button>
           ) : (
             ""
           )}
@@ -79,14 +78,17 @@ const useStyles = makeStyles({
     wordWrap: "break-word",
     margin: 5,
     minHeight: 240,
-
     borderRadius: 15,
     color: "white",
   },
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
+  btn: {
+    background: "linear-gradient(75deg , #ff5050 28%, #ff0066 100%)",
+    borderRadius: 3,
+    color: "white",
+    height: 30,
+    padding: "5px 10px",
   },
 });

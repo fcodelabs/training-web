@@ -38,7 +38,7 @@ const DiaryHome = ({ onAdd }) => {
         <Box m={2} pt={2} flexDirection="column">
           <TextField
             id="standard-basic"
-            placeholder="Submit New"
+            placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             onFocus={() => {

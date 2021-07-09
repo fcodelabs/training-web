@@ -3,6 +3,8 @@ import DiaryCard from "./component/DiaryCard";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import Grid from '@material-ui/core/Grid';
+import 'firebase/firestore';
 
 function App() {
   const classes = useStyles();
@@ -17,6 +19,7 @@ function App() {
     <div className={classes.root}>
       <h1 className="h1">HOME</h1>
       <DiaryHome />
+      <Grid container spacing={1}>
       <div className={classes.cardsList}>
         <Box
           display="flex"
@@ -28,6 +31,7 @@ function App() {
         >
           {cards.length > 0 ? (
             cards.map((card) => (
+              <Grid item xs>
               <Box p={2} m={2}>
                 <DiaryCard
                   title={card.title}
@@ -35,6 +39,7 @@ function App() {
                   description={card.description}
                 />
               </Box>
+              </Grid>
             ))
           ) : (
             <Box p={2} m={2}>
@@ -47,6 +52,7 @@ function App() {
           )}
         </Box>
       </div>
+      </Grid>
     </div>
   );
 }

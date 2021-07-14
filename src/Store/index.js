@@ -1,25 +1,21 @@
-import { createStore } from "redux";
+import { applyMiddleware, compose, createStore,combineReducers } from "redux";
+import createSagaMiddleware from "@redux-saga/core";
+import rootSaga from "../Saga/Saga";
+import nameReducer from "./Reducers/UserReduceer";
+import reducerFunction from "./Reducers/CardReducer";
 
-const initialState = {
-    visible: false,
-    cards: [],
 
-}
+const sagaMiddleware = createSagaMiddleware();
 
-const reducerFunction = (state = initialState, action) => {
+const rootReducer = combineReducers({
+    usr : nameReducer,
+    crd: reducerFunction,
+  })
 
-    switch (action.type) {
-        case 'addNew':
-            let newData = { title: action.sendTitle, description: action.sendDescription }
-            return {
-                cards: [...state.cards, newData],
-            }
-        default:
-            return state
 
-    }
-}
 
-const store = createStore(reducerFunction);
+const store = createStore(rootReducer, compose(applyMiddleware(sagaMiddleware)));
+
+sagaMiddleware.run(rootSaga)
 
 export default store;

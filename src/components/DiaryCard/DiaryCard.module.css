@@ -1,0 +1,25 @@
+.container{
+    padding: 1rem;
+    border-radius: 20px;
+    margin: 10px;
+    overflow-wrap: break-word;
+}
+
+.title{
+    font-size: 2rem;  
+}
+
+.subtitle{
+    color: gray;
+}
+
+.description{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.showMore{
+    font-weight: medium;
+    margin-top: 20px;
+    font-size:15px;
+}

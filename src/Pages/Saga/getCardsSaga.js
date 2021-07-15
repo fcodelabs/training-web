@@ -1,10 +1,10 @@
 import { take, put} from 'redux-saga/effects';
-import firebase from '../config'
+import fb from "../../utils/config"
 import { eventChannel } from 'redux-saga'
-import {GET_CARDS}  from "./DiaryType"
+import {GET_CARDS}  from "../Actions/diaryType"
 
 export default function* watchForCards() {
-    const ref=firebase.firestore().collection("cards")
+    const ref=fb.firestore().collection("cards")
     const channel = eventChannel((emit)=>ref.onSnapshot(emit))
     while (true){
         try{
@@ -14,8 +14,8 @@ export default function* watchForCards() {
             })
             yield put({type:GET_CARDS,payload:result})
         }
-        catch(err){
-            console.error('socket error:', err)
+        catch{
+            console.error('ERROR')
         }
     } 
 }

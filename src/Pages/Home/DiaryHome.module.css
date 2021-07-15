@@ -1,0 +1,60 @@
+.container{
+    margin: 30px 20px 0px 20px;
+}
+
+.cardContainer{
+    margin-top: 30px;
+}
+
+input{
+    outline:none;
+    border: 0px ;
+    border-radius: 20px;
+    height: 45px;
+    padding-left: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #b3d4fc71;
+    color: white;
+    font-size: 20px;
+    
+}
+
+::placeholder {
+    color: white;
+}
+  
+textarea{
+    color: white;
+    outline: none;
+    border: 0px ;
+    resize: none;
+    border-radius: 20px;
+    background-color: #b3d4fc71;
+    padding: 10px 0px 0px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+.button:hover{
+    background-color: #3690fd;
+    grid-template-columns: auto auto auto;
+}
+
+.submitButton{
+    /* grid-area: footer; */
+    border-radius: 20px;
+    background-color: #7db6fc;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 45px; 
+    cursor: pointer;
+}
+
+
+
+  

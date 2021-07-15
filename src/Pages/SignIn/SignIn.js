@@ -4,13 +4,12 @@ import TextField from '@material-ui/core/TextField';
 import styles from './SignIn.module.css';
 
 function SignIn() {
-    let history = useHistory();
     const [nickName, setNickName] = useState("")
     const [error, setError] = useState()
-    const onClk = ()=>{
+    const onNickName = ()=>{
         console.log(nickName)
         if(!nickName){
-            setError("required*")
+            setError("Required*")
         }else{setError("")}
     }
     const submit = ()=>{
@@ -19,29 +18,26 @@ function SignIn() {
             history.push("/home")
             return
         }
-        alert("Input everything")
+        alert("Input All")
     }
-
     const random=()=>{
-        let names = ["A","B","C","D","E","F","G","H"]
+        let names = ["A","B","C","D","E","F"]
         setNickName(names[Math.floor((Math.random() * names.length) + 1)])
     }
+    let history = useHistory();
 
-	 return(
-        <div className={styles.root}>
-            <div className={styles.container}>
-                {/* <div className={styles.imgContainer}>
-                    <img className={styles.img} src="/icon.png" alt="APP Icon"/>
-                    <div>
-                        <span style={{"color":"white",marginLeft:'15px'}}>Dear Diary</span>
-                    </div>
-                </div> */}
+    return (
+        <div className={styles.mainContainer}>
+            <div className={styles.container}>                
                 <div className={styles.signInContainer}>
-                    <div className={styles.signInDiv}>
-                        <span>
-                            Sign In
-                        </span>
+                <div className={styles.iconContainer}>
+                    <img className={styles.img} src="/logo.svg" alt="icon"/>                    
+                        <span style={{"color":"black",marginLeft:'15px'}}>Dear Diary</span>                   
+                </div>
+                    <div className={styles.txt}>                        
+                            Sign In                        
                     </div>
+
                     <div  className={styles.textContainer}>
                         <div style={{width:'70%'}}>
                             <TextField
@@ -52,12 +48,11 @@ function SignIn() {
                             helperText={error}
                             variant="outlined"
                             placeholder="Your Nickname"
-                            onBlur={onClk}
+                            onBlur={onNickName}
                             value={nickName}
-                            onChange={e=>{setNickName(e.target.value);onClk()}}
-                            />
-                        </div>
-                        
+                            onChange={e=>{setNickName(e.target.value);onNickName()}}
+                            />                            
+                        </div>                        
                         <div style={{marginLeft:"20px"}}>
                             <div style={{width:"100px"}} className={styles.btn} onClick={random}>RANDOM</div>
                         </div>
@@ -70,9 +65,7 @@ function SignIn() {
                 </div>
             </div>
         </div>
-   )
+    )
 }
 
-
-
-export default SignIn;
+export default SignIn

@@ -53,7 +53,7 @@ function DiaryHome() {
     return (
         <div className={styles.container}>
 
-            <h1 style={{"color":"white","fontSize":"60px"}}>
+            <h1 style={{"color":"#00606F","fontSize":"60px"}}>
                 Home
             </h1>
 

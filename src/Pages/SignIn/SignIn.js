@@ -20,6 +20,8 @@ function SignIn() {
         }
         alert("Input All")
     }
+    
+
     const random=()=>{
         let names = ["A","B","C","D","E","F"]
         setNickName(names[Math.floor((Math.random() * names.length) + 1)])

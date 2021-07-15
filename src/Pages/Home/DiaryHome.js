@@ -5,7 +5,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import { addCard,getCards } from '../Actions/diaryAction'
 import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
-import DiaryCard from '../../components/DiaryCard/DiaryCard';
+import DiaryCard from '../../Components/DiaryCard/DiaryCard';
 import styles from './DiaryHome.module.css';
 
 function DiaryHome() {

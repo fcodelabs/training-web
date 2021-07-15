@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+import { getCards } from '../redux/DiaryAction'
+import { useHistory } from "react-router-dom";
+import DiaryCard from "./DiaryCard";
+import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import { TextField, Button, TextareaAutosize, Box } from "@material-ui/core";
 
-const DiaryHome = ({ onAdd }) => {
+function DiaryHome () {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const cards = useSelector(state => state.cards)
+  const history = useHistory();
+  
+  //const node = useRef();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [add, setAdd] = useState(false);
+  
+useEffect(() => {
+    dispatch(getCards())
+    if(!localStorage.getItem("nickName")){
+      console.log("Name")
+        history.push("/")
+    }
+})    
+
   const onClick = (e) => {
     e.preventDefault();
     if (!title) {
@@ -25,15 +43,15 @@ const DiaryHome = ({ onAdd }) => {
       type: "createNew",
       sendTitle: title,
       sendDescription: description,
-      status: true,
-    });
-    setAdd(false);
-    setDescription("");
-    setTitle("");
-  };
+      nickName:localStorage.getItem("nickName"),
+      });
+    setDescription("")
+    setTitle("")
+  }
 
   return (
     <div className={classes.root}>
+       <h1 className="h1">HOME</h1>
       <form className={classes.root} noValidate autoComplete="off">
         <Box m={2} pt={2} flexDirection="column">
           <TextField
@@ -64,8 +82,51 @@ const DiaryHome = ({ onAdd }) => {
           SUBMIT
         </Button>
       </form>
+
+      
+      <div>
+      <Grid container spacing={1}>
+      <div className={classes.cardsList}>
+        <Box
+          display="flex"
+          p={2}
+          m={2}
+          css={{ minWidth: 300 }}
+          flexWrap="wrap"
+          className={classes.container}
+        >
+         {cards.length > 0 ? (
+            cards.map((card) => (
+              <Grid item xs>
+              <Box p={2} m={2}>
+                <DiaryCard
+                  title={card.title}
+                  subtitle={card.nickName}
+                  description={card.description}
+                />
+              </Box>
+              </Grid>
+            ))
+          ) : (
+            <Box p={2} m={2}>
+              <DiaryCard
+                title="Nothing to Show"
+                subtitle="Nothing to Show"
+                description={""}
+              />
+            </Box>
+          )}
+        </Box>
+      </div>
+      </Grid>
+      </div>
     </div>
   );
+};
+
+DiaryHome.propTypes = {
+  cards:PropTypes.array,
+  addCard:PropTypes.func
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -89,6 +150,10 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     height: 35,
     padding: "5px 30px",
+  },
+  cardsList: {
+    width: "100%",
+    minHeight: "100px",
   },
 }));
 

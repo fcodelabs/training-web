@@ -8,6 +8,7 @@ const initialState = {
 const reducerFunction = (state = initialState, action) => {
   switch (action.type) {
     case "createNew":
+      console.log("success")
       let newCard = {
         title: action.sendTitle,
         description: action.sendDescription,
@@ -19,6 +20,7 @@ const reducerFunction = (state = initialState, action) => {
     default:
       return state;
   }
+  
 };
 
 const reducer = createStore(reducerFunction);

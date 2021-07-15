@@ -1,0 +1,73 @@
+.btn{
+    background-color: #039be5;
+    color: white;
+    cursor: pointer;
+    padding: 13px 15px 13px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition-duration: 0.5s;
+    text-align: center;
+}
+
+.btn:hover{
+    background-color: #015699;
+}
+
+.signInDiv{
+    color:#039be5;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 400;
+    
+}
+
+.signInContainer{
+    border-radius: 20px;
+    margin-top: 40px;
+    background-color: white;
+    padding: 60px;  
+}
+
+.root{
+    width: 90%;
+    box-sizing: border-box;
+}
+
+@media only screen and (min-width: 1200px) {
+    .container{
+        width: 50%;
+    }
+}
+
+.textContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0px 40px 0px;
+}
+
+.textContainer > * {
+    margin: 1em 0;
+}
+
+.img{
+    width: 50px;
+}
+
+.imgContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px 20px 0px;
+    font-size: 25px;
+}
+
+.mainContainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}

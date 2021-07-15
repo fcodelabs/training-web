@@ -1,0 +1,4 @@
+export const ADD_CARD="ADD_CARD"
+export const GET_CARDS="GET_CARDS"
+export const REDUX_SAGA_ADD_CARD="REDUX_SAGA_ADD_CARD"
+export const REDUX_SAGA_GET_CARDS="REDUX_SAGA_GET_CARDS"

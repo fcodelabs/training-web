@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyCFcUCkdwS1mGMxK9LG4zlt5BgIEExYd9U",
     authDomain: "dear-diary-dinaliindeewari.firebaseapp.com",
     projectId: "dear-diary-dinaliindeewari",
@@ -8,8 +8,8 @@ var firebaseConfig = {
     messagingSenderId: "549545081202",
     appId: "1:549545081202:web:ac8bd323bf755adeb185eb",
     measurementId: "G-L8N4L61805"
-};
+  };
 
 firebase.initializeApp(firebaseConfig);
-  
+
 export default firebase;

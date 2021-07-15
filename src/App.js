@@ -1,14 +1,13 @@
 import DiaryHome from "./component/DiaryHome";
-import DiaryCard from "./component/DiaryCard";
-import { useSelector } from "react-redux";
+import SignIn from "./views/SignIn";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Grid from '@material-ui/core/Grid';
+import {  BrowserRouter as Router, Route,} from "react-router-dom";
 import 'firebase/firestore';
 
 function App() {
   const classes = useStyles();
-  const cards = useSelector((state) => state.cards);
+  //const cards = useSelector((state) => state.cards);
   // const addCard = (card) => {
   //   const id = Math.floor(Math.random() * 1000) + 1;
   //   const newCard = { id, ...card };
@@ -17,42 +16,15 @@ function App() {
 
   return (
     <div className={classes.root}>
-      <h1 className="h1">HOME</h1>
+      <Router><Route exact path="/">
+            <SignIn/>
+      </Route>
+      <Route exact path="/home">
+     
       <DiaryHome />
-      <Grid container spacing={1}>
-      <div className={classes.cardsList}>
-        <Box
-          display="flex"
-          p={2}
-          m={2}
-          css={{ minWidth: 300 }}
-          flexWrap="wrap"
-          className={classes.container}
-        >
-          {cards.length > 0 ? (
-            cards.map((card) => (
-              <Grid item xs>
-              <Box p={2} m={2}>
-                <DiaryCard
-                  title={card.title}
-                  subtitle="Dinali"
-                  description={card.description}
-                />
-              </Box>
-              </Grid>
-            ))
-          ) : (
-            <Box p={2} m={2}>
-              <DiaryCard
-                title="Nothing to Show"
-                subtitle="Nothing to Show"
-                description={""}
-              />
-            </Box>
-          )}
-        </Box>
-      </div>
-      </Grid>
+      
+        </Route></Router>
+     
     </div>
   );
 }
@@ -63,12 +35,8 @@ const useStyles = makeStyles({
     width: "90%",
     minHeight: "800px",
     color: "white",
-  },
-
-  cardsList: {
-    width: "100%",
-    minHeight: "100px",
-  },
+  }
+ 
 });
 
 export default App;

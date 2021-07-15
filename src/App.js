@@ -1,27 +1,20 @@
-import Grid from '@material-ui/core/Grid';
 import './App.css';
-import DiaryCard from './components/DiaryCard';
-import DiaryHome from './components/DiaryHome';
-import {useSelector} from 'react-redux';
-
+import Login from './Pages/Login/Login';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from './Pages/Home/Home';
 
 
 function App() {
-
-  const notes = useSelector(state=>state.notes)
   return (
-    <container>
-      <DiaryHome />
-      {notes.length > 0 ?
-      (<Grid container spacing={1}>
-        {notes.map((note)=>(
-          <Grid item xs={12} md={6} lg={4}>
-            <DiaryCard tittle={note.tittle} description={note.description} subtitle='Ashen' color='cyan'/>
-          </Grid>
-        ))}
-      </Grid>) : ('No Notes to show')}
+    <container style={{ margineLeft: 10 }}>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/home" component={Home} />
+        </Switch>
+      </Router>
     </container>
   );
 }
 
-export default App;
+export default App

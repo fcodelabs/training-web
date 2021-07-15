@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch,useSelector } from "react-redux";
-import { getCards } from '../redux/DiaryAction'
+import { getCards ,addCard} from '../redux/DiaryAction'
 import { useHistory } from "react-router-dom";
 import DiaryCard from "./DiaryCard";
 import PropTypes from 'prop-types';
@@ -38,16 +38,12 @@ useEffect(() => {
       alert("Missing Description");
       console.log("Missing Description");
       return;
-    }
-    dispatch({
-      type: "createNew",
-      sendTitle: title,
-      sendDescription: description,
-      nickName:localStorage.getItem("nickName"),
-      });
+    }else{
+      dispatch(addCard({"title":title,"description":description,"subtitle":localStorage.getItem("nickName")})) 
     setDescription("")
     setTitle("")
-  }
+    setAdd(false);
+  }}
 
   return (
     <div className={classes.root}>

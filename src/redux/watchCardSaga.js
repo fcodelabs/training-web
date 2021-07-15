@@ -1,7 +1,7 @@
 import { take, put} from 'redux-saga/effects';
 import firebase from '../config'
 import { eventChannel } from 'redux-saga'
-import {GET_CARDS}  from "../DiaryType"
+import {GET_CARDS}  from "./DiaryType"
 
 export default function* watchForCards() {
     const ref=firebase.firestore().collection("cards")

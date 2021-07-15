@@ -25,10 +25,10 @@ function* watchForCards() {
         try{
             const result = yield take(channel);
             yield put({type:GET_CARDS,payload:result})
-            console.error('Success:', err)
+            console.error('Success:')
         }
-        catch(err){
-            console.error('Error:', err)
+        catch{
+            console.error('Error:')
         }
     } 
   }
@@ -37,7 +37,8 @@ function* cardsWatcher() {
      yield takeLatest(REDUX_SAGA_GET_CARDS, watchForCards)
 }
 
-function* addCard() {
+export function* addCard(action) {
+    console.log("AddCard",action)
     yield takeLatest(REDUX_SAGA_ADD_CARD, (action)=>addCardtoFirebase(action))
 }
 

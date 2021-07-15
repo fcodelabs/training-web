@@ -1,5 +1,3 @@
-import { createStore } from "redux";
-
 const initialState = {
   visible: false,
   cards: [],
@@ -23,6 +21,6 @@ const reducerFunction = (state = initialState, action) => {
   
 };
 
-const reducer = createStore(reducerFunction);
 
-export default reducer;
+
+export default reducerFunction;

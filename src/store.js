@@ -1,12 +1,12 @@
 import {createStore,applyMiddleware} from "redux"
 import reducer from "../src/redux/Reducer"
-import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga'
-import {homePageSagas} from '../src/component/DiaryHome'
+import {homePageSagas} from './redux'
+import { compose } from "redux"
 import { all, fork } from "@redux-saga/core/effects";
 
 const sagaMiddleware = createSagaMiddleware()
-const store = createStore(reducer,composeWithDevTools(applyMiddleware(sagaMiddleware)))
+const store = createStore(reducer,compose(applyMiddleware(sagaMiddleware)))
 
 function* rootSaga(){
     yield all(homePageSagas.map(s=>fork(s)))

@@ -8,10 +8,10 @@ const initialState = {
 }
 
 const reducerFunction = (state = initialState, action) => {
-    console.log(action)
+   
     switch (action.type) {
         case 'addNew':
-            let newData = { title: action.sendTitle, description: action.sendDescription }
+            let newData = { title: action.sendTitle, description: action.sendDescription, subtitle: action.user }
             return {
                 ...state,
                 cards: [...state.cards, newData],
@@ -23,7 +23,7 @@ const reducerFunction = (state = initialState, action) => {
                 cards: action.data}
 
         case 'setName' :
-
+           
             return {
                 ...state,
                 name:action.sendName

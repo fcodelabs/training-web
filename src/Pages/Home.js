@@ -21,8 +21,6 @@ function Home() {
     const uname = useSelector(state => state.crd.name);
     const cards = useSelector(state => state.crd.cards);
 
-    console.log(uname)
-
     function onClick(e) {
         e.preventDefault();
 
@@ -45,7 +43,6 @@ function Home() {
 
     return (
         <div className="App">
-            <h1>{uname}</h1>
             <MenuAppBar/>
            
             <DiaryHome
@@ -63,7 +60,7 @@ function Home() {
 
                         return (
                             <Grid item xs={12} md={3} key={index + 1}>
-                                <DiaryCard title={cards.title} subtitle={uname} description={cards.description} color={"#bbdefb"} />
+                                <DiaryCard title={cards.title} subtitle={cards.subtitle} description={cards.description} color={"#bbdefb"} />
                             </Grid>
                         )
                     })

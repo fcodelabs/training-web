@@ -20,8 +20,8 @@ function* getCards() {
         querySnapshot.forEach((doc) => {
             let title = doc.data().sendTitle;
             let description = doc.data().sendDescription;
-
-            dbCards.push({ title: title, description: description })
+            let subtitle = doc.data().user;
+            dbCards.push({ title: title, description: description, subtitle:subtitle })
         });
         return dbCards
 

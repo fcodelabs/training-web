@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { Button, Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyle = makeStyles((themes) => ({
@@ -42,6 +43,8 @@ function Login() {
 
     const classes = useStyle();
 
+    const history = useHistory();
+
     const [userName, setUserName] = useState("");
     const [disable, setDisable] = useState(true);
 
@@ -60,9 +63,9 @@ function Login() {
     }
 
     const onSubmit = () => {
-        console.log(userName)
         dispatch({ type: "setName", sendName: userName });
         setDisable(true);
+        history.push({pathname:"home"})
        
     }
 
@@ -76,7 +79,7 @@ function Login() {
                         <TextField variant="outlined" placeholder="Your NickName" value={userName} onChange={onChange} required></TextField>
                         <Button variant="contained" color="primary" className={classes.Button} onClick={randomName}>Random</Button> <br></br>
 
-                        <Button variant="contained" color="primary" className={classes.Button1} type="submit" href="/home" onClick={() => onSubmit()} disabled={disable} >Continue</Button>
+                        <Button variant="contained" color="primary" className={classes.Button1} type="submit"  onClick={() => onSubmit()} disabled={disable} >Continue</Button>
                     </Grid>
                 </Grid>
             </form>

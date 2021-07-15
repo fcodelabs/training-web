@@ -22,11 +22,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MenuAppBar() {
   const classes = useStyles();
-  
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
-
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -43,7 +41,7 @@ export default function MenuAppBar() {
         <Toolbar>
          
           <Typography variant="h6" className={classes.title}>
-            Dear Diary
+            Dear Diary 
           </Typography>
      
             <div>
@@ -72,7 +70,7 @@ export default function MenuAppBar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Log Out</MenuItem>
               </Menu>
             </div>
         

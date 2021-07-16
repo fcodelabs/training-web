@@ -2,11 +2,11 @@ import React,{useState,useEffect,useRef} from 'react'
 import PropTypes from 'prop-types';
 import { useHistory } from "react-router-dom";
 import { useSelector,useDispatch } from 'react-redux'
-import { addCard,getCards } from '../Actions/diaryAction'
+import { addCard,getCards } from './diaryAction'
 import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
 import DiaryCard from '../../Components/DiaryCard/DiaryCard';
-import styles from './DiaryHome.module.css';
+import styles from './diaryHome.module.css';
 
 function DiaryHome() {
 

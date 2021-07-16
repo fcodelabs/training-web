@@ -1,4 +1,4 @@
-import {GET_CARDS} from "../Actions/diaryType"
+import {GET_CARDS} from "../Home/diaryType"
 
 const initialState ={
     cards:[],

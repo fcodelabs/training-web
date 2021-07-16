@@ -1,7 +1,7 @@
 import { take, put} from 'redux-saga/effects';
 import fb from "../../utils/config"
 import { eventChannel } from 'redux-saga'
-import {GET_CARDS}  from "../Actions/diaryType"
+import {GET_CARDS}  from "./diaryType"
 
 export default function* watchForCards() {
     const ref=fb.firestore().collection("cards")

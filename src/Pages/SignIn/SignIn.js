@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
-import styles from './SignIn.module.css';
+import styles from './signIn.module.css';
 
 function SignIn() {
     const [nickName, setNickName] = useState("")

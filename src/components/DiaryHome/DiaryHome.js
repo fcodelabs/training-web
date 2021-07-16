@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField, InputBase, Button } from '@material-ui/core'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addNote } from '../Pages/Actions/notesAction';
+import { addNote } from './actions';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({

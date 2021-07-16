@@ -1,6 +1,6 @@
 import Grid from '@material-ui/core/Grid';
-import DiaryCard from '../../components/DiaryCard';
-import DiaryHome from '../../components/DiaryHome';
+import DiaryCard from '../../components/DiaryCard/DiaryCard';
+import DiaryHome from '../../components/DiaryHome/DiaryHome';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -14,7 +14,8 @@ const Home = () => {
         dispatch({
             type: "GET_LISTS"
         })
-    });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
     const notes = useSelector(state => state.notes.notes)

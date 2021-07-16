@@ -1,9 +1,9 @@
-import { takeEvery, takeLatest, put, } from "@redux-saga/core/effects";
+import { put } from "@redux-saga/core/effects";
 import { collection } from "../../utils/fbConfig";
-import { getnoteList } from "../Actions/notesAction";
+import { getnoteList } from "./actions";
 
 
-function* addCard(data) {
+export function* addCard(data) {
     try {
         yield collection.add(data)
     } catch (error) {
@@ -12,7 +12,7 @@ function* addCard(data) {
 }
 
 
-function* getList() {
+export function* getList() {
     try {
         const notesList = yield collection.get().then((notes) => {
             let cardsList = []
@@ -50,10 +50,3 @@ function* getList() {
     //     console.log(data)
     // }
 }
-
-function* rootSaga() {
-    yield takeEvery('ADD_NOTE', addCard)
-    yield takeLatest('GET_LISTS', getList)
-}
-
-export default rootSaga;

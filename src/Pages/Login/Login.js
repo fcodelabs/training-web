@@ -4,7 +4,7 @@ import { useState } from "react";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { addName } from "../Actions/notesAction";
+import { addName } from "./actions";
 
 const useStyles = makeStyles({
     root: {

@@ -1,9 +1,8 @@
-import { takeEvery, put } from "@redux-saga/core/effects";
-//import firebase from "firebase/app";
-import { collection } from '../Utility/Firebase';
-import { fetchCards } from "../Store/Action/Action";
+import { put } from "@redux-saga/core/effects";
+import { collection } from '../../Utility/Firebase';
+import { fetchCards } from "./cardAction";
 
-function* saveCard(data) {
+export function* saveCard(data) {
 
     try {
         yield collection.add(data)
@@ -13,7 +12,7 @@ function* saveCard(data) {
 }
 
 
-function* getCards() {
+export function* getCards() {
     
     const cards = yield collection.get().then((querySnapshot) => {
         let dbCards = []
@@ -21,7 +20,7 @@ function* getCards() {
             let title = doc.data().sendTitle;
             let description = doc.data().sendDescription;
             let subtitle = doc.data().user;
-            dbCards.push({ title: title, description: description, subtitle:subtitle })
+            dbCards.push({ title: title, description: description, subtitle:subtitle });
         });
         return dbCards
 
@@ -30,9 +29,3 @@ function* getCards() {
     yield put(fetchCards(cards))
 }
 
-function* rootSaga() {
-    yield takeEvery('addNew', saveCard);
-    yield takeEvery('getCards', getCards)
-}
-
-export default rootSaga;

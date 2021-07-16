@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import DiaryCard from '../Components/DiaryCard';
-import DiaryHome from "../Components/DiaryHome";
+import DiaryCard from '../../Components/DiaryCard';
+import DiaryHome from "../../Components/DiaryHome";
 import { Grid } from '@material-ui/core';
-import MenuAppBar from "../Components/NavBar";
+import MenuAppBar from "../../Components/NavBar";
 
 function Home() {
       useEffect(() => {
         dispatch({ type: "getCards" });
-    })
+    },[])
 
     //read input data
     const [newTitle, setNewTitle] = useState("");

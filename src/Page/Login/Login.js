@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {  getTasks1 } from "../Action/actions";
+import {  getTasks1 } from "../../Redux/actions/actions";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import Button from "../Components/Button";
+import Button from "../../Components/Button";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Typography } from '@material-ui/core';
 function Login({ getName }) {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
@@ -15,25 +16,46 @@ function Login({ getName }) {
       },
     },
     root1: {
-      background: "linear-gradient(45deg , #FE6B8B , #FF8E53)",
-      border: 0,
-      // margin: "10%",
+      background: "linear-gradient(160deg , #FE6B8B , #FF8E53)",
+      margin:"5%",
+      width:"50%",
+      height:"50%",
+      align:"center",
+    
+
+
 
       position: "absolute",
-      left: "25%",
-      top: "25%",
-      transform: "translate(-50%, -25%)",
+      left: "18%",
+      top: "12%",
+
 
       borderRadius: 15,
       color: "white",
-      padding: "5px 10px",
+      padding: "10px 10px",
     },
     root2: {
       display: "inline-flex",
       flexDirection: "row",
+      position: 'absolute', left: '50%', top: '50%',
+        transform: 'translate(-50%, -50%)'
+     
     },
     tf: {
+      
+      
       width: "auto",
+    },
+    login:{
+      margin:"8%",
+      textAlign: "center",
+    },
+    start:{
+      position: "relative",
+      bottom: "-180px",
+      
+     
+      textAlign: "center",
     },
   }));
   const cards11 = useSelector((state) => state.cards);
@@ -64,8 +86,9 @@ function Login({ getName }) {
 
   return (
     <div className={classes.root1}>
-      <div>
-        <h1>login</h1>
+      <div className={classes.login}>
+        
+        <Typography variant="h4">Login</Typography>
       </div>
 
       <br />
@@ -78,10 +101,12 @@ function Login({ getName }) {
             value={name}
           />
 
-          <Button color="green" text="random" onClick={onRandom} />
+          <Button color="pink" text="random" onClick={onRandom} />
         </div>
+        <div className={classes.start}>
 
         <Button color="green" onClick={routeChange} text="start" />
+        </div>
       </form>
     </div>
   );

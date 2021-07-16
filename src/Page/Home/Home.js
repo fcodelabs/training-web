@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import DairyHome from "../Components/DairyHome";
-import {  getTasks1 } from "../Action/actions";
-import DairyCard from "../Components/DairyCard";
+import DairyHome from "../../Components/DairyHome";
+import {  getTasks1 } from "../../Redux/actions/actions";
+import DairyCard from "../../Components/DairyCard";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import { taskAdded } from "../Action/actions";
+import { taskAdded } from "../../Redux/actions/actions";
 import { useSelector, useDispatch } from "react-redux";
 function Home({ name }) {
   const dispatch = useDispatch();

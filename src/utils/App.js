@@ -1,10 +1,10 @@
-import "./App.css";
+
 import React, { useState } from "react";
 
-import Home from "./Page/Home";
+import Home from "../Page/Home/Home";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
-import Login from "./Page/Login";
+import Login from "../Page/Login/Login";
 function App() {
   const addName = (name) => {
     

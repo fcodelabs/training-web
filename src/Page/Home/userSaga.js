@@ -1,7 +1,7 @@
 import { put, takeEvery } from "redux-saga/effects";
 
-import { collection } from "../utils/firebase";
-import { saveTasks } from "../Redux/actions/actions";
+import { collection } from "../../utils/firebase";
+import { saveTasks } from "./actions";
 
 function* addCard(data) {
   try {

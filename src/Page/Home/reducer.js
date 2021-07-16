@@ -1,4 +1,4 @@
-import { addCard, saveCards } from "../actions/actionTypes";
+import { addCard, saveCards } from "./actionTypes";
 
 let lastId = 0;
 const initialState = {

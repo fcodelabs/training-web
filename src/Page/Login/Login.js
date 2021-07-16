@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {  getTasks1 } from "../../Redux/actions/actions";
+import {  getTasks1 } from "../Home/actions";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "../../Components/Button";

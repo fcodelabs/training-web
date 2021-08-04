@@ -6,7 +6,7 @@ const DiaryCard = ({title, name, description}) => {
     const [bodyContent, setBody] = useState(description.slice(0, 100) + '...')
     const [isAllShown, setSeeMore] = useState(isSeeMore)
     const onSeeMoreClick = () => {
-        if (isAllShown) setBody(description.slice(0, 100) + '...')
+        if (isAllShown && description.length>100) setBody(description.slice(0, 100) + '...')
         else setBody((description))
 
         setSeeMore(!isAllShown)
@@ -21,10 +21,11 @@ const DiaryCard = ({title, name, description}) => {
                         <Col>{bodyContent}</Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <Button variant={'link'} onClick={() => onSeeMoreClick()}>
-                                {isAllShown ? 'See less' : 'See more'}
-                            </Button>
+                        <Col className={'see-more'} onClick={() => onSeeMoreClick()}>
+                            {isAllShown ? 'See less' : 'See more'}
+                            {/*<Button variant={'link'} onClick={() => onSeeMoreClick()}>*/}
+                            {/*    {isAllShown ? 'See less' : 'See more'}*/}
+                            {/*</Button>*/}
                         </Col>
                     </Row>
                 </Card.Body>

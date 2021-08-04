@@ -1,9 +1,51 @@
+.main {
+    min-height: 100vh;
+    background: linear-gradient(to right top, #52ab99, #7fc6a4);
+}
+
 .diary-card {
-  max-width: 24%!important;
-  min-width: 300px!important;
-  border-radius: 10px !important;
+    max-width: 24% !important;
+    min-width: 300px !important;
+    border-radius: 10px !important;
 }
 
 .card:hover {
-  background: #d9e2ef;
+    background: rgba(255, 255, 255, 0.7) !important;
+    border: 2px solid #116d7b;
+    box-shadow: 0 0 10px 1px #1e9591;
+}
+
+.new-card-form {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px !important;
+    height: auto;
+}
+
+.new-card-form:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.raw-text-box {
+    border-radius: 15px !important;
+    border-color: #282c34;
+    height: 200px;
+    min-height: 500px;
+}
+
+
+.see-more {
+    color: #116d7b;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.button {
+    background: linear-gradient(to right top, #116d7b, #1e9591) !important;
+    border-color: #52ab99 !important;
+    font-weight: 500!important;
+}
+
+.button:hover {
+    background: linear-gradient(to right top, #116d7b, #1e9591) !important;
+    box-shadow: 0 0 10px 1px  #52ab99;
 }

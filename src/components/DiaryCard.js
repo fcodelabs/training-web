@@ -2,15 +2,17 @@ import {Button, Card, Col, Row} from "react-bootstrap";
 import {useState} from "react";
 
 const DiaryCard = ({title, name, description}) => {
-    const [bodyContent, setBodyContent] = useState(description.slice(0, 100) + '...')
-    const [isAllShown, setIsAllShown] = useState(false)
-
+    let isSeeMore = false
+    let needSeeMore = description.length>100
+    const [bodyContent, setBody] = useState(needSeeMore ? description.slice(0, 100) + '...' : description)
+    const [isAllShown, setSeeMore] = useState(isSeeMore)
     const onSeeMoreClick = () => {
-        if (isAllShown && description.length>100) setBodyContent(description.slice(0, 100) + '...')
-        else setBodyContent((description))
-        setIsAllShown(!isAllShown)
-    }
+        if (isAllShown && description.length>100) setBody(description.slice(0, 100) + '...')
+        else setBody((description))
 
+        setSeeMore(!isAllShown)
+
+    }
     return (
             <Card className={'m-1 diary-card'}>
                 <Card.Title className={'p-3 pb-0'}>{title}</Card.Title>
@@ -21,7 +23,10 @@ const DiaryCard = ({title, name, description}) => {
                     </Row>
                     <Row>
                         <Col className={'see-more'} onClick={() => onSeeMoreClick()}>
-                            {isAllShown ? 'See less' : 'See more'}
+                            {needSeeMore
+                                ? isAllShown ? 'See less' : 'See more'
+                                : ''
+                            }
                             {/*<Button variant={'link'} onClick={() => onSeeMoreClick()}>*/}
                             {/*    {isAllShown ? 'See less' : 'See more'}*/}
                             {/*</Button>*/}

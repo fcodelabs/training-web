@@ -6,6 +6,7 @@
 .diary-card {
     max-width: 24% !important;
     min-width: 300px !important;
+    min-height: 200px!important;
     border-radius: 10px !important;
 }
 
@@ -19,6 +20,7 @@
     background: rgba(255, 255, 255, 0.2);
     border-radius: 15px !important;
     height: auto;
+    min-width: 350px;
 }
 
 .new-card-form:hover {
@@ -28,8 +30,7 @@
 .raw-text-box {
     border-radius: 15px !important;
     border-color: #282c34;
-    height: 200px;
-    min-height: 500px;
+    height: 100px;
 }
 
 
@@ -42,10 +43,62 @@
 .button {
     background: linear-gradient(to right top, #116d7b, #1e9591) !important;
     border-color: #52ab99 !important;
-    font-weight: 500!important;
+    font-weight: 500 !important;
+    min-width: 100px;
 }
 
 .button:hover {
     background: linear-gradient(to right top, #116d7b, #1e9591) !important;
-    box-shadow: 0 0 10px 1px  #52ab99;
+    box-shadow: 0 0 10px 1px #52ab99;
+}
+
+.login-form {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px !important;
+    height: 30vh;
+    min-width: 500px;
+    width: auto;
+    overflow: hidden;
+}
+
+.login-form:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.button-login {
+    background: linear-gradient(to right top, #2d624b, #076c5f) !important;
+    border-color: #48a28f !important;
+    font-weight: 500 !important;
+    margin-top: 20px;
+    min-width: 200px;
+}
+
+.button-login:hover {
+    background: linear-gradient(to right top, #0e5b50, #449171) !important;
+    box-shadow: 0 0 10px 1px #d6f8d6;
+}
+
+.login-card-header {
+    overflow: hidden;
+    background: rgba(30, 149, 145, 0.8);
+    padding: 0;
+    padding: 5px;
+    margin: 0 0 20px;
+}
+
+.login-card-header {
+    overflow: hidden;
+    background: rgba(30, 149, 145, 0.8);
+    padding: 0;
+    padding: 5px;
+    margin: 0 0 20px;
+}
+
+.login-card-header-fonts{
+    color: #ffffff;
+    box-shadow: #61dafb;
+}
+
+.header {
+    position: absolute;
 }

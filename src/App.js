@@ -1,33 +1,25 @@
-import {useState} from "react";
 import './App.css';
-import {Card, Col, Container, Row} from "react-bootstrap";
-
+import { Container} from "react-bootstrap";
 import CardGrid from "./Components/CardGrid";
+import {BrowserRouter, Route} from "react-router-dom";
 import NewCardForm from "./Components/NewCardForm";
-
-const notes = [
-    {
-        title: "Tisstle",
-        name: 'Jhon Doe',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula odio at diam dictum porttitor. Pellentesque lectus arcu, egestas sit amet mattis a, facilisis non magnac'
-    },
-    {
-        title: "Title",
-        name: 'Jhon Doe',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula odio at diam dictum porttitor. Pellentesque lectus arcu, egestas sit amet mattis a, facilisis non magnac'
-    }
-]
+import DiaryHome from "./Pages/DiaryHome";
+import LoginPage from "./Pages/LoginPage";
+import Header from "./Components/Header";
 
 function App() {
-    const [diaryNotes, setDiaryNotes] =  useState(notes)
-    const addNote = (title, content, author) =>{
-        setDiaryNotes([...diaryNotes, {title: title, name: author, description: content}])
-    }
     return (
-        <Container fluid className={'vh-100 main'}>
-            <NewCardForm onClickAdd = {addNote}/>
-            <CardGrid diaryNotesList={diaryNotes} />
-        </Container>
+        <BrowserRouter>
+            <Container fluid className={'vh-100 main'}>
+                <Header/>
+                <Route exact path={'/'} component>
+                    <DiaryHome/>
+                </Route>
+               <Route path={'/login'}>
+                   <LoginPage/>
+               </Route>
+            </Container>
+        </BrowserRouter>
     );
 }
 

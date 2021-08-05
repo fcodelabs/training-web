@@ -29,8 +29,8 @@ const NewCardForm = ({onClickAdd}) => {
     }
 
     return (
-        <Row>
-            <Col className={'new-card-form p-4'}>
+        <Row className={'justify-content-center'}>
+            <Col className={'col-8 new-card-form p-4'}>
                 <Row className={'p-2'}>
                     <Col>
                         <Form.Control

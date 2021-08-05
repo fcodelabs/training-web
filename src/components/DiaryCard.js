@@ -2,16 +2,15 @@ import {Button, Card, Col, Row} from "react-bootstrap";
 import {useState} from "react";
 
 const DiaryCard = ({title, name, description}) => {
-    let isSeeMore = false
-    const [bodyContent, setBody] = useState(description.slice(0, 100) + '...')
-    const [isAllShown, setSeeMore] = useState(isSeeMore)
+    const [bodyContent, setBodyContent] = useState(description.slice(0, 100) + '...')
+    const [isAllShown, setIsAllShown] = useState(false)
+
     const onSeeMoreClick = () => {
-        if (isAllShown && description.length>100) setBody(description.slice(0, 100) + '...')
-        else setBody((description))
-
-        setSeeMore(!isAllShown)
-
+        if (isAllShown && description.length>100) setBodyContent(description.slice(0, 100) + '...')
+        else setBodyContent((description))
+        setIsAllShown(!isAllShown)
     }
+
     return (
             <Card className={'m-1 diary-card'}>
                 <Card.Title className={'p-3 pb-0'}>{title}</Card.Title>

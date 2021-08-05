@@ -1,9 +1,9 @@
-import logo from './logo.svg';
+import {useState} from "react";
 import './App.css';
 import {Card, Col, Container, Row} from "react-bootstrap";
-import CardGrid from "./components/CardGrid";
-import NewCardForm from "./components/NewCardForm";
-import {useState} from "react";
+
+import CardGrid from "./Components/CardGrid";
+import NewCardForm from "./Components/NewCardForm";
 
 const notes = [
     {
@@ -19,9 +19,9 @@ const notes = [
 ]
 
 function App() {
-    const [diaryNotes, setNotes] =  useState(notes)
+    const [diaryNotes, setDiaryNotes] =  useState(notes)
     const addNote = (title, content, author) =>{
-        setNotes([...diaryNotes, {title: title, name: author, description: content}])
+        setDiaryNotes([...diaryNotes, {title: title, name: author, description: content}])
     }
     return (
         <Container fluid className={'vh-100 main'}>

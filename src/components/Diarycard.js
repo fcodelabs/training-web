@@ -22,19 +22,18 @@ function Card({ title, subTitle, body, color }) {
       </div>
       <div className="card-body">
         <p>
-          {" "}
-          {body.substring(0, 100)} {readMore && extraContent}{" "}
+          {body.substring(0, 100)} 
+          {readMore && extraContent}
           <a
             className="read-more-link"
             onClick={() => {
               setReadMore(!readMore);
             }}
           >
-            {" "}
             <h2> {readMore ? "Read Less << " : "Read More"} </h2>
-          </a>{" "}
+            {/* {body.length > 100 && !readMore ? "..." : ""} */}
+          </a>
         </p>
-        {/* {readMore && extraContent} */}{" "}
       </div>
     </div>
   );

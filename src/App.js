@@ -1,5 +1,4 @@
 import "./App.css";
-import DiaryCard from "./components/Diarycard";
 import { CardForm } from "./components/CardForm";
 import React from "react";
 

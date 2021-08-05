@@ -22,7 +22,7 @@ function Card({ title, subTitle, body, color }) {
       </div>
       <div className="card-body">
         <p>
-          {body.substring(0, 100)} 
+          {body.substring(0, 100)} {body.length > 100 && !readMore ? "..." : ""}
           {readMore && extraContent}
           <a
             className="read-more-link"
@@ -31,7 +31,6 @@ function Card({ title, subTitle, body, color }) {
             }}
           >
             <h2> {readMore ? "Read Less << " : "Read More"} </h2>
-            {/* {body.length > 100 && !readMore ? "..." : ""} */}
           </a>
         </p>
       </div>

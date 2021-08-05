@@ -1,4 +1,4 @@
-import {Button, Col, Collapse, Form, InputGroup, Row} from "react-bootstrap";
+import {Button, Col,  Form,  Row} from "react-bootstrap";
 import {useState} from "react";
 
 const NewCardForm = ({onClickAdd}) => {
@@ -7,9 +7,9 @@ const NewCardForm = ({onClickAdd}) => {
     const [isExpanded, setExpandedStatus] = useState(false)
 
     const onSubmitClick = () => {
-        if (titleText.length == 0) {
+        if (titleText.length === 0) {
             console.log('No title')
-        } else if (contentText.length == 0) {
+        } else if (contentText.length === 0) {
             console.log('No content')
         } else {
             onClickAdd(titleText, contentText, 'Salitha')

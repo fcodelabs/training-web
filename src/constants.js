@@ -1,0 +1,4 @@
+export const ActionTypes = {
+    ADD_DIARY_CARD: 'ADD_DIARY_CARD',
+    REMOVE_DIARY_CARD: 'REMOVE_DIARY_CARD'
+}

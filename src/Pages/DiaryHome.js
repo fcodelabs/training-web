@@ -1,7 +1,9 @@
 import {useState} from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col,  Row} from "react-bootstrap";
 import NewCardForm from "../Components/NewCardForm";
-import CardGrid from "../Components/CardGrid";
+import DiaryCard from "../Components/DiaryCard";
+
+import {useSelector} from "react-redux";
 
 
 const notes = [
@@ -18,7 +20,8 @@ const notes = [
 ]
 
 function DiaryHome() {
-    const [diaryNotes, setNotes] = useState(notes)
+    const diaryCardsList = useSelector(state=>state.diaryCards)
+    const [diaryNotes, setNotes] = useState(diaryCardsList)
     const addNote = (title, content, author) => {
         setNotes([...diaryNotes, {title: title, name: author, description: content}])
     }
@@ -26,7 +29,11 @@ function DiaryHome() {
             <Row className={'justify-content-center p-3 vh-100'}>
                 <Col className={'col-12'}>
                     <NewCardForm onClickAdd={addNote}/>
-                    <CardGrid diaryNotesList={diaryNotes}/>
+                    <Row className={'justify-content-center m-3'}>
+                        {
+                            [...diaryCardsList].map(i => (<DiaryCard title={i.title} description={i.description} name={i.name}/>))
+                        }
+                    </Row>
                 </Col>
             </Row>
     );

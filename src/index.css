@@ -81,7 +81,6 @@
 .login-card-header {
     overflow: hidden;
     background: rgba(30, 149, 145, 0.8);
-    padding: 0;
     padding: 5px;
     margin: 0 0 20px;
 }
@@ -89,7 +88,6 @@
 .login-card-header {
     overflow: hidden;
     background: rgba(30, 149, 145, 0.8);
-    padding: 0;
     padding: 5px;
     margin: 0 0 20px;
 }
@@ -101,4 +99,27 @@
 
 .header {
     position: absolute;
+}
+
+.card-trash {
+    cursor: pointer;
+    float: right!important;
+}
+
+.card-trash:hover {
+    cursor: pointer;
+    animation: shake 50ms;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    50% { transform: translate(-3px, 1px) rotate(-2deg); }
+    100% { transform: translate(-2px, -2px) rotate(2deg); }
+}
+
+.hr {
+    height: 2px;
+    background:  rgba(30, 149, 145, 0.2);
+    border-radius: 5rem;
+    margin: 5px 0 -10px 0;
 }

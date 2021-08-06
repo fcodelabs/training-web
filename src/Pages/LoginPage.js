@@ -1,10 +1,18 @@
 import {Button, Col, FormControl, Row} from "react-bootstrap";
-import {useHistory} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {login} from "../actions/login";
+import {useState} from "react";
+import {useHistory} from "react-router-dom/cjs/react-router-dom";
 
 function LoginPage() {
-    const history = useHistory();
-    const onLoginClicked = ()=>{
-        history.push("/");
+    const history = useHistory()
+    const dispatch = useDispatch()
+    const [username, setUsername] = useState('')
+    const onLoginClicked = () => {
+        if (username.length > 0)
+            dispatch(login(username))
+        history.push('/')
+
     }
 
     return (
@@ -22,7 +30,12 @@ function LoginPage() {
                     <Col className={'p-4'}>
                         <Row className={'pb-2'}>
                             <Col className={'col-10'}>
-                                <FormControl placeholder='Enter a nickname' className={'rounded-pill'}/>
+                                <FormControl
+                                    placeholder='Enter a nickname'
+                                    className={'rounded-pill'}
+                                    value={username}
+                                    onInput={(e) => setUsername(e.target.value)}
+                                />
                             </Col>
                             <Col className={'col-2'}>
                                 <Button

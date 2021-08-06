@@ -2,9 +2,9 @@ import {Button, Col, Collapse, Form, InputGroup, Row} from "react-bootstrap";
 import {useState} from "react";
 
 const NewCardForm = ({onClickAdd}) => {
-    const [titleText, setTitleInput] = useState('')
-    const [contentText, setContentInput] = useState('')
-    const [isExpanded, setExpandedStatus] = useState(false)
+    const [titleText, setTitleText] = useState('')
+    const [contentText, setContentText] = useState('')
+    const [isExpanded, setIsExpanded] = useState(false)
 
     const onSubmitClick = () => {
         if (titleText.length == 0) {
@@ -13,19 +13,19 @@ const NewCardForm = ({onClickAdd}) => {
             console.log('No content')
         } else {
             onClickAdd(titleText, contentText, 'Salitha')
-            setTitleInput('')
-            setContentInput('')
+            setTitleText('')
+            setContentText('')
         }
     }
 
     const onDescriptionEnters = (e) => {
-        setContentInput(e.target.value)
-        setExpandedStatus(true)
+        setContentText(e.target.value)
+        setIsExpanded(true)
     }
 
     const onTitleEnters = (e) => {
-        setTitleInput(e.target.value)
-        setExpandedStatus(true)
+        setTitleText(e.target.value)
+        setIsExpanded(true)
     }
 
     return (

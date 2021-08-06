@@ -4,13 +4,13 @@ import {useState} from "react";
 const DiaryCard = ({title, name, description}) => {
     let isSeeMore = false
     let needSeeMore = description.length>100
-    const [bodyContent, setBody] = useState(needSeeMore ? description.slice(0, 100) + '...' : description)
-    const [isAllShown, setSeeMore] = useState(isSeeMore)
+    const [bodyContent, setBodyContent] = useState(needSeeMore ? description.slice(0, 100) + '...' : description)
+    const [isAllShown, setIsAllShown] = useState(isSeeMore)
     const onSeeMoreClick = () => {
-        if (isAllShown && description.length>100) setBody(description.slice(0, 100) + '...')
-        else setBody((description))
+        if (isAllShown && description.length>100) setBodyContent(description.slice(0, 100) + '...')
+        else setBodyContent((description))
 
-        setSeeMore(!isAllShown)
+        setIsAllShown(!isAllShown)
 
     }
     return (

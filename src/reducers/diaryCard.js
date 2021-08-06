@@ -17,10 +17,10 @@ const diaryCardReducer = (state = [], action) => {
             return [
                 ...state.filter(i=>i.id !== action.payload.id)
             ]
-        case ActionTypes.FETCH_ALL_CARDS:
-            return [...action.payload]
+        case ActionTypes.LOAD_ALL_DIARY_CARDS:
+            return Array.isArray(action.payload) ? [...action.payload] : state
         default:
-            return [...state]
+            return state
     }
 }
 

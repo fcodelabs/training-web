@@ -136,3 +136,10 @@
     background: #61dafb;
     border-radius: 50%;
 }
+
+.spinner {
+    width: 30px;
+    height: 30px;
+    color: #449171;
+    margin-left: 30px
+}

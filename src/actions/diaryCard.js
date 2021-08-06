@@ -1,6 +1,6 @@
 import {ActionTypes} from "../constants";
 
-export const addDiaryCard = (title, name, description) => ({
+export const addDiaryCard = ({title, name, description}) => ({
     type: ActionTypes.ADD_DIARY_CARD,
     payload: {
         title: title,
@@ -17,7 +17,11 @@ export const removeDiaryCard = (id) => ({
 })
 
 
-export const fetchDiaryCard = (diaryCards) => ({
-    type: ActionTypes.FETCH_ALL_CARDS,
-    payload: diaryCards
+export const fetchDiaryCards = () => ({
+    type: ActionTypes.REQUEST_ALL_CARDS
+})
+
+export const loadAllDiaryCards = (diaryCardsArray) => ({
+    type: ActionTypes.LOAD_ALL_DIARY_CARDS,
+    payload: diaryCardsArray
 })

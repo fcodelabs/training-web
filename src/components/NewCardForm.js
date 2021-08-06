@@ -16,7 +16,7 @@ const NewCardForm = ({}) => {
         } else if (contentText.length === 0) {
             console.log('No content')
         } else {
-            dispatch(addDiaryCard(titleText, login.username, contentText))
+            dispatch(addDiaryCard({title:titleText, name:login.username, description:contentText}))
             setTitleText('')
             setContentText('')
             titleText = ''

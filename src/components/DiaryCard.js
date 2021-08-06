@@ -50,9 +50,9 @@ const DiaryCard = ({id, title, name, description}) => {
 }
 
 DiaryCard.defaultProps = {
-    title: "Title",
-    name: 'Jhon Doe',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula odio at diam dictum porttitor. Pellentesque lectus arcu, egestas sit amet mattis a, facilisis non magnac'
+    title: "(no title)",
+    name: 'Guest',
+    description: '(no content)'
 }
 
 export default DiaryCard

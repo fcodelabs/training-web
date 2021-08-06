@@ -17,6 +17,8 @@ const diaryCardReducer = (state = [], action) => {
             return [
                 ...state.filter(i=>i.id !== action.payload.id)
             ]
+        case ActionTypes.FETCH_ALL_CARDS:
+            return [...action.payload]
         default:
             return [...state]
     }

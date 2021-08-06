@@ -97,10 +97,6 @@
     box-shadow: #61dafb;
 }
 
-.header {
-    position: absolute;
-}
-
 .card-trash {
     cursor: pointer;
     float: right!important;
@@ -122,4 +118,21 @@
     background:  rgba(30, 149, 145, 0.2);
     border-radius: 5rem;
     margin: 5px 0 -10px 0;
+}
+
+
+.top-band {
+    background: linear-gradient(to right top, #0e5b50, #076c5f);
+}
+
+.nav-logo {
+    margin-right: 15px;
+}
+
+.nav-profile-img {
+    margin-left: 10px;
+    height: 40px;
+    width: 40px;
+    background: #61dafb;
+    border-radius: 50%;
 }

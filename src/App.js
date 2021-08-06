@@ -10,8 +10,8 @@ function App() {
     const login = useSelector(state => state.login)
     return (
         <BrowserRouter>
+            <Header/>
             <Container fluid className={'vh-100 main'}>
-                <Header/>
                 {
                     login.isLoggedIn
                         ?

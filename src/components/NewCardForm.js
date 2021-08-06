@@ -38,7 +38,6 @@ const NewCardForm = ({}) => {
     }
 
     const checkFormExpandStatus = () => {
-        console.log(titleText, contentText)
         if (titleText.length > 0 || contentText.length > 0) setIsExpanded(true)
         else setIsExpanded(false)
     }
@@ -61,7 +60,7 @@ const NewCardForm = ({}) => {
                 </Row>
 
                 <Collapse in={isExpanded}>
-                    <div>
+                    <div id='collapsable'>
                         <Row className={'p-2'}>
                             <Col className={'col-12'}>
                                 <Form.Control

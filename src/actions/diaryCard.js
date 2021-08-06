@@ -16,3 +16,8 @@ export const removeDiaryCard = (id) => ({
     }
 })
 
+
+export const fetchDiaryCard = (diaryCards) => ({
+    type: ActionTypes.FETCH_ALL_CARDS,
+    payload: diaryCards
+})

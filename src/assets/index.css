@@ -6,7 +6,7 @@
 .diary-card {
     max-width: 24% !important;
     min-width: 300px !important;
-    min-height: 200px!important;
+    min-height: 200px !important;
     border-radius: 10px !important;
 }
 
@@ -92,14 +92,14 @@
     margin: 0 0 20px;
 }
 
-.login-card-header-fonts{
+.login-card-header-fonts {
     color: #ffffff;
     box-shadow: #61dafb;
 }
 
 .card-trash {
     cursor: pointer;
-    float: right!important;
+    float: right !important;
 }
 
 .card-trash:hover {
@@ -108,14 +108,20 @@
 }
 
 @keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    50% { transform: translate(-3px, 1px) rotate(-2deg); }
-    100% { transform: translate(-2px, -2px) rotate(2deg); }
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+    50% {
+        transform: translate(-3px, 1px) rotate(-2deg);
+    }
+    100% {
+        transform: translate(-2px, -2px) rotate(2deg);
+    }
 }
 
 .hr {
     height: 2px;
-    background:  rgba(30, 149, 145, 0.2);
+    background: rgba(30, 149, 145, 0.2);
     border-radius: 5rem;
     margin: 5px 0 -10px 0;
 }

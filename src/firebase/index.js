@@ -1,24 +1,23 @@
-import firebase from "firebase";
+import firebase from 'firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
-import firebaseConfig from "../config/firebase";
-import store from "../redux/store";
-import {createFirestoreInstance} from "redux-firestore";
+import firebaseConfig from '../config/firebase'
+import store from '../redux/store'
+import { createFirestoreInstance } from 'redux-firestore'
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig)
 firebase.firestore()
 
 const rrfConfig = {
-    userProfile: 'users',
-    useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-    // enableClaims: true // Get custom claims along with the profile
+  userProfile: 'users',
+  useFirestoreForProfile: true
 }
 
-const rrfProps = {
-    firebase,
-    config: rrfConfig,
-    dispatch: store.dispatch,
-    createFirestoreInstance // <- needed if using firestore
+export const rrfProps = {
+  firebase,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance // <- needed if using firestore
 }
 
-export default rrfProps
+export const firestore = firebase.firestore()

@@ -16,7 +16,7 @@ function DiaryHome () {
 
   return (
       <Row className={'justify-content-center p-3 vh-100'}>
-        <Col className={'col-12'}>
+        <Col className={'col-12 overlay'}>
           <NewCardForm/>
           <CardGroup className={'justify-content-center m-3'}>
             {

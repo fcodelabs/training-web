@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { } from 'react'
 import { Button, Col, FormControl, Row } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
-import { login, randomName } from '../actions/login'
+import { useDispatch, useSelector } from 'react-redux'
+import { login, randomName, setName } from '../actions/login'
 
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 
 function LoginPage () {
   const history = useHistory()
   const dispatch = useDispatch()
-  const [username, setUsername] = useState('')
+  // const [username, setUsername] = useState('')
+
+  const username = useSelector(state => state.login.username)
+
+  const setUserName = (name) => {
+    dispatch(setName(name))
+  }
   const onLoginClicked = () => {
     if (username.length > 0) { dispatch(login(username)) }
     history.push('/')
@@ -16,6 +22,7 @@ function LoginPage () {
 
   const onRandomClicked = () => {
     dispatch(randomName())
+    // setUsername(randomUsername)
   }
 
   return (
@@ -37,7 +44,7 @@ function LoginPage () {
                       placeholder="Enter a nickname"
                       className={'rounded-pill'}
                       value={username}
-                      onInput={(e) => setUsername(e.target.value)}
+                      onInput={(e) => setUserName(e.target.value)}
                   />
                 </Col>
                 <Col className={'col-2'}>

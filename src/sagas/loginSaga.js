@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { call, put } from 'redux-saga/effects'
-import { login } from '../actions/login'
+import { setName } from '../actions/login'
 import { endLoading, startLoading } from '../actions/global'
 
 function getRandomName () {
@@ -19,7 +19,7 @@ export function * handleRandomName () {
   try {
     yield put(startLoading())
     const response = yield call(getRandomName)
-    yield put(login(response.data.first_name))
+    yield put(setName(response.data.first_name))
     yield put(endLoading())
   } catch (e) {
     console.log(e)

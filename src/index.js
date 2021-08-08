@@ -4,10 +4,9 @@ import './assets/index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import store from './redux/store'
+import { store, rrfProps } from './Utils/store'
 import { Provider } from 'react-redux'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
-import { rrfProps } from './firebase'
 
 ReactDOM.render(
     <Provider store={store}>

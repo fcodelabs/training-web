@@ -11,7 +11,7 @@ function App () {
   return (
       <BrowserRouter>
         <Header/>
-        <Container fluid className={'vh-100 main'}>
+        <Container fluid className={'vh-100 main no-scroll'}>
           {
             login.isLoggedIn
               ? <Route exact path={'/'}>

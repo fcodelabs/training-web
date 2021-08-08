@@ -144,8 +144,50 @@
 }
 
 .spinner {
-    width: 30px;
-    height: 30px;
-    color: #449171;
+    width: 20px !important;
+    height: 20px !important;
+    color: rgba(97, 218, 251, 0.2);
     margin-left: 30px
+}
+
+.cards {
+    overflow: scroll;
+    flex-grow: 1;
+}
+
+.no-scroll {
+    position: fixed;
+    overflow: hidden;
+}
+
+.overlay {
+    position: fixed;
+    overflow-y: scroll;
+    top: 10vh;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(14, 91, 80, 0.2);
+    border-radius: 15px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    background: rgba(14, 91, 80, 0.2);
+    border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(14, 91, 80, 0.5);
 }

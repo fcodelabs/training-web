@@ -1,4 +1,4 @@
-import { ActionTypes } from '../constants'
+import { ActionTypes } from '../config/constants'
 
 export const login = (username) => ({
   type: ActionTypes.LOGIN,
@@ -16,7 +16,7 @@ export const randomName = () => ({
   type: ActionTypes.RANDOM_NAME,
   payload: {}
 })
-export const setName = () => ({
+export const setName = (name) => ({
   type: ActionTypes.SET_NAME,
-  payload: {}
+  payload: name
 })

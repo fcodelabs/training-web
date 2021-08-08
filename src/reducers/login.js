@@ -1,4 +1,4 @@
-import { ActionTypes } from '../constants'
+import { ActionTypes } from '../config/constants'
 
 const loginReducer = (state = false, action) => {
   switch (action.type) {
@@ -14,7 +14,8 @@ const loginReducer = (state = false, action) => {
 
     case ActionTypes.SET_NAME:
       return {
-        isLoggedIn: false
+        isLoggedIn: false,
+        username: action.payload
       }
     default:
       return state

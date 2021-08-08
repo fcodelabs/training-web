@@ -1,4 +1,4 @@
-import { ActionTypes } from '../constants'
+import { ActionTypes } from '../config/constants'
 
 let id = 1
 const diaryCardReducer = (state = [], action) => {

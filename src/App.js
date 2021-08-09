@@ -1,11 +1,10 @@
 import './App.css';
 import { Container} from "react-bootstrap";
-import CardGrid from "./Components/CardGrid";
 import {BrowserRouter, Route} from "react-router-dom";
-import NewCardForm from "./Components/NewCardForm";
+import NewCardForm from "./components/NewCardForm";
 import DiaryHome from "./Pages/DiaryHome";
 import LoginPage from "./Pages/LoginPage";
-import Header from "./Components/Header";
+import Header from "./components/Header";
 
 function App() {
     return (

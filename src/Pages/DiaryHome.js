@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Col, Container, Row} from "react-bootstrap";
-import NewCardForm from "../Components/NewCardForm";
-import CardGrid from "../Components/CardGrid";
+import NewCardForm from "../components/NewCardForm";
+import CardGrid from "../components/CardGrid";
 
 
 const notes = [

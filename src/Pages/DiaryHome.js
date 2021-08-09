@@ -18,9 +18,9 @@ const notes = [
 ]
 
 function DiaryHome() {
-    const [diaryNotes, setNotes] = useState(notes)
+    const [diaryNotes, setDiaryNotes] = useState(notes)
     const addNote = (title, content, author) => {
-        setNotes([...diaryNotes, {title: title, name: author, description: content}])
+        setDiaryNotes([...diaryNotes, {title: title, name: author, description: content}])
     }
     return (
             <Row className={'justify-content-center p-3 vh-100'}>

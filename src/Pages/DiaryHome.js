@@ -1,7 +1,7 @@
-import {useState} from "react";
-import {Col, Container, Row} from "react-bootstrap";
-import NewCardForm from "../Components/NewCardForm";
-import CardGrid from "../Components/CardGrid";
+import React, { useEffect } from 'react'
+import { CardGroup, Col, Row } from 'react-bootstrap'
+import NewCardForm from '../components/NewCardForm'
+import DiaryCard from '../components/DiaryCard'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -34,4 +34,4 @@ function DiaryHome () {
   )
 }
 
-export default DiaryHome;
+export default DiaryHome

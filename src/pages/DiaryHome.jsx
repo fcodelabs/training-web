@@ -14,7 +14,7 @@ const DiaryHome = () => {
     useEffect(()=>{
         dispatch(getPosts());
     },[dispatch]);
-
+    ///Comment
     const handleSubmit = (e)=>{
         e.preventDefault();
         if(details.title===''){
@@ -40,9 +40,6 @@ const DiaryHome = () => {
                     <Button className={classes.button} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
                 </form>
             </Container>
-
-
-            
             <Container maxWidth="lg" style={{marginTop:'100px'}} >
                 <Grid container spacing={4} >
                     {items.map((item,index) => (

@@ -1,27 +1,31 @@
 import React,{useState} from 'react'
 import { TextField,Typography,Button,Paper,Grid,Container,AppBar,Toolbar, FormControl } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 import DiaryCard from '../components/DiaryCard/DiaryCard';
 import useStyles from './styles';
+import { useEffect } from 'react';
+import {getPosts,addPost} from '../actions/items'
+import { useSelector } from 'react-redux';
 const DiaryHome = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const [details,setDetails] = useState({title:'',description:''})
-    const [items,setItems] = useState([]);
+    const items = useSelector(state => state.items.itemsArray);
+    useEffect(()=>{
+        dispatch(getPosts());
+    },[dispatch]);
+    ///Comment
     const handleSubmit = (e)=>{
         e.preventDefault();
-        setItems((prevValue)=>{
-            console.log(details)
-            if(details.title===''){
-                console.log('Title Missing');
-                return [...prevValue]
-            }
-            else if(details.description===''){
-                console.log('Description Missing');
-                return [...prevValue]
-            }
-            else{
-                return [...prevValue,details]
-            }
-        })
+        if(details.title===''){
+            console.log('Title Missing')
+        }
+        else if(details.description===''){
+            console.log('Description Missing')
+        }
+        else{
+            dispatch(addPost(details))
+        }
         setDetails({title:'',description:''});
     }
     return (
@@ -36,9 +40,6 @@ const DiaryHome = () => {
                     <Button className={classes.button} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
                 </form>
             </Container>
-
-
-            
             <Container maxWidth="lg" style={{marginTop:'100px'}} >
                 <Grid container spacing={4} >
                     {items.map((item,index) => (

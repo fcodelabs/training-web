@@ -25,42 +25,35 @@ const DiaryCard = ({ id, title, name, description }) => {
     dispatch(removeDiaryCard(id))
   }
 
-  return (
-      <Card className={'m-1 diary-card'}>
-
-        <Card.Title className={'p-3 pb-0'}>
-          <Row>
-            <Col className={'col-10'}>{title}</Col>
-            <Col className={'col-auto'}><FaTrash color="#b25b8f"
-                                                 className={'card-trash'}
-                                                 onClick={() => onCardDeleteClick()}/></Col>
-          </Row>
-        </Card.Title>
-        <Card.Subtitle
-            className={'p-3 pt-0 pb-0 text-muted'}>{name}</Card.Subtitle>
-        <div className={'hr'}/>
-        <Card.Body>
-          <Row>
-            <Col>{bodyContent}</Col>
-          </Row>
-          <Row>
-            <Col className={'see-more'} onClick={() => onSeeMoreClick()}>
-              {needSeeMore
-                ? isSeeMoreShown ? 'See less' : 'See more'
-                : ''
-              }
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-  )
+    }
+    return (
+            <Card className={'m-1 diary-card'}>
+                <Card.Title className={'p-3 pb-0'}>{title}</Card.Title>
+                <Card.Subtitle className={'p-3 pt-0 pb-0 text-muted'}>{name}</Card.Subtitle>
+                <Card.Body>
+                    <Row>
+                        <Col>{bodyContent}</Col>
+                    </Row>
+                    <Row>
+                        <Col className={'see-more'} onClick={() => onSeeMoreClick()}>
+                            {needSeeMore
+                                ? isAllShown ? 'See less' : 'See more'
+                                : ''
+                            }
+                            {/*<Button variant={'link'} onClick={() => onSeeMoreClick()}>*/}
+                            {/*    {isAllShown ? 'See less' : 'See more'}*/}
+                            {/*</Button>*/}
+                        </Col>
+                    </Row>
+                </Card.Body>
+            </Card>
+    )
 }
 
-DiaryCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired
+DiaryCard.defaultProps = {
+    title: "Title",
+    name: 'Jhon Doe',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula odio at diam dictum porttitor. Pellentesque lectus arcu, egestas sit amet mattis a, facilisis non magnac'
 }
 
 export default DiaryCard

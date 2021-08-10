@@ -10,7 +10,7 @@ const DiaryHome = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [details,setDetails] = useState({title:'',description:''})
-    const items = useSelector(state => state.items);
+    const items = useSelector(state => state.items.itemsArray);
     useEffect(()=>{
         dispatch(getPosts());
     },[dispatch]);

@@ -9,16 +9,16 @@ const DiaryCard = ({ id, title, name, description }) => {
   const dispatch = useDispatch()
   const isSeeMore = false
   const needSeeMore = description.length > 100
-  const [bodyContent, setBody] = useState(
+  const [bodyContent, setBodyContent] = useState(
     needSeeMore ? description.slice(0, 100) + '...' : description)
-  const [isSeeMoreShown, setSeeMore] = useState(isSeeMore)
+  const [isSeeMoreShown, setIsSeeMoreShown] = useState(isSeeMore)
 
   const onSeeMoreClick = () => {
     if (isSeeMoreShown && needSeeMore) {
-      setBody(
+      setBodyContent(
         description.slice(0, 100) + '...')
-    } else setBody((description))
-    setSeeMore(!isSeeMoreShown)
+    } else setBodyContent((description))
+    setIsSeeMoreShown(!isSeeMoreShown)
   }
 
   const onCardDeleteClick = () => {

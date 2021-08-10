@@ -1,11 +1,12 @@
 import { ActionTypes } from '../config/constants'
 
-let id = 1
-const diaryCardReducer = (state = [], action) => {
+let id = 0
+const initialState = { diaryCards: [] }
+const diaryCardReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.ADD_DIARY_CARD:
-      return [
-        ...state,
+    case ActionTypes.ADD_DIARY_CARD: {
+      state.diaryCards = [
+        ...state.diaryCards,
         {
           id: id++,
           title: action.payload.title,
@@ -13,9 +14,11 @@ const diaryCardReducer = (state = [], action) => {
           description: action.payload.description
         }
       ]
-    case ActionTypes.UPSERT_DIARY_CARD:
-      return [
-        ...state.filter(i => i.id !== action.payload.id),
+      return state
+    }
+    case ActionTypes.UPSERT_DIARY_CARD: {
+      state.diaryCards = [
+        ...state.diaryCards.filter(i => i.id !== action.payload.id),
         {
           id: id++,
           title: action.payload.title,
@@ -23,12 +26,19 @@ const diaryCardReducer = (state = [], action) => {
           description: action.payload.description
         }
       ]
-    case ActionTypes.REMOVE_DIARY_CARD:
-      return [
-        ...state.filter(i => i.id !== action.payload.id)
+      return state
+    }
+    case ActionTypes.REMOVE_DIARY_CARD: {
+      state.diaryCards = [
+        ...state.diaryCards.filter(i => i.id !== action.payload.id)
       ]
+      return state
+    }
     case ActionTypes.LOAD_ALL_DIARY_CARDS:
-      return Array.isArray(action.payload) ? [...action.payload] : state
+      if (Array.isArray(action.diaryCards)) {
+        state.diaryCards = action.payload
+      }
+      return state
     default:
       return state
   }

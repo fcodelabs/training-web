@@ -5,25 +5,13 @@ import useStyles from './styles';
 const DiaryHome = () => {
     const classes = useStyles();
     const [details,setDetails] = useState({title:'',description:''})
-    const [items,setItems] = useState([]);
     const handleSubmit = (e)=>{
         e.preventDefault();
-        setItems((prevValue)=>{
-            console.log(details)
-            if(details.title===''){
-                console.log('Title Missing');
-                return [...prevValue]
-            }
-            else if(details.description===''){
-                console.log('Description Missing');
-                return [...prevValue]
-            }
-            else{
-                return [...prevValue,details]
-            }
-        })
+        console.log(details);
         setDetails({title:'',description:''});
     }
+        
+    
     return (
         <div>
             <AppBar position="absolute">
@@ -41,11 +29,16 @@ const DiaryHome = () => {
             
             <Container maxWidth="lg" style={{marginTop:'100px'}} >
                 <Grid container spacing={4} >
-                    {items.map((item,index) => (
-                        <Grid item key={index} item xs={12} sm={6} md={4}>
-                            <DiaryCard  title={item.title} description={item.description} subtitle="Subtitle-01" />
-                        </Grid>
-                    ))}
+                    <Grid item key={0} xs={12} sm={6} md={4}  >
+                        <DiaryCard title="Titile-01" subtitle="Subtitle-01" description=" consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt i" />
+                    </Grid>
+                    <Grid item key={1} xs={12} sm={6} md={4}>
+                        <DiaryCard title="Titile-02" subtitle="Subtitle-02" description=" consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt i"  />
+                    </Grid>
+                    <Grid item key={3} xs={12} sm={6} md={4}>
+                        <DiaryCard title="Titile-03" subtitle="Subtitle-03" 
+                        description=" consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt i" />
+                    </Grid>
                 </Grid>
             </Container>
         </div>

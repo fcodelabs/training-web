@@ -1,2 +1,9 @@
-export const CREATE_ITEM = 'CREATE_ITEM';
-export const FETCH_ALL = 'FETCH_ALL';
+
+export const FETCH_ALL_START = 'FETCH_ALL_START';
+export const FETCH_ALL_SUCCESS = 'FETCH_ALL_SUCCESS';
+export const FETCH_ALL_FAIL = 'FETCH_ALL_FAIL';
+
+
+export const ADD_POST_START = 'ADD_POST_START';
+export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
+export const ADD_POST_FAIL = 'ADD_POST_FAIL';

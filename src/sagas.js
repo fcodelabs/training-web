@@ -26,7 +26,7 @@ function* onLoadPostAsync(){
         // });
         // console.log(posts);
         // yield put(addPostSuccess(posts));
-
+        //get Once
     } catch (error) {
         yield put(getPostFail())
     }

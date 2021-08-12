@@ -4,15 +4,15 @@ import { useDispatch } from 'react-redux';
 import DiaryCard from '../components/DiaryCard/DiaryCard';
 import useStyles from './styles';
 import { useEffect } from 'react';
-import {getPosts,addPost} from '../actions/items'
+import {getPostStart,addPostStart} from '../actions/items'
 import { useSelector } from 'react-redux';
-const DiaryHome = () => {
+const DiaryHome = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [details,setDetails] = useState({title:'',description:''})
+    const [details,setDetails] = useState({userName:props.location.state.userName,title:'',description:''})
     const items = useSelector(state => state.items.itemsArray);
     useEffect(()=>{
-        dispatch(getPosts());
+        dispatch(getPostStart());
     },[dispatch]);
     ///Comment
     const handleSubmit = (e)=>{
@@ -24,7 +24,7 @@ const DiaryHome = () => {
             console.log('Description Missing')
         }
         else{
-            dispatch(addPost(details))
+            dispatch(addPostStart(details));
         }
         setDetails({title:'',description:''});
     }
@@ -44,7 +44,7 @@ const DiaryHome = () => {
                 <Grid container spacing={4} >
                     {items.map((item,index) => (
                         <Grid item key={index} item xs={12} sm={6} md={4}>
-                            <DiaryCard  title={item.title} description={item.description} subtitle="Subtitle-01" />
+                            <DiaryCard  title={item.title} description={item.description} subtitle="" />
                         </Grid>
                     ))}
                 </Grid>

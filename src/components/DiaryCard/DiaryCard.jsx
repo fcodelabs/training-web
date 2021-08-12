@@ -14,7 +14,7 @@ const DiaryCard = ({title,subtitle,description,color}) => {
                         {subtitle}
                 </Typography>
                 <Typography variant="h6" display="block" style={{wordWrap:"break-word"}}  >
-                        {expand?description:description.substring(0,100)+"..." }
+                        {expand?description:description.substring(0,100||description.length())+"..." }
                 </Typography>
 
             </CardContent>

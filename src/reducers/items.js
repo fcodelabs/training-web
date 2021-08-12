@@ -1,10 +1,49 @@
-let initial_state = {itemsArray:[]};
+import {FETCH_ALL_FAIL,FETCH_ALL_START,FETCH_ALL_SUCCESS,ADD_POST_FAIL,ADD_POST_START,ADD_POST_SUCCESS } from "../actionTypes/actionTypes";
+
+let initial_state = {
+    itemsArray:[],
+    error:null,
+    loading:false
+};
 export default (state=initial_state,action)=>{
-    switch(action.type){
-        case 'FETCH_ALL':
-            return {...state,itemsArray:[...state.itemsArray,...action.payload]};
-        case 'CREATE_ITEM':
-            return {...state,itemsArray:[...state.itemsArray,action.payload]};
+    switch(action.type){ 
+        case FETCH_ALL_START:
+            return {
+                ...state,
+                loading:true
+            };
+        case FETCH_ALL_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                itemsArray:action.payload
+            };
+        case FETCH_ALL_FAIL:
+            return {
+                ...state,
+                error:action.payload,
+                loading:false 
+            };
+        case ADD_POST_START:
+            return{
+                ...state,
+                loading:true
+
+            };
+        case ADD_POST_FAIL:
+            return {
+                ...state,
+                error:action.payload,
+                loading:false
+
+            };
+        case ADD_POST_SUCCESS:
+            return {
+                ...state,
+                itemsArray:[...state.itemsArray,action.payload]
+
+            };
+        
         default:
             return state;
     }

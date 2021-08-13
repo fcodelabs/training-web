@@ -1,4 +1,4 @@
-import { ActionTypes } from '../config/constants'
+import { ActionTypes } from '../../config/constants'
 
 let id = 0
 const initialState = { diaryCards: [] }
@@ -35,7 +35,7 @@ const diaryCardReducer = (state = initialState, action) => {
       return state
     }
     case ActionTypes.LOAD_ALL_DIARY_CARDS:
-      if (Array.isArray(action.diaryCards)) {
+      if (Array.isArray(action.payload)) {
         state.diaryCards = action.payload
       }
       return state

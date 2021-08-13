@@ -1,4 +1,4 @@
-import { ActionTypes } from '../config/constants'
+import { ActionTypes } from '../../config/constants'
 
 export const startLoading = () => ({
   type: ActionTypes.LOADING_START,

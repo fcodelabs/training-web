@@ -2,7 +2,7 @@ import { Card, Col, Row } from 'react-bootstrap'
 import React, { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
-import { removeDiaryCard } from '../actions/diaryCard'
+import { removeDiaryCard } from '../Utils/actions/diaryCard'
 import PropTypes from 'prop-types'
 
 const DiaryCard = ({ id, title, name, description }) => {

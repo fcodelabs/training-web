@@ -1,4 +1,4 @@
-import { ActionTypes } from '../config/constants'
+import { ActionTypes } from '../../config/constants'
 
 export const addDiaryCard = ({ title, name, description }) => ({
   type: ActionTypes.ADD_DIARY_CARD,

@@ -1,6 +1,6 @@
 import { put, take } from 'redux-saga/effects'
 import { loadAllDiaryCards } from '../actions/diaryCard'
-import { firestore } from '../Utils/store'
+import { firestore } from '../store'
 import { eventChannel } from 'redux-saga'
 import { endLoading, startLoading } from '../actions/global'
 

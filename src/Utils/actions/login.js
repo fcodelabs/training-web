@@ -1,4 +1,4 @@
-import { ActionTypes } from '../config/constants'
+import { ActionTypes } from '../../config/constants'
 
 export const login = (username) => ({
   type: ActionTypes.LOGIN,

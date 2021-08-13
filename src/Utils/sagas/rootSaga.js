@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects'
-import { ActionTypes } from '../config/constants'
+import { ActionTypes } from '../../config/constants'
 import {
   handleFirebasePostsCreate,
   handleFirebasePostsDelete,

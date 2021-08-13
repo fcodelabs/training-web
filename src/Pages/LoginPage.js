@@ -1,14 +1,13 @@
 import React, { } from 'react'
 import { Button, Col, FormControl, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { login, randomName, setName } from '../actions/login'
+import { login, randomName, setName } from '../Utils/actions/login'
 
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 
 function LoginPage () {
   const history = useHistory()
   const dispatch = useDispatch()
-  // const [username, setUsername] = useState('')
 
   const username = useSelector(state => state.login.username)
 
@@ -16,13 +15,12 @@ function LoginPage () {
     dispatch(setName(name))
   }
   const onLoginClicked = () => {
-    if (username.length > 0) { dispatch(login(username)) }
+    if (username && username.length > 0) { dispatch(login(username)) }
     history.push('/')
   }
 
   const onRandomClicked = () => {
     dispatch(randomName())
-    // setUsername(randomUsername)
   }
 
   return (

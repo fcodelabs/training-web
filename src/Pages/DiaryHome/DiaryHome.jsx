@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
 import { TextField,Typography,Button,Paper,Grid,Container,AppBar,Toolbar, FormControl } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import DiaryCard from '../components/DiaryCard/DiaryCard';
+import DiaryCard from '../../Components/DiaryCard/DiaryCard';
 import useStyles from './styles';
 import { useEffect } from 'react';
-import {getPostStart,addPostStart} from '../actions/items'
+import {getPostStart,addPostStart} from '../../actions/items'
 import { useSelector } from 'react-redux';
 const DiaryHome = (props) => {
     const classes = useStyles();

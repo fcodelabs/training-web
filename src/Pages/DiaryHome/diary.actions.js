@@ -1,4 +1,4 @@
-import { ActionTypes } from '../../config/constants'
+import { ActionTypes } from '../../utils/actionTypes'
 
 export const addDiaryCard = ({ title, name, description }) => ({
   type: ActionTypes.ADD_DIARY_CARD,
@@ -33,4 +33,8 @@ export const fetchDiaryCards = () => ({
 export const loadAllDiaryCards = (diaryCardsArray) => ({
   type: ActionTypes.LOAD_ALL_DIARY_CARDS,
   payload: diaryCardsArray
+})
+export const startDiaryNotesFirestoreSync = () => ({
+  type: ActionTypes.START_FIRESTORE_DIARY_NOTES_SYNC,
+  payload: {}
 })

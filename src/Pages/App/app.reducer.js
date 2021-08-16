@@ -1,4 +1,4 @@
-import { ActionTypes } from '../../config/constants'
+import { ActionTypes } from '../../utils/actionTypes'
 
 export const loadingReducer = (state = false, action) => {
   switch (action.type) {

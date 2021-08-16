@@ -1,8 +1,8 @@
-import { ActionTypes } from '../../config/constants'
+import { ActionTypes } from '../../utils/actionTypes'
 
 let id = 0
 const initialState = { diaryCards: [] }
-const diaryCardReducer = (state = initialState, action) => {
+const diaryReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.ADD_DIARY_CARD: {
       state.diaryCards = [
@@ -44,4 +44,4 @@ const diaryCardReducer = (state = initialState, action) => {
   }
 }
 
-export default diaryCardReducer
+export default diaryReducer

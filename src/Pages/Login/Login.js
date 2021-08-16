@@ -1,11 +1,11 @@
 import React, { } from 'react'
 import { Button, Col, FormControl, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { login, randomName, setName } from '../Utils/actions/login'
+import { login, randomName, setName } from './login.actions'
 
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 
-function LoginPage () {
+function Login () {
   const history = useHistory()
   const dispatch = useDispatch()
 
@@ -76,4 +76,4 @@ function LoginPage () {
   )
 }
 
-export default LoginPage
+export default Login

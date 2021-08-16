@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Col, Image, Row } from 'react-bootstrap'
-import notfoundImage from '../assets/404.png'
+import notfoundImage from '../../assets/404.png'
 
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { call, put } from 'redux-saga/effects'
-import { setName } from '../actions/login'
-import { endLoading, startLoading } from '../actions/global'
+import { setName } from './login.actions'
+import { endLoading, startLoading } from '../App/app.actions'
 
 function getRandomName () {
   const options = {

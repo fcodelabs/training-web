@@ -1,6 +1,6 @@
-import {takeLatest,all,put,fork,call} from 'redux-saga/effects';
-import { FETCH_ALL,CREATE_ITEM,FETCH_ALL_FAIL,FETCH_ALL_START,FETCH_ALL_SUCCESS, ADD_POST_START } from '../actionTypes/actionTypes';
-import { getPostSuccess,getPostFail,getPostStart, addPostSuccess, addPostFail } from '../actions/items';
+import {takeLatest,all,put,fork} from 'redux-saga/effects';
+import { FETCH_ALL_START, ADD_POST_START } from '../actionTypes/actionTypes';
+import { getPostSuccess,getPostFail, addPostSuccess, addPostFail } from '../actions/items';
 import firebase from '../db/firebase';
 
 function* onLoadPostAsync(){

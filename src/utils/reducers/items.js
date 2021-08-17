@@ -5,7 +5,7 @@ let initial_state = {
     error:null,
     loading:false
 };
-export default (state=initial_state,action)=>{
+const reducer = (state=initial_state,action)=>{
     switch(action.type){ 
         case FETCH_ALL_START:
             return {
@@ -48,3 +48,4 @@ export default (state=initial_state,action)=>{
             return state;
     }
 }
+export default reducer;

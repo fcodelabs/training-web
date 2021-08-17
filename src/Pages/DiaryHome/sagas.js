@@ -1,18 +1,37 @@
-import {takeLatest,all,put,fork} from 'redux-saga/effects';
+import {takeLatest,all,put,fork,call} from 'redux-saga/effects';
 import { FETCH_ALL_START, ADD_POST_START } from './actionTypes';
 import { getPostSuccess,getPostFail, addPostSuccess, addPostFail } from './actions';
 import firebase from '../../utils/firebase';
 
+const getPostsAPI = () => {
+    return new Promise((resolve, reject) => {
+        firebase.firestore().collection("posts").onSnapshot((snap) => {
+            let documents = [];
+            snap.forEach(doc => {
+                let result = doc.data();
+                documents.push(result);
+            });
+            resolve(documents);
+        });
+    });
+};
+
 function* onLoadPostAsync(){
     try {
-        const posts = yield firebase.firestore().collection('posts').get().then((snapshot)=>{
-                const items = [];
-                snapshot.forEach((doc)=>{
-                    items.push(doc.data());
-                });
-                return items;
-        });
-        yield put(getPostSuccess([...posts]));
+        while (true) {
+            const response = yield call(getPostsAPI);
+            yield put(getPostSuccess(response));
+        }
+
+
+        // const posts = yield firebase.firestore().collection('posts').get().then((snapshot)=>{
+        //         const items = [];
+        //         snapshot.forEach((doc)=>{
+        //             items.push(doc.data());
+        //         });
+        //         return items;
+        // });
+        // yield put(getPostSuccess([...posts]));
         
         //this does not work.
 

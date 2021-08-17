@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import DiaryCard from '../../Components/DiaryCard/DiaryCard';
 import useStyles from './styles';
 import { useEffect } from 'react';
-import {getPostStart,addPostStart} from '../../utils/actions/items'
+import {getPostStart,addPostStart} from './actions'
 import { useSelector } from 'react-redux';
 const DiaryHome = (props) => {
     const classes = useStyles();

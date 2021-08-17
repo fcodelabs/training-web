@@ -1,7 +1,12 @@
-import {createStore ,applyMiddleware} from "redux";
-import rootSaga from "./utils/sagas/sagas";
+import {createStore ,applyMiddleware,combineReducers} from "redux";
+import rootSaga from "./Pages/DiaryHome/sagas";
 import createSagaMiddleware from "@redux-saga/core";
-import reducers from './utils/reducers';
+import items from './Pages/DiaryHome/reducers'
+
+
+const reducers = combineReducers({
+    items:items,
+});
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];

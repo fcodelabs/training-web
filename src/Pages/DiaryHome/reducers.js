@@ -1,4 +1,4 @@
-import {FETCH_ALL_FAIL,FETCH_ALL_START,FETCH_ALL_SUCCESS,ADD_POST_FAIL,ADD_POST_START,ADD_POST_SUCCESS } from "../actionTypes/actionTypes";
+import {FETCH_ALL_FAIL,FETCH_ALL_START,FETCH_ALL_SUCCESS,ADD_POST_FAIL,ADD_POST_START,ADD_POST_SUCCESS } from "./actionTypes";
 
 let initial_state = {
     itemsArray:[],

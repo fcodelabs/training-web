@@ -1,7 +1,7 @@
 import {createStore ,applyMiddleware,combineReducers} from "redux";
 import rootSaga from "./Pages/DiaryHome/sagas";
 import createSagaMiddleware from "@redux-saga/core";
-import items from './Pages/DiaryHome/reducers'
+import items from './Pages/DiaryHome/reducer'
 
 
 const reducers = combineReducers({

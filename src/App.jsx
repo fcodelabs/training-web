@@ -1,9 +1,9 @@
-import { AppBar, Container,Grid,Button,Toolbar } from '@material-ui/core';
+
 import React from 'react';
 import  {BrowserRouter,Switch,Route} from "react-router-dom";
-import DiaryHome from './pages/DiaryHome';
+import DiaryHome from './Pages/DiaryHome/DiaryHome';
 import './index.css'
-import Login from './auth/Login';
+import Login from './Pages/Auth/Login';
 function App(){
     return (
         <div>

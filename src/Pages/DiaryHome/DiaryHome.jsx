@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
-import { TextField,Typography,Button,Paper,Grid,Container,AppBar,Toolbar, FormControl } from '@material-ui/core';
+import { TextField,Button,Grid,Container,AppBar,Toolbar} from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import DiaryCard from '../components/DiaryCard/DiaryCard';
+import DiaryCard from '../../Components/DiaryCard/DiaryCard';
 import useStyles from './styles';
 import { useEffect } from 'react';
-import {getPostStart,addPostStart} from '../actions/items'
+import {getPostStart,addPostStart} from './actions'
 import { useSelector } from 'react-redux';
 const DiaryHome = (props) => {
     const classes = useStyles();
@@ -43,7 +43,7 @@ const DiaryHome = (props) => {
             <Container maxWidth="lg" style={{marginTop:'100px'}} >
                 <Grid container spacing={4} >
                     {items.map((item,index) => (
-                        <Grid item key={index} item xs={12} sm={6} md={4}>
+                        <Grid item key={index} xs={12} sm={6} md={4}>
                             <DiaryCard  title={item.title} description={item.description} subtitle="" />
                         </Grid>
                     ))}

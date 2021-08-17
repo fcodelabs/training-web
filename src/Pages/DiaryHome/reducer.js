@@ -1,11 +1,11 @@
-import {FETCH_ALL_FAIL,FETCH_ALL_START,FETCH_ALL_SUCCESS,ADD_POST_FAIL,ADD_POST_START,ADD_POST_SUCCESS } from "../actionTypes/actionTypes";
+import {FETCH_ALL_FAIL,FETCH_ALL_START,FETCH_ALL_SUCCESS,ADD_POST_FAIL,ADD_POST_START,ADD_POST_SUCCESS } from "./actionTypes";
 
 let initial_state = {
     itemsArray:[],
     error:null,
     loading:false
 };
-export default (state=initial_state,action)=>{
+const reducer = (state=initial_state,action)=>{
     switch(action.type){ 
         case FETCH_ALL_START:
             return {
@@ -48,3 +48,4 @@ export default (state=initial_state,action)=>{
             return state;
     }
 }
+export default reducer;

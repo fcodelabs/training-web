@@ -1,24 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import DiaryCard from "./components/DiaryCard";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    return (
+        <div className="App">
+            <DiaryCard
+                title='Reason Why Learning English is so important'
+                subtitle='Noah'
+                description='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur doloribus harum quo. Deserunt ducimus fugit itaque minus nesciunt nihil praesentium, quaerat. Accusantium consectetur dolor ex iusto quas quos rerum sed!'
+            />
+        </div>
   );
 }
 

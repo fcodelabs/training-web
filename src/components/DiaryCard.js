@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+/*Styling*/
 const useStyles = makeStyles({
     card: {
         width: 300,
@@ -18,9 +19,12 @@ const useStyles = makeStyles({
 });
 
 function DiaryCard({title, subtitle, description}) {
-    const [isShowMore, setShowMore] = useState(false);
     const classes = useStyles();
 
+    //states
+    const [isShowMore, setShowMore] = useState(false);
+
+    //show more handler
     function buttonHandler() {
         setShowMore(!isShowMore);
     }
@@ -34,7 +38,7 @@ function DiaryCard({title, subtitle, description}) {
                 <Typography className={classes.subtitle} color="textSecondary">
                     {subtitle}
                 </Typography>
-                <Typography variant="p">
+                <Typography variant="body2">
                     {description.length > 100 && !isShowMore ? description.substring(0, 99) + ' ...' : description}
                 </Typography>
             </CardContent>

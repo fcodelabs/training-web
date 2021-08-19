@@ -45,16 +45,6 @@ function DiaryHome(props) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
-    //get title field value
-    function titleHandler(event) {
-        setTitle(event.target.value);
-    }
-
-    //get description field value
-    function descriptionHandler(event) {
-        setDescription(event.target.value);
-    }
-
     //submit button handler
     function submitHandler() {
         console.log(`Title: ${title}`);
@@ -71,7 +61,9 @@ function DiaryHome(props) {
                 id="outlined-basic"
                 variant="outlined"
                 value={title}
-                onChange={titleHandler}
+                onChange={(event) => {
+                    setTitle(event.target.value);
+                }}
                 className={classes.title}
                 placeholder='Title'
             />
@@ -81,7 +73,9 @@ function DiaryHome(props) {
                 rows={4}
                 variant="outlined"
                 value={description}
-                onChange={descriptionHandler}
+                onChange={(event) => {
+                    setDescription(event.target.value);
+                }}
                 className={classes.description}
                 placeholder='Description'
             />

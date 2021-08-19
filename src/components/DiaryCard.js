@@ -22,7 +22,7 @@ function DiaryCard(props) {
                     {more ? props.description : props.description.substring(0, 100 || props.description.length()) + "..."}
                 </Typography>
                 <CardActions>
-                    <Button size="small" onClick={() => setMore(!more)} >{!more ? "Read more" : "Read less"}</Button>
+                    <Button size="medium" onClick={() => setMore(!more)} >{!more ? "Read more" : "Read less"}</Button>
                 </CardActions>
             </CardContent>
         </Card>

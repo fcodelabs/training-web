@@ -14,6 +14,11 @@ function AddNewDiary(props) {
 
     function sendDiaryDataHandler() {
         console.log(diaryData);
+        setDiaryData({
+            title: "",
+            author: "",
+            description: ""
+        })
     }
 
 
@@ -28,7 +33,7 @@ function AddNewDiary(props) {
                     <label htmlFor='title'>
                         Topic
                     </label>
-                    <input placeholder='Topic' type='text' required id='title' onChange={(e) => {
+                    <input placeholder='Topic' type='text' value={diaryData.title} required id='title' onChange={(e) => {
                         setDiaryData(prevState => ({...prevState, title: e.target.value}))
                     }}/>
                 </div>
@@ -36,7 +41,7 @@ function AddNewDiary(props) {
                     <label htmlFor='author'>
                         Subtopic
                     </label>
-                    <input placeholder='Subtopic' type='text' required id='author' onChange={(e) => {
+                    <input placeholder='Subtopic' type='text'  value={diaryData.author} required id='author' onChange={(e) => {
                         setDiaryData(prevState => ({...prevState, author: e.target.value}))
                     }}/>
                 </div>
@@ -44,7 +49,7 @@ function AddNewDiary(props) {
                     <label htmlFor='description'>
                         Description
                     </label>
-                    <textarea placeholder='Description' id='description' required rows='5' onChange={(e) => {
+                    <textarea placeholder='Description' id='description'  value={diaryData.description} required rows='5' onChange={(e) => {
                         setDiaryData(prevState => ({...prevState, description: e.target.value}))
                     }}>
 

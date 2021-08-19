@@ -4,31 +4,19 @@ import classes from './DiaryCard.module.css'
 import {useState} from "react";
 
 function DiaryCard(props) {
-    const [more, setMore] = useState(false);
-    const [buttonText, setButtonText] = useState("Show More");
+    const [showBtn, setShowBtn] = useState(false);
 
 
-
-
-    function showHandler() {
-        return !!setMore(!more);
-    }
-
-
-    function allHandler() {
-        showHandler();
-
-    }
     return (
         <Card className={classes.main}>
             <CardContent className={classes.card}>
                 <Typography variant='h4' className={classes.cardHeader} gutterBottom
                             align='center'>{props.title}</Typography>
-                <p className={classes.subTopic}>{props.author} </p>
+                <Typography className={classes.subTopic}>{props.author} </Typography>
                 <Typography
-                    variant='body1'>{more ? props.description : props.description.substring(0, 100 || props.description.length()) + "..."}</Typography>
+                    variant='body1'> {showBtn ? props.description : props.description.substring(0, 100 || props.description.length()) + "..."}</Typography>
                 <CardActions>
-                    <Button size="small"  variant="contained" color="secondary" id='addBTN' onClick={allHandler}>{buttonText}</Button>
+                    <Button size="small"  variant="contained" color="secondary" id='addBTN' onClick={() => setShowBtn(!showBtn)} >{!showBtn ? "READ MORE" : "READ LESS"}</Button>
                 </CardActions>
             </CardContent>
 

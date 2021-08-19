@@ -26,6 +26,7 @@ const DUMMY_DATA = [
 ]
 
 
+
 function AllDiary() {
     return (
         <div className={classes.main}>

@@ -12,6 +12,7 @@ function AddNewDiary(props) {
         description: ''
     })
 
+
     function sendDiaryDataHandler() {
         console.log(diaryData);
         setDiaryData({

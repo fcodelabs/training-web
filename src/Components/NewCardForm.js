@@ -1,7 +1,7 @@
 import { Button, Col, Collapse, Form, Row } from 'react-bootstrap'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addDiaryCard } from '../Pages/DiaryHome/diary.actions'
+import { addDiaryCard } from '../Pages/DiaryHome/actions'
 
 const NewCardForm = () => {
   const dispatch = useDispatch()

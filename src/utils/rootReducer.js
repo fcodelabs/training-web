@@ -1,11 +1,11 @@
-import diaryReducer from '../Pages/DiaryHome/diary.reducer'
-import loginReducer from '../Pages/Login/login.reducer'
+import reducer from '../Pages/DiaryHome/reducer'
+import loginReducer from '../Pages/Login/reducer'
 import { combineReducers } from 'redux'
 import { firestoreReducer } from 'redux-firestore'
-import { loadingReducer } from '../Pages/App/app.reducer'
+import { loadingReducer } from '../Pages/App/reducer'
 
 const rootReducer = combineReducers({
-  diaryCards: diaryReducer,
+  diaryCards: reducer,
   login: loginReducer,
   loading: loadingReducer,
   firestore: firestoreReducer

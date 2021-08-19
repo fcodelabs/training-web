@@ -4,8 +4,8 @@ import {
   handleFirebasePostsCreate,
   handleFirebasePostsDelete,
   handleFirebasePostsSync
-} from '../Pages/DiaryHome/diary.saga'
-import { handleRandomName } from '../Pages/Login/login.saga'
+} from '../Pages/DiaryHome/sagas'
+import { handleRandomName } from '../Pages/Login/sagas'
 
 export function * watchSaga () {
   yield takeLatest(ActionTypes.ADD_DIARY_CARD, handleFirebasePostsCreate)

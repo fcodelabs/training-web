@@ -1,8 +1,8 @@
 import { put, take } from 'redux-saga/effects'
-import { loadAllDiaryCards } from './diary.actions'
+import { loadAllDiaryCards } from './actions'
 import { firestore } from '../../utils/store'
 import { eventChannel } from 'redux-saga'
-import { endLoading, startLoading } from '../App/app.actions'
+import { endLoading, startLoading } from '../App/actions'
 
 /**
  * Creates event listner for DiraryNote collection on firebase. Emits data on each update

@@ -1,6 +1,6 @@
 import { ActionTypes } from '../../utils/actionTypes'
 
-const loginReducer = (state = false, action) => {
+const reducer = (state = false, action) => {
   switch (action.type) {
     case ActionTypes.LOGIN:
       return {
@@ -22,4 +22,4 @@ const loginReducer = (state = false, action) => {
   }
 }
 
-export default loginReducer
+export default reducer

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import NewCardForm from '../../Components/NewCardForm'
 import DiaryCard from '../../Components/DiaryCard'
-import { startDiaryNotesFirestoreSync } from './diary.actions'
+import { startDiaryNotesFirestoreSync } from './actions'
 
 function DiaryHome () {
   const diaryCardsList = useSelector(state => state.diaryCards.diaryCards)

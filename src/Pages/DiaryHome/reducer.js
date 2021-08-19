@@ -2,7 +2,7 @@ import { ActionTypes } from '../../utils/actionTypes'
 
 let id = 0
 const initialState = { diaryCards: [] }
-const diaryReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.ADD_DIARY_CARD: {
       state.diaryCards = [
@@ -44,4 +44,4 @@ const diaryReducer = (state = initialState, action) => {
   }
 }
 
-export default diaryReducer
+export default reducer

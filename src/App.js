@@ -1,9 +1,12 @@
 import React from "react";
 import DiaryCard from "./components/DiaryCard";
+import DiaryHome from "./components/DiaryHome";
+import './App.css';
 
 function App() {
     return (
         <div className="App">
+            <DiaryHome />
             <DiaryCard
                 title='Reason Why Learning English is so important'
                 subtitle='Noah'

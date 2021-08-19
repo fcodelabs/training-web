@@ -4,26 +4,10 @@ import classes from './DiaryCard.module.css'
 import {useState} from "react";
 
 function DiaryCard(props) {
-    const [more, setMore] = useState(false);
-    const [showButton,setShowButton]=useState('Show More');
-    const [lessButton,setLessButton]=useState('Show Less');
-    const [buttonText, setButtonText] = useState("Show More");
-
-    const changeText = (text) => setButtonText(text);
+    const [showMore, setShowMore] = useState(false);
 
 
-    function showHandler() {
-        return !!setMore(!more);
-    }
 
-    function buttonHandler() {
-      setShowButton("Show Less")
-    }
-
-    function allHandler() {
-        showHandler();
-
-    }
     return (
         <Card className={classes.main}>
             <CardContent className={classes.card}>
@@ -31,9 +15,9 @@ function DiaryCard(props) {
                             align='center'>{props.title}</Typography>
                 <p className={classes.subTopic}>{props.author} </p>
                 <Typography
-                    variant='body1'>{more ? props.description : props.description.substring(0, 100 || props.description.length()) + "..."}</Typography>
+                    variant='body1'> {showMore ? props.description : props.description.substring(0, 100 || props.description.length()) + "..."} </Typography>
                 <CardActions>
-                    <Button size="small"  variant="contained" color="secondary" id='addBTN' onClick={allHandler}>{buttonText}</Button>
+                    <Button size="small"  variant="contained" color="secondary" id='addBTN' onClick={() => setShowMore(!showMore)}>{!showMore ? "SHOW MORE" : "SHOW LESS"}</Button>
                 </CardActions>
             </CardContent>
 

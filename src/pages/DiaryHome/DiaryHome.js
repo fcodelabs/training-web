@@ -1,6 +1,7 @@
 //imporing modules
 //importing hooks
 import React, {useState} from 'react'
+import DiaryCard from '../../components/DiaryCard'
 //hook for style material components
 import {
     AppBar,
@@ -12,38 +13,57 @@ import {
     FormControl,
     makeStyles,
     TextField,
-    Toolbar
+    Toolbar,
+    Typography
 } from '@material-ui/core';
 //import css files
 import '../../normalize.css'
 import './diaryPage.css'
 //Masonary css for grid
+import Masonry from 'react-masonry-css'
 
-const styles = makeStyles({
-    btn: {
-        color: "white",
-        border: "2px solid white",
-        '&:hover': {
-            background: "white",
-            color: "#34495e"
-        },
-    },
-    text: {
-        borderRadius: "10px",
-        borderWidth: "2px",
-        borderColor: '#3498db !important',
-    },
-    areaText: {
-        borderRadius: "10px",
-        borderWidth: "2px",
-        borderColor: '#3498db !important',
-    },
-    hidden: {
-        color: '#3498db'
-    }
-})
 
+const dataArr = [] //holds all the card data
 function DiaryHome() {
+
+    ///Card Data
+
+    ///States
+    const [open, setOpen] = useState(false); ///using to handle dialog state
+
+    const [color, setColor] = useState({///using to handle form border colors(change to red when errors)
+        title: "#3498db",
+        description: "#3498db"
+    });
+
+    const [formData, setData] = useState({///using to handle form data
+        title: "",
+        description: ""
+    });
+
+    const styles = makeStyles({///Material UI custom stylings
+        btn: {
+            color: "white",
+            border: "2px solid white",
+            '&:hover': {
+                background: "white",
+                color: "#34495e"
+            },
+        },
+        text: {
+            borderRadius: "10px",
+            borderWidth: "2px",
+            borderColor: `${color.title} !important`,
+        },
+        areaText: {
+            borderRadius: "10px",
+            borderWidth: "2px",
+            borderColor: `${color.description} !important`,
+        },
+        hidden: {
+            color: '#3498db'
+        }
+    })
 
     const clasess = styles()
 
@@ -54,12 +74,6 @@ function DiaryHome() {
         500: 1
     }
 
-    const [open, setOpen] = useState(false);
-    const [formData, setData] = useState({
-        title: "",
-        description: ""
-    });
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -67,15 +81,48 @@ function DiaryHome() {
         setOpen(false);
     };
 
-    function submitForm() {
+    function submitForm() { ///Handling the forms errors and submission
 
-        console.log(`
-            title: ${formData.title}\n
-            description: ${formData.description}
-        `)
-        handleClose()
+        if (formData.title.trim().length == 0 && formData.description.trim().length == 0) {
+            setColor(prevState => ({
+                description: "#ff6b6b",
+                title: "#ff6b6b"
+            }))
+        } else if (formData.title.trim().length == 0) {
+            setColor(prevState => ({
+                title: "#ff6b6b",
+                description: "#3498db",
+            }))
+        } else if (formData.description.trim().length == 0) {
+            setColor(prevState => ({
+                title: "#3498db",
+                description: "#ff6b6b"
+            }))
+        } else {
+            setColor(prevState => ({
+                title: "#3498db",
+                description: "#3498db"
+            }))
+            submitData()
+            handleClose()
+        }
     }
 
+    function submitData() {
+        const data = {
+            name: "udara",
+            title: formData.title,
+            description: formData.description
+        }
+
+        dataArr.push(data);
+
+        ///After submit all the form data will be cleared from the state
+        setData({
+            title: "",
+            description: ""
+        })
+    }
 
     return (
         <div className="diary-container fld-clm">
@@ -93,7 +140,7 @@ function DiaryHome() {
                     fullWidth={true}
                     onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                     <DialogTitle
-                        style={{color: "#ED4C67"}}
+                        style={{color: "#ed4c67"}}
                         id="customized-dialog-title" onClose={handleClose}>
                         Add Note
                     </DialogTitle>
@@ -106,8 +153,6 @@ function DiaryHome() {
                                         title: e.target.value
                                     }))
                                 }}
-                                required={true}
-                                // onChange={}
                                 InputProps={{
                                     classes: {
                                         notchedOutline: clasess.text,
@@ -120,7 +165,7 @@ function DiaryHome() {
                                 }}
                                 style={{width: "100%"}}
                                 fullWidth={true}
-                                id="outlined-basic" label="Outlined" variant="outlined"/>
+                                id="outlined-basic" label="TITLE" variant="outlined"/>
                             <br/>
                             <TextField
                                 onChange={(e) => {
@@ -144,7 +189,8 @@ function DiaryHome() {
                                 fullWidth={true}
                                 multiline={4}
                                 rows={10}
-                                id="outlined-basic" label="Outlined" variant="outlined"/>
+                                maxRows={10}
+                                id="outlined-basic" label="DESCRIPTION" variant="outlined"/>
                         </FormControl>
                     </DialogContent>
                     <DialogActions>
@@ -156,74 +202,29 @@ function DiaryHome() {
                     </DialogActions>
                 </Dialog>
             </div>
-            {/*<div className="data-grid">*/}
-            {/*    <Masonry*/}
-            {/*        breakpointCols={breakpoints}*/}
-            {/*        className="my-masonry-grid"*/}
-            {/*        columnClassName="my-masonry-grid_column"*/}
-            {/*    >*/}
-            {/*        <div className="diary-card">*/}
-            {/*            <DiaryCard*/}
-            {/*                title="Title"*/}
-            {/*                subtitle="subtitle"*/}
-            {/*                description="descriptionss descriptionss descriptionss descriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionss"/>*/}
-            {/*        </div>*/}
-            {/*        <div className="diary-card">*/}
-            {/*            <DiaryCard*/}
-            {/*                title="Title"*/}
-            {/*                subtitle="subtitle"*/}
-            {/*                description="descriptionss descriptionss descriptionss descriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionss"/>*/}
-            {/*        </div>*/}
-            {/*        <div className="diary-card">*/}
-            {/*            <DiaryCard*/}
-            {/*                title="Title"*/}
-            {/*                subtitle="subtitle"*/}
-            {/*                description="descriptionss descriptionss descriptionss descriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionss*/}
-            {/*        descriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionss"/>*/}
-            {/*        </div>*/}
-            {/*        <div className="diary-card">*/}
-            {/*            <DiaryCard*/}
-            {/*                title="Title"*/}
-            {/*                subtitle="subtitle"*/}
-            {/*                description="descriptionss descriptionss descriptionss descriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionss"/>*/}
-            {/*        </div>*/}
-            {/*        <div className="diary-card">*/}
-            {/*            <DiaryCard*/}
-            {/*                title="Title"*/}
-            {/*                subtitle="subtitle"*/}
-            {/*                description="descriptionss descriptionss descriptionss descriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionss"/>*/}
-            {/*        </div>*/}
-            {/*        <div className="diary-card">*/}
-            {/*            <DiaryCard*/}
-            {/*                title="Title"*/}
-            {/*                subtitle="subtitle"*/}
-            {/*                description="descriptionss descriptionss descriptionss descriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionss"/>*/}
-            {/*        </div>*/}
-            {/*        <div className="diary-card">*/}
-            {/*            <DiaryCard*/}
-            {/*                title="Title"*/}
-            {/*                subtitle="subtitle"*/}
-            {/*                description="descriptionss descriptionss descriptionss descriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionss"/>*/}
-            {/*        </div>*/}
-            {/*        <div className="diary-card">*/}
-            {/*            <DiaryCard*/}
-            {/*                title="Title"*/}
-            {/*                subtitle="subtitle"*/}
-            {/*                description="descriptionss descriptionss descriptionss descriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionss"/>*/}
-            {/*        </div>*/}
-            {/*        <div className="diary-card">*/}
-            {/*            <DiaryCard*/}
-            {/*                title="Title"*/}
-            {/*                subtitle="subtitle"*/}
-            {/*                description="descriptionss descriptionss descriptionss descriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionssdescriptionss"/>*/}
-            {/*        </div>*/}
-            {/*    </Masonry>*/}
-            {/*</div>*/}
-            {/*<footer class="footer d-flex">*/}
-            {/*    <Typography style={{paddingBottom: 5}} gutterBottom variant="subtitle1">*/}
-            {/*        &copy; 2021 Fcode labs | All the copyrights reserved*/}
-            {/*    </Typography>*/}
-            {/*</footer>*/}
+            <div className="data-grid">
+                <Masonry
+                    breakpointCols={breakpoints}
+                    className="my-masonry-grid"
+                    columnClassName="my-masonry-grid_column"
+                >
+                    {
+                        dataArr.map(e => {
+                            return <div  className="diary-card">
+                                <DiaryCard
+                                    title={e.title}
+                                    subtitle={e.name}
+                                    description={e.description}/>
+                            </div>
+                        })
+                    }
+                </Masonry>
+            </div>
+            <footer class="footer d-flex">
+                <Typography style={{paddingBottom: 5}} gutterBottom variant="subtitle1">
+                    &copy; 2021 Fcode labs | All the copyrights reserved
+                </Typography>
+            </footer>
         </div>
     )
 }

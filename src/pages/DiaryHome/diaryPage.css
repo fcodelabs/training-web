@@ -1,44 +1,43 @@
-.diary-container{
+.diary-container {
     display: flex;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(to right bottom, #0c4142, #043f44, #003c46, #003a48, #003749);   
-      justify-content: space-between;
-   
+    background-image: linear-gradient(to right bottom, #0c4142, #043f44, #003c46, #003a48, #003749);
+    justify-content: space-between;
+
 }
 
-.diary-card{
+.diary-card {
     width: 30vw;
     /* height: 20vh; */
 }
 
-.data-grid{
-  display: flex;
-  width: 100%;
-  height: 70%;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-  overflow: auto;
+.data-grid {
+    display: flex;
+    width: 100%;
+    height: 70%;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: auto;
 }
 
-.appbar{
-  width: 100%;
-  height: 8%;
+.appbar {
+    width: 100%;
+    height: 8%;
 }
 
-.data-form{
-  width: 100%;
-    height: 88%;
+.data-form {
+    width: 100%;
 }
 
-.footer{
-  justify-content: center;
-  align-items: center;
-  color: whitesmoke;
+.footer {
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
 }
 
-.desc-area{
+.desc-area {
     border: 2px solid #3498db;
     font-family: "Calibri Light";
     font-size: 20px;
@@ -54,14 +53,15 @@
     display: flex;
     margin-left: -30px; /* gutter size offset */
     width: auto;
-  }
-  .my-masonry-grid_column {
+}
+
+.my-masonry-grid_column {
     padding-left: 30px; /* gutter size */
     background-clip: padding-box;
-  }
-  
-  /* Style your items */
-  .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+}
+
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
     background: grey;
     margin-bottom: 30px;
-  }
+}

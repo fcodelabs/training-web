@@ -2,10 +2,12 @@ import React from "react";
 import DiaryCard from "./components/DiaryCard";
 import DiaryHome from "./components/DiaryHome";
 import './App.css';
+import AppMenuBar from "./components/layouts/AppMenuBar";
 
 function App() {
     return (
         <div className="App">
+            <AppMenuBar/>
             <DiaryHome />
             <DiaryCard
                 title='Reason Why Learning English is so important'

@@ -26,13 +26,11 @@ const DUMMY_DATA = [
 ]
 
 
-function AllDiary(props) {
+function AllDiary() {
     return (
-
         <div className={classes.main}>
             <DiaryCardList dcards={DUMMY_DATA}/>
         </div>
-
 
     );
 }

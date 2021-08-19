@@ -39,13 +39,13 @@ const useStyle = makeStyles((theme) => {
 })
 
 function allDiaryRoute() {
-    window.location = '/all-diary'
+    window.location = '/'
 }
 
 
 
 
-function MainNavigation(props) {
+function MainNavigation() {
     const classes = useStyle();
     return (
         <div>
@@ -62,7 +62,7 @@ function MainNavigation(props) {
                                 </Link>
                             </li>
                             <li>
-                                <Link to='/' className={classes.forLI}>
+                                <Link to='/add-diary' className={classes.forLI}>
                                     Add New Diary
                                 </Link>
                             </li>

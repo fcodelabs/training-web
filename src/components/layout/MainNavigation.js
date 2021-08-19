@@ -1,6 +1,7 @@
 import React from 'react';
 import {AppBar, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import {format} from "date-fns";
+import {Link} from "react-router-dom";
 
 
 const drawerWidth = 10
@@ -19,6 +20,19 @@ const useStyle = makeStyles((theme) => {
             margin: 20,
             cursor: "pointer",
 
+        },
+        forUL:{
+            listStyle:"none",
+            display:"flex",
+            margin:0,
+            padding:0,
+            alignItems:"baseline"
+        },
+        forLI:{
+            margin:20,
+            color:"white",
+            textDecoration:"none",
+            fontWeight:"bold"
         }
 
     }
@@ -29,9 +43,6 @@ function allDiaryRoute() {
 }
 
 
-function homeRoute() {
-    window.location = '/'
-}
 
 
 function MainNavigation(props) {
@@ -43,12 +54,20 @@ function MainNavigation(props) {
                     <Typography className={classes.date} onClick={allDiaryRoute}>
                         ToDay Is : {format(new Date(), 'do MMM Y')}
                     </Typography>
-                    <Typography className={classes.menu} onClick={allDiaryRoute}>
-                        All Diary's
-                    </Typography>
-                    <Typography className={classes.menu} onClick={homeRoute}>
-                        Add New Diary
-                    </Typography>
+                    <nav >
+                        <ul className={classes.forUL}>
+                            <li className={classes.forLI}>
+                                <Link to='/all-diary' className={classes.forLI}>
+                                    All Diary
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to='/' className={classes.forLI}>
+                                    Add New Diary
+                                </Link>
+                            </li>
+                        </ul>
+                    </nav>
                 </Toolbar>
             </AppBar>
         </div>

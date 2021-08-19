@@ -6,32 +6,16 @@ import Card from "@material-ui/core/Card";
 function AddNewDiary(props) {
 
     //states
-    const [inputTitle, setInputTitle] = useState('');
-    const [inputAuthor, setInputAuthor] = useState('');
-    const [inputDescription, setInputDescription] = useState('');
+    useState({
+        title:'',
+        author:'',
+        description:''
+    })
 
-    //get textField Value
-    function titleHandler(event) {
-        setInputTitle(event.target.value);
-    }
 
-    function authorHandler(event) {
-        setInputAuthor(event.target.value);
-    }
-
-    function descriptionHandler(event) {
-        setInputDescription(event.target.value);
-    }
 
     function submitDataHandler() {
-        console.log(`Title : ${inputTitle}`);
-        console.log(`Author : ${inputAuthor}`);
-        console.log(`Description : ${inputDescription}`);
 
-        //Reset Text Field
-        setInputTitle('');
-        setInputAuthor('');
-        setInputDescription('');
     }
 
 

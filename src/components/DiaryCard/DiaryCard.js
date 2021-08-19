@@ -5,20 +5,15 @@ import {useState} from "react";
 
 function DiaryCard(props) {
     const [more, setMore] = useState(false);
-    const [showButton,setShowButton]=useState('Show More');
-    const [lessButton,setLessButton]=useState('Show Less');
     const [buttonText, setButtonText] = useState("Show More");
 
-    const changeText = (text) => setButtonText(text);
+
 
 
     function showHandler() {
         return !!setMore(!more);
     }
 
-    function buttonHandler() {
-      setShowButton("Show Less")
-    }
 
     function allHandler() {
         showHandler();

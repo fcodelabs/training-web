@@ -6,7 +6,6 @@ import {useState} from "react";
 function DiaryCard(props) {
     const [showBtn, setShowBtn] = useState(false);
 
-
     return (
         <Card className={classes.main}>
             <CardContent className={classes.card}>

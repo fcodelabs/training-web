@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import classes from './AddNewDiary.module.css'
 import Card from "@material-ui/core/Card";
-import DiaryCard from "./DiaryCard";
+
 
 
 
@@ -13,8 +13,6 @@ function AddNewDiary() {
         title: '',
         description: ''
     })
-
-    const [isShowCard,setIsShowCard]=useState(false);
 
 
     const allData=[{
@@ -29,17 +27,15 @@ function AddNewDiary() {
         }else if(diaryData.description===''){
             console.log('Description Missing')
         }else {
-            setIsShowCard(true);
+            console.log(allData)
         }
 
-        console.log(allData)
     }
 
     function preventHandler(event) {
         event.preventDefault()
 
     }
-
 
 
     return (
@@ -65,7 +61,6 @@ function AddNewDiary() {
                     </div>
                 </form>
             </Card>
-            {isShowCard && <DiaryCard description={diaryData.description} />}
         </div>
     );
 }

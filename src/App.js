@@ -6,10 +6,12 @@ import DiaryCardContainer from "./components/DiaryCardContainer";
 
 /*Context*/
 export const Context = React.createContext('');
+
 /*Temp Array*/
 let tempData = [];
 
 function App() {
+    //states
     const [data, setData] = useState();
 
     return (

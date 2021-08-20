@@ -3,13 +3,13 @@ import {AppBar, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import {format} from "date-fns";
 import {Link} from "react-router-dom";
 
-
 const drawerWidth = 10
 const useStyle = makeStyles((theme) => {
     return {
         appBar: {
             width: `calc(100% - ${drawerWidth}px)`,
-            marginRight: 5
+            marginRight: 5,
+            backgroundColor:"#00BCD4"
         },
         toolbar: theme.mixins.toolbar,
         date: {
@@ -41,9 +41,6 @@ const useStyle = makeStyles((theme) => {
 function allDiaryRoute() {
     window.location = '/'
 }
-
-
-
 
 function MainNavigation() {
     const classes = useStyle();

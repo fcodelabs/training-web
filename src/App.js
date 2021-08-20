@@ -3,6 +3,7 @@ import React from 'react';
 import AllDiary from "./components/pages/AllDiary";
 import Layout from "./components/layout/Layout";
 import DiaryHome from "./components/pages/DiaryHome";
+import LoginPage from "./components/pages/LoginPage";
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
         <Layout>
             <Switch>
                 <Route path='/' exact={true}>
-                    <DiaryHome/>
+                    <LoginPage/>
                 </Route>
                 <Route path='/all-diary'>
                     <AllDiary/>

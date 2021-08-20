@@ -65,7 +65,6 @@ function AddNewDiary() {
                     </div>
                 </form>
             </Card>
-            {/*{isShowCard && <DiaryCard dcards={allData}/>}*/}
             {isShowCard && <DiaryCard description={diaryData.description} />}
         </div>
     );

@@ -6,9 +6,6 @@ import {useState} from "react";
 function DiaryCard(props) {
     const [showBtn, setShowBtn] = useState(false);
 
-    //{showBtn ? props.description : props.description.substring(0, 100 || props.description.length()) + "..."}
-    //{props.description}
-
 
     return (
         <Card className={classes.main}>

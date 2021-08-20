@@ -14,9 +14,11 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Divider from "@material-ui/core/Divider";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
+/*Styling*/
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        backgroundImage: `linear-gradient(-45deg, #039BE5 0%, #039BE5 33%, #00BCD4 100%)`
     },
     title: {
         flexGrow: 1,
@@ -116,8 +118,8 @@ function AppMenuBar() {
     };
 
     return (
-        <div className={classes.root}>
-            <AppBar position="fixed">
+        <div>
+            <AppBar position="fixed" className={classes.root} variant='outlined'>
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap> Dear Diary</Typography>
                     <div className={classes.search}>

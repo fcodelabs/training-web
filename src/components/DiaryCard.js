@@ -8,10 +8,25 @@ import Typography from '@material-ui/core/Typography';
 
 /*Styling*/
 const useStyles = makeStyles({
+    container: {
+        position: 'relative',
+        width: '100%',
+        height: 500,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'brown'
+    },
+    content: {
+        display: 'grid',
+        gridTemplateColumns: `repeat(3, 1fr)`,
+        width: '95%',
+        backgroundColor: 'green'
+    },
     card: {
         width: 300,
         backgroundColor: 'skyblue',
-        borderRadius: 10
+        borderRadius: 10,
     },
     subtitle: {
         marginBottom: 12,

@@ -1,21 +1,26 @@
-import React from "react";
-import DiaryCard from "./components/DiaryCard";
+import React, {useState} from "react";
 import DiaryHome from "./components/DiaryHome";
 import './App.css';
 import AppMenuBar from "./components/layouts/AppMenuBar";
+import DiaryCardContainer from "./components/DiaryCardContainer";
+
+/*Context*/
+export const Context = React.createContext('');
+/*Temp Array*/
+let tempData = [];
 
 function App() {
+    const [data, setData] = useState();
+
     return (
         <div className="App">
-            <AppMenuBar/>
-            <DiaryHome />
-            <DiaryCard
-                title='Reason Why Learning English is so important'
-                subtitle='Noah'
-                description='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur doloribus harum quo. Deserunt ducimus fugit itaque minus nesciunt nihil praesentium, quaerat. Accusantium consectetur dolor ex iusto quas quos rerum sed!'
-            />
+            <Context.Provider value={[data, setData, tempData]}>
+                <AppMenuBar/>
+                <DiaryHome/>
+                <DiaryCardContainer/>
+            </Context.Provider>
         </div>
-  );
+    );
 }
 
 export default App;

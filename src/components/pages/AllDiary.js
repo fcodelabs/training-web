@@ -3,6 +3,7 @@ import classes from './HomePage.module.css'
 import DiaryCardList from "../DiaryCard/DiaryCardList";
 
 
+
 const DUMMY_DATA = [
     {
         id: 'm1',

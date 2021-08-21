@@ -1,9 +1,12 @@
 import React from 'react';
+import classes from './LoginPage.module.css'
 
-function LoginPage(props) {
+
+function LoginPage() {
+
     return (
-        <div>
-            <h1>Login Page</h1>
+        <div className={classes.main}>
+
         </div>
     );
 }

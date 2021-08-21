@@ -3,7 +3,6 @@ import {AppBar, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import {format} from "date-fns";
 import {Link} from "react-router-dom";
 
-
 const drawerWidth = 10
 const useStyle = makeStyles((theme) => {
     return {
@@ -39,32 +38,24 @@ const useStyle = makeStyles((theme) => {
 })
 
 function allDiaryRoute() {
-    window.location = '/all-diary'
+    window.location = '/'
 }
 
 
-
-
-function MainNavigation(props) {
+function MainNavigation() {
     const classes = useStyle();
     return (
         <div>
             <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <Typography className={classes.date} onClick={allDiaryRoute}>
-                        ToDay Is : {format(new Date(), 'do MMM Y')}
-                    </Typography>
+                    <Typography className={classes.date} onClick={allDiaryRoute}>ToDay Is : {format(new Date(), 'do MMM Y')} </Typography>
                     <nav >
                         <ul className={classes.forUL}>
                             <li className={classes.forLI}>
-                                <Link to='/all-diary' className={classes.forLI}>
-                                    All Diary
-                                </Link>
+                                <Link to='/all-diary' className={classes.forLI}> All Diary </Link>
                             </li>
                             <li>
-                                <Link to='/' className={classes.forLI}>
-                                    Add New Diary
-                                </Link>
+                                <Link to='/add-diary' className={classes.forLI}> Add New Diary </Link>
                             </li>
                         </ul>
                     </nav>

@@ -2,10 +2,12 @@ import React from 'react';
 import classes from './DiaryHome.module.css'
 import AddNewDiary from "../DiaryCard/AddNewDiary";
 
-function DiaryHome(props) {
+
+function DiaryHome() {
+
     return (
         <div className={classes.main}>
-            <AddNewDiary/>
+            <AddNewDiary />
         </div>
     );
 }

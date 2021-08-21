@@ -3,7 +3,7 @@ import DiaryCard from "./DiaryCard";
 import classes from './DiaryCardList.module.css'
 
 
-function DiaryCardList(props) {
+function  DiaryCardList(props) {
     return (
 
         <div className={classes.cards}>
@@ -12,7 +12,7 @@ function DiaryCardList(props) {
                     key={card.id}
                     id={card.id}
                     title={card.title}
-                    author={card.author}
+                    //author={card.author}
                     description={card.description}
                 />)}
         </div>

@@ -28,7 +28,9 @@ import './diaryPage.css'
 //Masonary css for grid
 import Masonry from 'react-masonry-css'
 
-function DiaryHome() {
+import {connect} from "react-redux";
+
+function DiaryHome(props) {
 
     const ref = firebase.firestore().collection("diary-notes")
 
@@ -42,7 +44,7 @@ function DiaryHome() {
         description: "#3498db"
     });
 
-    const [formData, setData] = useState({///using to handle form data
+    const [formData, setFormData] = useState({///using to handle form data
         title: "",
         description: ""
     });
@@ -135,7 +137,7 @@ function DiaryHome() {
             description: formData.description
         }
         ///After submit all the form data will be cleared from the state
-        setData({
+        setFormData({
             title: "",
             description: ""
         })
@@ -191,7 +193,7 @@ function DiaryHome() {
                         <FormControl fullWidth={true}>
                             <TextField
                                 onChange={(e) => {
-                                    setData(prevState => ({
+                                    setFormData(prevState => ({
                                         ...prevState,
                                         title: e.target.value
                                     }))
@@ -212,7 +214,7 @@ function DiaryHome() {
                             <br/>
                             <TextField
                                 onChange={(e) => {
-                                    setData(prevState => ({
+                                    setFormData(prevState => ({
                                         ...prevState,
                                         description: e.target.value
                                     }))
@@ -258,5 +260,4 @@ function DiaryHome() {
         </div>
     )
 }
-
 export default DiaryHome

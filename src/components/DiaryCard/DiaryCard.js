@@ -5,24 +5,24 @@ import {useState} from "react";
 
 function DiaryCard(props) {
     const [showMore, setShowMore] = useState(false);
+<<<<<<< HEAD
 
 
 
+=======
+  
+>>>>>>> 904b03a01778f93957b67d716ba5606edb5dd68d
     return (
         <Card className={classes.main}>
             <CardContent className={classes.card}>
-                <Typography variant='h4' className={classes.cardHeader} gutterBottom
-                            align='center'>{props.title}</Typography>
+                <Typography variant='h4' className={classes.cardHeader} gutterBottom align='center'>{props.title}</Typography>
                 <p className={classes.subTopic}>{props.author} </p>
-                <Typography
-                    variant='body1'> {showMore ? props.description : props.description.substring(0, 100 || props.description.length()) + "..."} </Typography>
+                <Typography variant='body1'>{showMore ? props.description : props.description.substring(0, 100 || props.description.length()) + "..."}</Typography>
                 <CardActions>
-                    <Button size="small"  variant="contained" color="secondary" id='addBTN' onClick={() => setShowMore(!showMore)}>{!showMore ? "SHOW MORE" : "SHOW LESS"}</Button>
+                   <Button size="small" variant="contained" color="secondary" id='addBTN' onClick={() => setShowMore(!showMore)}>{!showMore ? "SHOW MORE " : "SHOW LESS"}></Button>
                 </CardActions>
             </CardContent>
-
         </Card>
-
     );
 }
 

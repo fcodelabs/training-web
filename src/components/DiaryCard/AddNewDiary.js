@@ -4,10 +4,7 @@ import Card from "@material-ui/core/Card";
 import DiaryCard from "./DiaryCard";
 
 
-
 function AddNewDiary() {
-
-
 
     //states
     const [title,setTitle]=useState('');

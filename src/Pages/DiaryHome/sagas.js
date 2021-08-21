@@ -1,27 +1,50 @@
-import {takeLatest,all,put,fork,call} from 'redux-saga/effects';
+import {takeLatest,all,put,fork,call,take} from 'redux-saga/effects';
 import { FETCH_ALL_START, ADD_POST_START } from './actionTypes';
 import { getPostSuccess,getPostFail, addPostSuccess, addPostFail } from './actions';
 import firebase from '../../utils/firebase';
+import { eventChannel } from '@redux-saga/core';
 
-const getPostsAPI = () => {
-    return new Promise((resolve, reject) => {
-        firebase.firestore().collection("posts").onSnapshot((snap) => {
-            let documents = [];
-            snap.forEach(doc => {
-                let result = doc.data();
-                documents.push(result);
-            });
-            resolve(documents);
-        });
-    });
-};
+// const getPostsAPI = () => {
+//     return new Promise((resolve, reject) => {
+//         firebase.firestore().collection("posts").onSnapshot((snap) => {
+//             let documents = [];
+//             snap.forEach(doc => {
+//                 let result = doc.data();
+//                 documents.push(result);
+//             });
+//             resolve(documents);
+//         });
+//     });
+// };
 
 function* onLoadPostAsync(){
     try {
-        while (true) {
-            const response = yield call(getPostsAPI);
-            yield put(getPostSuccess(response));
+        const channel = new eventChannel(emiter=>{
+            const listner =firebase.firestore().collection("posts").onSnapshot((snap) => {
+                let documents = [];
+                snap.forEach(doc => {
+                    let result = doc.data();
+                    documents.push(result);
+                });
+                emiter({data:documents||{}})
+
+            });
+            return ()=>{
+                listner.off();
+            };
+        });
+        while(true){
+            const {data }= yield take(channel);
+            console.log(data);
+            yield put(getPostSuccess(data));
         }
+
+
+
+        // while (true) {
+        //     const response = yield call(getPostsAPI);
+        //     yield put(getPostSuccess(response));
+        // }
 
 
         // const posts = yield firebase.firestore().collection('posts').get().then((snapshot)=>{

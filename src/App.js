@@ -1,23 +1,13 @@
-import logo from './logo.svg';
+import DiaryCard from './components/diary-card/diary-card';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DiaryCard
+        title="Resons Why Learning English Is So Important"
+        name="Name"
+        description="They should be easy to scan for relevant and actionable information. Elements, like text and images, should be placed on them in a way that clearly indicates hierarchy." />
     </div>
   );
 }

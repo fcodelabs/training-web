@@ -2,10 +2,13 @@ import { Button, Card, CardActions, CardContent, makeStyles, Typography } from "
 import { useState } from "react";
 
 const useStyles = makeStyles({
-    root: {
+    card: {
         minWidth: 275,
         textAlign: "start",
-        backgroundColor: "#b3e9fe"
+        backgroundColor: "#b3e9fe",
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column'
     },
     title: {
         fontSize: 20
@@ -15,6 +18,9 @@ const useStyles = makeStyles({
     },
     button: {
         fontWeight: 600
+    },
+    cardContent: {
+        flexGrow: 1,
     }
 });
 
@@ -24,8 +30,8 @@ function DiaryCard(props) {
     const [isMore, setMore] = useState(false)
 
     return (
-        <Card className={classes.root}>
-            <CardContent>
+        <Card className={classes.card}>
+            <CardContent className={classes.cardContent}>
                 <Typography className={classes.title} >
                     {props.title}
                 </Typography>
@@ -33,7 +39,7 @@ function DiaryCard(props) {
                     {props.name}
                 </Typography>
                 <Typography variant="body2" component="p">
-                    {isMore? props.description : props.description.substring(0, 100).concat(" ...")}
+                    {isMore ? props.description : props.description.substring(0, 100).concat(" ...")}
                 </Typography>
             </CardContent>
             <CardActions>

@@ -1,7 +1,6 @@
 import React from 'react';
 import DiaryCard from "./DiaryCard";
 import classes from './DiaryCardList.module.css'
-import Masonry from "react-masonry-css";
 
 
 function DiaryCardList(props) {

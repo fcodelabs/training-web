@@ -26,7 +26,7 @@ const DUMMY_DATA = [
 ]
 
 
-function HomePage(props) {
+function AllDiary(props) {
     return (
 
         <div className={classes.main}>
@@ -37,4 +37,4 @@ function HomePage(props) {
     );
 }
 
-export default HomePage;
+export default AllDiary;

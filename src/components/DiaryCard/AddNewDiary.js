@@ -4,9 +4,7 @@ import Card from "@material-ui/core/Card";
 import DiaryCard from "./DiaryCard";
 
 
-
 function AddNewDiary() {
-
 
     //states
     const [title,setTitle]=useState('');
@@ -47,7 +45,7 @@ function AddNewDiary() {
     }
 
 
-return (
+    return (
         <div>
             <Card className={classes.card}>
                 <form className={classes.form} onSubmit={preventHandler}>

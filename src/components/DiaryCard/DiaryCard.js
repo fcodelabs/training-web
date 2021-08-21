@@ -5,13 +5,8 @@ import {useState} from "react";
 
 function DiaryCard(props) {
     const [showMore, setShowMore] = useState(false);
-<<<<<<< HEAD
 
 
-
-=======
-  
->>>>>>> 904b03a01778f93957b67d716ba5606edb5dd68d
     return (
         <Card className={classes.main}>
             <CardContent className={classes.card}>

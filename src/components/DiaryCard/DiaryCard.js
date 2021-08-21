@@ -7,6 +7,7 @@ function DiaryCard(props) {
     const [showMore, setShowMore] = useState(false);
 
 
+
     return (
         <Card className={classes.main}>
             <CardContent className={classes.card}>

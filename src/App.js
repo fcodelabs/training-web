@@ -5,7 +5,6 @@ import Layout from "./components/layout/Layout";
 import DiaryHome from "./components/pages/DiaryHome";
 
 function App() {
-
     return (
         <Layout>
             <Switch>

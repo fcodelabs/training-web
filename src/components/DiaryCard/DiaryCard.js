@@ -6,8 +6,6 @@ import {useState} from "react";
 function DiaryCard(props) {
     const [showMore, setShowMore] = useState(false);
 
-
-
     return (
         <Card className={classes.main}>
             <CardContent className={classes.card}>
@@ -18,9 +16,7 @@ function DiaryCard(props) {
                     <Button size="small"  variant="contained" color="secondary" id='addBTN' onClick={() => setShowMore(!showMore)}>{!showMore ? "SHOW MORE" : "SHOW LESS"}</Button>
                 </CardActions>
             </CardContent>
-
         </Card>
-
     );
 }
 

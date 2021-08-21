@@ -4,7 +4,6 @@ import Card from "@material-ui/core/Card";
 
 function AddNewDiary() {
 
-
     //states
     const [title,setTitle]=useState('');
     const [description,setDescription]=useState('')

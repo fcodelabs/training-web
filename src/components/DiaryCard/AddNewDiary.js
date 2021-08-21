@@ -8,6 +8,7 @@ import DiaryCard from "./DiaryCard";
 function AddNewDiary() {
 
 
+
     //states
     const [title,setTitle]=useState('');
     const [description,setDescription]=useState('')

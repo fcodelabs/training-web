@@ -38,7 +38,6 @@ function AddNewDiary() {
     }
 
     //functions for get  values
-
     function titleValueHandler(event) {
         setTitle(event.target.value)
     }

@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 function DiaryCard(props) {
 
     const classes = useStyles();
-    const [isMore, setMore] = useState(false)
+    const [isMore, setIsMore] = useState(false)
 
     return (
         <Card className={classes.card}>
@@ -43,7 +43,7 @@ function DiaryCard(props) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button className={classes.button} size="small" onClick={() => setMore(!isMore)}>SHOW MORE</Button>
+                <Button className={classes.button} size="small" onClick={() => setIsMore(!isMore)}>SHOW MORE</Button>
             </CardActions>
         </Card>
     )

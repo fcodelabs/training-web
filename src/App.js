@@ -11,11 +11,6 @@ function App() {
     description: ''
   });
 
-  // let input = {
-  //   title: '',
-  //   description: ''
-  // }
-
   const handleChange = (event) => {
     setInput(({
       ...input, [event.target.name]: event.target.value
@@ -40,11 +35,6 @@ function App() {
         input={input}
         handleChange={(event) => handleChange(event)}
         handleSubmit={() => handleSubmit()} />
-
-      {/* <DiaryCard
-        title="Resons Why Learning English Is So Important"
-        name="Name"
-        description="They should be easy to scan for relevant and actionable information. Elements, like text and images, should be placed on them in a way that clearly indicates hierarchy." /> */}
     </div>
   );
 }

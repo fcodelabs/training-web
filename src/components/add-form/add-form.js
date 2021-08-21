@@ -26,10 +26,6 @@ function AddForm(props) {
 
     const classes = useStyles();
 
-    const handleChange = (e) => {
-        props.handleChange(e);
-    }
-
     return (
         <div className={classes.card}>
             <form className={classes.root} noValidate autoComplete="off">
@@ -37,7 +33,7 @@ function AddForm(props) {
                     className={classes.title}
                     id="outlined-basic"
                     value={props.input.title}
-                    onChange={handleChange}
+                    onChange={props.handleChange}
                     name="title"
                     label="Outlined"
                     variant="outlined" />
@@ -45,7 +41,7 @@ function AddForm(props) {
                     className={classes.description}
                     id="outlined-multiline-static"
                     value={props.input.description}
-                    onChange={handleChange}
+                    onChange={props.handleChange}
                     name="description"
                     label="Multiline"
                     multiline

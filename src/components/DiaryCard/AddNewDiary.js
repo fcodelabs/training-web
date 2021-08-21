@@ -3,10 +3,7 @@ import classes from './AddNewDiary.module.css'
 import Card from "@material-ui/core/Card";
 import DiaryCard from "./DiaryCard";
 
-
-
 function AddNewDiary() {
-
 
     //states
     const [diaryData, setDiaryData] = useState({
@@ -16,12 +13,10 @@ function AddNewDiary() {
 
     const [isShowCard,setIsShowCard]=useState(false);
 
-
     const allData=[{
         title:diaryData.title,
         description:diaryData.description
     }]
-
 
     function submitDataHandler() {
         if (diaryData.title===''){
@@ -31,7 +26,6 @@ function AddNewDiary() {
         }else {
             setIsShowCard(true);
         }
-
         console.log(allData)
     }
 
@@ -41,10 +35,8 @@ function AddNewDiary() {
     }
 
 
-
     return (
         <div>
-
             <Card className={classes.card}>
                 <form className={classes.form} onSubmit={preventHandler}>
                     <div className={classes.control}>
@@ -53,8 +45,7 @@ function AddNewDiary() {
                     </div>
                     <div className={classes.control}>
                         <label htmlFor='description'>Description</label>
-                        <textarea placeholder='Description' id='description' value={diaryData.description} required rows='5' onChange={(e) => {setDiaryData(prevState => ({...prevState, description: e.target.value}))}}>
-                    </textarea>
+                        <textarea placeholder='Description' id='description' value={diaryData.description} required rows='5' onChange={(e) => {setDiaryData(prevState => ({...prevState, description: e.target.value}))}}> </textarea>
                         <div className={classes.actions}>
                             <button onClick={submitDataHandler}>Add Your Diary</button>
                         </div>
@@ -65,7 +56,6 @@ function AddNewDiary() {
         </div>
     );
 }
-
 
 export default AddNewDiary;
 

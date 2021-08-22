@@ -43,7 +43,7 @@ function DiaryCard(props) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button className={classes.button} size="small" onClick={() => setIsMore(!isMore)}>SHOW MORE</Button>
+                <Button className={classes.button} size="small" onClick={() => setIsMore(!isMore)}>{isMore ? 'SHOW LESS' : 'SHOW MORE'}</Button>
             </CardActions>
         </Card>
     )

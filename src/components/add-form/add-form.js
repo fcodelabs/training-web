@@ -51,7 +51,7 @@ function AddForm(props) {
             <Button className={classes.button}
                 onClick={() => props.handleSubmit()}
                 >
-                SHOW MORE
+                SUBMIT
             </Button>
         </div>
     )

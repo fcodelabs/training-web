@@ -7,9 +7,6 @@ const useStyles = makeStyles((theme) => ({
             width: '90%',
         }
     },
-    card: {
-        backgroundColor: "#b3e9fe"
-    },
     title: {
         backgroundColor: '#2e94de'
     },
@@ -27,7 +24,7 @@ function AddForm(props) {
     const classes = useStyles();
 
     return (
-        <div className={classes.card}>
+        <div>
             <form className={classes.root} noValidate autoComplete="off">
                 <TextField
                     className={classes.title}
@@ -35,7 +32,7 @@ function AddForm(props) {
                     value={props.input.title}
                     onChange={props.handleChange}
                     name="title"
-                    label="Outlined"
+                    label="Tite"
                     variant="outlined" />
                 <TextField
                     className={classes.description}
@@ -43,14 +40,13 @@ function AddForm(props) {
                     value={props.input.description}
                     onChange={props.handleChange}
                     name="description"
-                    label="Multiline"
+                    label="Description"
                     multiline
                     rows={5}
                     variant="outlined" />
             </form>
             <Button className={classes.button}
-                onClick={() => props.handleSubmit()}
-                >
+                onClick={() => props.handleSubmit()}>
                 SUBMIT
             </Button>
         </div>

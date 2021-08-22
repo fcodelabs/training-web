@@ -39,11 +39,17 @@ function DiaryCard(props) {
                     {props.name}
                 </Typography>
                 <Typography variant="body2" component="p">
-                    {isMore ? props.description : props.description.substring(0, 100).concat(" ...")}
+                    {isMore ? props.description :
+                        props.description.length <= 100 ? props.description : props.description.substring(0, 100).concat("...")}
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button className={classes.button} size="small" onClick={() => setIsMore(!isMore)}>{isMore ? 'SHOW LESS' : 'SHOW MORE'}</Button>
+                <Button
+                    className={classes.button}
+                    size="small"
+                    onClick={() => setIsMore(props.description.length <= 100 ? isMore : !isMore)}>
+                    {isMore ? 'SHOW LESS' : 'SHOW MORE'}
+                </Button>
             </CardActions>
         </Card>
     )

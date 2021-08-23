@@ -1,8 +1,7 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import TextField from "@material-ui/core/TextField";
 import {makeStyles} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import {Context} from "../App";
 
 /*Styling*/
 const useStyles = makeStyles((theme) => ({
@@ -48,45 +47,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function DiaryHome() {
+function DiaryHome(props) {
     const classes = useStyles();
-
-    //context
-    const context = useContext(Context);
-
-    //states
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-
-    //submit button handler
-    function submitHandler() {
-
-        if (title.length > 0 && description.length > 0) {
-            //state change
-            let setData = context[1];
-            setData({
-                title: title,
-                description: description
-            });
-
-            //push data to array
-            context[2].push({
-                title: title,
-                description: description
-            });
-
-            //clear text fields
-            setTitle('');
-            setDescription('');
-        } else {
-            if (title.length <= 0) {
-                console.log('Missing title');
-            }
-            if (description.length <= 0) {
-                console.log('Missing description');
-            }
-        }
-    }
 
     //prevent form default behaviour
     function formHandler(event) {
@@ -99,10 +61,8 @@ function DiaryHome() {
                 <TextField
                     id="outlined-basic"
                     variant="outlined"
-                    value={title}
-                    onChange={(event) => {
-                        setTitle(event.target.value);
-                    }}
+                    value={props.title}
+                    onChange={props.titleHandler}
                     className={classes.title}
                     placeholder='Title'
                     size="small"
@@ -112,17 +72,15 @@ function DiaryHome() {
                     multiline
                     rows={4}
                     variant="outlined"
-                    value={description}
-                    onChange={(event) => {
-                        setDescription(event.target.value);
-                    }}
+                    value={props.description}
+                    onChange={props.descriptionHandler}
                     className={classes.description}
                     placeholder='Description'
                 />
                 <Button
                     variant='outlined'
                     className={classes.submitButton}
-                    onClick={submitHandler}
+                    onClick={props.submitHandler}
                 >
                     SUBMIT
                 </Button>

@@ -1,7 +1,10 @@
 import { Container, Grid, makeStyles } from "@material-ui/core";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import AddForm from '../../components/add-form/add-form';
 import DiaryCard from '../../components/diary-card/diary-card';
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../state";
 
 const useStyles = makeStyles((theme) => ({
     page: {
@@ -24,7 +27,12 @@ function DiaryHome(props) {
 
     const classes = useStyles();
 
-    const [state, setState] = useState([]);
+    const cards = useSelector((state) => state.card);
+    const dispatch = useDispatch();
+
+    const { addNewCard } = bindActionCreators(actionCreators, dispatch);
+
+    console.log(cards)
     const [input, setInput] = useState({
         id: 0,
         title: '',
@@ -33,14 +41,14 @@ function DiaryHome(props) {
 
     const handleChange = (event) => {
         setInput(({
-            ...input, id: state.length, [event.target.name]: event.target.value
+            ...input, id: cards.length, [event.target.name]: event.target.value
         }));
     };
 
     const handleSubmit = () => {
 
         if (input.title && input.description) {
-            setState([...state, input]);
+            addNewCard(input)
 
             setInput({
                 title: '',
@@ -67,7 +75,7 @@ function DiaryHome(props) {
                 </div>
                 <Container className={classes.cardGrid} maxWidth="xl">
                     <Grid container spacing={4}>
-                        {state.map((card) => (
+                        {cards.map((card) => (
                             <Grid item key={card.id} xs={12} sm={6} md={4} lg={3} xl={3}>
                                 <DiaryCard
                                     title={card.title}

@@ -1,7 +1,7 @@
 import React from 'react';
-import style from './LoginPage.module.css'
+import style from '../../../components/pages/LoginPage.module.css'
 import {Button, CardContent,  makeStyles, Typography} from "@material-ui/core";
-import Card from "../ui/Card";
+import Card from "../../Card/pages/Card";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import TextField from '@material-ui/core/TextField';
 import names from  'random-names-generator'

@@ -3,7 +3,7 @@ import React from 'react';
 import AllDiary from "./components/pages/AllDiary";
 import Layout from "./components/layout/Layout";
 import DiaryHome from "./components/pages/DiaryHome";
-import LoginPage from "./components/pages/LoginPage";
+import LoginPage from "./views/login/pages/LoginPage";
 
 function App() {
 

@@ -4,7 +4,7 @@ import firebase from "../../utils/firebase";
 import Spinner from 'react-spinkit'
 
 //importing hooks
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import DiaryCard from '../../components/DiaryCard'
 //hook for style material components
 import {
@@ -21,6 +21,7 @@ import {
     Typography
 } from '@material-ui/core';
 
+import { motion } from "framer-motion";
 
 //import css files
 import '../../normalize.css'
@@ -28,7 +29,20 @@ import './diaryPage.css'
 //Masonary css for grid
 import Masonry from 'react-masonry-css'
 
-import {connect} from "react-redux";
+//animation variants for the main container of this component
+const containerConstraint = {
+    hidden: {
+        x: "100vw",
+    },
+    visible: {
+        transition: { delay: 1, duration: 1 },
+        x: 0,
+    },
+    exit: {
+        x: '-100vw',
+        transition: { ease: 'easeOut' },
+    }
+}
 
 function DiaryHome(props) {
 
@@ -59,7 +73,7 @@ function DiaryHome(props) {
                 items.push(doc.data())
             })
             setDiaryData(items);
-            isLoading(false)
+            setTimeout(() => { isLoading(false) }, 1500)
         })
     }, [])
 
@@ -147,7 +161,7 @@ function DiaryHome(props) {
     function loader() {
         // <h1>Loading</h1>
         if (loading) {
-            return <Spinner name='pacman' color="white"/>
+            return <Spinner name='pacman' color="white" />
 
         } else {
             return <Masonry
@@ -161,7 +175,7 @@ function DiaryHome(props) {
                             <DiaryCard
                                 title={e.title}
                                 subtitle={e.name}
-                                description={e.description}/>
+                                description={e.description} />
                         </div>
                     })
                 }
@@ -170,7 +184,12 @@ function DiaryHome(props) {
     }
 
     return (
-        <div className="diary-container fld-clm">
+        <motion.div
+            variants={containerConstraint}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="diary-container fld-clm">
             <AppBar className="appbar" position="static">
                 <Toolbar>
                 </Toolbar>
@@ -185,7 +204,7 @@ function DiaryHome(props) {
                     fullWidth={true}
                     onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                     <DialogTitle
-                        style={{color: "#ed4c67"}}
+                        style={{ color: "#ed4c67" }}
                         id="customized-dialog-title" onClose={handleClose}>
                         Add Note
                     </DialogTitle>
@@ -208,10 +227,10 @@ function DiaryHome(props) {
                                         root: clasess.hidden
                                     }
                                 }}
-                                style={{width: "100%"}}
+                                style={{ width: "100%" }}
                                 fullWidth={true}
-                                id="outlined-basic" label="TITLE" variant="outlined"/>
-                            <br/>
+                                id="outlined-basic" label="TITLE" variant="outlined" />
+                            <br />
                             <TextField
                                 onChange={(e) => {
                                     setFormData(prevState => ({
@@ -230,12 +249,12 @@ function DiaryHome(props) {
                                         root: clasess.hidden
                                     }
                                 }}
-                                style={{width: "100%"}}
+                                style={{ width: "100%" }}
                                 fullWidth={true}
                                 multiline={4}
                                 rows={10}
                                 maxRows={10}
-                                id="outlined-basic" label="DESCRIPTION" variant="outlined"/>
+                                id="outlined-basic" label="DESCRIPTION" variant="outlined" />
                         </FormControl>
                     </DialogContent>
                     <DialogActions>
@@ -253,11 +272,11 @@ function DiaryHome(props) {
                 }
             </div>
             <footer class="footer d-flex">
-                <Typography style={{paddingBottom: 5}} gutterBottom variant="subtitle1">
+                <Typography style={{ paddingBottom: 5 }} gutterBottom variant="subtitle1">
                     &copy; 2021 Fcode labs | All the copyrights reserved
                 </Typography>
             </footer>
-        </div>
+        </motion.div>
     )
 }
 export default DiaryHome

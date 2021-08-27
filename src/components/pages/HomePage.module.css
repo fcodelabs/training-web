@@ -1,22 +1,21 @@
 .main {
-    /*background: #00C9FF;  !* fallback for old browsers *!*/
-    /*background: -webkit-linear-gradient(to left, #92FE9D, #00C9FF);  !* Chrome 10-25, Safari 5.1-6 *!*/
-    /*background: linear-gradient(to left, #92FE9D, #00C9FF); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
-    background-image: url(/src/assets/download.svg), linear-gradient(-45deg, #039BE5 0%, #039BE5 33%, #00BCD4 100%);
-    padding: 2em 0;
-    line-height: 1.6;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    min-width: 100vh;
-    align-items: center;
-    flex-flow: row !important;
-    font-family: 'Open Sans', sans-serif;
+  /*background: #00C9FF;  !* fallback for old browsers *!*/
+  /*background: -webkit-linear-gradient(to left, #92FE9D, #00C9FF);  !* Chrome 10-25, Safari 5.1-6 *!*/
+  /*background: linear-gradient(to left, #92FE9D, #00C9FF); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+  background-image: url(/src/assets/download.svg),
+    linear-gradient(-45deg, #039be5 0%, #039be5 33%, #00bcd4 100%);
+  padding: 2em 0;
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vh;
+  align-items: center;
+  flex-flow: row !important;
+  font-family: "Open Sans", sans-serif;
 }
 
-
-.cards{
-    background: transparent;
-    margin: 10px;
+.cards {
+  background: transparent;
+  margin: 10px;
 }
-

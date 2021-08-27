@@ -1,12 +1,7 @@
-.cards{
-    background: transparent !important;
-    margin: 10px ;
-    display: flex;
-    flex-flow: row;
-    flex-wrap: wrap;
+.cards {
+  background: transparent !important;
+  margin: 10px;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
 }
-
-
-
-
-

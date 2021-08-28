@@ -1,13 +1,18 @@
-import React, { useState } from "react";
-import AppMenuBar from "../components/layouts/AppMenuBar";
-import DiaryHome from "../components/DiaryHome";
-import DiaryCardContainer from "../components/DiaryCardContainer";
+import React, {useState} from "react";
+import AppMenuBar from "../../../components/layouts/appmenubar/AppMenuBar";
+import DiaryHome from "../../../components/diaryhome/DiaryHome";
+import DiaryCardContainer from "../../../components/diarycardcontainer/DiaryCardContainer";
+import {useDispatch} from "react-redux";
+import {submitCard} from "../redux/homeAction";
+import {Box} from "@material-ui/core";
 
 function Home() {
   //states
-  const [tempData, setTempData] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  //dispatcher
+  const dispatch = useDispatch();
 
   //title onchange handler
   function titleHandler(event) {
@@ -23,19 +28,13 @@ function Home() {
   function submitHandler() {
     //check if title & description is not empty
     if (title.length > 0 && description.length > 0) {
-      console.log(`title: ${title}`);
-      console.log(`description: ${description}`);
-
-      //set data to temp array
-      setTempData((oldData) => {
-        return [
-          ...oldData,
-          {
+      //add data to reducer
+      dispatch(
+          submitCard({
             title: title,
             description: description,
-          },
-        ];
-      });
+          })
+      );
 
       //clear text fields
       setTitle("");
@@ -51,17 +50,17 @@ function Home() {
   }
 
   return (
-    <div>
-      <AppMenuBar />
-      <DiaryHome
-        title={title}
-        titleHandler={titleHandler}
-        description={description}
-        descriptionHandler={descriptionHandler}
-        submitHandler={submitHandler}
-      />
-      <DiaryCardContainer tempData={tempData} />
-    </div>
+      <Box>
+        <AppMenuBar/>
+        <DiaryHome
+            title={title}
+            titleHandler={titleHandler}
+            description={description}
+            descriptionHandler={descriptionHandler}
+            submitHandler={submitHandler}
+        />
+        <DiaryCardContainer/>
+      </Box>
   );
 }
 

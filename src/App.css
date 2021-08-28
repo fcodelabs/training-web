@@ -1,7 +1,8 @@
 .App {
-  background-image: url("assets/bg2.svg"),
+    position: relative;
+    background-image: url("assets/bg2.svg"),
     linear-gradient(-45deg, #039be5 0%, #039be5 33%, #00bcd4 100%);
-  /*background-attachment: fixed;*/
-  min-height: 100vh;
-  min-width: 100vh;
+    /*background-attachment: fixed;*/
+    min-height: 100vh;
+    min-width: 100vh;
 }

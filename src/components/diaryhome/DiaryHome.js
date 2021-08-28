@@ -1,6 +1,6 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core";
+import {Box, makeStyles} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
 /*Styling*/
@@ -56,41 +56,41 @@ function DiaryHome(props) {
   }
 
   return (
-    <div className={classes.container}>
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={formHandler}
-      >
-        <TextField
-          id="outlined-basic"
-          variant="outlined"
-          value={props.title}
-          onChange={props.titleHandler}
-          className={classes.title}
-          placeholder="Title"
-          size="small"
-        />
-        <TextField
-          id="outlined-multiline-static"
-          multiline
-          rows={4}
-          variant="outlined"
-          value={props.description}
-          onChange={props.descriptionHandler}
-          className={classes.description}
-          placeholder="Description"
-        />
-        <Button
-          variant="outlined"
-          className={classes.submitButton}
-          onClick={props.submitHandler}
+      <Box className={classes.container}>
+        <form
+            className={classes.root}
+            noValidate
+            autoComplete="off"
+            onSubmit={formHandler}
         >
-          SUBMIT
-        </Button>
-      </form>
-    </div>
+          <TextField
+              id="outlined-basic"
+              variant="outlined"
+              value={props.title}
+              onChange={props.titleHandler}
+              className={classes.title}
+              placeholder="Title"
+              size="small"
+          />
+          <TextField
+              id="outlined-multiline-static"
+              multiline
+              rows={4}
+              variant="outlined"
+              value={props.description}
+              onChange={props.descriptionHandler}
+              className={classes.description}
+              placeholder="Description"
+          />
+          <Button
+              variant="outlined"
+              className={classes.submitButton}
+              onClick={props.submitHandler}
+          >
+            SUBMIT
+          </Button>
+        </form>
+      </Box>
   );
 }
 

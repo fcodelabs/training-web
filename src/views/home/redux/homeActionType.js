@@ -1,0 +1,4 @@
+export const SUBMIT_CARD = "SUBMIT_CARD";
+export const SUBMIT_SUCCESS = "SUBMIT_SUCCESS";
+export const SUBMIT_FAILURE = "SUBMIT_FAILURE";
+export const FETCH_DATA = "FETCH_DATA";

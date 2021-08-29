@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { motion } from "framer-motion";
 
-import { Button, OutlinedInput, makeStyles, TextField } from "@material-ui/core";
+import { Button, OutlinedInput, makeStyles, TextField, Typography } from "@material-ui/core";
 //imporing css
 import './landinPage.css'
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,10 @@ const containerConstraint = {
     }
 }
 
+const nickNameArr = [
+    "Gordan", "Peter", "Linux", "REX", "$!N!$teR", "Lochana", "Gathsara", "Bumblebee"
+]
+
 function LandingPage(props) {
 
     const state = useSelector(state => state.login.nickName)
@@ -30,16 +34,18 @@ function LandingPage(props) {
 
     const [nickName, setNickName] = useState("");
 
-    const [borderColor, setBorderColor] = useState('#34495e');
+    const [borderColor, setBorderColor] = useState('#3498db');
+
+    const [errMsg, setErrMsg] = useState("")
 
     const history = useHistory();
 
     const createStyle = makeStyles({
         labelStyle: {
-            color: "#3498db"
+            color: borderColor
         },
         borderStyle: {
-            borderColor: '#3498db',
+            borderColor: borderColor,
             borderWidth: 2,
             '&:hover': {
                 background: "white",
@@ -53,11 +59,11 @@ function LandingPage(props) {
     ///validating nickname
     function validateNickName() {
 
-        if (nickName.trim.length == 0) {
+        if (nickName.trim().length == 0) {
             setBorderColor("#e74c3c")
             return false;
         } else {
-            setBorderColor("#34495e")
+            setBorderColor("#3498db")
             return true;
         }
 
@@ -68,8 +74,15 @@ function LandingPage(props) {
         if (validateNickName()) {
             history.push("/diary")
         } else {
-            alert("empty")
+            setErrMsg("*You must enter a nickname for enter")
         }
+    }
+
+    function randomNameGenerate() {
+
+        const rndNickName = nickNameArr[Math.floor(Math.random() * nickNameArr.length)]
+
+        setNickName(rndNickName)
     }
 
     return (
@@ -81,12 +94,12 @@ function LandingPage(props) {
             className="container center ladning-contaner">
             <div className="nickname-container">
                 <div className="nickName-upper">
-                    {/* <h1>Dear Diary</h1> */}
-                    <h1>{state}</h1>
+                    <h1>Dear Diary</h1>
                 </div>
                 <div className="nickname-body">
                     <div className="nickname-body-mid">
                         <TextField
+                            onChange={(e) => { setNickName(e.target.value) }}
                             style={{ width: "80%" }}
                             InputLabelProps={{
                                 classes: {
@@ -98,12 +111,20 @@ function LandingPage(props) {
                                     notchedOutline: style.borderStyle
                                 }
                             }}
-                            color="primary" variant="outlined" label="Enter your nickname"></TextField>
+                            color="primary" variant="outlined" value={nickName} label="Enter your nickname"></TextField>
                         <Button
-                            onClick={() => dispatch(nickNameSet("udara j"))}
+                            onClick={() => randomNameGenerate()}
                             variant="contained" color="primary">Random Name</Button>
                     </div>
+                    <br />
+                    <Typography variant="subtitle1" color="secondary">{errMsg}</Typography>
+                    <br />
+                    <Button
+                        onClick={() => routeToDiary()}
+                        variant="contained" color="secondary"><Typography variant="h5">SUBMIT</Typography></Button>
+
                 </div>
+
             </div>
         </motion.div>
     )

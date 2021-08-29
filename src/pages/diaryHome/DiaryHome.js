@@ -1,6 +1,5 @@
 //imporing modules
 //importing firebase
-import firebase from "../../utils/firebase";
 import Spinner from 'react-spinkit'
 
 //importing hooks
@@ -28,6 +27,8 @@ import '../../normalize.css'
 import './diaryPage.css'
 //Masonary css for grid
 import Masonry from 'react-masonry-css'
+import { useDispatch, useSelector } from "react-redux";
+import { diaryGet, diaryPost, postListener } from "./redux/diaryAction";
 
 //animation variants for the main container of this component
 const containerConstraint = {
@@ -46,10 +47,18 @@ const containerConstraint = {
 
 function DiaryHome(props) {
 
-    const ref = firebase.firestore().collection("diary-notes")
+
+    ///using the dispatcher
+    const dispatch = useDispatch()
+
+    ///nickname from login reducer
+    const nickname = useSelector(state => state.login.nickname)
+
+    ///use this to access the diaryReducer's state
+    const diaryState = useSelector(state => state.diary)
 
     ///States
-    const [diaryData, setDiaryData] = useState([]);
+    // const [diaryData, setDiaryData] = useState(diaryState.diaryData);
 
     const [open, setOpen] = useState(false); ///using to handle dialog state
 
@@ -63,19 +72,16 @@ function DiaryHome(props) {
         description: ""
     });
 
-    const [loading, isLoading] = useState(true)
+    const [loading, isLoading] = useState(diaryState.diaryCardsLoading)
 
-    ///Use-effect using
+    // /Use-effect using to load diary cards from firestore
     useEffect(() => {
-        ref.onSnapshot((snapshot) => {
-            let items = []
-            snapshot.forEach((doc) => {
-                items.push(doc.data())
-            })
-            setDiaryData(items);
-            setTimeout(() => { isLoading(false) }, 1500)
-        })
-    }, [])
+        setTimeout(() => {
+            dispatch(diaryGet())
+        }, 1200)
+    }, []);
+    // setDiaryData(diaryState.diaryData);
+    // dispatch(diaryGet())
 
     const styles = makeStyles({///Material UI custom stylings
         btn: {
@@ -146,10 +152,12 @@ function DiaryHome(props) {
 
     function submitData() {
         const data = {
+            description: formData.description,
             name: "udara",
             title: formData.title,
-            description: formData.description
         }
+        dispatch(diaryPost(data))
+
         ///After submit all the form data will be cleared from the state
         setFormData({
             title: "",
@@ -159,10 +167,8 @@ function DiaryHome(props) {
 
     ///render functions
     function loader() {
-        // <h1>Loading</h1>
-        if (loading) {
+        if (diaryState.diaryCardsLoading) {
             return <Spinner name='pacman' color="white" />
-
         } else {
             return <Masonry
                 breakpointCols={breakpoints}
@@ -170,13 +176,14 @@ function DiaryHome(props) {
                 columnClassName="my-masonry-grid_column"
             >
                 {
-                    diaryData.map(e => {
-                        return <div className="diary-card">
+                    diaryState.diaryData.map(e => {
+
+                        return (<div className="diary-card">
                             <DiaryCard
                                 title={e.title}
                                 subtitle={e.name}
                                 description={e.description} />
-                        </div>
+                        </div>)
                     })
                 }
             </Masonry>

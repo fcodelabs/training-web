@@ -31,6 +31,7 @@ function AddNewDiary() {
     console.log(submitDiaryData);
   }
 
+
   //functions for get  values
   function titleValueHandler(event) {
     setTitle(event.target.value);

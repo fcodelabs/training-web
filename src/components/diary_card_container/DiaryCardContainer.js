@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
-import DiaryCard from "./diarycard/DiaryCard";
+import DiaryCard from "./diary_card/DiaryCard";
 import {makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import firebase from "../../util/firebase";
 import {Box} from "@material-ui/core";
+import ProgressCircular from "../progress_circular/ProgressBar";
 
 /*Styles*/
 const useStyles = makeStyles({
@@ -24,6 +25,7 @@ function DiaryCardContainer() {
 
   //states
   const [cardDetails, setCardDetails] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   //fetch data from database
   function fetchData() {
@@ -34,6 +36,7 @@ function DiaryCardContainer() {
         items.push(doc.data());
       });
       setCardDetails(items);
+      setLoading(false);
     });
   }
 
@@ -43,19 +46,23 @@ function DiaryCardContainer() {
 
   return (
       <Box className={classes.root}>
-        <Grid container spacing={3} className={classes.container}>
-          {cardDetails.map((data) => {
-            return (
-                <Grid item md={3} key={data.title}>
-                  <DiaryCard
-                      title={data.title}
-                      subtitle="Noah"
-                      description={data.description}
-                  />
-                </Grid>
-            );
-          })}
-        </Grid>
+        {isLoading ? (
+            <ProgressCircular/>
+        ) : (
+            <Grid container spacing={3} className={classes.container}>
+              {cardDetails.map((data) => {
+                return (
+                    <Grid item md={3} key={data.title}>
+                      <DiaryCard
+                          title={data.title}
+                          subtitle="Noah"
+                          description={data.description}
+                      />
+                    </Grid>
+                );
+              })}
+            </Grid>
+        )}
       </Box>
   );
 }

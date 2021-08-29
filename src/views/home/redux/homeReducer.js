@@ -2,7 +2,6 @@ import {SUBMIT_FAILURE, SUBMIT_SUCCESS} from "./homeActionType";
 
 //initial state
 const initialState = {
-  data: [],
   successMessage: "",
   errorMessage: "",
 };

@@ -6,6 +6,10 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import {useDispatch} from "react-redux";
+import {login} from "../redux/loginAction";
+import Cookies from "js-cookie";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -82,6 +86,20 @@ function Login() {
   const [name, setName] = useState("");
   const [isError, setIsError] = useState(false);
   const [isButtonDisabled, setButtonDisabled] = useState(true);
+  const randomeNames = [
+    "William",
+    "Benjamin",
+    "Logan",
+    "James",
+    "Noah",
+    "Liam",
+  ];
+
+  //router history
+  const history = useHistory();
+
+  //dispatcher
+  const dispatch = useDispatch();
 
   //name handler
   function nameHandler(event) {
@@ -95,6 +113,7 @@ function Login() {
     }
   }
 
+  //name on focus
   function nameOnFocusHandler(event) {
     if (event.target.value.length > 0) {
       setName(event.target.value);
@@ -103,6 +122,25 @@ function Login() {
     } else {
       setIsError(true);
       setButtonDisabled(true);
+    }
+  }
+
+  //random name generate
+  function randomNameHandler() {
+    let randName =
+        randomeNames[Math.floor(Math.random() * randomeNames.length)];
+    setName(randName);
+    setIsError(false);
+    setButtonDisabled(false);
+  }
+
+  //continue button handler
+  function continueHandler() {
+    Cookies.set("userId", name, {expires: 1});
+    let user = Cookies.get("userId");
+    if (user !== "") {
+      history.replace("/home");
+      dispatch(login(name));
     }
   }
 
@@ -115,9 +153,10 @@ function Login() {
           <Autocomplete
               className={classes.autoComplete}
               freeSolo
+              value={name}
               id="free-solo-2-demo"
               disableClearable
-              options={top100Films.map((option) => option.title)}
+              options={randomeNames.map((data) => data)}
               renderInput={(params) => (
                   <TextField
                       error={isError}
@@ -128,13 +167,16 @@ function Login() {
                       InputProps={{...params.InputProps, type: "search"}}
                       helperText={isError && "Required"}
                       size="small"
-                      value={name}
                       onChange={nameHandler}
                       onFocus={nameOnFocusHandler}
                   />
               )}
           />
-          <Button variant="outlined" className={classes.randomButton}>
+          <Button
+              variant="outlined"
+              className={classes.randomButton}
+              onClick={randomNameHandler}
+          >
             RANDOM
           </Button>
         </Box>
@@ -142,6 +184,7 @@ function Login() {
             variant="outlined"
             className={classes.continueButton}
             disabled={isButtonDisabled && true}
+            onClick={continueHandler}
         >
           CONTINUE
           <ArrowForwardIcon style={{paddingLeft: 10}}/>
@@ -149,14 +192,5 @@ function Login() {
       </Box>
   );
 }
-
-const top100Films = [
-  {title: "The Shawshank Redemption", year: 1994},
-  {title: "The Godfather", year: 1972},
-  {title: "The Godfather: Part II", year: 1974},
-  {title: "The Dark Knight", year: 2008},
-  {title: "12 Angry Men", year: 1957},
-  {title: "Schindler's List", year: 1993},
-];
 
 export default Login;

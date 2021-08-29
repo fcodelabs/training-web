@@ -14,6 +14,10 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import Divider from "@material-ui/core/Divider";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import {Box} from "@material-ui/core";
+import Cookies from "js-cookie";
+import {login} from "../../../views/login/redux/loginAction";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 /*Styling*/
 const useStyles = makeStyles((theme) => ({
@@ -98,6 +102,12 @@ function AppMenuBar() {
   const openNotificationPane = Boolean(isNotificationPaneOpen);
   const openProfilePane = Boolean(isProfilePaneOpen);
 
+  //router history
+  const history = useHistory();
+
+  //dispatcher
+  const dispatch = useDispatch();
+
   //open notification pane
   const notificationOpen = (event) => {
     setNotificationOpen(event.currentTarget);
@@ -116,6 +126,14 @@ function AppMenuBar() {
   //close profile pane
   const profileClose = () => {
     setProfileOpen(null);
+  };
+
+  //logout handler
+  const logOutHandler = () => {
+    setProfileOpen(null);
+    Cookies.remove("userId");
+    history.replace("/");
+    dispatch(login(null));
   };
 
   return (
@@ -160,13 +178,13 @@ function AppMenuBar() {
                   }}
                   keepMounted
                   transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={openNotificationPane}
-              onClose={notificationClose}
-              className={classes.notificationPane}
-            >
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={openNotificationPane}
+                  onClose={notificationClose}
+                  className={classes.notificationPane}
+              >
                 <MenuItem onClick={notificationClose}>Notification 1</MenuItem>
                 <Divider variant="inset"/>
                 <MenuItem onClick={notificationClose}>Notification 2</MenuItem>
@@ -212,7 +230,7 @@ function AppMenuBar() {
                   <Badge badgeContent={1} color="secondary"/>
                 </MenuItem>
                 <Divider variant="fullWidth"/>
-                <MenuItem onClick={profileClose}>
+                <MenuItem onClick={logOutHandler}>
                   <ExitToAppIcon/> &nbsp;&nbsp;Log Out
                 </MenuItem>
               </Menu>

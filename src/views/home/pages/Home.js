@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import AppMenuBar from "../../../components/layouts/appmenubar/AppMenuBar";
-import DiaryHome from "../../../components/diaryhome/DiaryHome";
-import DiaryCardContainer from "../../../components/diarycardcontainer/DiaryCardContainer";
+import AppMenuBar from "../../../components/layouts/app_menu_bar/AppMenuBar";
+import DiaryHome from "../../../components/diary_home/DiaryHome";
+import DiaryCardContainer from "../../../components/diary_card_container/DiaryCardContainer";
 import {useDispatch} from "react-redux";
 import {submitCard} from "../redux/homeAction";
 import {Box} from "@material-ui/core";

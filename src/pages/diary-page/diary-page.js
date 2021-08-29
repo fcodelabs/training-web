@@ -32,7 +32,6 @@ function DiaryHome(props) {
 
     const { addNewCard } = bindActionCreators(actionCreators, dispatch);
 
-    console.log(cards)
     const [input, setInput] = useState({
         id: 0,
         title: '',

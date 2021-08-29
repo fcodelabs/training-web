@@ -14,6 +14,7 @@ function DiaryCardList(props) {
   const submitDiaryData = useSelector(
     (state) => state.submitDataReducer.allDiary
   );
+
   console.log("Test");
   console.log(submitDiaryData);
 

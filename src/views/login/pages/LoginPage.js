@@ -93,7 +93,7 @@ function LoginPage() {
   function loginHandler() {
     Auth.setAuth(true);
     history.replace("/add-diary");
-    Cookies.set("user", "loginTrue", { expires: 1 });
+    Cookies.set("user", "loginTrue");
   }
 
   return (

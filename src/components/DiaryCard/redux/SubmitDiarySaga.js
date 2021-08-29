@@ -6,18 +6,7 @@ import firebase from "../../../config/fbConfig";
 
 function* getAllDiary() {
     let diaryData = []
-    // const db = firebase.firestore().collection('gathsara-diary');
     try {
-        // const allDiary = db.onSnapshot((snapshot) => {
-        //     snapshot.forEach((fData) => {
-        //         diaryData.push(fData.data())
-        //     })
-        //     return diaryData;
-        // })
-        //
-        // yield put(getDiaryDataAction([...allDiary]))
-
-
         const allDiary = yield firebase.firestore().collection('gathsara-diary').get()
             .then((snapshot) => {
                 snapshot.forEach((data) => {

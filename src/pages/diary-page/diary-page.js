@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AddForm from '../../components/add-form/add-form';
 import DiaryCard from '../../components/diary-card/diary-card';
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../../state";
+import { actionCreators } from "../../utils/state";
 
 const useStyles = makeStyles((theme) => ({
     page: {

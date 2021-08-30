@@ -1,6 +1,6 @@
 const reducer = (state = [], action) => {
     if (action.payload) {
-        state.push(action.payload);
+        state = [...state, action.payload];
     }
     return state;
 }

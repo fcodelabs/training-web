@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Provider store={store}>
-      <DiaryHome name="Name" />
+        <DiaryHome name="Jhon Doe" />
       </Provider>
     </div>
   );

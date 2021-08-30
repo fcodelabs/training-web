@@ -1,4 +1,7 @@
 import { Button, makeStyles, TextField } from "@material-ui/core";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addNewCard } from "../../utils/state/action-creators/cardAction";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,22 +26,56 @@ function AddForm(props) {
 
     const classes = useStyles();
 
+    const dispatch = useDispatch();
+
+    const [input, setInput] = useState({
+        id: 0,
+        title: '',
+        name: props.name,
+        description: ''
+    });
+
+    const handleChange = (event) => {
+        setInput(({
+            ...input, id: props.id, [event.target.name]: event.target.value
+        }));
+    };
+
+    const handleSubmit = () => {
+
+        if (input.title && input.description) {
+            dispatch(addNewCard(input))
+
+            setInput({
+                title: '',
+                description: ''
+            });
+        } else {
+            if (!input.title) {
+                console.log("Missing title")
+            }
+            if (!input.description) {
+                console.log("Missing description")
+            }
+        }
+    };
+
     return (
         <div>
             <form className={classes.root} noValidate autoComplete="off">
                 <TextField
                     className={classes.title}
                     id="outlined-basic"
-                    value={props.input.title}
-                    onChange={props.handleChange}
+                    value={input.title}
+                    onChange={handleChange}
                     name="title"
                     label="Tite"
                     variant="outlined" />
                 <TextField
                     className={classes.description}
                     id="outlined-multiline-static"
-                    value={props.input.description}
-                    onChange={props.handleChange}
+                    value={input.description}
+                    onChange={handleChange}
                     name="description"
                     label="Description"
                     multiline
@@ -46,7 +83,7 @@ function AddForm(props) {
                     variant="outlined" />
             </form>
             <Button className={classes.button}
-                onClick={() => props.handleSubmit()}>
+                onClick={handleSubmit}>
                 SUBMIT
             </Button>
         </div>

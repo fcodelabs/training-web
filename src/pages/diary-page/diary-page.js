@@ -1,10 +1,7 @@
 import { Container, Grid, makeStyles } from "@material-ui/core";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import AddForm from '../../components/add-form/add-form';
 import DiaryCard from '../../components/diary-card/diary-card';
-import { bindActionCreators } from "redux";
-import { actionCreators } from "../../utils/state";
 
 const useStyles = makeStyles((theme) => ({
     page: {
@@ -28,49 +25,14 @@ function DiaryHome(props) {
     const classes = useStyles();
 
     const cards = useSelector((state) => state.card);
-    const dispatch = useDispatch();
-
-    const { addNewCard } = bindActionCreators(actionCreators, dispatch);
-
-    const [input, setInput] = useState({
-        id: 0,
-        title: '',
-        description: ''
-    });
-
-    const handleChange = (event) => {
-        setInput(({
-            ...input, id: cards.length, [event.target.name]: event.target.value
-        }));
-    };
-
-    const handleSubmit = () => {
-
-        if (input.title && input.description) {
-            addNewCard(input)
-
-            setInput({
-                title: '',
-                description: ''
-            });
-        } else {
-            if (!input.title) {
-                console.log("Missing title")
-            }
-            if (!input.description) {
-                console.log("Missing description")
-            }
-        }
-    };
 
     return (
         <div className={classes.page}>
             <main className={classes.main}>
                 <div className={classes.formContent}>
                     <AddForm
-                        input={input}
-                        handleChange={(event) => handleChange(event)}
-                        handleSubmit={() => handleSubmit()} />
+                        name={props.name}
+                        id={cards.length} />
                 </div>
                 <Container className={classes.cardGrid} maxWidth="xl">
                     <Grid container spacing={4}>

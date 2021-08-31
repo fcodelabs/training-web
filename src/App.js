@@ -1,4 +1,12 @@
 import './App.css';
+import DiaryHome from "./pages/DiaryHome/DiaryHome";
+import {
+    Switch,
+    Route,
+    useLocation
+} from "react-router-dom";
+import LandingPage from "./pages/LandingPage/LandingPage";
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
   return (

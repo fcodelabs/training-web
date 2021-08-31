@@ -1,6 +1,6 @@
-import { takeEvery, call, put, takeLatest } from "@redux-saga/core/effects"
 import { DIARY_GET, DIARY_POST } from "./diaryActionsTypes"
 import { diaryGet, successData } from './diaryAction'
+import { takeEvery, call, put, takeLatest } from "@redux-saga/core/effects"
 
 import firebase from "../../../utils/firebase";
 

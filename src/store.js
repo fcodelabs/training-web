@@ -1,9 +1,9 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import createSagaMiddleware from "@redux-saga/core";
-import diaryReducer from "./pages/diaryHome/redux/diaryReducer";
-import loginReducer from "./pages/landingPage/redux/loginReducer";
-import loginSaga from "./pages/landingPage/redux/loginSaga";
-import { diaryPostSaga, diarySaga } from "./pages/diaryHome/redux/diarySaga";
+import diaryReducer from "./pages/DiaryHome/redux/diaryReducer";
+import loginReducer from "./pages/LandingPage/redux/loginReducer";
+import loginSaga from "./pages/LandingPage/redux/loginSaga";
+import { diaryPostSaga, diarySaga } from "./pages/DiaryHome/redux/diarySaga";
 import { spawn } from 'redux-saga/effects';
 
 const saga = createSagaMiddleware()

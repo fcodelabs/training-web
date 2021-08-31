@@ -1,7 +1,9 @@
-import {SUBMIT_FAILURE, SUBMIT_SUCCESS} from "./homeActionType";
+import {FETCH_DATA, IS_LOADING, SUBMIT_FAILURE, SUBMIT_SUCCESS,} from "./homeActionType";
 
 //initial state
 const initialState = {
+  data: [],
+  loading: true,
   successMessage: "",
   errorMessage: "",
 };
@@ -19,7 +21,17 @@ export default function homeReducer(state = initialState, actions) {
         ...state,
         errorMessage: actions.errorMessage,
       };
+    case FETCH_DATA:
+      return {
+        ...state,
+        data: actions.data,
+      };
+    case IS_LOADING:
+      return {
+        ...state,
+        loading: actions.loading,
+      };
     default:
-      return initialState;
+      return state;
   }
 }

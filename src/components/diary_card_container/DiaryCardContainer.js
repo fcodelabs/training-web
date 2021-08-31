@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import DiaryCard from "./diary_card/DiaryCard";
 import {makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import firebase from "../../util/firebase";
 import {Box} from "@material-ui/core";
 import ProgressCircular from "../progress_circular/ProgressBar";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchDataCaller} from "../../views/home/redux/homeAction";
 
 /*Styles*/
 const useStyles = makeStyles({
@@ -23,26 +24,15 @@ const useStyles = makeStyles({
 function DiaryCardContainer() {
   const classes = useStyles();
 
-  //states
-  const [cardDetails, setCardDetails] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const cardDetails = useSelector((state) => state.homeReducer.data);
+  const isLoading = useSelector((state) => state.homeReducer.loading);
+
+  const dispatch = useDispatch();
 
   //fetch data from database
-  function fetchData() {
-    const ref = firebase.firestore().collection("DiaryCard");
-    ref.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      setCardDetails(items);
-      setLoading(false);
-    });
-  }
-
   useEffect(() => {
-    fetchData();
-  }, []);
+    dispatch(fetchDataCaller());
+  }, [dispatch, isLoading]);
 
   return (
       <Box className={classes.root}>

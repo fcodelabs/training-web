@@ -50,7 +50,7 @@ function App() {
               </Route>
               <Route path="/home">
                 {tempData !== null ? <Home/> : <Redirect to="/"/>}
-                <Home/>
+                {/*<Home/>*/}
               </Route>
             </Switch>
         )}

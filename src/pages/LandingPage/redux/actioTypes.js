@@ -1,1 +1,0 @@
-export const NICKNAME_SET = "NICKNAME_SET"

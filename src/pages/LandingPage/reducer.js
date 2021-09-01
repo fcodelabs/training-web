@@ -1,10 +1,10 @@
-import { NICKNAME_SET } from "./actioTypes";
+import { NICKNAME_SET } from "./actionTypes";
 
 const init = {
     nickName: "asdasd",
 }
 
-export default function loginReducer(state = init, action) {
+export default function reducer(state = init, action) {
 
     switch (action.type) {
         case NICKNAME_SET: {

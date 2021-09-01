@@ -1,8 +1,8 @@
-import { DIARY_GET, DIARY_POST } from "./diaryActionsTypes"
-import { diaryGet, successData } from './diaryAction'
-import { takeEvery, call, put, takeLatest } from "@redux-saga/core/effects"
+import {DIARY_GET, DIARY_POST} from "./actionTypes"
+import {diaryGet, successData} from './action'
+import {takeEvery, call, put, takeLatest} from "@redux-saga/core/effects"
 
-import firebase from "../../../utils/firebase";
+import firebase from "../../utils/firebase";
 
 const ref = firebase.firestore().collection("diary-notes")
 
@@ -36,7 +36,7 @@ function* postCardData(data) {
     }
 }
 
-export function* diarySaga() {
+export function* saga() {
 
     yield takeLatest(DIARY_GET, callCardGet)
 }

@@ -6,7 +6,7 @@ import { Button, OutlinedInput, makeStyles, TextField, Typography } from "@mater
 //imporing css
 import './landinPage.css'
 import { useDispatch, useSelector } from "react-redux";
-import { loginTest, nickNameSet } from "./redux/loginAction";
+import {loginTest, nickNameListen, nickNameSet} from "./actions";
 
 const containerConstraint = {
     hidden: {
@@ -72,6 +72,7 @@ function LandingPage(props) {
     ///routing to the diaryPage
     function routeToDiary() {
         if (validateNickName()) {
+            dispatch(nickNameListen(nickName))
             history.push("/diary")
         } else {
             setErrMsg("*You must enter a nickname for enter")

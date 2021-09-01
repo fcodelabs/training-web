@@ -1,29 +1,30 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import createSagaMiddleware from "@redux-saga/core";
-import diaryReducer from "./pages/DiaryHome/redux/diaryReducer";
-import loginReducer from "./pages/LandingPage/redux/loginReducer";
-import loginSaga from "./pages/LandingPage/redux/loginSaga";
-import { diaryPostSaga, diarySaga } from "./pages/DiaryHome/redux/diarySaga";
+import diaryReducer from "./pages/DiaryHome/reducer";
+import reducer from "./pages/LandingPage/reducer";
+import nickNameSetSaga from "./pages/LandingPage/saga";
+import { diaryPostSaga, saga } from "./pages/DiaryHome/saga";
 import { spawn } from 'redux-saga/effects';
 
-const saga = createSagaMiddleware()
+const reduxSaga = createSagaMiddleware()
 
 const rootReducer = combineReducers({
-    login: loginReducer,
+    login: reducer,
     diary: diaryReducer,
 })
 
 const store = createStore(
     rootReducer,
-    applyMiddleware(saga)
+    applyMiddleware(reduxSaga)
 )
 
 function* rootSaga() {
-    yield spawn(loginSaga)
-    yield spawn(diarySaga)
+    yield spawn(reduxSaga)
+    yield spawn(saga)
+    yield spawn(nickNameSetSaga)
     yield spawn(diaryPostSaga)
 }
 
-saga.run(rootSaga)
+reduxSaga.run(rootSaga)
 
 export default store;

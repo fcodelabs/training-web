@@ -1,0 +1,3 @@
+export const NICKNAME_SET = "NICKNAME_SET"
+
+export const NICKNAME_LISTEN = "NICKNAME_LISTEN"

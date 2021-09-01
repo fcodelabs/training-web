@@ -28,7 +28,7 @@ import './diaryPage.css'
 //Masonary css for grid
 import Masonry from 'react-masonry-css'
 import { useDispatch, useSelector } from "react-redux";
-import { diaryGet, diaryPost, postListener } from "./redux/diaryAction";
+import { diaryGet, diaryPost } from "./action";
 
 //animation variants for the main container of this component
 const containerConstraint = {
@@ -52,7 +52,7 @@ function DiaryHome(props) {
     const dispatch = useDispatch()
 
     ///nickname from login reducer
-    const nickname = useSelector(state => state.login.nickname)
+    const nickname = useSelector(state => state.login.nickName)
 
     ///use this to access the diaryReducer's state
     const diaryState = useSelector(state => state.diary)
@@ -72,7 +72,7 @@ function DiaryHome(props) {
         description: ""
     });
 
-    const [loading, isLoading] = useState(diaryState.diaryCardsLoading)
+    // const [loading, isLoading] = useState(true)
 
     // /Use-effect using to load diary cards from firestore
     useEffect(() => {
@@ -80,8 +80,7 @@ function DiaryHome(props) {
             dispatch(diaryGet())
         }, 1200)
     }, []);
-    // setDiaryData(diaryState.diaryData);
-    // dispatch(diaryGet())
+
 
     const styles = makeStyles({///Material UI custom stylings
         btn: {
@@ -153,7 +152,7 @@ function DiaryHome(props) {
     function submitData() {
         const data = {
             description: formData.description,
-            name: "udara",
+            name: nickname,
             title: formData.title,
         }
         dispatch(diaryPost(data))
@@ -176,7 +175,7 @@ function DiaryHome(props) {
                 columnClassName="my-masonry-grid_column"
             >
                 {
-                    diaryState.diaryData.map(e => {
+                    diaryState.diaryArr.map(e => {
 
                         return (<div className="diary-card">
                             <DiaryCard

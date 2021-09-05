@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import cardReducer from './cardReducer';
+import {cardReducer} from '../components/add-form/redux/reducer';
 
 const reducers = combineReducers({
     card: cardReducer

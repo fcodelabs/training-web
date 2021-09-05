@@ -1,7 +1,9 @@
 import { Container, Grid, makeStyles } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AddForm from '../../components/add-form/add-form';
 import DiaryCard from '../../components/diary-card/diary-card';
+import * as actions from '../../components/add-form/redux/actions'
 
 const useStyles = makeStyles((theme) => ({
     page: {
@@ -22,9 +24,14 @@ const useStyles = makeStyles((theme) => ({
 
 function DiaryHome(props) {
 
-    const classes = useStyles();
 
-    const cards = useSelector((state) => state.card);
+useEffect(() => {
+    dispatch(actions.requestCards())
+}, [])
+
+    const classes = useStyles();
+const dispatch = useDispatch()
+    const cards = useSelector((state) => state.card.cards);
 
     return (
         <div className={classes.page}>

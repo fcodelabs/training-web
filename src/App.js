@@ -1,7 +1,7 @@
 import DiaryHome from './pages/diary-page/diary-page';
 import './App.css';
 import { Provider } from 'react-redux';
-import { store } from './utils/state/store';
+import { store } from './store';
 
 function App() {
 

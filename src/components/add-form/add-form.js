@@ -1,7 +1,7 @@
 import { Button, makeStyles, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNewCard } from "../../utils/state/action-creators/cardAction";
+import { addNewCard } from "./redux/actions";
 
 const useStyles = makeStyles((theme) => ({
     root: {

@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
 
 function DiaryHome(props) {
 
+    const dispatch = useDispatch()
 
-useEffect(() => {
-    dispatch(actions.requestCards())
-}, [])
+    useEffect(() => {
+        dispatch(actions.requestCards())
+    }, [])
 
     const classes = useStyles();
-const dispatch = useDispatch()
     const cards = useSelector((state) => state.card.cards);
 
     return (

@@ -10,7 +10,11 @@ export const cardReducer = (state = initialState, action) => {
                 ...state,
                 cards: action.payload
             }
-
+        case "ADD_NEW_CARD": 
+        return {
+            ...state,
+            cards: [...state.cards, {...action.payload}]
+        }
         default:
             return state;
     }

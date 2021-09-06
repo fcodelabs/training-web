@@ -1,5 +1,5 @@
 import { ref, set, get, child } from "firebase/database";
-import { delay, put } from "redux-saga/effects";
+import { put } from "redux-saga/effects";
 import { db } from "../../../fbConfig"
 
 export function* addNewCardSaga(action) {
@@ -13,7 +13,6 @@ export function* addNewCardSaga(action) {
 
 export function* requestCardsSaga() {
     try {
-        // yield delay(10000)
         const response = [];
         const dbRef = ref(db);
         yield get(child(dbRef, `users`)).then((snapshot) => {
@@ -27,8 +26,6 @@ export function* requestCardsSaga() {
                     }
                     return temp_card;
                 }))
-            } else {
-                response = []
             }
         }).catch((error) => {
             console.error(error);

@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          This is the training web <code>src/App.js</code> and save to reload.
+          This is the training web edit<code>src/App.js</code> and save to reload.
         </p>
         <a
           className="App-link"
@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-         This is the test app
+         Final Pull Request
         </a>
       </header>
     </div>

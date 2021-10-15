@@ -5,6 +5,10 @@ export default function Posts() {
         <>
             <h1>This is Posts page</h1>
             <h2>Title of the post</h2>
+
+            <div>
+                <h2>Content of the post.</h2>
+            </div>
         </>
     )
 }

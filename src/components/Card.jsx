@@ -8,7 +8,7 @@ export default function Posts() {
                 This is a card
             </duv>
             <div>
-                Title of the card
+                Title of the card.
             </div>
         </>
     )

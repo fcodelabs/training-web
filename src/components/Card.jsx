@@ -5,8 +5,11 @@ export default function Posts() {
         <>
             <h1>This is Cards page page</h1>
             <duv>
-                this is a card
+                This is a card
             </duv>
+            <div>
+                Title of the card
+            </div>
         </>
     )
 }

@@ -17,6 +17,9 @@ function App() {
         >
          This is the test application for new training people
         </a>
+          <p>
+              Hello People. Welcome to the training Project
+          </p>
       </header>
     </div>
   );

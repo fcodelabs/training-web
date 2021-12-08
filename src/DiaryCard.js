@@ -85,6 +85,3 @@ function DiaryCard(){
 
 export default DiaryCard;
 
-// <Button size="small" color="inherit">
-                    //   SHOW MORE
-                    // </Button>

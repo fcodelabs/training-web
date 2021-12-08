@@ -17,7 +17,10 @@ function DiaryHome() {
 
         if(title && details){
             console.log(title,details)
+            
         }
+        e.target.reset();
+       
     }
     return (
         

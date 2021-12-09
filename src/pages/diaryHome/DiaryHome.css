@@ -1,0 +1,81 @@
+.inputContainer {
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  /* margin-top: 50px; */
+}
+
+.content {
+  width: 100%;
+}
+
+.titleButton {
+  gap: 1%;
+  width: 100%;
+  display: flex;
+  flex-grow: 0;
+}
+
+.cardFormTitle {
+  width: 90%;
+}
+
+.cardFormTitle input {
+  width: 40%;
+  height: 40px;
+  border-radius: 20px;
+  padding-left: 10px;
+  background-color: #039ee3;
+  border-width: 0;
+  outline: none;
+}
+
+.inputTitle {
+  padding: 5px;
+}
+
+.cardSubButton {
+  width: 10%;
+  margin-top: 5px;
+}
+
+.cardSubButton button {
+  width: 100%;
+  background-color: #2271f1ee;
+  color: black;
+  border-radius: 20px;
+  border: hidden;
+}
+
+.decText {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.inputDescription {
+  width: 100%;
+  height: 150px;
+  border-radius: 20px;
+  background-color: #039ee3;
+  border-width: 0;
+  outline: none;
+  margin: 0;
+}
+
+input {
+  padding-top: 0;
+  padding-left: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .titleButton {
+    display: block;
+  }
+  .cardSubButton {
+    width: 100%;
+  }
+  .cardFormTitle {
+    width: 100%;
+  }
+}

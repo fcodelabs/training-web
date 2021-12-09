@@ -6,7 +6,8 @@ import DiaryHome from './DiaryHome';
 function App() {
   return (
     <div className="App">
-    <DiaryHome/>
+   
+    <DiaryCard/>
     </div>
   );
 }

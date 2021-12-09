@@ -9,7 +9,7 @@ export const DiaryCard = ({props}) => {
     let name = props.name
     let description = props.description
     let desc = ''
-    let backgroundColor = props.name
+    let backgroundColor = props.color
 
     if(!buttonClicked && description.length < 100){
         desc = description

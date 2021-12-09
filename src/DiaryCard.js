@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import { CardActions } from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -10,6 +9,7 @@ import './sass.scss';
 import {useState} from "react";
 import DiaryHome from "./DiaryHome";
 import { Grid } from "@mui/material";
+import { v4 as uuidv4 } from 'uuid';
 
 
 const DiaryCard =()=>{
@@ -21,14 +21,15 @@ const DiaryCard =()=>{
     const classes = useStyles();
 
     const [cards,setCards]=useState([
-        {title:"Reasons Why Learning English is so Important",
+        {id:1,
+        title:"Reasons Why Learning English is so Important",
         subTitle:"Noah",
         description:"Out of the 6500 spoken languages in the world today, why choose to learn English? As the third most widely spoken language in the world, English is widely spoken and taught in over 118 countries and is commonly used around the world as a trade language or diplomatic language. It is the language of science, aviation, computers, diplomacy and tourism. Last but not least, it is the language of international communication, the media and the internet.",
     }
     ]);
 
     const addCard = (title,details)=>{
-        setCards([...cards,{title,subTitle:'Liam',description:details}]);
+        setCards([...cards,{id:uuidv4(),title,subTitle:'Liam',description:details}]);
     }
 
     const [showMore, setShowMore] = useState(false);
@@ -49,9 +50,9 @@ const DiaryCard =()=>{
         <DiaryHome addCard={addCard}/>
         <br/>
         <Grid container spacing={2}>
-        {cards.map((card,index)=>{
+        {cards.map((card,id)=>{
                 return(
-                    <Grid item key={card.index} xs={12}md={6} lg={3}>
+                    <Grid item key={card.id} xs={12}md={6} lg={3}>
                     <Card className={classes.root} >
                     <div className="card">
                     <CardContent>

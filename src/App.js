@@ -1,23 +1,13 @@
-import logo from './logo.svg';
+import Card from './DiaryCard/DiaryCard'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-         This is the test app
-        </a>
-      </header>
+      <Card title="Reasons Why Learning English is so Important" subtitle="Noah" description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam aspernatur eos sequi odit deserunt unde libero officiis nostrum odio, soluta dignissimos, ipsum eius placeat similique ex quae obcaecati laborum ut!" color="#AFEEEE"/>
+      <Card title="Reasons Why Learning English is so Important" subtitle="Noah" description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam aspernatur eos sequi odit deserunt unde libero officiis nostrum odio, soluta dignissimos, ipsum eius placeat similique ex quae obcaecati laborum ut!" color="#AFEEEE"/>
+      <Card title="Reasons Why Learning English is so Important" subtitle="Noah" description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam aspernatur eos sequi odit deserunt unde libero officiis nostrum odio, soluta dignissimos, ipsum eius placeat similique ex quae obcaecati laborum ut!" color="#AFEEEE"/>
+      <Card title="Reasons Why Learning English is so Important" subtitle="Noah" description="Lorem, ipsum dolor" color="#AFEEEE"/>
     </div>
   );
 }

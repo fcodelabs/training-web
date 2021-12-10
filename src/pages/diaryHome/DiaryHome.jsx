@@ -3,7 +3,7 @@ import Button from '@mui/material/Button'
 import './DiaryHome.css'
 
 
-export const DiaryHome = () => {
+const DiaryHome = () => {
 
     const [onClicked, setOnClicked] = useState(false)
     const [title, handleTitle] = useState('')
@@ -66,3 +66,5 @@ export const DiaryHome = () => {
         </div>
     )
 }
+
+export default DiaryHome

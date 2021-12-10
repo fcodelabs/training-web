@@ -1,6 +1,6 @@
 import './App.css';
-import { DiaryCard } from './components/DiaryCard/DiaryCard';
-import { DiaryHome } from './pages/diaryHome/DiaryHome';
+import DiaryCard from './components/DiaryCard/DiaryCard';
+import DiaryHome from './pages/diaryHome/DiaryHome';
 
 function App() {
   const list =[
@@ -9,10 +9,10 @@ function App() {
   return (
     <div className="App">
       <section>
-        <DiaryHome> </DiaryHome>
+        <DiaryHome/>
         <div className="cardContainer"> 
           { list.map (p => 
-            <DiaryCard props = {p}></DiaryCard>
+            <DiaryCard props = {p}/>
           )}
         </div>
       </section>

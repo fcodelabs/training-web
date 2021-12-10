@@ -2,14 +2,14 @@ import React, {useState} from 'react'
 import Button from '@mui/material/Button'
 import './DiaryCard.css'
 
-export const DiaryCard = ({props}) => {
+const DiaryCard = ({props}) => {
 
     const [buttonClicked, setButtonClicked] = useState(false)
     let title = props.title
     let name = props.name
     let description = props.description
     let desc = ''
-    let backgroundColor = props.name
+    let backgroundColor = props.color
 
     if(!buttonClicked && description.length < 100){
         desc = description
@@ -41,6 +41,8 @@ export const DiaryCard = ({props}) => {
         </div>
     )
 }
+
+export default DiaryCard;
 
 
 

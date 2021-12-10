@@ -15,7 +15,7 @@ const DiaryHome = () => {
     let decHieght = '0'
     if(onClicked){
         decHieght = '150px'
-        inputWidth = '100%'
+        inputWidth = '99%'
     }
 
     let list1 = list
@@ -49,10 +49,11 @@ const DiaryHome = () => {
                                     type="text"
                                     placeholder='Submit New'
                                     required
+                                    autoComplete='off'
                                 ></input>
                             </div>
                             <div className='cardSubButton'>
-                                {onClicked && <Button onClick={handleInputs}>Submit</Button>}
+                                {onClicked && <Button variant='contained' disableElevation onClick={handleInputs}>Submit</Button>}
                             </div>
                         </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './diaryHome.css';
-import { useState } from 'react';
+import { useState} from 'react';
 
 export default function DiaryHome() {
     const [title, setTitle] = useState('');
@@ -10,12 +10,12 @@ export default function DiaryHome() {
         const data = {
             title,
             description
-        }
+        }   
         setTitle('');
         setDescription('');
         console.log(data);
     }
-
+    
     return (
         <div className='create'>
             <form>

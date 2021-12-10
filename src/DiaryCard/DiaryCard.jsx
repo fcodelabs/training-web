@@ -1,5 +1,6 @@
 import React from 'react';
 import './DiaryCard.css';
+import '../App.css';
 
 export default function DiaryCard(props) {
 

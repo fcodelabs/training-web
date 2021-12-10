@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Button from '@mui/material/Button'
 import './DiaryCard.css'
 
-export const DiaryCard = ({props}) => {
+const DiaryCard = ({props}) => {
 
     const [buttonClicked, setButtonClicked] = useState(false)
     let title = props.title
@@ -41,6 +41,8 @@ export const DiaryCard = ({props}) => {
         </div>
     )
 }
+
+export default DiaryCard;
 
 
 

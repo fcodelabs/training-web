@@ -1,5 +1,4 @@
 import './App.css';
-import DiaryCard from './components/DiaryCard/DiaryCard';
 import DiaryHome from './pages/diaryHome/DiaryHome';
 
 function App() {
@@ -10,11 +9,6 @@ function App() {
     <div className="App">
       <section>
         <DiaryHome/>
-        <div className="cardContainer"> 
-          { list.map (p => 
-            <DiaryCard props = {p}/>
-          )}
-        </div>
       </section>
     </div>
   );

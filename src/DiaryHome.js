@@ -33,22 +33,26 @@ const DiaryHome=({addCard})=> {
        
     }
     return (
-        
+       
         <form noValidate onSubmit={handleSubmit}
           component="form"
           sx={{'& .MuiTextField-root': { m: 1 }, }}
           noValidate
           autoComplete="off"
         >
-        <div>
+
+        <div className="firstRow">
         <br/>
         <TextField 
         value={title}
         required
         onChange={(e)=> setTitle(e.target.value)}
-         className="inputRounded"  fullWidth autoFocus id="input-card" placeholder="Submit New" type="text" variant="outlined" size="small"/>
+         className="inputRounded"  autoFocus id="input-card" placeholder="Submit New" type="text" variant="outlined" size="small" sx={{m:1,width:"94%" }}/>
+
+         <Button style={{backgroundColor: 'rgb(28, 103, 243)', color: 'black'}} type ="submit" variant="contained" sx={ { borderRadius: 28,m:1} }>Submit</Button>
        
         </div>
+        
         <br/>
         <div>
         <TextField 
@@ -59,13 +63,10 @@ const DiaryHome=({addCard})=> {
            
         </div>
         <br/>
-        <div>
-      
-            <Button  fullWidth style={{backgroundColor: 'rgb(28, 103, 243)', color: 'black'}} type ="submit" variant="contained" sx={ { borderRadius: 28} }>Submit</Button>
         
-            </div>
        
         </form>)
+        
 
 }
 export default DiaryHome;

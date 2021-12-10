@@ -1,23 +1,22 @@
 
 body {
   background-color:rgb(21, 185, 226);
-  //background-image: url('images.jpeg')
-  padding: 20px 20px 20px 20px;
+  padding: 30px 30px 30px 30px;
 }
+
 @use './DiaryCard.js';
 
 .card{
-  background-color:rgb(150, 227, 247)
+  background-color:rgb(150, 227, 247);
+  //border-radius: 20px;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-width: 345;
+  display: block;
+  height: fit-content;
   
 }
 
-.card {
-   word-wrap: break-word;
- 
-  
-overflow: hidden;
- 
-}
 .inputRounded .MuiOutlinedInput-root {
   border-radius: 20px;
   background-color: rgb(54, 166, 231);
@@ -26,6 +25,7 @@ overflow: hidden;
   margin-bottom: 20;
   display: 'block';
 }
+
 .button{
   border-radius: 50%;
   background-color: rgb(38, 110, 245);
@@ -34,4 +34,8 @@ overflow: hidden;
   font-weight: bold;
 
 
+}
+.firstRow{
+  display: flex;
+  justify-content: space-between;
 }

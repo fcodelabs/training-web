@@ -7,7 +7,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import './sass.scss';
-import ShowMore from 'react-show-more-button';
 import {useState} from "react";
 
 
@@ -30,11 +29,7 @@ function DiaryCard(){
             subTitle:"Noah",
             description:"Out of the 6 500 spoken languages in the world today, why choose to learn English? As the third most widely spoken language in the world, English is widely spoken and taught in over 118 countries and is commonly used around the world as a trade language or diplomatic language. It is the language of science, aviation, computers, diplomacy and tourism. Last but not least, it is the language of international communication, the media and the internet.",
         },
-        // {
-        //     title:"test2",
-        //     subTitle:"sub2",
-        //     description:"sdfghjksdfghjkl",
-        // },
+        
     ]
 
     return(
@@ -85,6 +80,3 @@ function DiaryCard(){
 
 export default DiaryCard;
 
-// <Button size="small" color="inherit">
-                    //   SHOW MORE
-                    // </Button>

@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import DiaryCard from './components/DiaryCard/DiaryCard';
 
 function App() {
+  const list =[
+    {title:"Test 1", name:"Udith", color:"#b9e9ff", description:"222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222"},
+  ]
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-         This is the test app
-        </a>
-      </header>
+      <section>
+        <div className="cardContainer"> 
+          { list.map (p => 
+            <DiaryCard props = {p}/>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

@@ -10,7 +10,7 @@
 
 
 .cardTitle{
-    padding: 0 1rem;
+    padding:1rem;
     font-weight: normal;
 }
 
@@ -21,6 +21,8 @@
 
 .cardDescription{
     padding: 0 1rem 2rem;
+    word-break: break-all;
+    white-space: normal;
 }
 
 .cardButton{
@@ -32,6 +34,8 @@
     background: transparent;  
     cursor: pointer;
     border-radius: 5px;
+    align-self: start;
+    display: block;
 }
 
 .cardButton:hover{

@@ -1,0 +1,42 @@
+.card{
+    overflow: hidden;
+    /* box-shadow: 0 2px 20px; */
+    height: fit-content;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+
+.cardTitle{
+    padding: 0 1rem;
+    font-weight: normal;
+}
+
+.subTitle{
+    padding: 0 1rem 1rem;
+    font-weight: normal;
+}
+
+.cardDescription{
+    padding: 0 1rem 2rem;
+}
+
+.cardButton{
+    padding: 1rem;
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 15px;
+    border: none;
+    background: transparent;  
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cardButton:hover{
+    padding: 0.65rem;
+    margin: 5px 5px;
+    background:#b0c7c7;
+    border-radius: 20px;
+}

@@ -2,14 +2,17 @@ import React, {useState} from 'react'
 import Button from '@mui/material/Button'
 import './DiaryHome.css'
 import DiaryCard from '../../components/DiaryCard/DiaryCard'
+import store from '../../store/configureStore'
+import { useSelector } from 'react-redux';
 
 
 const DiaryHome = () => {
 
+    const cards = useSelector(state => state);
+
     const [onClicked, setOnClicked] = useState(false)
     const [title, handleTitle] = useState('')
     const [description, handleDescription] = useState('')
-    const [list, setList] = useState([])
 
     let inputWidth = '40%'
     let decHieght = '0'
@@ -17,15 +20,19 @@ const DiaryHome = () => {
         decHieght = '150px'
         inputWidth = '99%'
     }
-
-    let list1 = list
-
+    
     const handleInputs =() =>{
         if(title !== '' && description !== ''){
-            list1.push({title:title, name:"Udith", color:"#b9e9ff", description:description})
-            setList(list1)
-            handleTitle('')
-            handleDescription('')
+            let cardDetails = {
+                title:title,
+                name:"Udith", 
+                color:"#b9e9ff", 
+                description:description
+            }
+            store.dispatch({
+                type : "addNewCard",
+                payload : cardDetails
+            })
         }
         else{
             console.log("Missing title or description");
@@ -42,7 +49,7 @@ const DiaryHome = () => {
                                 <input
                                     name="Cardtitle"
                                     value={title}
-                                    style={{width:inputWidth, transition: 'width 500ms ease-out'}}
+                                    style={{width :inputWidth, transition: 'width 500ms ease-out'}}
                                     onClick = {() => setOnClicked(!onClicked)} 
                                     onChange={ (e) => handleTitle(e.target.value)}
                                     className='inputTitle'
@@ -77,7 +84,7 @@ const DiaryHome = () => {
             </div>
 
             <div className="cardContainer"> 
-                { list.map (p => 
+                { cards.map (p => 
                     <DiaryCard props = {p}/>
                 )}
             </div> 

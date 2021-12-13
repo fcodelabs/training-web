@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import Reducer from './Reducer';
+import {getFirebase, ReactReduxFirebaseProvider} from "react-redux-firebase";
+import thunk from 'redux-thunk';
 
 const store= createStore(Reducer);
 ReactDOM.render(

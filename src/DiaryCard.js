@@ -7,12 +7,10 @@ import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import './sass.scss';
 import {useState} from "react";
-import DiaryHome from "./DiaryHome";
-import { Grid } from "@mui/material";
-import { v4 as uuidv4 } from 'uuid';
 
 
-const DiaryCard =()=>{
+function DiaryCard(props){
+
     const useStyles = makeStyles({
         root: {
           maxWidth: 345
@@ -20,74 +18,41 @@ const DiaryCard =()=>{
       });
     const classes = useStyles();
 
-    const [cards,setCards]=useState([
-        {id:1,
-        title:"Reasons Why Learning English is so Important",
-        subTitle:"Noah",
-        description:"Out of the 6500 spoken languages in the world today, why choose to learn English? As the third most widely spoken language in the world, English is widely spoken and taught in over 118 countries and is commonly used around the world as a trade language or diplomatic language. It is the language of science, aviation, computers, diplomacy and tourism. Last but not least, it is the language of international communication, the media and the internet.",
-    }
-
-    ]);
-
-    const addCard = (title,details)=>{
-        setCards([...cards,{id:uuidv4(),title,subTitle:'Liam',description:details}]);
-    }
-
 
     const [showMore, setShowMore] = useState(false);
-    let cards=[
-        {
-            title:"Reasons Why Learning English is so Important",
-            subTitle:"Noah",
-            description:"Out of the 6 500 spoken languages in the world today, why choose to learn English? As the third most widely spoken language in the world, English is widely spoken and taught in over 118 countries and is commonly used around the world as a trade language or diplomatic language. It is the language of science, aviation, computers, diplomacy and tourism. Last but not least, it is the language of international communication, the media and the internet.",
-        },
-    ]
+    
 
 
     return(
         <div className="container">
-        
         <div className="cards">
-        <DiaryHome addCard={addCard}/>
-        <br/>
-        <Grid container spacing={2}>
-        {cards.map((card,id)=>{
-                return(
-                    <Grid item key={card.id} xs={12}md={6} lg={3}>
-                    <Card className={classes.root} >
-                    <div className="card">
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2" align="left">
-                                {card.title}
-                        </Typography>
-                        <Typography variant="body1" color="textSecondary" component="h2" align="left">
-                                {card.subTitle}
-                        </Typography>
-                        <br/>
-                         <Typography variant="body2"  component="p" align="left" >
-                         {showMore ? card.description : `${card.description.substring(0, 100)} ...`}
-                         </Typography>
-                    </CardContent>
-                    <CardActions>
-                    <Button varient="text" size="small" color="inherit" onClick={() => setShowMore(!showMore)}>
-                    {showMore ? "Show less" : "Show more"}
-                    </Button>
-                    
-                   
-                     </CardActions>
-                     </div>
-                    </Card>
-                    </Grid>
-                    
-                    
-                )
-            })
-
-        }
-        </Grid>
         
-           
-        </div>
+                    
+                        <Card className={classes.root} >
+                            <div className="card">
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2" align="left">
+                                        {props.title}
+                                    </Typography>
+                                    <Typography variant="body1" color="textSecondary" component="h2" align="left">
+                                        {props.subTitle}
+                                    </Typography>
+                                    <br/>
+                                    <Typography variant="body2"  component="p" align="left" >
+                                    {showMore ? props.description : `${props.description.substring(0, 100)} ...`}
+
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button varient="text" size="small" color="inherit" onClick={() => setShowMore(!showMore)}>
+                                        {showMore ? "Show less" : "Show more"}
+                                    </Button>
+                    
+                                </CardActions>
+                            </div>
+                        </Card>
+                    
+            </div>
         </div>
        
     )

@@ -6,6 +6,7 @@ import './sass.scss';
 
 
 const DiaryHome=({addCard})=> {
+
     const[title,setTitle]=React.useState('')
     const[details,setDetails]=React.useState('')
 
@@ -14,6 +15,7 @@ const DiaryHome=({addCard})=> {
 
         if(title && details){
             console.log(title,details)
+
             addCard(title,details);
             
         }else if(details){
@@ -34,12 +36,14 @@ const DiaryHome=({addCard})=> {
     }
     return (
        
+
         <form noValidate onSubmit={handleSubmit}
           component="form"
           sx={{'& .MuiTextField-root': { m: 1 }, }}
           noValidate
           autoComplete="off"
         >
+
 
         <div className="firstRow">
         <br/>
@@ -58,11 +62,13 @@ const DiaryHome=({addCard})=> {
         <TextField 
         value={details} 
         required
+
         onChange={(e)=> setDetails(e.target.value)}
         className="inputRounded" fullWidth autoFocus id="input-description" placeholder="Enter Description" type="text" variant="outlined" multiline rows={5}/>
            
         </div>
         <br/>
+
         
        
         </form>)
@@ -70,3 +76,4 @@ const DiaryHome=({addCard})=> {
 
 }
 export default DiaryHome;
+

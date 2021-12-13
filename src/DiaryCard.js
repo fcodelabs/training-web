@@ -21,6 +21,7 @@ function DiaryCard(props){
     const [showMore, setShowMore] = useState(false);
     
 
+
     return(
         <div className="container">
         <div className="cards">

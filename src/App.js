@@ -1,14 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import DiaryCard from './DiaryCard';
-import DiaryHome from './DiaryHome';
-import DiaryHomeTop from './DiaryHomeTop';
+import DiaryHome from './components/DiaryHome';
+import DiaryHomeTop from './components/DiaryHomeTop';
 
 function App() {
   return (
     <div className="App">
    <DiaryHomeTop/>
-    <DiaryCard/>
+    <DiaryHome/>
     </div>
   );
 }

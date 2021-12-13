@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import '../sass.scss';
+import './sass.scss';
 import { useSelector ,useDispatch} from 'react-redux';
 import DiaryCard from './DiaryCard';
 import { Grid } from "@mui/material";

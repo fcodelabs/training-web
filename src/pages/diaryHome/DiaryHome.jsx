@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Button from '@mui/material/Button'
 import './DiaryHome.css'
 import DiaryCard from '../../components/DiaryCard/DiaryCard'
 import store from '../../store/configureStore'
 import { useSelector } from 'react-redux';
+import {addCardToStore, addNewCard} from '../../dbHandler'
 
 
 const DiaryHome = () => {
@@ -29,15 +30,19 @@ const DiaryHome = () => {
                 color:"#b9e9ff", 
                 description:description
             }
-            store.dispatch({
-                type : "addNewCard",
-                payload : cardDetails
-            })
+
+            addNewCard(cardDetails)
+            handleTitle('')
+            handleDescription('')
         }
         else{
             console.log("Missing title or description");
         }
     }
+
+    useEffect(() => {
+        addCardToStore()
+    }, [])
 
     return (
         <div>

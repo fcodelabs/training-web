@@ -9,67 +9,50 @@ import './sass.scss';
 import {useState} from "react";
 
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345
-  }
-});
+function DiaryCard(props){
 
-
-function DiaryCard(){
+    const useStyles = makeStyles({
+        root: {
+          maxWidth: 345
+        }
+      });
     const classes = useStyles();
+
+
     const [showMore, setShowMore] = useState(false);
     
 
 
-    let cards=[
-        {
-            title:"Reasons Why Learning English is so Important",
-            subTitle:"Noah",
-            description:"Out of the 6 500 spoken languages in the world today, why choose to learn English? As the third most widely spoken language in the world, English is widely spoken and taught in over 118 countries and is commonly used around the world as a trade language or diplomatic language. It is the language of science, aviation, computers, diplomacy and tourism. Last but not least, it is the language of international communication, the media and the internet.",
-        },
-    ]
-
     return(
         <div className="container">
         <div className="cards">
+        
+                    
+                        <Card className={classes.root} >
+                            <div className="card">
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2" align="left">
+                                        {props.title}
+                                    </Typography>
+                                    <Typography variant="body1" color="textSecondary" component="h2" align="left">
+                                        {props.subTitle}
+                                    </Typography>
+                                    <br/>
+                                    <Typography variant="body2"  component="p" align="left" >
+                                    {showMore ? props.description : `${props.description.substring(0, 100)} ...`}
 
-        {
-            cards.map((card,index)=>{
-                return(
-                   
-                   
-                    <Card className={classes.root} >
-                     <div className="card">
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2" align="left">
-                                {card.title}
-                        </Typography>
-                        <Typography variant="body1" color="textSecondary" component="h2" align="left">
-                                {card.subTitle}
-                        </Typography>
-                        <br/>
-                         <Typography variant="body2"  component="p" align="left" >
-                         {showMore ? card.description : `${card.description.substring(0, 100)} ...`}
-                         </Typography>
-                    </CardContent>
-                    <CardActions>
-                    <Button varient="text" size="small" color="inherit" onClick={() => setShowMore(!showMore)}>
-                    {showMore ? "Show less" : "Show more"}
-                    </Button>
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button varient="text" size="small" color="inherit" onClick={() => setShowMore(!showMore)}>
+                                        {showMore ? "Show less" : "Show more"}
+                                    </Button>
                     
-                   
-                     </CardActions>
-                     </div>
-                    </Card>
+                                </CardActions>
+                            </div>
+                        </Card>
                     
-                    
-                )
-            })
-
-        }
-           
-        </div>
+            </div>
         </div>
        
     )

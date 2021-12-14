@@ -1,6 +1,6 @@
-import db from "../Config/firestoreConfig";
+import db from "../../utils/firestore-config";
 import { collection, query, onSnapshot } from "firebase/firestore";
-import { store } from "../Components/store";
+import { store } from "../../store";
 
 export default function GetAllCards(){
     // const dispatch = useDispatch();

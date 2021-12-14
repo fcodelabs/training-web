@@ -2,10 +2,10 @@ import React from 'react';
 import './diaryHome.css';
 import DiaryCard from '../DiaryCard/DiaryCard';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTitle, getDescription, getCards } from '../Components/store';
-import GetAllCards from '../Actions/getCards';
+import { getTitle, getDescription, getCards } from '../../store';
+import GetAllCards from '../actions/get-cards';
 import { useEffect } from 'react'; 
-import AddCards from '../Actions/AddCards';
+import AddCards from '../actions/add-cards';
 
 export default function DiaryHome() {
     const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import DiaryHome from './DiaryHome/DiaryHome';
+import DiaryHome from './Pages/DiaryHome/DiaryHome';
 import './App.css';
 
 function App() {

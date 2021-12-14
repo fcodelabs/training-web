@@ -1,9 +1,11 @@
 import React from 'react';
 import './diaryHome.css';
 import DiaryCard from '../DiaryCard/DiaryCard';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getTitle, getDescription, getCards } from '../Components/store';
+import GetAllCards from '../Actions/getCards';
+import { useEffect } from 'react'; 
+import AddCards from '../Actions/AddCards';
 
 export default function DiaryHome() {
     const dispatch = useDispatch();
@@ -11,13 +13,17 @@ export default function DiaryHome() {
     const description = useSelector(getDescription);
     const cards = useSelector(getCards);
 
+    useEffect(() => {
+        GetAllCards();
+    }, [])
+
     const handleSubmit = () => {
         if(title.trim().length !== 0 && description.trim().length !== 0){
             const card = {
                 title,
-                description
+                description,
             }
-            dispatch({type: "newCard", payload: card});
+            AddCards(card);
             dispatch({ type: "titleChanged", payload: ''});
             dispatch({type: "descriptionChanged", payload: ''});
         }  
@@ -55,7 +61,7 @@ export default function DiaryHome() {
             <button className='createButton' onClick={handleSubmit}>SUBMIT</button>
             
             <div className='App'>
-                {cards && cards.map((card, index) => <DiaryCard key={index} title={card.title} subtitle="Noah" description={card.description} color="#AFEEEE"/>)}
+                {cards && cards.map((card, index) => <DiaryCard key={index} title={card.title} subtitle={card.user} description={card.description} color="#AFEEEE"/>)}
             </div>
         </div>
     )

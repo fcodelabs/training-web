@@ -1,5 +1,5 @@
 import './App.css';
-import DiaryCard from './components/DiaryCard/DiaryCard';
+import DiaryHome from './pages/diaryHome/DiaryHome';
 
 function App() {
   const list =[
@@ -8,11 +8,7 @@ function App() {
   return (
     <div className="App">
       <section>
-        <div className="cardContainer"> 
-          { list.map (p => 
-            <DiaryCard props = {p}/>
-          )}
-        </div>
+        <DiaryHome/>
       </section>
     </div>
   );

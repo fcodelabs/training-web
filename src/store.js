@@ -1,19 +1,18 @@
-// import {createStore} from 'redux';
+import {createStore} from 'redux';
 
-// const initialState={
+const initialState={
   
-//   cards:[]
-// };
+  cards:[]
+};
 
-
-//   function cardReducer (state=initialState,action){
-//         if(action.type==="ADD_CARD"){
-//             return {...state, cards:action.payload};
+  function cardReducer (state=initialState,action){
+        if(action.type==="ADD_CARD"){
+            return {...state, cards:action.payload};
             
-//         }
+        }
     
-//         return state;
-//     };
+        return state;
+    };
        
-//     export const store = createStore(cardReducer);
-//     export const getCardList= (state)=>state.cards;
+    export const store = createStore(cardReducer);
+    export const getCardList= (state)=>state.cards;

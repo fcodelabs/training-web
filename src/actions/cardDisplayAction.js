@@ -1,6 +1,6 @@
 import {collection, addDoc, query,onSnapshot, QuerySnapshot} from "firebase/firestore";
 import {store} from "../store";
-import db from '../config/firebaseConfig';
+import db from '../Utility/firebaseConfig';
 
 
 export default function getCards(){

@@ -7,9 +7,7 @@ import DiaryCard from './DiaryCard';
 import {  Grid } from "@mui/material";
 import getCards from './actions/cardDisplayAction';
 import addCard from './actions/cardActions';
-import { getCardList } from './store';
 import { useEffect } from 'react';
-import cardReducer from './Reducer';
 
 
 

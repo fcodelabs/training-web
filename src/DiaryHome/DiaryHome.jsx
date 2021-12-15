@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import AddCards from '../Actions/AddCards';
 
 export default function DiaryHome() {
+
     const dispatch = useDispatch();
     const title = useSelector(getTitle);
     const description = useSelector(getDescription);
@@ -16,6 +17,7 @@ export default function DiaryHome() {
     useEffect(() => {
         GetAllCards();
     }, [])
+
 
     const handleSubmit = () => {
         if(title.trim().length !== 0 && description.trim().length !== 0){
@@ -59,10 +61,10 @@ export default function DiaryHome() {
                 ></textarea>
             </form>
             <button className='createButton' onClick={handleSubmit}>SUBMIT</button>
-            
             <div className='App'>
                 {cards && cards.map((card, index) => <DiaryCard key={index} title={card.title} subtitle={card.user} description={card.description} color="#AFEEEE"/>)}
             </div>
+
         </div>
     )
 }

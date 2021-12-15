@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 const DiaryHome=()=>{
     const[title,setTitle]=React.useState('')
     const[description,setDescription]=React.useState('')
-    const cards = useSelector(getAllCards);
+    const cards = useSelector(state=>state.cards.cards);
     const dispatch=useDispatch();
     //const cards = useSelector(cardDidplayAction);
 

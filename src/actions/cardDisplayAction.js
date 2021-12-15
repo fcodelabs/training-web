@@ -6,7 +6,6 @@ import Reducer from "../Reducer";
 
 export default function getCards(){
     const cardList = query(collection(db,"cards"));
-    console.log(cardList);
     const unsubscribe = onSnapshot(cardList,(QuerySnapshot)=>{
         const cards=[];
         QuerySnapshot.forEach((doc)=>{

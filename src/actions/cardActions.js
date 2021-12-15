@@ -1,10 +1,14 @@
 import { Store } from "@material-ui/icons";
 import {collection, addDoc} from "firebase/firestore";
 import db from '../config/firebaseConfig';
+import * as type from '../types';
 
 export default async function addCard(card){
+    return{
+        type:type.ADD_CARD,
+    }
     await addDoc(collection(db,"cards"),card);
-    console.log(card);
+
 }
 
 

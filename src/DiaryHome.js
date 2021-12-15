@@ -11,7 +11,9 @@ import { useEffect } from 'react';
 
 
 
+
 const DiaryHome=()=>{
+
     const[title,setTitle]=React.useState('')
     const[description,setDescription]=React.useState('')
     const cards = useSelector((state)=>state.cards);
@@ -25,6 +27,7 @@ const DiaryHome=()=>{
     const handleSubmit =(e) => {
         e.preventDefault()
 
+
         if(title && description){
 
             const card={
@@ -37,6 +40,7 @@ const DiaryHome=()=>{
             setDescription('');
             
        
+
             
         }else if(description){
             console.log("Missing Title")
@@ -52,13 +56,16 @@ const DiaryHome=()=>{
     }
     
     return (
+
         <div>
+
         <form noValidate onSubmit={handleSubmit}
         component="form"
         sx={{'& .MuiTextField-root': { m: 1 }, }}
         noValidate
         autoComplete="off"
       >
+
 
       <div className="firstRow">
       <br/>
@@ -99,4 +106,6 @@ const DiaryHome=()=>{
       
 
 }
+
 export default DiaryHome;
+

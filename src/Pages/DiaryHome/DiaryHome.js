@@ -5,8 +5,8 @@ import './sass.scss';
 import { useSelector ,useDispatch} from 'react-redux';
 import DiaryCard from '../DiaryCard/DiaryCard';
 import {  Grid } from "@mui/material";
-import getCards from '../../actions/cardDisplayAction';
-import addCard from '../../actions/cardActions';
+import getCards from '../Actions/cardDisplayAction';
+import addCard from '../Actions/cardActions';
 import { useEffect } from 'react';
 
 

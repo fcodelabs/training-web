@@ -33,15 +33,14 @@
 import {createStore} from 'redux';
 
 const initialState={
-  title:'',
-  description:'',
+  
   cards:[]
 };
 
 
   function cardReducer (state=initialState,action){
         if(action.type==="ADD_CARD"){
-            return [...state, action.payload];
+            return {...state, cards:action.payload};
             
         }
     

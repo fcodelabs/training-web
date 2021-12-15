@@ -8,6 +8,7 @@ import { getCardActionsUtilityClass, Grid } from "@mui/material";
 import getCards from './actions/cardDisplayAction';
 import addCard from './actions/cardActions';
 import { getAllCards } from './store';
+import { useEffect } from 'react';
 
 
 
@@ -18,7 +19,7 @@ const DiaryHome=()=>{
     const dispatch=useDispatch();
     //const cards = useSelector(cardDidplayAction);
 
-    React.useEffect(()=>{
+    useEffect(()=>{
         getCards();
     },[])
 
@@ -28,13 +29,13 @@ const DiaryHome=()=>{
         e.preventDefault()
 
         if(title && description){
-            console.log(title,description)
+            //console.log(title,description)
 
             const card={
                 title,
                 description,
             }
-            dispatch({type:"ADDCard" , payload:card});
+            //dispatch({type:"ADD_CARD" , payload:card});
             addCard(card);
             e.target.reset();
             setTitle('');

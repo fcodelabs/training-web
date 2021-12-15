@@ -6,11 +6,12 @@ import Reducer from "../Reducer";
 
 export default function getCards(){
     const cardList = query(collection(db,"cards"));
+    console.log(cardList);
     const unsubscribe = onSnapshot(cardList,(QuerySnapshot)=>{
         const cards=[];
         QuerySnapshot.forEach((doc)=>{
             cards.push(doc.data());
         });
-        store.dispatch({type:"newCard",payload:cards});
+        store.dispatch({type:"ADD_CARD",payload:cards});
     });
 }

@@ -6,7 +6,7 @@ import DiaryCard from '../DiaryCard/DiaryCard';
 export default function DiaryHome() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    // const [cards, setCards] = useState([]);
+   
     let cards = JSON.parse(localStorage.getItem("cards") || "[]");
 
     const handleSubmit = () => {
@@ -45,9 +45,11 @@ export default function DiaryHome() {
                 ></textarea>
             </form>
             <button className='createButton' onClick={handleSubmit}>SUBMIT</button>
+
             <div className='App'>
                 {cards && cards.map( (card, index) => <DiaryCard key={index} title={card.title} subtitle="Noah" description={card.description} color="#AFEEEE"/>)}
             </div>
+
         </div>
     )
 }

@@ -1,9 +1,5 @@
 import { combineReducers } from "redux";
 
-
-
-
-
 const Reducer = combineReducers({
     
 

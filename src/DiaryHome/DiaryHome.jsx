@@ -1,19 +1,26 @@
 import React from 'react';
 import './diaryHome.css';
-import { useState } from 'react';
+import { useState} from 'react';
+import DiaryCard from '../DiaryCard/DiaryCard';
 
 export default function DiaryHome() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+   
+    let cards = JSON.parse(localStorage.getItem("cards") || "[]");
 
     const handleSubmit = () => {
-        const data = {
-            title,
-            description
-        }
+        if(title.trim().length !== 0 && description.trim().length !== 0){
+            const card = {
+                title,
+                description
+            }
+            cards.push(card)
+        }  
         setTitle('');
         setDescription('');
-        console.log(data);
+        localStorage.setItem("cards", JSON.stringify(cards));
+        console.log(cards);
     }
 
     return (
@@ -38,6 +45,11 @@ export default function DiaryHome() {
                 ></textarea>
             </form>
             <button className='createButton' onClick={handleSubmit}>SUBMIT</button>
+
+            <div className='App'>
+                {cards && cards.map( (card, index) => <DiaryCard key={index} title={card.title} subtitle="Noah" description={card.description} color="#AFEEEE"/>)}
+            </div>
+
         </div>
     )
 }

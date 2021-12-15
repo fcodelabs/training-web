@@ -1,13 +1,14 @@
-import { Store } from "@material-ui/icons";
+import { CardTravelSharp, Store } from "@material-ui/icons";
 import {collection, addDoc} from "firebase/firestore";
 import db from '../config/firebaseConfig';
 import * as type from '../types';
 
-export default async function addCard(card){
+export const  addCard =()=>{
     return{
         type:type.ADD_CARD,
+
     }
-    await addDoc(collection(db,"cards"),card);
+    //await addDoc(collection(db,"cards"),card);
 
 }
 

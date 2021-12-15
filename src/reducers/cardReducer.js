@@ -1,16 +1,23 @@
 import * as type from '../types';
 
 const initialState={
-  
-    cards:[]
+  cards:[],
+  loading:false,
+  error:null
+
   };
   
   
 export default function cardReducer (state=initialState,action){
-          if(action.type==="ADD_CARD"){
-              return {...state, cards:action.payload};
-              
-          }
-      
-          return state;
-      };
+  switch(action.type){
+    case "ADD_CARD":
+      return{...state,loading:true};
+    // case "ADD_CARD_FAILED":
+    //   return{...state,loading:false,error:action.message};
+    default:
+      return state;
+  }
+         
+};
+
+export default cards;

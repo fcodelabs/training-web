@@ -1,53 +1,24 @@
 
-
-// const cardReducer = (state = {}, action) => {
-//     switch (action.type) {
-//       case "ADD_CARD": {
-//         console.log("Added a card");
-//         return state;
-//       }
-//       case "ADD_CARD_ERR": {
-//         console.log("An error occurred");
-//         return state;
-//       }
-      
-//       default:
-//         return state;
-//     }
-//   };
-  
-  //export default cardReducer;
-
-//   const initState ={
-//       cards:[
-//           {id:'1',title:"asdfgh",description:"sdfghjkghj"},
-//           {id:'2',title:"dffgh",description:"sdfghjkghj"},
-//       ]
-//   }
-
-//   const cardReducer =(state = initState, action)=>{
-//       return state
-//   }
-
-//   export default cardReducer;
-import {createStore} from 'redux';
+import {createStore,compose} from 'redux';
 import Reducer from './reducers/Reducer';
 
-// const initialState={
-  
-//   cards:[]
-// };
+export const store = compose(window.devToolsExtension && window.devToolsExtension(),
+)(createStore)(Reducer);
+export default store;
 
 
-//   function cardReducer (state=initialState,action){
-//         if(action.type==="ADD_CARD"){
-//             return {...state, cards:action.payload};
-            
-//         }
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer from './reducers/index.js';
+import rootSaga from './sagas/index';
+
+const sagaMiddleware = createSagaMiddleware();
+const store = compose(
+  applyMiddleware(sagaMiddleware),
+  window.devToolsExtension && window.devToolsExtension(),
+)(createStore)(rootReducer);
+
+sagaMiddleware.run(rootSaga);
+
+export default store;
     
-//         return state;
-//     };
-       
-    export const store = createStore(Reducer);
-    export default store;
-    //export const getAllCards= (state)=>state.cards;

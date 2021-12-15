@@ -5,10 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import {store} from './store';
-import {getFirebase, ReactReduxFirebaseProvider} from "react-redux-firebase";
-import thunk from 'redux-thunk';
+import cardReducer from './reducers/cardReducer';
 
+const store = createStore(cardReducer);
 
 ReactDOM.render(
   <Provider store={store}>

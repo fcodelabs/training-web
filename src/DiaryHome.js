@@ -9,13 +9,14 @@ import getCards from './actions/cardDisplayAction';
 import addCard from './actions/cardActions';
 import { getCardList } from './store';
 import { useEffect } from 'react';
+import cardReducer from './Reducer';
 
 
 
 const DiaryHome=()=>{
     const[title,setTitle]=React.useState('')
     const[description,setDescription]=React.useState('')
-    const cards = useSelector(getCardList);
+    const cards = useSelector((state)=>state.cards);
     const dispatch=useDispatch();
 
     useEffect(()=>{

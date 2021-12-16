@@ -6,6 +6,8 @@ function App() {
     <>
       <div className='card-home'>
         <DiaryHome/>
+
+      </div>
     </>
   );
 }

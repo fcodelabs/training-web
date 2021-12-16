@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import db from '../config/firebaseConfig';
+import db from '../Utility/firebaseConfig';
 import {collection, query,onSnapshot, QuerySnapshot} from "firebase/firestore";
 import store from '../store';
 

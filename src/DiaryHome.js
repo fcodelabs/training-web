@@ -5,37 +5,39 @@ import './sass.scss';
 import { useSelector ,useDispatch} from 'react-redux';
 import DiaryCard from './DiaryCard';
 import { getCardActionsUtilityClass, Grid } from "@mui/material";
-import getCards from './actions/cardDisplayAction';
-import addCard from './actions/cardActions';
-import { getAllCards } from './store';
+import addCard from './actions/addCard';
 import { useEffect } from 'react';
+import {getCards}  from './actions/getCards';
+import { Timestamp } from 'firebase/firestore';
 
 
 
 const DiaryHome=()=>{
     const[title,setTitle]=React.useState('')
     const[description,setDescription]=React.useState('')
+    //const[timestamp,setTimestamp]=React.useState('')
     const cards = useSelector(state=>state.cards.cards);
     const dispatch=useDispatch();
-    //const cards = useSelector(cardDidplayAction);
-
+    const loading=useSelector(state=>state.cards.loading);
+    const error=useSelector(state=>state.cards.error);
+   
     useEffect(()=>{
-        getCards();
-    },[])
+        (getCards());
+    },[]);
 
-    //console.log(cards);
+    var timestamp=Date.now();
 
     const handleSubmit =(e) => {
         e.preventDefault()
 
         if(title && description){
-            //console.log(title,description)
-
+           
             const card={
                 title,
                 description,
+                timestamp
+                
             }
-            //dispatch({type:"ADD_CARD" , payload:card});
             addCard(card);
             e.target.reset();
             setTitle('');

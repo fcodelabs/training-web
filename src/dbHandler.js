@@ -1,8 +1,6 @@
 import firebase from './firebase';
-import { collection, setDoc, onSnapshot, query, doc } from '@firebase/firestore'
+import { collection, onSnapshot, query, addDoc } from '@firebase/firestore'
 import store from './store/configureStore';
-
-let cardId = 0
 
 export function addCardToStore() {
     const q = query(collection(firebase, "Post"));
@@ -19,8 +17,7 @@ export function addCardToStore() {
 }
 
 export async function addNewCard(data) {
-    let documentName = "cards" + (cardId++).toString()
-    await setDoc(doc(firebase, "Post", documentName), {
+    const docRef = await addDoc(collection(firebase, "Post"), {
         name: data.name,
         title: data.title,
         description: data.description,

@@ -18,8 +18,10 @@ function DiaryCard(props){
       });
     const classes = useStyles();
 
+
     const [showMore, setShowMore] = useState(false);
     
+
 
     return(
         <div className="container">

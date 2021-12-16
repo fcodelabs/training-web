@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import db from '../../Utils/firebaseConfig';
+import db from '../../../Utils/firebaseConfig';
 import {collection, query,onSnapshot, QuerySnapshot} from "firebase/firestore";
-import store from '../../store';
+import store from '../../../store';
 
 function* getCardSaga() {
     const cardList = query(collection(db,"cards"));

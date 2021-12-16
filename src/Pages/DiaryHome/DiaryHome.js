@@ -3,11 +3,11 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import './sass.scss';
 import { useSelector ,useDispatch} from 'react-redux';
-import DiaryCard from './DiaryCard';
+import DiaryCard from '../DiaryCard/DiaryCard';
 import { getCardActionsUtilityClass, Grid } from "@mui/material";
-import addCard from './actions/addCard';
+import addCard from '../Actions/addCard';
 import { useEffect } from 'react';
-import {getCards}  from './actions/getCards';
+import {getCards}  from '../Actions/getCards';
 
 
 

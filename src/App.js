@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import DiaryHome from './DiaryHome';
-import DiaryHomeTop from './DiaryHomeTop';
+import DiaryHome from './Pages/DiaryHome/DiaryHome';
+import DiaryHomeTop from './Pages/DiaryHome/DiaryHomeTop';
 
 
 function App() {

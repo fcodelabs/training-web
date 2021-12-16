@@ -4,10 +4,11 @@ import TextField from '@mui/material/TextField';
 import './sass.scss';
 import { useSelector ,useDispatch} from 'react-redux';
 import DiaryCard from '../DiaryCard/DiaryCard';
-import { getCardActionsUtilityClass, Grid } from "@mui/material";
+import {  Grid } from "@mui/material";
 import addCard from '../Actions/addCard';
 import { useEffect } from 'react';
 import {getCards}  from '../Actions/getCards';
+import DiaryHomeTop from '../../Components/Header/DiaryHomeTop';
 
 
 
@@ -65,6 +66,7 @@ const DiaryHome=()=>{
     return (
 
         <div>
+        <div><DiaryHomeTop/></div>
 
         <form noValidate onSubmit={handleSubmit}
         component="form"

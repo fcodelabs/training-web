@@ -1,7 +1,9 @@
 
 body {
   background-color:rgb(21, 185, 226);
+
   padding: 30px 30px 30px 30px;
+
 }
 
 @use './DiaryCard.js';
@@ -24,6 +26,22 @@ body {
   margin-top: 20;
   margin-bottom: 20;
   display: 'block';
+}
+.inputRounded .MuiOutlinedInput-root {
+  border-radius: 20px;
+  background-color: rgb(87, 183, 238);
+  border: rgb(87, 165, 238);
+  margin-top: 20;
+  margin-bottom: 20;
+  display: 'block';
+}
+.button{
+  border-radius: 50%;
+  background-color: rgb(38, 110, 245);
+  width: 80px;
+  height: 80px;
+  font-weight: bold;
+
 }
 
 .button{

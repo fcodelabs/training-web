@@ -17,7 +17,6 @@ const DiaryHome = () => {
         decHieght = '150px'
         inputWidth = '99%'
     }
-
     let list1 = list
 
     const handleInputs =() =>{

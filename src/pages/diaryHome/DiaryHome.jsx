@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import Button from '@mui/material/Button'
 import './DiaryHome.css'
-import DiaryCard from '../../components/DiaryCard/DiaryCard'
-import store from '../../store/configureStore'
+import DiaryCard from '../../Components/DiaryCard/DiaryCard'
 import { useSelector } from 'react-redux';
-import {addCardToStore, addNewCard} from '../../dbHandler'
+import {addCardToStore, addNewCard} from '../../utils/dbHandler'
 
 
 const DiaryHome = () => {
@@ -23,7 +22,7 @@ const DiaryHome = () => {
     }
     
     const handleInputs =() =>{
-        if(title !== '' && description !== ''){
+        if(title.trim() !== '' && description.trim() !== ''){
             let cardDetails = {
                 title:title,
                 name:"Udith", 

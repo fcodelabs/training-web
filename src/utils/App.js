@@ -1,5 +1,6 @@
 import './App.css';
-import DiaryHome from './pages/diaryHome/DiaryHome';
+import DiaryHome from '../Pages/diaryHome/DiaryHome';
+import {Route, Routes } from 'react-router-dom'
 
 function App() {
   const list =[
@@ -8,7 +9,9 @@ function App() {
   return (
     <div className="App">
       <section>
-        <DiaryHome/>
+        <Routes>
+          <Route path='/' element={<DiaryHome/>}/>
+        </Routes>
       </section>
     </div>
   );

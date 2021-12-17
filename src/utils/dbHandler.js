@@ -1,6 +1,6 @@
 import firebase from './firebase';
 import { collection, onSnapshot, query, addDoc } from '@firebase/firestore'
-import store from './store/configureStore';
+import store from './configureStore';
 
 export function addCardToStore() {
     const q = query(collection(firebase, "Post"));

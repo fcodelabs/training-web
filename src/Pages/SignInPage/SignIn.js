@@ -64,10 +64,10 @@ const SignIn = (props) => {
                   required
                   id="outlined-required"
                   label="Your Nickname"
-                  Value={subTitle}
+                  //Value={subTitle}
                   onChange={handleInputChange}/>
                 <Button 
-                onClick={Value={getName()}}
+                //onClick={Value={getName()}}
                 variant="contained" type="submit" sx={ { borderRadius: 28,m:1} }>
                   Random
                 </Button>

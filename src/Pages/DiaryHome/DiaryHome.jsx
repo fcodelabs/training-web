@@ -3,7 +3,8 @@ import './diaryHome.css';
 import DiaryCard from '../DiaryCard/DiaryCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTitle, getDescription, getCards } from '../../store';
-import GetAllCards from '../actions/get-cards';
+// import GetAllCards from '../Actions/getCards';
+import getAllCards from '../actions/index';
 import { useEffect } from 'react'; 
 import AddCards from '../actions/add-cards';
 
@@ -14,8 +15,9 @@ export default function DiaryHome() {
     const cards = useSelector(getCards);
 
     useEffect(() => {
-        GetAllCards();
-    }, [])
+        dispatch(getAllCards());
+        // console.log("Hi")
+    }, [dispatch])
 
     const handleSubmit = () => {
         if(title.trim().length !== 0 && description.trim().length !== 0){
@@ -59,10 +61,10 @@ export default function DiaryHome() {
                 ></textarea>
             </form>
             <button className='createButton' onClick={handleSubmit}>SUBMIT</button>
-            
             <div className='App'>
                 {cards && cards.map((card, index) => <DiaryCard key={index} title={card.title} subtitle={card.user} description={card.description} color="#AFEEEE"/>)}
             </div>
+
         </div>
     )
 }

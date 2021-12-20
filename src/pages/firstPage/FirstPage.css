@@ -1,0 +1,108 @@
+.signUpCardContainer {
+  height: 100vh;
+  padding: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.signUpCard {
+  height: 100%;
+  width: 100%;
+  padding: 5% 20% 5% 20%;
+}
+
+.signUpCardContent {
+  background: white;
+  height: 100%;
+  width: 100%;
+  padding: 24px;
+  border-radius: 15px;
+  justify-content: center;
+}
+
+.field {
+  height: 25%;
+}
+
+.logoTitle {
+  align-items: center;
+  display: flex;
+  margin-left: 5%;
+  gap: 1%;
+}
+
+.logo {
+  height: 30px;
+  width: 30px;
+}
+
+.signUpCardTitle {
+  text-align: center;
+  color: #039be5;
+  font-size: 2.125rem;
+}
+
+.inputFieldContainer {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  gap: 2%;
+}
+
+.signUpCardInputField {
+  align-items: center;
+  height: 80%;
+}
+
+.randomButton button {
+  border-radius: 20px;
+  background: #039be5;
+}
+
+.btnbtnClass {
+  justify-content: space-around;
+  display: flex;
+  padding: 0 2px 0 0;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.btnbtnClass button {
+  margin-top: 20px;
+  border-radius: 20px;
+  background: #039be5;
+}
+
+@media screen and (min-width: 600px) {
+  .signUpCard {
+    height: 100%;
+    width: 100%;
+    padding: 20% 0 20% 0;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .signUpCard {
+    height: 100%;
+    width: 100%;
+    padding: 5% 20% 5% 20%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .signUpCard {
+    height: 100%;
+    width: 100%;
+    padding: 8% 20% 8% 20%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .signUpCard {
+    height: 500px;
+    width: 100%;
+    /* padding: 20% 0 20% 0; */
+  }
+}

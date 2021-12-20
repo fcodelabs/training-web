@@ -4,10 +4,12 @@ import './DiaryHome.css'
 import DiaryCard from '../../Components/DiaryCard/DiaryCard'
 import { useSelector } from 'react-redux';
 import {addCardToStore, addNewCard} from '../../utils/dbHandler'
+import {useLocation} from 'react-router-dom';
 
 
 const DiaryHome = () => {
 
+    const location = useLocation();
     const cards = useSelector(state => state);
 
     const [onClicked, setOnClicked] = useState(false)
@@ -25,7 +27,7 @@ const DiaryHome = () => {
         if(title.trim() !== '' && description.trim() !== ''){
             let cardDetails = {
                 title:title,
-                name:"Udith", 
+                name:location.state, 
                 color:"#b9e9ff", 
                 description:description
             }

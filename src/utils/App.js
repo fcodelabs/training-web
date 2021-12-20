@@ -1,5 +1,6 @@
 import './App.css';
 import DiaryHome from '../Pages/diaryHome/DiaryHome';
+import FirstPage from '../Pages/firstPage/FirstPage'
 import {Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
     <div className="App">
       <section>
         <Routes>
-          <Route path='/' element={<DiaryHome/>}/>
+          <Route path='/diaryHome' element={<DiaryHome/>}/>
+          <Route path='/' element={<FirstPage/>}/>
         </Routes>
       </section>
     </div>

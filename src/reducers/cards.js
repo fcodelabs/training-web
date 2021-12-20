@@ -2,7 +2,6 @@ import * as type from '../types';
 
 const initialState={
   cards:[],
-  
   loading:false,
   error:null
 

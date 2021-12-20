@@ -5,7 +5,7 @@ import './sass.scss';
 import { useSelector ,useDispatch} from 'react-redux';
 import DiaryCard from './DiaryCard';
 import { getCardActionsUtilityClass, Grid } from "@mui/material";
-import {addCard} from './actions/addCard';
+import addCard from './actions/addCard';
 import { useEffect } from 'react';
 import {getCards}  from './actions/getCards';
 
@@ -18,6 +18,7 @@ const DiaryHome=()=>{
 
     const[title,setTitle]=React.useState('')
     const[description,setDescription]=React.useState('')
+    //const[timestamp,setTimestamp]=React.useState('')
     const cards = useSelector(state=>state.cards.cards);
     const dispatch=useDispatch();
     const loading=useSelector(state=>state.cards.loading);

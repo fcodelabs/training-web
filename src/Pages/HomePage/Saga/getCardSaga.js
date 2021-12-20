@@ -19,18 +19,6 @@ function* getCardSaga() {
     });
     
   }
-
-//   function* fetchCards(action) {
-//     try {
-//        const cards = yield call(getDocuments);
-//        yield put({type: 'GET_CARDS_SUCCESS', cards: cards});
-//     } catch (e) {
-//        yield put({type: 'GET_CARDS_FAILED', message: e.message});
-//     }
-//  }
- 
-//  function* getCardSaga() {
-//     yield takeEvery('GET_CARDS_REQUESTED', fetchCards);
-//  }
  
  export default getCardSaga;
+ 

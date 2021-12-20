@@ -17,22 +17,10 @@ export default function cards (state=initialState,action){
         loading:true,
         cards:action.payload,
       }
-      case type.GET_CARDS_SUCCESS:
-        return{
-          ...state,
-          loading:false,
-          cards:action.cards,
-        }
-      case type.GET_CARDS_FAILED:
-        return{
-          ...state,
-          loading:false,
-          error:action.message,
-        }
    
     default:
       return state;
   }
+
          
 };
-

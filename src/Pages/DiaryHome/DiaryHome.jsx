@@ -2,9 +2,9 @@ import React from 'react';
 import './diaryHome.css';
 import DiaryCard from '../DiaryCard/DiaryCard';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTitle, getDescription, getCards } from '../Components/store';
+import { getTitle, getDescription, getCards } from '../../store';
 // import GetAllCards from '../Actions/getCards';
-import getAllCards from '../Actions/index';
+import getAllCards from '../actions/index';
 import { useEffect } from 'react'; 
 import AddCards from '../actions/add-cards';
 

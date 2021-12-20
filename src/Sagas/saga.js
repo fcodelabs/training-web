@@ -1,5 +1,5 @@
 import { takeEvery, call} from 'redux-saga/effects';
-import GetAllCards from '../Actions/getCards';
+import GetAllCards from '../Pages/actions/get-cards';
 
 function* handleGetCards(){
     yield call(GetAllCards);

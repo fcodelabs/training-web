@@ -4,21 +4,16 @@ import TextField from '@mui/material/TextField';
 import './sass.scss';
 import { useSelector ,useDispatch} from 'react-redux';
 import DiaryCard from './DiaryCard';
-import { getCardActionsUtilityClass, Grid } from "@mui/material";
-import addCard from './actions/addCard';
+import {Grid } from "@mui/material";
 import { useEffect } from 'react';
 import {getCards}  from './actions/getCards';
-
-
-
-
+import store from './store';
 
 
 const DiaryHome=()=>{
 
     const[title,setTitle]=React.useState('')
     const[description,setDescription]=React.useState('')
-    //const[timestamp,setTimestamp]=React.useState('')
     const cards = useSelector(state=>state.cards.cards);
     const dispatch=useDispatch();
     const loading=useSelector(state=>state.cards.loading);
@@ -42,7 +37,11 @@ const DiaryHome=()=>{
                 timestamp
                 
             }
-            addCard(card);
+        
+            store.dispatch({
+                type:"ADD_CARD",
+                payload:card
+            })
             e.target.reset();
             setTitle('');
             setDescription('');

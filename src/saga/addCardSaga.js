@@ -1,27 +1,18 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import db from '../Utils/firebaseConfig';
 import {collection} from "firebase/firestore";
-import store from '../store';
 import { addDoc} from "firebase/firestore";
-//import {addCard} from '../actions/addCard';
 
 
 
-
+function* getAddCard(action){
+  yield call(addDoc(collection(db,"cards"),action.payload));
+}
 
 function* addCardSaga(){
+  yield takeLatest("ADD_CARD",getAddCard);
 
-  //const card = yield call(addCard, card);
-  console.log('card');
-  //const card = yield put (addCard(card));
-  //const card =yield put(addCard(card));
-  // const card ={
-  //   title:'aaa',
-  //   description:'aaavv'
-  // }
-    // const doc=yield call(addDoc(collection(db,"cards"),card));
-   
-  }
+}
 
  
  export default addCardSaga;

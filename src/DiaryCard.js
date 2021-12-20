@@ -61,4 +61,4 @@ function DiaryCard(props){
 
 export default DiaryCard;
 
- // {showMore ? props.description : `${props.description.substring(0, 100)} ...`}
+ 

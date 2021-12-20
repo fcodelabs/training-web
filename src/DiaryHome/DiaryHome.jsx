@@ -61,10 +61,10 @@ export default function DiaryHome() {
                 ></textarea>
             </form>
             <button className='createButton' onClick={handleSubmit}>SUBMIT</button>
-            
             <div className='App'>
                 {cards && cards.map((card, index) => <DiaryCard key={index} title={card.title} subtitle={card.user} description={card.description} color="#AFEEEE"/>)}
             </div>
+
         </div>
     )
 }

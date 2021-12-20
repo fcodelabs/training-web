@@ -19,6 +19,7 @@ function reducer(state = initialState, action){
             return {...state, description : action.payload};
         case "newCard":
             return {...state, cards: action.payload};
+
         default:
             return state;
     }

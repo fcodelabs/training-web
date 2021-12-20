@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import Button from '@mui/material/Button'
 import './DiaryHome.css'
-import DiaryCard from '../../components/DiaryCard/DiaryCard'
+import DiaryCard from '../../Components/DiaryCard/DiaryCard'
 import store from '../../store/configureStore'
 import { useSelector } from 'react-redux';
-import {addCardToStore, addNewCard} from '../../dbHandler'
 
 
 const DiaryHome = () => {
@@ -31,7 +30,11 @@ const DiaryHome = () => {
                 description:description
             }
 
-            addNewCard(cardDetails)
+            store.dispatch({
+                type : "dataAddRequested",
+                payload : cardDetails
+            })
+
             handleTitle('')
             handleDescription('')
         }
@@ -41,7 +44,9 @@ const DiaryHome = () => {
     }
 
     useEffect(() => {
-        addCardToStore()
+        store.dispatch({
+            type : "dataGetRequested",
+        })
     }, [])
 
     return (

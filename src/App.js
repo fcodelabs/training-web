@@ -1,5 +1,5 @@
 import './App.css';
-import DiaryHome from './pages/diaryHome/DiaryHome';
+import DiaryHome from './Pages/diaryHome/DiaryHome';
 
 function App() {
   const list =[

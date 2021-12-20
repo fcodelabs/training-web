@@ -3,7 +3,8 @@ import './diaryHome.css';
 import DiaryCard from '../DiaryCard/DiaryCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTitle, getDescription, getCards } from '../Components/store';
-import GetAllCards from '../Actions/getCards';
+// import GetAllCards from '../Actions/getCards';
+import getAllCards from '../Actions/index';
 import { useEffect } from 'react'; 
 import AddCards from '../Actions/AddCards';
 
@@ -14,8 +15,9 @@ export default function DiaryHome() {
     const cards = useSelector(getCards);
 
     useEffect(() => {
-        GetAllCards();
-    }, [])
+        dispatch(getAllCards());
+        // console.log("Hi")
+    }, [dispatch])
 
     const handleSubmit = () => {
         if(title.trim().length !== 0 && description.trim().length !== 0){

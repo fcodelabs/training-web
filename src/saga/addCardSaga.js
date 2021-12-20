@@ -1,22 +1,22 @@
-import { call } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import db from '../Utils/firebaseConfig';
 import {collection} from "firebase/firestore";
 import store from '../store';
 import { addDoc} from "firebase/firestore";
+import {addCard} from '../actions/addCard';
 
-function* addCardSaga(card){
+
+function* addCardSaga(){
+  //const card =yield put(addCard(card));
+  const card ={
+    title:'aaa',
+    description:'aaavv'
+  }
     const doc=yield call(addDoc(collection(db,"cards"),card));
-    console.log('gg');
-//    const doc = yield call(
-//     rsf.firestore.addDocument,
-//     'users',
-//     {
-//       firstName: 'Elon',
-//       lastName: 'Musk'
-//     }
-//   );
+   
     
-    
+const data = yield take(channel)
+yield put(successAction(data))
   }
 
  

@@ -44,6 +44,13 @@ const SignIn = (props) => {
       };
       const classes = useStyles();
 
+      var Names=['Noah','Liam','Ivan','Anne','Benjamin'];
+
+      function getName(){
+        var randomName=Names[Math.floor(Math.random()*Names.length)];
+        return randomName;
+      }
+
     return(
       <div>
         <div className={classes.root}>
@@ -57,9 +64,11 @@ const SignIn = (props) => {
                   required
                   id="outlined-required"
                   label="Your Nickname"
-                  defaultValue=""
+                  Value={subTitle}
                   onChange={handleInputChange}/>
-                <Button variant="contained" type="submit" sx={ { borderRadius: 28,m:1} }>
+                <Button 
+                onClick={Value={getName()}}
+                variant="contained" type="submit" sx={ { borderRadius: 28,m:1} }>
                   Random
                 </Button>
               </div>

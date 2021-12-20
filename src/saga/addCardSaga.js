@@ -15,8 +15,8 @@ function* addCardSaga(){
     const doc=yield call(addDoc(collection(db,"cards"),card));
    
     
-const data = yield take(channel)
-yield put(successAction(data))
+// const data = yield take(channel)
+// yield put(successAction(data))
   }
 
  

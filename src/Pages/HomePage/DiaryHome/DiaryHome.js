@@ -3,12 +3,12 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import './sass.scss';
 import { useSelector ,useDispatch} from 'react-redux';
-import DiaryCard from '../DiaryCard/DiaryCard';
+import DiaryCard from '../../../Components/DiaryCard/DiaryCard';
 import {  Grid } from "@mui/material";
 import addCard from '../Actions/addCard';
 import { useEffect } from 'react';
 import {getCards}  from '../Actions/getCards';
-import DiaryHomeTop from '../../Components/Header/DiaryHomeTop';
+import DiaryHomeTop from '../../../Components/Header/DiaryHomeTop';
 
 
 
@@ -18,7 +18,6 @@ const DiaryHome=()=>{
 
     const[title,setTitle]=React.useState('')
     const[description,setDescription]=React.useState('')
-    //const[timestamp,setTimestamp]=React.useState('')
     const cards = useSelector(state=>state.cards.cards);
     const dispatch=useDispatch();
     const loading=useSelector(state=>state.cards.loading);

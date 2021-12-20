@@ -11,8 +11,7 @@ const store = compose(
   applyMiddleware(sagaMiddleware),
    //window.devToolsExtension && window.devToolsExtension(),
 )(createStore)(rootReducer);
-// //export default store;
-//const store=createStore(rootReducer);
+
 
 sagaMiddleware.run(rootSaga);
 

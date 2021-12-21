@@ -25,7 +25,7 @@ export default function DiaryHome() {
                 title,
                 description,
             }
-            AddCards(card);
+            dispatch({ type: "ADD_ALL_CARDS", payload: card});
             dispatch({ type: "titleChanged", payload: ''});
             dispatch({type: "descriptionChanged", payload: ''});
         }  

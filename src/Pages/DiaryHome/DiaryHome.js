@@ -105,7 +105,7 @@ const DiaryHome=()=>{
     <div>
     <Grid container spacing={2}>
         {cards && cards.map((card,id)=>
-            <Grid item key={card.id} xs={12} md={6} lg={3} width={345}>
+            <Grid item key={card.timestamp} xs={12} md={6} lg={3} width={345}>
                 <DiaryCard title={card.title} subTitle={card.subTitle} description={card.description}/>
             </Grid>
          )}

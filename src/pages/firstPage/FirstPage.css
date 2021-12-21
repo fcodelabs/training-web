@@ -6,11 +6,11 @@
   box-sizing: border-box;
 }
 
-.signUpCard {
+/* .signUpCard {
   height: 100%;
   width: 100%;
   padding: 5% 20% 5% 20%;
-}
+} */
 
 .signUpCardContent {
   background: white;
@@ -101,8 +101,8 @@
 
 @media screen and (max-width: 600px) {
   .signUpCard {
-    height: 500px;
+    height: 100%;
     width: 100%;
-    /* padding: 20% 0 20% 0; */
+    padding: 40% 0 40% 0;
   }
 }

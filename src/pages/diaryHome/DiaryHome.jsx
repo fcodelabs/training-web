@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react'
 import Button from '@mui/material/Button'
 import './DiaryHome.css'
 import DiaryCard from '../../Components/DiaryCard/DiaryCard'
+import store from '../../utils/configureStore'
 import { useSelector } from 'react-redux';
-import {addCardToStore, addNewCard} from '../../utils/dbHandler'
 import {useLocation} from 'react-router-dom';
+import { addNewCard } from '../../utils/dbHandler'
 
 
 const DiaryHome = () => {
@@ -20,7 +21,7 @@ const DiaryHome = () => {
     let decHieght = '0'
     if(onClicked){
         decHieght = '150px'
-        inputWidth = '99%'
+       inputWidth = '99%'
     }
     
     const handleInputs =() =>{
@@ -32,7 +33,11 @@ const DiaryHome = () => {
                 description:description
             }
 
-            addNewCard(cardDetails)
+            store.dispatch({
+                type : "dataAddRequested",
+                payload : cardDetails
+            })
+
             handleTitle('')
             handleDescription('')
         }
@@ -42,11 +47,21 @@ const DiaryHome = () => {
     }
 
     useEffect(() => {
-        addCardToStore()
+        store.dispatch({
+            type : "dataGetRequested",
+        })
     }, [])
 
     return (
         <div>
+            <div className='homeTitle'>
+                <div className='home'>
+                    <h4 >Home</h4>
+                </div>
+                <div className='homePara'>
+                    <p>You are here: Home</p>
+                </div>
+            </div>
             <div className='inputContainer'>
                 <div className='content'>
                     <form className='cardForm'>
@@ -75,7 +90,7 @@ const DiaryHome = () => {
                                 name="cardDescription"
                                 value={description}
                                 hidden={!onClicked}
-                                style={{transition: 'height 500ms ease-out', padding:'15px', fontFamily:'sans-serif', resize: 'none'}}
+                                style={{ height:decHieght, transition: 'height 500ms ease-out', padding:'15px', fontFamily:'sans-serif', resize: 'none'}}
                                 className='inputDescription' 
                                 onChange={ (e) => handleDescription(e.target.value)}
                                 rows={6}

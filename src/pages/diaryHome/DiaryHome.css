@@ -21,7 +21,7 @@
 }
 
 .cardFormTitle input {
-  width: 80%;
+  width: 40%;
   height: 40px;
   border-radius: 20px;
   padding-left: 10px;
@@ -77,5 +77,43 @@ input {
   }
   .cardFormTitle {
     width: 65%;
+  }
+}
+
+.homeTitle {
+  align-items: center;
+  padding: 25px 25px 25px 25px;
+  height: 100px;
+  display: block;
+}
+
+.homeTitle h4 {
+  font-size: 2.125rem;
+  color: white;
+  margin: 0;
+}
+
+.homeTitle p {
+  font-size: 15px;
+  color: white;
+}
+
+.home {
+  float: left;
+}
+
+.homePara {
+  float: right;
+}
+
+@media screen and (max-width: 960px) {
+  .homeTitle {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  .homePara {
+    float: left;
   }
 }

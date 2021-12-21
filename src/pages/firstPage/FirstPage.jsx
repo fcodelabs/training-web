@@ -9,7 +9,6 @@ const FirstPage = () => {
 
     const nameList = ['Liam', 'Logan', 'Benjamin', 'James', 'Noah', 'William']
     const [selectedName, setSelectedName] = useState('')
-    console.log(selectedName);
 
     const selectRandomName = () => {
         var randName = nameList[Math.floor(Math.random() * nameList.length)];
@@ -64,14 +63,7 @@ const FirstPage = () => {
                                     variant='contained' 
                                     disableElevation
                                     disabled ={!selectedName}
-                                    // onClick={<Link
-                                    //     to={{
-                                    //       pathname: "/diaryHome",
-                                    //       state: selectedName // your data array of objects
-                                    //     }}
-                                    //   />}
                                     onClick={handleName}
-                                    // onClick={() => history.push('/diaryHome')}
                                 >Continue</Button>
                             </div>
                         </div>

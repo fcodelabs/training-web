@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import './home.scss';
-import { useSelector ,useDispatch} from 'react-redux';
+import { useSelector } from 'react-redux';
 import DiaryCard from '../../../Components/DiaryCard/DiaryCard';
 import {  Grid } from "@mui/material";
 import { useEffect } from 'react';
@@ -18,9 +18,7 @@ const DiaryHome=()=>{
     const[title,setTitle]=React.useState('')
     const[description,setDescription]=React.useState('')
     const cards = useSelector(state=>state.cards.cards);
-    const dispatch=useDispatch();
-    const loading=useSelector(state=>state.cards.loading);
-    const error=useSelector(state=>state.cards.error);
+    
    
     useEffect(()=>{
         (getCards());

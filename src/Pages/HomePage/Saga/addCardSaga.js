@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, takeLatest } from 'redux-saga/effects';
 import db from '../../../Utils/firebaseConfig';
 import {collection} from "firebase/firestore";
 import { addDoc} from "firebase/firestore";

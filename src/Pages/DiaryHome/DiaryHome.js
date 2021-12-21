@@ -1,13 +1,16 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import './sass.scss';
-import { useSelector ,useDispatch} from 'react-redux';
+import './home.scss';
+import { useSelector } from 'react-redux';
 import DiaryCard from '../../Components/DiaryCard/DiaryCard';
-import {Grid } from "@mui/material";
+import {  Grid } from "@mui/material";
 import { useEffect } from 'react';
 import {getCards}  from './Actions/getCards';
+import DiaryHomeTop from '../../Components/Header/DiaryHomeTop';
 import store from '../../store';
+
+
 
 
 const DiaryHome=()=>{
@@ -15,15 +18,14 @@ const DiaryHome=()=>{
     const[title,setTitle]=React.useState('')
     const[description,setDescription]=React.useState('')
     const cards = useSelector(state=>state.cards.cards);
-    const dispatch=useDispatch();
-    const loading=useSelector(state=>state.cards.loading);
-    const error=useSelector(state=>state.cards.error);
+    
    
     useEffect(()=>{
         (getCards());
     },[]);
 
     var timestamp=Date.now();
+    const subTitle=localStorage.getItem("subTitle");
 
     const handleSubmit =(e) => {
         e.preventDefault()
@@ -33,15 +35,16 @@ const DiaryHome=()=>{
            
             const card={
                 title,
+                subTitle,
                 description,
                 timestamp
                 
             }
-        
             store.dispatch({
                 type:"ADD_CARD",
                 payload:card
             })
+            
             e.target.reset();
             setTitle('');
             setDescription('');
@@ -65,6 +68,7 @@ const DiaryHome=()=>{
     return (
 
         <div>
+        <div><DiaryHomeTop/></div>
 
         <form noValidate onSubmit={handleSubmit}
         component="form"
@@ -101,8 +105,8 @@ const DiaryHome=()=>{
     <div>
     <Grid container spacing={2}>
         {cards && cards.map((card,id)=>
-            <Grid item key={card.timestamp} xs={12} md={6} lg={3} width={345}>
-                <DiaryCard title={card.title} subTitle="Noah" description={card.description}/>
+            <Grid item key={card.id} xs={12} md={6} lg={3} width={345}>
+                <DiaryCard title={card.title} subTitle={card.subTitle} description={card.description}/>
             </Grid>
          )}
     </Grid>
@@ -116,5 +120,3 @@ const DiaryHome=()=>{
 
 export default DiaryHome;
  
-
-

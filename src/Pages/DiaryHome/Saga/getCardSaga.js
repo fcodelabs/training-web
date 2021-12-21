@@ -1,10 +1,9 @@
-
 import db from '../../../Utils/firebaseConfig';
-import {collection, query,onSnapshot, QuerySnapshot} from "firebase/firestore";
+import {collection, query,onSnapshot, orderBy} from "firebase/firestore";
 import store from '../../../store';
 
 function* getCardSaga() {
-    const cardList = query(collection(db,"cards"));
+    const cardList = query(collection(db,"cards"),orderBy("timestamp","desc"));
     console.log(cardList);
     const unsubscribe = onSnapshot(cardList,(QuerySnapshot)=>{
         const cards=[];

@@ -24,6 +24,8 @@ export default function DiaryHome() {
             const card = {
                 title,
                 description,
+                user: localStorage.getItem("user"),
+                created: new Date()
             }
             AddCards(card);
             dispatch({ type: "titleChanged", payload: ''});

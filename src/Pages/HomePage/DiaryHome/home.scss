@@ -19,22 +19,22 @@ body {
   
 }
 
-// .inputRounded .MuiOutlinedInput-root {
-//   border-radius: 20px;
-//   background-color: rgb(54, 166, 231);
-//   border: rgb(54, 166, 231);
-//   margin-top: 20;
-//   margin-bottom: 20;
-//   display: 'block';
-// }
-// .inputRounded .MuiOutlinedInput-root {
-//   border-radius: 20px;
-//   background-color: rgb(87, 183, 238);
-//   border: rgb(87, 165, 238);
-//   margin-top: 20;
-//   margin-bottom: 20;
-//   display: 'block';
-// }
+.inputRounded .MuiOutlinedInput-root {
+  border-radius: 20px;
+  background-color: rgb(54, 166, 231);
+  border: rgb(54, 166, 231);
+  margin-top: 20;
+  margin-bottom: 20;
+  display: 'block';
+}
+.inputRounded .MuiOutlinedInput-root {
+  border-radius: 20px;
+  background-color: rgb(87, 183, 238);
+  border: rgb(87, 165, 238);
+  margin-top: 20;
+  margin-bottom: 20;
+  display: 'block';
+}
 .button{
   border-radius: 50%;
   background-color: rgb(38, 110, 245);
@@ -53,20 +53,20 @@ body {
 
 
 }
-// .firstRow{
-//   display: flex;
-//   justify-content: space-between;
-//   border-radius: 20px;
-//   // background-color: rgb(54, 166, 231);
-//   // border: rgb(54, 166, 231);
-// }
+.firstRow{
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  // background-color: rgb(54, 166, 231);
+  // border: rgb(54, 166, 231);
+}
 
-// .descRow{
-//   display: flex;
-//   justify-content: space-between;
-//   border-radius: 20px;
-//   background-color: rgb(54, 166, 231);
-//   border: rgb(54, 166, 231);
+.descRow{
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  background-color: rgb(54, 166, 231);
+  border: rgb(54, 166, 231);
 
-// }
+}
 

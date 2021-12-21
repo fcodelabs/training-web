@@ -36,7 +36,7 @@ const SignIn = (props) => {
           <h4 style={{color:"white"}}>Dear Diary</h4>
         </Grid>
         <Grid align="center" justify="center">
-        <Card className='conatiner' style={{width:700, borderRadius:"20px"}}>
+        <Card className='frame' style={{width:700, borderRadius:"20px"}}>
           <div className='title'> <Box sx={{ color: 'info.main' }}><h1>Sign In</h1></Box></div>
             <form className="signin-form" onSubmit={handleOnSubmit}>
               <div>

@@ -5,14 +5,18 @@ import { addDoc} from "firebase/firestore";
 
 
 
-function* getAddCard(action){
-  yield call(addDoc(collection(db,"cards"),action.payload));
-}
-
 function* addCardSaga(){
-  yield takeLatest("ADD_CARD",getAddCard);
+  yield takeLatest("ADD_CARD",(
+    function*(action){
+      try{
+        yield call(addDoc(collection(db,"cards"),action.payload));
+      }catch (e) { /* ignore */ }
+      }
+    
+
+  ));
 
 }
 
- 
+
  export default addCardSaga;

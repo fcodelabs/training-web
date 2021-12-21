@@ -1,15 +1,14 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import './sass.scss';
+import './home.scss';
 import { useSelector ,useDispatch} from 'react-redux';
 import DiaryCard from '../../../Components/DiaryCard/DiaryCard';
 import {  Grid } from "@mui/material";
-import addCard from '../Actions/addCard';
 import { useEffect } from 'react';
 import {getCards}  from '../Actions/getCards';
 import DiaryHomeTop from '../../../Components/Header/DiaryHomeTop';
-
+import store from '../../../store';
 
 
 
@@ -28,6 +27,7 @@ const DiaryHome=()=>{
     },[]);
 
     var timestamp=Date.now();
+    const subTitle=localStorage.getItem("subTitle");
 
     const handleSubmit =(e) => {
         e.preventDefault()
@@ -37,11 +37,16 @@ const DiaryHome=()=>{
            
             const card={
                 title,
+                subTitle,
                 description,
                 timestamp
                 
             }
-            addCard(card);
+            store.dispatch({
+                type:"ADD_CARD",
+                payload:card
+            })
+            
             e.target.reset();
             setTitle('');
             setDescription('');
@@ -103,7 +108,7 @@ const DiaryHome=()=>{
     <Grid container spacing={2}>
         {cards && cards.map((card,id)=>
             <Grid item key={card.id} xs={12} md={6} lg={3} width={345}>
-                <DiaryCard title={card.title} subTitle="Noah" description={card.description}/>
+                <DiaryCard title={card.title} subTitle={card.subTitle} description={card.description}/>
             </Grid>
          )}
     </Grid>

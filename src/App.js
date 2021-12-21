@@ -8,7 +8,14 @@ import DiaryHome from './Pages/HomePage/DiaryHome/DiaryHome';
 function App() {
   return (
     <div className="App">
-    <SignIn/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SignIn/>} />
+          <Route path="/home" element={<DiaryHome/>}/>
+          </Routes>
+
+      </BrowserRouter>
+
    
     </div>
   );
@@ -16,13 +23,3 @@ function App() {
 
 export default App;
 
-
-// <BrowserRouter>
-// <Routes>
-//     <Route component={SignIn} path="/" exact={true} />
-//     <Route component={DiaryHome} path="/DiaryHome" />
-
-    
-//   </Routes>
-
-// </BrowserRouter>

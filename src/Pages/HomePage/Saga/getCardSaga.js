@@ -1,10 +1,10 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import db from '../../../Utils/firebaseConfig';
-import {collection, query,onSnapshot, QuerySnapshot} from "firebase/firestore";
+import {collection, query,onSnapshot, QuerySnapshot, orderBy} from "firebase/firestore";
 import store from '../../../store';
 
 function* getCardSaga() {
-    const cardList = query(collection(db,"cards"));
+    const cardList = query(collection(db,"cards"),orderBy("timestamp"));
     console.log(cardList);
     const unsubscribe = onSnapshot(cardList,(QuerySnapshot)=>{
         const cards=[];
@@ -20,17 +20,6 @@ function* getCardSaga() {
     
   }
 
-//   function* fetchCards(action) {
-//     try {
-//        const cards = yield call(getDocuments);
-//        yield put({type: 'GET_CARDS_SUCCESS', cards: cards});
-//     } catch (e) {
-//        yield put({type: 'GET_CARDS_FAILED', message: e.message});
-//     }
-//  }
- 
-//  function* getCardSaga() {
-//     yield takeEvery('GET_CARDS_REQUESTED', fetchCards);
-//  }
+
  
  export default getCardSaga;

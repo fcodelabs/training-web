@@ -1,5 +1,6 @@
 import './App.css';
 import DiaryCard from './components/DiaryCard';
+import DiaryHome from './components/DiaryHome';
 import MainHeader from './components/MainHeader';
 import Title from './components/Title';
 
@@ -11,6 +12,7 @@ function App() {
       <MainHeader />
       <main style={{ padding: '5px' }}>
         <Title />
+        <DiaryHome />
         <DiaryCard
           name={'test'}
           title={'React'}

@@ -32,7 +32,7 @@ function DearDiaryPage() {
         <div>
         {/* Navigation bar  */}
             <Box sx={{ flexGrow: 2 }}>
-                <AppBar position="static">
+                <AppBar position="static" elevation={0} style={{background: "transparent"}}>
                     <Toolbar>
                         <IconButton
                             size="normal"
@@ -51,7 +51,7 @@ function DearDiaryPage() {
                         >
                             Dear Diary
                         </Typography>
-                        <Search>
+                        <Search style={{borderRadius : "12px"}}>
                             <SearchIconWrapper>
                                 <SearchIcon />
                             </SearchIconWrapper>
@@ -95,9 +95,12 @@ function DearDiaryPage() {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Typography variant='h3' color="darkblue" >Dear Diary Home</Typography>           
+            <Typography variant='h3' color="#37E2D5" style={{margin : "20px"}}>Home</Typography> 
+            {/* Submit Form           */}
+            <SubmitForm />
             {/* Calling diary Card  */}
             <DearDiaryCard />
+
         </div>
 
     )

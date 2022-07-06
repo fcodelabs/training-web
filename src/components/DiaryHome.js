@@ -66,9 +66,9 @@ const DiaryHome = () => {
 
   return (
     <>
-      <Grid container sx={{ alignItems: 'center', mb: 4 }}>
+      <Grid container sx={{ alignItems: 'center', my: 2 }}>
         <Grid item md={8} xs={8} sx={{ my: 1, display: 'flex' }}>
-          <Grid item md={12}>
+          <Grid item md={8}>
             <FormControl>
               <InputLabel htmlFor='title'>Title</InputLabel>
               <OutlinedInput

@@ -21,7 +21,12 @@ const diarySlice = createSlice({
         cardColor: newDiary.cardColor,
       });
     },
-    removeDiary: () => {},
+    removeDiary: (state, action) => {
+      state.totalDiaries--;
+      state.isChangeStore = true;
+      const id = action.payload;
+      state.diaries = state.diaries.filter((diary) => diary.id !== id);
+    },
   },
 });
 

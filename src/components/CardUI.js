@@ -6,9 +6,12 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { diaryActions } from '../store/diary-slice';
 
 const CardUI = (props) => {
-  const { name, title, cardColor, description } = props;
+  const dispatch = useDispatch();
+  const { id, name, title, cardColor, description } = props;
   const [buttonText, setButtonText] = useState('Show More');
   const [text, setText] = useState(description);
   const [isShowMore, setShowMore] = useState(false);
@@ -31,14 +34,16 @@ const CardUI = (props) => {
     }
   };
 
-  const showCardHandler = () => {};
+  const showCardCloseHandler = () => {
+    dispatch(diaryActions.removeDiary(id));
+  };
 
   return (
     <Card sx={{ borderRadius: 3, backgroundColor: `#${cardColor}` }}>
       <IconButton
         color='error'
         sx={{ float: 'right' }}
-        onClick={showCardHandler}
+        onClick={showCardCloseHandler}
       >
         <CloseIcon />
       </IconButton>

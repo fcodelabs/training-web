@@ -11,7 +11,8 @@ import InputBase from '@mui/material/InputBase';
 import { Home } from '@material-ui/icons'
 import { Search as SearchIcon } from '@material-ui/icons'
 import { AccountCircle } from '@material-ui/icons';
-import { Menu , MenuItem} from '@mui/material';
+import { Menu, MenuItem } from '@mui/material';
+import CardList from '../Components/CardList';
 
 
 
@@ -30,9 +31,15 @@ function DearDiaryPage() {
 
     return (
         <div>
-        {/* Navigation bar  */}
-            <Box sx={{ flexGrow: 2 }}>
-                <AppBar position="static" elevation={0} style={{background: "transparent"}}>
+            {/* Navigation bar  */}
+            <Box sx={{
+                flexGrow: 1,
+                width: '100%',
+                height: '100%'
+            }
+
+            }>
+                <AppBar position="static" elevation={0} style={{ background: "transparent" }}>
                     <Toolbar>
                         <IconButton
                             size="normal"
@@ -51,7 +58,7 @@ function DearDiaryPage() {
                         >
                             Dear Diary
                         </Typography>
-                        <Search style={{borderRadius : "12px"}}>
+                        <Search style={{ borderRadius: "12px" }}>
                             <SearchIconWrapper>
                                 <SearchIcon />
                             </SearchIconWrapper>
@@ -88,18 +95,18 @@ function DearDiaryPage() {
                             {/* action Elements */}
                             <MenuItem onClick={handleClose}>My Profile</MenuItem>
                             <MenuItem onClick={handleClose}>My account</MenuItem>
-                            <MenuItem onClick={handleClose}>My Inbox</MenuItem> 
+                            <MenuItem onClick={handleClose}>My Inbox</MenuItem>
                             <hr />
-                            <MenuItem onClick={handleClose}>Log Out</MenuItem> 
+                            <MenuItem onClick={handleClose}>Log Out</MenuItem>
                         </Menu>
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Typography variant='h3' color="#37E2D5" style={{margin : "20px"}}>Home</Typography> 
+            <Typography variant='h3' color="#37E2D5" style={{ margin: "20px" }}>Home</Typography>
             {/* Submit Form           */}
             <SubmitForm />
             {/* Calling diary Card  */}
-            <DearDiaryCard />
+
 
         </div>
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Container, Paper } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
@@ -25,8 +25,10 @@ const useStyles = makeStyles({
     
 })
 
+
+
 //Function to Create Todolist Card
-function DearDiaryCard() {
+function DearDiaryCard({todo}) {
     const classes = useStyles()
     return (
 
@@ -35,13 +37,13 @@ function DearDiaryCard() {
                 <Card className={classes.cardLayout }>
                     <CardHeader style={{ backgroundColor: "#66BFBF" }} action={
                         <IconButton><DeleteOutlineRounded /></IconButton>
-                    } title={"Sample Title"}
+                    } title={todo.title}
                         subheader={"Name"}
                     />
 
                     <CardContent >
                         <Typography variant="body2" color="black">
-                            Simple test 1
+                            {todo.description}
                         </Typography>
                     </CardContent>
                     <CardActions>

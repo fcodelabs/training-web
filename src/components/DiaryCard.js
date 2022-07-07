@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 
-let DiaryCard = ({
+const DiaryCard = ({
     title = "Test Title",
     subTitle = "Name",
     description = "This is a text description for the card. It is hard coded. It is supposed to display only 100 characters. If number of characters is more than that the excess characters should be hidden till you click the show more button.",

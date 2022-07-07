@@ -1,11 +1,10 @@
-import DiaryCard from "./components/DiaryCard";
+import DiaryHome from "./pages/DiaryHome";
 import "./App.css";
-
 function App() {
     return (
         <div className="App">
             <div className="App-header">Memos</div>
-            <DiaryCard />
+            <DiaryHome />
         </div>
     );
 }

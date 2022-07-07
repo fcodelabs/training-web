@@ -16,6 +16,7 @@ let DiaryCard = ({
     return (
         <Card
             sx={{
+                margin: "2%",
                 width: 300,
                 borderRadius: 5,
                 backgroundColor: { backgroundColor },

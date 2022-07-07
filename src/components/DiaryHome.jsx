@@ -9,7 +9,7 @@ import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { diaryActions } from '../store/diary-slice';
-import DiaryCard from './DiaryCard';
+import DiaryCard from './DiaryCard.jsx';
 
 const DiaryHome = () => {
   const dispatch = useDispatch();

@@ -22,7 +22,9 @@ const Title = () => {
             textAlign: 'center',
           }}
         >
-          <p style={{ margin: 0 }}>You are here:</p>
+          <p style={{ margin: 0 }}>
+            You are here: <span>Home</span>
+          </p>
         </Grid>
       </Grid>
     </Box>

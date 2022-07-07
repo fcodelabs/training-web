@@ -18,6 +18,7 @@ import { alpha, styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -63,6 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const MainHeader = () => {
+  const totalDiaries = useSelector((state) => state.diary.totalDiaries);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -134,26 +136,18 @@ const MainHeader = () => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem sx={{ mb: '-15px' }}>
-        <IconButton size='small' aria-label='show 4 new mails' color='inherit'>
-          <Badge badgeContent={4} color='error'>
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem sx={{ mb: '-15px' }}>
         <IconButton
           size='small'
           aria-label='show 17 new notifications'
           color='inherit'
         >
-          <Badge badgeContent={17} color='error'>
+          <Badge badgeContent={totalDiaries} color='error'>
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen} sx={{ mb: '-15px' }}>
+      <MenuItem onClick={handleMenuClose} sx={{ mb: '-15px' }}>
         <IconButton
           size='small'
           aria-label='account of current user'
@@ -165,7 +159,7 @@ const MainHeader = () => {
         </IconButton>
         <p>My Profile</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen} sx={{ mb: '-15px' }}>
+      <MenuItem onClick={handleMenuClose} sx={{ mb: '-15px' }}>
         <IconButton
           size='small'
           aria-label='account of current user'
@@ -177,7 +171,7 @@ const MainHeader = () => {
         </IconButton>
         <p>My Calender</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleMenuClose}>
         <IconButton
           size='small'
           aria-label='account of current user'
@@ -235,19 +229,10 @@ const MainHeader = () => {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
               size='large'
-              aria-label='show 4 new mails'
-              color='inherit'
-            >
-              <Badge badgeContent={4} color='error'>
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size='large'
               aria-label='show 17 new notifications'
               color='inherit'
             >
-              <Badge badgeContent={17} color='error'>
+              <Badge badgeContent={totalDiaries} color='error'>
                 <NotificationsIcon />
               </Badge>
             </IconButton>

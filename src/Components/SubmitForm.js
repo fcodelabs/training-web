@@ -4,15 +4,16 @@ import TextField from '@mui/material/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box } from '@mui/system'
 import { Button } from '@mui/material'
-import { BorderColor } from '@material-ui/icons'
 import { ArrowForwardIos } from '@material-ui/icons'
 import CardList from './CardList'
-
+import { useDispatch } from 'react-redux'
+import { Add_Todo } from '../Redux-Store/Actions/Action'
+import { ADD_TODO } from '../Redux-Store/Actions/ActionType'
 
 //custom css for components
 const useStyles = makeStyles({
     input: {
-        color: "#66BFBF",
+        color: "black",
         opacity: "90%"
     },
     btn: {
@@ -30,52 +31,45 @@ const useStyles = makeStyles({
 
 })
 function SubmitForm() {
-
-    const [todos, setTodos] = useState([]);
-
-    const [attributes, setAttributes] = useState({
+    //setting up the useState and useDispatch
+    const [todos, setTodos] = useState({
         title: "",
         description: ""
     });
 
-  
-    
-    //Submit Validations
-    const handleSubmit = (e) => {
+    const dispatch = useDispatch();
 
+    const handleClick = (e) => {
         e.preventDefault();
-        if (attributes.title === '') {
-            return console.log('Missing Title ')
+        //Submit Validations
+        if (todos.title === '') {
+            console.log('Missing Title')
         }
-
-        if (attributes.description === '') {
-            return console.log('Missing description ')
+        if (todos.description === '') {
+            console.log('Missing Description')
         }
-
-        const title = attributes.title;
-        const description = attributes.description;
-
-        setTodos((prevTodo) => [...prevTodo, { title: attributes.title, description: attributes.description }])
+        else {
 
 
-        console.log(title)
-        console.log(description)
+            dispatch(
 
+                {
+                    type: ADD_TODO,
+                    payload: {
+                        title: todos.title,
+                        description: todos.description
+                    }
+                })
+        }
     }
 
+    
     const classes = useStyles();
 
     return (
-        <Box
-            sx={{
-                width: '100%',
-                maxWidth: '100%',
-                display : 'inline'
-
-            }}
-        >
+        <>
             <form autoComplete='off'>
-
+                
                 <TextField
 
                     id="title"
@@ -84,13 +78,13 @@ function SubmitForm() {
                     placeholder="Enter Name"
                     variant="filled"
                     type="text"
-                      //getting the values of inputs
-                    onChange={e => setAttributes({ ...attributes, title: e.target.value })}
+                    //getting the values of inputs
+                    onChange={e => setTodos({ ...todos, title: e.target.value })}
                     InputProps={{
                         className: classes.input
                     }}
 
-                    style={{ backgroundColor: "#66BFBF", opacity: "80%", borderRadius: "12px", margin: "8px" }}
+                    style={{ backgroundColor: "#66BFBF", opacity: "70%", borderRadius: "12px", margin: "8px" }}
                 />
 
                 <TextField
@@ -104,13 +98,13 @@ function SubmitForm() {
                     placeholder="Enter Description"
                     variant="filled"
                     //   getting the values of inputs
-                    onChange={e => setAttributes({ ...attributes, description: e.target.value })}
+                    onChange={e => setTodos({ ...todos, description: e.target.value })}
                     InputProps={{
                         className: classes.input,
 
                     }}
 
-                    style={{ backgroundColor: "#66BFBF", opacity: "80%", borderRadius: "12px", margin: "8px" }}
+                    style={{ backgroundColor: "#66BFBF", opacity: "70%", borderRadius: "12px", margin: "8px" }}
                 />
 
                 <Button
@@ -119,16 +113,18 @@ function SubmitForm() {
                     }
                     type="submit"
                     endIcon={<ArrowForwardIos />}
-                    onClick={handleSubmit}
+                    onClick={handleClick}
                 >Submit</Button>
             </form>
             {/* showcasing the diary Cards */}
             <div>
                 <CardList todos={todos} />
             </div>
-        </Box>
 
+        </>
     )
 }
+
+
 
 export default SubmitForm

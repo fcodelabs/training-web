@@ -13,6 +13,9 @@ import { Search as SearchIcon } from '@material-ui/icons'
 import { AccountCircle } from '@material-ui/icons';
 import { Menu, MenuItem } from '@mui/material';
 import CardList from '../Components/CardList';
+import Collapse from '@mui/material/Collapse';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
 
 
@@ -29,13 +32,20 @@ function DearDiaryPage() {
         setAnchorEl(null);
     };
 
+    const [checked, setChecked] = React.useState(false);
+
+    const handleChange = () => {
+        setChecked((prev) => !prev);
+    };
+
     return (
         <div>
             {/* Navigation bar  */}
-            <Box sx={{
+            <Box md={{
                 flexGrow: 1,
                 width: '100%',
-                height: '100%'
+                height: '100%',
+                
             }
 
             }>
@@ -104,10 +114,31 @@ function DearDiaryPage() {
             </Box>
             <Typography variant='h3' color="#37E2D5" style={{ margin: "20px" }}>Home</Typography>
             {/* Submit Form           */}
-            <SubmitForm />
-            {/* Calling diary Card  */}
+            <Box sx={{ height: "100%" }}>
+                <FormControlLabel
+                    control={<Switch checked={checked} onChange={handleChange} />}
+                    label="Show"
+                />
 
+                <Box
+                    sx={{
+                        '& > :not(style)': {
+                            display: 'inline',
+                            justifyContent: 'space-around',
+                            height: '100%',
+                            width: '100%',
+                        },
+                    }}
 
+                >
+                    <div>
+                        <Collapse in={checked} collapsedSize={70}>
+                            {<SubmitForm />}
+                        </Collapse>
+                    </div>
+                </Box>
+            </Box>
+            
         </div>
 
     )

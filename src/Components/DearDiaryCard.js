@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Container, Paper } from '@mui/material'
+import { Box, Button, Container, Paper } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -32,8 +32,10 @@ function DearDiaryCard({todo}) {
     const classes = useStyles()
     return (
 
-        <Grid container>
-            <Grid item xs={4}>
+        <Box sx={
+            {height:'100px', width: '400px'}
+        }>
+            
                 <Card className={classes.cardLayout }>
                     <CardHeader style={{ backgroundColor: "#66BFBF" }} action={
                         <IconButton><DeleteOutlineRounded /></IconButton>
@@ -50,8 +52,8 @@ function DearDiaryCard({todo}) {
                         <Button> Show More </Button>
                     </CardActions>
                 </Card>
-            </Grid>
-        </Grid>
+            
+        </Box>
     )
 }
 

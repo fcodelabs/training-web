@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './App.css';
 import DiaryHome from './components/DiaryHome.jsx';
 import MainHeader from './components/MainHeader.jsx';
 import Title from './components/Title.jsx';
-import { firebaseConfig } from './firebaseConfig';
+import { diaryActions } from './store/diary-slice';
 
 function App() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    firebaseConfig();
-  }, []);
+    dispatch(diaryActions.getDiaries());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   return (
     <>

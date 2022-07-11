@@ -1,25 +1,17 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import DiaryHome from './components/DiaryHome.jsx';
-import MainHeader from './components/MainHeader.jsx';
-import Title from './components/Title.jsx';
-import { diaryActions } from './store/diary-slice';
+import DiaryHome from './pages/DiaryHome.jsx';
+import SignInPage from './pages/SignInPage';
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(diaryActions.getDiaries());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
-
   return (
     <>
-      <MainHeader />
       <main style={{ padding: '5px' }}>
-        <Title />
-        <DiaryHome />
+        <Routes>
+          <Route path='/' element={<Navigate to='/signin' />} />
+          <Route path='/signin' element={<SignInPage />} />
+          <Route path='/home/:name' element={<DiaryHome />} />
+        </Routes>
       </main>
     </>
   );

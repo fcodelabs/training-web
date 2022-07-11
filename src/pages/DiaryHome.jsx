@@ -1,18 +1,23 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { purple } from '@mui/material/colors';
 import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import DiaryCard from '../components/DiaryCard.jsx';
+import Title from '../components/Title.jsx';
+import MainHeader from '../components/MainHeader.jsx';
+import { purple } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
+import { addDoc, doc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { diaryActions } from '../store/diary-slice';
-import DiaryCard from './DiaryCard.jsx';
+import { useSelector } from 'react-redux';
+import colRef, { db } from '../firebaseConfig';
+import { useParams } from 'react-router-dom';
 
 const DiaryHome = () => {
-  const dispatch = useDispatch();
+  const params = useParams();
+  const totalDiaries = useSelector((state) => state.diary.totalDiaries);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [cardColor, setCardColour] = useState('');
@@ -41,17 +46,17 @@ const DiaryHome = () => {
   };
 
   const submitHandler = () => {
-    const randomId = Math.floor(100 + Math.random() * 900);
     if (title !== '' && description !== '') {
-      dispatch(
-        diaryActions.addDiary({
-          id: randomId,
-          name: 'React',
-          title: title,
-          description: description,
-          cardColor: cardColor,
-        })
-      );
+      addDoc(colRef, {
+        name: params.name,
+        title: title,
+        description: description,
+        cardColor: cardColor,
+      });
+
+      updateDoc(doc(db, 'totalDiaries', 'SEoX1XiXBAtlN8le3f3b'), {
+        totalDiaries: parseInt(totalDiaries) + 1,
+      });
 
       setTitle('');
       setDescription('');
@@ -66,6 +71,10 @@ const DiaryHome = () => {
 
   return (
     <>
+      <MainHeader />
+
+      <Title />
+
       <Grid container sx={{ alignItems: 'center', my: 2 }}>
         <Grid item md={8} xs={8} sx={{ my: 1, display: 'flex' }}>
           <Grid item md={8}>

@@ -7,7 +7,7 @@ const DiaryCard = () => {
 
   return (
     <Grid container>
-      {diaries.map((diary) => (
+      {diaries?.map((diary) => (
         <Grid key={diary.id} item md={3} xs={12} sx={{ p: 0.5 }}>
           <CardUI
             id={diary.id}

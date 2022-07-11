@@ -1,21 +1,26 @@
-import { useEffect } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import DiaryHome from './components/DiaryHome';
-import MainHeader from './components/MainHeader';
-import Title from './components/Title';
-import { firebaseConfig } from './firebaseConfig';
+import DiaryHome from './pages/DiaryHome.jsx';
+import SignInPage from './pages/SignInPage';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { diaryActions } from './store/diary-slice';
 
 function App() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    firebaseConfig();
-  }, []);
+    dispatch(diaryActions.getDiaries());
+  }, [dispatch]);
 
   return (
     <>
-      <MainHeader />
       <main style={{ padding: '5px' }}>
-        <Title />
-        <DiaryHome />
+        <Routes>
+          <Route path='/' element={<Navigate to='/signin' />} />
+          <Route path='/signin' element={<SignInPage />} />
+          <Route path='/home/:name' element={<DiaryHome />} />
+        </Routes>
       </main>
     </>
   );

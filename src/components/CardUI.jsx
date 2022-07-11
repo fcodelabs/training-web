@@ -6,10 +6,11 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { diaryActions } from '../store/diary-slice';
 
 const CardUI = (props) => {
+  const totalDiaries = useSelector((state) => state.diary.totalDiaries);
   const dispatch = useDispatch();
   const { id, name, title, cardColor, description } = props;
   const [buttonText, setButtonText] = useState('Show More');
@@ -35,7 +36,7 @@ const CardUI = (props) => {
   };
 
   const showCardCloseHandler = () => {
-    dispatch(diaryActions.removeDiary(id));
+    dispatch(diaryActions.removeDiary({ id, totalDiaries }));
   };
 
   return (
@@ -61,7 +62,7 @@ const CardUI = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        {description.length > 100 && (
+        {description?.length > 100 && (
           <Button size='small' onClick={showMoreHandler} variant='text'>
             {buttonText}
           </Button>

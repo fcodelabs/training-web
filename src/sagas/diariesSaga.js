@@ -1,7 +1,6 @@
-import { getDocs } from 'firebase/firestore';
+import { deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import colRef from '../firebaseConfig';
-import { totalDiariesRef } from '../firebaseConfig';
+import colRef, { db, totalDiariesRef } from '../firebaseConfig';
 import { diaryActions } from '../store/diary-slice';
 
 function* workGetDiariesFetch() {
@@ -24,7 +23,6 @@ function* workGetDiariesFetch() {
       .then((snapshots) => {
         snapshots.docs.forEach((doc) => {
           totalDiaries = doc.data().totalDiaries;
-          console.log(totalDiaries);
         });
       })
       .catch((err) => {
@@ -36,6 +34,19 @@ function* workGetDiariesFetch() {
   yield put(diaryActions.saveTotalDiaries(totalDiaries));
 }
 
-export default function* diariesSaga() {
-  yield takeEvery(diaryActions.getDiaries, workGetDiariesFetch);
+function* deleteDiaries(action) {
+  const { id, totalDiaries } = action.payload;
+
+  yield call(() => {
+    deleteDoc(doc(db, 'diaries', id));
+    updateDoc(doc(db, 'totalDiaries', 'SEoX1XiXBAtlN8le3f3b'), {
+      totalDiaries: parseInt(totalDiaries) - 1,
+    });
+  });
 }
+
+const diariesSaga = [
+  takeEvery(diaryActions.removeDiary, deleteDiaries),
+  takeEvery(diaryActions.getDiaries, workGetDiariesFetch),
+];
+export default diariesSaga;

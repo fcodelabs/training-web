@@ -18,10 +18,6 @@ const DiaryHome = () => {
   const [cardColor, setCardColour] = useState('');
 
   useEffect(() => {
-    dispatch(diaryActions.getDiaries());
-  }, [dispatch]);
-
-  useEffect(() => {
     const unsubscribeDiaries = onSnapshot(colRef, (snapshots) => {
       let diaries = [];
       snapshots.docs.map((doc) =>
@@ -31,6 +27,7 @@ const DiaryHome = () => {
         })
       );
       dispatch(diaryActions.replaceDiary(diaries));
+      diaries.length = 0;
     });
 
     const unsubscribeTotalDiaries = onSnapshot(totalDiariesRef, (snapshots) => {

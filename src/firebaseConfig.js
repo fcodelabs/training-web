@@ -14,7 +14,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 //init service
-const db = getFirestore();
+export const db = getFirestore();
 
 //collection ref
 const colRef = collection(db, 'diaries');

@@ -7,7 +7,14 @@ const DiaryHome = () => {
     const [showCollapsed, setShowCollapsed] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [cardList, setCardList] = useState([]);
+    const [cardList, setCardList] = useState([
+        <DiaryCard
+            title="Test Title"
+            subTitle="Name"
+            description="This is a text description for the card. It is hard coded. It is supposed to display only 100 characters. If number of characters is more than that the excess characters should be hidden till you click the show more button."
+            backgroundColor="#B3E9FE"
+        />,
+    ]);
 
     //logged user name
     const userName = "Owin";
@@ -39,7 +46,7 @@ const DiaryHome = () => {
                 />
             );
             //adding card to cardList
-            setCardList((cardlist) => cardList.concat(card));
+            setCardList(() => cardList.concat(card));
         }
 
         setTitle("");

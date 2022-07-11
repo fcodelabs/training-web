@@ -1,19 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme({
-    typography: { fontFamily: "Poppins,sans-serif" },
-});
+import { Provider } from "react-redux";
+import store from "./app/store";
 
 ReactDOM.render(
     <React.StrictMode>
-        <ThemeProvider theme={theme}>
+        <Provider store={store}>
             <App />
-        </ThemeProvider>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );

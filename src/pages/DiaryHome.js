@@ -4,6 +4,9 @@ import { useState } from "react";
 import DiaryCard from "../components/DiaryCard";
 
 const DiaryHome = () => {
+    //logged user name
+    const userName = "Owin";
+
     const [showCollapsed, setShowCollapsed] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -15,9 +18,6 @@ const DiaryHome = () => {
             backgroundColor="#B3E9FE"
         />,
     ]);
-
-    //logged user name
-    const userName = "Owin";
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);

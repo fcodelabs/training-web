@@ -7,8 +7,11 @@ import { Button } from '@mui/material'
 import { ArrowForwardIos } from '@material-ui/icons'
 import CardList from './CardList'
 import { useDispatch } from 'react-redux'
-import { Add_Todo } from '../Redux-Store/Actions/Action'
-import { ADD_TODO } from '../Redux-Store/Actions/ActionType'
+import { Add_Todo_Success, Add_Todo_Start, get_Todo_Success, get_Todo_Start } from '../Redux-Store/Actions/Action'
+import { ADD_TODO_SUCCESS, GET_TODO_SUCCESS } from '../Redux-Store/Actions/ActionType'
+import { useSelector } from 'react-redux/es/exports'
+import firestoreDB from '../Config/fbConfig'
+import { useEffect } from 'react'
 
 //custom css for components
 const useStyles = makeStyles({
@@ -30,45 +33,48 @@ const useStyles = makeStyles({
     }
 
 })
+
 function SubmitForm() {
     //setting up the useState and useDispatch
+
+    const auth = useSelector(state => state.auth.auth)
+    
     const [todos, setTodos] = useState({
+        name:auth[0].name,
         title: "",
         description: ""
     });
 
+    
     const dispatch = useDispatch();
 
-    const handleClick = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        //Submit Validations
+        //user validation
         if (todos.title === '') {
             console.log('Missing Title')
+            return null;
         }
         if (todos.description === '') {
             console.log('Missing Description')
+            return null;
+        }else{
+            console.log("State",todos)
+            //dispatching the Adding todo action
+            dispatch(Add_Todo_Start(todos))
+            //dispatching the getting todo action to sync Firestore DB
+            dispatch(get_Todo_Start())            
         }
-        else {
-            
-            dispatch(
-
-                {
-                    type: ADD_TODO,
-                    payload: {
-                        title: todos.title,
-                        description: todos.description
-                    }
-                })
-        }
+       
     }
+    
 
     
     const classes = useStyles();
-
     return (
         <>
             <form autoComplete='off'>
-                
+
                 <TextField
 
                     id="title"
@@ -112,14 +118,12 @@ function SubmitForm() {
                     }
                     type="submit"
                     endIcon={<ArrowForwardIos />}
-                    onClick={handleClick}
+                    onClick={handleSubmit}
                 >Submit</Button>
             </form>
-            {/* showcasing the diary Cards */}
-            <div>
-                <CardList todos={todos} />
-            </div>
-
+          
+            
+            
         </>
     )
 }

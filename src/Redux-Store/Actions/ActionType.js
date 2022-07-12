@@ -1,1 +1,16 @@
-export const ADD_TODO ='ADD_TODO'
+
+//ALL ACTION TYPES
+
+export const ADD_TODO_START ='ADD_TODO_START'
+export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS'
+export const ADD_TODO_FAIL = 'ADD_TODO_FAIL'
+
+export const GET_TODO_START = 'GET_TODO_START'
+export const GET_TODO_SUCCESS = 'GET_TODO_SUCCESS'
+export const GET_TODO_FAIL = 'GET_TODO_FAIL'
+
+export const SIGN_IN_START = 'SIGN_IN_START'
+export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS'
+export const SIGN_IN_FAIL = 'SIGN_IN_FAIL'
+
+export const UPDATE_TODOS = 'UPDATE_TODOS'

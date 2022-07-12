@@ -1,5 +1,4 @@
 import * as React from 'react'
-import DearDiaryCard from '../Components/DearDiaryCard'
 import Typography from '@mui/material/Typography'
 import SubmitForm from '../Components/SubmitForm'
 import { styled, alpha } from '@mui/material/styles';
@@ -16,12 +15,15 @@ import CardList from '../Components/CardList';
 import Collapse from '@mui/material/Collapse';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { Navigate } from 'react-router';
 
 
-
-function DearDiaryPage() {
+function DearDiaryPage({ todos }) {
     //triggering the transition of the userIcon
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const creds = useSelector(state => state.auth.auth);
+    console.log(creds[0])
 
     //handleing transition by setting the current state of the target
     const handleMenu = (event) => {
@@ -40,12 +42,20 @@ function DearDiaryPage() {
 
     return (
         <div>
+
+            {
+                creds && (() => {
+                    if (creds[0] === null) {
+                        <Navigate to="/" replace={true} />
+                    }                    
+                })
+            }
             {/* Navigation bar  */}
             <Box md={{
                 flexGrow: 1,
                 width: '100%',
                 height: '100%',
-                
+
             }
 
             }>
@@ -138,7 +148,14 @@ function DearDiaryPage() {
                     </div>
                 </Box>
             </Box>
-            
+            {/* showcasing the diary Cards */}
+            <Box>
+                <CardList todos={todos} />
+            </Box>
+
+
+
+
         </div>
 
     )

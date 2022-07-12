@@ -6,6 +6,7 @@ import image from '../src/Assets/background.jpg'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { green, purple, teal } from '@mui/material/colors';
 
+
 //custom theme for web
 const theme = createTheme({
 
@@ -18,25 +19,29 @@ const theme = createTheme({
 })
 
 function App() {
-  return (
+
+  
+
+ return (
     //Routing the Pages
     <div className="App" style={{
 
       backgroundImage: `url(${image})`,
       backgroundPosition: 'center',
       backgroundSize: "cover",
-      backgroundRepeat:'no-repeat',
+      backgroundRepeat: 'no-repeat',
       position:'absolute',
-      width:'100%',
-      height:'100%'
+      width: '100%',
+      height: '150%',
+      
 
     }}>
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
-            <Route exact path='/' element={<DearDiaryPage />}>
+            <Route path='/Home' element={<DearDiaryPage  />}>
             </Route>
-            <Route path="/SignIn" element={<DearDiarySignin />}>
+            <Route exact path="/" element={<DearDiarySignin />}>
             </Route>
           </Routes>
         </Router>

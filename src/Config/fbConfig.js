@@ -1,21 +1,25 @@
-import firebase from 'firebase/app'
-import "firebase/firestore"
-import "firebase/auth"
+import { initializeApp } from 'firebase/app'
+import {collection, getFirestore, getDocs} from 'firebase/firestore'
+import {getAuth} from 'firebase/auth'
+import "firebase/compat/firestore"
+import "firebase/compat/auth"
 import 'firebase/storage'
 
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyD8ykt2zTiZ0YhjGXOSYk16Rlze9EDn0g8",
-    authDomain: "dear-diary-hasindu.firebaseapp.com",
-    projectId: "dear-diary-hasindu",
-    storageBucket: "dear-diary-hasindu.appspot.com",
-    messagingSenderId: "8022747190",
-    appId: "1:8022747190:web:546001523d178d953c9097",
-    measurementId: "G-H5PEDR6LNL"
+    apiKey: "AIzaSyAT-WzSRDAiThQZFFSErVFc3j4A2c_QXwg",
+    authDomain: "dear-diary-hasindu-828ff.firebaseapp.com",
+    projectId: "dear-diary-hasindu-828ff",
+    storageBucket: "dear-diary-hasindu-828ff.appspot.com",
+    messagingSenderId: "414519326291",
+    appId: "1:414519326291:web:04fb56fb6e5a55ffa378a6",
+    measurementId: "G-WSN93J55JR"
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.firestore();
-const storage = firebase.storage();
-
-export { storage, firebase as default };
+initializeApp(firebaseConfig);
+//reference of firestore database
+export const firestoreDB = getFirestore();
+//reference of collection 
+const  collectionRef = collection(firestoreDB, 'Todos');
+export default collectionRef;

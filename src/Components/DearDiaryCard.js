@@ -1,58 +1,100 @@
 import React, { useState } from 'react'
-import { Box, Button, Container, Paper } from '@mui/material'
+import { Box, Button, Collapse, Container, Paper } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import { DeleteOutlineRounded } from '@material-ui/icons'
 import CardActions from '@mui/material/CardActions'
-import { teal } from '@mui/material/colors'
 import { makeStyles } from '@material-ui/core/styles'
-import { borderRadius, padding } from '@mui/system'
+import styled from '@emotion/styled'
+import IconButton from '@mui/material/IconButton'
+import { ExpandMoreRounded } from '@material-ui/icons'
+
+
+const ExpandMore = styled((props) => {
+    const { expand, ...other } = props;
+    return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+    transform: !expand ? 'rotate(0deg)' : 'rotate(0deg)',
+    marginRight: 'auto',
+    transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+    }),
+}));
+
+
 
 const useStyles = makeStyles({
     cardLayout: {
         color: "black",
         opacity: "90%",
         borderRadius: "20px",
-        margin : "40px",
+        margin: "40px",
+
+
     },
-    btn : {
+    btn: {
         borderRadius: "20px"
     }
-    
+
 })
 
-
-
 //Function to Create Todolist Card
-function DearDiaryCard({todo}) {
+function DearDiaryCard({ title, description, header, length }) {
+
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    };
+    console.log(length)
+
     const classes = useStyles()
     return (
-
         <Box sx={
-            {height:'100px', width: '400px'}
+            { height: '150px', width: '400px' }
         }>
-            
-                <Card className={classes.cardLayout }>
-                    <CardHeader style={{ backgroundColor: "#66BFBF" }} action={
-                        <IconButton><DeleteOutlineRounded /></IconButton>
-                    } title={todo.title}
-                        subheader={"Name"}
-                    />
+            <Card className={classes.cardLayout} >
 
-                    <CardContent >
-                        <Typography variant="body2" color="black">
-                            {todo.description}
-                        </Typography>
-                    </CardContent>
+                <CardHeader style={{ backgroundColor: "#66BFBF" }} title={title}
+                    subheader={header}
+                />
+
+                {
+                    (length > 20) ?
+                        <CardContent>
+                            <Collapse in={expanded} collapsedSize={5} timeout="auto" unmountOnExit >
+                                {
+
+                                    <Typography variant="body2" color="black">
+                                        {description}
+                                    </Typography>
+
+                                }
+                            </Collapse>
+                        </CardContent>
+                        : (<CardContent>
+                            <Typography variant="body2" color="black">
+                                {description}
+                            </Typography>
+                        </CardContent>)
+                }
+                <div>
                     <CardActions>
-                        <Button> Show More </Button>
+
+                        {
+                            (length > 100) ?
+                                <ExpandMore expand={expanded}
+                                    onClick={handleExpandClick}
+                                    aria-expanded={expanded}
+                                    aria-label="show more"> <Button>Show More </Button></ExpandMore>
+                                : null
+                        }
                     </CardActions>
-                </Card>
-            
+                </div>
+            </Card>
+
         </Box>
     )
 }

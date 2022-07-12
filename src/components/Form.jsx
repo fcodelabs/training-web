@@ -61,7 +61,6 @@ const Form = (props) => {
           </FormControl>
         </Grid>
       </Grid>
-
       <Grid item md={4} xs={4} sx={{ display: 'flex' }}>
         <Box sx={{ flexGrow: 1 }} />
         <SubmitButton
@@ -73,7 +72,6 @@ const Form = (props) => {
           Submit
         </SubmitButton>
       </Grid>
-
       <Grid item md={12} sx={{ my: 1 }} xs={12}>
         <FormControl fullWidth sx={{ borderRadius: 5 }}>
           <InputLabel htmlFor='description'>Description</InputLabel>

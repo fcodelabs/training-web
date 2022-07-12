@@ -51,11 +51,9 @@ const CardUI = (props) => {
         <Typography variant='h5' component='div'>
           {title}
         </Typography>
-
         <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
           {name}
         </Typography>
-
         <Typography variant='body2'>
           {isShowMore ? description : text}
         </Typography>

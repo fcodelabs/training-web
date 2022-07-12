@@ -66,7 +66,6 @@ const MainHeader = () => {
   const totalDiaries = useSelector((state) => state.diary.totalDiaries);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -183,7 +182,6 @@ const MainHeader = () => {
         <p>My Inbox</p>
       </MenuItem>
       <Divider />
-
       <MenuItem>
         <ListItemIcon>
           <Logout fontSize='small' />
@@ -215,7 +213,6 @@ const MainHeader = () => {
             Dear Diary
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

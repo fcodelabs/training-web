@@ -10,6 +10,7 @@ const diarySlice = createSlice({
   reducers: {
     saveDiaries: (state, action) => {
       state.isChangeStore = true;
+      state.diaries.length = 0;
       const newDiaries = action.payload;
 
       newDiaries.map((diary) =>

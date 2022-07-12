@@ -30,7 +30,6 @@ const CardUI = (props) => {
     if (isShowMore) {
       setButtonText('Show More');
     } else {
-      setText(shortText.current);
       setButtonText('Show Less');
     }
   };

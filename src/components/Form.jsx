@@ -55,7 +55,7 @@ const Form = (props) => {
               id='cardColor'
               label='Card Color'
               sx={{ borderRadius: 5 }}
-              placeholder='Hexadecimal color'
+              placeholder='Hex colour Code'
               required
             />
           </FormControl>

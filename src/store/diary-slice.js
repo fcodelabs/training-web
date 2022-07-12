@@ -5,28 +5,11 @@ const diarySlice = createSlice({
   initialState: {
     diaries: [],
     totalDiaries: 0,
-    isChangeStore: false,
   },
   reducers: {
     saveDiaries: (state, action) => {
-      state.isChangeStore = true;
       state.diaries.length = 0;
       const newDiaries = action.payload;
-
-      newDiaries.map((diary) =>
-        state.diaries.push({
-          id: diary.id,
-          name: diary.name,
-          title: diary.title,
-          description: diary.description,
-          cardColor: diary.cardColor,
-        })
-      );
-    },
-
-    replaceDiary: (state, action) => {
-      const newDiaries = action.payload;
-      state.diaries.length = 0;
 
       newDiaries.map((diary) =>
         state.diaries.push({
@@ -40,7 +23,6 @@ const diarySlice = createSlice({
     },
 
     removeDiary: (state, action) => {
-      state.isChangeStore = false;
       const id = action.payload.id;
       state.totalDiaries--;
       state.diaries = state.diaries.filter((diary) => diary.id !== id);

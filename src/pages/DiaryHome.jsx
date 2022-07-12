@@ -26,7 +26,7 @@ const DiaryHome = () => {
           ...doc.data(),
         })
       );
-      dispatch(diaryActions.replaceDiary(diaries));
+      dispatch(diaryActions.saveDiaries(diaries));
       diaries.length = 0;
     });
 

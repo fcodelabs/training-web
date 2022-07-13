@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore/lite";
 
-const firebaseConfig = {
+export const firebaseConfig = {
     apiKey: "AIzaSyCnr49qpDAsceIRxJZyaFy541XlkBtJ-BE",
     authDomain: "dear-diary-owin.firebaseapp.com",
     projectId: "dear-diary-owin",
@@ -10,4 +11,6 @@ const firebaseConfig = {
     measurementId: "G-SY7T3KJC77",
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
+export const db = getFirestore(app);

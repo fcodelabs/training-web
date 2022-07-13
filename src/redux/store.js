@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
+import diarySlice from "./diarySlice";
 
 const store = configureStore({
-    reducer: {},
+    reducer: { diaryItems: diarySlice.reducer },
 });
 export default store;

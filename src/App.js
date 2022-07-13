@@ -1,5 +1,5 @@
-import DiaryHome from "./pages/DiaryHome";
 import "./App.css";
+import DiaryHome from "./pages/DiaryHome";
 
 const App = () => {
     return (

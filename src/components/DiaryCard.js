@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 
-const DiaryCard = ({ title, subTitle, description, backgroundColor }) => {
+const DiaryCard = ({ title, userName, description, backgroundColor }) => {
     const [cardExpand, setCardExpand] = useState(false);
 
     return (
@@ -22,7 +22,7 @@ const DiaryCard = ({ title, subTitle, description, backgroundColor }) => {
                     {title}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {subTitle}
+                    {userName}
                 </Typography>
                 <Typography variant="body2">
                     {!cardExpand
@@ -31,9 +31,14 @@ const DiaryCard = ({ title, subTitle, description, backgroundColor }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" onClick={() => setCardExpand(!cardExpand)}>
-                    {cardExpand ? `Show Less` : `Show More`}
-                </Button>
+                {description.length > 100 ? (
+                    <Button
+                        size="small"
+                        onClick={() => setCardExpand(!cardExpand)}
+                    >
+                        {cardExpand ? `Show Less` : `Show More`}
+                    </Button>
+                ) : null}
             </CardActions>
         </Card>
     );

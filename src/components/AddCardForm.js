@@ -60,8 +60,11 @@ const AddCardForm = (userName) => {
                 sx={{
                     "& .MuiOutlinedInput-root": {
                         borderRadius: 10,
-
+                        backgroundColor: "#ffffff",
+                        fontSize: 16,
+                        pl: "2%",
                         mx: "7%",
+                        width: "40%",
                     },
                 }}
                 placeholder="Enter Title"
@@ -76,6 +79,9 @@ const AddCardForm = (userName) => {
                         sx={{
                             "& .MuiOutlinedInput-root": {
                                 borderRadius: 3,
+                                backgroundColor: "#ffffff",
+                                fontSize: 16,
+                                pl: "2%",
                                 mx: "7%",
                             },
                         }}
@@ -84,7 +90,7 @@ const AddCardForm = (userName) => {
                         value={description}
                         onChange={handleDescriptionChange}
                         multiline
-                        minRows={4}
+                        minRows={3}
                     />
                     <Button
                         sx={{
@@ -93,8 +99,8 @@ const AddCardForm = (userName) => {
                             mx: "7%",
                             pl: 5,
                             pr: 5,
-                            color: "#dcdcdc",
-                            backgroundColor: "#1a1a1a",
+                            color: "#fff",
+                            backgroundColor: "#0A0812",
                             fontWeight: 600,
                         }}
                         type="Submit"

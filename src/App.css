@@ -8,22 +8,21 @@
 }
 
 .App {
-  background-color: #00A9DF;
+  background-image: url(./images/homeBackground.jpg);
+  background-size: cover;
   min-height: 100vh;
 }
 
 .App-header {
+  background-color: #262626a1;
   padding-left: 2%;
-  min-height: 10vh;
+  height: 8vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: calc(15px + 2vmin);
-  color: #272727;
+  font-size: calc(7px + 2vmin);
+  color: #F0D38D;
   font-weight: 600;
 }
 
-.App-link {
-  color: #61dafb;
-}
 

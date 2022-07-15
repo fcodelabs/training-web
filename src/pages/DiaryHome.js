@@ -1,3 +1,4 @@
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux/es/exports";
 import AddCardForm from "../components/AddCardForm";
@@ -14,9 +15,9 @@ const DiaryHome = () => {
         <div className="DiaryHome">
             <AddCardForm userName={userName} />
             <Grid container sx={{ px: "5%" }}>
-                {diaryItems.map((card) => {
+                {diaryItems.map((card, index) => {
                     return (
-                        <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                             <DiaryCard
                                 title={card.title}
                                 description={card.description}
@@ -27,6 +28,14 @@ const DiaryHome = () => {
                     );
                 })}
             </Grid>
+
+            <Button
+                variant="contained"
+                href="/"
+                sx={{ float: "right", right: "5%" }}
+            >
+                Log Out
+            </Button>
         </div>
     );
 };

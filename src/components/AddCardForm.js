@@ -1,7 +1,9 @@
 import { Box, Button, TextField } from "@mui/material";
+import { addDoc, collection } from "firebase/firestore";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { addCard } from "../redux/diarySlice";
+import { db } from "../services/firebase";
 
 const AddCardForm = (userName) => {
     const backgroundColor = "#B3E9FE";
@@ -29,18 +31,43 @@ const AddCardForm = (userName) => {
             return;
         } else {
             //adding card to cardList
-            dispatch(
-                addCard({
-                    title: title,
-                    description: description,
-                    userName: userName.userName,
-                    backgroundColor: backgroundColor,
-                })
+            addDiaryEntry(
+                title,
+                description,
+                userName.userName,
+                backgroundColor
             );
         }
 
         setTitle("");
         setDescription("");
+    };
+
+    const addDiaryEntry = async (
+        name,
+        description,
+        userName,
+        backgroundColor
+    ) => {
+        try {
+            const docRef = await addDoc(collection(db, "diaryEntries"), {
+                name: name,
+                description: description,
+                userName: userName,
+                backgroundColor: backgroundColor,
+            });
+            dispatch(
+                addCard({
+                    title: title,
+                    description: description,
+                    userName: userName,
+                    backgroundColor: backgroundColor,
+                })
+            );
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
     };
     return (
         <Box

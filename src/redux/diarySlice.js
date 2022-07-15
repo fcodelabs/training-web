@@ -12,6 +12,7 @@ const diarySlice = createSlice({
                 backgroundColor: "#B3E9FE",
             },
         ],
+        user: "",
     },
     reducers: {
         addCard: (state, action) => {
@@ -23,8 +24,14 @@ const diarySlice = createSlice({
                 backgroundColor: data.backgroundColor,
             });
         },
+        addUserName: (state, action) => {
+            const data = action.payload;
+            state.user = data;
+        },
     },
 });
-export const selectDiaryItems = (state) => state.diaryItems.diaryItems;
 export const { addCard } = diarySlice.actions;
+export const { addUserName } = diarySlice.actions;
+export const selectDiaryItems = (state) => state.diaryItems.diaryItems;
+export const selectUserName = (state) => state.diaryItems.user;
 export default diarySlice;

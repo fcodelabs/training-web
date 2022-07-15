@@ -3,11 +3,11 @@ import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux/es/exports";
 import AddCardForm from "../components/AddCardForm";
 import DiaryCard from "../components/DiaryCard";
-import { selectDiaryItems } from "../redux/diarySlice";
+import { selectDiaryItems, selectUserName } from "../redux/diarySlice";
 
 const DiaryHome = () => {
     //logged user name
-    const userName = "Owin";
+    const userName = useSelector(selectUserName);
 
     const diaryItems = useSelector(selectDiaryItems);
 

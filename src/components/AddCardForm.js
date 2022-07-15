@@ -64,6 +64,7 @@ const AddCardForm = (userName) => {
                         fontSize: 16,
                         pl: "2%",
                         mx: "7%",
+                        mt: "2%",
                         width: "40%",
                     },
                 }}

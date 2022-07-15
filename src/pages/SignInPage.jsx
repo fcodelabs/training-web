@@ -23,7 +23,7 @@ const SignInPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 400);
+    }, 500);
     return () => clearTimeout(timer);
   }, []);
 

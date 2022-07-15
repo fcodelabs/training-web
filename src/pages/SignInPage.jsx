@@ -21,10 +21,10 @@ const SignInPage = () => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    // const timer = setTimeout(() => {
-    // }, 200);
-    // return () => clearTimeout(timer);
-    setLoading(false);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 400);
+    return () => clearTimeout(timer);
   }, []);
 
   const namesArray = [

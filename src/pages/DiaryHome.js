@@ -1,31 +1,30 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import { onSnapshot } from "firebase/firestore";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import AddCardForm from "../components/AddCardForm";
 import DiaryCard from "../components/DiaryCard";
-import { onSnapshot } from "firebase/firestore";
-import { useEffect } from "react";
-import { colRef } from "../services/firebase";
 import { diaryActions } from "../redux/diarySlice";
+import { colRef } from "../services/firebase";
 
 const DiaryHome = () => {
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     const unSubDiaries = onSnapshot(colRef, (snapshots) => {
-    //         let diaryEntriesFb = [];
-    //         snapshots.docs.map((doc) =>
-    //             diaryEntriesFb.push({
-    //                 // id: doc.id,
-    //                 ...doc.data(),
-    //             })
-    //         );
-    //         dispatch(diaryActions.addCard(diaryEntriesFb));
-    //         return () => {
-    //             unSubDiaries();
-    //         };
-    //     });
-    // }, [dispatch]);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const unSubDiaries = onSnapshot(colRef, (snapshots) => {
+            let diaryEntries = [];
+            snapshots.docs.map((doc) =>
+                diaryEntries.push({
+                    ...doc.data(),
+                })
+            );
+            dispatch(diaryActions.addCard(diaryEntries));
+            return () => {
+                unSubDiaries();
+            };
+        });
+    }, [dispatch]);
 
     const params = useParams();
     const diaryItems = useSelector((state) => state.diaryReducer.diaryItems);
@@ -49,7 +48,7 @@ const DiaryHome = () => {
             <Button
                 variant="contained"
                 href="/"
-                sx={{ float: "right", right: "5%" }}
+                sx={{ float: "right", right: "5%", mb: "2%" }}
             >
                 Log Out
             </Button>

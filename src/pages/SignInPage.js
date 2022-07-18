@@ -5,21 +5,17 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux/es/exports";
-import { addUserName } from "../redux/diarySlice";
 
 const SignIn = () => {
     const [userName, setUserName] = useState("");
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const handleNameChange = (event) => {
         setUserName(event.target.value);
     };
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(addUserName(userName));
-        navigate("/home", { replace: true });
+        navigate("/home/" + userName);
     };
 
     return (
@@ -45,7 +41,7 @@ const SignIn = () => {
                         margin="normal"
                         required
                         fullWidth
-                        id="name"
+                        id="userName"
                         label="User Name"
                         name="name"
                         autoComplete="off"

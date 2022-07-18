@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection } from "firebase/firestore";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyCnr49qpDAsceIRxJZyaFy541XlkBtJ-BE",
@@ -11,6 +11,8 @@ export const firebaseConfig = {
     measurementId: "G-SY7T3KJC77",
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
-export const db = getFirestore(app);
+export const db = getFirestore();
+
+export const colRef = collection(db, "diaryEntries");

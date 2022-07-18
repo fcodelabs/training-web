@@ -5,6 +5,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { useReducer } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { diaryActions } from '../store/diary-slice';
@@ -15,8 +16,11 @@ const CardUI = (props) => {
   const { id, name, title, cardColor, description } = props;
   const [buttonText, setButtonText] = useState('Show More');
   const [text, setText] = useState(description);
-  const [isShowMore, setShowMore] = useState(false);
   let shortText = useRef('');
+  const [isShowMore, setShowMore] = useReducer(
+    (isShowMore) => !isShowMore,
+    false
+  );
 
   useEffect(() => {
     if (description?.length > 100) {
@@ -26,7 +30,7 @@ const CardUI = (props) => {
   }, [description]);
 
   const showMoreHandler = () => {
-    setShowMore(!isShowMore);
+    setShowMore();
     if (isShowMore) {
       setButtonText('Show More');
     } else {

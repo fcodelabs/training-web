@@ -7,6 +7,7 @@ const diarySlice = createSlice({
     },
     reducers: {
         addCard: (state = [], action) => {
+            state.diaryItems = [];
             const cards = action.payload;
             cards.map((card) =>
                 state.diaryItems.push({

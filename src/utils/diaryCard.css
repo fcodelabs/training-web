@@ -1,0 +1,20 @@
+.App{
+    background-image: url('../asset/images/bimg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height:100vh;
+    width:100vw;
+    align-items: center;
+    /*justify-content: center;*/
+    display: flex; 
+    
+  
+  }
+  .card{
+    width:300px;
+    height:fit-content;
+    background-color: white;
+    opacity: 0.8;
+    padding :10px;
+    
+  }

@@ -26,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SignIn />}/>
         <Route path="/diaryHome" element={<DiaryHome/>}/>
+        <Route path="/diaryCard" element={<DiaryCard/>}/>
       </Routes>
    </BrowserRouter>
   

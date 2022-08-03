@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 
 import React, {useState} from "react";
 
-function DiaryCard(){
+function DiaryCard(props){
 
     const useStyles = makeStyles({
         root: {
@@ -37,16 +37,18 @@ function DiaryCard(){
         const bull = <span className={classes.bullet}>•</span>;
 
       const [showMore, setShowMore]=useState(false);
-      const text="We have been with Fcode Labs since 2019,and they have done an outstanding job with all our web, app and GIS evelopment work. Highly skilled, insightful and exceptionally responsive at a very competitive price.";
+     // const text="We have been with Fcode Labs since 2019,and they have done an outstanding job with all our web, app and GIS evelopment work. Highly skilled, insightful and exceptionally responsive at a very competitive price.";
+      const text=props.description
+      //const title={props.title}
 
-      // const [open, setOpen] =useState(false);
-      // const OpenCard=()=>{
-      //   setOpen(true);
-      //   };
+       const [open, setOpen] =useState(false);
+       const OpenCard=()=>{
+         setOpen(true);
+       };
         
-      //   const closeCard =()=>{
-      //   setOpen(false);
-      //   };
+      const closeCard =()=>{
+       setOpen(false);
+      };
     return(
       
         <Card className={classes.root}>
@@ -55,7 +57,8 @@ function DiaryCard(){
           Word of the Day
         </Typography> */}
         <Typography variant="h5" component="h2">
-          Card Name
+          {/* {title} */}
+          Title
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           name

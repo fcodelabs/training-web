@@ -3,6 +3,11 @@ import '../../utils/signIn.css';
 
 import logo from "../../asset/images/logo.png";
 
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 import {useState} from 'react';
 
 //import {Link} from 'react-router-dom';
@@ -37,12 +42,13 @@ function SignIn() {
         <div className="dh2">
           <h2>Dear Diary</h2>
         </div>
-        <div className="table">
+        <div className="signInForm">
         <h1 id="sh1" text-align="center">Sign In</h1>
-        <input type="text" id="txt1" placeholder="Enter" value={randomName}></input>
+         <input type="text" id="txt1" placeholder="Enter" value={randomName}></input>
         <input type="Button" id="btn1" value="RANDOM" onClick={genName}></input><br></br>
         
-          <input type="Button" id="btn2" value="Continue" onClick={navigateToDiaryCard} disabled={randomName===null}></input>
+        <input type="Button" id="btn2" value="Continue" onClick={navigateToDiaryCard} disabled={randomName===null}></input>
+        
 
           <Routes>
             <Route path="/DiaryHome" element={<DiaryHome />} />

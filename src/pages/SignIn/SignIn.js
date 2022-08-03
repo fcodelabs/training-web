@@ -29,7 +29,7 @@ function SignIn() {
         <div className="dh2">
           <h2>Dear Diary</h2>
         </div>
-        <div className="signInForm">
+        <div className="signIn-Form">
         <h1 id="sh1" text-align="center">Sign In</h1>
         {/* <input type="text" id="txt1" placeholder="Enter" value={randomName}></input>
         <input type="Button" id="btn1" value="RANDOM" onClick={genName}></input><br></br>
@@ -37,7 +37,7 @@ function SignIn() {
         <TextField id="txt1" label="Your NickName" variant="outlined" value={randomName} onChange={event => setRandomName(event.target.value)}/>
         
         <Button variant="contained" id="btn1" onClick={genName}>RANDOM</Button>
-        <Button variant="contained" id="btn2" onClick={navigateToDiaryCard} disabled={randomName===null}>Continue</Button>
+        <Button variant="contained" id="btn2"  disabled={randomName===null}>Continue</Button>
         </div>
       </div>
 

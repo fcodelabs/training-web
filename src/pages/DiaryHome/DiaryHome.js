@@ -1,5 +1,8 @@
 import '../../utils/diaryHome.css';
 
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import DiaryCard from '../../component/DiaryCard/DiaryCard';
+
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -24,6 +27,7 @@ function DiaryHome()
 {
     const classes = useStyles();
     const [value, setValue] = React.useState('Controlled');
+    
 
     const handleSubmit=(e)=>{
         e.preventDefault();
@@ -42,6 +46,12 @@ function DiaryHome()
    // const [showResults, setShowResults] = React.useState(false)
    // const onClick = () => setShowResults(true)
 
+    // const navigate = useNavigate();
+    // const navigateToDiaryCard = () => {
+    
+    //   navigate('/diaryCard');
+    // };
+
     return(
         <div className="DiaryHome">
             <div className="header">
@@ -58,11 +68,13 @@ function DiaryHome()
                      <Button variant="contained" color="primary" type="submit" id="btn"> Submit</Button>
       
                    </div>
-                   
-                   
-
         
                 </form>
+
+            </div>
+
+            <div className="diaryHomeBody">
+              <DiaryCard description="text"/>
 
             </div>
 

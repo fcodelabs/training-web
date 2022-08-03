@@ -1,5 +1,5 @@
 import SignIn from "./pages/SignIn/SignIn";
-import DiaryCard from "./pages/DiaryCard/DiaryCard";
+import DiaryCard from "./component/DiaryCard/DiaryCard";
 
 import React from "react";
 import {
@@ -8,6 +8,7 @@ import {
   Route,
   
 } from "react-router-dom";
+import DiaryHome from "./pages/DiaryHome/DiaryHome";
 
 function App() {
   
@@ -24,7 +25,7 @@ function App() {
    <BrowserRouter>
       <Routes>
         <Route path="/" element={<SignIn />}/>
-        <Route path="/diary" element={<DiaryCard />}/>
+        <Route path="/diaryHome" element={<DiaryHome/>}/>
       </Routes>
    </BrowserRouter>
   

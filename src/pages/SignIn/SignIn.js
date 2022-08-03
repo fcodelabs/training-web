@@ -7,7 +7,8 @@ import {useState} from 'react';
 
 //import {Link} from 'react-router-dom';
 import {Routes, Route, useNavigate} from 'react-router-dom';
-import DiaryCard from '../DiaryCard/DiaryCard';
+//import DiaryCard from '../DiaryHome/DiaryHome';
+import DiaryHome from '../DiaryHome/DiaryHome';
 
 function SignIn() {
 
@@ -22,7 +23,7 @@ function SignIn() {
   const navigate = useNavigate();
   const navigateToDiaryCard = () => {
     
-    navigate('/diary');
+    navigate('/diaryHome');
   };
   
   return (
@@ -44,7 +45,7 @@ function SignIn() {
           <input type="Button" id="btn2" value="Continue" onClick={navigateToDiaryCard} disabled={randomName===null}></input>
 
           <Routes>
-            <Route path="/DiaryCard" element={<DiaryCard />} />
+            <Route path="/DiaryHome" element={<DiaryHome />} />
           </Routes>
         
         </div>

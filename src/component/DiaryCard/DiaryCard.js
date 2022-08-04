@@ -10,13 +10,19 @@ import Typography from '@material-ui/core/Typography';
 
 
 import React, {useState} from "react";
+import { blue } from '@material-ui/core/colors';
 
 function DiaryCard(props){
 
     const useStyles = makeStyles({
         root: {
-          width: 300,
+          width: 275,
           borderRadius:10,
+          marginLeft:10,
+          marginTop:15,
+          backgroundColor:'blue',
+          opacity:0.6,
+          float:'left',
           
         },
         bullet: {
@@ -39,7 +45,7 @@ function DiaryCard(props){
       const [showMore, setShowMore]=useState(false);
      // const text="We have been with Fcode Labs since 2019,and they have done an outstanding job with all our web, app and GIS evelopment work. Highly skilled, insightful and exceptionally responsive at a very competitive price.";
       const text=props.description
-      //const title={props.title}
+      const title=props.title
 
        const [open, setOpen] =useState(false);
        const OpenCard=()=>{
@@ -57,8 +63,8 @@ function DiaryCard(props){
           Word of the Day
         </Typography> */}
         <Typography variant="h5" component="h2">
-          {/* {title} */}
-          Title
+           {title} 
+          {/* Title */}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           name
@@ -66,10 +72,11 @@ function DiaryCard(props){
         <Typography variant="body2" component="p">
           
           <br />
-          {showMore ? text:text.substring(0,100)}
+           {showMore ? text: text && text.substring(0,100)} 
         </Typography>
       </CardContent>
       <CardActions>
+        
         <Button size="small" id="btn" onClick={()=> setShowMore(!showMore)}>
         {showMore ? "Show less":"Show more"}</Button>
       </CardActions>

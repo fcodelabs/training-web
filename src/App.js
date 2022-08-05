@@ -6,6 +6,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Switch,
   
 } from "react-router-dom";
 import DiaryHome from "./pages/DiaryHome/DiaryHome";
@@ -25,9 +26,10 @@ function App() {
    <BrowserRouter>
       <Routes>
         <Route path="/" element={<SignIn />}/>
-        <Route path="/diaryHome" element={<DiaryHome/>}/>
+        <Route path="/diaryHome/:name"  element={<DiaryHome/>}/>
         <Route path="/diaryCard" element={<DiaryCard/>}/>
       </Routes>
+      
    </BrowserRouter>
   
   );

@@ -46,6 +46,7 @@ function DiaryCard(props){
      // const text="We have been with Fcode Labs since 2019,and they have done an outstanding job with all our web, app and GIS evelopment work. Highly skilled, insightful and exceptionally responsive at a very competitive price.";
       const text=props.description
       const title=props.title
+      const name=props.name
 
        const [open, setOpen] =useState(false);
        const OpenCard=()=>{
@@ -67,7 +68,7 @@ function DiaryCard(props){
           {/* Title */}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          name
+         {name}
         </Typography>
         <Typography variant="body2" component="p">
           

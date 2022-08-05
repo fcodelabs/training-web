@@ -11,9 +11,10 @@ import Button from '@material-ui/core/Button';
 import {useState} from 'react';
 
 //import {Link} from 'react-router-dom';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import { Switch, Routes, Route, useNavigate, useParams} from 'react-router-dom';
 //import DiaryCard from '../DiaryHome/DiaryHome';
 import DiaryHome from '../DiaryHome/DiaryHome';
+import { renderIntoDocument } from 'react-dom/test-utils';
 
 function SignIn() {
 
@@ -26,10 +27,13 @@ function SignIn() {
   }
 
   const navigate = useNavigate();
-  const navigateToDiaryCard = () => {
+  const navigateToDiaryCard = (e) => {
     
-    navigate('/diaryHome');
+    navigate(`/diaryHome/${randomName}`);
+    
   };
+
+  
   
   return (
     <div className="App">
@@ -44,18 +48,16 @@ function SignIn() {
         </div>
         <div className="signInForm">
         <h1 id="sh1" text-align="center">Sign In</h1>
+        
          {/* <input type="text" id="txt1" placeholder="Enter" value={randomName}></input>
         <input type="Button" id="btn1" value="RANDOM" onClick={genName}></input><br></br>
         
         <input type="Button" id="btn2" value="Continue" onClick={navigateToDiaryCard} disabled={randomName===null}></input> */}
-        <TextField id="txt1" label="Your NickName" variant="outlined" value={randomName} onChange={event => setRandomName(event.target.value)}/>
+        <TextField id="txt1" label="Your NickName" name="name" variant="outlined" value={randomName} onChange={event => setRandomName(event.target.value)}/>
         
         <Button variant="contained" id="btn1" onClick={genName}>RANDOM</Button>
         <Button variant="contained" id="btn2" onClick={navigateToDiaryCard} disabled={randomName===null}>Continue</Button>
-
-          <Routes>
-            <Route path="/DiaryHome" element={<DiaryHome />} />
-          </Routes>
+        
         
         </div>
       </div>

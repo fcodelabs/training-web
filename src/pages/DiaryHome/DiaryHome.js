@@ -1,7 +1,7 @@
 import '../../utils/diaryHome.css';
 import hbimg from '../../asset/images/bimg.jpg';
 
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, useParams, Switch} from 'react-router-dom';
 import DiaryCard from '../../component/DiaryCard/DiaryCard';
 
 import React from 'react';
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 function DiaryHome()
 {
+    let { name } = useParams();
     const classes = useStyles();
     const [value, setValue] = React.useState('Controlled');
 
@@ -113,7 +114,7 @@ function DiaryHome()
             <div className="diaryHomeBody">
             {myArray.map( a =>
               <div>
-                <DiaryCard title={a.title} description={a.description}/>
+                <DiaryCard title={a.title} name={name} description={a.description}/>
 
                   
               </div>

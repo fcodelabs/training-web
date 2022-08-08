@@ -9,6 +9,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+// import { Provider } from 'react-redux';
+// import { createStore } from 'redux';
+// import { useSelector } from 'react-redux';
+
+//import { createSlice } from '@reduxjs/toolkit'
+import {useDispatch, useSelector} from 'react-redux';
+
+import { onSubmit } from '../../Redux/slices/dataSlice';
+import { dataActions } from '../../Redux/slices/dataSlice';
+import { selectCard } from '../../Redux/slices/dataSlice';
+
+
 const { useState } = React;
 
 const useStyles = makeStyles((theme) => ({
@@ -34,27 +46,38 @@ function DiaryHome()
     const classes = useStyles();
     const [value, setValue] = React.useState('Controlled');
 
-    const [myArray, updateMyArray] = useState([]);
+    //const [myArray, updateMyArray] = useState([]);
 
-    const onClick = () => {
-      
-  };
+    const dispatch = useDispatch();
+    //const title = useSelector(state => state.data.title);
+    //const description = useSelector(state => state.data.description);
+
+    const cards = useSelector(selectCard)
     
 
+
+  
     const handleSubmit=(e)=>{
         e.preventDefault();
         //e.target.reset();
-        const submitNew=e.target.title.value;
-        const description=e.target.description.value;
+        //const submitNew=e.target.title.value;
+        //const description=e.target.description.value;
+       
+        // dispatch (onSubmit())
 
-        console.log("Title :"+submitNew);
+        const title=e.target.title.value;
+        const description=e.target.description.value;
+        dispatch(dataActions.addCard({title,description}));
+      
+
+        console.log("Title :"+title);
         console.log("Description :"+description);
 
-        if(submitNew == "" || description == ""){
-          if(submitNew == ""){
+        if(title === "" || description === ""){
+          if(title === ""){
             console.log("Missing title")
           }
-          if(description == ""){
+          if(description === ""){
             console.log("Missing Description")
 
           }
@@ -62,9 +85,11 @@ function DiaryHome()
         }
         
 
-        updateMyArray( arr => [...arr,
-          {title:submitNew, description:description} 
-        ]);
+        //  updateMyArray( arr => [...arr,
+        //   {title:submitNew, description:description} 
+        //  ]);
+
+        
 
       e.target.title.value="";
       e.target.description.value="";
@@ -102,7 +127,7 @@ function DiaryHome()
                      multiline
                      rows={4}
                      variant="filled"/>
-                     <Button variant="contained" color="primary" type="submit" id="btn" onClick={onClick}> Submit</Button>
+                     <Button variant="contained" color="primary" type="submit" id="btn"> Submit</Button>
       
                    </div>
         
@@ -112,13 +137,24 @@ function DiaryHome()
             
 
             <div className="diaryHomeBody">
-            {myArray.map( a =>
-              <div>
+              {/* {myArray.map( a =>
+               <div>
                 <DiaryCard title={a.title} name={name} description={a.description}/>
 
                   
-              </div>
-            )}
+               </div>
+            )}  */}
+
+              <div>
+                {cards.map(a =>
+                  <DiaryCard title={a.title} name={name} description={a.description}/>
+                )};
+
+                  
+               </div>
+            
+
+
 
             </div>
 

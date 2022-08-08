@@ -77,9 +77,12 @@ function DiaryCard(props){
         </Typography>
       </CardContent>
       <CardActions>
+        {text.length>=100 && 
+          <Button size="small" id="btn" onClick={()=> setShowMore(!showMore)}>
+          {showMore ? "Show less":"Show more"}</Button>
         
-        <Button size="small" id="btn" onClick={()=> setShowMore(!showMore)}>
-        {showMore ? "Show less":"Show more"}</Button>
+        }
+        
       </CardActions>
     </Card>
 

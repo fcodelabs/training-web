@@ -11,6 +11,8 @@ import {
 } from "react-router-dom";
 import DiaryHome from "./pages/DiaryHome/DiaryHome";
 
+
+
 function App() {
   
    
@@ -23,6 +25,7 @@ function App() {
   //     <DiaryCard />
   //   </Route>
   //  </Switch>
+  
    <BrowserRouter>
       <Routes>
         <Route path="/" element={<SignIn />}/>
@@ -31,6 +34,7 @@ function App() {
       </Routes>
       
    </BrowserRouter>
+   
   
   );
 }

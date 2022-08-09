@@ -22,7 +22,7 @@ function SignIn() {
   const genName=()=>{
     const num=Math.floor(Math.random() * 5)
         
-        let nameArr =['Nimal','Kamal','Peter','Saman','Jhon']
+        let nameArr =['Nimal','Kamal','Peter','Saman','Jhon'];
         setRandomName(nameArr[num])
   }
 

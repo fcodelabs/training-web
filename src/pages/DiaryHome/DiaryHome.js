@@ -67,7 +67,10 @@ function DiaryHome()
 
         const title=e.target.title.value;
         const description=e.target.description.value;
-        dispatch(dataActions.addCard({title,description}));
+        if(title !== "" && description !== ""){
+          dispatch(dataActions.addCard({title,description}));
+        }
+       // dispatch(dataActions.addCard({title,description}));
       
 
         console.log("Title :"+title);
@@ -146,9 +149,10 @@ function DiaryHome()
             )}  */}
 
               <div>
-                {cards.map(a =>
-                  <DiaryCard title={a.title} name={name} description={a.description}/>
-                )};
+                
+                  { cards.map(a =>
+                    <DiaryCard title={a.title} name={name} description={a.description}/>
+                  )}
 
                   
                </div>

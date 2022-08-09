@@ -20,6 +20,10 @@ import { onSubmit } from '../../Redux/slices/dataSlice';
 import { dataActions } from '../../Redux/slices/dataSlice';
 import { selectCard } from '../../Redux/slices/dataSlice';
 
+//import {useRef} from 'react';
+import firestore from '../../firestore/firebase';
+import {addDoc, collection} from '@firebase/firestore';
+
 
 const { useState } = React;
 
@@ -54,7 +58,8 @@ function DiaryHome()
 
     const cards = useSelector(selectCard)
     
-
+    //const messageRef = useRef();
+    const ref = collection(firestore, "messages");
 
   
     const handleSubmit=(e)=>{
@@ -68,10 +73,24 @@ function DiaryHome()
         const title=e.target.title.value;
         const description=e.target.description.value;
         dispatch(dataActions.addCard({title,description}));
-      
+       
 
         console.log("Title :"+title);
         console.log("Description :"+description);
+
+        let data = {
+          name : name,
+          title : title,
+          description : description,
+
+        };
+
+        try{
+          addDoc(ref, data)
+        }
+        catch(c){
+          console.log(c)
+        }
 
         if(title === "" || description === ""){
           if(title === ""){
@@ -148,7 +167,7 @@ function DiaryHome()
               <div>
                 {cards.map(a =>
                   <DiaryCard title={a.title} name={name} description={a.description}/>
-                )};
+                )}
 
                   
                </div>

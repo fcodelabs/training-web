@@ -56,6 +56,7 @@ function DiaryCard(props){
       const closeCard =()=>{
        setOpen(false);
       };
+      console.log(text)
     return(
       
         <Card className={classes.root}>
@@ -77,7 +78,7 @@ function DiaryCard(props){
         </Typography>
       </CardContent>
       <CardActions>
-        {text.length>=100 && 
+        {text && text.length>=100 && 
           <Button size="small" id="btn" onClick={()=> setShowMore(!showMore)}>
           {showMore ? "Show less":"Show more"}</Button>
         

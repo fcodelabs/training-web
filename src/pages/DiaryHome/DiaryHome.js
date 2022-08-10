@@ -1,7 +1,7 @@
 import '../../utils/diaryHome.css';
 import hbimg from '../../asset/images/bimg.jpg';
 
-import {Routes, Route, useNavigate, useParams, Switch} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import DiaryCard from '../../component/DiaryCard/DiaryCard';
 
 import React from 'react';
@@ -11,7 +11,6 @@ import Button from '@material-ui/core/Button';
 
 // import { Provider } from 'react-redux';
 // import { createStore } from 'redux';
-// import { useSelector } from 'react-redux';
 
 //import { createSlice } from '@reduxjs/toolkit'
 import {useDispatch, useSelector} from 'react-redux';
@@ -21,8 +20,11 @@ import { dataActions } from '../../Redux/slices/dataSlice';
 import { selectCard } from '../../Redux/slices/dataSlice';
 
 //import {useRef} from 'react';
-import firestore from '../../firestore/firebase';
+//import firestore from '../../firestore/firebase';
 import {addDoc, collection} from '@firebase/firestore';
+import { onSnapshot } from '@firebase/firestore';
+import { useEffect } from 'react';
+import {doc} from '../../firestore/firebase';
 
 
 const { useState } = React;
@@ -53,13 +55,10 @@ function DiaryHome()
     //const [myArray, updateMyArray] = useState([]);
 
     const dispatch = useDispatch();
-    //const title = useSelector(state => state.data.title);
-    //const description = useSelector(state => state.data.description);
-
-    const cards = useSelector(selectCard)
     
-    //const messageRef = useRef();
-    const ref = collection(firestore, "messages");
+    const cards = useSelector(selectCard)
+    //console.log(cards)
+    
 
   
     const handleSubmit=(e)=>{
@@ -68,29 +67,35 @@ function DiaryHome()
         //const submitNew=e.target.title.value;
         //const description=e.target.description.value;
        
-        // dispatch (onSubmit())
+        
 
         const title=e.target.title.value;
         const description=e.target.description.value;
-        dispatch(dataActions.addCard({title,description}));
+        if(title !== "" && description !== ""){
+          dispatch(dataActions.addCard({name,title,description}));
+        }
+       // dispatch(dataActions.addCard({title,description}));
        
 
         console.log("Title :"+title);
         console.log("Description :"+description);
 
-        let data = {
-          name : name,
-          title : title,
-          description : description,
+        // let data = {
+        //   name : name,
+        //   title : title,
+        //   description : description,
 
-        };
+        // };
 
-        try{
-          addDoc(ref, data)
-        }
-        catch(c){
-          console.log(c)
-        }
+        // try{
+        //   addDoc(ref, data)
+        // }
+        // catch(c){
+        //   console.log(c)
+        // }
+
+        
+      
 
         if(title === "" || description === ""){
           if(title === ""){
@@ -113,20 +118,28 @@ function DiaryHome()
       e.target.title.value="";
       e.target.description.value="";
 
-      
-
-
-
     }
 
-   // const [showResults, setShowResults] = React.useState(false)
-   // const onClick = () => setShowResults(true)
+     const [card, setCard] = useState(null)
 
-    // const navigate = useNavigate();
-    // const navigateToDiaryCard = () => {
-    
-    //   navigate('/diaryCard');
-    // };
+      
+
+      useEffect(() => {
+
+       let newCards = [];
+
+       onSnapshot(doc, (snapshot) => {
+         newCards = [];
+         snapshot.docs.forEach(doc => {
+           newCards.push(doc.data());
+         });
+         console.log(newCards)
+
+         dispatch(dataActions.saveCards(newCards));
+       });
+      }, [dispatch]);
+
+   
 
     return(
         <div className="DiaryHome">
@@ -164,17 +177,15 @@ function DiaryHome()
                </div>
             )}  */}
 
-              <div>
+               <div>
                 {cards.map(a =>
-                  <DiaryCard title={a.title} name={name} description={a.description}/>
+                  <DiaryCard title={a.title} name={a.name} description={a.description}/>
+                
                 )}
 
-                  
-               </div>
-            
-
-
-
+                </div>  
+               
+                
             </div>
 
         </div>

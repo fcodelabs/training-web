@@ -1,23 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const ONSUBMIT = 'onsubmit';
-
-// const initialState = {
-//   cards: [],
-// }
-
-// const homeSlice = createSlice({
-//   name: "home",
-//   initialState,
-//   reducers: {
-//       addCard(state, action) {
-//           const tempCards = [...state.cards];
-//           tempCards.push(action.payload);
-//           state.cards = tempCards;
-//       }
-//   }
-// });
-
-//
+import allDataSaga from "../saga/dataSaga";
 
 
 
@@ -26,29 +8,24 @@ const initialState = {
    diaryCards :[],
 };
 
-// const dataReducer = (e, state = initState, action) => {
-//     if (action.type === ONSUBMIT) {
-//       return {
-//         ...state,
-//         title : e.target.title.value,
-//         description : e.target.description.value
-//       };
-//     }
-    
-//   };
+
 
 const dataSlice = createSlice({
   name: "diary",
   initialState,
   reducers: {
-      addCard(state, action) {
-          const tempCard = [...state.diaryCards];
+      addCard(state, action) {},
+          //const tempCard = [...state.diaryCards];
           
-          tempCard.push(action.payload);
+          //tempCard.push(action.payload);
           
-          state.diaryCards = tempCard;
+          //state.diaryCards = tempCard;
+          getCards() {},
+          saveCards(state, action) {
+           // console.log(action.payload)
+            state.diaryCards = action.payload;
           
-      }
+          }
   }
 });
 

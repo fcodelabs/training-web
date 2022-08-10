@@ -1,17 +1,19 @@
 import { initializeApp } from "firebase/app";
-import {getFirestore} from '@firebase/firestore';
+import {getFirestore, collection} from '@firebase/firestore';
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBkjWmLpMvAyxgTRZThSXxuO52CrgfR5OE",
-  authDomain: "dear-diary-gayal.firebaseapp.com",
-  projectId: "dear-diary-gayal",
-  storageBucket: "dear-diary-gayal.appspot.com",
-  messagingSenderId: "295226046453",
-  appId: "1:295226046453:web:1655d85c26d94242b752bc"
+  apiKey: process.env.React_App_apiKey,
+  authDomain: process.env.React_App_authDomain,
+  projectId: process.env.React_App_projectId,
+  storageBucket: process.env.React_App_storageBucket,
+  messagingSenderId: process.env.React_App_messagingSenderId,
+  appId: process.env.React_App_appId
 };
 
 
-const app = initializeApp(firebaseConfig);
-const firestore = getFirestore(app);
+initializeApp(firebaseConfig);
+export const firestore = getFirestore();
+export const doc= collection(firestore,"messages")
 
-export default firestore;
+//export default firestore;

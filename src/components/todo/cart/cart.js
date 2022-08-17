@@ -6,7 +6,7 @@ import { CardActionArea } from '@mui/material';
 
 export default function cart(props) {
   return (
-    <Card sx={{ maxWidth: 'auto',marginLeft: 'auto' }}>
+    <Card sx={{ maxWidth: 'auto',marginLeft: 'auto',m:2 }}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

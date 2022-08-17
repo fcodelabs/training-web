@@ -12,12 +12,7 @@ export default function Todo() {
         description: "",
 
     });
-    // const[description,setdescription] = useState("");
 
-//     const handleSubmit = (e) => {
-//         e.preventDefault()
-//         console.log(title,description)
-// }
 
 const handleChange = (e) => {
     const name = e.target.name;
@@ -37,7 +32,7 @@ const handleSubmit = (e) => {
     
 
 }
-    const todoarray  =  [{git 
+    const todoarray  =  [{
 
         title:"workshop",
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'

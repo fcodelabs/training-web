@@ -5,6 +5,7 @@ import Image from "../assets/diary.jpg";
 import styled from "styled-components";
 import { Formik } from "formik";
 import CardForm from "../components/CardForm";
+import DiaryCard from "../components/DiaryCard";
 
 const StyledTitle = styled.h1`
   font-style: normal;
@@ -30,6 +31,7 @@ function Diary() {
       paddingTop="60px"
       paddingX="30px"
       direction="column"
+      sx={{ overFlowY: "scroll" }}
       style={{ minHeight: "100vh", backgroundImage: `url(${Image})` }}
     >
       <StyledTitle>Home</StyledTitle>
@@ -41,6 +43,11 @@ function Diary() {
           {() => <CardForm />}
         </Formik>
       </Grid>
+      <DiaryCard
+        title="Diary Card"
+        name="Anushka"
+        description="a demo version of the software I saw a demo on how to use the computer program."
+      />
     </Grid>
   );
 }

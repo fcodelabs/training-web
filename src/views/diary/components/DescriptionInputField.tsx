@@ -5,16 +5,13 @@ const StyledInput = styled.textarea`
   width: 98%;
   height: 150px;
   padding: 10px;
-  border: 1px solid #006fff;
+  border: 0px;
   font-family: "Nunito";
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
   letter-spacing: -0.02em;
-  color: #000000;
-  &:focus {
-    outline: none;
-  }
+  resize: none;
 `;
 
 export default function DescriptionInputField() {

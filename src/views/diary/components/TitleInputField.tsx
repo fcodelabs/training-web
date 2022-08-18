@@ -6,7 +6,7 @@ const StyledInput = styled.input`
   gap: 10px;
   width: 95%;
   height: 48px;
-  border: 1px solid #006fff;
+  border: 0px;
   border-radius: 24px;
   font-family: "Nunito";
   font-style: normal;

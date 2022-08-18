@@ -1,7 +1,7 @@
 
 import './App.css';
-import SignIn from './components/signIn/signIn'
-import Cart from './components/toDoText/toDoTextBox'
+import SignIn from './components/SignPage/SignIn'
+import Cart from './components/ToDO/ToDo'
 import {BrowserRouter, Route,Routes} from 'react-router-dom'
 
 function App() {

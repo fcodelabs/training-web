@@ -2,7 +2,7 @@ import React from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { Button, CardActionArea } from '@mui/material';
 
 export default function cart(props) {
   return (
@@ -15,6 +15,7 @@ export default function cart(props) {
           <Typography variant="body2" color="text.secondary">
             {props.description}
           </Typography>
+          <Button>SeeAll</Button>
         </CardContent>
       </CardActionArea>
     </Card>

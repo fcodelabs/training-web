@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import './SignUp.css';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-import Todo from "../todo/Todo";
+import Todo from "../Todo/Todo";
 import { Link } from "react-router-dom";
 
 const nameData = ["nar",
@@ -167,13 +167,13 @@ const [name,setname] = useState(
   const handleClick = () => {
     const randomResearchTitle = getRandomName();
    setResearchName(randomResearchTitle);
-   //setname = researchName
+   
 
    const name = researchName;
  
   
   setname(name);
-    //console.log(name)
+    console.log(name)
   };
 
 
@@ -195,14 +195,11 @@ return(
       }}>
 
         <p className="headertext">SignUp</p>
-        <p className="nametext">Name</p>
-
-
         <form >
         <TextField
           required
           id="filled-required"
-          label={researchName}        
+          label={"Name" + " : " +researchName}        
           variant="filled"
           fullWidth
           name='Name'
@@ -217,7 +214,7 @@ return(
         <Button sx = {{ m:1}}  onClick={handleClick} >Random</Button>
            <Button type = 'submit' >
           <Link to="/todo">continue</Link> 
-         {/* continue */}
+        
           </Button>
         </div>
         </Box>

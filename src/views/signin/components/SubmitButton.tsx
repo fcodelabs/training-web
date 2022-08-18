@@ -42,8 +42,3 @@ export default function SubmitButton(props: Props) {
     </MaterialStyledButton>
   );
 }
-
-SubmitButton.defaultProps = {
-  disabled: false,
-  onClick: undefined,
-};

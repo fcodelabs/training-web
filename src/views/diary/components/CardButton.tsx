@@ -2,10 +2,9 @@ import { styled as materialStyled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
 const MaterialStyledButton = materialStyled(Button)({
-  background: "#24a0ed",
-  height: 44,
-  width: "130px",
-  borderRadius: 12,
+  background: "#006FFF",
+  height: 40,
+  borderRadius: 24,
   fontFamily: "Nunito",
   fontStyle: "normal",
   fontWeight: 800,
@@ -28,17 +27,17 @@ interface Props {
   onClick?: VoidFunction | undefined;
 }
 
-export default function RandomButton(props: Props) {
+export default function CardButton(props: Props) {
   const { onClick } = props;
 
   return (
     <MaterialStyledButton
       fullWidth
       variant="contained"
-      type="button"
+      type="submit"
       onClick={onClick}
     >
-      Random
+      SUBMIT
     </MaterialStyledButton>
   );
 }

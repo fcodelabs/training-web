@@ -3,11 +3,15 @@ import SignInForm from "../components/SignInForm";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import Image from "../assets/signIn.jpg";
+import { useContext } from "react";
+import { UserContext } from "../../../App";
 
 function SignInPage() {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
-  async function handleSubmit() {
+  async function handleSubmit(values: { nickName: string }) {
+    setUser(values.nickName);
     navigate("/diary", { replace: true });
   }
 
@@ -19,7 +23,10 @@ function SignInPage() {
       style={{ minHeight: "100vh", backgroundImage: `url(${Image})` }}
     >
       <Grid container alignItems="center" justifyContent="center">
-        <Formik initialValues={{ nickName: "" }} onSubmit={handleSubmit}>
+        <Formik
+          initialValues={{ nickName: "" }}
+          onSubmit={(values) => handleSubmit(values)}
+        >
           {({ dirty, setFieldValue }) => (
             <SignInForm dirty={dirty} setFieldValue={setFieldValue} />
           )}

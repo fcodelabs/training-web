@@ -173,7 +173,7 @@ const [name,setname] = useState(
  
   
   setname(name);
-    console.log(name)
+    //console.log(name)
   };
 
 
@@ -195,12 +195,14 @@ return(
       }}>
 
         <p className="headertext">SignUp</p>
+        <p className="nametext">Name</p>
+
 
         <form >
         <TextField
           required
           id="filled-required"
-          label="Name"        
+          label={researchName}        
           variant="filled"
           fullWidth
           name='Name'
@@ -211,10 +213,11 @@ return(
         />
         </form>
         <div>
-        <Button sx = {{ m:2}}  onClick={handleClick} >Random</Button>
+          
+        <Button sx = {{ m:1}}  onClick={handleClick} >Random</Button>
            <Button type = 'submit' >
-          {/* <Link to="/todo">continue</Link> */}
-         continue
+          <Link to="/todo">continue</Link> 
+         {/* continue */}
           </Button>
         </div>
         </Box>

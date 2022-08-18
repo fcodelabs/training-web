@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import Cart from './cart/cart'
+import Cart from './cart/DiaryCard'
 import Box from '@mui/material/Box';
 import './todo.css'
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import Navbar from './layout/Navbar';
+import { ClassNames } from '@emotion/react';
+import { makeStyles } from '@material-ui/core/styles';
 
 export default function Todo() {
 
@@ -16,12 +18,6 @@ export default function Todo() {
 
     const [todos, setTodos] = useState([])
 
-    
-
-   
-
-    
-
     const handleChange = (e) => {
         const name = e.target.name;
         const value= e.target.value;
@@ -31,7 +27,7 @@ export default function Todo() {
         }
     );
 
-    console.log("Details", details)
+    //console.log("Details", details)
 }
 
     const handleSubmit = (e) => {
@@ -43,23 +39,10 @@ export default function Todo() {
       description: ''
     })
   }
-
-
-
-
-
-    const todoarray  =  [
-         { title:details.title, description: details.description},
-        //{
-    //     title:'Hello world 2',
-    //     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'
-    // },
-    // {
-    //     title:'Hello world 3',
-    //     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'
-
-    // }
-    ];
+    // const todoarray  =  [
+    //      { title:details.title, description: details.description},
+       
+    // ];
 
  
     
@@ -80,61 +63,106 @@ export default function Todo() {
 
     };
 
+    const useStyles = makeStyles(theme => ({
+      // root: {
+      //   // borderRadius: "50px 50px 0 0"
+      //   "& > *":{
+      //     margin : theme.spacing(1),
+      //     width : "450px"
+      //   }
+      // },
+      container: {
+        
+      },
+      textField: {
+       
+        // border : " 2px solid blue", 
+        // borderRadius: "15px",
+        width : "450px"
+
+        
+      }
+    }));
+
    
 
   
-
-
+    const classes = useStyles();
+    
 
   return (
     
     <div>
         <Navbar/>
+
+      
+
+        
         <div className='Details  Details-header'>
         <Box
       sx={{
-        width: 'auto',
-        height: 'auto',
+        width: 500,
+        height: 200,
         backgroundColor: 'white',
         opacity: 0.7,
-        borderRadius: '16px',
-        boxShadow: 10,  
+        borderRadius: '20px',
+        boxShadow: 10, 
+
       }}>
+        
+
+
+
         <form onSubmit={handleSubmit}>
-        <TextField
+          <div>
+
+          <input type="text" id="ip2" onChange={handleChange} label="Title" name='title' placeholder="Title" />
+          {/* <TextField
+          sx = {{ m:2}}
           required
-          id="filled-required"
+          id="filled-number"
           label="Title"          
-          variant="filled"
-          fullWidth
+          //variant="outlined"
           name='title'
+          className={classes.textField}
           type='text'
           onChange = {handleChange}
+          
+        /> */}
+          </div>
 
-        />
-        <TextField
+          <div>
+
+          <input type="text" id="ip2" onChange={handleChange} label="Description" name='description' placeholder="Description" />
+    
+          {/* <TextField
           required
-          id="filled-required"
+          id="filled-number"
           label="Description"          
-          variant="filled"
-          fullWidth
+          //variant="outlined"
+          sx = {{ m:1}}
           name='description'
           type='text'
           onChange = {handleChange}
-        />
-        {/* <Button  type = 'submit' >Submit</Button> */}
-        <Button  type = 'submit'>Submit</Button>
+          className={classes.textField}
+          
+        /> */}
+
+          </div>
+        
+       
+        
+        
+        <Button sx = {{ m:1}} type = 'submit'>Submit</Button>
 
         </form>
-
-
         </Box>       
     </div>
 
         <div>
 
         {todolistcomponet()}
-        {/* <Cart title = {updateTitle} description = {updateDescription}/> */}
+        
        
         </div>
         

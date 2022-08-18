@@ -3,13 +3,26 @@
   }
 
   .Details-header {
-    /*background-color: #282c34;*/
+   
     min-height: 10vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* font-size: calc(10px + 2vmin);
-    color: white; */
+   
   }
+
+  .TextField{
+    borderRadius:20px
+  }
+
+  #ip2 {
+    border-radius: 25px;
+    border: 2px solid rgb(3, 65, 254);
+    padding: 20px; 
+    width: 430px;
+    height: 15px;
+    margin: 10px;
+    font-size: medium;    
+}
   

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import './SignUp.css';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-import Todo from "../Todo/Todo";
+import Todo from "../Todo/DiaryHome";
 import { Link } from "react-router-dom";
 
 const nameData = ["nar",

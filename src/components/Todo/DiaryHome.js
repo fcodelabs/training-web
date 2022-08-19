@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Cart from '../Cart/DiaryCard'
 import Box from '@mui/material/Box';
-import './Todo.css'
+import './DiaryHome.css'
 import { Button } from '@mui/material';
 import Navbar from '../Layout/Navbar';
 import { makeStyles } from '@material-ui/core/styles';

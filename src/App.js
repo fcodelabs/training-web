@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import SignUp from './Components/SignUp/SignUp';
 import Navbar from './Components/Layout/Navbar';
-import Todo from './Components/Todo/Todo';
+import Todo from './Components/Todo/DiaryHome';
 
 
 import React, { useState } from "react";

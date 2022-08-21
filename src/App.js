@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import React from 'react';
+//import logo from './logo.svg';
 import './App.css';
+//import reactDom from 'react-dom';
+import { BrowserRouter, Routes ,Route } from 'react-router-dom';
+// import { Switch } from 'react-router-dom';
+import SignIn from './component/sign';
+import Diary from './component/diary';
+import NewCard from './component/newcard';
+
+//import { BrowserRouter as Router, Switch,Route, Redirect,} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-         This is the test app
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+          <Routes>
+            <Route exact path='/' element ={<SignIn/>}/>
+            <Route exact path='/diary' element ={<Diary/>}/>
+            <Route exact path='/card' element ={<NewCard/>}/>
+
+          </Routes>
+      </BrowserRouter>
+    
   );
+
 }
 
 export default App;

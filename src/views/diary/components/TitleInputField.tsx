@@ -27,7 +27,7 @@ export default function TitleInputField() {
         as={StyledInput}
         placeholder="Submit New"
         type="text"
-        required={true}
+        required
         name="title"
         style={{ backgroundColor: "rgba(0, 111, 255, 0.3)" }}
       />

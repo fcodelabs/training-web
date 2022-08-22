@@ -21,7 +21,7 @@ export default function DescriptionInputField() {
         as={StyledInput}
         placeholder="Enter Description"
         type="text"
-        required={true}
+        required
         name="description"
         style={{ backgroundColor: "rgba(0, 111, 255, 0.1)" }}
       />

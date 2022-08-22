@@ -17,6 +17,7 @@ export default function CardForm() {
           width: "95vw",
           backgroundColor: "transparent",
           borderRadius: "12px",
+          marginBottom: "50px",
         }}
       >
         <Grid

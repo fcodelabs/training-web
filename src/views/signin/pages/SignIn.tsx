@@ -3,15 +3,12 @@ import SignInForm from "../components/SignInForm";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import Image from "../assets/signIn.jpg";
-import { useContext } from "react";
-import { UserContext } from "../../../App";
 
 function SignInPage() {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
 
-  async function handleSubmit(values: { nickName: string }) {
-    setUser(values.nickName);
+  function handleSubmit(values: { nickName: string }) {
+    window.localStorage.setItem("nickName", values.nickName);
     navigate("/diary", { replace: true });
   }
 

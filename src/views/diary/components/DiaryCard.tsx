@@ -1,6 +1,4 @@
-import { Box, TextareaAutosize } from "@mui/material";
-import { useContext } from "react";
-import { UserContext } from "../../../App";
+import { Grid, Box, TextareaAutosize } from "@mui/material";
 import styled from "styled-components";
 
 const StyledTitle = styled.p`
@@ -26,22 +24,6 @@ const StyledName = styled.p`
   margin-bottom: 0px;
 `;
 
-const StyledDescription = styled.p`
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 100;
-  font-size: 17px;
-  width: 100%;
-  border: none;
-  outline: none;
-  overflow: hidden;
-  letter-spacing: -0.02em;
-  color: #000000;
-  background-color: transparent;
-  margin-top: 10px;
-  margin-bottom: 20px;
-`;
-
 interface Props {
   title: string;
   name: string;
@@ -50,48 +32,47 @@ interface Props {
 
 function DiaryCard(props: Props) {
   const { title, name, description } = props;
-  const { user } = useContext(UserContext);
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: "#BBF6FF",
-        padding: "0px 10px",
-        width: "300px",
-        marginTop: "40px",
-        marginBottom: "40px",
-        alignItems: "start",
-        justifyContent: "start",
-        borderRadius: "12px",
-      }}
-    >
-      <StyledTitle>{title}</StyledTitle>
-      <StyledName>{name}</StyledName>
-      <TextareaAutosize
-        maxRows={100}
-        aria-label="maximum height"
-        placeholder="Maximum 4 rows"
-        defaultValue={description}
-        readOnly
-        style={{
-          fontFamily: "Nunito",
-          fontStyle: "normal",
-          fontWeight: "100",
-          fontSize: "17px",
-          width: "100%",
-          border: "none",
-          outline: "none",
-          overflow: "hidden",
-          letterSpacing: "-0.02em",
-          color: "#000000",
-          backgroundColor: "transparent",
-          marginTop: "10px",
-          marginBottom: "20px",
-          resize: "none",
+    <Grid item xs={3}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "#BBF6FF",
+          padding: "0px 10px",
+          marginBottom: "7px",
+          alignItems: "start",
+          justifyContent: "start",
+          borderRadius: "12px",
         }}
-      />
-    </Box>
+      >
+        <StyledTitle>{title}</StyledTitle>
+        <StyledName>{name}</StyledName>
+        <TextareaAutosize
+          maxRows={100}
+          aria-label="maximum height"
+          placeholder="Maximum 4 rows"
+          defaultValue={description}
+          readOnly
+          style={{
+            fontFamily: "Nunito",
+            fontStyle: "normal",
+            fontWeight: "100",
+            fontSize: "17px",
+            width: "100%",
+            border: "none",
+            outline: "none",
+            overflow: "hidden",
+            letterSpacing: "-0.02em",
+            color: "#000000",
+            backgroundColor: "transparent",
+            marginTop: "10px",
+            marginBottom: "20px",
+            resize: "none",
+          }}
+        />
+      </Box>
+    </Grid>
   );
 }
 

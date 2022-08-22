@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
-import { UserContext } from "../../../App";
 import Image from "../assets/diary.jpg";
 import styled from "styled-components";
 import { Formik } from "formik";
+import * as Yup from "yup";
 import CardForm from "../components/CardForm";
 import DiaryCard from "../components/DiaryCard";
 
@@ -17,10 +17,26 @@ const StyledTitle = styled.h1`
 `;
 
 function Diary() {
-  const { user } = useContext(UserContext);
+  const [user, setUser] = useState<string | null>();
+  const [diaryCards, setDiaryCards] = useState<
+    { name: any; title: string; description: string }[]
+  >([]);
 
-  async function handleSubmit() {
-    console.log("Yes");
+  useEffect(() => {
+    const user = window.localStorage.getItem("nickName");
+    setUser(user);
+  }, []);
+
+  const validationSchema = Yup.object().shape({
+    title: Yup.string().required(),
+    description: Yup.string().required(),
+  });
+
+  async function handleSubmit(values: { title: string; description: string }) {
+    setDiaryCards((cards) => [
+      ...cards,
+      { name: user, title: values.title, description: values.description },
+    ]);
   }
 
   return (
@@ -38,16 +54,22 @@ function Diary() {
       <Grid item alignItems="start" justifyContent="start">
         <Formik
           initialValues={{ title: "", description: "" }}
-          onSubmit={handleSubmit}
+          onSubmit={(values) => handleSubmit(values)}
+          validationSchema={validationSchema}
         >
           {() => <CardForm />}
         </Formik>
       </Grid>
-      <DiaryCard
-        title="Diary Card"
-        name="Anushka"
-        description="a demo version of the software I saw a demo on how to use the computer program."
-      />
+      <Grid container columnSpacing={1}>
+        {diaryCards.map((card, index) => (
+          <DiaryCard
+            key={index}
+            name={card.name}
+            title={card.title}
+            description={card.description}
+          />
+        ))}
+      </Grid>
     </Grid>
   );
 }

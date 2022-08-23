@@ -15,7 +15,7 @@ import {
   import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 
   
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
 createStyles({
   root: {
     display: "flex",
@@ -37,21 +37,48 @@ const NewCard = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [titleArray, setTitleArray] = useState([]);
+  const [error,seterror] = useState({
+    titlerror:"",descriptionerror:""
+  });
 
   const submitHandler = (e) => {
     e.preventDefault();
-    titleArray.push({ name: title, description: description });
+    if (title==="" && description==="") {
+      seterror({
+        titlerror:"Title is Empty",descriptionerror:"Description is Empty"
+
+      })
+    }
+    else if (description==="") {
+      seterror({
+        descriptionerror:"Description is Empty"
+        
+      })
+    }
+    else if (title==="") {
+      seterror({
+        titlerror:"Title is Empty"
+        
+      })
+    }
+    else{
+    
     let arr = [...titleArray];
+    arr.push({ name: title, description: description });
+    
     setTitleArray(arr);
+    
     setTitle("");
     setDescription("");
-
+    }
     console.log("arr" + titleArray);
     console.log(title);
     console.log(description);
     console.log(titleArray);
   };
   const classes = useStyles();
+  const isEmpty = str => !str.trim().length;
+
 
   return (
     <Container>
@@ -74,7 +101,13 @@ const NewCard = () => {
             fullWidth
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+
           />
+          <span>
+            {
+              error.titlerror
+            }
+          </span>
 
           <div>
             <div>
@@ -92,6 +125,11 @@ const NewCard = () => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
+              <span>
+            {
+              error.descriptionerror
+            }
+          </span>
               <Button
                 type="submit"
                 variant="contained"
@@ -100,10 +138,21 @@ const NewCard = () => {
               >
                 Submit
               </Button>
+              
+                  
+
+                
+
+           
+               
+              
+            
             </div>
           </div>
+
           <div>
       </div>
+
       <div>
         {
        titleArray.map(data => 
@@ -122,6 +171,12 @@ const NewCard = () => {
         )}
        
         </div>
+
+
+        
+        
+          
+        
      
           {/* <Grid container spacing={2}>
             {titleArray.map((e) => (

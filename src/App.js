@@ -4,9 +4,9 @@ import './App.css';
 //import reactDom from 'react-dom';
 import { BrowserRouter, Routes ,Route } from 'react-router-dom';
 // import { Switch } from 'react-router-dom';
-import SignIn from './component/sign';
-import Diary from './component/diary';
-import NewCard from './component/newcard';
+import SignIn from './component/Pages/Sign';
+import Diary from './component/Pages/Diary';
+import NewCard from './component/Pages/NewCard';
 
 //import { BrowserRouter as Router, Switch,Route, Redirect,} from "react-router-dom";
 

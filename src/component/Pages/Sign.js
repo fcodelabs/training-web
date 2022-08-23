@@ -9,7 +9,7 @@ import {useNavigate} from 'react-router-dom'
 
 
 const SignIn=()=>{
-    const paperstyle={padding: 20,height:'30vh',width:500,margin:"20px auto"}
+    const paperstyle={padding: 30,height:'30vh',width:500,margin:"220px auto"}
     const navigate = useNavigate();
 
     // const click = () => { 
@@ -19,24 +19,41 @@ const SignIn=()=>{
     return(
         <Grid>
             <Paper elevation={10} style={paperstyle}>
-        
+            <Grid align='center'> Sign In</Grid>
                 <Grid align='left'>
                      <Avatar>AcUnitIcon</Avatar>Dear Diary</Grid>
-                        <Grid align='center'>Sign In</Grid>
+                        
                 
-                <TextField label="Your Nickname" placeholder="Your Nickname" />
-                
-                      <Button variant="contained">Random</Button><br></br>
+                     <Grid align='center'><TextField label="Your Nickname" placeholder="Your Nickname" />
+                     <Button variant="contained">Random</Button><br></br></Grid>
                       
                 <br></br>
                 {/* <Button onClick={click}variant="contained">Continue</Button> */}
 
-                <Button onClick={() => navigate('/card')}>
+                <Grid align='center'><Button onClick={() => navigate('/card')}>
                 Continue
-                </Button>
+                </Button></Grid>
 
             </Paper>
         </Grid>
+
+            // const names = [
+            //  'John',
+            //  'Jack ',
+            // 'William',
+    
+            //  ];
+
+            // class Container extends Component {
+            //     constructor() {
+            //       super();
+            //       this.state = {
+            //         name: this.getRandomName()
+            //       };
+            //     }
+            //     getRandomName() {
+            //       return names[Math.floor(Math.random() * names.length)];
+            //     }
        
     );
 }

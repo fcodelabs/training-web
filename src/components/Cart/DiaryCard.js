@@ -6,10 +6,10 @@ import { Button, CardActionArea } from '@mui/material';
 
 export default function cart(props) {
   return (
-    <Card sx={{ maxWidth: 'auto',marginLeft: 'auto',m:2,maxHeight:'auto' }}>
+    <Card sx={{ m:2,width:'auto'}} >
       <CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography  gutterBottom variant="h5" component="div" md={5} >
             {props.title}
           </Typography>
           <Typography variant="body1" color="text.secondary">

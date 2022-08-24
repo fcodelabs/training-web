@@ -139,12 +139,6 @@ const NewCard = () => {
                 Submit
               </Button>
               
-                  
-
-                
-
-           
-               
               
             
             </div>

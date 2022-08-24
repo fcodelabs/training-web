@@ -20,9 +20,7 @@ const StyledInput = styled.input`
   }
 `;
 
-export default function TextInputField(props: { nickName: string }) {
-  const { nickName } = props;
-
+export default function TextInputField() {
   return (
     <>
       <Field

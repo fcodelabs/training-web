@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useStore } from "react-redux";
 import { Grid } from "@mui/material";
 import Image from "../assets/diary.jpg";
 import styled from "styled-components";
@@ -6,6 +7,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import CardForm from "../components/CardForm";
 import DiaryCard from "../components/DiaryCard";
+import { State } from "../../../reducer";
 
 const StyledTitle = styled.h1`
   font-style: normal;
@@ -17,15 +19,10 @@ const StyledTitle = styled.h1`
 `;
 
 function Diary() {
-  const [user, setUser] = useState<string | null>();
+  const store = useStore();
   const [diaryCards, setDiaryCards] = useState<
-    { name: any; title: string; description: string }[]
+    { name: string; title: string; description: string }[]
   >([]);
-
-  useEffect(() => {
-    const user = window.localStorage.getItem("nickName");
-    setUser(user);
-  }, []);
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(),
@@ -33,10 +30,32 @@ function Diary() {
   });
 
   async function handleSubmit(values: { title: string; description: string }) {
-    setDiaryCards((cards) => [
-      ...cards,
-      { name: user, title: values.title, description: values.description },
-    ]);
+    const prevState = store.getState() as State;
+    const user = prevState.user;
+    store.dispatch({
+      type: "addCard",
+      payload: {
+        name: user,
+        title: values.title,
+        description: values.description,
+      },
+    });
+    const newState = store.getState() as State;
+    const diaryCards = newState.cards;
+    setDiaryCards(diaryCards);
+  }
+
+  function displayCards(
+    diaryCards: { name: string; title: string; description: string }[]
+  ) {
+    return diaryCards.map((card, index) => (
+      <DiaryCard
+        key={index}
+        name={card.name}
+        title={card.title}
+        description={card.description}
+      />
+    ));
   }
 
   return (
@@ -61,14 +80,7 @@ function Diary() {
         </Formik>
       </Grid>
       <Grid container columnSpacing={1}>
-        {diaryCards.map((card, index) => (
-          <DiaryCard
-            key={index}
-            name={card.name}
-            title={card.title}
-            description={card.description}
-          />
-        ))}
+        {displayCards(diaryCards)}
       </Grid>
     </Grid>
   );

@@ -46,7 +46,7 @@ export default function SignInForm(props: Props) {
           style={{ width: "35vw", backgroundColor: "white" }}
         >
           <Grid item xs={8}>
-            <TextInputField nickName="" />
+            <TextInputField />
           </Grid>
           <Grid item xs={4}>
             <RandomButton onClick={setRandomName} />

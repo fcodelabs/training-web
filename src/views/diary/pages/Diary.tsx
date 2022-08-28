@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStore } from "react-redux";
 import { Grid } from "@mui/material";
 import Image from "../assets/diary.jpg";
@@ -21,8 +21,25 @@ const StyledTitle = styled.h1`
 function Diary() {
   const store = useStore();
   const [diaryCards, setDiaryCards] = useState<
-    { name: string; title: string; description: string }[]
+    { name: string; title: string; description: string; created: string }[]
   >([]);
+
+  useEffect(() => {
+    store.dispatch({
+      type: "getCards",
+    });
+    store.dispatch({
+      type: "addUser",
+      payload: localStorage.getItem("user"),
+    });
+  }, []);
+
+  useEffect(() => {
+    store.subscribe(() => {
+      const initialState = store.getState() as State;
+      setDiaryCards(initialState.cards);
+    });
+  }, []);
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(),
@@ -38,6 +55,7 @@ function Diary() {
         name: user,
         title: values.title,
         description: values.description,
+        created: new Date(),
       },
     });
     const newState = store.getState() as State;

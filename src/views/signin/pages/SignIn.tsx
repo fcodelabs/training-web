@@ -11,6 +11,7 @@ function SignInPage() {
 
   function handleSubmit(values: { nickName: string }) {
     store.dispatch({ type: "addUser", payload: values.nickName });
+    localStorage.setItem("user", values.nickName);
     navigate("/diary", { replace: true });
   }
 

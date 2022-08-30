@@ -1,5 +1,27 @@
 import { Grid, Box, TextareaAutosize } from "@mui/material";
 import styled from "styled-components";
+import { styled as materialStyled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import { useState, useEffect } from "react";
+import { rgba } from "polished";
+
+const SeeMoreButton = materialStyled(Button)({
+  color: "black",
+  background: "transparent",
+  borderRadius: 16,
+  fontFamily: "Nunito",
+  fontStyle: "normal",
+  fontWeight: 400,
+  fontSize: 18,
+  lineHeight: "150%",
+  textAlign: "center",
+  letterSpacing: "-0.02em",
+  textTransform: "capitalize",
+  marginBottom: "10px",
+  "&:hover": {
+    background: rgba(194, 194, 194, 0.2),
+  },
+});
 
 const StyledTitle = styled.p`
   font-family: "Nunito";
@@ -31,7 +53,14 @@ interface Props {
 }
 
 function DiaryCard(props: Props) {
+  const [desc, setDesc] = useState("");
+  const [clicked, setClicked] = useState(false);
   const { title, name, description } = props;
+  useEffect(() => {
+    description.length > 100
+      ? setDesc(description.substring(0, 99).concat("..."))
+      : setDesc(description);
+  }, []);
   return (
     <Grid item xs={3}>
       <Box
@@ -52,7 +81,7 @@ function DiaryCard(props: Props) {
           maxRows={100}
           aria-label="maximum height"
           placeholder="Maximum 4 rows"
-          defaultValue={description}
+          defaultValue={desc}
           readOnly
           style={{
             fontFamily: "Nunito",
@@ -71,6 +100,21 @@ function DiaryCard(props: Props) {
             resize: "none",
           }}
         />
+        {description.length > 100 && (
+          <SeeMoreButton
+            onClick={() => {
+              if (!clicked) {
+                setDesc(description);
+                setClicked(true);
+              } else {
+                setDesc(description.substring(0, 99).concat("..."));
+                setClicked(false);
+              }
+            }}
+          >
+            {!clicked ? "Show More" : "Show Less"}
+          </SeeMoreButton>
+        )}
       </Box>
     </Grid>
   );

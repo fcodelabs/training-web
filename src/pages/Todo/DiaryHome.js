@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { addDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import Cart from "../../components/Cart/DiaryCard";
 import Box from "@mui/material/Box";
 import "./DiaryHome.css";
@@ -6,157 +7,124 @@ import { Button } from "@mui/material";
 import Navbar from "../../components/Layout/Navbar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
-
+//import asyncAction from "../../features/todo/action";
 import { useSelector, useDispatch } from "react-redux";
-import { detailList } from "../../features/todo/todoSlice";
+import todoSlice from "./todoSlice";
+import { detailList } from "./todoSlice";
+import allTodos from "../../utils/firebaseConfig";
+import { useLocation } from "react-router-dom";
 
-function Todo(props) {
+function Todo() {
   /*Redux Task*/
-
-  const Title = useSelector((state) => state.todo.title);
-  const Description = useSelector((state) => state.todo.desc);
-
-  //console.log("Redux",Title,Description)
-  
-  const dispatch = useDispatch();
-
   const [title, setTitle] = useState("");
-  const [description, setdescription] = useState("");
-
-  //console.log("Value",title,description)
-
-  const values = {
-    t: title,
-    d: description,
-  };
-
-  /* Hooks task*/
-
-  // const [details, setDetails] = useState({
-  //   title: "",
-  //   description: "",
-  // });
-
-  // const [todos, setTodos] = useState([]);
-
-  // const handleChange = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-
-  //   setDetails((prev) => {
-  //     return { ...prev, [name]: value };
-  //   });
-  // };
-
-
-  // Use Redux
+  const [description, setDescription] = useState("");
+  const location = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(details);
-    if (Title == "") {
+
+    if (e.target.title.value == "") {
       console.log("Missing title");
     }
-    if (Description == "") {
+    if (e.target.description.value == "") {
       console.log("Missing description");
     }
 
-    // if (details.title != "" && details.description != "") {
-    //   todos.push(details);
-    //   setDetails({
-    //     title: "",
-    //     description: "",
-    //   });
-    // }
+    if (e.target.title.value && e.target.description.value) {
+      dispatch(
+        todoSlice.actions.postAdded({
+          title: e.target.title.value,
+          description: e.target.description.value,
+          name: location.state.inputname,
+        })
+      );
+
+      console.log("Title", title);
+    }
+    setTitle("");
+    setDescription("");
   };
 
-  // const todolistcomponet = () => {
-  //   return todos.map((todo) => (
-  //     <Cart title={todo.title} description={todo.description} />
-  //   ));
-  // };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    let todoArray = [];
+    onSnapshot(allTodos, (snapshot) => {
+      todoArray = [];
+      snapshot.docs.forEach((element) => {
+        todoArray.push(element.data());
+        console.log("Array :", todoArray);
+      });
+      dispatch(todoSlice.actions.saveTodo(todoArray));
+    });
+  }, []);
 
-  // const cartlistcomponet = () => {
-  //   return title.map((n) => (
-  //     // <Cart title={todo.title} description={todo.description} />
-  //     <Cart title={Title[n]} description={Description[n]} />
-
-  //   ));
-  // };
-
+  const todos = useSelector((state) => state.todo.todoList);
   return (
-    <Container>
+    <div>
       <Navbar />
+      <Container>
+        {/* Use redux */}
 
-      {/* Use redux */}
+        <div className=" Details-header">
+          <Box
+            sx={{
+              width: 500,
+              height: 200,
+              backgroundColor: "white",
+              opacity: 0.7,
+              borderRadius: "20px",
+              boxShadow: 10,
+              padding: "20px",
+            }}
+          >
+            <form onSubmit={handleSubmit}>
+              <div>
+                <input
+                  type="text"
+                  id="ip2"
+                  //onChange={handleChange}
+                  label="Title"
+                  name="title"
+                  placeholder="Title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
 
-      <div className="Details  Details-header">
-        <Box
-          sx={{
-            width: 500,
-            height: 200,
-            backgroundColor: "white",
-            opacity: 0.7,
-            borderRadius: "20px",
-            boxShadow: 10,
-          }}
+              <div>
+                <input
+                  type="text"
+                  id="ip2"
+                  // onChange={handleChange}
+                  label="Description"
+                  name="description"
+                  placeholder="Description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+
+              <Button sx={{ m: 1 }} type="submit">
+                Submit
+              </Button>
+            </form>
+          </Box>
+        </div>
+
+        <Grid
+          //item
+          sx={{ m: 2 }}
+          //className={classes.root}
+          container
+          justifyContent="center"
         >
-          <form onSubmit={handleSubmit}>
-            <div>
-              <input
-                type="text"
-                id="ip2"
-                //onChange={handleChange}
-                label="Title"
-                name="title"
-                placeholder="Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <input
-                type="text"
-                id="ip2"
-                // onChange={handleChange}
-                label="Description"
-                name="description"
-                placeholder="Description"
-                value={description}
-                onChange={(e) => setdescription(e.target.value)}
-              />
-            </div>
-
-            {/* <Button sx={{ m: 1 }} type="submit">
-              Submit
-            </Button> */}
-            <Button
-              sx={{ m: 1 }}
-              type="submit"
-              onClick={() => {
-                dispatch(detailList(values));
-                //console.log("DESC", values)
-              }}
-            >
-              Submit
-            </Button>
-          </form>
-        </Box>
-      </div>
-
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        <Grid container spacing={2}>
-          {/* {todolistcomponet()} */}
-         
-          
-          {Title.map((n, i) => (
-            <Cart title={n} description={Description[i]} />
+          {/* container */}
+          {todos.map((n) => (
+            <Cart title={n.title} description={n.description} name={n.name} />
           ))}
-          
         </Grid>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }
 

@@ -4,7 +4,8 @@ import "./SignUp.css";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import Todo from "../Todo/DiaryHome";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import LowPriorityIcon from "@mui/icons-material/LowPriority";
 
 const nameData = [
   "nar",
@@ -130,76 +131,74 @@ const nameData = [
   "Waltheof",
 ];
 
-const getRandomName = () => {
+const getRandomName = (props) => {
   return nameData[Math.floor(Math.random() * nameData.length)];
 };
 
 function SignUp() {
-  const [researchName, setResearchName] = useState(getRandomName());
   const [name, setname] = useState();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setname((prev) => {
-      return { ...prev, [name]: value };
-    });
+    const name = e.target.value;
+    setname(name);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     console.log(name);
+    if (name) {
+      navigate("/todo", {
+        state: { inputname: name },
+      });
+    }
   };
 
   const handleClick = () => {
     const randomResearchTitle = getRandomName();
-    setResearchName(randomResearchTitle);
 
-    const name = researchName;
-
-    setname(name);
-    console.log(name);
+    setname(randomResearchTitle);
+    console.log(randomResearchTitle);
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <Box
-          sx={{
-            width: 500,
-            height: 200,
-            backgroundColor: "white",
-            borderRadius: "16px",
-            boxShadow: 10,
-            color: "text.secondary",
-            opacity: "0.6",
-          }}
-        >
-          <p className="headertext">SignUp</p>
-          <form>
-            <TextField
-              required
-              id="filled-required"
-              label={"Name" + " : " + researchName}
-              variant="filled"
-              fullWidth
-              name="Name"
-              type="text"
-              onChange={handleChange}
-            />
-          </form>
-          <div>
-            <Button sx={{ m: 1 }} onClick={handleClick}>
-              Random
-            </Button>
-            <Button type="submit">
-              <Link to="/todo">continue</Link>
-              {/* continue */}
-            </Button>
-          </div>
-        </Box>
-      </form>
+      <Box
+        sx={{
+          width: 500,
+          height: 200,
+          backgroundColor: "white",
+          borderRadius: "16px",
+          boxShadow: 10,
+          color: "text.secondary",
+          opacity: "0.6",
+        }}
+      >
+        <p className="headertext">
+          {" "}
+          <LowPriorityIcon />
+          SignUp
+        </p>
+        Name
+        <TextField
+          required
+          id="filled-required"
+          variant="filled"
+          value={name}
+          fullWidth
+          name="Name"
+          type="text"
+          onChange={handleChange}
+        />
+        <div>
+          <Button sx={{ m: 1 }} onClick={handleClick} type="button">
+            Random
+          </Button>
+          <Button type="submit" onClick={handleSubmit}>
+            {/* <Link to="/todo">continue</Link> */}
+            continue
+          </Button>
+        </div>
+      </Box>
     </div>
   );
 }

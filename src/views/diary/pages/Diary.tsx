@@ -89,7 +89,10 @@ function Diary() {
       <Grid item alignItems="start" justifyContent="start">
         <Formik
           initialValues={{ title: "", description: "" }}
-          onSubmit={(values) => handleSubmit(values)}
+          onSubmit={(values, { resetForm }) => {
+            handleSubmit(values);
+            resetForm();
+          }}
           validationSchema={validationSchema}
         >
           {() => <CardForm />}

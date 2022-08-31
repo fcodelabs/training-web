@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import CardForm from "../components/CardForm";
 import DiaryCard from "../components/DiaryCard";
 import { State } from "../../../reducer";
+import * as actions from "../../../reducer";
 
 const StyledTitle = styled.h1`
   font-style: normal;
@@ -28,18 +29,15 @@ function Diary() {
     store.dispatch({
       type: "getCards",
     });
-    store.dispatch({
-      type: "addUser",
-      payload: localStorage.getItem("user"),
-    });
+    store.dispatch(actions.addUser({ payload: localStorage.getItem("user") }));
   }, []);
 
   useEffect(() => {
     store.subscribe(() => {
-      const initialState = store.getState() as State;
-      setDiaryCards(initialState.cards);
+      const state = store.getState() as State;
+      setDiaryCards(state.cards);
     });
-  }, []);
+  });
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(),

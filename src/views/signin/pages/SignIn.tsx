@@ -4,13 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import Image from "../assets/signIn.jpg";
 import { useStore } from "react-redux";
+import * as actions from "../../../reducer";
 
 function SignInPage() {
   const navigate = useNavigate();
   const store = useStore();
 
   function handleSubmit(values: { nickName: string }) {
-    store.dispatch({ type: "addUser", payload: values.nickName });
+    store.dispatch(actions.addUser({ payload: values.nickName }));
     localStorage.setItem("user", values.nickName);
     navigate("/diary", { replace: true });
   }

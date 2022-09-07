@@ -1,7 +1,7 @@
 import { Typography,TextField,Button } from "@mui/material"
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { setUser} from '../../state/user';
+import { setUser} from '../state/user';
 import { useNavigate } from "react-router-dom";
 export default function LogIn(){
     const user = useSelector((state)=>state.user.value);

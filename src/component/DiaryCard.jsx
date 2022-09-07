@@ -1,7 +1,7 @@
 import { Typography,TextField,Button,Grid,Paper } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import {useState, useEffect} from "react";
-import {db} from "./firebase";
+import {db} from "../db/firebase";
 import {collection,addDoc,onSnapshot} from "firebase/firestore"
 import { useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";

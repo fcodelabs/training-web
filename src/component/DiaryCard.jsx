@@ -2,11 +2,12 @@ import { Typography,TextField,Button,Grid,Paper } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import {useState, useEffect} from "react";
 import {db} from "../db/firebase";
-import {collection,addDoc,onSnapshot} from "firebase/firestore"
-import { useSelector } from 'react-redux'
+import {collection,addDoc} from "firebase/firestore"
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
+import { getCards } from "../state/slices/cardSlice";
 
-const Item = styled(Paper)(({ theme }) => ({
+const Item = styled(Paper)(( ) => ({
     backgroundColor: "rgba(255, 255,255, 0.7)",
     textAlign: 'start',
     padding:"15px",
@@ -14,25 +15,21 @@ const Item = styled(Paper)(({ theme }) => ({
     boxShadow:"none",
     borderRadius:"12px"
 }));
-
-
 export default function DiaryCard(){
-    const [diaryCards,setDiaryCards] = useState([]);
     const [title,setTitle] = useState("");
     const [description,setDescription] = useState("");
-    const user = useSelector((state)=>state.user.name)
+    const {user,cards} = useSelector((state)=>state)
+    const dispatch = useDispatch();
     let navigate = useNavigate();
-
-    console.log(user);
+    
+    console.log(cards);
     useEffect(()=>{
-        if(!user){
+        if(!user?.name){
             navigate("/");
             return;
         }
-        onSnapshot(collection(db, "diarycards"), (snapshot) => {
-            setDiaryCards(snapshot.docs.map((doc)=>({...doc.data()})))
-        })
-        console.log(diaryCards);
+        console.log("dispatch called")
+        dispatch(getCards());
     },[])
     async function handleSubmit(e){
         e.preventDefault();
@@ -41,9 +38,10 @@ export default function DiaryCard(){
             return ;
         }
         const res = await addDoc(collection(db,"diarycards"),{
-            user,title,description
+            user:user.name,title,description
         });
         console.log("data has been posted!",res);
+        dispatch(getCards());
         setTitle("");
         setDescription("");
     }
@@ -72,7 +70,7 @@ export default function DiaryCard(){
                 />
             </form>
             <Grid container spacing={2} style={{marginTop:"20px"}}>
-                {diaryCards && diaryCards.map((card,idx)=>
+                {cards && cards.map((card,idx)=>
                     <Grid item lg={3} md={6} xs={12} key ={idx}>
                         <Item>
                             <p>

@@ -18,6 +18,8 @@ const Item = styled(Paper)(( ) => ({
 export default function DiaryCard(){
     const [title,setTitle] = useState("");
     const [description,setDescription] = useState("");
+    const [isError,setIsError]=useState(false);
+
     const {user,cards} = useSelector((state)=>state)
     const dispatch = useDispatch();
     let navigate = useNavigate();
@@ -33,8 +35,9 @@ export default function DiaryCard(){
     },[])
     async function handleSubmit(e){
         e.preventDefault();
-        if(title==="" && description===""){
-            alert("error");
+        if(title==="" || description===""){
+            alert("Please provide both Title and Description!");
+            setIsError(true);
             return ;
         }
         const res = await addDoc(collection(db,"diarycards"),{
@@ -52,6 +55,7 @@ export default function DiaryCard(){
                 <div style={{display:"flex", gap:"10px"}}>
                 <TextField 
                     fullWidth 
+                    error={isError}
                     id="outlined-basic" 
                     label="Submit New" 
                     variant="outlined"
@@ -62,6 +66,7 @@ export default function DiaryCard(){
                 </div>
                 <TextField
                     fullWidth 
+                    error={isError}
                     placeholder="Enter Description"
                     multiline
                     rows={4}

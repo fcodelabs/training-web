@@ -18,6 +18,7 @@ export default function LogIn(){
     },[])
     const dispatch = useDispatch()
     const [name,setName] = useState("");
+    const [isError,setIsError]=useState(false);
 
     const handleRNG=()=>{
         setName(nameData[Math.floor(Math.random()*nameData.length)]);
@@ -26,9 +27,11 @@ export default function LogIn(){
 
         if(!name){
             alert("please enter a name to continue");
+            setIsError(true)
             return;
         }
         dispatch(setUser(name));navigate("/home");
+        setIsError(false)
     }
 
     return(
@@ -51,6 +54,7 @@ export default function LogIn(){
                         >
                         <Grid item lg={6}>
                             <TextField 
+                                error={isError}
                                 fullWidth
                                 id="outlined-basic" 
                                 label="Name" 

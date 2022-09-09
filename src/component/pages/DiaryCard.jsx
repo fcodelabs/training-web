@@ -1,11 +1,11 @@
 import { Typography,TextField,Button,Grid,Paper } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import {useState, useEffect} from "react";
-import {db} from "../db/firebase";
+import {db} from "../../db/firebase";
 import {collection,addDoc} from "firebase/firestore"
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
-import { getCards } from "../state/slices/cardSlice";
+import { getCards, postCard } from "../../state/slices/cardSlice";
 
 const Item = styled(Paper)(( ) => ({
     backgroundColor: "rgba(255, 255,255, 0.7)",
@@ -24,26 +24,24 @@ export default function DiaryCard(){
     const dispatch = useDispatch();
     let navigate = useNavigate();
     
-    console.log(cards);
     useEffect(()=>{
         if(!user?.name){
             navigate("/");
             return;
         }
         console.log("dispatch called")
+        console.log("get cards type",getCards.type)
         dispatch(getCards());
     },[])
-    async function handleSubmit(e){
+
+    function handleSubmit(e){
         e.preventDefault();
         if(title==="" || description===""){
             alert("Please provide both Title and Description!");
             setIsError(true);
             return ;
         }
-        const res = await addDoc(collection(db,"diarycards"),{
-            user:user.name,title,description
-        });
-        console.log("data has been posted!",res);
+        dispatch(postCard({name:user.name,title,description}));
         dispatch(getCards());
         setTitle("");
         setDescription("");

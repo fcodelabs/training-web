@@ -1,7 +1,7 @@
 import { Typography,TextField,Button,Grid,Hidden } from "@mui/material"
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { setUser} from '../state/slices/userSlice';
+import { setUser} from '../../state/slices/userSlice';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 

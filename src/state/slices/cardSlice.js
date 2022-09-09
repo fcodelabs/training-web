@@ -7,6 +7,7 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {
     getCards(){},
+    postCard(){},
     setCards:(state,action)=>{
       let cards =action.payload.res;
       console.log(cards)
@@ -16,6 +17,6 @@ export const cardSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { getCards,setCards } = cardSlice.actions
+export const { getCards,setCards,postCard } = cardSlice.actions
 
 export default cardSlice.reducer

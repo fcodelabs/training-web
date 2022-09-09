@@ -1,7 +1,7 @@
 import './App.css';
 import {Route,Routes,BrowserRouter} from "react-router-dom"
-import DiaryCard from './component/DiaryCard';
-import LogIn from './component/LogIn';
+import DiaryCard from './component/pages/DiaryCard';
+import LogIn from './component/pages/LogIn';
 function App() {
   return (
       <BrowserRouter>

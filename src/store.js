@@ -1,0 +1,1 @@
+export const RandomName=["Lahiru","Abdul","Rashmi","Rishini"]

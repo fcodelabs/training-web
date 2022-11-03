@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import Box from "@mui/material/Box";
 // eslint-disable-next-line
 import FilledInput from "@mui/material/FilledInput";
@@ -25,6 +26,7 @@ export default function SignIn() {
   const [activeContinue, setActiveContinue] = useState(false);
   const [name, setName] = useState("");
   const [requiredMessage, setRequiredMessage] = useState("");
+  const navigate = useNavigate();
 
   const generateRandomName = () => {
     const names = ["Aiden", "Brew", "John", "Zahir", "Jessica", "Lyan"];
@@ -43,6 +45,14 @@ export default function SignIn() {
     }
     setName(e.target.value);
   };
+
+  const navigateToHome = () => {
+    if (name.length > 0) {
+      navigate("/home");
+    } else {
+      setRequiredMessage("Name is required");
+    }
+  }
 
   return (
     <Box item xs={3}>
@@ -114,6 +124,7 @@ export default function SignIn() {
                   backgroundColor: "#0097A7",
                   ":hover": { backgroundColor: "#0097A7" },
                 }}
+                onClick={navigateToHome}
               >
                 Continue <ArrowRightAltIcon />
               </Button>
@@ -137,6 +148,7 @@ export default function SignIn() {
           </CardContent>
         </Box>
       </Card>
+      
     </Box>
   );
 }

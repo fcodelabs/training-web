@@ -1,12 +1,11 @@
 import "./App.css";
-import Signin from "./pages/SignIn/sign-in.jsx";
+import SignIn from "./pages/SignIn/sign-in.js";
 
 function App() {
   return (
     <div>
-        <Signin />
+      <SignIn />
     </div>
-    
   );
 }
 

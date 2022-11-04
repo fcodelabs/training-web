@@ -82,8 +82,11 @@ const DiaryHome = () => {
               backgroundColor:'#09aee8',
               border:'1px solid transparent',
               color:'black',
-              fontSize:'18px'}}
+              fontSize:'18px',
+              position:'relative',
+              left:'1rem'}}
               onClick={(e)=>{expandField()}}
+              hintText="Type"
             className="textField" 
             placeHolder="Your Nickname" 
             // value={userName}
@@ -93,7 +96,7 @@ const DiaryHome = () => {
         <Button variant="contained"
          style1={{display:"inline-block", top: '9rem',position: 'absolute',left: '80rem',display:btnVisibility}} 
          style2={{border:' 1px solid transparent',borderRadius: '25px',top:'-2rem',height:'2rem'}}
-        className="randomBtn" placeHolder='RANDOM' onClick={()=>{submitNewCard()}}/>
+        className="submitBtn" placeHolder='SUBMIT' onClick={()=>{submitNewCard()}}/>
 
             <TextareaAutosize aria-label="minimum height" minRows={3} placeholder="Enter Description" 
             style={{ width: '98%',

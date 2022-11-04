@@ -14,7 +14,7 @@ export default function BasicTextFields(props) {
       
       style={props.style}
     >
-      <TextField id="standard-basic"  hintText={props.hintText} label={props.placeHolder} onClick={props.onClick} value={props.value} onChange={props.onChange} variant="standard" />
+      <TextField id="standard-basic" style={props.style2} hintText={props.hintText} label={props.placeHolder} onClick={props.onClick} value={props.value} onChange={props.onChange} variant="standard" />
     </Box>
   );
 }

@@ -37,15 +37,13 @@ const DiaryHome = () => {
   // collaps functions
   const[style,setStyle]=useState('9rem');
   const[btnVisibility,setbtnVisibility]=useState('none');
+  const[textFieldLength,settextFieldLength]=useState('25rem');
+  const[duration,setDuaration]=useState()
   function expandField(){
-    console.log("hello")
-    var status='collaps'
-    if(status=='collaps'){
       setStyle('21rem')
       setbtnVisibility('block')
-      status='expand';
-    }
-    
+      settextFieldLength('75rem')
+      setDuaration('1s')
   }
 
 
@@ -53,15 +51,16 @@ const DiaryHome = () => {
   function submitNewCard(){
     setStyle('9rem')
     setbtnVisibility('none')
+    settextFieldLength('25rem')
+    setDuaration('1s')
   }
 
   return (
     <>
     {/* header bar */}
-      <Grid className='mainGrid' item l={12}>
+      <Grid className='mainGrid' item lg={12}>
           <Item><HeaderBar className='navBar'/></Item>
         </Grid>
-
 
         {/* main grid */}
     <div className='DiaryHome' >
@@ -69,7 +68,7 @@ const DiaryHome = () => {
 
             {/* text input area */}
          <Grid className='textInputArea' xs={12}>
-          <Item2 className='content'   style={{width:'100%',height:style}}>
+          <Item2 className='content'   style={{width:'100%',height:style,transition:'all',transitionDuration:duration}}>
 
             <h1 style={{display:'flex',color:'white'}}>Home</h1>
 
@@ -84,7 +83,12 @@ const DiaryHome = () => {
               color:'black',
               fontSize:'18px',
               position:'relative',
-              left:'1rem'}}
+              left:'1rem',}}
+              style2={{
+                width:textFieldLength,
+                transition:'all',
+                transitionDuration:duration
+              }}
               onClick={(e)=>{expandField()}}
               hintText="Type"
             className="textField" 

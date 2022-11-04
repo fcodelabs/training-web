@@ -1,0 +1,28 @@
+.container{
+    background-Image: url("./img.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-Items: center;
+    justify-Content: center;
+}
+
+.text{
+   
+    border-Radius:30px !important;
+    background-Color: #b3d4fc;
+    
+  
+}
+
+.btn{
+    width: 15%;
+    border-Radius: 30px !important;
+    
+    
+}
+
+
+

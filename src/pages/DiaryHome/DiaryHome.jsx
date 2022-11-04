@@ -36,12 +36,14 @@ const DiaryHome = () => {
 
   // collaps functions
   const[style,setStyle]=useState('9rem');
-  const[btnVisibility,setbtnVisibility]=useState('none');
+  const[descVisiility,setDescVisiility]=useState('none');
+  const[btnVisibility,setBtnVisibility]=useState('none');
   const[textFieldLength,settextFieldLength]=useState('25rem');
   const[duration,setDuaration]=useState()
   function expandField(){
       setStyle('21rem')
-      setbtnVisibility('block')
+      setBtnVisibility('block')
+      setDescVisiility('block')
       settextFieldLength('75rem')
       setDuaration('1s')
   }
@@ -50,8 +52,9 @@ const DiaryHome = () => {
   //btn function
   function submitNewCard(){
     setStyle('9rem')
-    setbtnVisibility('none')
+    setBtnVisibility('none')
     settextFieldLength('25rem')
+    setDescVisiility('none')
     setDuaration('1s')
   }
 
@@ -92,7 +95,7 @@ const DiaryHome = () => {
               onClick={(e)=>{expandField()}}
               hintText="Type"
             className="textField" 
-            placeHolder="Your Nickname" 
+            placeHolder="Submit New" 
             // value={userName}
             // onChange={e=>{setUserName(e.target.value)}}
             />
@@ -109,16 +112,21 @@ const DiaryHome = () => {
             backgroundColor:'rgb(80 198 239)',
             border:'1px solid transparent',
             color:'black',
-            fontSize:'18px' }} />
+            fontSize:'18px' ,
+            display:descVisiility
+            }} />
             </Item2>
          </Grid>
 
 
           {/*cards*/}
         <Grid item xs={3}>
-          <Item><DiaryCard/></Item>
+          <Item><DiaryCard 
+          title={"hello"} 
+          name={'kasun'} 
+          description={'loremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgts'}/></Item>
         </Grid>
-        <Grid item xs={3}>
+        {/* <Grid item xs={3}>
           <Item><DiaryCard/></Item>
         </Grid>
         <Grid item xs={3}>
@@ -139,7 +147,7 @@ const DiaryHome = () => {
         </Grid>
         <Grid item xs={3}>
           <Item><DiaryCard/></Item>
-        </Grid>
+        </Grid> */}
 
         
 

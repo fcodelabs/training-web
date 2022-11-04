@@ -1,0 +1,17 @@
+.DiaryHome{
+   background-color: #0fbcf9;
+   position: relative;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+}
+.mainGrid{
+   overflow: hidden;
+}
+.textInputArea{
+   background-color: #0fbcf9;
+}
+

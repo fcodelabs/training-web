@@ -11,9 +11,10 @@ export default function BasicTextFields(props) {
       }}
       noValidate
       autoComplete="off"
-      style={{display:"inline-block"}}
+      
+      style={props.style}
     >
-      <TextField id="standard-basic" label={props.placeHolder} value={props.value} onChange={props.onChange} variant="standard" />
+      <TextField id="standard-basic" label={props.placeHolder} onClick={props.onClick} value={props.value} onChange={props.onChange} variant="standard" />
     </Box>
   );
 }

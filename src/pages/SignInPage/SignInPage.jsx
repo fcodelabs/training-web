@@ -38,6 +38,7 @@ function setRandomName(){
         <TextField 
         className="textField" 
         placeHolder="Your Nickname" 
+        style={{display:'inline-block'}}
         value={userName}
         onChange={e=>{setUserName(e.target.value)}}
         />
@@ -50,7 +51,7 @@ function setRandomName(){
 
         <Button variant="contained" style={{display:"block"}} 
         style2={{border:' 1px solid transparent',borderRadius: '25px',top:'1rem',height:'2rem',left:'40%'}}
-        className="signInBtn" placeHolder='CONTINUE' disabled={disabled} onClick={()=>{navigate("/Dashboard")}}/>
+        className="signInBtn" placeHolder='CONTINUE' disabled={disabled} onClick={()=>{navigate("/DiaryHome")}}/>
         
         </div>
     </div>

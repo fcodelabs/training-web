@@ -39,8 +39,8 @@ const[description2,setDiscription2]=useState("")
 const[dot,setDot]=useState('')
  useEffect(()=>{
          if(temp1.length>100){
-            setDiscription1(temp1.substring(0,temp1.length-100))
-            setDiscription2(temp1.substring(temp1.length-100,temp1.length))
+            setDiscription1(temp1.substring(0,temp1.length-80))
+            setDiscription2(temp1.substring(temp1.length-80,temp1.length))
             if(expanded==false){
                 setDot('block')
             }else{
@@ -50,6 +50,7 @@ const[dot,setDot]=useState('')
          }else{
             setDiscription1(temp1)
             setDiscription2("")
+            setDot('none')
          }
  })
   const [expanded, setExpanded] = useState(false);

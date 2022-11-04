@@ -43,7 +43,7 @@ const DiaryHome = () => {
   function expandField(){
       setStyle('21rem')
       setBtnVisibility('block')
-      setDescVisiility('block')
+      setDescVisiility('inline')
       settextFieldLength('75rem')
       setDuaration('1s')
   }
@@ -59,7 +59,7 @@ const DiaryHome = () => {
   }
 
   return (
-    <>
+    <div className='mainDashboard'>
     {/* header bar */}
       <Grid className='mainGrid' item lg={12}>
           <Item><HeaderBar className='navBar'/></Item>
@@ -120,42 +120,38 @@ const DiaryHome = () => {
 
 
           {/*cards*/}
+
         <Grid item xs={3}>
           <Item><DiaryCard 
           title={"hello"} 
           name={'kasun'} 
           description={'loremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgts'}/></Item>
         </Grid>
-        {/* <Grid item xs={3}>
-          <Item><DiaryCard/></Item>
-        </Grid>
+
         <Grid item xs={3}>
-          <Item><DiaryCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><DiaryCard/></Item>
+          <Item><DiaryCard 
+          title={"hello"} 
+          name={'kasun'} 
+          description={'loremfsgsfgs sfgsfgs sfgsfgsfgfgsfgsfg sfsfgswrsfbxsdadgts'}/></Item>
         </Grid>
 
         <Grid item xs={3}>
-          <Item><DiaryCard/></Item>
+          <Item><DiaryCard 
+          title={"hello"} 
+          name={'kasun'} 
+          description={'loremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgts'}/></Item>
         </Grid>
+
         <Grid item xs={3}>
-          <Item><DiaryCard/></Item>
+          <Item><DiaryCard 
+          title={"hello"} 
+          name={'kasun'} 
+          description={'loremfsgsfgssfgsfgs sfgsfgsfg  sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgts'}/></Item>
         </Grid>
-        <Grid item xs={3}>
-          <Item><DiaryCard/></Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item><DiaryCard/></Item>
-        </Grid> */}
-
-        
-
-
         
       </Grid>
     </div>
-    </>
+    </div>
   )
 }
 

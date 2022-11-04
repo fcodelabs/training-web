@@ -10,8 +10,11 @@
 }
 .mainGrid{
    overflow: hidden;
+  
 }
 .textInputArea{
    background-color: #0fbcf9;
 }
-
+.mainDashboard{
+   background-color: #0fbcf9;
+}

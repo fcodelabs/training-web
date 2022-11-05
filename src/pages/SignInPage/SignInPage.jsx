@@ -4,20 +4,28 @@ import Button from '../../components/Buttons/Button'
 import TextField from '../../components/TextField/TextField'
 import { useNavigate } from 'react-router-dom'
 import Logo from '../../utils/assets/star.jpg'
-const SignInPage = () => {
 
-    const navigate=useNavigate();
+
+const SignInPage = () => {
 
     const[userName,setUserName]=useState("");
     const[disabled,setDisable]=new useState(Boolean)
 
     useEffect(()=>{
-        console.log(userName)
+        //console.log(userName)
         if(userName==null || userName=="")
           setDisable(true)
         else  
           setDisable(false)
     },[userName])
+
+    //page navigation
+    const navigate=useNavigate();
+    const openDiaryForm=(data)=>{
+      navigate("/DiaryHome",{
+        state:{
+          data:userName}})
+    }
 
 function setRandomName(){
   // let r = (Math.random() + 1).toString(36).substring(7);
@@ -51,7 +59,7 @@ function setRandomName(){
 
         <Button variant="contained" style={{display:"block"}} 
         style2={{border:' 1px solid transparent',borderRadius: '25px',top:'1rem',height:'2rem',left:'40%'}}
-        className="signInBtn" placeHolder='CONTINUE' disabled={disabled} onClick={()=>{navigate("/DiaryHome")}}/>
+        className="signInBtn" placeHolder='CONTINUE' disabled={disabled} onClick={openDiaryForm}/>
         
         </div>
     </div>

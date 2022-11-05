@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate,navigation,useLocation } from 'react-router-dom'
+import {BrowserRouter,Route,Routes}from 'react-router-dom'
 
 import './DiaryHome.css'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
@@ -17,6 +19,7 @@ import DiaryCard from '../../components/DiaryCard/DiaryCard'
 import HeaderBar from '../../components/HeaderBar/HeaderBar'
 import Button from '../../components/Buttons/Button'
 import TextField from '../../components/TextField/TextField'
+import { render } from '@testing-library/react';
 
 const Item = styled(Paper)(({ theme }) => ({
     //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -35,19 +38,26 @@ const Item = styled(Paper)(({ theme }) => ({
 const DiaryHome = () => {
 
   // collaps functions
+ const location=useLocation();
+ const data=location.state.data;
   const[style,setStyle]=useState('9rem');
   const[descVisiility,setDescVisiility]=useState('none');
   const[btnVisibility,setBtnVisibility]=useState('none');
   const[textFieldLength,settextFieldLength]=useState('25rem');
   const[duration,setDuaration]=useState()
+  const [card, setCard] = useState([]);
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
+
+
+  //expand 
   function expandField(){
       setStyle('21rem')
       setBtnVisibility('block')
-      setDescVisiility('block')
+      setDescVisiility('inline')
       settextFieldLength('75rem')
       setDuaration('1s')
   }
-
 
   //btn function
   function submitNewCard(){
@@ -56,12 +66,32 @@ const DiaryHome = () => {
     settextFieldLength('25rem')
     setDescVisiility('none')
     setDuaration('1s')
+   
+    console.log(data)
+
+    if(title==""){
+      console.log("Missing title")
+  }else if( description==""){
+    console.log("Missing description")
+  }else{
+    setCard(card.concat(
+      <Grid item xs={3}>
+      <Item><DiaryCard 
+       title={title} 
+      name={data} 
+       description={description}/></Item>
+      </Grid>
+    ))
+  }
+
+    setTitle('')
+    setDescription('')
   }
 
   return (
     <>
     {/* header bar */}
-      <Grid className='mainGrid' item lg={12}>
+      <Grid container className='mainGrid' item lg={12}>
           <Item><HeaderBar className='navBar'/></Item>
         </Grid>
 
@@ -96,8 +126,8 @@ const DiaryHome = () => {
               hintText="Type"
             className="textField" 
             placeHolder="Submit New" 
-            // value={userName}
-            // onChange={e=>{setUserName(e.target.value)}}
+             value={title}
+             onChange={e=>{setTitle(e.target.value)}}
             />
   
         <Button variant="contained"
@@ -106,7 +136,8 @@ const DiaryHome = () => {
         className="submitBtn" placeHolder='SUBMIT' onClick={()=>{submitNewCard()}}/>
 
             <TextareaAutosize aria-label="minimum height" minRows={3} placeholder="Enter Description" 
-            style={{ width: '98%',
+            style={{ 
+            width: '98%',
             height:'10rem',
             borderRadius:'10px',
             backgroundColor:'rgb(80 198 239)',
@@ -114,18 +145,24 @@ const DiaryHome = () => {
             color:'black',
             fontSize:'18px' ,
             display:descVisiility
-            }} />
+            }} 
+            value={description}
+             onChange={e=>{setDescription(e.target.value)}}
+            />
             </Item2>
          </Grid>
 
 
           {/*cards*/}
-        <Grid item xs={3}>
-          <Item><DiaryCard 
-          title={"hello"} 
-          name={'kasun'} 
-          description={'loremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgts'}/></Item>
-        </Grid>
+           <Grid item xs={3}>
+              <Item><DiaryCard 
+               title={"hello"} 
+              name={'kasun'} 
+               description={'loremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgtsloremfsgsfgs sfgsfgs sfgsfgsfg sfsfgswrsfbxsdadgts'}/></Item>
+              </Grid>
+
+              {card}
+       
         {/* <Grid item xs={3}>
           <Item><DiaryCard/></Item>
         </Grid>
@@ -148,11 +185,6 @@ const DiaryHome = () => {
         <Grid item xs={3}>
           <Item><DiaryCard/></Item>
         </Grid> */}
-
-        
-
-
-        
       </Grid>
     </div>
     </>

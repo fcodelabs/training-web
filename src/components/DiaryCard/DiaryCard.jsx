@@ -34,15 +34,19 @@ export default function DiaryCard(props) {
 const titleText=props.title
 const name=props.name
 var temp1=props.description
+
 const[description1,setDiscription1]=useState("")
 const[description2,setDiscription2]=useState("")
 const[dot,setDot]=useState('')
+const[expandMore,setExpandMore]=useState('none')
  useEffect(()=>{
          if(temp1.length>100){
-            setDiscription1(temp1.substring(0,temp1.length-100))
-            setDiscription2(temp1.substring(temp1.length-100,temp1.length))
+          setExpandMore('block')
+            setDiscription1(temp1.substring(0,80))
+            setDiscription2(temp1.substring(80,temp1.length))
             if(expanded==false){
                 setDot('block')
+                
             }else{
                 setDot('none')
             }
@@ -50,6 +54,7 @@ const[dot,setDot]=useState('')
          }else{
             setDiscription1(temp1)
             setDiscription2("")
+            setDot('none')
          }
  })
   const [expanded, setExpanded] = useState(false);
@@ -99,6 +104,7 @@ const[dot,setDot]=useState('')
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
+          style={{display:expandMore}}
         >
           <ExpandMoreIcon />
         </ExpandMore>

@@ -13,7 +13,7 @@ const bull = (
   ></Box>
 );
 
-export default function DiaryCard() {
+export default function DiaryCard({title, description}) {
   const [handleDescriptionLineClamp, setHandleDescriptionLineClamp] =
     React.useState(3);
 
@@ -38,7 +38,7 @@ export default function DiaryCard() {
     >
       <CardContent>
         <Typography variant="h6" component="div">
-          Title
+          {title}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           nick name
@@ -54,10 +54,7 @@ export default function DiaryCard() {
               WebkitBoxOrient: "vertical",
             }}
           >
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            {description}
           </Box>
         </Typography>
       </CardContent>

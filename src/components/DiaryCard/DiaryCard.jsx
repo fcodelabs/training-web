@@ -1,11 +1,12 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import CardHeader from '@mui/material/CardHeader';
 import { useState, useEffect } from "react";
+
 
 
 export default function DiaryCard(props) {
@@ -31,12 +32,12 @@ export default function DiaryCard(props) {
     function handleShowMore() {
 
         if (label == "SHOW MORE") {
-           
+
             setText(props.description);
-          
+
         } else {
             setText(props.description.substring(1, 100) + "...");
-           
+
         }
 
         var tempLabel = (label == "SHOW MORE") ? "SHOW LESS" : "SHOW MORE";
@@ -46,21 +47,21 @@ export default function DiaryCard(props) {
 
 
     return (
-        <Card sx={{ minWidth: 275 }} style={{ backgroundColor: props.color }}>
+
+        <Card sx={{ maxWidth: 400,minWidth:275}} style={{backgroundColor:props.color}}>
+             <CardHeader
+                title={props.title}
+                subheader={props.subTitle}
+            />
             <CardContent>
-                <Typography variant="h5" component="div">
-                    {props.title}
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {props.subTitle}
-                </Typography>
-                <Typography variant="body2">
+                <Typography>
                     {text}
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" style={{ color: 'black' ,display:visibility}} onClick={handleShowMore} >{label}</Button>
+                <Button size="small" style={{display:visibility}} onClick={handleShowMore} >{label}</Button>
             </CardActions>
         </Card>
     );
 }
+

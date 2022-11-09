@@ -5,26 +5,30 @@ import TextField from '../../components/TextField/TextField'
 import { useNavigate } from 'react-router-dom'
 import Logo from '../../utils/assets/star.jpg'
 
+import { useSelector,useDispatch } from 'react-redux';
 
 const SignInPage = () => {
 
-    const[userName,setUserName]=useState("");
-    const[disabled,setDisable]=new useState(Boolean)
+    //const[userName,setUserName]=useState("");
+    //const[disabled,setDisable]=new useState(Boolean)
+
+const userName=useSelector((state)=>state.signInPage.userName)
+const disabled=useSelector((state)=>state.signInPage.disabled)
+
+const dispatch=useDispatch()
 
     useEffect(()=>{
         //console.log(userName)
         if(userName==null || userName=="")
-          setDisable(true)
+        dispatch({type:'disabled',value:true})
         else  
-          setDisable(false)
+        dispatch({type:'disabled',value:false})
     },[userName])
 
     //page navigation
     const navigate=useNavigate();
     const openDiaryForm=(data)=>{
-      navigate("/DiaryHome",{
-        state:{
-          data:userName}})
+      navigate("/DiaryHome")
     }
 
 function setRandomName(){
@@ -33,7 +37,8 @@ function setRandomName(){
  
   const randomName=["Lahiru","Abdul","Rashmi","Rishini"]
   let name=randomName[Math.floor(Math.random()*randomName.length)]
-  setUserName(name) 
+  //setUserName(name) 
+  dispatch({type:'userName',value:name})
 }
 
   return (
@@ -48,7 +53,7 @@ function setRandomName(){
         placeHolder="Your Nickname" 
         style={{display:'inline-block'}}
         value={userName}
-        onChange={e=>{setUserName(e.target.value)}}
+        onChange={e=>{dispatch({type:'userName',value:e.target.value})}}
         />
        
         <Button variant="contained"

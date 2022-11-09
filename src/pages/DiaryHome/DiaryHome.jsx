@@ -21,6 +21,9 @@ import Button from '../../components/Buttons/Button'
 import TextField from '../../components/TextField/TextField'
 import { render } from '@testing-library/react';
 
+import { useSelector,useDispatch } from 'react-redux';
+
+
 const Item = styled(Paper)(({ theme }) => ({
     //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     //...theme.typography.body2,
@@ -35,37 +38,68 @@ const Item = styled(Paper)(({ theme }) => ({
     backgroundColor:'#09aee8'
   }));
   
+
+
+
 const DiaryHome = () => {
 
   // collaps functions
- const location=useLocation();
- const data=location.state.data;
-  const[style,setStyle]=useState('9rem');
-  const[descVisiility,setDescVisiility]=useState('none');
-  const[btnVisibility,setBtnVisibility]=useState('none');
-  const[textFieldLength,settextFieldLength]=useState('25rem');
-  const[duration,setDuaration]=useState()
-  const [card, setCard] = useState([]);
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
+ 
 
+ //(local state)====================
+  //const[txtAreaStyle,setTxtAreaStyle]=useState('9rem');
+  //const[descVisiility,setDescVisiility]=useState('none');
+  //const[btnVisibility,setBtnVisibility]=useState('none');
+  //const[textFieldLength,settextFieldLength]=useState('25rem');
+ // const[duration,setDuaration]=useState()
+  const [card, setCard] = useState([]);
+  //const [title, setTitle] = useState("");
+  //const [description, setDescription] = useState("");
+
+  //(global state(redux))====================
+  const descVisiility=useSelector((state)=>state.diaryHome.descVisiility)
+  const btnVisibility=useSelector((state)=>state.diaryHome.btnVisibility)
+  const txtAreaStyle=useSelector((state)=>state.diaryHome.txtAreaStyle)
+  const textFieldLength=useSelector((state)=>state.diaryHome.textFieldLength)
+  const duration=useSelector((state)=>state.diaryHome.duration)
+  const title=useSelector((state)=>state.diaryHome.title)
+  const description=useSelector((state)=>state.diaryHome.description)
+  const dispatch=useDispatch()
 
   //expand 
   function expandField(){
-      setStyle('21rem')
-      setBtnVisibility('block')
-      setDescVisiility('inline')
-      settextFieldLength('75rem')
-      setDuaration('1s')
+       // setTxtAreaStyle('21rem')
+      //setBtnVisibility('block')
+     // setDescVisiility('inline')
+     // settextFieldLength('75rem')
+     // setDuaration('1s')
+
+      dispatch({type:'descVisiility',value:'inline'})
+      dispatch({type:'btnVisibility',value:'block'})
+      dispatch({type:'txtAreaStyle',value:'21rem'})
+      dispatch({type:'textFieldLength',value:'75rem'})
+      dispatch({type:'duration',value:'1s'})
   }
+
+
+//get username
+  //const location=useLocation();
+  //const data=location.state.data;
+  const data=useSelector((state)=>state.signInPage.userName)
 
   //btn function
   function submitNewCard(){
-    setStyle('9rem')
-    setBtnVisibility('none')
-    settextFieldLength('25rem')
-    setDescVisiility('none')
-    setDuaration('1s')
+       //setTxtAreaStyle('9rem')
+      //setBtnVisibility('none') 
+     //setDescVisiility('none')
+    //settextFieldLength('25rem')
+    //setDuaration('1s')
+
+    dispatch({type:'descVisiility',value:'none'})
+    dispatch({type:'btnVisibility',value:'none'})
+    dispatch({type:'txtAreaStyle',value:'9rem'})
+    dispatch({type:'textFieldLength',value:'25rem'})
+    dispatch({type:'duration',value:'1s'})
    
     console.log(data)
 
@@ -84,8 +118,10 @@ const DiaryHome = () => {
     ))
   }
 
-    setTitle('')
-    setDescription('')
+    //setTitle('')
+    //setDescription('')
+    dispatch({type:'title',value:''})
+    dispatch({type:'description',value:''})
   }
 
   return (
@@ -101,7 +137,7 @@ const DiaryHome = () => {
 
             {/* text input area */}
          <Grid className='textInputArea' xs={12}>
-          <Item2 className='content'   style={{width:'100%',height:style,transition:'all',transitionDuration:duration}}>
+          <Item2 className='content'   style={{width:'100%',height:txtAreaStyle,transition:'all',transitionDuration:duration}}>
 
             <h1 style={{display:'flex',color:'white'}}>Home</h1>
 
@@ -127,7 +163,7 @@ const DiaryHome = () => {
             className="textField" 
             placeHolder="Submit New" 
              value={title}
-             onChange={e=>{setTitle(e.target.value)}}
+             onChange={e=>{dispatch({type:'title',value:e.target.value})}}
             />
   
         <Button variant="contained"
@@ -147,7 +183,7 @@ const DiaryHome = () => {
             display:descVisiility
             }} 
             value={description}
-             onChange={e=>{setDescription(e.target.value)}}
+             onChange={e=>{dispatch({type:'description',value:e.target.value})}}
             />
             </Item2>
          </Grid>

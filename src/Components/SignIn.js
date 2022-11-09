@@ -1,22 +1,11 @@
 import React, { useState } from "react";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
-// eslint-disable-next-line
-import FilledInput from "@mui/material/FilledInput";
 import FormControl from "@mui/material/FormControl";
-// eslint-disable-next-line
 import FormHelperText from "@mui/material/FormHelperText";
-// eslint-disable-next-line
-import Input from "@mui/material/Input";
-// eslint-disable-next-line
-import InputLabel from "@mui/material/InputLabel";
-// eslint-disable-next-line
-import OutlinedInput from "@mui/material/OutlinedInput";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-// eslint-disable-next-line
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -32,6 +21,7 @@ export default function SignIn() {
     const names = ["Aiden", "Brew", "John", "Zahir", "Jessica", "Lyan"];
     const randomIndex = Math.floor(Math.random() * names.length);
     setName(names[randomIndex]);
+    setActiveContinue(true);
   };
 
   const handleInput = (e) => {
@@ -52,10 +42,12 @@ export default function SignIn() {
     } else {
       setRequiredMessage("Name is required");
     }
-  }
+  };
+
+  localStorage.setItem("name", name);
 
   return (
-    <Box item xs={3}>
+    <Box item xs={3} sx={{opacity: 0.7}}>
       <Card variant="outlined">
         <Box
           component="form"
@@ -65,12 +57,11 @@ export default function SignIn() {
           alignItems="center"
           justifyContent="center"
           style={{ minHeight: "30vh" }}
-          bgcolor="white"
           sx={{ borderRadius: "40px" }}
         >
           <CardContent>
             <Typography
-              sx={{ fontSize: 30, color: "#0097A7", my: 2, fontWeight: 'bold' }}
+              sx={{ fontSize: 30, color: "#0097A7", my: 2, fontWeight: "bold" }}
               gutterBottom
             >
               Sign In
@@ -148,7 +139,6 @@ export default function SignIn() {
           </CardContent>
         </Box>
       </Card>
-      
     </Box>
   );
 }

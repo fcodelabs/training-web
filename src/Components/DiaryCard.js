@@ -6,14 +6,8 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  ></Box>
-);
 
-export default function DiaryCard({title, description}) {
+export default function DiaryCard({key, title, name, description}) {
   const [handleDescriptionLineClamp, setHandleDescriptionLineClamp] =
     React.useState(3);
 
@@ -40,11 +34,10 @@ export default function DiaryCard({title, description}) {
         <Typography variant="h6" component="div">
           {title}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          nick name
+        <Typography sx={{ mb: 1.5, fontSize: "13px" }} color="text.secondary">
+          {name}
         </Typography>
         <Typography variant="body2">
-          {/* line clamp */}
           <Box
             component="div"
             sx={{

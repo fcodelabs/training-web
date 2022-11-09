@@ -1,17 +1,19 @@
 import React from "react";
-import FormControl, { useFormControl } from "@mui/material/FormControl";
+import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import DiaryCard from "./DiaryCard";
 import Box from "@mui/material/Box";
-import { Button, FormHelperText } from "@mui/material";
+import { Button  } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addDiaryCard } from "../slices/diaryCardSlice";
 
 export default function Form() {
   const [extractedInput, setExtractedInput] = React.useState(false);
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [diaryCard, setDiaryCard] = React.useState(false);
   const [errorTitle, setErrorTitle] = React.useState("");
   const [errorDescription, setErrorDescription] = React.useState("");
+
+  const dispatch = useDispatch();
 
   const handleExtractInput = (e) => {
     setExtractedInput(true);
@@ -19,9 +21,16 @@ export default function Form() {
 
   const handleSubmit = (e) => {
     if (title.length > 0 && description.length > 0) {
-      setErrorTitle("");
-      setErrorDescription("");
-      setDiaryCard(true);
+      const diaryCard = {
+        key : Math.random(),
+        title : title,
+        nickname: localStorage.getItem("name"),
+        description : description,
+      };
+      dispatch(addDiaryCard(diaryCard));
+      setTitle("");
+      setDescription("");
+      setExtractedInput(false);
     } else if (title.length === 0 && description.length === 0) {
       setErrorTitle("Title is required");
       setErrorDescription("Description is missing");
@@ -41,6 +50,7 @@ export default function Form() {
           <FormControl
             sx={{
               width: extractedInput ? 4 / 5 : 2 / 5,
+              transition: extractedInput ? "ease-in 0.8s" : "ease-out 0.8s",
               borderRadius: "16px",
               backgroundColor: "#87CEEB",
               opacity: 0.8,
@@ -71,7 +81,6 @@ export default function Form() {
           >
             Submit
           </Button>
-          {errorTitle && <FormHelperText error>{errorTitle}</FormHelperText>}
           {errorTitle && console.log(errorTitle)}
         </Box>
         <Box
@@ -83,11 +92,12 @@ export default function Form() {
           <FormControl
             sx={{
               width: 1,
-              borderRadius: "16px",
               border: "none",
               opacity: 0.8,
               "& fieldset": { border: "none" },
+              borderRadius: "16px",
               display: extractedInput ? "block" : "none",
+              transition: extractedInput ? "ease-in 0.8s" : "ease-out 0.8s",
             }}
           >
             <OutlinedInput
@@ -100,13 +110,8 @@ export default function Form() {
             />
           </FormControl>
         </Box>
-        {errorDescription && <FormHelperText error>{errorDescription}</FormHelperText>}
         {errorDescription && console.log(errorDescription)}
       </Box>
-
-      <div>
-        {diaryCard && <DiaryCard title={title} description={description} />}
-      </div>
     </>
   );
 }

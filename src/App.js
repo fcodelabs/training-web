@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import SignInPage from '../src/pages/SignInPage/SignInPage'
 import DiaryHome from '../src/pages/DiaryHome/DiaryHome'

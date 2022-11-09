@@ -1,17 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate,navigation,useLocation } from 'react-router-dom'
-import {BrowserRouter,Route,Routes}from 'react-router-dom'
 
 import './DiaryHome.css'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
@@ -19,7 +9,6 @@ import DiaryCard from '../../components/DiaryCard/DiaryCard'
 import HeaderBar from '../../components/HeaderBar/HeaderBar'
 import Button from '../../components/Buttons/Button'
 import TextField from '../../components/TextField/TextField'
-import { render } from '@testing-library/react';
 
 import { useSelector,useDispatch } from 'react-redux';
 
@@ -64,6 +53,7 @@ const DiaryHome = () => {
   const duration=useSelector((state)=>state.diaryHome.duration)
   const title=useSelector((state)=>state.diaryHome.title)
   const description=useSelector((state)=>state.diaryHome.description)
+  //const card=useSelector((state)=>state.diaryHome.card)
   const dispatch=useDispatch()
 
   //expand 
@@ -136,7 +126,7 @@ const DiaryHome = () => {
          <Grid style={{margin: '2rem',position:'relative'}} container spacing={1}>
 
             {/* text input area */}
-         <Grid className='textInputArea' xs={12}>
+         <Grid className='textInputArea' item xs={12}>
           <Item2 className='content'   style={{width:'100%',height:txtAreaStyle,transition:'all',transitionDuration:duration}}>
 
             <h1 style={{display:'flex',color:'white'}}>Home</h1>

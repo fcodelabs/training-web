@@ -3,7 +3,6 @@ import {useEffect,useState} from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
@@ -17,7 +16,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import './DiaryCard.css'
 
-import { useSelector,useDispatch } from 'react-redux';
+//import { useSelector,useDispatch } from 'react-redux';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -37,40 +36,26 @@ const titleText=props.title
 const name=props.name
 var temp1=props.description
 
-//const[description1,setDiscription1]=useState("")
-//const[description2,setDiscription2]=useState("")
-//const[dot,setDot]=useState('')
-//const[expandMore,setExpandMore]=useState('none')
+const[description1,setDiscription1]=useState("")
+const[description2,setDiscription2]=useState("")
+const[dot,setDot]=useState('')
+const[expandMore,setExpandMore]=useState('none')
 
-const description1=useSelector((state)=>state.DiaryCard.description1)
-const description2=useSelector((state)=>state.DiaryCard.description2)
-const dot=useSelector((state)=>state.DiaryCard.dot)
-const expandMore=useSelector((state)=>state.DiaryCard.expandMore)
-const dispatch=useDispatch()
-//dispatch({type:'descVisiility',value:'none'})
  useEffect(()=>{
          if(temp1.length>100){
-          //setExpandMore('block')
-          dispatch({type:'expandMore',value:'block'})
-          dispatch({type:'description1',value:temp1.substring(0,80)})
-          dispatch({type:'description2',value:temp1.substring(80,temp1.length)})
-           // setDiscription1(temp1.substring(0,80))
-           // setDiscription2(temp1.substring(80,temp1.length))
-            if(expanded==false){
-               // setDot('block')
-                dispatch({type:'dot',value:'block'})
+          setExpandMore('block')
+          setDiscription1(temp1.substring(0,80))
+            setDiscription2(temp1.substring(80,temp1.length))
+            if(expanded===false){
+                setDot('block')
             }else{
-                //setDot('none')
-                dispatch({type:'dot',value:'none'})
+                setDot('none')
             }
             
          }else{
-           // setDiscription1(temp1)
-            //setDiscription2("")
-           dispatch({type:'description1',value:temp1})
-           dispatch({type:'description2',value:''})
-            //setDot('none')
-            dispatch({type:'dot',value:'none'})
+            setDiscription1(temp1)
+            setDiscription2("")
+            setDot('none')
          }
  })
   const [expanded, setExpanded] = useState(false);

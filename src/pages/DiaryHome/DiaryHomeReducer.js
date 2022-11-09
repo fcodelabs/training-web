@@ -9,7 +9,8 @@ const initialState={
     title:'',
     description:'',
     description1:'',
-    description2:''
+    description2:'',
+    card:[]
 
 }
 const reducer=(state=initialState,action)=>{
@@ -52,6 +53,9 @@ const reducer=(state=initialState,action)=>{
             newState.description2=action.value
             break; 
 
+            case "card":
+                newState.card =action.value
+                break; 
             default:
                 break;
     }

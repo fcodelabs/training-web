@@ -1,0 +1,124 @@
+.submit-new-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+}
+
+.submit-new-form-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 10px;
+}
+
+.submit-new-form-title-input {
+    background-color: #588ee1;
+    border-radius: 100px !important;
+    padding: 0px 15px !important;
+    height: 36px;
+    opacity: 0.54;
+
+}
+
+/* .submit-new-form-title-input::placeholder {
+    color: red !important;
+} */
+
+
+.submit-new-submit-btn {
+    border-radius: 100px !important;
+    color: rgba(0, 0, 0, 0.726) !important;
+    font-weight: 500;
+    display: none !important;
+    width: 150px;
+    background-color: #4071ee !important;
+
+}
+
+.submit-new-form-desc-container {
+    width: 100%;
+    opacity: 0.54;
+
+   
+}
+
+.submit-new-form-desc-input {
+    border-radius: 10px !important;
+    padding: 0px 15px !important;
+    display: none !important;
+    background-color: #588ee1 !important;
+    /* width: 100% !important; */
+
+}
+
+
+
+
+
+.submit-new-form-title-input-mode-1 {
+    animation-name: view-mode-1-titile-input;
+    animation-duration: 1s;
+    width: calc(100% - 200px);
+
+}
+
+.view-mode-1-submit-btn {
+    display: block !important;
+    animation-name: view-mode-1-submit-btn;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+
+}
+
+.view-mode-1-desc {
+    display: block !important;
+    border-radius: 10px !important;
+    animation-name: view-mode-1-desc-input;
+    animation-duration: 1s !important;
+    animation-timing-function: ease;
+    height: 100px;
+    max-width: 98%;
+    background-color:black;
+}
+
+@keyframes view-mode-1-desc-input {
+    0% {
+
+        height: 0px;
+        opacity: 0;
+    }
+
+    100% {
+
+        height: 100px;
+    }
+}
+
+@keyframes view-mode-1-submit-btn {
+    0% {
+        opacity: 0;
+
+
+    }
+
+    100% {
+        opacity: 1;
+
+    }
+}
+
+
+@keyframes view-mode-1-titile-input {
+    0% {
+
+        width: 20%;
+
+    }
+
+    100% {
+
+        width: calc(100%- 180px);
+    }
+}

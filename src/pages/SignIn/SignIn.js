@@ -1,8 +1,8 @@
 import { ArrowForward } from "@mui/icons-material";
 import { Button, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
-import "./sign-in.css";
-import CompanyLogo from "../../components/SignIn/company-logo";
+import "./signIn.css";
+import CompanyLogo from "../../components/CompanyLogo/CompanyLogo.js";
 
 let randomNames = [
   "Liam",

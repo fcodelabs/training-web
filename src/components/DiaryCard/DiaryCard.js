@@ -5,10 +5,14 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ShowMoreText from "react-show-more-text";
+import "./diaryCard.css";
 
 const DiaryCard = ({ cardData }) => {
   return (
-    <Card sx={{ width: 400 }} style={{ backgroundColor: cardData.color }}>
+    <Card
+      className="card-container"
+      style={{ backgroundColor: cardData.color }}
+    >
       <CardContent>
         <Typography variant="h5" component="div">
           {cardData.title}
@@ -17,7 +21,7 @@ const DiaryCard = ({ cardData }) => {
           {cardData.subtitle}
         </Typography>
 
-          <Typography variant="body2" style={{ maxWidth: 400 }}>
+        <Typography variant="body2">
           <ShowMoreText
             width={200}
             more={
@@ -35,9 +39,6 @@ const DiaryCard = ({ cardData }) => {
           </ShowMoreText>
         </Typography>
       </CardContent>
-      {/* <CardActions>
-        <Button size="small">SHOW MORE</Button>
-      </CardActions> */}
     </Card>
   );
 };

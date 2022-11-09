@@ -1,11 +1,12 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import "./company-logo.css";
-import company_logo from "./comapny-logo.png";
+import "./companyLogo.css";
+import companyLogo from "./companyLogo.png";
+
 const CompanyLogo = () => {
   return (
     <Grid className="company-logo-container">
-      <img src={company_logo} className="company-logo-image" />
+      <img src={companyLogo} alt="" className="company-logo-image" />
       <div className="company-logo-text"> Dear Diary </div>
     </Grid>
   );

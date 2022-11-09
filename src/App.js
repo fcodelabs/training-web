@@ -1,14 +1,19 @@
 
 import './App.css';
-import DiaryCard from './components/DiaryCard/DiaryCard';
+
 import DiaryHome from './pages/DiaryHome/DiaryHome';
 import SignInPage from './pages/SignInPage/SignInPage';
+import { Route, Routes } from "react-router-dom";
 
 
 function App() {
   return (
 
-    <DiaryHome/>
+    <Routes>
+      <Route exact path='/' element={<SignInPage/>} />
+      <Route path='home' element={<DiaryHome/>} />
+    </Routes>
+
 
   );
 }

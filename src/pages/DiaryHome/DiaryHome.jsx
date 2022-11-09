@@ -1,38 +1,39 @@
 import React, { useState } from "react";
 import { Grid, OutlinedInput, Button, Container, Typography } from "@mui/material";
 import "./DiaryHome.css"
-import img from './img.jpg'
-import { display, width } from "@mui/system";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
+import { addCard, setTitle, collapse, titleIsNotClicked, titleIsClicked, expand, setDescription} from "./DiaryHomeSlice";
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function DiaryHome() {
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [visibility, setVisibility] = useState("none");
-    const [titleClicked, setTitleClicked] = useState(false);
-    const [width, setWidth] = useState("");
-    const [cards, setCards] = useState([]);
+    const dispatch = useDispatch()
+    const cards=useSelector(state => state.diaryHome.cards);
+    const title=useSelector(state => state.diaryHome.title);
+    const description =useSelector(state => state.diaryHome.description);
+    const titleClicked =useSelector(state => state.diaryHome.titleClicked);
+    const nickName=useSelector(state => state.signIn.nickname);
+    const visibility=useSelector(state => state.diaryHome.visibility);
+    const width =useSelector(state => state.diaryHome.width);
 
     function submit() {
-        localStorage.setItem("nickname", "rashmi");
-
         if (title == "") {
             console.log("Missing title");
         } else if (description == "") {
             console.log("Missing description");
         } else {
+           
             let card = {
+                id: cards.length,
                 title: title,
-                description: description
+                description: description,
+                nickname:nickName
             }
 
-            let temp = cards;
-            temp.push(card);
-            setCards(temp);
 
-            setDescription("");
-            setTitle("");
+            dispatch(addCard(card));
+            dispatch(setTitle(""));
+            dispatch(setDescription(""));
         }
 
     }
@@ -41,37 +42,37 @@ export default function DiaryHome() {
     window.onclick = () => {
 
         if (!titleClicked) {
-            setVisibility("none");
-            setWidth("30%");
+            dispatch(collapse());
         }
-        setTitleClicked(false);
+        dispatch(titleIsNotClicked());
 
     }
 
     return (
 
-        <Grid className="container" >
+        <Grid className="container" position={'fixed'} top="0vh" >
 
 
-            <Container maxWidth>
+            <Container maxWidth='xl'>
 
-                <Grid >
-                    <Typography variant="h3" margin={'2vh'} fontWeight="bold" color={"white"}>Home</Typography>
+                <Grid marginTop="60px">
+                    <Typography variant="h4" marginTop={'2vh'} fontWeight="bold" color={"white"}>Home</Typography>
 
                 </Grid>
 
 
-                <Grid style={{ display: "flex", justifyContent: 'space-between', margin: '1vh' }}>
+
+                <Grid style={{ display: "flex", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '1vh' }}>
                     <OutlinedInput
+
                         className="text"
-                        value={title}
+                        value={useSelector(state => state.diaryHome.title)}
                         size="small"
                         placeholder="Submit New"
-                        onChange={(e) => { setTitle(e.target.value) }}
+                        onChange={(e) => { dispatch(setTitle(e.target.value)) }}
                         onClick={(e) => {
-                            setTitleClicked(true);
-                            setWidth("80%");
-                            setVisibility("block");
+                            dispatch(titleIsClicked());
+                            dispatch(expand());
                         }}
                         style={{ borderRadius: "30px", width: width, transition: 'width 2s' }}
 
@@ -84,23 +85,25 @@ export default function DiaryHome() {
                         onClick={submit}
                     >SUBMIT</Button>
                 </Grid>
-                <Grid style={{ margin: '1vh' }}>
+                <Grid marginTop='1vh' >
                     <OutlinedInput
                         className="text"
-                        value={description}
-                        onChange={(e) => { setDescription(e.target.value) }}
-                        onClick={() => { setTitleClicked(true); }}
+                        value={useSelector(state => state.diaryHome.description)}
+                        onChange={(e) => { dispatch(setDescription(e.target.value)) }}
+                        onClick={() => { dispatch(titleIsClicked()) }}
                         fullWidth
-                        multiline="true"
+                        multiline={true}
                         rows="6"
                         placeholder="Enter Description"
                         style={{ borderRadius: "10px", display: visibility, width: '100%', transition: 'display 2s' }}
                     />
                 </Grid>
 
-                <Grid container spacing={1}>
+
+
+                <Grid container spacing={1} marginTop='1vh'>
                     {
-                        cards.map((card) => <Grid item xs={12} sm={6} md={4} lg={3}><DiaryCard  description={card.description} title={card.title} subTitle={localStorage.getItem("nickname")} color="#b3d4fc" /></Grid>)
+                        cards.map((card) => <Grid key={card.id} item xs={12} sm={6} md={4} lg={3}><DiaryCard description={card.description} title={card.title} subTitle={card.nickname} color="hwb(196deg 75% 0%)" /></Grid>)
                     }
 
 

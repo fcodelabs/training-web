@@ -72,6 +72,7 @@ export default function Form() {
             Submit
           </Button>
           {errorTitle && <FormHelperText error>{errorTitle}</FormHelperText>}
+          {errorTitle && console.log(errorTitle)}
         </Box>
         <Box
           component="form"
@@ -100,6 +101,7 @@ export default function Form() {
           </FormControl>
         </Box>
         {errorDescription && <FormHelperText error>{errorDescription}</FormHelperText>}
+        {errorDescription && console.log(errorDescription)}
       </Box>
 
       <div>

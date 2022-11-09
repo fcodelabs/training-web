@@ -15,15 +15,31 @@ const AddForm = ({ passfunction }) => {
 
   const [descInputValue, setDescInputValue] = useState("");
 
-  
+  const [error, seterror] = useState({
+    titlerror: "",
+    descriptionerror: "",
+  });
 
   const submitHandler = (e) => {
     e.preventDefault();
-    
+    if (titleInputValue === "" && descInputValue === "") {
+      seterror({
+        titlerror: "Title is Empty",
+        descriptionerror: "Description is Empty",
+      });
+    } else if (descInputValue === "") {
+      seterror({
+        descriptionerror: "Description is Empty",
+      });
+    } else if (titleInputValue === "") {
+      seterror({
+        titlerror: "Title is Empty",
+      });
+    } else {
       passfunction({ title: titleInputValue, desc: descInputValue });
       setTitleInputValue("");
       setDescInputValue("");
-    
+    }
   };
 
   return (
@@ -58,7 +74,7 @@ const AddForm = ({ passfunction }) => {
           //   }
           // }}
         />
-        {/* <span>{error.titlerror}</span> */}
+        <span>{error.titlerror}</span>
         <Button
           size="medium"
           className={[
@@ -106,7 +122,7 @@ const AddForm = ({ passfunction }) => {
             disableUnderline: true,
           }}
         />
-        {/* <span>{error.descriptionerror}</span> */}
+        <span>{error.descriptionerror}</span>
       </div>
     </Grid>
   );

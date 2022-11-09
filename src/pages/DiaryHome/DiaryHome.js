@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import "./diaryHome.css";
 import AddForm from "../../components/AddForm/AddForm.js";
 import DiaryCard from "../../components/DiaryCard/DiaryCard.js";
-import { TryOutlined } from "@mui/icons-material";
+// import { TryOutlined } from "@mui/icons-material";
 
 const DiaryHome = () => {
   const [Cards, setCards] = useState([]);

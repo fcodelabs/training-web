@@ -5,21 +5,25 @@ import Button from '@mui/material/Button';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import img from './img.jpg';
 import { useSelector, useDispatch } from 'react-redux'
-import { enable, disable,setNickname } from './SignInSlice'
+import { enable, disable, setNickname } from './SignInSlice'
+import { useEffect } from "react";
 
 
 
 export default function SignInPage() {
 
-    var names=["John","Nick","Anne","Henry","James","Robert","William","Merry"];
-
-    const dispatch = useDispatch()
-
-    function generateRandomName(){
-        var random = names[Math.floor(Math.random()*names.length)];      
+    var names = ["John", "Nick", "Anne", "Henry", "James", "Robert", "William", "Merry"];
+    const dispatch = useDispatch();
+    const nickname = useSelector(state => state.signIn.nickname);
+    const disabled = useSelector(state => state.signIn.disabled);
+    localStorage.setItem("nickname",nickname);
+    
+    function generateRandomName() {
+        var random = names[Math.floor(Math.random() * names.length)];
+       
         dispatch(setNickname(random));
         dispatch(enable());
-      
+
     }
 
 
@@ -49,24 +53,25 @@ export default function SignInPage() {
                     <div>
                         <div className="center"> <Typography variant="h4" color='#039BE5' >Sign In</Typography></div>
                         <div className="center d1">
-                            <TextField 
-                                value={useSelector(state => state.signIn.nickname)} 
-                                id="outlined-basic" 
-                                label="Your Nickname*" 
-                                variant="outlined" 
+                            <TextField
+                                value={nickname}
+                                id="outlined-basic"
+                                label="Your Nickname*"
+                                variant="outlined"
                                 className="txt"
                                 onChange={(e) => {
-                                    (e.target.value == "") ?  dispatch(disable()) :  dispatch(enable());
+                                    (e.target.value == "") ? dispatch(disable()) : dispatch(enable());
+
                                     dispatch(setNickname(e.value));
-                                    
-                                }} 
+
+                                }}
                             />
 
                             <Button variant="contained" size="sm" style={{ margin: '3vh', borderRadius: '30px' }} onClick={generateRandomName}>RANDOM</Button>
                         </div>
 
                         <div className="center">
-                            <Button href="home" disabled={useSelector(state => state.signIn.disabled)} variant="contained" size="sm" endIcon={<ArrowForwardIcon />} style={{ marginBottom: '3vh', borderRadius: '30px' }}>CONTINUE</Button>
+                            <Button href="home" disabled={disabled} variant="contained" size="sm" endIcon={<ArrowForwardIcon />} style={{ marginBottom: '3vh', borderRadius: '30px' }}>CONTINUE</Button>
                         </div>
 
                     </div>

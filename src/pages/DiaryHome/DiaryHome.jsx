@@ -12,9 +12,11 @@ export default function DiaryHome() {
     const title=useSelector(state => state.diaryHome.title);
     const description =useSelector(state => state.diaryHome.description);
     const titleClicked =useSelector(state => state.diaryHome.titleClicked);
-    const nickName=useSelector(state => state.signIn.nickname);
     const visibility=useSelector(state => state.diaryHome.visibility);
     const width =useSelector(state => state.diaryHome.width);
+    localStorage.setItem("cards",cards);
+    
+    
 
     function submit() {
         if (title == "") {
@@ -27,10 +29,10 @@ export default function DiaryHome() {
                 id: cards.length,
                 title: title,
                 description: description,
-                nickname:nickName
+                nickname:localStorage.getItem("nickname")
             }
 
-
+           
             dispatch(addCard(card));
             dispatch(setTitle(""));
             dispatch(setDescription(""));
@@ -40,6 +42,7 @@ export default function DiaryHome() {
 
 
     window.onclick = () => {
+       
 
         if (!titleClicked) {
             dispatch(collapse());

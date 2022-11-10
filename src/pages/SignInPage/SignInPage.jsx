@@ -9,13 +9,13 @@ import img from './img.jpg';
 
 export default function SignInPage() {
 
-    var names=["John","Nick","Anne","Henry","James","Robert","William","Merry"];
+    const names=["John","Nick","Anne","Henry","James","Robert","William","Merry"];
 
     const [disable, setDisable] = React.useState(true);
     const [nickname, setNickname] = React.useState("");
 
     function generateRandomName(){
-        var random = names[Math.floor(Math.random()*names.length)];
+        const random = names[Math.floor(Math.random()*names.length)];
         setNickname(random);
         setDisable(false);
       

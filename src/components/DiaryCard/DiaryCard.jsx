@@ -22,7 +22,7 @@ export default function DiaryCard(props) {
             setText(props.description);
             setVisibility("none");
         } else {
-            var textTemp=props.description.substring(1, 100);
+            let textTemp=props.description.substring(1, 100);
             setText(textTemp + "...");
             setVisibility("block");
         }

@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import DiaryHomeReducer from '../src/pages/DiaryHome/DiaryHomeReducer'
-import SignInPageReducer from '../src/pages/SignInPage/SignInPageReducer'
-import DiaryCardReducer from '../src/components/DiaryCard/DiaryCardReducer'
+import DiaryHomeReducer from './pages/DiaryHome/DiaryHomeSlice'
+import SignInPageReducer from './pages/SignInPage/SignInPageSlice'
 export default configureStore({
     reducer:{
         signInPage:SignInPageReducer,
-        diaryHome:DiaryHomeReducer,
-        DiaryCard:DiaryCardReducer
+        diaryHome:DiaryHomeReducer
     }
-})
+}) 

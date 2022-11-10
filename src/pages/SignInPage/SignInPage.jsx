@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import Logo from '../../utils/assets/star.jpg'
 
 import { useSelector,useDispatch } from 'react-redux';
+import { enable,disable,setUserName } from './SignInPageSlice';
 
 const SignInPage = () => {
 
@@ -19,10 +20,10 @@ const dispatch=useDispatch()
 
     useEffect(()=>{
         //console.log(userName)
-        if(userName==null || userName=="")
-        dispatch({type:'disabled',value:true})
+        if(userName==null || userName=="") 
+        dispatch(disable())
         else  
-        dispatch({type:'disabled',value:false})
+        dispatch(enable())
     },[userName])
 
     //page navigation
@@ -38,7 +39,7 @@ function setRandomName(){
   const randomName=["Lahiru","Abdul","Rashmi","Rishini"]
   let name=randomName[Math.floor(Math.random()*randomName.length)]
   //setUserName(name) 
-  dispatch({type:'userName',value:name})
+  dispatch(setUserName(name))
 }
 
   return (
@@ -53,7 +54,7 @@ function setRandomName(){
         placeHolder="Your Nickname" 
         style={{display:'inline-block'}}
         value={userName}
-        onChange={e=>{dispatch({type:'userName',value:e.target.value})}}
+        onChange={e=>{dispatch(setUserName(e.target.value))}}
         />
        
         <Button variant="contained"

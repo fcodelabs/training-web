@@ -11,7 +11,18 @@ import Button from '../../components/Buttons/Button'
 import TextField from '../../components/TextField/TextField'
 
 import { useSelector,useDispatch } from 'react-redux';
-
+import {descVisiilityInline,
+        descVisiilityNone,
+        btnVisibilityEnable,
+        btnVisibilityDisable,
+        txtAreaStyleToLarge,
+        txtAreaStyleToSmall,
+        textFieldLengthToLong,
+        textFieldLengthToShort,
+        durationNow,
+        setTitle,
+        setDescription
+      } from './DiaryHomeSlice'
 
 const Item = styled(Paper)(({ theme }) => ({
     //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -27,8 +38,6 @@ const Item = styled(Paper)(({ theme }) => ({
     backgroundColor:'#09aee8'
   }));
   
-
-
 
 const DiaryHome = () => {
 
@@ -64,11 +73,11 @@ const DiaryHome = () => {
      // settextFieldLength('75rem')
      // setDuaration('1s')
 
-      dispatch({type:'descVisiility',value:'inline'})
-      dispatch({type:'btnVisibility',value:'block'})
-      dispatch({type:'txtAreaStyle',value:'21rem'})
-      dispatch({type:'textFieldLength',value:'75rem'})
-      dispatch({type:'duration',value:'1s'})
+      dispatch(descVisiilityInline())
+      dispatch(btnVisibilityEnable())
+      dispatch(txtAreaStyleToLarge())
+      dispatch(textFieldLengthToLong())
+      dispatch(durationNow())
   }
 
 
@@ -85,11 +94,11 @@ const DiaryHome = () => {
     //settextFieldLength('25rem')
     //setDuaration('1s')
 
-    dispatch({type:'descVisiility',value:'none'})
-    dispatch({type:'btnVisibility',value:'none'})
-    dispatch({type:'txtAreaStyle',value:'9rem'})
-    dispatch({type:'textFieldLength',value:'25rem'})
-    dispatch({type:'duration',value:'1s'})
+    dispatch(descVisiilityNone())
+    dispatch(btnVisibilityDisable())
+    dispatch(txtAreaStyleToSmall())
+    dispatch(textFieldLengthToShort())
+    dispatch(durationNow())
    
     console.log(data)
 
@@ -99,7 +108,7 @@ const DiaryHome = () => {
     console.log("Missing description")
   }else{
     setCard(card.concat(
-      <Grid item xs={3}>
+      <Grid item xs={3} key={card.length++}>
       <Item><DiaryCard 
        title={title} 
       name={data} 
@@ -110,8 +119,8 @@ const DiaryHome = () => {
 
     //setTitle('')
     //setDescription('')
-    dispatch({type:'title',value:''})
-    dispatch({type:'description',value:''})
+    dispatch(setTitle(''))
+    dispatch(setDescription(''))
   }
 
   return (
@@ -153,7 +162,7 @@ const DiaryHome = () => {
             className="textField" 
             placeHolder="Submit New" 
              value={title}
-             onChange={e=>{dispatch({type:'title',value:e.target.value})}}
+             onChange={e=>{dispatch(setTitle(e.target.value))}}
             />
   
         <Button variant="contained"
@@ -173,7 +182,7 @@ const DiaryHome = () => {
             display:descVisiility
             }} 
             value={description}
-             onChange={e=>{dispatch({type:'description',value:e.target.value})}}
+             onChange={e=>{dispatch(setDescription(e.target.value))}}
             />
             </Item2>
          </Grid>

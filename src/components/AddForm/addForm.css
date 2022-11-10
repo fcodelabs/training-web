@@ -10,14 +10,14 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 
 .submit-new-form-title-input {
     background-color: #588ee1;
     border-radius: 100px !important;
     padding: 0px 15px !important;
-    height: 36px;
+    max-height: 36px;
     opacity: 0.54;
 
 }
@@ -45,6 +45,7 @@
 }
 
 .submit-new-form-desc-input {
+    width:100%;
     border-radius: 10px !important;
     padding: 0px 15px !important;
     display: none !important;
@@ -79,7 +80,7 @@
     animation-duration: 1s !important;
     animation-timing-function: ease;
     height: 100px;
-    max-width: 98%;
+    min-width:100% !important;
     background-color:black;
 }
 

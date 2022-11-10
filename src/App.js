@@ -1,14 +1,28 @@
+import React, { Suspense } from "react";
+import { Routes } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
-// import SignIn from "./pages/SignIn/SignIn.js";
-// import AddForm from "./components/AddForm/AddForm.js";
-import DiaryHome from "./pages/DiaryHome/DiaryHome.js";
 
+const loading = (
+  <div className="pt-3 text-center">
+    <div className="sk-spinner sk-spinner-pulse"></div>
+  </div>
+);
+
+const SignIn = React.lazy(() => import("./pages/SignIn/SignIn.js"));
+const Home = React.lazy(() => import("./pages/DiaryHome/DiaryHome.js"));
 
 function App() {
   return (
     <div>
-      {/* <SignIn /> */}
-      <DiaryHome/>
+      <BrowserRouter>
+        <Suspense fallback={loading}>
+          <Routes>
+            <Route path="/" element={<SignIn />} />
+            <Route path="/home" element={<Home />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
     </div>
   );
 }

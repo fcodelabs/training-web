@@ -6,7 +6,7 @@ import companyLogo from "./companyLogo.png";
 const CompanyLogo = () => {
   return (
     <Grid className="company-logo-container">
-      <img src={companyLogo} alt="" className="company-logo-image" />
+      <img src={companyLogo} className="company-logo-image" />
       <div className="company-logo-text"> Dear Diary </div>
     </Grid>
   );

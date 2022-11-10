@@ -5,11 +5,11 @@ import "./addForm.css";
 const AddForm = ({ passfunction }) => {
   const [ViewMode, setViewMode] = useState("0");
 
-  const [title, setTitle] = useState(false);
+  // const [title, setTitle] = useState(false);
 
-  const [desc, setDesc] = useState(false);
+  // const [desc, setDesc] = useState(false);
 
-  const [submit, setSubmit] = useState(false);
+  // const [submit, setSubmit] = useState(false);
 
   const [titleInputValue, setTitleInputValue] = useState("");
 
@@ -27,14 +27,17 @@ const AddForm = ({ passfunction }) => {
         titlerror: "Title is Empty",
         descriptionerror: "Description is Empty",
       });
+      console.log("Title is Empty, Description is Empty");
     } else if (descInputValue === "") {
       seterror({
         descriptionerror: "Description is Empty",
       });
+      console.log("Description is Empty");
     } else if (titleInputValue === "") {
       seterror({
         titlerror: "Title is Empty",
       });
+      console.log("Title is Empty");
     } else {
       passfunction({ title: titleInputValue, desc: descInputValue });
       setTitleInputValue("");

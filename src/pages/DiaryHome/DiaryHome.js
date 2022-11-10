@@ -3,16 +3,18 @@ import { Grid } from "@mui/material";
 import "./diaryHome.css";
 import AddForm from "../../components/AddForm/AddForm.js";
 import DiaryCard from "../../components/DiaryCard/DiaryCard.js";
-// import { TryOutlined } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 
 const DiaryHome = () => {
+  const name = useSelector((state) => state.nickname.nickname);
+
   const [Cards, setCards] = useState([]);
 
   const setDetails = (new_card_details) => {
     let temp = Cards.slice();
     temp.push({
       title: new_card_details.title,
-      subtitle: "Noah",
+      subtitle: name,
       description: new_card_details.desc,
       color: "lightskyblue",
     });
@@ -21,18 +23,18 @@ const DiaryHome = () => {
 
   return (
     <Grid container className="home-main-container">
-      <div className="home-inner-container">
+      <Grid container className="home-inner-container">
+        {/* <div></div> */}
         <div className="home-text">
           <h1>Home</h1>
         </div>
         <AddForm passfunction={setDetails} />
-        <div className="submitted-cards">
+        <Grid  className="submitted-cards">
           {Cards.map((item) => (
             <DiaryCard cardData={item} />
           ))}
-          {}
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     </Grid>
   );
 };

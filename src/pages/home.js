@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div>
       <Form />
-      <div style={{ display: "flex", flexWrap: "wrap"}}>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
         {diaryCards.map((diaryCard, i) => (
           <DiaryCard
             key={diaryCard.key}

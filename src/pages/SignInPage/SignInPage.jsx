@@ -12,14 +12,14 @@ import { useEffect } from "react";
 
 export default function SignInPage() {
 
-    var names = ["John", "Nick", "Anne", "Henry", "James", "Robert", "William", "Merry"];
+    const names = ["John", "Nick", "Anne", "Henry", "James", "Robert", "William", "Merry"];
     const dispatch = useDispatch();
     const nickname = useSelector(state => state.signIn.nickname);
     const disabled = useSelector(state => state.signIn.disabled);
     localStorage.setItem("nickname",nickname);
     
     function generateRandomName() {
-        var random = names[Math.floor(Math.random() * names.length)];
+        const random = names[Math.floor(Math.random() * names.length)];
        
         dispatch(setNickname(random));
         dispatch(enable());

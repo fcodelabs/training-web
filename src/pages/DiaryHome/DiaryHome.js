@@ -29,9 +29,9 @@ const DiaryHome = () => {
           <h1>Home</h1>
         </div>
         <AddForm passfunction={setDetails} />
-        <Grid  className="submitted-cards">
-          {Cards.map((item) => (
-            <DiaryCard cardData={item} />
+        <Grid className="submitted-cards">
+          {Cards.map((item, index) => (
+            <DiaryCard key={index + 1} cardData={item} />
           ))}
         </Grid>
       </Grid>

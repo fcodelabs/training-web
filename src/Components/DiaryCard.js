@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 
-export default function DiaryCard({key, title, name, description}) {
+export default function DiaryCard({title, name, description, timestamp}) {
   const [handleDescriptionLineClamp, setHandleDescriptionLineClamp] =
     React.useState(3);
 

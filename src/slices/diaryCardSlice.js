@@ -9,12 +9,15 @@ export const diaryCardSlice = createSlice({
     initialState,
     reducers: {
         addDiaryCard: (state, action) => {
-            state.diaryCards = [...state.diaryCards, action.payload];
+            state.diaryCards.unshift(action.payload);
+        },
+        addAllDiaryCards: (state, action) => {
+            state.diaryCards.push(...action.payload);
         }
     }
 });
 
-export const { addDiaryCard } = diaryCardSlice.actions;
+export const { addDiaryCard, addAllDiaryCards } = diaryCardSlice.actions;
 
 export const selectDiaryCards = (state) => state.diaryCard.diaryCards;
 

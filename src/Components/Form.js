@@ -2,9 +2,9 @@ import React from "react";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Box from "@mui/material/Box";
-import { Button  } from "@mui/material";
+import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { addDiaryCard } from "../slices/diaryCardSlice";
+import { sagaActions } from "../sagas/sagaActions";
 
 export default function Form() {
   const [extractedInput, setExtractedInput] = React.useState(false);
@@ -22,15 +22,20 @@ export default function Form() {
   const handleSubmit = (e) => {
     if (title.length > 0 && description.length > 0) {
       const diaryCard = {
-        key : Math.random(),
-        title : title,
-        nickname: localStorage.getItem("name"),
-        description : description,
+        title: title,
+        name: localStorage.getItem("name"),
+        description: description,
+        timestamp: Date.now(),
       };
-      dispatch(addDiaryCard(diaryCard));
-      setTitle("");
-      setDescription("");
-      setExtractedInput(false);
+
+      try {
+        dispatch({ type: sagaActions.ADD_DIARY_CARD_TO_FIREBASE, diaryCard });
+        setTitle("");
+        setDescription("");
+        setExtractedInput(false);
+      } catch (error) {
+        console.log(error);
+      }
     } else if (title.length === 0 && description.length === 0) {
       setErrorTitle("Title is required");
       setErrorDescription("Description is missing");

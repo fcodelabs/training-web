@@ -31,14 +31,16 @@ export const diaryHomeSlice = createSlice({
     setDescription: (state, action) => {
         state.description = action.payload
     },
-    addCard: (state, action) => {
-        state.cards.push(action.payload)
-    }
-
+    setCards: (state, action) => {
+        state.cards=action.payload;
+        
+    },
+    getCards(){},
+    addCard(action){}
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { expand, collapse, titleIsClicked,titleIsNotClicked,setTitle,setDescription,addCard } = diaryHomeSlice.actions
+export const { expand, collapse, titleIsClicked,titleIsNotClicked,setTitle,setDescription,setCards,getCards,addCard} = diaryHomeSlice.actions
 
 export default diaryHomeSlice.reducer

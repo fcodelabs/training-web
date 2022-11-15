@@ -1,4 +1,4 @@
-import { Grid, Box, Typography, TextField, Container } from "@mui/material";
+import { Grid, Typography, TextField, Container } from "@mui/material";
 import React from "react";
 import './Styles.css';
 import Button from '@mui/material/Button';
@@ -6,7 +6,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import img from './img.jpg';
 import { useSelector, useDispatch } from 'react-redux'
 import { enable, disable, setNickname } from './SignInSlice'
-import { useEffect } from "react";
+
 
 
 
@@ -60,7 +60,7 @@ export default function SignInPage() {
                                 variant="outlined"
                                 className="txt"
                                 onChange={(e) => {
-                                    (e.target.value == "") ? dispatch(disable()) : dispatch(enable());
+                                    (e.target.value === "") ? dispatch(disable()) : dispatch(enable());
 
                                     dispatch(setNickname(e.value));
 

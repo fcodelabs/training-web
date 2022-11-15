@@ -27,11 +27,11 @@ export default function DiaryCard(props) {
             setText(textTemp + "...");
             setVisibility("block");
         }
-    },[]);
+    });
 
     function handleShowMore() {
 
-        if (label == "SHOW MORE") {
+        if (label === "SHOW MORE") {
 
             setText(props.description);
 
@@ -40,7 +40,7 @@ export default function DiaryCard(props) {
 
         }
 
-        var tempLabel = (label == "SHOW MORE") ? "SHOW LESS" : "SHOW MORE";
+        var tempLabel = (label === "SHOW MORE") ? "SHOW LESS" : "SHOW MORE";
         setLabel(tempLabel);
 
     }

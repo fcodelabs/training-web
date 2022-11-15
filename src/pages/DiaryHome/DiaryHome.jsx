@@ -1,39 +1,46 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, OutlinedInput, Button, Container, Typography } from "@mui/material";
 import "./DiaryHome.css"
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
-import { addCard, setTitle, collapse, titleIsNotClicked, titleIsClicked, expand, setDescription} from "./DiaryHomeSlice";
+import { setTitle, collapse, titleIsNotClicked, titleIsClicked, expand, setDescription, getCards, addCard } from "./DiaryHomeSlice";
 import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from "react";
+
+
 
 export default function DiaryHome() {
 
-    const dispatch = useDispatch()
-    const cards=useSelector(state => state.diaryHome.cards);
-    const title=useSelector(state => state.diaryHome.title);
-    const description =useSelector(state => state.diaryHome.description);
-    const titleClicked =useSelector(state => state.diaryHome.titleClicked);
-    const visibility=useSelector(state => state.diaryHome.visibility);
-    const width =useSelector(state => state.diaryHome.width);
-    localStorage.setItem("cards",cards);
-    
-    
+    const dispatch = useDispatch();
+    const cards = useSelector(state => state.diaryHome.cards);
+    const title = useSelector(state => state.diaryHome.title);
+    const description = useSelector(state => state.diaryHome.description);
+    const titleClicked = useSelector(state => state.diaryHome.titleClicked);
+    const visibility = useSelector(state => state.diaryHome.visibility);
+    const width = useSelector(state => state.diaryHome.width);
 
-    function submit() {
-        if (title == "") {
+
+
+    useEffect(() => {
+        dispatch(getCards());
+    },[]);
+
+     function submitCard() {
+        if (title === "") {
             console.log("Missing title");
-        } else if (description == "") {
+        } else if (description === "") {
             console.log("Missing description");
         } else {
-           
+
+            let id=(cards==null)?"card-"+1:"card-"+(cards.length+1);
             let card = {
-                id: cards.length,
+                
                 title: title,
                 description: description,
-                nickname:localStorage.getItem("nickname")
-            }
+                user: localStorage.getItem("nickname")
 
-           
-            dispatch(addCard(card));
+            }
+        
+            dispatch(addCard({card,id}))
             dispatch(setTitle(""));
             dispatch(setDescription(""));
         }
@@ -42,8 +49,6 @@ export default function DiaryHome() {
 
 
     window.onclick = () => {
-       
-
         if (!titleClicked) {
             dispatch(collapse());
         }
@@ -53,21 +58,15 @@ export default function DiaryHome() {
 
     return (
 
-        <Grid className="container" position={'fixed'} top="0vh" >
-
-
+        <Grid className="container" top="0vh">
             <Container maxWidth='xl'>
-
                 <Grid marginTop="60px">
                     <Typography variant="h4" marginTop={'2vh'} fontWeight="bold" color={"white"}>Home</Typography>
 
                 </Grid>
 
-
-
                 <Grid style={{ display: "flex", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '1vh' }}>
                     <OutlinedInput
-
                         className="text"
                         value={useSelector(state => state.diaryHome.title)}
                         size="small"
@@ -80,12 +79,11 @@ export default function DiaryHome() {
                         style={{ borderRadius: "30px", width: width, transition: 'width 2s' }}
 
                     />
-
                     <Button
                         className="btn"
                         variant="contained"
                         style={{ display: visibility, transition: 'display 2s' }}
-                        onClick={submit}
+                        onClick={submitCard}
                     >SUBMIT</Button>
                 </Grid>
                 <Grid marginTop='1vh' >
@@ -102,16 +100,14 @@ export default function DiaryHome() {
                     />
                 </Grid>
 
-
-
                 <Grid container spacing={1} marginTop='1vh'>
                     {
-                        cards.map((card) => <Grid key={card.id} item xs={12} sm={6} md={4} lg={3}><DiaryCard description={card.description} title={card.title} subTitle={card.nickname} color="hwb(196deg 75% 0%)" /></Grid>)
+
+                        cards.map((card) => <Grid paddingLeft={0} key={card.id} item xs={12} sm={6} md={4} lg={3}><DiaryCard description={card.description} title={card.title} subTitle={card.user} color="hwb(196deg 75% 0%)" /></Grid>)
+
                     }
 
-
                 </Grid>
-
             </Container>
         </Grid>
     );

@@ -1,11 +1,12 @@
 .container{
     background-Image: url("./img.jpg");
-    background-repeat: no-repeat;
     background-size:cover;
-    width: 100vw;
-    height: 100vh;
+    height: auto;
     display: flex;
     justify-Content: center;
+    min-Height:100vh;
+ 
+    
 }
 
 .text{
@@ -22,6 +23,7 @@
     
     
 }
+
 
 
 

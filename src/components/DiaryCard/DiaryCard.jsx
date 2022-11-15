@@ -23,11 +23,11 @@ export default function DiaryCard(props) {
             setText(props.description);
             setVisibility("none");
         } else {
-            var textTemp=props.description.substring(1, 100);
+            var textTemp=props.description.substring(0, 100);
             setText(textTemp + "...");
             setVisibility("block");
         }
-    });
+    },[]);
 
     function handleShowMore() {
 
@@ -36,7 +36,7 @@ export default function DiaryCard(props) {
             setText(props.description);
 
         } else {
-            setText(props.description.substring(1, 100) + "...");
+            setText(props.description.substring(0   , 100) + "...");
 
         }
 

@@ -1,12 +1,15 @@
 .DiaryHome{
    background-color: #0fbcf9;
    position: relative;
-   width: 100%;
+   
    height: 100%;
    display: flex;
    justify-content: center;
    align-items: center;
  
+}
+.container{
+   width: 100vw;
 }
 .mainGrid{
    overflow: hidden;

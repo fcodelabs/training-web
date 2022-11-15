@@ -4,6 +4,7 @@ const initialState={
     userName:'',
     disabled:false
 }
+
 export const SignInPageSlice=createSlice({
     name:'signInPage',
     initialState,
@@ -15,7 +16,7 @@ export const SignInPageSlice=createSlice({
             state.disabled=false;
         },
         setUserName:(state,action)=>{
-            state.userName=action.payload
+            state.userName=action.payload 
         }
     }
   

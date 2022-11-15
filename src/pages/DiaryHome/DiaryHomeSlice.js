@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { act } from 'react-dom/test-utils'
 
 const initialState={
     descVisiility:'none',
@@ -8,7 +9,7 @@ const initialState={
     duration:'0s',
     title:'',
     description:'',
-    card:[]
+    cards:[]
 
 }
 export const DiaryHomeSlice=createSlice({
@@ -47,9 +48,19 @@ export const DiaryHomeSlice=createSlice({
         },
         setDescription:(state,action)=>{
             state.description=action.payload
+        },
+        setCard:(state,action)=>{
+           state.cards=action.payload   
+        },
+
+        fetchAllCard:(state,action)=>{
+        },
+ 
+        addNewCard:(state,action)=>{
         }
     }
 })
+export const DiaryHomeActions=DiaryHomeSlice.actions;
 export const {descVisiilityInline,
     descVisiilityNone,
     btnVisibilityEnable,
@@ -60,5 +71,9 @@ export const {descVisiilityInline,
     textFieldLengthToShort,
     durationNow,
     setTitle,
-    setDescription}=DiaryHomeSlice.actions
+    setDescription,
+    setCard,
+    fetchAllCard,
+    addNewCard
+}=DiaryHomeSlice.actions
 export default DiaryHomeSlice.reducer; 

@@ -32,16 +32,19 @@ const ExpandMore = styled((props) => {
 export default function DiaryCard(props) {
 
    
-const titleText=props.title
-const name=props.name
-var temp1=props.description
 
+  const titleText=props.title
+const name=props.name
 const[description1,setDiscription1]=useState("")
 const[description2,setDiscription2]=useState("")
 const[dot,setDot]=useState('')
 const[expandMore,setExpandMore]=useState('none')
 
  useEffect(()=>{
+
+
+var temp1=props.description+''
+
          if(temp1.length>100){
           setExpandMore('block')
           setDiscription1(temp1.substring(0,80))
@@ -50,8 +53,7 @@ const[expandMore,setExpandMore]=useState('none')
                 setDot('block')
             }else{
                 setDot('none')
-            }
-            
+            }           
          }else{
             setDiscription1(temp1)
             setDiscription2("")

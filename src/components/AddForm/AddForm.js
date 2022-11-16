@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { Grid, Button, TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import "./addForm.css";
+import { addDiaryCard, getAllDiaryCards } from "../../store/diaryCardSlice";
 
-const AddForm = ({ passfunction }) => {
+const AddForm = () => {
   const [ViewMode, setViewMode] = useState("0");
-
-  // const [title, setTitle] = useState(false);
-
-  // const [desc, setDesc] = useState(false);
-
-  // const [submit, setSubmit] = useState(false);
 
   const [titleInputValue, setTitleInputValue] = useState("");
 
@@ -19,6 +15,10 @@ const AddForm = ({ passfunction }) => {
     titlerror: "",
     descriptionerror: "",
   });
+
+  const name = useSelector((state) => state.nickname.nickname);
+
+  const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -39,9 +39,20 @@ const AddForm = ({ passfunction }) => {
       });
       console.log("Title is Empty");
     } else {
-      passfunction({ title: titleInputValue, desc: descInputValue });
-      setTitleInputValue("");
-      setDescInputValue("");
+      const diaryCard = {
+        title: titleInputValue,
+        description: descInputValue,
+        user: name,
+        created: new Date(),
+      };
+
+      try {
+        dispatch(addDiaryCard(diaryCard));
+        setDescInputValue("");
+        setTitleInputValue("");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -56,10 +67,11 @@ const AddForm = ({ passfunction }) => {
           onChange={(e) => {
             setTitleInputValue(e.target.value);
           }}
-          className={[
-            "submit-new-form-title-input",
-            ViewMode === "1" ? "submit-new-form-title-input-mode-1" : "",
-          ]}
+          className={
+            ViewMode === "1"
+              ? "submit-new-form-title-input-mode-1"
+              : "submit-new-form-title-input"
+          }
           variant="standard"
           InputProps={{
             disableUnderline: true,
@@ -80,10 +92,11 @@ const AddForm = ({ passfunction }) => {
         <span>{error.titlerror}</span>
         <Button
           size="medium"
-          className={[
-            "submit-new-submit-btn",
-            ViewMode === "1" ? "view-mode-1-submit-btn" : "",
-          ]}
+          className={
+            ViewMode === "1"
+              ? "view-mode-1-submit-btn"
+              : "submit-new-submit-btn"
+          }
           onClick={submitHandler}
         >
           {" "}
@@ -97,6 +110,7 @@ const AddForm = ({ passfunction }) => {
           placeholder="Enter Description"
           rows={4}
           required
+          fullWidth
           value={descInputValue}
           onChange={(e) => {
             setDescInputValue(e.target.value);
@@ -114,12 +128,9 @@ const AddForm = ({ passfunction }) => {
           //   }
 
           // }}
-          className={[
-            [
-              "submit-new-form-desc-input",
-              ViewMode === "1" ? "view-mode-1-desc" : "",
-            ],
-          ]}
+          className={
+            ViewMode === "1" ? "view-mode-1-desc" : "submit-new-form-desc-input"
+          }
           variant="standard"
           InputProps={{
             disableUnderline: true,

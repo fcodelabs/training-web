@@ -22,6 +22,19 @@
 
 }
 
+.submit-new-form-title-input-mode-1 {
+    background-color: #588ee1;
+    border-radius: 100px !important;
+    padding: 0px 15px !important;
+    max-height: 36px;
+    opacity: 0.54;
+    animation-name: view-mode-1-titile-input;
+    animation-duration: 1s;
+    width: calc(100% - 200px);
+
+}
+
+
 /* .submit-new-form-title-input::placeholder {
     color: red !important;
 } */
@@ -34,6 +47,20 @@
     display: none !important;
     width: 150px;
     background-color: #4071ee !important;
+
+}
+
+
+.view-mode-1-submit-btn {
+    border-radius: 100px !important;
+    color: rgba(0, 0, 0, 0.726) !important;
+    font-weight: 500;
+    display: block !important;
+    width: 150px;
+    background-color: #4071ee !important;
+    animation-name: view-mode-1-submit-btn;
+    animation-duration: 1s;
+    animation-timing-function: ease;
 
 }
 
@@ -54,26 +81,10 @@
 
 }
 
-
-
-
-
-.submit-new-form-title-input-mode-1 {
-    animation-name: view-mode-1-titile-input;
-    animation-duration: 1s;
-    width: calc(100% - 200px);
-
-}
-
-.view-mode-1-submit-btn {
-    display: block !important;
-    animation-name: view-mode-1-submit-btn;
-    animation-duration: 1s;
-    animation-timing-function: ease;
-
-}
-
 .view-mode-1-desc {
+
+    padding: 0px 15px !important;
+    background-color: #588ee1 !important;
     display: block !important;
     border-radius: 10px !important;
     animation-name: view-mode-1-desc-input;
@@ -81,7 +92,6 @@
     animation-timing-function: ease;
     height: 100px;
     min-width:100% !important;
-    background-color:black;
 }
 
 @keyframes view-mode-1-desc-input {

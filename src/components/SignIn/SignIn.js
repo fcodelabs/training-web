@@ -10,6 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import TextField from "@mui/material/TextField";
+import { Grid } from "@mui/material";
 
 export default function SignIn() {
   const [activeContinue, setActiveContinue] = useState(false);
@@ -47,7 +48,7 @@ export default function SignIn() {
   localStorage.setItem("name", name);
 
   return (
-    <Box item xs={3} sx={{opacity: 0.7}}>
+    <Grid item sx={{opacity: 0.7}} minWidth="300px">
       <Card variant="outlined">
         <Box
           component="form"
@@ -139,6 +140,6 @@ export default function SignIn() {
           </CardContent>
         </Box>
       </Card>
-    </Box>
+    </Grid>
   );
 }

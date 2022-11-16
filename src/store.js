@@ -1,17 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import diaryCardReducer from "./slices/diaryCardSlice";
+import diaryCardReducer from "./pages/Home/HomeSlice";
 import createSagaMiddleware from "redux-saga";
-import saga from "./sagas/saga";
+import HomeSaga from "./pages/Home/HomeSaga";
 
-let sagaMiddleware = createSagaMiddleware()
-const middleware = [sagaMiddleware]
+let sagaMiddleware = createSagaMiddleware();
+const middleware = [sagaMiddleware];
 
-export const store =  configureStore({
-    reducer: {
-        diaryCard: diaryCardReducer,
-    },
-    middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(middleware),
+export const store = configureStore({
+  reducer: {
+    diaryCard: diaryCardReducer,
+  },
+  middleware: middleware,
 });
 
-sagaMiddleware.run(saga)
+sagaMiddleware.run(HomeSaga);
+
+export default store;

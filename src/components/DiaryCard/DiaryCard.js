@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 
-export default function DiaryCard({title, name, description, timestamp}) {
+export default function DiaryCard({name, title, description}) {
   const [handleDescriptionLineClamp, setHandleDescriptionLineClamp] =
     React.useState(3);
 
@@ -37,9 +37,8 @@ export default function DiaryCard({title, name, description, timestamp}) {
         <Typography sx={{ mb: 1.5, fontSize: "13px" }} color="text.secondary">
           {name}
         </Typography>
-        <Typography variant="body2">
-          <Box
-            component="div"
+        <Box variant="body2">
+          <Typography
             sx={{
               overflow: "hidden",
               display: "-webkit-box",
@@ -48,8 +47,8 @@ export default function DiaryCard({title, name, description, timestamp}) {
             }}
           >
             {description}
-          </Box>
-        </Typography>
+          </Typography>
+        </Box>
       </CardContent>
       <CardActions>
         <Button size="small" onClick={handleDescription} sx={{color:"#0097A7", fontWeight:"bold"}}>

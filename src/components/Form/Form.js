@@ -4,7 +4,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { sagaActions } from "../sagas/sagaActions";
+import { addADiaryCard } from "../../pages/Home/HomeSlice";
 
 export default function Form() {
   const [extractedInput, setExtractedInput] = React.useState(false);
@@ -21,15 +21,16 @@ export default function Form() {
 
   const handleSubmit = (e) => {
     if (title.length > 0 && description.length > 0) {
+      const diaryCardId = new Date();
       const diaryCard = {
+        timestamp : diaryCardId,
         title: title,
         name: localStorage.getItem("name"),
         description: description,
-        timestamp: Date.now(),
       };
 
       try {
-        dispatch({ type: sagaActions.ADD_DIARY_CARD_TO_FIREBASE, diaryCard });
+        dispatch(addADiaryCard(diaryCard));
         setTitle("");
         setDescription("");
         setExtractedInput(false);
@@ -54,7 +55,7 @@ export default function Form() {
         <Box component="form" noValidate autoComplete="off" sx={{ mb: "30px" }}>
           <FormControl
             sx={{
-              width: extractedInput ? 4 / 5 : 2 / 5,
+              width: extractedInput ? 3 / 5 : 1 / 5,
               transition: extractedInput ? "ease-in 0.8s" : "ease-out 0.8s",
               borderRadius: "16px",
               backgroundColor: "#87CEEB",

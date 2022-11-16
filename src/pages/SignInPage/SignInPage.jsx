@@ -1,13 +1,13 @@
 import { Grid, Typography, TextField, Container } from "@mui/material";
 import React from "react";
-import './Styles.css';
+import './SignInPage.css';
 import Button from '@mui/material/Button';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import img from './img.jpg';
 import { useSelector, useDispatch } from 'react-redux'
-import { enable, disable, setNickname } from './SignInSlice'
+import { setNickname } from './SignInSlice'
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 
 
@@ -17,33 +17,28 @@ export default function SignInPage() {
     const names = ["John", "Nick", "Anne", "Henry", "James", "Robert", "William", "Merry"];
     const dispatch = useDispatch();
     const nickname = useSelector(state => state.signIn.nickname);
-    const [disabled,setDisabled] =useState(true)
-    
-    
+    const [disabled, setDisabled] = useState(true)
+
+
     function generateRandomName() {
         const random = names[Math.floor(Math.random() * names.length)];
-        dispatch(setNickname(random));
-        setDisabled(false);
-
+        dispatch(setNickname(random));   
     }
+
+    useEffect(()=>{
+        if(nickname==""){
+            setDisabled(true);
+        }else{
+            setDisabled(false);
+        }
+    },[nickname])
 
 
     return (
 
-        <Grid style={{
-            backgroundImage: `url(${img})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            width: '100vw',
-            height: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-
-        }} >
+        <Grid className="containerSignIn" >
 
             <Container maxWidth="sm" >
-
 
                 <div className="card">
                     <div className="flex">
@@ -61,10 +56,7 @@ export default function SignInPage() {
                                 variant="outlined"
                                 className="txt"
                                 onChange={(e) => {
-                                    (e.target.value === "") ?  setDisabled(true) :  setDisabled(false);;
-
                                     dispatch(setNickname(e.target.value));
-
                                 }}
                             />
 
@@ -72,7 +64,9 @@ export default function SignInPage() {
                         </div>
 
                         <div className="center">
-                            <Button disabled={disabled} variant="contained" size="sm" endIcon={<ArrowForwardIcon />} style={{ marginBottom: '3vh', borderRadius: '30px' }}><Link to="home" style={{textDecoration:"none",color:"white"}}>CONTINUE</Link></Button>
+                            <Link to="home" style={{ textDecoration: "none"}}>
+                                <Button disabled={disabled} variant="contained" size="sm" endIcon={<ArrowForwardIcon />} style={{ marginBottom: '3vh', borderRadius: '30px' }}>CONTINUE</Button>
+                            </Link>
                         </div>
 
                     </div>

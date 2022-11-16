@@ -1,0 +1,46 @@
+.card {
+
+    background-color: white;
+    border-radius: 10px;
+    border: 10px solid white;
+
+}
+
+.containerSignIn{
+    background-Image: url("./img.jpg");
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-Content: center;
+    align-items: center;
+
+}
+
+.logo {
+    width: 5vh;
+    padding: 1vh;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.txt {
+    width: 70%;
+    margin: 1vh;
+
+}
+
+.d1 {
+    padding-top: 4vh;
+    padding-bottom: 3vh;
+}

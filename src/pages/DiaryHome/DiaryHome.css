@@ -1,17 +1,14 @@
-.container{
+.containerDiaryHome{
     background-Image: url("./img.jpg");
     background-size:cover;
     height: auto;
-    display: flex;
-    justify-Content: center;
     min-Height:100vh;
- 
-    
+    display: flex;
+    justify-Content: center; 
+   
 }
 
 .text{
-   
-    
     background-Color: #a6c5ea;
     opacity: 60%;
   

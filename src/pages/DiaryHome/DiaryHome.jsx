@@ -65,7 +65,7 @@ export default function DiaryHome() {
 
     return (
 
-        <Grid className="container" top="0vh">
+        <Grid className="containerDiaryHome" top="0vh" >
             <Container maxWidth='xl'>
                 <Grid marginTop="60px">
                     <Typography variant="h4" marginTop={'2vh'} fontWeight="bold" color={"white"}>Home</Typography>

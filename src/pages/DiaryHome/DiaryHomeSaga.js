@@ -2,7 +2,7 @@ import { take, call, put, takeEvery } from 'redux-saga/effects'
 import { eventChannel } from 'redux-saga'
 import { setCards, getCards, addCard } from './DiaryHomeSlice'
 import { db } from '../../utils/firebaseConfig';
-import { addDoc, collection, doc, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { addDoc, collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 
 function* handleGetCards() {
 

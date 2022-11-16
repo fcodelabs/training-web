@@ -2,9 +2,10 @@ import React from "react";
 import { Grid, OutlinedInput, Button, Container, Typography } from "@mui/material";
 import "./DiaryHome.css"
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
-import { setTitle, collapse, titleIsNotClicked, titleIsClicked, expand, setDescription, getCards, addCard } from "./DiaryHomeSlice";
+import {getCards, addCard } from "./DiaryHomeSlice";
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
+
 
 
 
@@ -12,49 +13,55 @@ export default function DiaryHome() {
 
     const dispatch = useDispatch();
     const cards = useSelector(state => state.diaryHome.cards);
-    const title = useSelector(state => state.diaryHome.title);
-    const description = useSelector(state => state.diaryHome.description);
-    const titleClicked = useSelector(state => state.diaryHome.titleClicked);
-    const visibility = useSelector(state => state.diaryHome.visibility);
-    const width = useSelector(state => state.diaryHome.width);
-
-
+    const nickname = useSelector(state => state.signIn.nickname);
+    const [title,setTitle]=useState("");
+    const [description,setDescription]=useState("");
+    const [visibility,setVisibility]=useState("none");
+    const [width,setWidth]=useState("");
+  
 
     useEffect(() => {
         dispatch(getCards());
-    },[]);
+    }, []);
 
-     function submitCard() {
+    useEffect(() => {
+        window.onclick = (e) => {
+            if (e.target.id==="expand") {
+                setVisibility("block");
+                setWidth("80%")
+            }else{
+                setVisibility("none");
+                setWidth("30%")   
+            }
+            
+        }
+
+    })
+
+    function submitCard() {
         if (title === "") {
             console.log("Missing title");
         } else if (description === "") {
             console.log("Missing description");
         } else {
-
-            let id=(cards==null)?"card-"+1:"card-"+(cards.length+1);
-            let card = {
-                
+           
+            const card = {
                 title: title,
                 description: description,
-                user: localStorage.getItem("nickname")
+                user: nickname,
+                created:new Date()
 
             }
-        
-            dispatch(addCard({card,id}))
-            dispatch(setTitle(""));
-            dispatch(setDescription(""));
+            
+            dispatch(addCard({card}))
+            setTitle("");
+            setDescription("");
         }
 
     }
 
 
-    window.onclick = () => {
-        if (!titleClicked) {
-            dispatch(collapse());
-        }
-        dispatch(titleIsNotClicked());
 
-    }
 
     return (
 
@@ -67,15 +74,12 @@ export default function DiaryHome() {
 
                 <Grid style={{ display: "flex", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '1vh' }}>
                     <OutlinedInput
+                        id="expand"
                         className="text"
-                        value={useSelector(state => state.diaryHome.title)}
+                        value={title}
                         size="small"
                         placeholder="Submit New"
-                        onChange={(e) => { dispatch(setTitle(e.target.value)) }}
-                        onClick={(e) => {
-                            dispatch(titleIsClicked());
-                            dispatch(expand());
-                        }}
+                        onChange={(e) => {setTitle(e.target.value)}}
                         style={{ borderRadius: "30px", width: width, transition: 'width 2s' }}
 
                     />
@@ -88,10 +92,10 @@ export default function DiaryHome() {
                 </Grid>
                 <Grid marginTop='1vh' >
                     <OutlinedInput
+                        id="expand"
                         className="text"
-                        value={useSelector(state => state.diaryHome.description)}
-                        onChange={(e) => { dispatch(setDescription(e.target.value)) }}
-                        onClick={() => { dispatch(titleIsClicked()) }}
+                        value={description}
+                        onChange={(e) => { setDescription(e.target.value)}}
                         fullWidth
                         multiline={true}
                         rows="6"

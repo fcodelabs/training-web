@@ -6,6 +6,8 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import img from './img.jpg';
 import { useSelector, useDispatch } from 'react-redux'
 import { enable, disable, setNickname } from './SignInSlice'
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 
@@ -15,14 +17,13 @@ export default function SignInPage() {
     const names = ["John", "Nick", "Anne", "Henry", "James", "Robert", "William", "Merry"];
     const dispatch = useDispatch();
     const nickname = useSelector(state => state.signIn.nickname);
-    const disabled = useSelector(state => state.signIn.disabled);
-    localStorage.setItem("nickname",nickname);
+    const [disabled,setDisabled] =useState(true)
+    
     
     function generateRandomName() {
         const random = names[Math.floor(Math.random() * names.length)];
-       
         dispatch(setNickname(random));
-        dispatch(enable());
+        setDisabled(false);
 
     }
 
@@ -60,9 +61,9 @@ export default function SignInPage() {
                                 variant="outlined"
                                 className="txt"
                                 onChange={(e) => {
-                                    (e.target.value === "") ? dispatch(disable()) : dispatch(enable());
+                                    (e.target.value === "") ?  setDisabled(true) :  setDisabled(false);;
 
-                                    dispatch(setNickname(e.value));
+                                    dispatch(setNickname(e.target.value));
 
                                 }}
                             />
@@ -71,7 +72,7 @@ export default function SignInPage() {
                         </div>
 
                         <div className="center">
-                            <Button href="home" disabled={disabled} variant="contained" size="sm" endIcon={<ArrowForwardIcon />} style={{ marginBottom: '3vh', borderRadius: '30px' }}>CONTINUE</Button>
+                            <Button disabled={disabled} variant="contained" size="sm" endIcon={<ArrowForwardIcon />} style={{ marginBottom: '3vh', borderRadius: '30px' }}><Link to="home" style={{textDecoration:"none",color:"white"}}>CONTINUE</Link></Button>
                         </div>
 
                     </div>

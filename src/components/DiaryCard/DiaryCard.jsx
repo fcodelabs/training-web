@@ -18,7 +18,6 @@ export default function DiaryCard(props) {
 
 
     useEffect(() => {
-
         if (props.description.length < 100) {
             setText(props.description);
             setVisibility("none");
@@ -27,7 +26,7 @@ export default function DiaryCard(props) {
             setText(textTemp + "...");
             setVisibility("block");
         }
-    },[]);
+    },[props.description]);
 
     function handleShowMore() {
 

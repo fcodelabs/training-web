@@ -1,6 +1,3 @@
-
-import './App.css';
-
 import DiaryHome from './pages/DiaryHome/DiaryHome';
 import SignInPage from './pages/SignInPage/SignInPage';
 import { Route, Routes } from "react-router-dom";

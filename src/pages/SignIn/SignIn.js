@@ -3,7 +3,7 @@ import { Button, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
-import { setNickname } from "../../store/nicknameSlice";
+import { setNickname } from "../DiaryHome/DiaryHomeSlice";
 import "./signIn.css";
 import CompanyLogo from "../../components/CompanyLogo/CompanyLogo.js";
 import { useNavigate } from "react-router-dom";
@@ -73,7 +73,8 @@ const SignIn = () => {
           backgroundSize: "cover",
         }}
       >
-        <Grid item
+        <Grid
+          item
           xs={11}
           sm={10}
           md={8}

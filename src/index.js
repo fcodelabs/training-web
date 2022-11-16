@@ -7,7 +7,7 @@ import { createTheme } from "@mui/material/styles";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { diaryErrorColor, diaryPrimaryColor } from "./utils/themeColor";
 
-import { store } from "./store/store.js";
+import { store } from "./store.js";
 import { Provider } from "react-redux";
 
 export const appTheme = createTheme({

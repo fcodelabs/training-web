@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Grid, Button, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import "./addForm.css";
-import { addDiaryCard, getAllDiaryCards } from "../../store/diaryCardSlice";
+import { addDiaryCard } from "../../pages/DiaryHome/DiaryHomeSlice";
+import { SpaceBarRounded, SpaTwoTone } from "@mui/icons-material";
 
 const AddForm = () => {
   const [ViewMode, setViewMode] = useState("0");
@@ -16,7 +17,7 @@ const AddForm = () => {
     descriptionerror: "",
   });
 
-  const name = useSelector((state) => state.nickname.nickname);
+  const user = useSelector((state) => state.diaryCards.nickname);
 
   const dispatch = useDispatch();
 
@@ -42,7 +43,7 @@ const AddForm = () => {
       const diaryCard = {
         title: titleInputValue,
         description: descInputValue,
-        user: name,
+        user: user,
         created: new Date(),
       };
 
@@ -77,17 +78,8 @@ const AddForm = () => {
             disableUnderline: true,
           }}
           onFocus={() => {
-            // setTitle(true);
             setViewMode("1");
           }}
-          // onBlur={() => {
-          //   setTitle(false);
-          //   {
-          //     title === false && desc === false && submit === false
-          //       ? setViewMode("0")
-          //       : setViewMode("1");
-          //   }
-          // }}
         />
         <span>{error.titlerror}</span>
         <Button
@@ -103,6 +95,7 @@ const AddForm = () => {
           SUBMIT{" "}
         </Button>
       </div>
+      
       <div className={"submit-new-form-desc-container"}>
         <TextField
           multiline

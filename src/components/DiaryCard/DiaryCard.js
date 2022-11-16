@@ -12,9 +12,6 @@ const DiaryCard = ({ cardData }) => {
   const [desc, setDesc] = useState("");
 
   useEffect(() => {
-    console.log("cardData");
-    console.log(cardData);
-
     if (cardData?.description.length <= 100) {
       setDesc(cardData.description);
       setVisible("none");

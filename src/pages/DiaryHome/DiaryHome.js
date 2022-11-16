@@ -4,14 +4,14 @@ import "./diaryHome.css";
 import AddForm from "../../components/AddForm/AddForm.js";
 import DiaryCard from "../../components/DiaryCard/DiaryCard.js";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getAllDiaryCards } from "../../store/diaryCardSlice";
+// import { useNavigate } from "react-router-dom";
+import { getAllDiaryCards } from "./DiaryHomeSlice";
 
 const DiaryHome = () => {
   const cards = useSelector((state) => state.diaryCards.diaryCards);
-  const user = useSelector((state) => state.nickname.nickname);
+  // const user = useSelector((state) => state.diaryCards.nickname);
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -20,9 +20,9 @@ const DiaryHome = () => {
     //   navigate("/");
     // }
     dispatch(getAllDiaryCards());
-    console.log("home cards");
+    
 
-    console.log(cards);
+    
   }, []);
 
   return (

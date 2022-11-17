@@ -1,10 +1,10 @@
-import { configureStore,applyMiddleware } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import DiaryHomeReducer from './pages/DiaryHome/DiaryHomeSlice'
 import SignInPageReducer from './pages/SignInPage/SignInPageSlice'
 import createSagaMiddleware from 'redux-saga'
-import logger from "redux-logger";
-import rootSaga from './rootSaga'
-import { Store } from '@mui/icons-material';
+//import logger from "redux-logger";
+import DiaryHomeSaga from '../src/pages/DiaryHome/DiaryHomeSaga'
+//import { Store } from '@mui/icons-material';
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -15,5 +15,5 @@ const store= configureStore({
     },
     middleware:[sagaMiddleware]
 }) ;
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(DiaryHomeSaga);
 export default store;

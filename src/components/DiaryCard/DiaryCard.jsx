@@ -5,7 +5,6 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -32,38 +31,35 @@ const ExpandMore = styled((props) => {
 export default function DiaryCard(props) {
 
    
-
+  
   const titleText=props.title
 const name=props.name
 const[description1,setDiscription1]=useState("")
-const[description2,setDiscription2]=useState("")
-const[dot,setDot]=useState('')
+const[lable,setLable]=useState('show')
 const[expandMore,setExpandMore]=useState('none')
 
+
  useEffect(()=>{
-
-
 var temp1=props.description+''
-
          if(temp1.length>100){
-          setExpandMore('block')
-          setDiscription1(temp1.substring(0,80))
-            setDiscription2(temp1.substring(80,temp1.length))
-            if(expanded===false){
-                setDot('block')
-            }else{
-                setDot('none')
-            }           
+          setExpandMore('block')    
+          setDiscription1(temp1.substring(0,80)+'...')                        
          }else{
             setDiscription1(temp1)
-            setDiscription2("")
-            setDot('none')
          }
- })
-  const [expanded, setExpanded] = useState(false);
+ },[props.description])
 
+  const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    if(lable==='show'){
+      setExpanded(true);
+      setDiscription1(props.description)
+      setLable('hide')
+    }else{
+      setExpanded(false);
+      setDiscription1(props.description.substring(0,80)+'...') 
+      setLable('show')
+    }
     
   };
 
@@ -86,10 +82,10 @@ var temp1=props.description+''
 
       <CardContent>
         <Typography className='mainText' variant="body2" color="text.secondary">
-         {description1}<span className='dots' style={{display:dot}}>...</span>
-         <Collapse className='restOfTheText' in={expanded} timeout="auto" unmountOnExit  >
-         {description2}</Collapse>
-      
+         {description1}
+         {/* <span>
+         <Collapse className='restOfTheText' in={expanded} timeout="auto" unmountOnExit  > </Collapse>
+         </span> */}
         </Typography>
       </CardContent>
 

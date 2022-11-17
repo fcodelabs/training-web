@@ -1,4 +1,4 @@
-import React,{StyleSheet, useEffect,useState} from 'react'
+import React,{ useEffect} from 'react'
 import './SignInPage.css'
 import Button from '../../components/Buttons/Button'
 import TextField from '../../components/TextField/TextField'
@@ -20,7 +20,7 @@ const dispatch=useDispatch()
 
     useEffect(()=>{
         //console.log(userName)
-        if(userName==null || userName=="") 
+        if(userName===null || userName==="") 
         dispatch(disable())
         else  
         dispatch(enable())

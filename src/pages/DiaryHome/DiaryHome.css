@@ -5,11 +5,16 @@
    height: 100%;
    display: flex;
    justify-content: center;
-   align-items: center;
+   align-items: center; 
  
 }
 .container{
-   width: 100vw;
+   height: auto;
+   min-Height:100vh;
+   display: flex;
+   justify-Content: center;
+   background-size:cover;
+   padding: 0;
 }
 .mainGrid{
    overflow: hidden;

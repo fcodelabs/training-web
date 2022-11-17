@@ -12,7 +12,11 @@ export const store = configureStore({
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(middleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['diaryCard/addDiaryCard'],
+      },
+    }).concat(middleware),
 });
 
 sagaMiddleware.run(DiaryHomeSaga);

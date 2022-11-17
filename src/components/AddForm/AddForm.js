@@ -3,7 +3,7 @@ import { Grid, Button, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import "./addForm.css";
 import { addDiaryCard } from "../../pages/DiaryHome/DiaryHomeSlice";
-import { SpaceBarRounded, SpaTwoTone } from "@mui/icons-material";
+import { useSearchParams } from "react-router-dom";
 
 const AddForm = () => {
   const [ViewMode, setViewMode] = useState("0");
@@ -18,7 +18,10 @@ const AddForm = () => {
   });
 
   const user = useSelector((state) => state.diaryCards.nickname);
-
+  
+  const [searchparams] = useSearchParams();
+  const profile = searchparams.get("user");
+  
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
@@ -43,7 +46,7 @@ const AddForm = () => {
       const diaryCard = {
         title: titleInputValue,
         description: descInputValue,
-        user: user,
+        user: (user === "") ? profile : user,
         created: new Date(),
       };
 
@@ -53,6 +56,7 @@ const AddForm = () => {
         setTitleInputValue("");
       } catch (error) {
         console.log(error);
+
       }
     }
   };
@@ -109,18 +113,9 @@ const AddForm = () => {
             setDescInputValue(e.target.value);
           }}
           onFocus={() => {
-            // setDesc(true);
             setViewMode("1");
           }}
-          // onBlur={() => {
-          //   setDesc(false);
-          //   {
-          //     title === false && desc === false && submit === false
-          //       ? setViewMode("0")
-          //       : setViewMode("1");
-          //   }
-
-          // }}
+          
           className={
             ViewMode === "1" ? "view-mode-1-desc" : "submit-new-form-desc-input"
           }

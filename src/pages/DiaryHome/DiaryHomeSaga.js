@@ -14,31 +14,32 @@ import {
   setAllDiaryCards,
 } from "./DiaryHomeSlice";
 
-
 function* GetCards() {
-    const channel = eventChannel((emit) =>
-      onSnapshot(query(collection(db, "Post"), orderBy("created")), emit)
-    );
-    while (true) {
-      try {
-        const data = yield take(channel);
-        const cards = data.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-          created: doc.data().created.toDate().toString(),
-        }));
+  const channel = eventChannel((emit) =>
+    onSnapshot(query(collection(db, "Post"), orderBy("created")), emit)
+  );
+  while (true) {
+    try {
+      const data = yield take(channel);
+      const cards = data.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        created: doc.data().created.toDate().toString(),
+      }));
 
-        yield put(setAllDiaryCards(cards));
-        
-      } catch (err) {
-        console.error("socket error:", err);
-      }
+      yield put(setAllDiaryCards(cards));
+    } catch (err) {
+      console.error("socket error:", err);
     }
+  }
 }
 
 function* AddCard(action) {
-  const ref = yield call(() => addDoc(collection(db, "Post"), action.payload));
-  console.log("added ", ref.id);
+  try {
+    yield call(() => addDoc(collection(db, "Post"), action.payload));
+  } catch (err) {
+    console.error("socket error:", err);
+  }
 }
 
 export function* DiaryHomeSaga() {

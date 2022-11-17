@@ -6,6 +6,7 @@ import DiaryCard from "../../components/DiaryCard/DiaryCard.js";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { getAllDiaryCards } from "./DiaryHomeSlice";
+import NavBar from "../../components/NavBar/NavBar";
 
 const DiaryHome = () => {
   const cards = useSelector((state) => state.diaryCards.diaryCards);
@@ -19,16 +20,14 @@ const DiaryHome = () => {
     // if (user === "") {
     //   navigate("/");
     // }
-    dispatch(getAllDiaryCards());
-    
-
-    
+    dispatch(getAllDiaryCards()); 
   }, []);
 
   return (
     <Grid container className="home-main-container">
       <Grid className="home-inner-container-bg-image">
         <Grid container className="home-inner-container">
+          <NavBar/>
           <div className="home-text">
             <h1>Home</h1>
           </div>

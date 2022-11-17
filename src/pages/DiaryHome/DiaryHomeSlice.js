@@ -20,9 +20,12 @@ export const DiaryHomeSlice = createSlice({
     },
     getAllDiaryCards: () => {},
     addDiaryCard : (action) => {},
+    removeDiaryCards: (state) => {
+      state.diaryCards = [];
+    },
   },
 });
 
-export const {  setNickname, removeNickname, setAllDiaryCards, getAllDiaryCards, addDiaryCard } = DiaryHomeSlice.actions;
+export const {  setNickname, removeNickname, setAllDiaryCards, getAllDiaryCards, addDiaryCard, removeDiaryCards } = DiaryHomeSlice.actions;
 
 export default DiaryHomeSlice.reducer;

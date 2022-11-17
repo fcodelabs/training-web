@@ -16,7 +16,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="bgImage">
       <Form />
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {/* diaryCards map with unique key */}

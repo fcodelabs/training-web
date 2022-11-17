@@ -51,15 +51,15 @@ export default function Form() {
 
   return (
     <>
-      <Box sx={{ width: "90%", ml: "30px", mt: "30px", mb: "50px" }}>
+      <Box sx={{ width: "90%", mt:"15px", ml: "30px", mb: "50px" }}>
         <Box component="form" noValidate autoComplete="off" sx={{ mb: "30px" }}>
           <FormControl
             sx={{
               width: extractedInput ? 3 / 5 : 1 / 5,
               transition: extractedInput ? "ease-in 0.8s" : "ease-out 0.8s",
               borderRadius: "16px",
-              backgroundColor: "#87CEEB",
-              opacity: 0.8,
+              backgroundColor: "#e0e0e0",
+              opacity: 0.94,
               border: "none",
               "& fieldset": { border: "none" },
             }}
@@ -93,13 +93,13 @@ export default function Form() {
           component="form"
           noValidate
           autoComplete="off"
-          sx={{ backgroundColor: "#87CEEB" }}
+          sx={{ backgroundColor: "#e0e0e0" }}
         >
           <FormControl
             sx={{
               width: 1,
               border: "none",
-              opacity: 0.8,
+              opacity: 0.94,
               "& fieldset": { border: "none" },
               borderRadius: "16px",
               display: extractedInput ? "block" : "none",

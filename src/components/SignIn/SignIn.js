@@ -48,11 +48,10 @@ export default function SignIn() {
   localStorage.setItem("name", name);
 
   return (
-    <Grid item sx={{opacity: 0.7}} minWidth="300px">
+    <Grid item sx={{opacity: 0.94}} minWidth="300px">
       <Card variant="outlined">
         <Box
           component="form"
-          container
           spacing={0}
           direction="column"
           alignItems="center"
@@ -65,7 +64,7 @@ export default function SignIn() {
               sx={{ fontSize: 30, color: "#0097A7", my: 2, fontWeight: "bold" }}
               gutterBottom
             >
-              Sign In
+              Dear Diary
             </Typography>
             <Stack
               spacing={4}

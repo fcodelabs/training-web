@@ -25,7 +25,7 @@ export default function DiaryCard({name, title, description}) {
       sx={{
         maxWidth: 375,
         borderRadius: "15px",
-        opacity: 0.6,
+        opacity: 0.94,
         mx: "20px",
         my: "20px",
       }}
@@ -34,7 +34,7 @@ export default function DiaryCard({name, title, description}) {
         <Typography variant="h6" component="div">
           {title}
         </Typography>
-        <Typography sx={{ mb: 1.5, fontSize: "13px" }} color="text.secondary">
+        <Typography sx={{ mb: 1.5, fontSize: "13px", fontStyle:"italic" }} color="text.secondary">
           {name}
         </Typography>
         <Box variant="body2">
@@ -44,6 +44,7 @@ export default function DiaryCard({name, title, description}) {
               display: "-webkit-box",
               WebkitLineClamp: handleDescriptionLineClamp,
               WebkitBoxOrient: "vertical",
+              opacity: 0.7,
             }}
           >
             {description}

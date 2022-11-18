@@ -52,7 +52,7 @@ export default function DiaryCard(props) {
                 title={props.title}
                 subheader={props.subTitle}
             />
-            <CardContent>
+            <CardContent style={{paddingTop:'0'}}>
                 <Typography>
                     {text}
                 </Typography>

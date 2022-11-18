@@ -1,4 +1,4 @@
-import { take, call, put, takeEvery } from 'redux-saga/effects'
+import { take, call, put, takeLatest } from 'redux-saga/effects'
 import { eventChannel } from 'redux-saga'
 import { setCards, getCards, addCard } from './DiaryHomeSlice'
 import { db } from '../../utils/firebaseConfig';
@@ -7,7 +7,8 @@ import { addDoc, collection, onSnapshot, query, orderBy } from 'firebase/firesto
 function* handleGetCards() {
 
     const ref = query(collection(db, "Post"), orderBy('created'));
-    const channel = eventChannel((emit) => onSnapshot(ref, emit))
+    const channel = eventChannel((emit) => onSnapshot(ref, emit));
+    
     while (true) {
         try {
             const data = yield take(channel);
@@ -31,6 +32,6 @@ function* handleAddCard(action) {
 }
 
 export function* DiaryHomeSaga() {
-    yield takeEvery(getCards, handleGetCards);
-    yield takeEvery(addCard, handleAddCard);
+    yield takeLatest(getCards, handleGetCards);
+    yield takeLatest(addCard, handleAddCard);
 } 

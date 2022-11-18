@@ -21,6 +21,7 @@ export default function DiaryHome() {
   
 
     useEffect(() => {
+        document.title="Dear Diary - Home"
         dispatch(getCards());
     }, []);
 

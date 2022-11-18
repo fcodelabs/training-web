@@ -1,10 +1,11 @@
 .containerDiaryHome{
     background-Image: url("./img.jpg");
     background-size:cover;
-    height: auto;
+    height: max-content;
     min-Height:100vh;
     display: flex;
     justify-Content: center; 
+    padding-bottom: 2vh;
    
 }
 

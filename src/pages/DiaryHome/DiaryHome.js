@@ -4,22 +4,15 @@ import "./diaryHome.css";
 import AddForm from "../../components/AddForm/AddForm.js";
 import DiaryCard from "../../components/DiaryCard/DiaryCard.js";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import { getAllDiaryCards } from "./DiaryHomeSlice";
 import NavBar from "../../components/NavBar/NavBar";
 
 const DiaryHome = () => {
   const cards = useSelector((state) => state.diaryCards.diaryCards);
-  // const user = useSelector((state) => state.diaryCards.nickname);
-
-  // let navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // if (user === "") {
-    //   navigate("/");
-    // }
     dispatch(getAllDiaryCards()); 
   }, []);
 

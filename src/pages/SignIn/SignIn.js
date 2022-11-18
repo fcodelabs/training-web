@@ -1,12 +1,11 @@
 import { ArrowForward } from "@mui/icons-material";
 import { Button, Grid, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import { setNickname } from "../DiaryHome/DiaryHomeSlice";
-import "./signIn.css";
 import CompanyLogo from "../../components/CompanyLogo/CompanyLogo.js";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 let randomNames = [
   "Liam",
@@ -45,6 +44,13 @@ const SignIn = () => {
     let ran = Math.floor(Math.random() * randomNames.length);
     setRanName(randomNames[ran]);
   };
+
+  useEffect(() => {
+    let nickname = localStorage.getItem("nickname");
+    if (nickname && nickname !== "") {
+      navigate("/home");
+    }
+  }, []);
 
   return (
     <Grid
@@ -154,28 +160,24 @@ const SignIn = () => {
                 RANDOM{" "}
               </Button>
             </div>
-              <Button
-                variant="contained"
-                disabled={ranName === "" || ranName.length < 3}
-                onClick={() => {
-                  dispatch(setNickname(ranName));
-                  // navigate("/home");
-                  navigate({
-                    pathname: "/home",
-                    search: createSearchParams({user: ranName}).toString()
-                  })
-                }}
-                className="signin-form-continue-btn"
-                style={{
-                  borderRadius: "40px",
-                  padding: "8px 30px",
-                  fontSize: ".95em",
-                }}
-                endIcon={<ArrowForward />}
-              >
-                {" "}
-                CONTINUE{" "}
-              </Button>
+            <Button
+              variant="contained"
+              disabled={ranName === "" || ranName.length < 3}
+              onClick={() => {
+                dispatch(setNickname(ranName));
+                navigate("/home");
+              }}
+              className="signin-form-continue-btn"
+              style={{
+                borderRadius: "40px",
+                padding: "8px 30px",
+                fontSize: ".95em",
+              }}
+              endIcon={<ArrowForward />}
+            >
+              {" "}
+              CONTINUE{" "}
+            </Button>
           </div>
         </Grid>
       </Grid>

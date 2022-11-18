@@ -16,24 +16,6 @@ export const diaryPrimaryColor =  {
     contrastDefaultColor: "light"
   }
 
-  export const diarydesaibleFontColor =  {
-    50: "#07ff22",
-    100: "#07ff22",
-    200: "#07ff22",
-    300: "#07ff22",
-    400: "#07ff22",
-    500: "#07ff22",
-    600: "#07ff22",
-    700: "#07ff22",
-    800: "#07ff22",
-    900: "#07ff22",
-    A100: "#07ff22",
-    A200: "#07ff22",
-    A400: "#07ff22",
-    A700: "#07ff22",
-    contrastDefaultColor: "light"
-  }
-
   export const diaryErrorColor =  {
     50: "#ea4c3d",
     100: "#ea4c3d",

@@ -3,7 +3,6 @@ import { Grid, Button, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import "./addForm.css";
 import { addDiaryCard } from "../../pages/DiaryHome/DiaryHomeSlice";
-import { useSearchParams } from "react-router-dom";
 
 const AddForm = () => {
   const [ViewMode, setViewMode] = useState("0");
@@ -18,10 +17,8 @@ const AddForm = () => {
   });
 
   const user = useSelector((state) => state.diaryCards.nickname);
-  
-  const [searchparams] = useSearchParams();
-  const profile = searchparams.get("user");
-  
+
+
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
@@ -46,7 +43,7 @@ const AddForm = () => {
       const diaryCard = {
         title: titleInputValue,
         description: descInputValue,
-        user: (user === "") ? profile : user,
+        user: user,
         created: new Date(),
       };
 
@@ -56,7 +53,6 @@ const AddForm = () => {
         setTitleInputValue("");
       } catch (error) {
         console.log(error);
-
       }
     }
   };
@@ -99,7 +95,7 @@ const AddForm = () => {
           SUBMIT{" "}
         </Button>
       </div>
-      
+
       <div className={"submit-new-form-desc-container"}>
         <TextField
           multiline
@@ -115,7 +111,6 @@ const AddForm = () => {
           onFocus={() => {
             setViewMode("1");
           }}
-          
           className={
             ViewMode === "1" ? "view-mode-1-desc" : "submit-new-form-desc-input"
           }

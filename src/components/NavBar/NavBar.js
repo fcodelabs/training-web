@@ -17,7 +17,7 @@ const NavBar = () => {
     <Grid
       style={{
         width: "100%",
-        height: "15vh",
+        height: "10vh",
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "center",
@@ -33,9 +33,10 @@ const NavBar = () => {
           boxShadow: "1px 2px 2px 1px rgba(0, 0, 0, 0.16)",
         }}
         onClick={() => {
-          navigate("/");
+          localStorage.removeItem("nickname");
           dispatch(removeNickname());
           dispatch(removeDiaryCards());
+          navigate("/");
         }}
         endIcon={<LogoutIcon />}
       >

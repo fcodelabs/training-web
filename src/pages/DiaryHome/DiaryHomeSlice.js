@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  nickname: "",
+  nickname: localStorage.getItem("nickname"),
   diaryCards: [],
 };
 
@@ -9,7 +9,8 @@ export const DiaryHomeSlice = createSlice({
   name: "diaryCard",
   initialState,
   reducers: {
-    setNickname: (state,action) => {
+    setNickname: (state, action) => {
+      localStorage.setItem("nickname", action.payload);
       state.nickname = action.payload;
     },
     removeNickname: (state) => {
@@ -19,13 +20,20 @@ export const DiaryHomeSlice = createSlice({
       state.diaryCards = action.payload;
     },
     getAllDiaryCards: () => {},
-    addDiaryCard : (action) => {},
+    addDiaryCard: (action) => {},
     removeDiaryCards: (state) => {
       state.diaryCards = [];
     },
   },
 });
 
-export const {  setNickname, removeNickname, setAllDiaryCards, getAllDiaryCards, addDiaryCard, removeDiaryCards } = DiaryHomeSlice.actions;
+export const {
+  setNickname,
+  removeNickname,
+  setAllDiaryCards,
+  getAllDiaryCards,
+  addDiaryCard,
+  removeDiaryCards,
+} = DiaryHomeSlice.actions;
 
 export default DiaryHomeSlice.reducer;

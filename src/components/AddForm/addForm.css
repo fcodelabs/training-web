@@ -41,12 +41,12 @@
 
 
 .submit-new-submit-btn {
-    border-radius: 100px !important;
+    /* border-radius: 100px !important;
     color: rgba(0, 0, 0, 0.726) !important;
-    font-weight: 500;
+    font-weight: 500; */
     display: none !important;
-    width: 150px;
-    background-color: #4071ee !important;
+    /* width: 150px; */
+    /* background-color: #4071ee !important; */
 
 }
 
@@ -72,11 +72,11 @@
 }
 
 .submit-new-form-desc-input {
-    width:100%;
+    /* width:100%;
     border-radius: 10px !important;
-    padding: 0px 15px !important;
+    padding: 0px 15px !important; */
     display: none !important;
-    background-color: #588ee1 !important;
+    /* background-color: #588ee1 !important; */
     /* width: 100% !important; */
 
 }

@@ -26,7 +26,7 @@ export default function SignInPage() {
     }
 
     useEffect(()=>{
-        if(nickname==""){
+        if(nickname===""){
             setDisabled(true);
         }else{
             setDisabled(false);
@@ -60,12 +60,12 @@ export default function SignInPage() {
                                 }}
                             />
 
-                            <Button variant="contained" size="sm" style={{ margin: '3vh', borderRadius: '30px' }} onClick={generateRandomName}>RANDOM</Button>
+                            <Button variant="contained" size="sm" className="btnSignIn" onClick={generateRandomName}>RANDOM</Button>
                         </div>
 
                         <div className="center">
-                            <Link to="home" style={{ textDecoration: "none"}}>
-                                <Button disabled={disabled} variant="contained" size="sm" endIcon={<ArrowForwardIcon />} style={{ marginBottom: '3vh', borderRadius: '30px' }}>CONTINUE</Button>
+                            <Link to="home" className="link">
+                                <Button className="btnSignIn" disabled={disabled} variant="contained" size="sm" endIcon={<ArrowForwardIcon />} >CONTINUE</Button>
                             </Link>
                         </div>
 

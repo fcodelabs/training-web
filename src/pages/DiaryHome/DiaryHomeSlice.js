@@ -4,18 +4,25 @@ import { createSlice } from '@reduxjs/toolkit'
 export const diaryHomeSlice = createSlice({
   name: 'diaryHome',
   initialState: {
-    cards:[]
+    cards:[],
+    error:""
   },
   reducers: {
-    setCards: (state, action) => {
-        state.cards=action.payload; 
+    getCards:()=>{},
+    getCardsSuccess: (state, action) => {
+      state.cards=action.payload; 
     },
-    getCards(){},
-    addCard(action){}
+    getCardsFailed:(state, action)=>{
+      state.error=action.payload
+    },
+    addCard:(action)=>{},
+    addCardFailed:(state, action)=>{
+      state.error=action.payload
+    }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const {setCards,getCards,addCard} = diaryHomeSlice.actions
+export const {getCards,getCardsSuccess,getCardsFailed,addCard,addCardFailed} = diaryHomeSlice.actions
 
 export default diaryHomeSlice.reducer

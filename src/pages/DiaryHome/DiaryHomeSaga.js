@@ -1,6 +1,6 @@
-import { take, call, put, takeLatest } from 'redux-saga/effects'
+import { take, call, put, takeEvery } from 'redux-saga/effects'
 import { eventChannel } from 'redux-saga'
-import { setCards, getCards, addCard } from './DiaryHomeSlice'
+import { getCards,getCardsFailed,getCardsSuccess, addCard ,addCardFailed} from './DiaryHomeSlice'
 import { db } from '../../utils/firebaseConfig';
 import { addDoc, collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 
@@ -17,10 +17,10 @@ function* handleGetCards() {
                 ...doc.data(),
             }));
 
-            yield put(setCards(cards))
+            yield put(getCardsSuccess(cards))
         }
         catch (err) {
-            console.error('socket error:', err)
+            yield put(getCardsFailed(err));
         }
     }
 
@@ -28,10 +28,15 @@ function* handleGetCards() {
 }
 
 function* handleAddCard(action) {
-    yield call(() => addDoc(collection(db, "Post"), action.payload.card));
+    try {
+        yield call(() => addDoc(collection(db, "Post"), action.payload.card));
+    } catch (error) {
+        yield put(addCardFailed(error));
+    }
+    
 }
 
 export function* DiaryHomeSaga() {
-    yield takeLatest(getCards, handleGetCards);
-    yield takeLatest(addCard, handleAddCard);
+    yield takeEvery(getCards, handleGetCards);
+    yield takeEvery(addCard, handleAddCard);
 } 

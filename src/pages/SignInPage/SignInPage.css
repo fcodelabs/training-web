@@ -44,3 +44,12 @@
     padding-top: 4vh;
     padding-bottom: 3vh;
 }
+
+.btnSignIn{
+    margin: 3vh !important;
+    border-Radius: 30px !important;
+}
+
+.link{
+    text-decoration: none;
+}

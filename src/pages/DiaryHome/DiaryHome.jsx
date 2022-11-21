@@ -1,10 +1,13 @@
 import React from "react";
+import * as ReactDOM from 'react-dom';
 import { Grid, OutlinedInput, Button, Container, Typography } from "@mui/material";
 import "./DiaryHome.css"
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
-import {getCards, addCard } from "./DiaryHomeSlice";
+import { getCards, addCard } from "./DiaryHomeSlice";
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 
 
@@ -14,47 +17,63 @@ export default function DiaryHome() {
     const dispatch = useDispatch();
     const cards = useSelector(state => state.diaryHome.cards);
     const nickname = useSelector(state => state.signIn.nickname);
-    const [title,setTitle]=useState("");
-    const [description,setDescription]=useState("");
-    const [visibility,setVisibility]=useState("none");
-    const [width,setWidth]=useState("");
-  
+    const error = useSelector(state => state.diaryHome.error);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [disabled, setDisabled] = useState(true);
+    const [open, setOpen] = useState(false);
+
 
     useEffect(() => {
-        document.title="Dear Diary - Home"
+
+        document.title = "Dear Diary - Home";
+        const title = document.getElementById("title");
+        const textArea = document.getElementById("textArea");
+        const description = document.getElementById("description");
+        const diaryHomeBtn = document.getElementById("diaryHomeBtn");
+        window.onclick = (e) => {
+            if (e.target === title || e.target === description) {
+                ReactDOM.findDOMNode(title).parentElement.className = "text textSubmitExpand";
+                ReactDOM.findDOMNode(textArea).className = "visible";
+                ReactDOM.findDOMNode(diaryHomeBtn).className = "diaryHomeBtn visible";
+            } else {
+                ReactDOM.findDOMNode(title).parentElement.className = "text textSubmitCollapse";
+                ReactDOM.findDOMNode(textArea).className = "hidden";
+                ReactDOM.findDOMNode(diaryHomeBtn).className = "diaryHomeBtn hidden";
+            }
+        }
         dispatch(getCards());
+
+
     }, []);
 
     useEffect(() => {
-        window.onclick = (e) => {
-            if (e.target.id==="expand") {
-                setVisibility("block");
-                setWidth("80%")
-            }else{
-                setVisibility("none");
-                setWidth("30%")   
-            }
-            
-        }
+        (title === "" || description === "") ? setDisabled(true) : setDisabled(false);
+    }, [title, description]);
 
-    })
+    useEffect(() => {
+        (error === "") ? setOpen(false) : setOpen(true);
+    }, [error]);
+
+
 
     function submitCard() {
         if (title === "") {
             console.log("Missing title");
+
         } else if (description === "") {
             console.log("Missing description");
         } else {
-           
+
             const card = {
                 title: title,
                 description: description,
                 user: nickname,
-                created:new Date()
+                created: new Date()
 
             }
-            
-            dispatch(addCard({card}))
+
+            dispatch(addCard({ card }))
             setTitle("");
             setDescription("");
         }
@@ -73,35 +92,35 @@ export default function DiaryHome() {
 
                 </Grid>
 
-                <Grid style={{ display: "flex", flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '1vh' }}>
+                <Grid className="addFormSection1">
                     <OutlinedInput
-                        id="expand"
-                        className="text"
+                        id="title"
+                        className="text textSubmitCollapse"
                         value={title}
                         size="small"
                         placeholder="Submit New"
-                        onChange={(e) => {setTitle(e.target.value)}}
-                        style={{ borderRadius: "30px", width: width, transition: 'width 2s' }}
+                        onChange={(e) => { setTitle(e.target.value); }}
 
                     />
                     <Button
-                        className="btn"
+                        id="diaryHomeBtn"
+                        className="diaryHomeBtn hidden "
                         variant="contained"
-                        style={{ display: visibility, transition: 'display 2s' }}
                         onClick={submitCard}
+                        disabled={disabled}
                     >SUBMIT</Button>
                 </Grid>
-                <Grid marginTop='1vh' >
+                <Grid id="textArea" className="hidden" >
                     <OutlinedInput
-                        id="expand"
+                        id="description"
                         className="text"
                         value={description}
-                        onChange={(e) => { setDescription(e.target.value)}}
+                        onChange={(e) => { setDescription(e.target.value) }}
                         fullWidth
                         multiline={true}
                         rows="6"
                         placeholder="Enter Description"
-                        style={{ borderRadius: "10px", display: visibility, width: '100%', transition: 'display 2s' }}
+
                     />
                 </Grid>
 
@@ -113,6 +132,14 @@ export default function DiaryHome() {
                     }
 
                 </Grid>
+
+                <Snackbar
+                    open={open}
+                    autoHideDuration={6000}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <Alert severity="error">{error}</Alert>
+                </Snackbar>
             </Container>
         </Grid>
     );

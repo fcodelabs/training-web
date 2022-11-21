@@ -12,6 +12,7 @@ import {
   addDiaryCard,
   getAllDiaryCards,
   setAllDiaryCards,
+  setError,
 } from "./DiaryHomeSlice";
 
 function* GetCards() {
@@ -30,6 +31,7 @@ function* GetCards() {
       yield put(setAllDiaryCards(cards));
     } catch (err) {
       console.error("socket error:", err);
+      yield put(setError(err));
     }
   }
 }
@@ -39,6 +41,8 @@ function* AddCard(action) {
     yield call(() => addDoc(collection(db, "Post"), action.payload));
   } catch (err) {
     console.error("socket error:", err);
+    yield put(setError(err));
+
   }
 }
 

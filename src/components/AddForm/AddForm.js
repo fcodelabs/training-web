@@ -29,7 +29,7 @@ const AddForm = () => {
         descriptionerror: "Description is Empty",
       });
       console.log("Title is Empty, Description is Empty");
-    } else if (descInputValue === "") {
+    }else if (descInputValue === "") {
       seterror({
         descriptionerror: "Description is Empty",
       });
@@ -81,7 +81,6 @@ const AddForm = () => {
             setViewMode("1");
           }}
         />
-        <span>{error.titlerror}</span>
         <Button
           size="medium"
           className={
@@ -95,6 +94,7 @@ const AddForm = () => {
           SUBMIT{" "}
         </Button>
       </div>
+      <span>{error.titlerror}</span>
 
       <div className={"submit-new-form-desc-container"}>
         <TextField
@@ -119,8 +119,9 @@ const AddForm = () => {
             disableUnderline: true,
           }}
         />
-        <span>{error.descriptionerror}</span>
       </div>
+      <span>{error.descriptionerror}</span>
+
     </Grid>
   );
 };

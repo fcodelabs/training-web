@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   nickname: localStorage.getItem("nickname"),
   diaryCards: [],
+  error: "",
 };
 
 export const DiaryHomeSlice = createSlice({
@@ -24,6 +25,9 @@ export const DiaryHomeSlice = createSlice({
     removeDiaryCards: (state) => {
       state.diaryCards = [];
     },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
@@ -34,6 +38,7 @@ export const {
   getAllDiaryCards,
   addDiaryCard,
   removeDiaryCards,
+  setError,
 } = DiaryHomeSlice.actions;
 
 export default DiaryHomeSlice.reducer;

@@ -40,7 +40,7 @@ const DiaryCard = ({ cardData }) => {
         style={{
           backgroundColor: cardData.color,
           borderRadius: "20px",
-          margin: "10px 10px 10px 0px",
+          minWidth: "22vw",
         }}
       >
         <CardContent>

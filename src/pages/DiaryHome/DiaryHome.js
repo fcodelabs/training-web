@@ -9,23 +9,39 @@ import NavBar from "../../components/NavBar/NavBar";
 
 const DiaryHome = () => {
   const cards = useSelector((state) => state.diaryCards.diaryCards);
+  const error = useSelector((state) => state.diaryCards.error);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllDiaryCards()); 
+    dispatch(getAllDiaryCards());
   }, []);
 
   return (
     <Grid container className="home-main-container">
       <Grid className="home-inner-container-bg-image">
         <Grid container className="home-inner-container">
-          <NavBar/>
+          <NavBar />
+          {error ? (
+            <Grid
+              style={{
+                color: "red",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <h3>! ! {error}</h3>
+            </Grid>
+          ) : (
+            ""
+          )}
           <div className="home-text">
             <h1>Home</h1>
           </div>
           <AddForm />
-          <Grid className="submitted-cards">
+          <Grid container spacing={1} className="submitted-cards">
             {cards?.map((item) => (
               <DiaryCard key={item.id} cardData={item} />
             ))}

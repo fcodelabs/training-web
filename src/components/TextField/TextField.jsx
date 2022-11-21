@@ -11,10 +11,15 @@ export default function BasicTextFields(props) {
       }}
       noValidate
       autoComplete="off"
-      
       style={props.style}
     >
-      <TextField id="standard-basic" style={props.style2}  label={props.placeHolder} onClick={props.onClick} value={props.value} onChange={props.onChange} variant="standard" />
+      <TextField id="standard-basic" 
+      style={props.style2}  
+      label={props.placeHolder} 
+      onClick={props.onClick} 
+      value={props.value} 
+      onChange={props.onChange} 
+      variant="standard" />
     </Box>
   );
 }

@@ -51,11 +51,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
+//===================================================
+
 export default function HeaderBar() {
   return (
     <Box sx={{ flexGrow: 1 }} style={{width:'100vw'}}>
       <AppBar position="static">
         <Toolbar style={{backgroundColor:'#3ba5ca'}}>
+          
           <IconButton
             size="large"
             edge="start"
@@ -65,6 +69,7 @@ export default function HeaderBar() {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography
             variant="h6"
             noWrap
@@ -73,6 +78,7 @@ export default function HeaderBar() {
           >
             DIARY HOME
           </Typography>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

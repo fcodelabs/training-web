@@ -25,14 +25,3 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-
-
-
-// apiKey: "AIzaSyClh-H48lvMQ2WJx03T-zGQiC3N_Xr4kNw",
-// authDomain: "dear-diary-lahiru.firebaseapp.com",
-// databaseURL: "https://dear-diary-lahiru-default-rtdb.firebaseio.com",
-// projectId: "dear-diary-lahiru",
-// storageBucket: "dear-diary-lahiru.appspot.com",
-// messagingSenderId: "461281283767",
-// appId: "1:461281283767:web:8b702781ccdeecde718732",
-// measurementId: "G-QNZZ087CCH"

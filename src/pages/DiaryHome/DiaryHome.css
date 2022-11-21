@@ -1,11 +1,11 @@
 .DiaryHome{
    background-color: #0fbcf9;
    position: relative;
-   
    height: 100%;
    display: flex;
-   justify-content: center;
-   align-items: center; 
+   justify-content: space-between;
+   align-items: center;
+   flex-wrap: wrap 
  
 }
 .container{
@@ -20,6 +20,21 @@
    overflow: hidden;
 }
 .textInputArea{
-   background-color: #0fbcf9;
+   background-color: #00bcd4;
 }
 
+.cardsGrid{
+   margin: 2rem !important;
+   position: relative !important;
+}
+.pageText{
+   display: flex;
+    color: black;
+    
+}
+.btnVisibilityTrue{
+   display: block;
+}
+.btnVisibilityFalse{
+   display: none;
+}

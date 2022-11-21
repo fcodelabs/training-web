@@ -22,7 +22,7 @@ const DiaryHome = () => {
       <Grid className="home-inner-container-bg-image">
         <Grid container className="home-inner-container">
           <NavBar />
-          {error ? (
+          {error && (
             <Grid
               style={{
                 color: "red",
@@ -34,8 +34,6 @@ const DiaryHome = () => {
             >
               <h3>! ! {error}</h3>
             </Grid>
-          ) : (
-            ""
           )}
           <div className="home-text">
             <h1>Home</h1>

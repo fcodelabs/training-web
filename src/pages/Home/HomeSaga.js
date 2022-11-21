@@ -21,7 +21,11 @@ function* getDiaryCardsFromFirebase() {
 }
 
 function* addDiaryCardToFirebase(diaryCard) {
-  yield call(() => addDoc(collection(db,"diaryCards"),diaryCard.payload));
+  try {
+    yield call(() => addDoc(collection(db,"diaryCards"),diaryCard.payload));
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export default function* HomeSaga() {

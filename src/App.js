@@ -1,13 +1,14 @@
 import "./App.css";
-import SignIn from "./components/SignIn/SignIn";
+import { Routes, Route } from "react-router-dom";
+import SignInPage from "./pages/SignIn/SignInPage";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
-    <div className="App parent">
-      <div className="child">
-        <SignIn />
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<SignInPage />} />
+      <Route path="/home" element={<Home />} />
+    </Routes>
   );
 }
 

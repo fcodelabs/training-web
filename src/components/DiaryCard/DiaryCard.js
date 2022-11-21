@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -10,6 +10,16 @@ import Typography from "@mui/material/Typography";
 export default function DiaryCard({name, title, description}) {
   const [handleDescriptionLineClamp, setHandleDescriptionLineClamp] =
     React.useState(3);
+
+  const [showMore, setShowMore] = React.useState("");
+
+  useEffect(() => {
+    if (description.length < 100) {
+      setShowMore("");
+    } else {
+      setShowMore("Show more")
+    }
+  }, [description]);
 
   const handleDescription = () => {
     if (handleDescriptionLineClamp === 3) {
@@ -52,9 +62,11 @@ export default function DiaryCard({name, title, description}) {
         </Box>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={handleDescription} sx={{color:"#0097A7", fontWeight:"bold"}}>
+        {showMore.length > 0 && (
+          <Button size="small" onClick={handleDescription} sx={{color:"#0097A7", fontWeight:"bold"}}>
           {handleDescriptionLineClamp === 3 ? "Show More" : "Show Less"}
         </Button>
+        )}
       </CardActions>
     </Card>
   );

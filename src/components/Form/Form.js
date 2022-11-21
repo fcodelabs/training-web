@@ -79,8 +79,8 @@ export default function Form() {
               ml: "70px",
               mt: "10px",
               borderRadius: "16px",
-              backgroundColor: "#0097A7",
-              ":hover": { backgroundColor: "#0097A7" },
+              backgroundColor: "#ffa500",
+              ":hover": { backgroundColor: "#ffa500" },
               display: extractedInput ? "" : "none",
             }}
             onClick={handleSubmit}
@@ -93,7 +93,7 @@ export default function Form() {
           component="form"
           noValidate
           autoComplete="off"
-          sx={{ backgroundColor: "#e0e0e0" }}
+          sx={{ backgroundColor: "#e0e0e0", borderRadius: "16px"}}
         >
           <FormControl
             sx={{

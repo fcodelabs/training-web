@@ -38,9 +38,13 @@ $continue-button-color: white;
 body{
     background-color: $background-color;
     height: $background-height;
+}
+
+.signin-page{
     display: flex;
     align-items: center;
     justify-content: center;
+    height: $background-height;
 }
 
 .signin-box{
@@ -51,7 +55,7 @@ body{
     padding: $signin-box-padding;
 }
 
-.diary-title{
+.diary-title-text{
     display: flex;
     alignItems: centre;
     padding: $diary-title-padding;
@@ -68,6 +72,9 @@ body{
 
 
 .signin-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: $signin-title-color;
     fontWeight: bold;
     font-size: $signin-title-font-size;
@@ -95,7 +102,14 @@ body{
 }
 
 .continue-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .continue-button{
+        .link{
+            text-decoration: none;
+            color: white;
+        }
         border-style: $continue-button-border-style;
         border-radius: $continue-button-border-radius;
         margin: $continue-button-margin;

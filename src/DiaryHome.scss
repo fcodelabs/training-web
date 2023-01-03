@@ -4,20 +4,27 @@ $background-height: 100vh;
 $background-margin: 10px;
 $background-padding: 5px;
 
-$diary-title-margin: 5px;
-$diary-title-padding: 5px;
-$diary-title-text-color: white;
-$diary-title-text-font-size: 40px;
-$diary-title-text-font-weight: bold;
-$diary-title-text-margin: 0 0 5px 0;
-$diary-title-you-are-here-color: aquamarine;
-$diary-title-you-are-here-font-size: 12px;
+$input-diary-title-margin: 5px;
+$input-diary-title-padding: 5px;
+$input-diary-title-text-color: white;
+$input-diary-title-text-font-size: 40px;
+$input-diary-title-text-font-weight: bold;
+$input-diary-title-text-margin: 0 0 5px 0;
+$input-diary-title-you-are-here-color: aquamarine;
+$input-diary-title-you-are-here-font-size: 12px;
 
 $add-card-form-input-margin: 5px;
 $add-card-form-input-padding: 10px;
 $add-card-form-input-background-color: blue;
 $add-card-form-input-border-style: none;
 $add-card-form-input-border-radius: 35px;
+
+$add-card-submit-button-margin: 20px 10px 10px 10px;
+$add-card-submit-button-padding: 10px 40px 10px 40px;
+$add-card-submit-button-background-color: lightblue;
+$add-card-submit-button-border-radius: 20px;
+$add-card-submit-button-color: black;
+
 
 body{
   background-color: $background-color;
@@ -27,18 +34,18 @@ body{
 
 }
 
-.diary-title{
-  margin: $diary-title-margin;
-  padding: $diary-title-padding;
-  .diary-title-text{
-    color: $diary-title-text-color;
-    font-size: $diary-title-text-font-size;
-    font-weight: $diary-title-text-font-weight;
-    margin: $diary-title-text-margin;
+.input-diary-title{
+  margin: $input-diary-title-margin;
+  padding: $input-diary-title-padding;
+  .input-diary-title-text{
+    color: $input-diary-title-text-color;
+    font-size: $input-diary-title-text-font-size;
+    font-weight: $input-diary-title-text-font-weight;
+    margin: $input-diary-title-text-margin;
   }
   .you-are-here{
-    color: $diary-title-you-are-here-color;
-    font-size: $diary-title-you-are-here-font-size;
+    color: $input-diary-title-you-are-here-color;
+    font-size: $input-diary-title-you-are-here-font-size;
   }
 }
 
@@ -52,11 +59,11 @@ body{
     padding: $add-card-form-input-padding;
   }
   .add-card-submit-button{
-    margin: 20px 10px 10px 10px;
-    padding: 10px 40px 10px 40px;
-    background-color: lightblue;
-    border-radius: 20px;
-    color: black;
+    margin: $add-card-submit-button-margin;
+    padding: $add-card-submit-button-padding;
+    background-color: $add-card-form-input-background-color;
+    border-radius: $add-card-submit-button-border-radius;
+    color: $add-card-submit-button-color;
   }
   .add-card-submit-button:hover{
     color: black;

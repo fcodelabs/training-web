@@ -2,6 +2,7 @@ import {ChangeEvent,ChangeEventHandler, FC, FormEvent, useEffect, useState} from
 import {Button, FormControl, Grid, TextareaAutosize, TextField, Typography} from '@mui/material';
 import './DiaryHome.scss'
 import {deepPurple} from "@mui/material/colors";
+import {Link} from "react-router-dom";
 
 const DieryHome: FC  = () => {
 
@@ -22,9 +23,11 @@ const DieryHome: FC  = () => {
 
     return <div className={"diary-home"}>
 
-        <Grid container className={"diary-title"} >
+        <Link to="/" className={"link-back"} >Back</Link>
+
+        <Grid container className={"input-diary-title"} >
             <Grid item xl={10} lg={12} sm={12} xs={12}>
-                <Typography className={"diary-title-text"}>Home</Typography>
+                <Typography className={"input-diary-title-text"}>Home</Typography>
             </Grid>
             <Grid item xl={1} lg={12} sm={12} xs={12}>
                 <Typography className={"you-are-here"}>You are here. Home</Typography>

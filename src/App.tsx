@@ -1,8 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import SignInForm from "./SigninForm";
 import { Helmet } from 'react-helmet';
+import DieryHome from "./DiaryHome";
 function App() {
   return (
     <div className="App">
@@ -20,7 +21,8 @@ function App() {
       {/*    Learn React*/}
       {/*  </a>*/}
       {/*</header>*/}
-      <SignInForm />
+      {/*<SignInForm />*/}
+        <DieryHome />
     </div>
   );
 }

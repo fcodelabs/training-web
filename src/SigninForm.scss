@@ -1,0 +1,105 @@
+
+$background-color: #34b7eb;
+$background-height: 100vh;
+
+$signin-box-width: 630px;
+$signin-box-background-color: white;
+$signin-box-border-radius: 10px;
+$signin-box-padding: 30px;
+
+$diary-title-padding: 5px;
+$diary-title-max-width: 5%;
+$diary-title-max-height: 5%;
+$diary-title-margin: 4px;
+$diary-title-text-padding: 5px;
+
+$signin-title-color: #34b4eb;
+$signin-title-font-size: 35px;
+$signin-title-padding: 5px;
+
+$input-nickname-border-color: grey;
+$input-nickname-border-radius: 5px;
+$input-nickname-margin: 20px;
+$input-nickname-padding: 10px;
+$input-nickname-width: 400px;
+
+$random-button-border-style: none;
+$random-button-border-radius: 20px;
+$random-button-margin: 20px;
+$random-button-padding: 10px;
+$random-button-color: white;
+
+$continue-button-border-style: none;
+$continue-button-border-radius: 60px;
+$continue-button-margin: 10px 0 40px 0 ;
+$continue-button-padding: 10px 40px 10px 40px;
+$continue-button-color: white;
+
+body{
+    background-color: $background-color;
+    height: $background-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signin-box{
+    width: $signin-box-width;
+    margin: 0 auto;
+    background-color: $signin-box-background-color;
+    border-radius: $signin-box-border-radius;
+    padding: $signin-box-padding;
+}
+
+.diary-title{
+    display: flex;
+    alignItems: centre;
+    padding: $diary-title-padding;
+    img{
+        max-width: $diary-title-max-width;
+        max-height: $diary-title-max-height;
+        margin: $diary-title-margin;
+    }
+    .diary-title-text{
+        color: black;
+        padding: $diary-title-text-padding;
+    }
+}
+
+
+.signin-title{
+    color: $signin-title-color;
+    fontWeight: bold;
+    font-size: $signin-title-font-size;
+    padding: $signin-title-padding;
+}
+
+.input-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .input-nickname{
+        border-color: $input-nickname-border-color;
+        border-radius: $input-nickname-border-radius;
+        margin: $input-nickname-margin;
+        padding: $input-nickname-padding;
+        width: $input-nickname-width;
+    }
+    .random-button{
+        border-style: $random-button-border-style;
+        border-radius: $random-button-border-radius;
+        margin: $random-button-margin;
+        padding: $random-button-padding;
+        color: $random-button-color;
+    }
+}
+
+.continue-row {
+    .continue-button{
+        border-style: $continue-button-border-style;
+        border-radius: $continue-button-border-radius;
+        margin: $continue-button-margin;
+        padding: $continue-button-padding;
+        color: $continue-button-color;
+    }
+}

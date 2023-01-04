@@ -3,6 +3,7 @@ import './App.css';
 import Login from './Login';
 import Box from "@mui/material/Box";
 import { Grid } from '@mui/material';
+import Home from './home';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
   alignItems="center"
   minHeight="100vh"
 >
-  <Login/>
+  <Home/>
 </Box>
     </div>
   );

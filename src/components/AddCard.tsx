@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Container } from "reactstrap";
 import { Button, TextField, Grid } from "@mui/material";
 import { addDoc } from "firebase/firestore";
-import { diaryCollectionRef } from "../lib/firestore.collections";
+import { diaryCollectionRef } from "../lib/firestore-collections";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function AddCard() {
-  const name = "Thilina";
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [expand, setExpand] = useState(false);
+  const user = useSelector((state: any) => state.user);
+  const name = user.username;
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -20,7 +22,7 @@ function AddCard() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title) return;
+    if (!title || !description) return;
     addDoc(diaryCollectionRef, {
       name,
       title,

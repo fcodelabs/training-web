@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { onSnapshot } from "firebase/firestore";
-import { diaryCollectionRef } from "../lib/firestore.collections";
+import { diaryCollectionRef } from "../lib/firestore-collections";
 import SingleCard from "./SingleCard";
 import { Grid } from "@mui/material";
 import { Container } from "reactstrap";
@@ -28,6 +28,7 @@ function Cards() {
         {diaries.map((diary) => (
           <Grid item md={4} lg={3} xs={12}>
             <SingleCard
+              key={diary.id}
               name={diary.data.name}
               title={diary.data.title}
               description={diary.data.description}

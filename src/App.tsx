@@ -8,7 +8,7 @@ import AddingForm from './components/AddingForm/index';
 function App() {
   return (
     <div className="App">
-       <AddingForm />
+       <Home />
     </div>
     
   );

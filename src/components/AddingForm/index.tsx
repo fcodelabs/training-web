@@ -8,11 +8,12 @@ import FilledInput from '@mui/material/FilledInput';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { Grid } from '@mui/material';
   
-export default function DairyHome() {
+export default function AddingForm() {
     
     const [touched, setTouched] = React.useState(false);
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
+    
 
     const handleTouch = (event: any) => {
         event.preventDefault();
@@ -35,15 +36,15 @@ export default function DairyHome() {
         width: '90%',
         padding: '2vw', }}>
 
-      <Typography component="h3" variant="h3" color='white' sx={{mt: 3, mb: 3, paddingLeft: "", fontSize: '1.5rem', fontWeight: 'bold', textAlign: 'left'}}>
+      <Typography component="h2" variant="h2" color='white' sx={{mt: 3, mb: 3, paddingLeft: "", fontSize: '2rem', fontWeight: 'bold', textAlign: 'left'}}>
             Home
       </Typography>
             
       <Box sx={{ mt: 3, mb: 3, textAlign: 'left'}} >
       {/* <div className="TextField-without-border-radius"> */}
 
-      <Grid container spacing={2} >
-        <Grid md={10}>
+      <Grid container spacing={4} >
+        <Grid item xs={10}>
         <TextField
         required
         fullWidth
@@ -63,43 +64,52 @@ export default function DairyHome() {
             '& label': { paddingLeft: (theme) => theme.spacing(2) },
             '& input': { paddingLeft: (theme) => theme.spacing(3.5) },
             '& fieldset': {
-              paddingLeft: (theme) => theme.spacing(2.5),
+              
               borderRadius: '30px',
               border: 'none',
               backgroundColor: '#9971E14D',
-              width: '50%',
+              width: '100%',
+              marginRight: '2vw',
             },
           }}
         
       />
         </Grid>
           
-        <Grid md={2}>
+        <Grid item  xs={2}>
             {touched && <Button
             variant="contained"
             onClick={handleSubmit}
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ height:'100%', margin: 'auto', width: '100%', borderRadius: '30px',  color: 'black', fontWeight: 'bold', backgroundColor: '#5353c6' }}
         >
             Submit
         </Button>}
+        </Grid>
+        </Grid>
+        <Grid>
+
+        <Grid item xs={12}>
+          {touched && <div>
+          <TextareaAutosize
+        aria-label="minimum height"
+        minRows={10}
+        placeholder="Enter Description"
+        name='description'
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        style={{ width: "96%", borderRadius: '10px',
+        border: 'none',
+        backgroundColor: '#b3d4fc', padding: "2vw", marginTop: '2vw'}}  />
+          </div>}
         </Grid>
       </Grid>
       
       {/* </div> */}
 
       
-        {touched && <div>
-        <TextareaAutosize
-      aria-label="minimum height"
-      minRows={10}
-      placeholder="Description"
-      name='description'
-      value={description}
-      onChange={(e) => setDescription(e.target.value)}
-      style={{ width: "100%", borderRadius: '30px',
-      border: 'none',
-      backgroundColor: '#b3d4fc' }}  />
-        </div>}
+
+      
+       
      
       
       </Box>

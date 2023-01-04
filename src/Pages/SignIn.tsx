@@ -11,6 +11,7 @@ function SignIn() {
   const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [nicknameError, setNicknameError] = useState(false);
 
   const getRandomNickname = () => {
     const config: Config = {
@@ -18,6 +19,7 @@ function SignIn() {
       separator: " ",
       style: "capital",
     };
+    setNicknameError(false);
     setNickname(uniqueNamesGenerator(config));
   };
 
@@ -77,8 +79,17 @@ function SignIn() {
               id="outlined-basic"
               name="nickname"
               value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
+              onChange={(e) => {
+                setNickname(e.target.value);
+                if (e.target.value.length === 0) {
+                  setNicknameError(true);
+                } else {
+                  setNicknameError(false);
+                }
+              }}
               label="Your Nickname*"
+              error={nicknameError}
+              helperText={nicknameError ? "Nickname is required" : ""}
               variant="outlined"
               fullWidth
             />

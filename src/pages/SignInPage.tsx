@@ -1,7 +1,10 @@
 import { Grid } from "@mui/material";
-import { Login } from "../components/Login";
+import SignIN from "../components/SignIn";
 
-export const Main = () => {
+
+
+
+const SignInPage = () => {
   return (
     <Grid
       container
@@ -11,9 +14,11 @@ export const Main = () => {
       alignItems="center"
       sx={{ height: "100vh" }}
     >
-      <Grid>
-        <Login />
+      <Grid item>
+        <SignIN/>
       </Grid>
     </Grid>
   );
 };
+
+export default SignInPage;

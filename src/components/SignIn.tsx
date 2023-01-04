@@ -12,12 +12,11 @@ const config: Config = {
   dictionaries: [names],
 };
 
-
-export const Login = () => {
+const SignIN = () => {
   const [name, setName] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState(false);
-  const [helperText, setHelperText] = useState('');
+  const [helperText, setHelperText] = useState("");
 
   const handleRandom = (event: React.MouseEvent<HTMLElement>) => {
     setName(uniqueNamesGenerator(config));
@@ -28,11 +27,11 @@ export const Login = () => {
     setName(event.currentTarget.value);
     setDisabled(false);
     setError(false);
-    setHelperText('');
+    setHelperText("");
     if (event.currentTarget.value === "") {
       setDisabled(true);
       setError(true);
-      setHelperText('Required')
+      setHelperText("Required");
     }
   };
 
@@ -50,10 +49,12 @@ export const Login = () => {
     >
       <Grid container columnSpacing={1}>
         <Grid>
-          <Avatar src={Logo} sx={{width:30,height:30}} />
+          <Avatar src={Logo} sx={{ width: 30, height: 30 }} />
         </Grid>
         <Grid>
-          <Link id="dear-diary-link" to={"/"}>Dear Diary</Link>
+          <Link id="dear-diary-link" to={"/"}>
+            Dear Diary
+          </Link>
         </Grid>
       </Grid>
 
@@ -127,3 +128,5 @@ export const Login = () => {
     </Box>
   );
 };
+
+export default SignIN;

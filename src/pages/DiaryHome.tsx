@@ -4,7 +4,6 @@ import Titlebar from "../components/Titlebar";
 import Button from "@mui/material/Button";
 import { TextareaAutosize, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
-import { fontSize } from "@mui/system";
 
 
 const DiaryHome = () => {

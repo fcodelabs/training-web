@@ -5,21 +5,48 @@ import {deepPurple} from "@mui/material/colors";
 import {Link} from "react-router-dom";
 import DiaryCard from "./DiaryCard";
 
-const DieryHome: FC  = () => {
+type DiaryEntry = {
+    title: string,
+    subtitle: string,
+    description: string,
+    color: string
+}
 
-    useEffect(() => {
-        document.title = 'Dear Diary - Home Page';
-    }, []);
+
+
+const DieryHome: FC = () => {
 
     const [inputCardTitle, setInputCardTitle] = useState<string>('');
     const [inputCardDescription, setInputCardDescription] = useState<string>('');
+    const [diaryCardsList, setDiaryCardsList] = useState<DiaryEntry[]>([])
+
+    useEffect(() => {
+        document.title = 'Dear Diary - Home Page';
+    }, [diaryCardsList]);
 
     const handleSubmit = (event: FormEvent<HTMLButtonElement>): void => {
         event.preventDefault();
-        console.log(`input-card-title: ${inputCardTitle}`);
-        console.log(`Description: ${inputCardDescription}`);
-        setInputCardTitle('');
-        setInputCardDescription('');
+        let invalid: boolean = inputCardTitle.length==0 || inputCardDescription.length==0;
+        if(inputCardTitle.length==0){
+            console.log("Missing title");
+        }
+        if(inputCardDescription.length==0){
+            console.log("Missing description");
+        }
+        if(!invalid){
+            console.log(`input-card-title: ${inputCardTitle}`);
+            console.log(`Description: ${inputCardDescription}`);
+            const diaryEntry: DiaryEntry = {
+                title: inputCardTitle,
+                subtitle: "Name",
+                description: inputCardDescription,
+                color: "#96dbe0"
+            }
+            diaryCardsList.push(diaryEntry);
+            setDiaryCardsList(diaryCardsList);
+            setInputCardTitle('');
+            setInputCardDescription('');
+        }
     };
 
     return <div className={"diary-home"}>
@@ -82,22 +109,22 @@ const DieryHome: FC  = () => {
             </Grid>
 
         <Grid container className={"diary-card-view"} columnSpacing={2} rowSpacing={2}>
-            <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={0}>
-                <DiaryCard
-                    title={`Title 0`}
-                    description={"Description"}
-                    color={"#96dbe0"}
-                    subtitle={`SubTitle 0`}
-                />
-            </Grid>
+            {/*<Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={0}>*/}
+            {/*    <DiaryCard*/}
+            {/*        title={`Title 0`}*/}
+            {/*        description={"Description"}*/}
+            {/*        color={"#96dbe0"}*/}
+            {/*        subtitle={`SubTitle 0`}*/}
+            {/*    />*/}
+            {/*</Grid>*/}
             {
-                [1,2,3,4,5,6,7,8,9,10].map(i=>(
-                    <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={i}>
+                diaryCardsList.map((value, index)=>(
+                    <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={index}>
                         <DiaryCard
-                            title={`Title ${i}`}
-                            description={"Description ".repeat(150)}
-                            color={"#96dbe0"}
-                            subtitle={`SubTitle ${i}`}
+                            title={value.title}
+                            description={value.description}
+                            color={value.color}
+                            subtitle={value.subtitle}
                         />
                     </Grid>
                 ))

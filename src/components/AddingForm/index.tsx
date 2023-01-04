@@ -29,83 +29,83 @@ export default function AddingForm() {
 
 
     return (
-        <div>
+      <div>
       
-    <div style={{margin: 'auto',
-        width: '90%',
-        padding: '2vw', }}>
-
-      <Typography component="h2" variant="h2" color='white' sx={{mt: 3, mb: 3, paddingLeft: "", fontSize: '2rem', fontWeight: 'bold', textAlign: 'left'}}>
-            Home
-      </Typography>
-            
-      <Box sx={{ mt: 3, mb: 3, textAlign: 'left'}} >
-      
-
-      <Grid container spacing={4} >
-        <Grid item xs={10}>
-        <TextField
-        required
-        fullWidth
-        id="title"
-        type="text"
-        placeholder="Submit New"
-        name="title"
-        value={title}
-        autoFocus={false}
-        onFocus= {handleTouch}
-        onChange={(e) => setTitle(e.target.value)}
-    
-        sx={{
-            paddingBottom: "0",
-            '& label': { paddingLeft: (theme) => theme.spacing(2) },
-            '& input': { paddingLeft: (theme) => theme.spacing(3.5) },
-            '& fieldset': {
+      <div style={{margin: 'auto',
+          width: '90%',
+          padding: '2vw', }}>
+  
+        <Typography component="h2" variant="h2" color='white' sx={{mt: 3, mb: 3, paddingLeft: "", fontSize: '2rem', fontWeight: 'bold', textAlign: 'left'}}>
+              Home
+        </Typography>
               
-              borderRadius: '30px',
-              border: 'none',
-              backgroundColor: '#9971E14D',
-              width: '100%',
-              marginRight: '2vw',
-            },
-          }}
+        <Box sx={{ mt: 3, mb: 3, textAlign: 'left'}} >
         
-      />
-        </Grid>
-          
-        <Grid item  xs={2}>
-            {touched && <Button
-            variant="contained"
-            onClick={handleSubmit}
-            sx={{ height:'100%', margin: 'auto', width: '100%', borderRadius: '30px',  color: 'black', fontWeight: 'bold', backgroundColor: '#5353c6' }}
-        >
-            Submit
-        </Button>}
-        </Grid>
-        </Grid>
-        <Grid>
-
-        <Grid item xs={12}>
-          {touched && <div>
-          <TextareaAutosize
-        aria-label="minimum height"
-        minRows={10}
-        placeholder="Enter Description"
-        name='description'
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        style={{ width: "96%", borderRadius: '10px',
-        border: 'none',
-        backgroundColor: '#b3d4fc', padding: "2vw", marginTop: '2vw'}}  />
-          </div>}
-        </Grid>
-      </Grid>
+  
+        <Grid container spacing={4} >
+          <Grid item xs={10}>
+          <TextField
+          required
+          fullWidth
+          id="title"
+          type="text"
+          placeholder="Submit New"
+          name="title"
+          value={title}
+          autoFocus={false}
+          onFocus= {handleTouch}
+          onChange={(e) => setTitle(e.target.value)}
       
-      </Box>
-
-    </div>    
-    </div>
+          sx={{
+              paddingBottom: "0",
+              '& label': { paddingLeft: (theme) => theme.spacing(2) },
+              '& input': { paddingLeft: (theme) => theme.spacing(3.5) },
+              '& fieldset': {
+                
+                borderRadius: '30px',
+                border: 'none',
+                backgroundColor: '#9971E14D',
+                width: '100%',
+                marginRight: '2vw',
+              },
+            }}
+          
+        />
+          </Grid>
+            
+          <Grid item  xs={2}>
+              {touched && <Button
+              variant="contained"
+              onClick={handleSubmit}
+              sx={{ height:'100%', margin: 'auto', width: '100%', borderRadius: '30px',  color: 'black', fontWeight: 'bold', backgroundColor: '#5353c6' }}
+          >
+              Submit
+          </Button>}
+          </Grid>
+          </Grid>
+          <Grid>
+  
+          <Grid item xs={12}>
+            {touched && <div>
+            <TextareaAutosize
+          aria-label="minimum height"
+          minRows={10}
+          placeholder="Enter Description"
+          name='description'
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          style={{ width: "96%", borderRadius: '10px',
+          border: 'none',
+          backgroundColor: '#b3d4fc', padding: "2vw", marginTop: '2vw'}}  />
+            </div>}
+          </Grid>
+        </Grid>
         
+        </Box>
+  
+      </div>    
+      </div>
+          
     );
    
    

@@ -3,24 +3,19 @@ import {
   Config,
   adjectives,
   colors,
-  
 } from "unique-names-generator";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import * as React from "react";
 
 import Typography from "@mui/material/Typography";
-import {
-  Button,
-  Grid,
-  Paper,
-  TextField,
-} from "@mui/material";
+import { Button, Grid, Paper, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import { useDispatch } from "react-redux/es/exports";
 import { loginSuccess } from "../redux/userRedux";
 
 export default function Login() {
   const [nickName, setNickName] = React.useState("");
+  const [focused, setFocus] = React.useState(false);
   const distpatch = useDispatch();
   const customConfig: Config = {
     dictionaries: [adjectives, colors],
@@ -37,7 +32,7 @@ export default function Login() {
     " "
   ); // big-donkey
 
-  const handleSubmit = (event:  React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     distpatch(loginSuccess(nickName));
   };
@@ -85,6 +80,10 @@ export default function Login() {
               autoFocus
               value={nickName}
               onChange={(e) => setNickName(e.target.value)}
+              onBlur={(e) => setFocus(true)}
+              // eslint-disable-next-line no-restricted-globals
+              error={nickName === "" && focused}
+              helperText={nickName === "" && focused ? "Empty field!" : " "}
             />
           </Grid>
           <Grid item xs={12} sm={4}>

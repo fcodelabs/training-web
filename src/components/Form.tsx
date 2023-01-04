@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { Button, Collapse} from "@mui/material";
+import { Button, Collapse } from "@mui/material";
 import Textarea from "@mui/joy/Textarea";
 // Add a second document with a generated ID.
 import { addDoc, collection, getDocs } from "firebase/firestore";
@@ -10,11 +10,13 @@ import { db } from "../firebase";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { getMsgSuccess } from "../redux/messageRedux";
 
-
-export default function Form() {
+export default function Form(_props: {
+  fullText: boolean;
+  setFullText: (message: boolean) => void;
+}) {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [fullText, setFullText] = React.useState(false);
+  // const [fullText, setFullText] = React.useState(false);
   const distpatch = useDispatch();
 
   interface userState {
@@ -66,7 +68,7 @@ export default function Form() {
   };
 
   return (
-    <Collapse in={fullText} collapsedSize={130}>
+    <Collapse in={_props.fullText} collapsedSize={130}>
       <Box sx={{ margin: "20px" }}>
         <Typography
           variant="h3"
@@ -76,7 +78,7 @@ export default function Form() {
             textDecorationColor: "white",
             margin: "10px",
           }}
-          onClick={() => setFullText(false)}
+          onClick={() => _props.setFullText(false)}
         >
           HOME
         </Typography>
@@ -87,7 +89,7 @@ export default function Form() {
               placeholder="Title…"
               variant="solid"
               sx={{ backgroundColor: "lightblue", borderRadius: "40px" }}
-              onClick={() => setFullText(true)}
+              onClick={() => _props.setFullText(true)}
               onChange={(e) => setTitle(e.target.value)}
               value={title}
             />

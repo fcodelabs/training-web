@@ -8,24 +8,22 @@ import { db } from "../firebase";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { getMsgSuccess } from "../redux/messageRedux";
 
-
-
 interface msgData {
   name: string;
   title: string;
   description: string;
 }
 interface msgsData {
-   message: { messages: any; isFetching: any; error: any };
+  message: { messages: any; isFetching: any; error: any };
 }
 
-export default function Masonry() {
+export default function Masonry(_props: {
+  setFullText: (message: boolean) => void;
+}) {
   const distpatch = useDispatch();
- 
 
+  const messages1 = useSelector((state: msgsData) => state.message.messages);
 
-
-  const messages1 = useSelector((state: msgsData) => state.message.messages)
   const getMessages = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "messages"));
@@ -39,7 +37,7 @@ export default function Masonry() {
 
         temp.push({ name, title, description });
       });
-    
+
       distpatch(getMsgSuccess(temp));
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -51,6 +49,7 @@ export default function Masonry() {
   return (
     <Box sx={{ margin: "20px" }}>
       <Grid
+        onClick={() => _props.setFullText(false)}
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 12, md: 16 }}
@@ -69,4 +68,4 @@ export default function Masonry() {
     </Box>
   );
 }
-//({ id, title }: ListData[])
+

@@ -97,6 +97,7 @@ function SignIn() {
               m: 2,
             }}
             onClick={handleContinue}
+            disabled={!nickname}
           >
             Continue
             <ArrowForward />

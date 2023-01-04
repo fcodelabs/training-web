@@ -41,7 +41,7 @@ export default function AddingForm() {
       </Typography>
             
       <Box sx={{ mt: 3, mb: 3, textAlign: 'left'}} >
-      {/* <div className="TextField-without-border-radius"> */}
+      
 
       <Grid container spacing={4} >
         <Grid item xs={10}>
@@ -52,8 +52,6 @@ export default function AddingForm() {
         type="text"
         placeholder="Submit New"
         name="title"
-        //variant='filled'
-        // sx={{ borderRadius: '25px', border: 'none', width: '50%', margin: 'auto', padding: '0 0 10px 0', height: '50%'}}
         value={title}
         autoFocus={false}
         onFocus= {handleTouch}
@@ -103,14 +101,6 @@ export default function AddingForm() {
           </div>}
         </Grid>
       </Grid>
-      
-      {/* </div> */}
-
-      
-
-      
-       
-     
       
       </Box>
 

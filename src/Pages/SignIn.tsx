@@ -4,10 +4,13 @@ import { uniqueNamesGenerator, Config, names } from "unique-names-generator";
 import { Paper, Button, Typography, TextField } from "@mui/material";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
+import { login } from "../redux/userRedux";
+import { useDispatch } from "react-redux/es/exports";
 
 function SignIn() {
   const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const getRandomNickname = () => {
     const config: Config = {
@@ -20,6 +23,7 @@ function SignIn() {
 
   const handleContinue = () => {
     console.log(nickname);
+    dispatch(login({ username: nickname }));
     navigate("/home");
   };
 

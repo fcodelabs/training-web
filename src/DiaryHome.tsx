@@ -3,6 +3,7 @@ import {Button, FormControl, Grid, TextareaAutosize, TextField, Typography} from
 import './DiaryHome.scss'
 import {deepPurple} from "@mui/material/colors";
 import {Link} from "react-router-dom";
+import DiaryCard from "./DiaryCard";
 
 const DieryHome: FC  = () => {
 
@@ -80,6 +81,30 @@ const DieryHome: FC  = () => {
                 </Grid>
             </Grid>
 
+        <Grid container className={"diary-card-view"} columnSpacing={2} rowSpacing={2}>
+            <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={0}>
+                <DiaryCard
+                    title={`Title 0`}
+                    description={"Description"}
+                    color={"#96dbe0"}
+                    subtitle={`SubTitle 0`}
+                />
+            </Grid>
+            {
+                [1,2,3,4,5,6,7,8,9,10].map(i=>(
+                    <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={i}>
+                        <DiaryCard
+                            title={`Title ${i}`}
+                            description={"Description ".repeat(150)}
+                            color={"#96dbe0"}
+                            subtitle={`SubTitle ${i}`}
+                        />
+                    </Grid>
+                ))
+            }
+
+
+        </Grid>
 
 
 

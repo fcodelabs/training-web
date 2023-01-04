@@ -1,0 +1,19 @@
+
+
+.diary-card-view{
+  margin: 10px;
+}
+
+.diary-card{
+  border-radius: 20px;
+  .diary-card-subtitle{
+    color: gray;
+  }
+  .diary-card-description{
+    margin: 10px 0 30px 0;
+  }
+  .diary-card-show-more{
+    font-size: 15px;
+    font-weight: bold;
+  }
+}

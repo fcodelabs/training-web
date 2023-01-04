@@ -30,12 +30,14 @@ function SingleCard(props: Props) {
           {props.name}
         </Typography>
         {props.description ? (
-          seeMore ? (
+          props.description.length < 100 ? (
             <Typography variant="body2">{props.description}</Typography>
-          ) : (
+          ) : !seeMore ? (
             <Typography variant="body2">
               {props.description.slice(0, 100)}...
             </Typography>
+          ) : (
+            <Typography variant="body2">{props.description}</Typography>
           )
         ) : (
           <Typography variant="body2">...</Typography>

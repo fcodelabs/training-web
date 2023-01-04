@@ -1,23 +1,25 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
+interface Card {
+    title: string;
+    subtitle: string;
+    description: string;
+    color: string;
+}
+
+interface CardsState {
+    value: Card[];
+}
+
+const initialState: CardsState = {
+    value: [],
+};
+
 export const cardsSlice = createSlice({
     name: 'cards',
-    initialState: {
-        value: [{
-            title: '',
-            subtitle: '',
-            description: '',
-            color: ''
-        }]
-    },
+    initialState,
     reducers: {
-        add: (state, action: PayloadAction<{
-            title: string,
-            subtitle: string,
-            description: string,
-            color: string
-        }
-        >) => {
+        add: (state, action: PayloadAction<Card>) => {
             state.value.push(action.payload)
         },
     },

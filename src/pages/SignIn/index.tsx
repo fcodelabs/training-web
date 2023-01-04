@@ -1,14 +1,12 @@
 import React from 'react';
-import { useState, useEffect} from 'react';
+import { useState} from 'react';
 import { names } from 'unique-names-generator';     // import the dictionary
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Container } from "@mui/system";
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Unstable_Grid2';
-import FilterVintageIcon from '@mui/icons-material/FilterVintage';
-import '../sign-in/style.css';
-import { config } from 'process';
+import './style.css';
 import Logo from '../../assets/logo.svg';
 const { uniqueNamesGenerator } = require('unique-names-generator');
 

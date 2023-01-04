@@ -1,0 +1,9 @@
+
+body{
+    height: 100%;
+    background: linear-gradient(90deg, #86caec 0%, #039BE5 100%);
+}
+.TextField-without-border-radius fieldset {
+    border-radius: 25px;
+    border-color: 'none';
+}

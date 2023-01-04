@@ -12,7 +12,7 @@ const config: Config = {
   dictionaries: [names],
 };
 
-const SignIN = () => {
+const SignIn = () => {
   const [name, setName] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState(false);
@@ -129,4 +129,4 @@ const SignIN = () => {
   );
 };
 
-export default SignIN;
+export default SignIn;

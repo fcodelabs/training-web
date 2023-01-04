@@ -3,7 +3,6 @@ import FullscreenRoundedIcon from "@mui/icons-material/FullscreenRounded";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import Divider from "@mui/material/Divider";
 import SearchBar from "./SearchBar";
-import { Height } from "@mui/icons-material";
 
 const NavigatiionBar = () => {
   return (
@@ -16,7 +15,7 @@ const NavigatiionBar = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Grid item>
+        <Grid item mx={3}>
           <IconButton>
             <Badge>
               <FullscreenRoundedIcon

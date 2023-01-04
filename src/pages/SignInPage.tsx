@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import SignIN from "../components/SignIn";
+import SignIn from "../components/SignIn";
 
 
 
@@ -15,7 +15,7 @@ const SignInPage = () => {
       sx={{ height: "100vh" }}
     >
       <Grid item>
-        <SignIN/>
+        <SignIn/>
       </Grid>
     </Grid>
   );

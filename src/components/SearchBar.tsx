@@ -45,13 +45,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchBar = () => {
-    
-
   return (
     <div>
       <Search>
         <SearchIconWrapper>
-          <SearchIcon sx={{color:"white"}} />
+          <SearchIcon sx={{ color: "white" }} />
         </SearchIconWrapper>
         <StyledInputBase
           placeholder="Search…"
@@ -60,6 +58,6 @@ const SearchBar = () => {
       </Search>
     </div>
   );
-}
+};
 
-export default SearchBar
+export default SearchBar;

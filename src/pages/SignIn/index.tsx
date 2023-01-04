@@ -45,7 +45,9 @@ return (
     </Typography>
     <Grid container spacing={2} sx={{mb: "2vw", padding: '0 3vw 0 3vw'}}>
         <Grid md={9}>
-        <TextField id="outlined-basic" label="Your Nickname*" variant="outlined" name='name' value={name} onChange={handleSave} sx={{width: "100%"}}  />
+        <TextField id="outlined-basic" label="Your Nickname" variant="outlined" name='name' required value={name} onChange={handleSave} sx={{width: "100%"}} 
+        error = {(name || !click) ? false: true}
+        helperText = {(name || !click) ? "": "Required"} />
         </Grid>
         <Grid md={3}>
         <Button variant="contained"  onClick={handleRandom} sx={{width: "100%", borderRadius: "100px", background:"#039BE5"}}>RANDOM</Button>

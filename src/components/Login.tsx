@@ -5,14 +5,13 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { Button, Typography } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../Images/logo.svg";
+import Logo from "../images/logo.svg";
 import Avatar from "@mui/material/Avatar";
 
 const config: Config = {
   dictionaries: [names],
 };
 
-// const randomName: string = uniqueNamesGenerator(config);
 
 export const Login = () => {
   const [name, setName] = useState("");

@@ -2,7 +2,11 @@ import {FC, useEffect, useState} from "react";
 import {Button, TextField, Typography} from '@mui/material';
 import { uniqueNamesGenerator, Config, names } from "unique-names-generator";
  import "./SigninForm.scss";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {RootState, store} from "./redux/store";
+import {useDispatch, useSelector} from "react-redux";
+import {add} from "./redux/cardsSlice";
+import {set} from "./redux/userSlice";
 
 const SignInForm: FC  = () => {
 
@@ -16,8 +20,17 @@ const SignInForm: FC  = () => {
         dictionaries: [names]
     }
 
+    const navigate = useNavigate();
+
     const generateRandomNickname = (): void => {
         setNickname(uniqueNamesGenerator(config));
+    };
+
+    const dispatch = useDispatch()
+
+    const handleSubmit = (): void => {
+        dispatch(set(nickname));
+        navigate('/home');
     };
 
     return <div className={"signin-page"}>
@@ -52,8 +65,9 @@ const SignInForm: FC  = () => {
                     variant="contained"
                     disabled={!nickname}
                     color="primary"
+                    onClick={handleSubmit}
             >
-                <Link to="/home" className={"link"} >CONTINUE</Link>
+                CONTINUE
             </Button>
         </div>
     </div>

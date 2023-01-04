@@ -4,6 +4,10 @@ import './DiaryHome.scss'
 import {deepPurple} from "@mui/material/colors";
 import {Link} from "react-router-dom";
 import DiaryCard from "./DiaryCard";
+import {RootState, store} from "./redux/store";
+import {useDispatch, useSelector} from "react-redux";
+import {set} from "./redux/userSlice";
+import {add} from "./redux/cardsSlice";
 
 type DiaryEntry = {
     title: string,
@@ -18,12 +22,14 @@ const DieryHome: FC = () => {
 
     const [inputCardTitle, setInputCardTitle] = useState<string>('');
     const [inputCardDescription, setInputCardDescription] = useState<string>('');
-    const [diaryCardsList, setDiaryCardsList] = useState<DiaryEntry[]>([])
 
     useEffect(() => {
         document.title = 'Dear Diary - Home Page';
-    }, [diaryCardsList]);
+    }, []);
 
+    const dispatch = useDispatch()
+    const user = useSelector((state: RootState) => state.user.value);
+    const cards = useSelector((state: RootState) => state.cards.value);
     const handleSubmit = (event: FormEvent<HTMLButtonElement>): void => {
         event.preventDefault();
         let invalid: boolean = inputCardTitle.length==0 || inputCardDescription.length==0;
@@ -38,12 +44,16 @@ const DieryHome: FC = () => {
             console.log(`Description: ${inputCardDescription}`);
             const diaryEntry: DiaryEntry = {
                 title: inputCardTitle,
-                subtitle: "Name",
+                subtitle: user,
                 description: inputCardDescription,
                 color: "#96dbe0"
             }
-            diaryCardsList.push(diaryEntry);
-            setDiaryCardsList(diaryCardsList);
+            dispatch(add({
+                title: inputCardTitle,
+                subtitle: user,
+                description: inputCardDescription,
+                color: "#96dbe0"
+            }));
             setInputCardTitle('');
             setInputCardDescription('');
         }
@@ -109,16 +119,8 @@ const DieryHome: FC = () => {
             </Grid>
 
         <Grid container className={"diary-card-view"} columnSpacing={2} rowSpacing={2}>
-            {/*<Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={0}>*/}
-            {/*    <DiaryCard*/}
-            {/*        title={`Title 0`}*/}
-            {/*        description={"Description"}*/}
-            {/*        color={"#96dbe0"}*/}
-            {/*        subtitle={`SubTitle 0`}*/}
-            {/*    />*/}
-            {/*</Grid>*/}
             {
-                diaryCardsList.map((value, index)=>(
+                cards.map((value, index)=>(
                     <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={index}>
                         <DiaryCard
                             title={value.title}

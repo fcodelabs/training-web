@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import {Card, CardContent, makeStyles, Typography} from "@mui/material";
 import './DiaryCard.scss'
 
@@ -11,6 +11,13 @@ type DiaryCardProps = {
 
 
 const DiaryCard: FC<DiaryCardProps>  = ({title, subtitle, description, color}: DiaryCardProps) => {
+
+    const [showMore, setShowMore] = useState<boolean>(false)
+
+    useEffect(() => {
+        document.title = 'Dear Diary - Home Page';
+    }, [showMore]);
+
     return <div>
         <Card className={"diary-card"} style={{
             backgroundColor: color,
@@ -34,14 +41,34 @@ const DiaryCard: FC<DiaryCardProps>  = ({title, subtitle, description, color}: D
                     variant={"body2"}
                     style={{ wordWrap: "break-word" }}
                 >
-                    {description.length>100 ? description.substring(0,100).concat(" ..."):description}
+                    {description.length>100 && !showMore ? description.substring(0,100).concat(" ..."):description}
                 </Typography>
-                <Typography
-                    className={"diary-card-show-more"}
-                    variant={"body1"}
-                >
-                    {"SHOW MORE"}
-                </Typography>
+                {
+                    description.length>100 && !showMore && <Typography
+                        className={"diary-card-show-more"}
+                        variant={"body1"}
+                        onClick={
+                            ()=>{
+                                setShowMore(true)
+                            }
+                        }
+                    >
+                        {"SHOW MORE"}
+                    </Typography>
+                }
+                {
+                    description.length>100 && showMore && <Typography
+                        className={"diary-card-show-more"}
+                        variant={"body1"}
+                        onClick={
+                            ()=>{
+                                setShowMore(false)
+                            }
+                        }
+                    >
+                        {"SHOW LESS"}
+                    </Typography>
+                }
             </CardContent>
         </Card>
     </div>

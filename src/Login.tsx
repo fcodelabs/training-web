@@ -29,16 +29,6 @@ const Login = () => {
     return ( 
         <>       
         <Container sx={{textAlign:'center', margin:0, width: "50%",padding:"2vw", borderRadius:"10px",background:'white'}}>
-        {/* <Stack direction="row" spacing={2} sx={{margin:"0%", textAlign:"left"}}>
-            <Item>
-            <img src={flowerSvg} 
-            style ={{width: "50px", height: "50px", borderRadius: "10px"}}
-            alt="flower SVG" />
-            </Item>
-            <Item sx={{float:"left"}}>
-            <p style={{textAlign: "left", marginRight:"50%"}}>Dear Diary</p>
-            </Item>
-        </Stack> */}
         <div style={{textAlign:"left", marginBottom:"2vw"}}>
         <img src={flowerSvg} 
             style ={{width: "50px", height: "50px", borderRadius: "10px"}}

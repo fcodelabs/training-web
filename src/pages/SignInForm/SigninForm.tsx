@@ -3,16 +3,18 @@ import {Button, TextField, Typography} from '@mui/material';
 import { uniqueNamesGenerator, Config, names } from "unique-names-generator";
  import "./SigninForm.scss";
 import {Link, useNavigate} from "react-router-dom";
-import {RootState, store} from "./redux/store";
+import {RootState, store} from "../../store";
 import {useDispatch, useSelector} from "react-redux";
-import {add} from "./redux/cardsSlice";
-import {set} from "./redux/userSlice";
+import {add} from "../DiaryHome/cardsSlice";
+import {set} from "./userSlice";
 
 const SignInForm: FC  = () => {
 
     useEffect(() => {
         document.title = 'Dear Diary - Login';
     }, []);
+
+    // console.log(process.env.REACT_APP_TITLE)
 
     const [nickname, setNickname] = useState<string>('');
 

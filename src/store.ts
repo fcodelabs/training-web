@@ -1,10 +1,10 @@
 
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import userReducer from './userSlice'
-import cardsReducer from './cardsSlice'
+import userReducer from './pages/SignInForm/userSlice'
+import cardsReducer from './pages/DiaryHome/cardsSlice'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import cardIdsReducer from "./cardIdsSlice";
+import cardIdsReducer from "./pages/DiaryHome/cardIdsSlice";
 
 const persistConfig = {
     key: 'root',

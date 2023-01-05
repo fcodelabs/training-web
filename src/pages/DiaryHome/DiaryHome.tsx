@@ -3,14 +3,14 @@ import {Button, FormControl, Grid, TextareaAutosize, TextField, Typography} from
 import './DiaryHome.scss'
 import {deepPurple} from "@mui/material/colors";
 import {Link} from "react-router-dom";
-import DiaryCard from "./DiaryCard";
-import {RootState, store} from "./redux/store";
+import DiaryCard from "../../components/DiaryCard/DiaryCard";
+import {RootState, store} from "../../store";
 import {useDispatch, useSelector} from "react-redux";
-import {set} from "./redux/userSlice";
-import {add} from "./redux/cardsSlice";
-import {db} from './firebase/app';
+import {set} from "../SignInForm/userSlice";
+import {add} from "./cardsSlice";
+import {db} from '../../utils/firebaseConfig';
 import {onSnapshot, query,collection, Firestore, getDocs, doc, setDoc, addDoc, DocumentData} from "firebase/firestore";
-import {addId} from "./redux/cardIdsSlice";
+import {addId} from "./cardIdsSlice";
 
 type DiaryEntry = {
     title: string,

@@ -1,7 +1,8 @@
 import React from 'react';
-import SignInForm from "./SigninForm";
-import DieryHome from "./DiaryHome";
+import SignInForm from "./pages/SignInForm/SigninForm";
+import DieryHome from "./pages/DiaryHome/DiaryHome";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+
 function App() {
   return (
     <div className="App">

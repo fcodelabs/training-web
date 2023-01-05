@@ -14,9 +14,13 @@ const Home = () => {
     const [description, setDescription] = useState('');
     const [collapseValue, setCollapse] = useState(false)
 
-    const handleSubmit = () => {
+    const handleSubmit = (e : any) => {
+        e.preventDefault();
         const Diary = {title, description};
-        console.log(Diary);
+        setSubmitNew('');
+        setDescription('');
+        console.log("Title" + {title});
+        console.log("Description" + description);
     }
 
     return ( 
@@ -40,7 +44,9 @@ const Home = () => {
                 </Grid>
                 <Grid item xs={2}>
 
-                <Button style={{
+                <Button
+                type="submit" 
+                style={{
                     width:"70%",
                     height:"55%",
                     margin:'1vw 0 0vw 2vw',

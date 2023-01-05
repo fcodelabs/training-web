@@ -13,14 +13,20 @@ const Home = () => {
     const [title, setSubmitNew] = useState('');
     const [description, setDescription] = useState('');
     const [collapseValue, setCollapse] = useState(false)
+    const [tempTitle, setTempTitle] = useState(title);
+    const [tempDescription, setTempDescription] = useState(description);
+    const [cardValue, setCardValue] = useState(false);
 
     const handleSubmit = (e : any) => {
         e.preventDefault();
         const Diary = {title, description};
         setSubmitNew('');
         setDescription('');
-        console.log("Title" + {title});
-        console.log("Description" + description);
+        setTempTitle(title);
+        setTempDescription(description);
+        if(!!title || !!description)
+            setCardValue(true)
+        ;
     }
 
     return ( 
@@ -79,8 +85,8 @@ const Home = () => {
         </Box>
         </form>
 
-
-        <DiaryCard title={title} description={description}/>
+        { cardValue ? <DiaryCard title={tempTitle} description={tempDescription}/> : null}            
+        
         </>
      );
 }

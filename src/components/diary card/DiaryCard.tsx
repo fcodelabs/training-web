@@ -35,7 +35,7 @@ const DiaryCard = (props : MyProps) => {
         </Typography>
       </CardContent>
       <CardActions>
-      <Button variant="outlined" onClick={() => setShowMore(!showMore)}>{!showMore ? "Show More" : "Hide"}</Button>
+      <Button size='small' variant="outlined" onClick={() => setShowMore(!showMore)}>{!showMore ? "Show More" : "Hide"}</Button>
       </CardActions>
     
     </Card>

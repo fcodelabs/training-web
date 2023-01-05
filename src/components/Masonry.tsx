@@ -4,9 +4,9 @@ import Grid from "@mui/material/Grid";
 
 import Card from "./Card";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../utils/firebase";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { getMsgSuccess } from "../redux/messageRedux";
+import { getMsgStart, getMsgSuccess } from "../redux/messageRedux";
 
 interface msgData {
   name: string;
@@ -23,29 +23,10 @@ export default function Masonry(_props: {
   const distpatch = useDispatch();
 
   const messages1 = useSelector((state: msgsData) => state.message.messages);
-
-  const getMessages = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, "messages"));
-      var temp: msgData[];
-      temp = [];
-      querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data().name}`);
-        const name = doc.data().name;
-        const title = doc.data().title;
-        const description = doc.data().description;
-
-        temp.push({ name, title, description });
-      });
-
-      distpatch(getMsgSuccess(temp));
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
   React.useEffect(() => {
-    getMessages();
-  }, []);
+    distpatch(getMsgStart())
+  }, [distpatch]);
+
   return (
     <Box sx={{ margin: "20px" }}>
       <Grid

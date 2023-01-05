@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../components/Header";
-import AddCard from "../components/AddCard";
-import Cards from "../components/Cards";
+import Header from "../../components/HomeComponents/Header";
+import AddCard from "../../components/HomeComponents/AddCard";
+import Cards from "../../components/DiaryCard/Cards";
 import { Container } from "reactstrap";
 
 function Home() {

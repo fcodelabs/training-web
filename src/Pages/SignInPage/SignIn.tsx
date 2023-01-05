@@ -4,7 +4,7 @@ import { uniqueNamesGenerator, Config, names } from "unique-names-generator";
 import { Paper, Button, Typography, TextField } from "@mui/material";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
-import { login } from "../redux/userRedux";
+import { login } from "../DiaryHome/userRedux";
 import { useDispatch } from "react-redux/es/exports";
 
 function SignIn() {

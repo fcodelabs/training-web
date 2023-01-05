@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { onSnapshot } from "firebase/firestore";
-import { diaryCollectionRef } from "../lib/firestore-collections";
+import { diaryCollectionRef } from "../../utils/firestore-collections";
 import SingleCard from "./SingleCard";
 import { Grid } from "@mui/material";
 import { Container } from "reactstrap";

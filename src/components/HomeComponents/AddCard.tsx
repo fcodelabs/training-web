@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container } from "reactstrap";
 import { Button, TextField, Grid } from "@mui/material";
 import { addDoc } from "firebase/firestore";
-import { diaryCollectionRef } from "../lib/firestore-collections";
+import { diaryCollectionRef } from "../../utils/firestore-collections";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function AddCard() {

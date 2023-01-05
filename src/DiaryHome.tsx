@@ -8,12 +8,22 @@ import {RootState, store} from "./redux/store";
 import {useDispatch, useSelector} from "react-redux";
 import {set} from "./redux/userSlice";
 import {add} from "./redux/cardsSlice";
+import {db} from './firebase/app';
+import {collection, Firestore, getDocs} from "firebase/firestore/lite";
 
 type DiaryEntry = {
     title: string,
     subtitle: string,
     description: string,
     color: string
+}
+
+// Get a list of cities from your database
+async function getUsers(db: Firestore) {
+    const usersCol = collection(db, 'Users');
+    const userSnapshot = await getDocs(usersCol);
+    const userList = userSnapshot.docs.map(doc => doc.data());
+    console.log(userList);
 }
 
 
@@ -32,6 +42,7 @@ const DieryHome: FC = () => {
     const cards = useSelector((state: RootState) => state.cards.value);
     const handleSubmit = (event: FormEvent<HTMLButtonElement>): void => {
         event.preventDefault();
+        // getUsers(db);
         let invalid: boolean = inputCardTitle.length==0 || inputCardDescription.length==0;
         if(inputCardTitle.length==0){
             console.log("Missing title");

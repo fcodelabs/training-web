@@ -24,7 +24,9 @@ const Home = () => {
         setDescription('');
         setTempTitle(title);
         setTempDescription(description);
-        setCardValue(true);
+        if(!!title || !!description)
+            setCardValue(true)
+        ;
     }
 
     return ( 

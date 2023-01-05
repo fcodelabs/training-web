@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Button, Typography } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../Images/logo.svg";
 import Avatar from "@mui/material/Avatar";
 
@@ -17,6 +17,7 @@ const SignIn = () => {
   const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState("");
+  const navigate = useNavigate();
 
   const handleRandom = (event: React.MouseEvent<HTMLElement>) => {
     setName(uniqueNamesGenerator(config));
@@ -33,6 +34,14 @@ const SignIn = () => {
       setError(true);
       setHelperText("Required");
     }
+  };
+
+  const handleContinue = (event: React.MouseEvent<HTMLElement>) => {
+    navigate("home", {
+      state: {
+        name: name,
+      },
+    });
   };
 
   return (
@@ -120,6 +129,7 @@ const SignIn = () => {
             sx={{ borderRadius: "20px", backgroundColor: "#039BE5" }}
             variant="contained"
             disabled={disabled}
+            onClick={handleContinue}
           >
             Continue &rarr;
           </Button>

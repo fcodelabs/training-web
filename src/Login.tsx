@@ -28,7 +28,7 @@ const Login = () => {
 
     return ( 
         <>       
-        <Container sx={{margin:0, width: "50%",padding:"2vw", borderRadius:"10px",background:'white'}}>
+        <Container sx={{textAlign:'center', margin:0, width: "50%",padding:"2vw", borderRadius:"10px",background:'white'}}>
         {/* <Stack direction="row" spacing={2} sx={{margin:"0%", textAlign:"left"}}>
             <Item>
             <img src={flowerSvg} 

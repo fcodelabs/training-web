@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {set} from "./redux/userSlice";
 import {add} from "./redux/cardsSlice";
 import {db} from './firebase/app';
-import {collection, Firestore, getDocs} from "firebase/firestore/lite";
+import {onSnapshot, query,collection, Firestore, getDocs, doc, setDoc, addDoc, DocumentData} from "firebase/firestore";
 
 type DiaryEntry = {
     title: string,
@@ -18,53 +18,66 @@ type DiaryEntry = {
     color: string
 }
 
-// Get a list of cities from your database
-async function getUsers(db: Firestore) {
-    const usersCol = collection(db, 'Users');
-    const userSnapshot = await getDocs(usersCol);
-    const userList = userSnapshot.docs.map(doc => doc.data());
-    console.log(userList);
-}
-
-
-
 const DieryHome: FC = () => {
 
     const [inputCardTitle, setInputCardTitle] = useState<string>('');
     const [inputCardDescription, setInputCardDescription] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(true);
 
-    useEffect(() => {
-        document.title = 'Dear Diary - Home Page';
-    }, []);
+    async function getCards(db: Firestore) {
+        // const cardsCol = collection(db, 'Cards');
+        // const cardSnapshot = await getDocs(cardsCol);
+        // const cardList = cardSnapshot.docs.map(doc => doc.data());
+        // console.log(cardList);
+        // const unsub = onSnapshot(doc(db, "Cards", "SF"), (doc) => {
+        //     console.log("Current data: ", doc.data());
+        // });
+        const q = query(collection(db, "Cards"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const cards: DocumentData[] = [];
+            querySnapshot.forEach((doc) => {
+                cards.push(doc.data());
+            });
+            console.log(cards);
+        });
+    }
 
     const dispatch = useDispatch()
     const user = useSelector((state: RootState) => state.user.value);
     const cards = useSelector((state: RootState) => state.cards.value);
-    const handleSubmit = (event: FormEvent<HTMLButtonElement>): void => {
+
+    useEffect(() => {
+        document.title = 'Dear Diary - Home Page';
+         getCards(db).then(r => {setLoading(false)}).catch((error)=>console.log(error));
+        // dispatch({})
+    }, []);
+
+    const handleSubmit = async (event: FormEvent<HTMLButtonElement>): Promise<void> => {
         event.preventDefault();
         // getUsers(db);
-        let invalid: boolean = inputCardTitle.length==0 || inputCardDescription.length==0;
-        if(inputCardTitle.length==0){
+        let invalid: boolean = inputCardTitle.length == 0 || inputCardDescription.length == 0;
+        if (inputCardTitle.length == 0) {
             console.log("Missing title");
         }
-        if(inputCardDescription.length==0){
+        if (inputCardDescription.length == 0) {
             console.log("Missing description");
         }
-        if(!invalid){
+        if (!invalid) {
             console.log(`input-card-title: ${inputCardTitle}`);
             console.log(`Description: ${inputCardDescription}`);
-            const diaryEntry: DiaryEntry = {
-                title: inputCardTitle,
-                subtitle: user,
-                description: inputCardDescription,
-                color: "#96dbe0"
-            }
-            dispatch(add({
-                title: inputCardTitle,
-                subtitle: user,
-                description: inputCardDescription,
-                color: "#96dbe0"
-            }));
+            // dispatch(add({
+            //     title: inputCardTitle,
+            //     subtitle: user,
+            //     description: inputCardDescription,
+            //     color: "#96dbe0"
+            // }));
+            const docRef = await addDoc(collection(db, "Cards"), {
+                    title: inputCardTitle,
+                    subtitle: user,
+                    description: inputCardDescription,
+                    color: "#96dbe0"
+            });
+            console.log("Document written with ID: ", docRef.id);
             setInputCardTitle('');
             setInputCardDescription('');
         }

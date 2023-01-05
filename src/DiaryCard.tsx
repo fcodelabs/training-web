@@ -16,7 +16,13 @@ const DiaryCard: FC<DiaryCardProps>  = ({title, subtitle, description, color}: D
 
     useEffect(() => {
         document.title = 'Dear Diary - Home Page';
+
     }, [showMore]);
+
+    // console.log(title)
+    // console.log(subtitle)
+    // console.log(description)
+    // console.log(color)
 
     return <div>
         <Card className={"diary-card"} style={{
@@ -41,7 +47,7 @@ const DiaryCard: FC<DiaryCardProps>  = ({title, subtitle, description, color}: D
                     variant={"body2"}
                     style={{ wordWrap: "break-word" }}
                 >
-                    {description.length>100 && !showMore ? description.substring(0,100).concat(" ..."):description}
+                    {description!=undefined && description.length>100 && !showMore ? description.substring(0,100).concat(" ..."):description}
                 </Typography>
                 {
                     description.length>100 && !showMore && <Typography
@@ -57,7 +63,7 @@ const DiaryCard: FC<DiaryCardProps>  = ({title, subtitle, description, color}: D
                     </Typography>
                 }
                 {
-                    description.length>100 && showMore && <Typography
+                    description!=undefined && description.length>100 && showMore && <Typography
                         className={"diary-card-show-more"}
                         variant={"body1"}
                         onClick={

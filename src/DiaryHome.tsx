@@ -10,6 +10,7 @@ import {set} from "./redux/userSlice";
 import {add} from "./redux/cardsSlice";
 import {db} from './firebase/app';
 import {onSnapshot, query,collection, Firestore, getDocs, doc, setDoc, addDoc, DocumentData} from "firebase/firestore";
+import {addId} from "./redux/cardIdsSlice";
 
 type DiaryEntry = {
     title: string,
@@ -24,27 +25,41 @@ const DieryHome: FC = () => {
     const [inputCardDescription, setInputCardDescription] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
 
+    let cards = useSelector((state: RootState) => state.cards.value);
+
+    let cardIds = useSelector((state: RootState) => state.cardIds.value);
+
+    // console.log("At begining")
+    // console.log(cardIds.length)
+
     async function getCards(db: Firestore) {
-        // const cardsCol = collection(db, 'Cards');
-        // const cardSnapshot = await getDocs(cardsCol);
-        // const cardList = cardSnapshot.docs.map(doc => doc.data());
-        // console.log(cardList);
-        // const unsub = onSnapshot(doc(db, "Cards", "SF"), (doc) => {
-        //     console.log("Current data: ", doc.data());
-        // });
+        // console.log("At get card begining")
+        // console.log(cardIds.length)
         const q = query(collection(db, "Cards"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const cards: DocumentData[] = [];
             querySnapshot.forEach((doc) => {
-                cards.push(doc.data());
+                if(!cardIds.includes(doc.id)){
+                    console.log("adding to state")
+                    console.log(cardIds)
+                    console.log(doc.id)
+                    console.log(cardIds.length)
+                    dispatch(add({
+                        title: doc.data().title,
+                        subtitle: doc.data().subtitle,
+                        description: doc.data().description,
+                        color: doc.data().color
+                    }))
+                    dispatch(addId(doc.id))
+                }
             });
-            console.log(cards);
         });
+        // console.log("at end get cards")
+        // console.log(cardIds.length)
     }
 
     const dispatch = useDispatch()
     const user = useSelector((state: RootState) => state.user.value);
-    const cards = useSelector((state: RootState) => state.cards.value);
+
 
     useEffect(() => {
         document.title = 'Dear Diary - Home Page';
@@ -54,7 +69,6 @@ const DieryHome: FC = () => {
 
     const handleSubmit = async (event: FormEvent<HTMLButtonElement>): Promise<void> => {
         event.preventDefault();
-        // getUsers(db);
         let invalid: boolean = inputCardTitle.length == 0 || inputCardDescription.length == 0;
         if (inputCardTitle.length == 0) {
             console.log("Missing title");
@@ -65,12 +79,6 @@ const DieryHome: FC = () => {
         if (!invalid) {
             console.log(`input-card-title: ${inputCardTitle}`);
             console.log(`Description: ${inputCardDescription}`);
-            // dispatch(add({
-            //     title: inputCardTitle,
-            //     subtitle: user,
-            //     description: inputCardDescription,
-            //     color: "#96dbe0"
-            // }));
             const docRef = await addDoc(collection(db, "Cards"), {
                     title: inputCardTitle,
                     subtitle: user,
@@ -83,6 +91,8 @@ const DieryHome: FC = () => {
         }
     };
 
+    // console.log("before return")
+    // console.log(cardIds.length)
     return <div className={"diary-home"}>
 
         <Link to="/" className={"link-back"} >Back</Link>
@@ -144,8 +154,8 @@ const DieryHome: FC = () => {
 
         <Grid container className={"diary-card-view"} columnSpacing={2} rowSpacing={2}>
             {
-                cards.map((value, index)=>(
-                    <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={index}>
+                cards.map((value, key)=>(
+                    <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={key}>
                         <DiaryCard
                             title={value.title}
                             description={value.description}

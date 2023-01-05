@@ -8,11 +8,11 @@ interface Card {
 }
 
 interface CardsState {
-    value: Card[];
+     value:Card[]
 }
 
 const initialState: CardsState = {
-    value: [],
+     value: []
 };
 
 export const cardsSlice = createSlice({
@@ -20,7 +20,7 @@ export const cardsSlice = createSlice({
     initialState,
     reducers: {
         add: (state, action: PayloadAction<Card>) => {
-            state.value.push(action.payload)
+             state.value.push(action.payload)
         },
     },
 })

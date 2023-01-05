@@ -4,15 +4,18 @@ import userReducer from './userSlice'
 import cardsReducer from './cardsSlice'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import cardIdsReducer from "./cardIdsSlice";
 
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: ['cards', 'cardIds']
 }
 
 const rootReducer = combineReducers({
     user: userReducer,
-    cards: cardsReducer
+    cards: cardsReducer,
+    cardIds: cardIdsReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -4,6 +4,7 @@ import Titlebar from "../components/Titlebar";
 import Button from "@mui/material/Button";
 import { TextareaAutosize, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
+import DiaryCard from "../components/DiaryCard";
 
 
 const DiaryHome = () => {
@@ -15,9 +16,12 @@ const DiaryHome = () => {
   const [descriptionFocused, setDescriptionFocused] = useState(false);
   const [width, setWidth] = useState("25vw");
   const [description, setDescription] = useState("");
+
+  const desc: string =
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
   useEffect(() => {
     if (titleFocused || descriptionFocused) {
-      setWidth("85vw");
+      setWidth("98vw");
       setHidden(false);
       setDisplay("block");
     } else {
@@ -39,14 +43,16 @@ const DiaryHome = () => {
       {/* submition bar */}
       <Grid
         container
-        spacing={2}
+        spacing={1}
         display="flex"
         direction="row"
         justifyContent="space-between"
         alignItems="center"
+        sx={{ width: { width }, mx: "1px" }}
       >
-        <Grid item mx={2}>
+        <Grid item md={11} sx={{width:"98%"}}>
           <TextField
+            fullWidth
             size="small"
             value={title}
             placeholder={"Submit new"}
@@ -65,13 +71,13 @@ const DiaryHome = () => {
                 borderRadius: "30px",
                 border: "none",
                 backgroundColor: "#9971E14D",
-                width: { width },
+                
               },
             }}
           />
         </Grid>
 
-        <Grid item sx={{ marginRight: "2vw" }}>
+        <Grid item md={1} order={{ xs: 3, sm: 3,md:2 }}>
           <Button
             variant="contained"
             onClick={() => {
@@ -84,55 +90,109 @@ const DiaryHome = () => {
               setHidden(true);
               setDisplay("none");
             }}
-            sx={{ borderRadius: "25px", display: { display } }}
+            sx={{ borderRadius: "25px", display: { display }, width: {xs:"94vw" ,md:"100px"} }}
           >
             Submit
           </Button>
         </Grid>
-      </Grid>
-      {/* discription box */}
 
-      <Grid
-        container
-        spacing={2}
-        display="flex"
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Grid item>
+        {/* discription box */}
+      
+        
+          <Grid item sx={{width:"98vw"}} order={{xs:2,sm:2,md:3}} >
+            <TextareaAutosize
+              hidden={hidden}
+              aria-label="minimum height"
+              minRows={6}
+              placeholder="Enter Description"
+              name="description"
+              value={description}
+              onChange={(e) => {
+                setDescription(e.currentTarget.value);
+              }}
+              onFocus={(e) => {
+                setDescriptionFocused(true);
+              }}
+              onBlur={(e) => {
+                setDescriptionFocused(false);
+              }}
+              
+              style={{
+                width: "95%",
+                borderRadius: "15px",
+                border: "none",
+                backgroundColor: "#9971E14D",
+                padding: "2vw",
+                marginTop: "2vw",
+                outline: "none",
+                fontSize: "18px",
+              }}
+            />
           
-          <TextareaAutosize
-            hidden={hidden}
-            aria-label="minimum height"
-            minRows={6}
-            placeholder="Enter Description"
-            name="description"
-            value={description}
-            onChange={(e) => {
-              setDescription(e.currentTarget.value);
-            }}
-            onFocus={(e) => {
-              setDescriptionFocused(true);
-            }}
-            onBlur={(e) => {
-              setDescriptionFocused(false);
-            }}
-            style={{
-              width: "93.5vw",
-              borderRadius: "15px",
-              border: "none",
-              backgroundColor: "#9971E14D",
-              padding: "2vw",
-              marginTop: "2vw",
-              outline:"none",
-              fontSize:"18px"
-            }}
-          />
         </Grid>
       </Grid>
 
       {/* card set */}
+
+      <Grid container spacing={1} columns={{ xs: 4, sm: 8, md: 16 }}>
+        <Grid item xs={4} sm={4} md={4}>
+          <DiaryCard
+            title={"Title 01"}
+            subTitle="SubTitle 01"
+            description={desc}
+            cardColor="#B9E9FF"
+          />
+        </Grid>
+        <Grid item xs={4} sm={4} md={4}>
+          <DiaryCard
+            title={"Title 01"}
+            subTitle="SubTitle 01"
+            description={desc.slice(0, 50)}
+            cardColor="#B9E9FF"
+          />
+        </Grid>
+        <Grid item xs={4} sm={4} md={4}>
+          <DiaryCard
+            title={"Title 01"}
+            subTitle="SubTitle 01"
+            description={desc}
+            cardColor="#B9E9FF"
+          />
+        </Grid>
+        <Grid item xs={4} sm={4} md={4}>
+          <DiaryCard
+            title={"Title 01"}
+            subTitle="SubTitle 01"
+            description={desc}
+            cardColor="#B9E9FF"
+          />
+        </Grid>
+        <Grid item xs={4} sm={4} md={4}>
+          <DiaryCard
+            title={"Title 01"}
+            subTitle="SubTitle 01"
+            description={desc}
+            cardColor="#B9E9FF"
+          />
+        </Grid>
+        <Grid item xs={4} sm={4} md={4}>
+          <DiaryCard
+            title={"Title 01"}
+            subTitle="SubTitle 01"
+            description={desc}
+            cardColor="#B9E9FF"
+          />
+        </Grid>
+        <Grid item xs={4} sm={4} md={4}>
+          <DiaryCard
+            title={"Title 01"}
+            subTitle="SubTitle 01"
+            description={desc}
+            cardColor="#B9E9FF"
+          />
+        </Grid>
+        
+      </Grid>
     </div>
   );
 };

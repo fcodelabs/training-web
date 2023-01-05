@@ -52,8 +52,9 @@ const SearchBar = () => {
           <SearchIcon sx={{ color: "white" }} />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ "aria-label": "search" }}
+          placeholder="Search Ui"
+          sx={{color:"#fff"}}
+          inputProps={{ "aria-label": "search"  }}
         />
       </Search>
     </div>

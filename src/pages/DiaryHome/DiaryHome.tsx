@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {set} from "../SignInForm/userSlice";
 import {add} from "./cardsSlice";
 import {db} from '../../utils/firebaseConfig';
-import {onSnapshot, query,collection, Firestore, getDocs, doc, setDoc, addDoc, DocumentData} from "firebase/firestore";
+import {onSnapshot, query,collection, Firestore, getDocs, doc, setDoc, addDoc, DocumentData, orderBy} from "firebase/firestore";
 import {addId} from "./cardIdsSlice";
 
 type DiaryEntry = {
@@ -29,32 +29,25 @@ const DieryHome: FC = () => {
 
     let cardIds = useSelector((state: RootState) => state.cardIds.value);
 
-    // console.log("At begining")
-    // console.log(cardIds.length)
-
     async function getCards(db: Firestore) {
-        // console.log("At get card begining")
-        // console.log(cardIds.length)
-        const q = query(collection(db, "Cards"));
+        const q = query(collection(db, "Cards"), orderBy("timestamp", "asc"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            let cardList: {
+                title: string,
+                subtitle: string,
+                description: string,
+                color: string
+            }[] = []
             querySnapshot.forEach((doc) => {
-                if(!cardIds.includes(doc.id)){
-                    console.log("adding to state")
-                    console.log(cardIds)
-                    console.log(doc.id)
-                    console.log(cardIds.length)
-                    dispatch(add({
-                        title: doc.data().title,
-                        subtitle: doc.data().subtitle,
-                        description: doc.data().description,
-                        color: doc.data().color
-                    }))
-                    dispatch(addId(doc.id))
-                }
+                cardList.push({
+                    title: doc.data().title,
+                    subtitle: doc.data().subtitle,
+                    description: doc.data().description,
+                    color: doc.data().color
+                })
             });
+            dispatch(add(cardList))
         });
-        // console.log("at end get cards")
-        // console.log(cardIds.length)
     }
 
     const dispatch = useDispatch()
@@ -64,7 +57,6 @@ const DieryHome: FC = () => {
     useEffect(() => {
         document.title = 'Dear Diary - Home Page';
          getCards(db).then(r => {setLoading(false)}).catch((error)=>console.log(error));
-        // dispatch({})
     }, []);
 
     const handleSubmit = async (event: FormEvent<HTMLButtonElement>): Promise<void> => {
@@ -83,7 +75,8 @@ const DieryHome: FC = () => {
                     title: inputCardTitle,
                     subtitle: user,
                     description: inputCardDescription,
-                    color: "#96dbe0"
+                    color: "#96dbe0",
+                    timestamp: Date.now()
             });
             console.log("Document written with ID: ", docRef.id);
             setInputCardTitle('');
@@ -91,8 +84,6 @@ const DieryHome: FC = () => {
         }
     };
 
-    // console.log("before return")
-    // console.log(cardIds.length)
     return <div className={"diary-home"}>
 
         <Link to="/" className={"link-back"} >Back</Link>

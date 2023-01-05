@@ -19,8 +19,8 @@ export const cardsSlice = createSlice({
     name: 'cards',
     initialState,
     reducers: {
-        add: (state, action: PayloadAction<Card>) => {
-             state.value.push(action.payload)
+        add: (state, action: PayloadAction<Card[]>) => {
+             state.value = action.payload
         },
     },
 })

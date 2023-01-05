@@ -9,7 +9,7 @@ import cardIdsReducer from "./pages/DiaryHome/cardIdsSlice";
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['cards', 'cardIds']
+    // blacklist: ['cards', 'cardIds']
 }
 
 const rootReducer = combineReducers({

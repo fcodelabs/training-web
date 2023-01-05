@@ -1,10 +1,10 @@
 
-import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import userReducer from './pages/SignInForm/userSlice'
-import cardsReducer from './pages/DiaryHome/cardsSlice'
+import {configureStore} from '@reduxjs/toolkit'
+import createSagaMiddleware from 'redux-saga'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import cardIdsReducer from "./pages/DiaryHome/cardIdsSlice";
+import rootReducer from "./rootReducer";
+import rootSaga from './rootSaga';
 
 const persistConfig = {
     key: 'root',
@@ -12,18 +12,15 @@ const persistConfig = {
     // blacklist: ['cards', 'cardIds']
 }
 
-const rootReducer = combineReducers({
-    user: userReducer,
-    cards: cardsReducer,
-    cardIds: cardIdsReducer
-})
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-export const store =  configureStore({
+const sagaMiddleware = createSagaMiddleware()
+const middleware = [sagaMiddleware];
+const persistedReducer = persistReducer(persistConfig, rootReducer);export const store =  configureStore({
     reducer: persistedReducer,
+    middleware,
 })
 export let persistor = persistStore(store)
 
+sagaMiddleware.run(rootSaga);
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

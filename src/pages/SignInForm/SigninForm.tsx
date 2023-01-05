@@ -5,7 +5,6 @@ import { uniqueNamesGenerator, Config, names } from "unique-names-generator";
 import {Link, useNavigate} from "react-router-dom";
 import {RootState, store} from "../../store";
 import {useDispatch, useSelector} from "react-redux";
-import {add} from "../DiaryHome/cardsSlice";
 import {set} from "./userSlice";
 
 const SignInForm: FC  = () => {

@@ -7,48 +7,16 @@ import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import {RootState, store} from "../../store";
 import {useDispatch, useSelector} from "react-redux";
 import {set} from "../SignInForm/userSlice";
-import {add} from "./cardsSlice";
+import {fetchCardList} from "./cardsSlice";
 import {db} from '../../utils/firebaseConfig';
 import {onSnapshot, query,collection, Firestore, getDocs, doc, setDoc, addDoc, DocumentData, orderBy} from "firebase/firestore";
-import {addId} from "./cardIdsSlice";
-
-type DiaryEntry = {
-    title: string,
-    subtitle: string,
-    description: string,
-    color: string
-}
 
 const DieryHome: FC = () => {
 
     const [inputCardTitle, setInputCardTitle] = useState<string>('');
     const [inputCardDescription, setInputCardDescription] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(true);
 
     let cards = useSelector((state: RootState) => state.cards.value);
-
-    let cardIds = useSelector((state: RootState) => state.cardIds.value);
-
-    async function getCards(db: Firestore) {
-        const q = query(collection(db, "Cards"), orderBy("timestamp", "asc"));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            let cardList: {
-                title: string,
-                subtitle: string,
-                description: string,
-                color: string
-            }[] = []
-            querySnapshot.forEach((doc) => {
-                cardList.push({
-                    title: doc.data().title,
-                    subtitle: doc.data().subtitle,
-                    description: doc.data().description,
-                    color: doc.data().color
-                })
-            });
-            dispatch(add(cardList))
-        });
-    }
 
     const dispatch = useDispatch()
     const user = useSelector((state: RootState) => state.user.value);
@@ -56,7 +24,7 @@ const DieryHome: FC = () => {
 
     useEffect(() => {
         document.title = 'Dear Diary - Home Page';
-         getCards(db).then(r => {setLoading(false)}).catch((error)=>console.log(error));
+        dispatch(fetchCardList());
     }, []);
 
     const handleSubmit = async (event: FormEvent<HTMLButtonElement>): Promise<void> => {

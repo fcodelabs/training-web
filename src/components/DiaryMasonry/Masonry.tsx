@@ -2,10 +2,10 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
-import Card from "./Card";
+import Card from "../DiaryCard/Card";
 
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { getMsgStart } from "../redux/messageRedux";
+import { getMsgStart } from "../../pages/DiaryHome/DiaryHomeSlice";
 
 interface msgData {
   name: string;

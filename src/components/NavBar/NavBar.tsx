@@ -13,7 +13,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch } from "react-redux/es/exports";
-import { logout } from "../redux/userRedux";
+import { logout } from "../../pages/SigninPage/UserSlice";
 import { Button } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({

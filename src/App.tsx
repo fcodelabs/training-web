@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import "./App.css";
-import HomePage from "./pages/HomePage";
-import Login from "./pages/Login";
+import HomePage from "./pages/DiaryHome/HomePage";
+import Login from "./pages/SigninPage/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {

@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
-import NavBar from "../components/NavBar";
-import Masonry from "../components/Masonry";
-import Form from "../components/Form";
+import NavBar from "../../components/NavBar/NavBar";
+import Masonry from "../../components/DiaryMasonry/Masonry";
+import Form from "../../components/DiaryForm/Form";
 import React from "react";
 
 

@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Button, Collapse } from "@mui/material";
 import Textarea from "@mui/joy/Textarea";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { getMsgStart, addMsgStart } from "../redux/messageRedux";
+import { getMsgStart, addMsgStart } from "../../pages/DiaryHome/DiaryHomeSlice";
 
 export default function Form(_props: {
   fullText: boolean;

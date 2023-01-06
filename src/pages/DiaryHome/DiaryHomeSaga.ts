@@ -1,8 +1,8 @@
 import {  put, takeEvery, all } from "redux-saga/effects";
-import { getMsgFailure, getMsgSuccess } from "./messageRedux";
+import { getMsgFailure, getMsgSuccess } from "./DiaryHomeSlice";
 // Add a second document with a generated ID.
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "../utils/firebase";
+import { db } from "../../utils/firebaseConfig";
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 interface msgData {
   name: string;

@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import { Button, Grid, Paper, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import { useDispatch } from "react-redux/es/exports";
-import { loginSuccess } from "../redux/userRedux";
+import { loginSuccess } from "./UserSlice";
 
 export default function Login() {
   const [nickName, setNickName] = React.useState("");

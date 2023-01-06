@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import userReducer from "./userRedux";
-import messageReducer from "./messageRedux"
+import userReducer from "../pages/SigninPage/UserSlice";
+import messageReducer from "../pages/DiaryHome/DiaryHomeSlice"
 import createSagaMiddleware from 'redux-saga'
 
 import {
@@ -9,7 +9,7 @@ import {
  
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import rootSaga from "./messageSaga";
+import rootSaga from "../pages/DiaryHome/DiaryHomeSaga";
 
 const persistConfig = {
   key: "root",

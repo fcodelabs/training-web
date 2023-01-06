@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "reactstrap";
 import { Button, TextField, Grid } from "@mui/material";
-import { addDoc } from "firebase/firestore";
-import { diaryCollectionRef } from "../../utils/firestore-collections";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { updateDiaries } from "../../Pages/DiaryHome/diaryRedux";
+import { callUpdateDiary } from "../../Pages/DiaryHome/diaryRedux";
 import { useDispatch } from "react-redux";
 
 function AddCard() {
@@ -29,18 +27,7 @@ function AddCard() {
       console.log("Please fill all the fields");
       return;
     }
-    dispatch(updateDiaries({ id: "", data: { name, title, description } }));
-    addDoc(diaryCollectionRef, {
-      name,
-      title,
-      description,
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(callUpdateDiary({ id: "", data: { name, title, description } }));
   };
 
   const handleExpand = (e: React.MouseEvent) => {

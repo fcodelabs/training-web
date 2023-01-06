@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest, all } from "redux-saga/effects";
+import {  put, takeEvery, all } from "redux-saga/effects";
 import { getMsgFailure, getMsgSuccess } from "./messageRedux";
 // Add a second document with a generated ID.
 import { addDoc, collection, getDocs } from "firebase/firestore";

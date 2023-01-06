@@ -3,10 +3,9 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 import Card from "./Card";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../utils/firebase";
+
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { getMsgStart, getMsgSuccess } from "../redux/messageRedux";
+import { getMsgStart } from "../redux/messageRedux";
 
 interface msgData {
   name: string;

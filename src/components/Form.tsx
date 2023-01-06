@@ -4,11 +4,8 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Button, Collapse } from "@mui/material";
 import Textarea from "@mui/joy/Textarea";
-// Add a second document with a generated ID.
-import { addDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "../utils/firebase";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { getMsgStart, getMsgSuccess, addMsgStart } from "../redux/messageRedux";
+import { getMsgStart, addMsgStart } from "../redux/messageRedux";
 
 export default function Form(_props: {
   fullText: boolean;
@@ -22,22 +19,13 @@ export default function Form(_props: {
   interface userState {
     user: { currentUser: any; isFetching: any; error: any };
   }
-  interface msgData {
-    name: string;
-    title: string;
-    description: string;
-  }
+
   const user = useSelector((state: userState) => state.user);
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     try {
-      // const docRef = await addDoc(collection(db, "messages"), {
-      //   name: user.currentUser,
-      //   title: title,
-      //   description: description,
-      // });
       const newMsg = {
         name: user.currentUser,
         title: title,

@@ -4,11 +4,8 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Button, Collapse } from "@mui/material";
 import Textarea from "@mui/joy/Textarea";
-// Add a second document with a generated ID.
-import { addDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { getMsgSuccess } from "../redux/messageRedux";
+import { getMsgStart, addMsgStart } from "../redux/messageRedux";
 
 export default function Form(_props: {
   fullText: boolean;
@@ -22,46 +19,23 @@ export default function Form(_props: {
   interface userState {
     user: { currentUser: any; isFetching: any; error: any };
   }
-  interface msgData {
-    name: string;
-    title: string;
-    description: string;
-  }
+
   const user = useSelector((state: userState) => state.user);
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     try {
-      const docRef = await addDoc(collection(db, "messages"), {
+      const newMsg = {
         name: user.currentUser,
         title: title,
         description: description,
-      });
-      getMessages();
+      };
+      distpatch(addMsgStart(newMsg));
+      distpatch(getMsgStart());
       setDescription("");
       setTitle("");
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
-
-  const getMessages = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, "messages"));
-      var temp: msgData[];
-      temp = [];
-      querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data().name}`);
-        const name = doc.data().name;
-        const title = doc.data().title;
-        const description = doc.data().description;
-
-        temp.push({ name, title, description });
-      });
-
-      distpatch(getMsgSuccess(temp));
+      //console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
     }

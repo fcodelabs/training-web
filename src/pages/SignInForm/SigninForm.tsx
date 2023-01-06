@@ -2,8 +2,8 @@ import {FC, useEffect, useState} from "react";
 import {Button, TextField, Typography} from '@mui/material';
 import { uniqueNamesGenerator, Config, names } from "unique-names-generator";
  import "./SigninForm.scss";
-import {Link, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {set} from "./userSlice";
 
 const SignInForm: FC  = () => {

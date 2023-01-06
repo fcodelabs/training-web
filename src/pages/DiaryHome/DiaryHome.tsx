@@ -7,7 +7,7 @@ import {RootState} from "../../store";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCardList} from "./cardsSlice";
 import {db} from '../../utils/firebaseConfig';
-import {onSnapshot, query,collection, addDoc, } from "firebase/firestore";
+import {onSnapshot, collection, addDoc, } from "firebase/firestore";
 
 const DieryHome: FC = () => {
 
@@ -19,21 +19,21 @@ const DieryHome: FC = () => {
     const dispatch = useDispatch()
     const user = useSelector((state: RootState) => state.user.value);
 
-
     useEffect(() => {
         document.title = 'Dear Diary - Home Page';
-        onSnapshot(query(collection(db, "Cards")), (querySnapshot) => {
+        // add listener
+        onSnapshot(collection(db, "Cards"), () => {
             dispatch(fetchCardList())
         })
     }, []);
 
     const handleSubmit = async (event: FormEvent<HTMLButtonElement>): Promise<void> => {
         event.preventDefault();
-        let invalid: boolean = inputCardTitle.length == 0 || inputCardDescription.length == 0;
-        if (inputCardTitle.length == 0) {
+        let invalid: boolean = inputCardTitle.length === 0 || inputCardDescription.length === 0;
+        if (inputCardTitle.length === 0) {
             console.log("Missing title");
         }
-        if (inputCardDescription.length == 0) {
+        if (inputCardDescription.length === 0) {
             console.log("Missing description");
         }
         if (!invalid) {

@@ -9,11 +9,14 @@ import {fetchCardList} from "./cardsSlice";
 import {db} from '../../utils/firebaseConfig';
 import {onSnapshot, collection, addDoc, } from "firebase/firestore";
 import {addCard} from "./addCardSlice";
+import PrimarySearchAppBar from "../../components/NavBar/NavBar";
 
 const DieryHome: FC = () => {
 
     const [inputCardTitle, setInputCardTitle] = useState<string>('');
     const [inputCardDescription, setInputCardDescription] = useState<string>('');
+    const [showDescription, setShowDescription] = useState(false);
+    const [mouseDown, setMouseDown] = useState(false);
 
     let cards = useSelector((state: RootState) => state.cards.value);
 
@@ -53,7 +56,9 @@ const DieryHome: FC = () => {
 
     return <div className={"diary-home"}>
 
-        <Link to="/" className={"link-back"} >Back</Link>
+        <PrimarySearchAppBar />
+
+
 
         <Grid container className={"input-diary-title"} >
             <Grid item xl={10} lg={12} sm={12} xs={12}>
@@ -74,6 +79,10 @@ const DieryHome: FC = () => {
                             placeholder="Submit New"
                             value={inputCardTitle}
                             onChange={(event: ChangeEvent<HTMLInputElement>) => setInputCardTitle(event.target.value)}
+                            onFocus={() => setShowDescription(true)}
+                            onBlur={() => !mouseDown && setShowDescription(false)}
+                            onMouseDown={() => setMouseDown(true)}
+                            onMouseUp={() => setMouseDown(false)}
                             InputProps={{
                                 style: {
                                     borderRadius: '50px',
@@ -83,7 +92,7 @@ const DieryHome: FC = () => {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={12} lg={12}>
+                    {showDescription && <Grid item xs={12} lg={12}>
                         <TextField
                             fullWidth={true}
                             variant={"outlined"}
@@ -93,6 +102,8 @@ const DieryHome: FC = () => {
                             rows={5}
                             value={inputCardDescription}
                             onChange={(event: ChangeEvent<HTMLInputElement>) => setInputCardDescription(event.target.value)}
+                            onMouseDown={() => setMouseDown(true)}
+                            onMouseUp={() => setMouseDown(false)}
                             InputProps={{
                                 style: {
                                     borderRadius: '10px',
@@ -101,7 +112,7 @@ const DieryHome: FC = () => {
                                 },
                             }}
                         />
-                    </Grid>
+                    </Grid>}
                 </Grid>
                 <Grid item xl={2} md={2} lg={2} sm={2} xs={12}>
                     <Button type="submit" onClick={handleSubmit} className="add-card-submit-button" >

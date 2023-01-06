@@ -1,31 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { onSnapshot } from "firebase/firestore";
-import { diaryCollectionRef } from "../../utils/firestore-collections";
+import React from "react";
 import SingleCard from "./SingleCard";
 import { Grid } from "@mui/material";
 import { Container } from "reactstrap";
+import { useSelector } from "react-redux";
 
 function Cards() {
-  const [diaries, setDiaries] = useState<any[]>([]);
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(diaryCollectionRef, (snapshot) => {
-      const diaries = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        data: doc.data(),
-      }));
-
-      setDiaries(diaries);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const diaries = useSelector((state: any) => state.diary.diaries);
 
   return (
     <Container style={{ padding: "25px" }}>
       <Grid container spacing={2}>
-        {diaries.map((diary) => (
+        {diaries.map((diary: any) => (
           <Grid item md={4} lg={3} xs={12}>
             <SingleCard
               key={diary.id}

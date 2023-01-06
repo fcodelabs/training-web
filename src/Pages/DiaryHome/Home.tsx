@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/HomeComponents/Header";
 import AddCard from "../../components/HomeComponents/AddCard";
 import Cards from "../../components/DiaryCard/Cards";
 import { Container } from "reactstrap";
+import { useDispatch } from "react-redux";
+import { getDiaries } from "../../Pages/DiaryHome/diaryRedux";
 
 function Home() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDiaries());
+  });
+
   return (
     <Container
       style={{

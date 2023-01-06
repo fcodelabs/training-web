@@ -24,7 +24,6 @@ function SignIn() {
   };
 
   const handleContinue = () => {
-    console.log(nickname);
     dispatch(login({ username: nickname }));
     navigate("/home");
   };

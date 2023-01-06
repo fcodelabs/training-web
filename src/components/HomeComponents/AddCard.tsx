@@ -4,6 +4,8 @@ import { Button, TextField, Grid } from "@mui/material";
 import { addDoc } from "firebase/firestore";
 import { diaryCollectionRef } from "../../utils/firestore-collections";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { updateDiaries } from "../../Pages/DiaryHome/diaryRedux";
+import { useDispatch } from "react-redux";
 
 function AddCard() {
   const [title, setTitle] = useState("");
@@ -11,6 +13,7 @@ function AddCard() {
   const [expand, setExpand] = useState(false);
   const user = useSelector((state: any) => state.user);
   const name = user.username;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -22,7 +25,11 @@ function AddCard() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !description) return;
+    if (!title || !description) {
+      console.log("Please fill all the fields");
+      return;
+    }
+    dispatch(updateDiaries({ id: "", data: { name, title, description } }));
     addDoc(diaryCollectionRef, {
       name,
       title,

@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchCardList} from "./cardsSlice";
 import {db} from '../../utils/firebaseConfig';
 import {onSnapshot, collection, addDoc, } from "firebase/firestore";
+import {addCard} from "./addCardSlice";
 
 const DieryHome: FC = () => {
 
@@ -39,14 +40,12 @@ const DieryHome: FC = () => {
         if (!invalid) {
             console.log(`input-card-title: ${inputCardTitle}`);
             console.log(`Description: ${inputCardDescription}`);
-            const docRef = await addDoc(collection(db, "Cards"), {
-                    title: inputCardTitle,
-                    subtitle: user,
-                    description: inputCardDescription,
-                    color: "#96dbe0",
-                    timestamp: Date.now()
-            });
-            console.log("Document written with ID: ", docRef.id);
+            dispatch(addCard({
+                title: inputCardTitle,
+                subtitle: user,
+                description: inputCardDescription,
+                color: "#96dbe0"
+            }))
             setInputCardTitle('');
             setInputCardDescription('');
         }

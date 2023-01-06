@@ -19,7 +19,6 @@ export const cardsSlice = createSlice({
             state.loading = true;
         },
         fetchCardListSuccess(state, action: PayloadAction<Card[]>) {
-            console.log(action.payload)
             state.loading = false;
             state.value = action.payload;
         },

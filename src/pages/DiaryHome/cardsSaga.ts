@@ -1,11 +1,11 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { fetchCardList, fetchCardListSuccess, fetchCardListFailed } from './cardsSlice';
-import {collection, Firestore, getDocs, onSnapshot, orderBy, query} from "firebase/firestore";
+import {collection, onSnapshot, orderBy, query} from "firebase/firestore";
 import {db} from '../../utils/firebaseConfig';
 import {Card} from "./card";
 
 
-async function getCards(): Promise<Card[]> {
+function getCards(): Promise<Card[]> {
     const q = query(collection(db, "Cards"), orderBy("timestamp", "asc"));
     return new Promise((resolve, reject)=>{
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -18,18 +18,16 @@ async function getCards(): Promise<Card[]> {
                     color: doc.data().color
                 })
             });
-            console.log("get cards executed")
-            console.log(cardList)
             resolve(cardList)
         });
     })
 }
 
+
 function* fetchCardList1() {
     try {
         const response: Card[] = yield call(getCards);
-        console.log("In fetch card list 1")
-        yield put(fetchCardListSuccess(response));
+         yield put(fetchCardListSuccess(response));
     } catch (error) {
         console.log('Failed to fetch card list', error);
         yield put(fetchCardListFailed());
@@ -37,5 +35,5 @@ function* fetchCardList1() {
 }
 
 export default function* cardSaga() {
-    yield takeLatest(fetchCardList.type, fetchCardList1);
+    yield takeEvery(fetchCardList.type, fetchCardList1);
 }

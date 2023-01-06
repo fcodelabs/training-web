@@ -1,15 +1,13 @@
-import {ChangeEvent,ChangeEventHandler, FC, FormEvent, useEffect, useState} from "react";
-import {Button, FormControl, Grid, TextareaAutosize, TextField, Typography} from '@mui/material';
+import {ChangeEvent,FC, FormEvent, useEffect, useState} from "react";
+import {Button, Grid, TextField, Typography} from '@mui/material';
 import './DiaryHome.scss'
-import {deepPurple} from "@mui/material/colors";
 import {Link} from "react-router-dom";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
-import {RootState, store} from "../../store";
+import {RootState} from "../../store";
 import {useDispatch, useSelector} from "react-redux";
-import {set} from "../SignInForm/userSlice";
 import {fetchCardList} from "./cardsSlice";
 import {db} from '../../utils/firebaseConfig';
-import {onSnapshot, query,collection, Firestore, getDocs, doc, setDoc, addDoc, DocumentData, orderBy} from "firebase/firestore";
+import {onSnapshot, query,collection, addDoc, } from "firebase/firestore";
 
 const DieryHome: FC = () => {
 
@@ -24,7 +22,9 @@ const DieryHome: FC = () => {
 
     useEffect(() => {
         document.title = 'Dear Diary - Home Page';
-        dispatch(fetchCardList());
+        onSnapshot(query(collection(db, "Cards")), (querySnapshot) => {
+            dispatch(fetchCardList())
+        })
     }, []);
 
     const handleSubmit = async (event: FormEvent<HTMLButtonElement>): Promise<void> => {

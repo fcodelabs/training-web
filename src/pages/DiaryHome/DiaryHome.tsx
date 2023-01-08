@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import NavigatiionBar from "../../components/NavigatiionBar";
 import Titlebar from "../../components/Titlebar";
 import Grid from "@mui/material/Grid";
@@ -7,14 +7,23 @@ import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/base/ClickAwayListener";
 import { useLocation } from "react-router";
 import DiaryCard from "../../components/DiaryCard";
+import { UseAppSelector, useAppDispatch } from "../../hooks";
+import { addNewCard } from "./diaryCardSlice";
 
 const DiaryHome = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [width, setWidth] = useState("50vw");
   const [show, setShow] = useState(false);
-  const [cards, setCards] = useState(new Array());
   const location = useLocation();
+  const subTitle = location.state.name;
+
+  const diaryCards = UseAppSelector((state) => {
+    return state.diaryCard.diaryCards;
+  });
+
+  const color = "#B9E9FF";
+  const dispatch = useAppDispatch();
 
   const handleClickAway = () => {
     if (title === "" && description === "") {
@@ -83,10 +92,14 @@ const DiaryHome = () => {
                   } else if (description === "") {
                     console.log("Missing description");
                   } else {
-                    setCards([
-                      ...cards,
-                      [title, description, location.state.name],
-                    ]);
+                    dispatch(
+                      addNewCard({
+                        title,
+                        subTitle,
+                        description,
+                        color,
+                      })
+                    );
                   }
                   setDescription("");
                   setTitle("");
@@ -123,16 +136,16 @@ const DiaryHome = () => {
 
       {/* cards */}
       <Grid container spacing={1} px={1} columns={{ xs: 4, sm: 8, md: 16 }}>
-        {cards.map((card, i) => {
+        {diaryCards.map((card, i) => {
           return (
             <Grid item xs={4} sm={4} md={4} key={i}>
               <DiaryCard
-                key={i}
-                title={card[0]}
-                subTitle={card[2]}
-                description={card[1]}
-                cardColor="#B9E9FF"
-              />
+              key={i}
+              title={card.title}
+              subTitle={card.subTitle}
+              description={card.description}
+              cardColor={card.color}
+            />
             </Grid>
           );
         })}

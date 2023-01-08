@@ -7,43 +7,83 @@ import "./styles.css";
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { Grid } from '@mui/material';
 import DiaryCard from '../../components/DiaryCard';
+import { collection, addDoc,getDocs  } from "firebase/firestore"; 
+import { db } from '../../firebase';
+import { useLocation } from 'react-router-dom';
 
-
-interface MyProps { 
-    name : string
-    }
   
-export default function DairyHome(props : MyProps) {
+export default function DairyHome() {
 
     const [touched, setTouched] = React.useState(false);
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [clicked, setClicked] = React.useState(false);
-    const [title1, setTitle1] = React.useState('');
-    const [description1, setDescription1] = React.useState('');
+    const [messages, setMessages] = React.useState([]); 
+
+    const useEffect = React.useEffect(() => {
+      getMessages();
+    }, []);
     
+    // const [name, setName] = React.useState('');
+    const {state} = useLocation();
+    const name = state.name;
 
     const handleTouch = (event: any) => {
         event.preventDefault();
         setTouched(true);
     }
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => { 
+    const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => { 
         event.preventDefault();
         setTouched(false);
         
-        console.log(title, description)
+        // console.log(title, description)
         if (title == '' || description == ''){
             setClicked(false);
             console.log('Missing title or Missing description')
         }else{
-            setTitle1(title);
-            setDescription1(description);
+            console.log(title, description);
+            console.log("clicked");   
+            try {
+              const docRef = await addDoc(collection(db, "messages"), {
+                name: state.name,
+                title: title,
+                description: description
+                
+              });
+              console.log("Document written with ID: ", docRef.id);
+              getMessages();
+            } catch (e) {
+              console.error("Error adding document: ", e);
+            }
+               
             setClicked(true);
         }
+        // getMessages();
         setTitle('');
         setDescription('');
     }
+
+   
+    
+    const getMessages = async () => { 
+      var msgs = [] as any;
+        const querySnapshot = await getDocs(collection(db, "messages"));
+        querySnapshot.forEach((doc) => {
+          let msg = [];
+          // doc.data() is never undefined for query doc snapshots
+          
+          // console.log(doc.id, " => ", doc.data().description, doc.data().name, doc.data().title);
+          msg.push(doc.data().title, doc.data().name, doc.data().description);
+          console.log("msg", msg);
+          msgs.push(msg);
+          
+        });
+        setMessages(msgs);
+        console.log("msgs", msgs);
+        console.log("messages", messages);
+    }
+        
 
 
     return (
@@ -57,7 +97,7 @@ export default function DairyHome(props : MyProps) {
                 Home
           </Typography>
                 
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3, mb: 3, textAlign: 'left'}} >
+          <Box  sx={{ mt: 3, mb: 3, textAlign: 'left'}} >
           <Grid container spacing={4} >
             <Grid item xs={10}>
             <TextField
@@ -91,9 +131,9 @@ export default function DairyHome(props : MyProps) {
               
             <Grid item  xs={2}>
                 {touched && <Button
-                type="submit"
+                //type="submit"
                 variant="contained"
-                // onClick={handleSubmit}
+                onClick={handleSubmit}
                 sx={{ height:'100%', margin: 'auto', width: '100%', borderRadius: '30px',  color: 'black', fontWeight: 'bold', backgroundColor: '#5353c6' }}
             >
                 Submit
@@ -119,11 +159,18 @@ export default function DairyHome(props : MyProps) {
           </Grid>
           
           </Box>
+          <Grid container spacing={4}>
+       {messages.map((m) => {return ( <Grid item xs={12} md={3}>
+                    <DiaryCard title={m[0]} description={m[2]} name={m[1]}  /> </Grid>  
+                  
+                )})}
+       
+       </Grid>  
     
         </div> 
 
-       {clicked && <DiaryCard title={title1} description={description1} name={props.name}  />}
-        
+       {/* <>{messages.map(({title, name, description}: any) => {<DiaryCard title={title} description={description} name={name}  />})}</> */}
+       
         </div>
             
         

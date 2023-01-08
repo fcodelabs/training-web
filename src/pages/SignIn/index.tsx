@@ -8,10 +8,12 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Unstable_Grid2';
 import './style.css';
 import Logo from '../../assets/logo.svg';
+import { useNavigate } from "react-router-dom";
 const { uniqueNamesGenerator } = require('unique-names-generator');
 
   
 export default function SignIn() {
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [click, setClick] = useState(false);
     
@@ -27,6 +29,12 @@ export default function SignIn() {
         setClick(true);
     }
 
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        navigate("/home", {state: {name: name}});
+        
+    }
+
 
 return (
     
@@ -40,7 +48,7 @@ return (
     
     </div>
     
-    <Typography variant="h4" component="h4" sx={{color: "#039BE5", mb: "2vw"}}>
+    <Typography variant="h4" component="h4" sx={{color: "#039BE5", mb: "2vw", textAlign:"center"}}>
        Sign In
     </Typography>
     <Grid container spacing={2} sx={{mb: "2vw", padding: '0 3vw 0 3vw'}}>
@@ -53,8 +61,8 @@ return (
         <Button variant="contained"  onClick={handleRandom} sx={{width: "100%", borderRadius: "100px", background:"#039BE5"}}>RANDOM</Button>
         </Grid>
       </Grid>
-    <div>
-    <Button variant="contained" disabled={!click} sx={{ height: "100%", borderRadius: "100px", background:"#039BE5"}}>CONTINUE</Button>
+    <div style={{textAlign: "center"}}>
+    <Button variant="contained" disabled={!click} onClick={handleSubmit} sx={{ height: "100%", borderRadius: "100px", background:"#039BE5"}}>CONTINUE</Button>
     </div>
     
     </Container>

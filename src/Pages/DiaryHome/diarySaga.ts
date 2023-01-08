@@ -20,20 +20,16 @@ function* getDiaries(): any {
 
 function* updateDiaries(action: any): any {
   const data = yield action.payload;
-
-  yield addDoc(diaryCollectionRef, {
-    name: data.data.name,
-    description: data.data.description,
-    title: data.data.title,
-  })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
+  console.log("data", data);
+  try {
+    const response = yield addDoc(diaryCollectionRef, data);
+    yield put({
+      type: "diary/updateDiaries",
+      payload: { id: response.id, data },
     });
-
-  yield put({ type: "diary/updateDiaries", payload: data });
+  } catch (error) {
+    console.log("error", error);
+  }
 }
 
 function* diarySaga() {

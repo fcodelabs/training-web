@@ -27,7 +27,7 @@ function AddCard() {
       console.log("Please fill all the fields");
       return;
     }
-    dispatch(callUpdateDiary({ id: "", data: { name, title, description } }));
+    dispatch(callUpdateDiary({ name, title, description }));
   };
 
   const handleExpand = (e: React.MouseEvent) => {

@@ -6,34 +6,73 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
-import { useState } from 'react';
-import { Collapse } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { CardContent, Collapse } from '@mui/material';
+import {db} from "./Firebase"
+import { addDoc, collection, doc, getDocs } from "firebase/firestore"; 
+import { useCallback } from 'react'
+import { margin, padding } from "@mui/system/spacing";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const Home = () => {
     const [title, setSubmitNew] = useState('');
     const [description, setDescription] = useState('');
     const [collapseValue, setCollapse] = useState(false)
-    const [tempTitle, setTempTitle] = useState(title);
-    const [tempDescription, setTempDescription] = useState(description);
-    const [cardValue, setCardValue] = useState(false);
+    const [cardContent, setCardContent] = useState([]);
+    const [isRender, setisRender] = useState(false);
+    const params = useParams();
+    const userName = params.userName;
+    const username = useSelector((state: any) => state.user.value.username)
 
-    const handleSubmit = (e : any) => {
+    const readData = async() =>{
+      var cardContent = [] as any;
+        const querySnapshot = await getDocs(collection(db, "Card"));
+        querySnapshot.forEach((doc) => {
+        const title = doc.data().title;
+        const description = doc.data().description;
+        const name = doc.data().name;
+        cardContent.push({title, description, name});
+        });
+        setCardContent(cardContent);
+    }    
+
+    useEffect(() => {
+        readData();
+      }, []);
+
+      useEffect(() => {
+        readData();
+      }, [isRender]);
+
+    const handleSubmit = async (e : any) => {
         e.preventDefault();
-        const Diary = {title, description};
+
+        // Add a new document in collection "Card"
+        try {
+            if(title || description){
+              const docRef = await addDoc(collection(db, "Card"), {
+                description : description,
+                name : userName,
+                title : title
+              });
+              console.log("Document written with ID: ", docRef.id);
+            }else{
+              console.log('plz provide a title or description')
+            }
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+  
         setSubmitNew('');
         setDescription('');
-        setTempTitle(title);
-        setTempDescription(description);
-        if(!!title || !!description)
-            setCardValue(true)
-        ;
+        setisRender(!isRender)
     }
 
     return ( 
         <>
         <Navbar/>
-
-
         <form onSubmit={handleSubmit}>
         <Box sx={{ flexGrow: 2, display:'flex' }}>
             
@@ -84,8 +123,17 @@ const Home = () => {
             
         </Box>
         </form>
+      
 
-        { cardValue ? <DiaryCard title={tempTitle} description={tempDescription}/> : null}            
+        <Grid container spacing={2} sx={{marginLeft:'0.5vw'}}>
+          {cardContent.map((m) => {
+            return (
+              <Grid item xs={12} md={3} >
+                <DiaryCard title={m['title']} name = {m['name']} description={m['description']}/>
+              </Grid>
+            )
+          })}
+        </Grid>
         
         </>
      );

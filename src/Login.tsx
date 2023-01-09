@@ -11,11 +11,18 @@ import SendIcon from '@mui/icons-material/Send';
 import EastIcon from '@mui/icons-material/East';
 import flowerSvg from './assests/flower.svg';
 import Item from '@mui/material/ListItem';
+import { useNavigate } from 'react-router-dom';
+import { login } from './store'
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
 
     const [name, setName] = useState(""); //state for the generated name
     const [initial, setInitial] = useState(true); //state for the initial render
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const username = useSelector((state: any) => state.user.value.username)
+
     const generateName = () => { //generate random name
         const config: Config = {
             dictionaries: [names],
@@ -27,7 +34,12 @@ const Login = () => {
 
 
     return ( 
-        <>       
+        <div style={{
+            display: "flex",
+            justifyContent:"center",
+            alignItems:"center",
+            minHeight:"100vh"
+        }}>      
         <Container sx={{textAlign:'center', margin:0, width: "50%",padding:"2vw", borderRadius:"10px",background:'white'}}>
         <div style={{textAlign:"left", marginBottom:"2vw"}}>
         <img src={flowerSvg} 
@@ -64,7 +76,12 @@ const Login = () => {
         </Grid>
 
 
-        <Button disabled={(name) ? false : true} color="primary"
+        <Button 
+        onClick={() =>{
+            dispatch(login({username: name}))
+            navigate('home/'+name)
+        }}
+        disabled={(name) ? false : true} color="primary"
         size='large' variant="contained" endIcon={<EastIcon />}
         style={{
             
@@ -74,7 +91,7 @@ const Login = () => {
         </Button>
         </Container>
 
-        </>
+        </div>
      );
 }
  

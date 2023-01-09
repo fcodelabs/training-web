@@ -82,12 +82,11 @@ export default function NavBar(_props: { handle: any }) {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={
+              _props.handle.active ? _props.handle.exit : _props.handle.enter
+            }
           >
-            {_props.handle.active ? (
-              <FullscreenExitIcon onClick={_props.handle.exit} />
-            ) : (
-              <FullscreenIcon onClick={_props.handle.enter} />
-            )}
+            {_props.handle.active ? <FullscreenExitIcon /> : <FullscreenIcon />}
           </IconButton>
 
           <Stack

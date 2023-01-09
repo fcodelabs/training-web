@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Button, Collapse } from "@mui/material";
 import Textarea from "@mui/joy/Textarea";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { getMsgStart, addMsgStart } from "../../pages/DiaryHome/DiaryHomeSlice";
+import { addMsgStart } from "../../pages/DiaryHome/DiaryHomeSlice";
 
 export default function Form(_props: {
   fullText: boolean;
@@ -13,7 +13,9 @@ export default function Form(_props: {
 }) {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
-  // const [fullText, setFullText] = React.useState(false);
+  const [focusedTitle, setFocusedTitle] = React.useState(false);
+  const [focusedDescription, setFocusedDescription] = React.useState(false);
+
   const distpatch = useDispatch();
 
   interface userState {
@@ -24,20 +26,25 @@ export default function Form(_props: {
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    if (title === "") {
+      console.log("title required!!!");
+    } else if (description === "") {
+      console.log("description required!!!");
+    } else {
+      try {
+        const newMsg = {
+          name: user.currentUser,
+          title: title,
+          description: description,
+        };
 
-    try {
-      const newMsg = {
-        name: user.currentUser,
-        title: title,
-        description: description,
-      };
-      distpatch(addMsgStart(newMsg));
-     // distpatch(getMsgStart());
-      setDescription("");
-      setTitle("");
-      //console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
+        distpatch(addMsgStart(newMsg));
+
+        setDescription("");
+        setTitle("");
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
     }
   };
 
@@ -66,6 +73,9 @@ export default function Form(_props: {
               onClick={() => _props.setFullText(true)}
               onChange={(e) => setTitle(e.target.value)}
               value={title}
+              // eslint-disable-next-line no-restricted-globals
+              error={focusedTitle && title === "" ? true : false}
+              onBlur={(e) => setFocusedTitle(true)}
             />
           </Grid>
           <Grid item xs={12} sm={2}>
@@ -106,8 +116,11 @@ export default function Form(_props: {
             sx={{ backgroundColor: "lightblue" }}
             onChange={(e) => setDescription(e.target.value)}
             value={description}
+            onBlur={(e) => setFocusedDescription(true)}
+            error={description === "" && focusedDescription ? true : false}
           />
         </Box>
+
         <Button
           sx={{
             width: 150,
@@ -122,7 +135,6 @@ export default function Form(_props: {
           variant="contained"
           onClick={handleSubmit}
           // eslint-disable-next-line eqeqeq
-
           disabled={description === "" || title === "" ? true : false}
         >
           Submit

@@ -5,8 +5,6 @@ import {
   addDoc,
   collection,
   getDocs,
-  doc,
-  deleteDoc,
 } from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
@@ -23,7 +21,7 @@ const getMessages = async () => {
     var temp: msgData[];
     temp = [];
     querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data().name}`);
+     // console.log(`${doc.id} => ${doc.data().name}`);
       const Id = doc.id;
       const name = doc.data().name;
       const title = doc.data().title;

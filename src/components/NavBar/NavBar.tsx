@@ -6,7 +6,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Stack from "@mui/material/Stack";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -15,6 +14,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch } from "react-redux/es/exports";
 import { logout } from "../../pages/SigninPage/UserSlice";
 import { Button } from "@mui/material";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -58,8 +59,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBar() {
+export default function NavBar(_props: { handle: any }) {
   const distpatch = useDispatch();
+  console.log(_props.handle.active);
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     distpatch(logout());
@@ -81,8 +83,13 @@ export default function NavBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            {_props.handle.active ? (
+              <FullscreenExitIcon onClick={_props.handle.exit} />
+            ) : (
+              <FullscreenIcon onClick={_props.handle.enter} />
+            )}
           </IconButton>
+
           <Stack
             direction="row"
             sx={{
@@ -109,6 +116,7 @@ export default function NavBar() {
               variant="contained"
               endIcon={<LogoutIcon />}
               onClick={handleSubmit}
+
               // eslint-disable-next-line eqeqeq
             ></Button>
           </Stack>

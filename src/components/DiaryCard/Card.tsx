@@ -39,7 +39,7 @@ export default function Card(_props: {
           </Typography>
         </Item>
       </Collapse>
-      {_props.description.length > 80 ? (
+      {_props.description.length > 100 ? (
         <IconButton
           sx={{ color: "white", backgroundColor: "black", top: -10 }}
           onClick={() => setFullText(!fullText)}

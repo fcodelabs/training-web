@@ -1,9 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+interface msgData {
+  Id: string;
+  name: string;
+  title: string;
+  description: string;
+}
+var temp: msgData[];
+temp = [];
 const messageSlice = createSlice({
   name: "message",
   initialState: {
-    messages: [],
+    messages: temp,
     isFetching: false,
     error: false,
   },
@@ -20,12 +27,14 @@ const messageSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
-    addMsgStart: (state,action) => {
+    addMsgStart: (state, action) => {
       state.isFetching = true;
     },
     addMsgSuccess: (state, action) => {
       state.isFetching = false;
       state.error = false;
+     // console.log(action.payload);
+      state.messages.push(action.payload);
     },
     addMsgFailure: (state) => {
       state.isFetching = false;
@@ -34,6 +43,6 @@ const messageSlice = createSlice({
   },
 });
 
-export const { getMsgStart, getMsgSuccess, getMsgFailure, addMsgStart } =
+export const { getMsgStart, getMsgSuccess, getMsgFailure, addMsgStart,addMsgFailure,addMsgSuccess } =
   messageSlice.actions;
 export default messageSlice.reducer;

@@ -32,7 +32,7 @@ export default function Form(_props: {
         description: description,
       };
       distpatch(addMsgStart(newMsg));
-      distpatch(getMsgStart());
+     // distpatch(getMsgStart());
       setDescription("");
       setTitle("");
       //console.log("Document written with ID: ", docRef.id);
@@ -75,6 +75,11 @@ export default function Form(_props: {
                 height: 40,
                 borderRadius: "30px",
                 backgroundColor: "lightblue",
+                display: {
+                  xs: "none",
+                  md: "flex",
+                  xl: "flex",
+                },
               }}
               variant="contained"
               onClick={handleSubmit}
@@ -103,6 +108,25 @@ export default function Form(_props: {
             value={description}
           />
         </Box>
+        <Button
+          sx={{
+            width: 150,
+            height: 40,
+            borderRadius: "30px",
+            backgroundColor: "lightblue",
+            display: {
+              md: "none",
+              xl: "none",
+            },
+          }}
+          variant="contained"
+          onClick={handleSubmit}
+          // eslint-disable-next-line eqeqeq
+
+          disabled={description === "" || title === "" ? true : false}
+        >
+          Submit
+        </Button>
       </Box>
     </Collapse>
   );

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux/es/exports";
 import { getMsgStart } from "../../pages/DiaryHome/DiaryHomeSlice";
 
 interface msgData {
+  Id: string;
   name: string;
   title: string;
   description: string;
@@ -23,7 +24,7 @@ export default function Masonry(_props: {
 
   const messages1 = useSelector((state: msgsData) => state.message.messages);
   React.useEffect(() => {
-    distpatch(getMsgStart())
+    distpatch(getMsgStart());
   }, [distpatch]);
 
   return (
@@ -34,18 +35,10 @@ export default function Masonry(_props: {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 12, md: 16 }}
       >
-        {messages1.map(
-          ({ name, title, description }: msgData, index: React.Key) => (
-            <Card
-              key={index}
-              name={name}
-              title={title}
-              description={description}
-            />
-          )
-        )}
+        {messages1.map(({ Id, name, title, description }: msgData) => (
+          <Card key={Id} name={name} title={title} description={description} />
+        ))}
       </Grid>
     </Box>
   );
 }
-

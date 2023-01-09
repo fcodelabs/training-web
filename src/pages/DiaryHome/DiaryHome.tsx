@@ -8,7 +8,16 @@ import ClickAwayListener from "@mui/base/ClickAwayListener";
 import { useLocation } from "react-router";
 import DiaryCard from "../../components/DiaryCard";
 import { UseAppSelector, useAppDispatch } from "../../hooks";
-import { addNewCard } from "./diaryCardSlice";
+import { addNewCard, refreshCards } from "./diaryCardSlice";
+import { db } from "../../utils/firebaseConfig";
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 
 const DiaryHome = () => {
   const [title, setTitle] = useState("");
@@ -35,6 +44,32 @@ const DiaryHome = () => {
     setWidth("100vw");
     setShow(true);
   };
+
+  //firebase data
+  const colRef = collection(db, "diary_cards");
+
+  type DiaryCard = {
+    title: string;
+    subTitle: string;
+    description: string;
+    color: string;
+  };
+
+  onSnapshot(colRef, (snapshot) => {
+    let cards: DiaryCard[] = [];
+    snapshot.docs.forEach((doc) => {
+      // books.push({ ...doc.data(), id: doc.id });
+      const temp: DiaryCard = {
+        title: doc.data().title,
+        subTitle: doc.data().subTitle,
+        description: doc.data().description,
+        color: doc.data().color,
+      };
+      cards.push(temp);
+    });
+    console.log(cards);
+    // dispatch(refreshCards(cards));
+  });
 
   return (
     <>
@@ -92,15 +127,26 @@ const DiaryHome = () => {
                   } else if (description === "") {
                     console.log("Missing description");
                   } else {
-                    dispatch(
-                      addNewCard({
-                        title,
-                        subTitle,
-                        description,
-                        color,
-                      })
-                    );
+                    // dispatch(
+                    //   addNewCard({
+                    //     title,
+                    //     subTitle,
+                    //     description,
+                    //     color,
+                    //   })
+                    // );
+                    addDoc(colRef, {
+                      title,
+                      subTitle,
+                      description,
+                      color,
+                    }).then(() => {
+                      setDescription("");
+                      setTitle("");
+                      handleClickAway();
+                    });
                   }
+
                   setDescription("");
                   setTitle("");
                   handleClickAway();
@@ -140,12 +186,12 @@ const DiaryHome = () => {
           return (
             <Grid item xs={4} sm={4} md={4} key={i}>
               <DiaryCard
-              key={i}
-              title={card.title}
-              subTitle={card.subTitle}
-              description={card.description}
-              cardColor={card.color}
-            />
+                key={i}
+                title={card.title}
+                subTitle={card.subTitle}
+                description={card.description}
+                cardColor={card.color}
+              />
             </Grid>
           );
         })}

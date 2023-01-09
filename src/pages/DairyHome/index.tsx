@@ -8,9 +8,18 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { Grid } from '@mui/material';
 import DiaryCard from '../../components/DiaryCard';
 import { collection, addDoc,getDocs  } from "firebase/firestore"; 
-import { db } from '../../firebase';
+import { db } from '../../utils/firebaseConfig';
 import { useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { getMsgSuccess } from './DiaryHomeSlice';
 
+interface MyProps {
+  [x: string]: any; 
+  title : string
+  name : string
+  description : string 
+}
+  
   
 export default function DairyHome() {
 
@@ -18,7 +27,8 @@ export default function DairyHome() {
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [clicked, setClicked] = React.useState(false);
-    const [messages, setMessages] = React.useState([]); 
+    //const [messages, setMessages] = React.useState([]); 
+    const distpatch = useDispatch()
 
     const useEffect = React.useEffect(() => {
       getMessages();
@@ -36,8 +46,6 @@ export default function DairyHome() {
     const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => { 
         event.preventDefault();
         setTouched(false);
-        
-        // console.log(title, description)
         if (title == '' || description == ''){
             setClicked(false);
             console.log('Missing title or Missing description')
@@ -71,18 +79,17 @@ export default function DairyHome() {
         const querySnapshot = await getDocs(collection(db, "messages"));
         querySnapshot.forEach((doc) => {
           let msg = [];
-          // doc.data() is never undefined for query doc snapshots
-          
-          // console.log(doc.id, " => ", doc.data().description, doc.data().name, doc.data().title);
           msg.push(doc.data().title, doc.data().name, doc.data().description);
           console.log("msg", msg);
           msgs.push(msg);
           
         });
-        setMessages(msgs);
-        console.log("msgs", msgs);
-        console.log("messages", messages);
+        //setMessages(msgs);
+        distpatch(getMsgSuccess(msgs))
     }
+
+    const messages = useSelector((state: MyProps) => state.message.messages);
+
         
 
 
@@ -160,7 +167,7 @@ export default function DairyHome() {
           
           </Box>
           <Grid container spacing={4}>
-       {messages.map((m) => {return ( <Grid item xs={12} md={3}>
+          {messages.map((m: string[]) => {return ( <Grid item xs={12} md={3}>
                     <DiaryCard title={m[0]} description={m[2]} name={m[1]}  /> </Grid>  
                   
                 )})}

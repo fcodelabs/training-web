@@ -37,6 +37,10 @@ function SignIn() {
         alignItems: "center",
         justifyContent: "center",
         backgroundImage: `url(${cloudImage})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
       }}
     >
       <Paper sx={{ width: "45%", p: 3, borderRadius: 3 }}>

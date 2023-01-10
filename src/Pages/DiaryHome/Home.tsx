@@ -25,6 +25,10 @@ function Home() {
             height: "100%",
             minHeight: "100vh",
             backgroundImage: `url(${cloudImage})`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed",
           }}
         >
           <Header handle={handle} />

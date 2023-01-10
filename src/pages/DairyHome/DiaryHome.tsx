@@ -1,33 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import "./styles.css";
+import "./DiaryHome.css";
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { Grid } from '@mui/material';
-import DiaryCard from '../../components/DiaryCard';
-import { collection, addDoc,getDocs  } from "firebase/firestore"; 
-import { db } from '../../firebase';
+import DiaryCard from '../../components/DiaryCard/DiaryCard';
 import { useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { getDiaryCards, addDiaryCard } from './DiaryHomeSlice';
 
+interface MyProps {
+  [x: string]: any; 
+  title : string
+  name : string
+  description : string 
+}
+  
   
 export default function DairyHome() {
 
     const [touched, setTouched] = React.useState(false);
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
-    const [clicked, setClicked] = React.useState(false);
-    const [messages, setMessages] = React.useState([]); 
-
-    const useEffect = React.useEffect(() => {
-      getMessages();
-    }, []);
+    const distpatch = useDispatch()
+    const messages = useSelector((state: MyProps) => state.message.messages);
+    useEffect(() => {
+      distpatch(getDiaryCards())
+    }, [distpatch]);
     
-    // const [name, setName] = React.useState('');
+ 
     const {state} = useLocation();
-    const name = state.name;
-
     const handleTouch = (event: any) => {
         event.preventDefault();
         setTouched(true);
@@ -36,54 +40,30 @@ export default function DairyHome() {
     const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => { 
         event.preventDefault();
         setTouched(false);
-        
-        // console.log(title, description)
-        if (title == '' || description == ''){
-            setClicked(false);
-            console.log('Missing title or Missing description')
-        }else{
-            console.log(title, description);
-            console.log("clicked");   
+        if (title === '' && description === ''){
+            console.log('Missing title and Missing description')
+
+        } else if (title === '' && description !== ''){
+            console.log('Missing title')
+
+        } else if (description === '' && title !== ''){
+            console.log('Missing Description')
+        }else{ 
             try {
-              const docRef = await addDoc(collection(db, "messages"), {
+              const newMessage = {
                 name: state.name,
                 title: title,
                 description: description
-                
-              });
-              console.log("Document written with ID: ", docRef.id);
-              getMessages();
+              };
+              distpatch(addDiaryCard(newMessage))
             } catch (e) {
               console.error("Error adding document: ", e);
             }
                
-            setClicked(true);
         }
-        // getMessages();
         setTitle('');
         setDescription('');
     }
-
-   
-    
-    const getMessages = async () => { 
-      var msgs = [] as any;
-        const querySnapshot = await getDocs(collection(db, "messages"));
-        querySnapshot.forEach((doc) => {
-          let msg = [];
-          // doc.data() is never undefined for query doc snapshots
-          
-          // console.log(doc.id, " => ", doc.data().description, doc.data().name, doc.data().title);
-          msg.push(doc.data().title, doc.data().name, doc.data().description);
-          console.log("msg", msg);
-          msgs.push(msg);
-          
-        });
-        setMessages(msgs);
-        console.log("msgs", msgs);
-        console.log("messages", messages);
-    }
-        
 
 
     return (
@@ -160,17 +140,13 @@ export default function DairyHome() {
           
           </Box>
           <Grid container spacing={4}>
-       {messages.map((m) => {return ( <Grid item xs={12} md={3}>
+          {messages.map((m: string[]) => {return ( <Grid item xs={12} md={3}>
                     <DiaryCard title={m[0]} description={m[2]} name={m[1]}  /> </Grid>  
                   
                 )})}
        
        </Grid>  
-    
         </div> 
-
-       {/* <>{messages.map(({title, name, description}: any) => {<DiaryCard title={title} description={description} name={name}  />})}</> */}
-       
         </div>
             
         

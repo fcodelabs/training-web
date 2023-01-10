@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Container } from "@mui/system";
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Unstable_Grid2';
-import './style.css';
+import './SignIn.css';
 import Logo from '../../assets/logo.svg';
 import { useNavigate } from "react-router-dom";
 const { uniqueNamesGenerator } = require('unique-names-generator');
@@ -37,8 +37,6 @@ export default function SignIn() {
 
 
 return (
-    
-   
     <Container sx={{width: "50%", mt: "10%",  borderRadius: "10px", padding: "3vw", background: "white"}}>
     {/* <Logo/> */}
     <div style={{textAlign: "left", paddingLeft: "3vw", display: "flex"}}>

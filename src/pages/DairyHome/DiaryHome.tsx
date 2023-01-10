@@ -11,7 +11,7 @@ import { collection, addDoc,getDocs  } from "firebase/firestore";
 import { db } from '../../utils/firebaseConfig';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { getMsgSuccess } from './DiaryHomeSlice';
+import { getMsgStart, addMsgStart } from './DiaryHomeSlice';
 
 interface MyProps {
   [x: string]: any; 
@@ -31,8 +31,9 @@ export default function DairyHome() {
     const distpatch = useDispatch()
 
     const useEffect = React.useEffect(() => {
-      getMessages();
-    }, []);
+      distpatch(getMsgStart())
+      //getMessages();
+    }, [distpatch]);
     
     // const [name, setName] = React.useState('');
     const {state} = useLocation();
@@ -50,17 +51,25 @@ export default function DairyHome() {
             setClicked(false);
             console.log('Missing title or Missing description')
         }else{
-            console.log(title, description);
-            console.log("clicked");   
+            // console.log(title, description);
+            // console.log("clicked");   
             try {
-              const docRef = await addDoc(collection(db, "messages"), {
+
+              const newMsg = {
                 name: state.name,
                 title: title,
                 description: description
+              };
+
+              distpatch(addMsgStart(newMsg))
+              // const docRef = await addDoc(collection(db, "messages"), {
+              //   name: state.name,
+              //   title: title,
+              //   description: description
                 
-              });
-              console.log("Document written with ID: ", docRef.id);
-              getMessages();
+              // });
+              // console.log("Document written with ID: ", docRef.id);
+              // //getMessages();
             } catch (e) {
               console.error("Error adding document: ", e);
             }
@@ -74,19 +83,19 @@ export default function DairyHome() {
 
    
     
-    const getMessages = async () => { 
-      var msgs = [] as any;
-        const querySnapshot = await getDocs(collection(db, "messages"));
-        querySnapshot.forEach((doc) => {
-          let msg = [];
-          msg.push(doc.data().title, doc.data().name, doc.data().description);
-          console.log("msg", msg);
-          msgs.push(msg);
+    // const getMessages = async () => { 
+    //   var msgs = [] as any;
+    //     const querySnapshot = await getDocs(collection(db, "messages"));
+    //     querySnapshot.forEach((doc) => {
+    //       let msg = [];
+    //       msg.push(doc.data().title, doc.data().name, doc.data().description);
+    //       console.log("msg", msg);
+    //       msgs.push(msg);
           
-        });
-        //setMessages(msgs);
-        distpatch(getMsgSuccess(msgs))
-    }
+    //     });
+    //     //setMessages(msgs);
+    //     distpatch(getMsgSuccess(msgs))
+    // }
 
     const messages = useSelector((state: MyProps) => state.message.messages);
 

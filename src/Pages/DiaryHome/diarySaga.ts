@@ -1,20 +1,33 @@
-import { takeEvery, put } from "redux-saga/effects";
-import { getDocs } from "firebase/firestore";
+import { take, takeEvery, put, call, cancelled } from "redux-saga/effects";
+import { onSnapshot } from "firebase/firestore";
 import { diaryCollectionRef } from "../../utils/firestore-collections";
 import { addDoc } from "firebase/firestore";
+import { EventChannel, eventChannel } from "redux-saga";
 
-function* getDiaries(): any {
-  try {
-    const data = yield getDocs(diaryCollectionRef);
-    const diaries = yield data.docs.map(
-      (doc: { id: any; data: () => any }) => ({
+function fetchDiaries() {
+  return eventChannel((emit) => {
+    const unsubscribe = onSnapshot(diaryCollectionRef, (snapshot) => {
+      const diaries = snapshot.docs.map((doc) => ({
         id: doc.id,
         data: doc.data(),
-      })
-    );
-    yield put({ type: "diary/setDiaries", payload: diaries });
-  } catch (error) {
-    yield put({ type: "diary/setDiaries", payload: [] });
+      }));
+      emit(diaries);
+    });
+    return unsubscribe;
+  });
+}
+
+function* getDiaries(): any {
+  const channel: EventChannel<any> = yield call(fetchDiaries);
+  try {
+    while (true) {
+      const diaries = yield take(channel);
+      yield put({ type: "diary/setDiaries", payload: diaries });
+    }
+  } finally {
+    if (yield cancelled()) {
+      channel.close();
+    }
   }
 }
 

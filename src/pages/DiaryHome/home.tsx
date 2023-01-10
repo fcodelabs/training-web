@@ -1,5 +1,5 @@
-import DiaryCard from "./components/diary card/DiaryCard";
-import Navbar from "./components/Navbar/Navbar";
+import DiaryCard from "../../components/diary card/DiaryCard";
+import Navbar from "../../components/Navbar/Navbar";
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -8,67 +8,82 @@ import Button from '@mui/material/Button';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { useEffect, useState } from 'react';
 import { CardContent, Collapse } from '@mui/material';
-import {db} from "./Firebase"
+import {db} from "../../Firebase"
 import { addDoc, collection, doc, getDocs } from "firebase/firestore"; 
 import { useCallback } from 'react'
 import { margin, padding } from "@mui/system/spacing";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { addCardStart, getCardStart, getCardSuccess } from "./DiaryHomeSlice";
 
+interface MyProps {
+  [x: string]: any;
+  title: string;
+  description: string;
+  name: string;
+}
 
 const Home = () => {
     const [title, setSubmitNew] = useState('');
     const [description, setDescription] = useState('');
     const [collapseValue, setCollapse] = useState(false)
-    const [cardContent, setCardContent] = useState([]);
-    const [isRender, setisRender] = useState(false);
+    // const [cardContent, setCardContent] = useState([]);
     const params = useParams();
     const userName = params.userName;
-    const username = useSelector((state: any) => state.user.value.username)
+    const dispatch = useDispatch(); 
 
-    const readData = async() =>{
-      var cardContent = [] as any;
-        const querySnapshot = await getDocs(collection(db, "Card"));
-        querySnapshot.forEach((doc) => {
-        const title = doc.data().title;
-        const description = doc.data().description;
-        const name = doc.data().name;
-        cardContent.push({title, description, name});
-        });
-        setCardContent(cardContent);
-    }    
+    // const readData = async() =>{
+    //   var cardContent = [] as any;
+    //     const querySnapshot = await getDocs(collection(db, "Card"));
+    //     querySnapshot.forEach((doc) => {
+    //     const title = doc.data().title;
+    //     const description = doc.data().description;
+    //     const name = doc.data().name;
+    //     cardContent.push({title, description, name});
+    //     });
+    //     setCardContent(cardContent);
+    //     dispatch(getCardSuccess(cardContent));
+    // }    
 
     useEffect(() => {
-        readData();
-      }, []);
+      console.log('line 50 use effect')
+        dispatch(getCardStart());
+      }, [dispatch]);
 
-      useEffect(() => {
-        readData();
-      }, [isRender]);
+      // useEffect(() => {
+      //   readData();
+      // }, [isRender]);
 
     const handleSubmit = async (e : any) => {
         e.preventDefault();
 
         // Add a new document in collection "Card"
-        try {
-            if(title || description){
-              const docRef = await addDoc(collection(db, "Card"), {
-                description : description,
-                name : userName,
-                title : title
-              });
-              console.log("Document written with ID: ", docRef.id);
-            }else{
-              console.log('plz provide a title or description')
-            }
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
+        // try {
+        //     if(title || description){
+        //       const docRef = await addDoc(collection(db, "Card"), {
+                // description : description,
+                // name : userName,
+                // title : title
+        //       });
+        //       console.log("Document written with ID: ", docRef.id);
+        //     }else{
+        //       console.log('plz provide a title or description')
+        //     }
+        //   } catch (e) {
+        //     console.error("Error adding document: ", e);
+        //   }
+        dispatch(addCardStart({
+          description : description,
+          name : userName,
+          title : title
+        }))
   
         setSubmitNew('');
         setDescription('');
-        setisRender(!isRender)
     }
+
+    const cardContentRedux = useSelector((state: MyProps) => state.card.cards);
+    console.log("line 86 reduxcard ",cardContentRedux);
 
     return ( 
         <>
@@ -126,7 +141,7 @@ const Home = () => {
       
 
         <Grid container spacing={2} sx={{marginLeft:'0.5vw'}}>
-          {cardContent.map((m) => {
+          {cardContentRedux.map((m: { [x: string]: string; }) => {
             return (
               <Grid item xs={12} md={3} >
                 <DiaryCard title={m['title']} name = {m['name']} description={m['description']}/>

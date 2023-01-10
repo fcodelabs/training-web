@@ -9,10 +9,9 @@ import { uniqueNamesGenerator, Config, names } from 'unique-names-generator';
 import { useEffect, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import EastIcon from '@mui/icons-material/East';
-import flowerSvg from './assests/flower.svg';
+import flowerSvg from '../../assests/flower.svg';
 import Item from '@mui/material/ListItem';
 import { useNavigate } from 'react-router-dom';
-import { login } from './store'
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
@@ -20,8 +19,7 @@ const Login = () => {
     const [name, setName] = useState(""); //state for the generated name
     const [initial, setInitial] = useState(true); //state for the initial render
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const username = useSelector((state: any) => state.user.value.username)
+    // const username = useSelector((state: any) => state.user.value.username)
 
     const generateName = () => { //generate random name
         const config: Config = {
@@ -78,7 +76,6 @@ const Login = () => {
 
         <Button 
         onClick={() =>{
-            dispatch(login({username: name}))
             navigate('home/'+name)
         }}
         disabled={(name) ? false : true} color="primary"

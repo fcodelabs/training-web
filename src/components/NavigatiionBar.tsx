@@ -3,11 +3,12 @@ import FullscreenRoundedIcon from "@mui/icons-material/FullscreenRounded";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import Divider from "@mui/material/Divider";
 import SearchBar from "./SearchBar";
+import { createStaticHandler } from "@remix-run/router";
 // import { InputAdornment } from "@mui/material";
 // import SearchIcon from "@mui/icons-material/Search";
 // import {useState} from 'react';
 
-const NavigatiionBar = () => {
+const NavigatiionBar = (props: {handler:any}) => {
   // const [width, setWidth] = useState("235px")
   
   return (
@@ -21,12 +22,22 @@ const NavigatiionBar = () => {
         alignItems="center"
       >
         <Grid item mx={3}>
-          <IconButton>
+          <IconButton title={!props.handler.active ? "Enter to full screen" : "Exit from full screen"}>
             <Badge>
-              <FullscreenRoundedIcon
-                fontSize="large"
-                sx={{ color: "#e3f2fd" }}
-              />
+              {!props.handler.active && (
+                <FullscreenRoundedIcon
+                  fontSize="large"
+                  sx={{ color: "#e3f2fd" }}
+                  onClick={props.handler.enter}
+                />
+              )}
+              {props.handler.active && (
+                <FullscreenRoundedIcon
+                  fontSize="large"
+                  sx={{ color: "#e3f2fd" }}
+                  onClick={props.handler.exit}
+                />
+              )}
             </Badge>
           </IconButton>
         </Grid>
@@ -42,8 +53,8 @@ const NavigatiionBar = () => {
           >
             <Grid item justifyContent="flex-end">
               <SearchBar />
-              
-                {/* <TextField
+
+              {/* <TextField
                   onFocus={()=>{setWidth("500px")}}
                   size="small"
                   placeholder="Search Ui"
@@ -62,7 +73,6 @@ const NavigatiionBar = () => {
                     },
                   }}
                 /> */}
-              
             </Grid>
 
             <Divider

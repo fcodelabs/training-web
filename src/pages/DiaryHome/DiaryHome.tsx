@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavigatiionBar from "../../components/NavigatiionBar";
 import Titlebar from "../../components/Titlebar";
 import Grid from "@mui/material/Grid";
@@ -8,8 +8,10 @@ import ClickAwayListener from "@mui/base/ClickAwayListener";
 import { useLocation } from "react-router";
 import DiaryCard from "../../components/DiaryCard";
 import { UseAppSelector, useAppDispatch } from "../../hooks";
-import { addNewCard, refreshCards } from "./diaryCardSlice";
-import { db } from "../../utils/firebaseConfig";
+import {
+  sendNewCard, getCards
+} from "./diaryCardSlice";
+import { colRef } from '../../utils/firebaseConfig'
 import {
   getFirestore,
   collection,
@@ -17,7 +19,12 @@ import {
   addDoc,
   deleteDoc,
   doc,
+  query,
+  where,
 } from "firebase/firestore";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+
+
 
 const DiaryHome = () => {
   const [title, setTitle] = useState("");
@@ -26,6 +33,8 @@ const DiaryHome = () => {
   const [show, setShow] = useState(false);
   const location = useLocation();
   const subTitle = location.state.name;
+  const handle = useFullScreenHandle();
+  const [fullScreen, setFullScreen] = useState(false);
 
   const diaryCards = UseAppSelector((state) => {
     return state.diaryCard.diaryCards;
@@ -45,8 +54,15 @@ const DiaryHome = () => {
     setShow(true);
   };
 
-  //firebase data
-  const colRef = collection(db, "diary_cards");
+  useEffect(
+    ()=>{
+      dispatch(getCards());
+    },[]
+  );
+
+
+
+  
 
   type DiaryCard = {
     title: string;
@@ -55,26 +71,35 @@ const DiaryHome = () => {
     color: string;
   };
 
-  onSnapshot(colRef, (snapshot) => {
-    let cards: DiaryCard[] = [];
-    snapshot.docs.forEach((doc) => {
-      // books.push({ ...doc.data(), id: doc.id });
-      const temp: DiaryCard = {
-        title: doc.data().title,
-        subTitle: doc.data().subTitle,
-        description: doc.data().description,
-        color: doc.data().color,
-      };
-      cards.push(temp);
-    });
-    console.log(cards);
+
+
+
+  // onSnapshot(colRef, (snapshot) => {
+
+  //   console.log(snapshot.docChanges())
+  //   let cards: DiaryCard[] = [];
+    // snapshot.docs.forEach((doc) => {
+    //   // books.push({ ...doc.data(), id: doc.id });
+    //   const temp: DiaryCard = {
+    //     title: doc.data().title,
+    //     subTitle: doc.data().subTitle,
+    //     description: doc.data().description,
+    //     color: doc.data().color,
+    //   };
+    //   cards.push(temp);
+    // });
+    // console.log(cards);
     // dispatch(refreshCards(cards));
-  });
+  // });
 
   return (
-    <>
+    <FullScreen handle={handle}>
       {/* Navigation bar */}
-      <NavigatiionBar />
+      <NavigatiionBar handler={handle} />
+      {/* {!handle.active && (
+        <button onClick={handle.enter}>Enter fullscreen</button>
+      )}
+      {handle.active && <button onClick={handle.exit}>Enter fullscreen</button>} */}
 
       {/* title bar */}
       <Titlebar />
@@ -127,24 +152,15 @@ const DiaryHome = () => {
                   } else if (description === "") {
                     console.log("Missing description");
                   } else {
-                    // dispatch(
-                    //   addNewCard({
-                    //     title,
-                    //     subTitle,
-                    //     description,
-                    //     color,
-                    //   })
-                    // );
-                    addDoc(colRef, {
-                      title,
-                      subTitle,
-                      description,
-                      color,
-                    }).then(() => {
-                      setDescription("");
-                      setTitle("");
-                      handleClickAway();
-                    });
+                    //add new card
+                    dispatch(
+                      sendNewCard({
+                        title,
+                        subTitle,
+                        description,
+                        color,
+                      })
+                    );
                   }
 
                   setDescription("");
@@ -196,7 +212,7 @@ const DiaryHome = () => {
           );
         })}
       </Grid>
-    </>
+    </FullScreen>
   );
 };
 

@@ -5,3 +5,8 @@ body{
 #dear-diary-link{
   text-decoration: none;
 }
+
+:fullscreen, ::backdrop {
+  background-color:#01B6D7;
+  overflow: auto;
+}

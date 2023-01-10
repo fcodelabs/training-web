@@ -21,3 +21,4 @@ const firebaseConfig = {
 // Initialize Firebase
 export const initializedapp = initializeApp(firebaseConfig);
 export const db = getFirestore();
+export const colRef = collection(db, "diary_cards");

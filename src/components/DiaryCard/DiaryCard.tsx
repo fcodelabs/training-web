@@ -40,8 +40,8 @@ export default function DiaryCard(props : MyProps ) {
                 {props.name}
                 </Typography>
                 {!showMore && <Typography variant="body2" sx={{textAlign: "justify", textJustify: "inter-word"}}>
-                {props.description.length <= 100 ? props.description: (props.description.substr(0, 100) + "...") }
-                {props.description.length > 100 ? <CardActions sx={{paddingLeft: '0px'}} ><Button sx={{padding: '0px'}} size="small" onClick={handleClick}>Show More</Button>  </CardActions>: null}
+                {props.description ?.length <= 100 ? props.description: (props.description ?.substr(0, 100) + "...") }
+                {props.description ?.length > 100 ? <CardActions sx={{paddingLeft: '0px'}} ><Button sx={{padding: '0px'}} size="small" onClick={handleClick}>Show More</Button>  </CardActions>: null}
                 </Typography>}
 
                 {showMore && <Typography variant="body2" sx={{textAlign: "justify", textJustify: "inter-word"}}>

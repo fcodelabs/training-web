@@ -11,7 +11,7 @@ const persistConfig = {
   version: 1,
   storage,
 };
-// create the saga middleware
+
 const sagaMiddleware = createSagaMiddleware()
 
 const rootReducer = combineReducers({

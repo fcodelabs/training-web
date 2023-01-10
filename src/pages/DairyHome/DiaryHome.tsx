@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -27,18 +27,15 @@ export default function DairyHome() {
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [clicked, setClicked] = React.useState(false);
-    //const [messages, setMessages] = React.useState([]); 
     const distpatch = useDispatch()
-
-    const useEffect = React.useEffect(() => {
+    const messages = useSelector((state: MyProps) => state.message.messages);
+    useEffect(() => {
       distpatch(getMsgStart())
       //getMessages();
     }, [distpatch]);
     
-    // const [name, setName] = React.useState('');
+ 
     const {state} = useLocation();
-    const name = state.name;
-
     const handleTouch = (event: any) => {
         event.preventDefault();
         setTouched(true);
@@ -50,9 +47,7 @@ export default function DairyHome() {
         if (title == '' || description == ''){
             setClicked(false);
             console.log('Missing title or Missing description')
-        }else{
-            // console.log(title, description);
-            // console.log("clicked");   
+        }else{ 
             try {
 
               const newMsg = {
@@ -62,44 +57,15 @@ export default function DairyHome() {
               };
 
               distpatch(addMsgStart(newMsg))
-              // const docRef = await addDoc(collection(db, "messages"), {
-              //   name: state.name,
-              //   title: title,
-              //   description: description
-                
-              // });
-              // console.log("Document written with ID: ", docRef.id);
-              // //getMessages();
             } catch (e) {
               console.error("Error adding document: ", e);
             }
                
             setClicked(true);
         }
-        // getMessages();
         setTitle('');
         setDescription('');
     }
-
-   
-    
-    // const getMessages = async () => { 
-    //   var msgs = [] as any;
-    //     const querySnapshot = await getDocs(collection(db, "messages"));
-    //     querySnapshot.forEach((doc) => {
-    //       let msg = [];
-    //       msg.push(doc.data().title, doc.data().name, doc.data().description);
-    //       console.log("msg", msg);
-    //       msgs.push(msg);
-          
-    //     });
-    //     //setMessages(msgs);
-    //     distpatch(getMsgSuccess(msgs))
-    // }
-
-    const messages = useSelector((state: MyProps) => state.message.messages);
-
-        
 
 
     return (
@@ -182,11 +148,7 @@ export default function DairyHome() {
                 )})}
        
        </Grid>  
-    
         </div> 
-
-       {/* <>{messages.map(({title, name, description}: any) => {<DiaryCard title={title} description={description} name={name}  />})}</> */}
-       
         </div>
             
         

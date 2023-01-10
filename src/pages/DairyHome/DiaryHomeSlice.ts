@@ -36,7 +36,6 @@ const messageSlice = createSlice({
     addMsgSuccess: (state, action) => {
       state.isFetching = false;
       state.error = false;
-     // console.log(action.payload);
       state.messages.push(action.payload);
     },
     addMsgFailure: (state) => {

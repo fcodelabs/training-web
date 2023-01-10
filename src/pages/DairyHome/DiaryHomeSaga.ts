@@ -1,8 +1,7 @@
 import { put, takeEvery, all } from "redux-saga/effects";
-import { addMsgFailure, addMsgSuccess, getMsgFailure, getMsgSuccess } from "./DiaryHomeSlice";
+import { addDiaryCardFailure, addDiaryCardSuccess, getDiaryCardFailure, getDiaryCardSuccess } from "./DiaryHomeSlice";
 import {addDoc, collection,getDocs} from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
-
 
 const getMessages = async () => {
   try {
@@ -12,7 +11,6 @@ const getMessages = async () => {
           let msg = [];
           msg.push(doc.data().title, doc.data().name, doc.data().description);
           msgs.push(msg);
-          
         });
         return msgs
         
@@ -22,19 +20,19 @@ const getMessages = async () => {
   }
 };
 
-const postNewMessage = async (newMsg: {
+const addNewMessage = async (newMessage: {
   name: string;
   title: string;
   description: string;
 }) => {
   try {
     const docRef = await addDoc(collection(db, "messages"), {
-      name: newMsg.name,
-      title: newMsg.title,
-      description: newMsg.description,
+      name: newMessage.name,
+      title: newMessage.title,
+      description: newMessage.description,
     });
     console.log("Document written with ID: ", docRef.id);
-    const returnMsg = [ newMsg.title, newMsg.name, newMsg.description];
+    const returnMsg = [ newMessage.title, newMessage.name, newMessage.description];
     return returnMsg;
   } catch (error) {
     console.log(error);
@@ -42,35 +40,33 @@ const postNewMessage = async (newMsg: {
   }
 };
 
-function* fetchMessages(): any {
+function* getAllMessages(): any {
   try {
     const msgs = yield getMessages();
     console.log(msgs)
-    yield put(getMsgSuccess(msgs));
+    yield put(getDiaryCardSuccess(msgs));
   } catch (e) {
-    yield put(getMsgFailure());
+    yield put(getDiaryCardFailure());
   }
 }
 
-function* addNewMessageSaga(action: any) {
+function* addMessage(action: any) {
   try {
-    const msg : [] = yield postNewMessage(action.payload);
-    yield put(addMsgSuccess(msg));
+    const msg : [] = yield addNewMessage(action.payload);
+    yield put(addDiaryCardSuccess(msg));
   } catch (e) {
-    yield put(addMsgFailure());
+    yield put(addDiaryCardFailure());
   }
 }
 
-function* messageSaga() {
-  yield takeEvery("message/getMsgStart", fetchMessages);
+function* getMessageSaga() {
+  yield takeEvery("message/getDiaryCards", getAllMessages);
 }
 
-function* NewMessage() {
-  yield takeEvery("message/addMsgStart", addNewMessageSaga);
+function* AddMessageSaga() {
+  yield takeEvery("message/addDiaryCard", addMessage);
 }
 
-// notice how we now only export the rootSaga
-// single entry point to start all Sagas at once
 export default function* rootSaga() {
-  yield all([messageSaga(), NewMessage()]);
+  yield all([getMessageSaga(), AddMessageSaga()]);
 }

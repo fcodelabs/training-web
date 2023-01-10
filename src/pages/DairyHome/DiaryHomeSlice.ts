@@ -18,33 +18,33 @@ const messageSlice = createSlice({
     error: false,
   },
   reducers: {
-    getMsgStart: (state) => {
+    getDiaryCards: (state) => {
       state.isFetching = true;
     },
-    getMsgSuccess: (state, action) => {
+    getDiaryCardSuccess: (state, action) => {
       state.isFetching = false;
       state.messages = action.payload;
       state.error = false;
     },
-    getMsgFailure: (state) => {
+    getDiaryCardFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
-    addMsgStart: (state, action) => {
+    addDiaryCard: (state, action) => {
       state.isFetching = true;
     },
-    addMsgSuccess: (state, action) => {
+    addDiaryCardSuccess: (state, action) => {
       state.isFetching = false;
-      state.error = false;
       state.messages.push(action.payload);
+      state.error = false; 
     },
-    addMsgFailure: (state) => {
+    addDiaryCardFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
   },
 });
 
-export const { getMsgStart, getMsgSuccess, getMsgFailure, addMsgStart,addMsgFailure,addMsgSuccess } =
+export const { getDiaryCards, getDiaryCardSuccess, getDiaryCardFailure, addDiaryCard,addDiaryCardFailure,addDiaryCardSuccess } =
   messageSlice.actions;
 export default messageSlice.reducer;

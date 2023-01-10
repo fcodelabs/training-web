@@ -7,11 +7,9 @@ import "./DiaryHome.css";
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { Grid } from '@mui/material';
 import DiaryCard from '../../components/DiaryCard/DiaryCard';
-import { collection, addDoc,getDocs  } from "firebase/firestore"; 
-import { db } from '../../utils/firebaseConfig';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { getMsgStart, addMsgStart } from './DiaryHomeSlice';
+import { getDiaryCards, addDiaryCard } from './DiaryHomeSlice';
 
 interface MyProps {
   [x: string]: any; 
@@ -26,12 +24,10 @@ export default function DairyHome() {
     const [touched, setTouched] = React.useState(false);
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
-    const [clicked, setClicked] = React.useState(false);
     const distpatch = useDispatch()
     const messages = useSelector((state: MyProps) => state.message.messages);
     useEffect(() => {
-      distpatch(getMsgStart())
-      //getMessages();
+      distpatch(getDiaryCards())
     }, [distpatch]);
     
  
@@ -44,24 +40,26 @@ export default function DairyHome() {
     const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => { 
         event.preventDefault();
         setTouched(false);
-        if (title == '' || description == ''){
-            setClicked(false);
-            console.log('Missing title or Missing description')
+        if (title === '' && description === ''){
+            console.log('Missing title and Missing description')
+
+        } else if (title === '' && description !== ''){
+            console.log('Missing title')
+
+        } else if (description === '' && title !== ''){
+            console.log('Missing Description')
         }else{ 
             try {
-
-              const newMsg = {
+              const newMessage = {
                 name: state.name,
                 title: title,
                 description: description
               };
-
-              distpatch(addMsgStart(newMsg))
+              distpatch(addDiaryCard(newMessage))
             } catch (e) {
               console.error("Error adding document: ", e);
             }
                
-            setClicked(true);
         }
         setTitle('');
         setDescription('');

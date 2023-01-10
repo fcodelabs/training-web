@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -63,7 +64,7 @@ export default function SearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <FullscreenIcon/>
           </IconButton>
           <Typography
             variant="h6"

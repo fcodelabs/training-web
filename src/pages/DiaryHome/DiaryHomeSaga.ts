@@ -19,7 +19,7 @@ interface cardData {
 }
 
 const getCards = async () => {
-
+  console.log('line 22')
   return eventChannel(emitter => {
     const q = query(collection(db, "Card"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -32,6 +32,7 @@ const getCards = async () => {
     
           temp.push({ name, title, description });
         });
+        console.log('line 35 '+temp)
         emitter(temp)
     });
     return unsubscribe;
@@ -98,6 +99,7 @@ function* fetchCards(): any {
   try {
     while(true){
       let crds: cardData[] = yield take(chan);
+      console.log('line 102 '+crds);
       yield put(getCardSuccess(crds));
     }
     // const crds = yield getCards();

@@ -95,19 +95,20 @@ const Home = () => {
                 <Grid item xs={10} >
 
                 <TextField 
-                sx={{
-                  paddingBottom: "0",
-                  '& label': { paddingLeft: (theme) => theme.spacing(2) },
-                  '& input': { paddingLeft: (theme) => theme.spacing(3.5) },
-                  '& fieldset': {
+                // sx={{
+                //   paddingBottom: "0",
+                //   '& label': { paddingLeft: (theme) => theme.spacing(2) },
+                //   '& input': { paddingLeft: (theme) => theme.spacing(3.5), color: 'red' },
+                //   '& fieldset': {
                     
-                    borderRadius: '30px',
-                    border: 'none',
-                    backgroundColor: '#F0f8FF',
-                    width: '100%',
-                    marginRight: '2vw',
-                  },
-                }}
+                //     borderRadius: '30px',
+                //     border: 'none',
+                //     backgroundColor: '#ADD8E6',
+                //     width: '100%',
+                //     marginRight: '2vw',
+                //     color: 'black',
+                //   },
+                // }}
   
                 style={{width:'100%', margin:'1%'}} id="outlined-basic"
                 label="Submit New" value={title}

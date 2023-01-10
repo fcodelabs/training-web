@@ -11,7 +11,7 @@ import { collection, addDoc,getDocs  } from "firebase/firestore";
 import { db } from '../../utils/firebaseConfig';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { getMsgSuccess } from './DiaryHomeSlice';
+import { getMessageSuccess } from './DiaryHomeSlice';
 
 interface MyProps {
   [x: string]: any; 
@@ -27,14 +27,12 @@ export default function DairyHome() {
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [clicked, setClicked] = React.useState(false);
-    //const [messages, setMessages] = React.useState([]); 
     const distpatch = useDispatch()
 
     const useEffect = React.useEffect(() => {
       getMessages();
     }, []);
     
-    // const [name, setName] = React.useState('');
     const {state} = useLocation();
     const name = state.name;
 
@@ -67,7 +65,6 @@ export default function DairyHome() {
                
             setClicked(true);
         }
-        // getMessages();
         setTitle('');
         setDescription('');
     }
@@ -84,8 +81,7 @@ export default function DairyHome() {
           msgs.push(msg);
           
         });
-        //setMessages(msgs);
-        distpatch(getMsgSuccess(msgs))
+        distpatch(getMessageSuccess(msgs))
     }
 
     const messages = useSelector((state: MyProps) => state.message.messages);
@@ -175,8 +171,6 @@ export default function DairyHome() {
        </Grid>  
     
         </div> 
-
-       {/* <>{messages.map(({title, name, description}: any) => {<DiaryCard title={title} description={description} name={name}  />})}</> */}
        
         </div>
             

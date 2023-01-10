@@ -9,43 +9,17 @@ interface MyProps {
 var temp: MyProps[];
 temp = [];
 
-
 const messageSlice = createSlice({
   name: "message",
   initialState: {
-    messages: temp,
-    isFetching: false,
-    error: false,
+    messages: temp
   },
   reducers: {
-    getMsgStart: (state) => {
-      state.isFetching = true;
-    },
-    getMsgSuccess: (state, action) => {
-      state.isFetching = false;
+    getMessageSuccess: (state, action) => {
       state.messages = action.payload;
-      state.error = false;
-    },
-    getMsgFailure: (state) => {
-      state.isFetching = false;
-      state.error = true;
-    },
-    addMsgStart: (state, action) => {
-      state.isFetching = true;
-    },
-    addMsgSuccess: (state, action) => {
-      state.isFetching = false;
-      state.error = false;
-     // console.log(action.payload);
-      state.messages.push(action.payload);
-    },
-    addMsgFailure: (state) => {
-      state.isFetching = false;
-      state.error = true;
-    },
+    }
   },
 });
 
-export const { getMsgStart, getMsgSuccess, getMsgFailure, addMsgStart,addMsgFailure,addMsgSuccess } =
-  messageSlice.actions;
+export const { getMessageSuccess } = messageSlice.actions;
 export default messageSlice.reducer;

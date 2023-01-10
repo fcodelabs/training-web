@@ -25,10 +25,7 @@ const DieryHome: FC = () => {
 
     useEffect(() => {
         document.title = 'Dear Diary - Home Page';
-        // add listener
-        onSnapshot(collection(db, "Cards"), () => {
-            dispatch(fetchCardList())
-        })
+        dispatch(fetchCardList())
     }, []);
 
     const handleSubmit = async (event: FormEvent<HTMLButtonElement>): Promise<void> => {
@@ -123,6 +120,7 @@ const DieryHome: FC = () => {
 
         <Grid container className={"diary-card-view"} columnSpacing={2} rowSpacing={2}>
             {
+
                 cards.map((value, key)=>(
                     <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={key}>
                         <DiaryCard

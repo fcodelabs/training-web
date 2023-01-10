@@ -1,21 +1,21 @@
 import React from 'react';
-import Login from './Login';
+import Login from './pages/SignInPage/Login';
 import Box from "@mui/material/Box";
 import { Grid } from '@mui/material';
-import Home from './home';
+import Home from './pages/DiaryHome/home';
+import { Routes, Route} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 function App() {
   return (
     <div>
-      {/* <Box
-  display="flex"
-  justifyContent="center"
-  alignItems="center"
-  minHeight="100vh"
->
-  <Login/>
-</Box> */}
-<Home/>
+        <Routes>
+          <Route path='/' element={<Login/>}/>
+          <Route path='home' element={<Home/>}>
+            <Route path=':userName' element={<Home/>}/>
+          </Route>
+        </Routes>
     </div>
   );
 }

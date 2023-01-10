@@ -6,45 +6,45 @@ interface MyProps {
   description : string 
 }
   
-var temp: MyProps[];
-temp = [];
+var msg: MyProps[];
+msg = [];
 
 
-const messageSlice = createSlice({
+const diaryHomeSlice = createSlice({
   name: "message",
   initialState: {
-    messages: temp,
-    isFetching: false,
+    messages: msg,
+    isLoading: false,
     error: false,
   },
   reducers: {
     getDiaryCards: (state) => {
-      state.isFetching = true;
+      state.isLoading = true;
     },
     getDiaryCardSuccess: (state, action) => {
-      state.isFetching = false;
+      state.isLoading = false;
       state.messages = action.payload;
       state.error = false;
     },
     getDiaryCardFailure: (state) => {
-      state.isFetching = false;
+      state.isLoading = false;
       state.error = true;
     },
     addDiaryCard: (state, action) => {
-      state.isFetching = true;
+      state.isLoading = true;
     },
     addDiaryCardSuccess: (state, action) => {
-      state.isFetching = false;
+      state.isLoading = false;
       state.messages.push(action.payload);
       state.error = false; 
     },
     addDiaryCardFailure: (state) => {
-      state.isFetching = false;
+      state.isLoading = false;
       state.error = true;
     },
   },
 });
 
 export const { getDiaryCards, getDiaryCardSuccess, getDiaryCardFailure, addDiaryCard,addDiaryCardFailure,addDiaryCardSuccess } =
-  messageSlice.actions;
-export default messageSlice.reducer;
+diaryHomeSlice.actions;
+export default diaryHomeSlice.reducer;

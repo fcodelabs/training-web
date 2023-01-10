@@ -1,23 +1,23 @@
-import { put, takeEvery, all } from "redux-saga/effects";
+import { put, takeEvery, all, call, take, cancelled } from "redux-saga/effects";
 import { addDiaryCardFailure, addDiaryCardSuccess, getDiaryCardFailure, getDiaryCardSuccess } from "./DiaryHomeSlice";
-import {addDoc, collection,getDocs} from "firebase/firestore";
+import {addDoc, collection,getDocs,query,onSnapshot} from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
+import { EventChannel, eventChannel } from "redux-saga";
 
 const getMessages = async () => {
-  try {
+  return eventChannel(emitter => {
     var msgs = [] as any;
-        const querySnapshot = await getDocs(collection(db, "messages"));
+    const qry = query(collection(db, "messages"));
+    const unsubscribe = onSnapshot(qry, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
           let msg = [];
           msg.push(doc.data().title, doc.data().name, doc.data().description);
           msgs.push(msg);
         });
-        return msgs
-        
-  } catch (e) {
-    console.error("Error adding document: ", e);
-    return e;
-  }
+        emitter(msgs)
+    });
+    return unsubscribe;
+    })
 };
 
 const addNewMessage = async (newMessage: {
@@ -41,12 +41,17 @@ const addNewMessage = async (newMessage: {
 };
 
 function* getAllMessages(): any {
+  const chan: EventChannel<any> = yield call(getMessages);
   try {
-    const msgs = yield getMessages();
-    console.log(msgs)
-    yield put(getDiaryCardSuccess(msgs));
-  } catch (e) {
-    yield put(getDiaryCardFailure());
+    while(true){
+      let msgs = yield take(chan);
+      yield put(getDiaryCardSuccess(msgs));
+    }
+    } finally {
+    let val: boolean = yield cancelled()
+    if(val){
+        chan.close()
+    }
   }
 }
 

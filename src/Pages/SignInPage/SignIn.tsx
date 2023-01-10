@@ -6,6 +6,7 @@ import ArrowForward from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import { login } from "../DiaryHome/userRedux";
 import { useDispatch } from "react-redux/es/exports";
+import cloudImage from "../Images/clouds.jpg";
 
 function SignIn() {
   const [nickname, setNickname] = useState("");
@@ -35,7 +36,7 @@ function SignIn() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundImage: `url("https://img.freepik.com/free-photo/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-71554.jpg?w=1060&t=st=1672743749~exp=1672744349~hmac=7abe054ff9ed4063b56bd8090a73e0014095fe7f96078bca1fe2fe4e47b88134)`,
+        backgroundImage: `url(${cloudImage})`,
       }}
     >
       <Paper sx={{ width: "45%", p: 3, borderRadius: 3 }}>

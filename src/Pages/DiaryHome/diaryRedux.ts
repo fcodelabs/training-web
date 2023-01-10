@@ -19,7 +19,7 @@ export const diaryslice = createSlice({
     },
 
     updateDiaries: (state, action) => {
-      state.diaries = [action.payload, ...state.diaries];
+      state.diaries = [...state.diaries];
     },
   },
 });

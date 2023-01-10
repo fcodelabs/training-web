@@ -49,6 +49,17 @@ function AddCard() {
               variant="outlined"
               fullWidth
               sx={{
+                width: !expand ? "50%" : "100%",
+                paddingBottom: "0",
+                "& label": { paddingLeft: (theme) => theme.spacing(2) },
+                "& input": { paddingLeft: (theme) => theme.spacing(3.5) },
+                "& fieldset": {
+                  borderRadius: "30px",
+                  border: "none",
+                  backgroundColor: "#9971E14D",
+                  width: "100%",
+                  marginRight: "2vw",
+                },
                 m: 1,
                 ml: 3,
               }}
@@ -60,7 +71,7 @@ function AddCard() {
             {expand && (
               <Button
                 variant="contained"
-                sx={{ m: 1, ml: 3 }}
+                sx={{ m: 1, ml: 5, borderRadius: "30px" }}
                 onClick={(e) => handleSubmit(e)}
               >
                 Submit
@@ -78,7 +89,21 @@ function AddCard() {
               multiline
               rows={4}
               fullWidth
-              sx={{ borderRadius: 10, m: 1, ml: 5, mr: 15 }}
+              sx={{
+                paddingBottom: "0",
+                "& label": { paddingLeft: (theme) => theme.spacing(2) },
+                "& input": { paddingLeft: (theme) => theme.spacing(3.5) },
+                "& fieldset": {
+                  borderRadius: "30px",
+                  border: "none",
+                  backgroundColor: "#9971E14D",
+                  width: "100%",
+                  marginRight: "2vw",
+                },
+                m: 1,
+                ml: 5,
+                mr: 15,
+              }}
             />
           )}
         </Grid>

@@ -1,12 +1,16 @@
-import { put, takeEvery, all } from "redux-saga/effects";
+import { call, take, cancelled, put, takeEvery, all } from "redux-saga/effects";
 import { addCardFailure, addCardSuccess, getCardFailure, getCardSuccess } from "./DiaryHomeSlice";
 // Add a second document with a generated ID.
 import {
   addDoc,
   collection,
   getDocs,
+  query,
+  onSnapshot
 } from "firebase/firestore";
 import { db } from "../../Firebase";
+import { EventChannel, eventChannel } from "redux-saga";
+
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 interface cardData {
   name: string;
@@ -15,25 +19,46 @@ interface cardData {
 }
 
 const getCards = async () => {
-  try {
-    const querySnapshot = await getDocs(collection(db, "Card"));
-    var temp: cardData[];
-    temp = [];
-    querySnapshot.forEach((doc) => {
-     // console.log(`${doc.id} => ${doc.data().name}`);
-      const name = doc.data().name;
-      const title = doc.data().title;
-      const description = doc.data().description;
 
-      temp.push({ name, title, description });
+  return eventChannel(emitter => {
+    const q = query(collection(db, "Card"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        var temp: cardData[];
+        temp = [];
+        querySnapshot.forEach((doc) => {
+          const name = doc.data().name;
+          const title = doc.data().title;
+          const description = doc.data().description;                  
+    
+          temp.push({ name, title, description });
+        });
+        emitter(temp)
     });
-    return temp;
-    //  distpatch(getMsgSuccess(temp));
-  } catch (e) {
-    console.error("Error adding document: ", e);
-    return e;
-  }
-};
+    return unsubscribe;
+    }
+)
+
+
+  // try {
+  //   const querySnapshot = await getDocs(collection(db, "Card"));
+  //   var temp: cardData[];
+  //   temp = [];
+  //   querySnapshot.forEach((doc) => {
+  //    // console.log(`${doc.id} => ${doc.data().name}`);
+      // const name = doc.data().name;
+      // const title = doc.data().title;
+      // const description = doc.data().description;
+
+      // temp.push({ name, title, description });
+  //   });
+  //   return temp;
+  //   //  distpatch(getMsgSuccess(temp));
+  // } catch (e) {
+  //   console.error("Error adding document: ", e);
+  //   return e;
+  // }
+
+}
     // const readData = async() =>{
     //   var cardContent = [] as any;
     //     const querySnapshot = await getDocs(collection(db, "Card"));
@@ -69,11 +94,20 @@ const postNewCard = async (newCard: {
 };
 
 function* fetchCards(): any {
+  const chan: EventChannel<cardData[]> = yield call(getCards);
   try {
-    const crds = yield getCards();
-    yield put(getCardSuccess(crds));
-  } catch (e) {
-    yield put(getCardFailure());
+    while(true){
+      let crds: cardData[] = yield take(chan);
+      yield put(getCardSuccess(crds));
+    }
+    // const crds = yield getCards();
+    // yield put(getCardSuccess(crds));
+  } finally {
+    let val: boolean = yield cancelled()
+    if(val){
+        chan.close()
+       }
+    // yield put(getCardFailure());
   }
 }
 //addMsgSucces

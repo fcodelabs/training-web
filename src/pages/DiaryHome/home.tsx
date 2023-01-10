@@ -95,8 +95,22 @@ const Home = () => {
                 <Grid item xs={10} >
 
                 <TextField 
+                sx={{
+                  paddingBottom: "0",
+                  '& label': { paddingLeft: (theme) => theme.spacing(2) },
+                  '& input': { paddingLeft: (theme) => theme.spacing(3.5) },
+                  '& fieldset': {
+                    
+                    borderRadius: '30px',
+                    border: 'none',
+                    backgroundColor: '#F0f8FF',
+                    width: '100%',
+                    marginRight: '2vw',
+                  },
+                }}
+  
                 style={{width:'100%', margin:'1%'}} id="outlined-basic"
-                label="Submit New" variant="filled" value={title}
+                label="Submit New" value={title}
                 onChange={(e) => setSubmitNew(e.target.value)}
                 onFocus={ e => setCollapse(true)} 
                 onBlur={e => setCollapse(false)}

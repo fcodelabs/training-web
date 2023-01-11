@@ -26,7 +26,7 @@ function* getDiaries(): any {
     }
   } finally {
     if (yield cancelled()) {
-      channel.close();
+      yield channel.close();
     }
   }
 }

@@ -11,7 +11,13 @@ export const diaryslice = createSlice({
     },
 
     setDiaries: (state, action) => {
-      state.diaries = action.payload;
+      const diaries = action.payload.filter((diary: any) => {
+        const inDiaries = state.diaries.find(
+          (diaryInState: any) => diaryInState.id === diary.id
+        );
+        return !inDiaries;
+      });
+      state.diaries = [...state.diaries, ...diaries];
     },
 
     callUpdateDiary: (state, action) => {

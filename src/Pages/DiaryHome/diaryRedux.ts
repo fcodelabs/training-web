@@ -19,7 +19,12 @@ export const diaryslice = createSlice({
     },
 
     updateDiaries: (state, action) => {
-      state.diaries = [...state.diaries];
+      const inDiaries = state.diaries.find(
+        (diary: any) => diary.id === action.payload.id
+      );
+      if (!inDiaries) {
+        state.diaries.push(action.payload);
+      }
     },
   },
 });

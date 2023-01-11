@@ -37,7 +37,7 @@ function Home() {
               fontWeight: "bold",
               color: "white",
               marginLeft: "20px",
-              marginTop: "60px",
+              marginTop: "90px",
             }}
           >
             Home

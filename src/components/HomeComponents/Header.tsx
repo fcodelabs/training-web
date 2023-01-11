@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import PersonIcon from "@mui/icons-material/Person";
+import { IconButton } from "@mui/material";
 
 interface Props {
   handle: any;
@@ -28,18 +29,18 @@ function Header(props: Props) {
         zIndex: "1",
       }}
     >
-      <button
+      <IconButton
         onClick={() => {
           handleClick(props.handle);
         }}
         title={fullScreen ? "Exit Full Screen" : "Enter Full Screen"}
       >
         <CropFreeIcon fontSize="large" sx={{ p: 1 }} />
-      </button>
+      </IconButton>
 
-      <button title="Profile" style={{ float: "right" }}>
+      <IconButton title="Profile" style={{ float: "right" }}>
         <PersonIcon fontSize="large" sx={{ p: 1 }} />
-      </button>
+      </IconButton>
     </div>
   );
   //not implement

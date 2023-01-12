@@ -17,6 +17,7 @@ export default function Login() {
   const [nickName, setNickName] = React.useState("");
   const [focused, setFocus] = React.useState(false);
   const distpatch = useDispatch();
+
   const customConfig: Config = {
     dictionaries: [adjectives, colors],
     separator: "-",
@@ -65,6 +66,59 @@ export default function Login() {
           borderRadius: "20px",
         }}
       >
+        <Grid
+          container
+          spacing={1}
+          width="240px"
+          sx={{
+            display: {
+              xs: "none",
+              md: "flex",
+              xl: "flex",
+            },
+
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Grid item xs={12} sm={6} >
+            <Typography>
+              {" "}
+              <Box
+                component="img"
+                sx={{
+                  height: 70,
+                  width: 70,
+                }}
+                alt="pen icon"
+                src="https://firebasestorage.googleapis.com/v0/b/dailydiary-96e2f.appspot.com/o/pen.gif?alt=media&token=cd73cc1e-8101-4f51-97ae-4ff47806027d"
+              />
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography
+              variant="h5"
+              sx={{
+                color: "blue",
+                fontFamily: "Raleway",
+              }}
+            >
+              Dear Diary
+            </Typography>
+          </Grid>
+        </Grid>
+        <Typography
+          sx={{
+            color: "blue",
+            fontFamily: "Raleway",
+            display: {
+              md: "none",
+              xl: "none",
+            },
+          }}
+        >
+          Dear Diary
+        </Typography>
         <Typography variant="h3" sx={{ color: "blue" }}>
           Sign In
         </Typography>

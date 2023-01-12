@@ -10,7 +10,7 @@ export default function HomePage() {
 const handle = useFullScreenHandle();
   return (
  <FullScreen handle={handle}>
-    <Box >
+    <Box sx={{backgroudcolour:"blue"}}>
       <NavBar handle={handle}/>
       <Box sx={{ height: "60px" }}></Box>
       <Form fullText={fullText} setFullText={setFullText}/>

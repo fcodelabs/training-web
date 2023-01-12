@@ -1,13 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { msgData } from "../../helpers/Interfaces";
 
-interface msgData {
-  Id: string;
-  name: string;
-  title: string;
-  description: string;
-  colour: string;
-  time: Date;
-}
+
 var temp: msgData[];
 temp = [];
 

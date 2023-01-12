@@ -7,20 +7,24 @@ import { Collapse, IconButton } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 
+
+
+export default function Card(_props: {
+  name: string;
+  description: string;
+  title: string;
+  colour:string;
+}) {
+  const [fullText, setFullText] = React.useState(false);
+
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: _props.colour,
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
 
-export default function Card(_props: {
-  name: string;
-  description: string;
-  title: string;
-}) {
-  const [fullText, setFullText] = React.useState(false);
   return (
     <Grid item xs={2} sm={4} md={4}>
       <Collapse in={fullText} collapsedSize={150}>

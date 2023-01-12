@@ -3,11 +3,10 @@ import "./App.css";
 import HomePage from "./pages/DiaryHome/HomePage";
 import Login from "./pages/SigninPage/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { userState } from "./helpers/Interfaces";
 
 function App() {
-  interface userState {
-    user: { currentUser: any; isFetching: any; error: any };
-  }
+ 
   const user = useSelector((state: userState) => state.user);
   return (
     <BrowserRouter>

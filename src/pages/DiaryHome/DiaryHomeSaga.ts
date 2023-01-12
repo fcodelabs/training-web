@@ -1,10 +1,5 @@
-import { put, takeEvery, all, call, take, cancelled } from "redux-saga/effects";
-import {
-  addMsgFailure,
-  addMsgSuccess,
-  getMsgFailure,
-  getMsgSuccess,
-} from "./DiaryHomeSlice";
+import { put, takeEvery, all, call, take, cancelled, takeLatest } from "redux-saga/effects";
+import { addMsgFailure, getMsgFailure, getMsgSuccess } from "./DiaryHomeSlice";
 // Add a second document with a generated ID.
 import {
   addDoc,
@@ -15,7 +10,7 @@ import {
   query,
 } from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
-import { eventChannel,EventChannel } from "redux-saga";
+import { eventChannel, EventChannel } from "redux-saga";
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 interface msgData {
   Id: string;
@@ -84,7 +79,7 @@ const postNewMessage = async (newMsg: {
       name: newMsg.name,
       title: newMsg.title,
       description: newMsg.description,
-      colour: "test",
+      colour: "#fff",
       time: date,
     });
     console.log("Document written with ID: ", docRef.id);
@@ -106,26 +101,25 @@ function* fetchMessages(): any {
   }
 }
 
- function*  fetchMessagesList() {
-    const chan: EventChannel<msgData[]> = yield call(getcards);
-    try{
-        while (true) {
-            let cards: msgData[] = yield take(chan)
-            yield put(getMsgSuccess(cards));
-        }
-    }finally {
-        let val: boolean = yield cancelled()
-        if(val){
-            chan.close()
-        }
+function* fetchMessagesList() {
+  const chan: EventChannel<msgData[]> = yield call(getcards);
+  try {
+    while (true) {
+      let cards: msgData[] = yield take(chan);
+      yield put(getMsgSuccess(cards));
     }
+  } finally {
+    if (yield cancelled()) {
+      chan.close();
+    }
+  }
 }
 
 //addMsgSucces
 function* addNewMessageSaga(action: any) {
   try {
     const msg = yield postNewMessage(action.payload);
-   // yield put(addMsgSuccess(msg));
+    // yield put(addMsgSuccess(msg));
   } catch (e) {
     yield put(addMsgFailure());
   }
@@ -139,7 +133,7 @@ function* messageSaga() {
 }
 // eslint-disable-next-line require-yield
 function* NewMessage() {
-  yield takeEvery("message/addMsgStart", addNewMessageSaga);
+  yield takeLatest("message/addMsgStart", addNewMessageSaga);
 }
 
 // notice how we now only export the rootSaga

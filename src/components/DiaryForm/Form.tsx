@@ -6,6 +6,7 @@ import { Button, Collapse } from "@mui/material";
 import Textarea from "@mui/joy/Textarea";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { addMsgStart } from "../../pages/DiaryHome/DiaryHomeSlice";
+import { msgState, userState } from "../../helpers/Interfaces";
 
 export default function Form(_props: {
   fullText: boolean;
@@ -18,11 +19,8 @@ export default function Form(_props: {
 
   const distpatch = useDispatch();
 
-  interface userState {
-    user: { currentUser: any; isFetching: any; error: any };
-  }
-
   const user = useSelector((state: userState) => state.user);
+  const isFetching = useSelector((state: msgState) => state.message.isFetching);
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -94,7 +92,7 @@ export default function Form(_props: {
               variant="contained"
               onClick={handleSubmit}
               // eslint-disable-next-line eqeqeq
-              disabled={description == "" || title == "" ? true : false}
+              disabled={description == "" || title == "" || isFetching ? true : false}
             >
               Submit
             </Button>
@@ -135,7 +133,7 @@ export default function Form(_props: {
           variant="contained"
           onClick={handleSubmit}
           // eslint-disable-next-line eqeqeq
-          disabled={description === "" || title === "" ? true : false}
+          disabled={description === "" || title === "" || isFetching ? true : false}
         >
           Submit
         </Button>

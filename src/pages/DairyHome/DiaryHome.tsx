@@ -29,7 +29,7 @@ export default function DairyHome() {
     
     useEffect(() => {
       distpatch(getDiaryCards())
-    }, [distpatch]);
+    }, []);
     
  
     const {state} = useLocation();

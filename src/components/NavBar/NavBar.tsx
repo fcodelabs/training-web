@@ -61,7 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar(_props: { handle: any }) {
   const distpatch = useDispatch();
-  console.log(_props.handle.active);
+  //console.log(_props.handle.active);
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     distpatch(logout());

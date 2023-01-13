@@ -22,12 +22,14 @@ function AddCard() {
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (!title || !description) {
       console.log("Please fill all the fields");
       return;
     }
     dispatch(callUpdateDiary({ name, title, description }));
+    setTitle("");
+    setDescription("");
   };
 
   const handleExpand = (e: React.MouseEvent) => {
@@ -41,6 +43,7 @@ function AddCard() {
           <Grid item md={10} lg={10} xs={12}>
             <TextField
               type="text"
+              value={title}
               id="outlined-basic"
               onChange={(e) => setTitle(e.target.value)}
               onClick={(e) => handleExpand(e)}
@@ -83,6 +86,7 @@ function AddCard() {
               type="text"
               id="outlined-basic"
               name="discription"
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Description"
               variant="outlined"

@@ -39,10 +39,10 @@ export default function SignIn() {
 return (
     <Container sx={{width: "50%", mt: "10%",  borderRadius: "10px", padding: "3vw", background: "white"}}>
     {/* <Logo/> */}
-    <div style={{textAlign: "left", paddingLeft: "3vw", display: "flex"}}>
+    <div className='conta'>
     
-    <img style={{width: '5%', height: '5%', textAlign: "left"}} src={Logo} alt="Logo" /> 
-    <span style={{margin: "1vw"}}>Dear Diary</span>
+    <img className='imageC' src={Logo} alt="Logo" /> 
+    <span className='title-name'>Dear Diary</span>
     
     </div>
     
@@ -59,7 +59,7 @@ return (
         <Button variant="contained"  onClick={handleRandom} sx={{width: "100%", borderRadius: "100px", background:"#039BE5"}}>RANDOM</Button>
         </Grid>
       </Grid>
-    <div style={{textAlign: "center"}}>
+    <div className='btn-s'>
     <Button variant="contained" disabled={!click} onClick={handleSubmit} sx={{ height: "100%", borderRadius: "100px", background:"#039BE5"}}>CONTINUE</Button>
     </div>
     

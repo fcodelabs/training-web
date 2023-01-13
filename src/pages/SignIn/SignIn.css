@@ -2,3 +2,22 @@ body{
     height: 100%;
     background: linear-gradient(90deg, #86caec 0%, #039BE5 100%);
 }
+
+.conta{
+    text-align: left;
+    padding-left: 3vw; 
+    display: flex
+}
+
+.imageC{
+    width: 5%; 
+    height: 5%; 
+    text-align: left
+}
+
+.title-name{
+    margin: 1vw
+}
+.btn-s{
+    text-align: center
+}

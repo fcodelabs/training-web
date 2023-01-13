@@ -3,3 +3,16 @@ body{
     height: 100%;
     background: linear-gradient(90deg, #86caec 0%, #039BE5 100%);
 }
+.textarea{
+    width: 96%; 
+    border-radius: 10px;
+    border: none;
+    background-color: #b3d4fc;
+    padding: 2vw; 
+    margin-top: 2vw
+}
+.cont{
+    margin: auto;
+    width: 90%;
+    padding: 2vw
+}

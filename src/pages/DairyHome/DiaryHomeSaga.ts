@@ -6,14 +6,11 @@ import { EventChannel, eventChannel } from "redux-saga";
 
 const getMessages = async () => {
   return eventChannel(emitter => {
-    var msgs = [] as any;
     const qry = query(collection(db, "messages"));
     const unsubscribe = onSnapshot(qry, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          let msg = [];
-          msg.push(doc.data().title, doc.data().name, doc.data().description);
-          msgs.push(msg);
-        });
+        const msgs = querySnapshot.docs.map((doc) => (
+          [doc.data().title, doc.data().name, doc.data().description]
+        ));
         emitter(msgs)
     });
     return unsubscribe;

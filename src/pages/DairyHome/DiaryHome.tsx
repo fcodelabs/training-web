@@ -26,6 +26,7 @@ export default function DairyHome() {
     const [description, setDescription] = React.useState('');
     const distpatch = useDispatch()
     const messages = useSelector((state: MyProps) => state.message.messages);
+    
     useEffect(() => {
       distpatch(getDiaryCards())
     }, [distpatch]);
@@ -69,9 +70,7 @@ export default function DairyHome() {
     return (
         <div>
       
-        <div style={{margin: 'auto',
-            width: '90%',
-            padding: '2vw', }}>
+        <div className='cont'>
     
           <Typography component="h2" variant="h2" color='white' sx={{mt: 3, mb: 3, paddingLeft: "", fontSize: '2rem', fontWeight: 'bold', textAlign: 'left'}}>
                 Home
@@ -123,7 +122,7 @@ export default function DairyHome() {
             <Grid>
     
             <Grid item xs={12}>
-              {touched && <div>
+              {touched && <div >
               <TextareaAutosize
             aria-label="minimum height"
             minRows={10}
@@ -131,9 +130,8 @@ export default function DairyHome() {
             name='description'
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            style={{ width: "96%", borderRadius: '10px',
-            border: 'none',
-            backgroundColor: '#b3d4fc', padding: "2vw", marginTop: '2vw'}}  />
+            className="textarea"
+            />
               </div>}
             </Grid>
           </Grid>

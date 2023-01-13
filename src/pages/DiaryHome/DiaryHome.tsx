@@ -11,17 +11,6 @@ import { UseAppSelector, useAppDispatch } from "../../hooks";
 import {
   sendNewCard, getCards
 } from "./diaryCardSlice";
-import { colRef } from '../../utils/firebaseConfig'
-import {
-  getFirestore,
-  collection,
-  onSnapshot,
-  addDoc,
-  deleteDoc,
-  doc,
-  query,
-  where,
-} from "firebase/firestore";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 
@@ -34,7 +23,6 @@ const DiaryHome = () => {
   const location = useLocation();
   const subTitle = location.state.name;
   const handle = useFullScreenHandle();
-  const [fullScreen, setFullScreen] = useState(false);
 
   const diaryCards = UseAppSelector((state) => {
     return state.diaryCard.diaryCards;
@@ -61,46 +49,11 @@ const DiaryHome = () => {
   );
 
 
-
-  
-
-  type DiaryCard = {
-    title: string;
-    subTitle: string;
-    description: string;
-    color: string;
-  };
-
-
-
-
-  // onSnapshot(colRef, (snapshot) => {
-
-  //   console.log(snapshot.docChanges())
-  //   let cards: DiaryCard[] = [];
-    // snapshot.docs.forEach((doc) => {
-    //   // books.push({ ...doc.data(), id: doc.id });
-    //   const temp: DiaryCard = {
-    //     title: doc.data().title,
-    //     subTitle: doc.data().subTitle,
-    //     description: doc.data().description,
-    //     color: doc.data().color,
-    //   };
-    //   cards.push(temp);
-    // });
-    // console.log(cards);
-    // dispatch(refreshCards(cards));
-  // });
-
   return (
     <FullScreen handle={handle}>
       {/* Navigation bar */}
       <NavigatiionBar handler={handle} />
-      {/* {!handle.active && (
-        <button onClick={handle.enter}>Enter fullscreen</button>
-      )}
-      {handle.active && <button onClick={handle.exit}>Enter fullscreen</button>} */}
-
+  
       {/* title bar */}
       <Titlebar />
 

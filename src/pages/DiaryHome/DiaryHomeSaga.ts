@@ -1,6 +1,6 @@
 import { put, takeEvery, all, call, take, cancelled } from "redux-saga/effects";
 import { colRef } from "../../utils/firebaseConfig";
-import { collection, getDocs, addDoc, onSnapshot } from "firebase/firestore";
+import { addDoc, onSnapshot } from "firebase/firestore";
 import { EventChannel, eventChannel } from "redux-saga";
 
 type DiaryCard = {

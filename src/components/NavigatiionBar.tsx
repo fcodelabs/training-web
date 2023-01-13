@@ -1,15 +1,11 @@
-import { Avatar, Badge, Grid, IconButton, TextField } from "@mui/material";
+import { Avatar, Badge, Grid, IconButton } from "@mui/material";
 import FullscreenRoundedIcon from "@mui/icons-material/FullscreenRounded";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import Divider from "@mui/material/Divider";
 import SearchBar from "./SearchBar";
-import { createStaticHandler } from "@remix-run/router";
-// import { InputAdornment } from "@mui/material";
-// import SearchIcon from "@mui/icons-material/Search";
-// import {useState} from 'react';
+
 
 const NavigatiionBar = (props: {handler:any}) => {
-  // const [width, setWidth] = useState("235px")
   
   return (
     <div>

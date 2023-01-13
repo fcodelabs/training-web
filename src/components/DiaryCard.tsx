@@ -19,12 +19,23 @@ const DiaryCard: FunctionComponent<DiaryCardProps> = ({
     const [showDesc, setShowDesc] = useState(showingDescription);
     const [btnName, setBtnName] = useState("Show More")
     const btnVisibility = description.length>100
+
+    const handler = () => {
+      if (btnName === "Show More") {
+        setBtnName("Show Less");
+        setShowDesc(description);
+      } else {
+        setBtnName("Show More");
+        setShowDesc(showingDescription);
+      }
+    };
+
   return (
     <Card
       sx={{
         borderRadius: "15px",
         m: 1,
-        bgcolor: `${cardColor}` 
+        bgcolor: `${cardColor}`,
       }}
     >
       <CardContent>
@@ -39,30 +50,22 @@ const DiaryCard: FunctionComponent<DiaryCardProps> = ({
         <Typography variant="body1">{showDesc}</Typography>
       </CardContent>
       <CardActions>
-        {btnVisibility && 
-        <Button
-          size="small"
-          sx={{
-            p: 1,
-            color: "black",
-            "&:hover": {
+        {btnVisibility && (
+          <Button
+            size="small"
+            sx={{
+              p: 1,
               color: "black",
-              borderRadius: "25px",
-            },
-          }}
-          onClick={() => {
-            if (btnName === "Show More") {
-              setBtnName("Show Less");
-              setShowDesc(description);
-            } else {
-              setBtnName("Show More");
-              setShowDesc(showingDescription);
-            }
-          }}
-        >
-          {btnName}
-        </Button>
-        }
+              "&:hover": {
+                color: "black",
+                borderRadius: "25px",
+              },
+            }}
+            onClick={handler}
+          >
+            {btnName}
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

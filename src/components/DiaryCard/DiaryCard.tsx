@@ -9,6 +9,18 @@ type DiaryCardProps = {
     color: string;
 }
 
+const truncate = (size: number, message: string) => {
+    return message.length>size ? message.substring(0,size).concat("..."):message
+}
+
+const processDescription = (description: string, seeMore: boolean) => {
+    if(!seeMore){
+        return truncate(100, description)
+    }else{
+        return description
+    }
+}
+
 
 const DiaryCard: FC<DiaryCardProps>  = ({title, subtitle, description, color}: DiaryCardProps) => {
 
@@ -39,7 +51,7 @@ const DiaryCard: FC<DiaryCardProps>  = ({title, subtitle, description, color}: D
                     variant={"body2"}
                     style={{ wordWrap: "break-word" }}
                 >
-                    {description!=undefined && description.length>100 && !showMore ? description.substring(0,100).concat(" ..."):description}
+                    {processDescription(description, showMore)}
                 </Typography>
                 {
                     description.length>100 && !showMore && <Typography

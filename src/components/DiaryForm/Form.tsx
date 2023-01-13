@@ -37,7 +37,6 @@ export default function Form(_props: {
         };
 
         distpatch(addMsgStart(newMsg));
-
         setDescription("");
         setTitle("");
       } catch (e) {
@@ -76,7 +75,15 @@ export default function Form(_props: {
               onBlur={(e) => setFocusedTitle(true)}
             />
           </Grid>
-          <Grid item xs={12} sm={2}>
+          <Grid
+            item
+            xs={12}
+            sm={2}
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
             <Button
               sx={{
                 width: 150,
@@ -88,11 +95,14 @@ export default function Form(_props: {
                   md: "flex",
                   xl: "flex",
                 },
+               
               }}
               variant="contained"
               onClick={handleSubmit}
               // eslint-disable-next-line eqeqeq
-              disabled={description == "" || title == "" || isFetching ? true : false}
+              disabled={
+                description == "" || title == "" || isFetching ? true : false
+              }
             >
               Submit
             </Button>
@@ -133,7 +143,9 @@ export default function Form(_props: {
           variant="contained"
           onClick={handleSubmit}
           // eslint-disable-next-line eqeqeq
-          disabled={description === "" || title === "" || isFetching ? true : false}
+          disabled={
+            description === "" || title === "" || isFetching ? true : false
+          }
         >
           Submit
         </Button>

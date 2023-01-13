@@ -81,7 +81,7 @@ export default function Login() {
             justifyContent: "center",
           }}
         >
-          <Grid item xs={12} sm={6} >
+          <Grid item xs={12} sm={6}>
             <Typography>
               {" "}
               <Box
@@ -140,7 +140,15 @@ export default function Login() {
               helperText={nickName === "" && focused ? "Empty field!" : " "}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             <Button
               onClick={changeNickName}
               sx={{ width: 150, height: 50, borderRadius: "30px" }}

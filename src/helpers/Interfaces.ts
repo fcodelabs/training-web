@@ -12,5 +12,5 @@ export interface msgData {
 }
 
 export interface userState {
-    user: { currentUser: any; isFetching: any; error: any };
-  }
+  user: { currentUser: any; isFetching: any; error: any };
+}

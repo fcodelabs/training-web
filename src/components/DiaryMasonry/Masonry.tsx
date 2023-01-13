@@ -25,7 +25,7 @@ export default function Masonry(_props: {
         onClick={() => _props.setFullText(false)}
         container
         spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 12, md: 16 }}
+        columns={{ xs: 2, sm: 12, md: 16 }}
       >
         {messages1?.length > 0 &&
           messages1.map(({ Id, name, title, description, colour }: msgData) => (

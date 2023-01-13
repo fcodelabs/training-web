@@ -16,6 +16,7 @@ export default function Masonry(_props: {
 
   React.useEffect(() => {
     distpatch(getMsgStart());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

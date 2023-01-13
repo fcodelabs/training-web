@@ -11,24 +11,18 @@ import {
 } from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
 import { eventChannel, EventChannel } from "redux-saga";
+import { msgData } from "../../helpers/Interfaces";
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
-interface msgData {
-  Id: string;
-  name: string;
-  title: string;
-  description: string;
-  colour: string;
-  time: Date;
-}
+
 
 function getcards() {
   const q = query(collection(db, "messages"), orderBy("time", "asc"));
   return eventChannel((emitter) => {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let cardList: msgData[] = [];
+      let msgList: msgData[] = [];
 
       querySnapshot.forEach((doc) => {
-        cardList.push({
+        msgList.push({
           Id: doc.id,
           title: doc.data().title,
           name: doc.data().name,
@@ -38,7 +32,7 @@ function getcards() {
         });
       });
       // console.log(cardList)
-      emitter(cardList);
+      emitter(msgList);
     });
     return unsubscribe;
   });
@@ -92,6 +86,7 @@ const postNewMessage = async (newMsg: {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function* fetchMessages(): any {
   try {
     const msgs = yield getMessages();
@@ -118,6 +113,7 @@ function* fetchMessagesList() {
 //addMsgSucces
 function* addNewMessageSaga(action: any) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const msg = yield postNewMessage(action.payload);
     // yield put(addMsgSuccess(msg));
   } catch (e) {

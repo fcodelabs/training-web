@@ -1,0 +1,11 @@
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: #0081c9;
+  z-index: 1;
+}
+
+.icon-button {
+  float: right;
+}

@@ -20,6 +20,22 @@ function SingleCard(props: Props) {
     setSeeMore(!seeMore);
   };
 
+  const SliceDescription = () => {
+    return props.description ? (
+      props.description.length < 100 ? (
+        <Typography variant="body2">{props.description}</Typography>
+      ) : !seeMore ? (
+        <Typography variant="body2">
+          {props.description.slice(0, 100)}...
+        </Typography>
+      ) : (
+        <Typography variant="body2">{props.description}</Typography>
+      )
+    ) : (
+      <Typography variant="body2">...</Typography>
+    );
+  };
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -29,19 +45,7 @@ function SingleCard(props: Props) {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {props.name}
         </Typography>
-        {props.description ? (
-          props.description.length < 100 ? (
-            <Typography variant="body2">{props.description}</Typography>
-          ) : !seeMore ? (
-            <Typography variant="body2">
-              {props.description.slice(0, 100)}...
-            </Typography>
-          ) : (
-            <Typography variant="body2">{props.description}</Typography>
-          )
-        ) : (
-          <Typography variant="body2">...</Typography>
-        )}
+        {SliceDescription()}
       </CardContent>
       {props.description.length > 100 && !seeMore && (
         <CardActions>

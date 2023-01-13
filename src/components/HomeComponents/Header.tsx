@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import PersonIcon from "@mui/icons-material/Person";
 import { IconButton } from "@mui/material";
+import "./Header.css";
 
 interface Props {
   handle: any;
@@ -20,15 +21,7 @@ function Header(props: Props) {
   };
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        left: "0",
-        right: "0",
-        backgroundColor: "#0081C9",
-        zIndex: "1",
-      }}
-    >
+    <div className="header">
       <IconButton
         onClick={() => {
           handleClick(props.handle);
@@ -38,12 +31,11 @@ function Header(props: Props) {
         <CropFreeIcon fontSize="large" sx={{ p: 1 }} />
       </IconButton>
 
-      <IconButton title="Profile" style={{ float: "right" }}>
+      <IconButton className="icon-button" title="Profile">
         <PersonIcon fontSize="large" sx={{ p: 1 }} />
       </IconButton>
     </div>
   );
-  //not implement
 }
 
 export default Header;

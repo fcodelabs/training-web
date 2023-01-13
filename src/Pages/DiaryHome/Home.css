@@ -1,0 +1,17 @@
+.home-container {
+  overflow: auto;
+  height: 100%;
+  min-height: 100vh;
+  background-image: url("../Images/clouds.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.home-title {
+  font-weight: bold;
+  color: white;
+  margin-left: 20px;
+  margin-top: 90px;
+}

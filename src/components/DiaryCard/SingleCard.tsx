@@ -43,7 +43,7 @@ function SingleCard(props: Props) {
           {props.title}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {props.name}
+          {props.name ? props.name : "Anonymous"}
         </Typography>
         {SliceDescription()}
       </CardContent>

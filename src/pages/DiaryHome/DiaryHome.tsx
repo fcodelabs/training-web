@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
-import NavigatiionBar from "../../components/NavigatiionBar";
-import Titlebar from "../../components/Titlebar";
+import NavigatiionBar from "../../Components/NavigatiionBar";
+import Titlebar from "../../Components/Titlebar";
 import Grid from "@mui/material/Grid";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/base/ClickAwayListener";
 import { useLocation } from "react-router";
-import DiaryCard from "../../components/DiaryCard";
+import DiaryCard from "../../Components/DiaryCard";
 import { UseAppSelector, useAppDispatch } from "../../hooks";
-import {
-  sendNewCard, getCards
-} from "./diaryCardSlice";
+import { sendNewCard, getCards } from "./diaryCardSlice";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-
-
 
 const DiaryHome = () => {
   const [title, setTitle] = useState("");
@@ -42,18 +38,15 @@ const DiaryHome = () => {
     setShow(true);
   };
 
-  useEffect(
-    ()=>{
-      dispatch(getCards());
-    },[]
-  );
-
+  useEffect(() => {
+    dispatch(getCards());
+  }, []);
 
   return (
     <FullScreen handle={handle}>
       {/* Navigation bar */}
       <NavigatiionBar handler={handle} />
-  
+
       {/* title bar */}
       <Titlebar />
 

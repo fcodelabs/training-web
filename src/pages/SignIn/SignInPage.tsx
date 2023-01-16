@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import SignIn from "../../components/SignIn";
+import SignIn from "../../Components/SignIn";
 
 const SignInPage = () => {
   return (

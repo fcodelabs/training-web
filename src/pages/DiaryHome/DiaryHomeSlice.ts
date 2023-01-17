@@ -35,7 +35,6 @@ const cardSlice = createSlice({
     addCardSuccess: (state, action) => {
       state.isFetching = false;
       state.error = false;
-     // console.log(action.payload);
       state.cards.push(action.payload);
     },
     addCardFailure: (state) => {

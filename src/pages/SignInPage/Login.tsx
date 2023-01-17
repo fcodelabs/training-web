@@ -1,25 +1,20 @@
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import { borderRight } from '@mui/system';
 import Grid from '@mui/material/Grid';
-import { ListItem, Stack, Typography } from '@mui/material';
-import { red } from '@mui/material/colors';
+import { Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { uniqueNamesGenerator, Config, names } from 'unique-names-generator';
-import { useEffect, useState } from 'react';
-import SendIcon from '@mui/icons-material/Send';
+import { useState } from 'react';
 import EastIcon from '@mui/icons-material/East';
 import flowerSvg from '../../assests/flower.svg';
-import Item from '@mui/material/ListItem';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
+
 
 const Login = () => {
 
     const [name, setName] = useState(""); //state for the generated name
     const [initial, setInitial] = useState(true); //state for the initial render
     const navigate = useNavigate();
-    // const username = useSelector((state: any) => state.user.value.username)
 
     const generateName = () => { //generate random name
         const config: Config = {

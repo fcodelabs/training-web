@@ -9,7 +9,6 @@ import rootSaga from './rootSaga';
 const persistConfig = {
     key: 'root',
     storage,
-    // blacklist: ['cards', 'cardIds']
 }
 
 const sagaMiddleware = createSagaMiddleware()
@@ -23,4 +22,3 @@ export let persistor = persistStore(store)
 sagaMiddleware.run(rootSaga);
 
 export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch

@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from "react";
-import {Card, CardContent, makeStyles, Typography} from "@mui/material";
+import {Card, CardContent, Typography} from "@mui/material";
 import './DiaryCard.scss'
 
 type DiaryCardProps = {

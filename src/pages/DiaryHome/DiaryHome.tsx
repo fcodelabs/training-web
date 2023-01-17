@@ -1,13 +1,11 @@
 import {ChangeEvent,FC, FormEvent, useEffect, useState} from "react";
 import {Button, Grid, TextField, Typography} from '@mui/material';
 import './DiaryHome.scss'
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import {RootState} from "../../store";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCardList} from "./cardsSlice";
-import {db} from '../../utils/firebaseConfig';
-import {onSnapshot, collection, addDoc, } from "firebase/firestore";
 import {addCard} from "./addCardSlice";
 import PrimarySearchAppBar from "../../components/NavBar/NavBar";
 
@@ -141,11 +139,6 @@ const DieryHome: FC = () => {
 
             </Grid>
         </div>}
-
-
-
-
-
     </div>
 }
 

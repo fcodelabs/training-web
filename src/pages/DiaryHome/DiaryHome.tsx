@@ -37,10 +37,10 @@ const DieryHome: FC = () => {
         event.preventDefault();
         let invalid: boolean = inputCardTitle.length === 0 || inputCardDescription.length === 0;
         if (inputCardTitle.length === 0) {
-            console.log("Missing title");
+            alert("Missing title");
         }
         if (inputCardDescription.length === 0) {
-            console.log("Missing description");
+            alert("Missing description");
         }
         if (!invalid) {
             console.log(`input-card-title: ${inputCardTitle}`);

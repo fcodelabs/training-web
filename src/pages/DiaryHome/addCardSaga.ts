@@ -6,7 +6,6 @@ import {Card} from "./card";
 import {PayloadAction} from "@reduxjs/toolkit";
 
 async function addCardFunc(card: Card):Promise<string>{
-    console.log("in add card fucntion")
     const docRef = await addDoc(collection(db, "Cards"), {
         title: card.title,
         subtitle: card.subtitle,
@@ -14,7 +13,6 @@ async function addCardFunc(card: Card):Promise<string>{
         color: card.color,
         timestamp: Date.now()
     });
-    console.log("Document written with ID: ", docRef.id);
     return docRef.id
 }
 
@@ -24,7 +22,6 @@ function* addCard1(action:PayloadAction<Card>) {
         const response: string = yield call(addCardFunc, action.payload);
         yield put(addCardSuccess(response));
     } catch (error) {
-        console.log('Failed to add card', error);
         yield put(addCardFailed());
     }
 }

@@ -1,21 +1,21 @@
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import { borderRight } from '@mui/system';
 import Grid from '@mui/material/Grid';
-import { ListItem, Stack, Typography } from '@mui/material';
-import { red } from '@mui/material/colors';
+import { Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { uniqueNamesGenerator, Config, names } from 'unique-names-generator';
-import { useEffect, useState } from 'react';
-import SendIcon from '@mui/icons-material/Send';
+import { useState } from 'react';
 import EastIcon from '@mui/icons-material/East';
-import flowerSvg from './assests/flower.svg';
-import Item from '@mui/material/ListItem';
+import flowerSvg from '../../assests/flower.svg';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
 
     const [name, setName] = useState(""); //state for the generated name
     const [initial, setInitial] = useState(true); //state for the initial render
+    const navigate = useNavigate();
+
     const generateName = () => { //generate random name
         const config: Config = {
             dictionaries: [names],
@@ -27,18 +27,13 @@ const Login = () => {
 
 
     return ( 
-        <>       
-        <Container sx={{margin:0, width: "50%",padding:"2vw", borderRadius:"10px",background:'white'}}>
-        {/* <Stack direction="row" spacing={2} sx={{margin:"0%", textAlign:"left"}}>
-            <Item>
-            <img src={flowerSvg} 
-            style ={{width: "50px", height: "50px", borderRadius: "10px"}}
-            alt="flower SVG" />
-            </Item>
-            <Item sx={{float:"left"}}>
-            <p style={{textAlign: "left", marginRight:"50%"}}>Dear Diary</p>
-            </Item>
-        </Stack> */}
+        <div style={{
+            display: "flex",
+            justifyContent:"center",
+            alignItems:"center",
+            minHeight:"100vh"
+        }}>      
+        <Container sx={{textAlign:'center', margin:0, width: "50%",padding:"2vw", borderRadius:"10px",background:'white'}}>
         <div style={{textAlign:"left", marginBottom:"2vw"}}>
         <img src={flowerSvg} 
             style ={{width: "50px", height: "50px", borderRadius: "10px"}}
@@ -74,7 +69,11 @@ const Login = () => {
         </Grid>
 
 
-        <Button disabled={(name) ? false : true} color="primary"
+        <Button 
+        onClick={() =>{
+            navigate('home/'+name)
+        }}
+        disabled={(name) ? false : true} color="primary"
         size='large' variant="contained" endIcon={<EastIcon />}
         style={{
             
@@ -84,7 +83,7 @@ const Login = () => {
         </Button>
         </Container>
 
-        </>
+        </div>
      );
 }
  

@@ -9,12 +9,12 @@ export const userSlice = createSlice({
         set: (state, action: PayloadAction<string>) => {
             state.value = action.payload
         },
-        clear: (state) => {
+        clearUser: (state) => {
             state.value = ''
         },
     },
 })
 
-export const { set } = userSlice.actions
+export const { set, clearUser  } = userSlice.actions
 
 export default userSlice.reducer

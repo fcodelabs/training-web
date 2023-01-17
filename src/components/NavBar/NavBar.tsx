@@ -15,11 +15,13 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {Button} from "@mui/material";
 import {blue} from "@mui/material/colors";
 import * as colorette from "colorette";
+import {useDispatch} from "react-redux";
+import {clearUser} from "../../pages/SignInForm/userSlice";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -170,21 +172,30 @@ export default function PrimarySearchAppBar() {
             }
         }
     }
-        const handleExitFullscreen = () => {
-            if (document.fullscreenEnabled) {
-                document.exitFullscreen();
-                setIsFullscreen(false);
-            }
+    const handleExitFullscreen = () => {
+        if (document.fullscreenEnabled) {
+            document.exitFullscreen();
+            setIsFullscreen(false);
         }
+    }
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const logout = ()=>{
+        dispatch(clearUser())
+        navigate('/')
+    }
+
 
     return (
         <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static">
     <Toolbar>
-        <Link to="/" className={"link-back"} >Back</Link>
+        <Button onClick={logout} variant="contained" color="success">Log Out</Button>
         <div style={{padding: 5}}>
-            {!isFullscreen && <Button color="secondary" onClick={handleFullscreen}>Fullscreen</Button>}
-            {isFullscreen && <Button color="secondary" onClick={handleExitFullscreen}>Exit Fullscreen</Button>}
+            {!isFullscreen && <Button color="success" variant="contained" onClick={handleFullscreen}>Fullscreen</Button>}
+            {isFullscreen && <Button color="success" variant="contained" onClick={handleExitFullscreen}>Exit Fullscreen</Button>}
         </div>
     <Search>
     <SearchIconWrapper>

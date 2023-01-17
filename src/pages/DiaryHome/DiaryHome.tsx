@@ -1,7 +1,7 @@
 import {ChangeEvent,FC, FormEvent, useEffect, useState} from "react";
 import {Button, Grid, TextField, Typography} from '@mui/material';
 import './DiaryHome.scss'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import {RootState} from "../../store";
 import {useDispatch, useSelector} from "react-redux";
@@ -20,10 +20,17 @@ const DieryHome: FC = () => {
 
     let cards = useSelector((state: RootState) => state.cards.value);
 
+    const navigate = useNavigate()
+
     const dispatch = useDispatch()
     const user = useSelector((state: RootState) => state.user.value);
 
+
     useEffect(() => {
+        if(user.length === 0){
+            alert('Not logged in')
+            navigate('/')
+        }
         document.title = 'Dear Diary - Home Page';
         dispatch(fetchCardList())
     }, []);
@@ -53,18 +60,16 @@ const DieryHome: FC = () => {
 
     return <div className={"diary-home"}>
 
-        <PrimarySearchAppBar />
-
-
-
-        <Grid container className={"input-diary-title"} >
-            <Grid item xl={10} lg={12} sm={12} xs={12}>
-                <Typography className={"input-diary-title-text"}>Home</Typography>
+        {user.length !==0 && <div>
+            <PrimarySearchAppBar />
+            <Grid container className={"input-diary-title"} >
+                <Grid item xl={10} lg={12} sm={12} xs={12}>
+                    <Typography className={"input-diary-title-text"}>Home</Typography>
+                </Grid>
+                <Grid item xl={1} lg={12} sm={12} xs={12}>
+                    <Typography className={"you-are-here"}>You are here. Home</Typography>
+                </Grid>
             </Grid>
-            <Grid item xl={1} lg={12} sm={12} xs={12}>
-                <Typography className={"you-are-here"}>You are here. Home</Typography>
-            </Grid>
-        </Grid>
 
             <Grid container className={"add-card-form"} columnSpacing={4}>
                 <Grid item xl={10} md={10} lg={10} sm={10} xs={12}>
@@ -113,28 +118,31 @@ const DieryHome: FC = () => {
                 </Grid>
                 <Grid item xl={2} md={2} lg={2} sm={2} xs={12}>
                     <Button type="submit" onClick={handleSubmit} className="add-card-submit-button" >
-                    SUBMIT
+                        SUBMIT
                     </Button>
                 </Grid>
             </Grid>
 
-        <Grid container className={"diary-card-view"} columnSpacing={2} rowSpacing={2}>
-            {
+            <Grid container className={"diary-card-view"} columnSpacing={2} rowSpacing={2}>
+                {
 
-                cards.map((value, key)=>(
-                    <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={key}>
-                        <DiaryCard
-                            title={value.title}
-                            description={value.description}
-                            color={value.color}
-                            subtitle={value.subtitle}
-                        />
-                    </Grid>
-                ))
-            }
+                    cards.map((value, key)=>(
+                        <Grid item  xl={3} md={4} lg={3} sm={6} xs={12} key={key}>
+                            <DiaryCard
+                                title={value.title}
+                                description={value.description}
+                                color={value.color}
+                                subtitle={value.subtitle}
+                            />
+                        </Grid>
+                    ))
+                }
 
 
-        </Grid>
+            </Grid>
+        </div>}
+
+
 
 
 

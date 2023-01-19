@@ -35,7 +35,6 @@ const diaryHomeSlice = createSlice({
     },
     addDiaryCardSuccess: (state, action) => {
       state.isLoading = false;
-      // state.messages.push(action.payload);
       state.error = false; 
     },
     addDiaryCardFailure: (state) => {

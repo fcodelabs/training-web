@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import diaryRedux from "./diaryRedux";
-import userRedux from "./userRedux";
+import diaryRedux from "../Pages/DiaryHome/diaryRedux";
+import userRedux from "../Pages/SignInPage/userRedux";
 
 const rootReducer = combineReducers({
   diary: diaryRedux,

@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import diarySaga from "./Pages/DiaryHome/diarySaga";
 import createSagaMiddleware from "redux-saga";
-import rootReducer from "./Pages/DiaryHome/rootReducer";
+import rootReducer from "./utils/rootReducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 

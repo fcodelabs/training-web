@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
-import { logout } from "../../Pages/DiaryHome/userRedux";
+import { logout } from "../../Pages/SignInPage/userRedux";
 
 interface Props {
   handle: any;

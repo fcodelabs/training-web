@@ -136,7 +136,7 @@ export default function DairyHome() {
           
           </Box>
           <Grid container spacing={4}>
-          {messages.map((m: string[]) => {return ( <Grid item xs={12} md={3}>
+          {messages.map((m: string[]) => {return ( <Grid item xs={12} md={4} sm={6} xl={3}>
                     <DiaryCard title={m[0]} description={m[2]} name={m[1]}  /> </Grid>  
                   
                 )})}

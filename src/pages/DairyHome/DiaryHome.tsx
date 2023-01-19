@@ -80,7 +80,6 @@ export default function DairyHome() {
           <Grid container spacing={4} >
             <Grid item xs={10}>
             <TextField
-            // required
             fullWidth
             id="title"
             type="text"
@@ -110,7 +109,6 @@ export default function DairyHome() {
               
             <Grid item  xs={2}>
                 {touched && <Button
-                //type="submit"
                 variant="contained"
                 onClick={handleSubmit}
                 sx={{ height:'100%', margin: 'auto', width: '100%', borderRadius: '30px',  color: 'black', fontWeight: 'bold', backgroundColor: '#5353c6' }}

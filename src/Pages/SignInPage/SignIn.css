@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../Images/clouds.jpg");
+  background-image: url("../../../public/clouds.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

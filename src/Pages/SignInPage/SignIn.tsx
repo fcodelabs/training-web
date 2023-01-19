@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { uniqueNamesGenerator, Config, names } from "unique-names-generator";
 import { Paper, Button, Typography, TextField } from "@mui/material";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
-import { login } from "../DiaryHome/userRedux";
+import { login, setState } from "../DiaryHome/userRedux";
 import { useDispatch } from "react-redux/es/exports";
 import "./SignIn.css";
 
@@ -28,6 +28,10 @@ function SignIn() {
     dispatch(login({ username: nickname }));
     navigate("/home");
   };
+
+  useEffect(() => {
+    dispatch(setState({ isloggedin: false }));
+  }, [dispatch]);
 
   return (
     <Container className="sign-in-container">

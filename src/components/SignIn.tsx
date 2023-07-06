@@ -4,11 +4,22 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const SignIn = () => {
 
+    const paperStyle={
+        padding:20,
+        height:"70vh",
+        width:280,
+        margin:"20px auto"
+    }
+
+    const avatarStyle={
+        backgroundColor:"#3e6fc3"
+    }
+
     return(
         <Grid>
-            <Paper elevation={10}>
+            <Paper elevation={10} style={paperStyle}>
                 <Grid>
-                    <Avatar><LockOutlinedIcon/></Avatar>
+                    <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
                     <h2>Sign In</h2>
                 </Grid>
                

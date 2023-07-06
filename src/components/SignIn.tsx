@@ -5,15 +5,23 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const SignIn = () => {
 
+    //add the data using array for useSate 
     const [names,setNames] = useState(['sip','usra','udy','baji']);
+    // for select a name in array
     const [selectedName,setSelectedName] = useState('');
 
+    // this event handler use for random btn
     const handleClick = () => {
+        //get the indexnum in the 'names' array
         const randomIndex = Math.floor(Math.random() * names.length);
         const randomName = names[randomIndex];
+        //set randomNames to state
         setSelectedName(randomName);
         
     }
+
+    
+    // =========================Styles start===================
 
     const paperStyle={
         padding:20,
@@ -37,6 +45,9 @@ const SignIn = () => {
         
     }
 
+    // ==========================styles end===============
+
+    
     return(
         <Grid>
             <Paper elevation={10} style={paperStyle}>

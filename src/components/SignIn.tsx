@@ -1,10 +1,17 @@
 import { Grid,Paper,Avatar, TextField,Button} from "@mui/material";
 import  React, { useState } from "react";
+import {useNavigate} from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 
 const SignIn = () => {
 
+    const navigate = useNavigate();
+
+    const navigateToHome = () =>{
+        navigate('/home');
+    }
+    
     //add the data using array for useSate 
     const [names,setNames] = useState(['sip','usra','udy','baji']);
     // for select a name in array
@@ -58,7 +65,7 @@ const SignIn = () => {
                
                 <TextField label="user name" placeholder="enter user Name" value={selectedName} required />
                 <Button variant="contained" type="submit" color="primary" style={btnStyle} onClick={handleClick}>Conform</Button>
-                <Button disabled={!selectedName} variant="contained" type="submit" color="primary" style={signbtnstyle} fullWidth>SIGN IN</Button>
+                <Button disabled={!selectedName} variant="contained" type="submit" color="primary" style={signbtnstyle} fullWidth onClick={navigateToHome}>SIGN IN</Button>
                 
             </Paper>
         </Grid>

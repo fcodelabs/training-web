@@ -6,8 +6,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const SignIn = () => {
 
+    //useNavigate is equle to navigate variable
     const navigate = useNavigate();
 
+    //navigate to home using a function
     const navigateToHome = () =>{
         navigate('/home');
     }

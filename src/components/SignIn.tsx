@@ -5,7 +5,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const SignIn = () => {
 
-    const [names,setNames] = useState(['sip','usra']);
+    const [names,setNames] = useState(['sip','usra','udy','baji']);
     const [selectedName,setSelectedName] = useState('');
 
     const handleClick = () => {
@@ -47,7 +47,7 @@ const SignIn = () => {
                
                 <TextField label="user name" placeholder="enter user Name" value={selectedName} required />
                 <Button variant="contained" type="submit" color="primary" style={btnStyle} onClick={handleClick}>Conform</Button>
-                <Button variant="contained" type="submit" color="primary" style={signbtnstyle} fullWidth>SIGN IN</Button>
+                <Button disabled={!selectedName} variant="contained" type="submit" color="primary" style={signbtnstyle} fullWidth>SIGN IN</Button>
                 
             </Paper>
         </Grid>

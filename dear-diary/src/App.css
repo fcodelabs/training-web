@@ -28,10 +28,24 @@
   color: #61dafb;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width:auto;
+}
+
+.bg {
+  background-image: linear-gradient(-45deg, #039BE5 0%, #039BE5 33%, #00BCD4 100%);
+  background-attachment: fixed;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

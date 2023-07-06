@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import { Container, Card, TextField, Typography, Button } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
@@ -5,6 +6,8 @@ function Signin() {
     // set variables for nickname and disabled state
   const [nickname, setNickname] = useState("");
   const [isDisabled, setDisabled] = useState(true);
+  
+  const navigate = useNavigate();
 
   // Generates a random name from a list
   const randomNameGenerate = () => {
@@ -41,9 +44,9 @@ function Signin() {
 
    // Click event handler for the "Continue" button
   function continueHandler(){
-    window.location.href = "/home"; // Redirect to the home page
+    navigate('/home') // Redirect to the home page
   }
-  
+
   return (
     <React.Fragment>
       <Container

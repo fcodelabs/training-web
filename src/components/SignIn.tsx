@@ -1,9 +1,19 @@
 import { Grid,Paper,Avatar, TextField,Button} from "@mui/material";
-import  React from "react";
+import  React, { useState } from "react";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 
 const SignIn = () => {
+
+    const [names,setNames] = useState(['sip','usra']);
+    const [selectedName,setSelectedName] = useState('');
+
+    const handleClick = () => {
+        const randomIndex = Math.floor(Math.random() * names.length);
+        const randomName = names[randomIndex];
+        setSelectedName(randomName);
+        
+    }
 
     const paperStyle={
         padding:20,
@@ -35,8 +45,8 @@ const SignIn = () => {
                     <h2>Sign In</h2>
                 </Grid>
                
-                <TextField label="user name" placeholder="enter user Name" required />
-                <Button variant="contained" type="submit" color="primary" style={btnStyle}>Conform</Button>
+                <TextField label="user name" placeholder="enter user Name" value={selectedName} required />
+                <Button variant="contained" type="submit" color="primary" style={btnStyle} onClick={handleClick}>Conform</Button>
                 <Button variant="contained" type="submit" color="primary" style={signbtnstyle} fullWidth>SIGN IN</Button>
                 
             </Paper>

@@ -2,30 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import { Container, Card, TextField, Typography, Button } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
+import randomNameGenerate from '../../utils/randomNameGenerate';
 function Signin() {
     // set variables for nickname and disabled state
   const [nickname, setNickname] = useState("");
   const [isDisabled, setDisabled] = useState(true);
   
   const navigate = useNavigate();
-
-  // Generates a random name from a list
-  const randomNameGenerate = () => {
-    const names = [
-      "John",
-      "Jane",
-      "Alice",
-      "Bob",
-      "Emma",
-      "Michael",
-      "Olivia",
-      "William",
-      "Sophia",
-    ];
-    const randomNumber = Math.floor(Math.random() * names.length);
-    return names[randomNumber];
-  };
-
+  
   // Click event handler for the "Random" button
   function clickHandler() {
     setNickname(randomNameGenerate);// Set a random name

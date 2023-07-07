@@ -33,19 +33,6 @@ function Signin() {
 
   return (
     <React.Fragment>
-      <Container
-        maxWidth="xl"
-        sx={{
-          backgroundImage:
-            "linear-gradient(-45deg, #039BE5 0%, #039BE5 33%, #00BCD4 100%);",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
         <Card
           variant="outlined"
           sx={{
@@ -100,7 +87,6 @@ function Signin() {
             Continue <EastIcon />
           </Button>
         </Card>
-      </Container>
     </React.Fragment>
   );
 }

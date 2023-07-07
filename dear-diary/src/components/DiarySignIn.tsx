@@ -13,7 +13,7 @@ import { useState } from "react";
 import { generateRandomNickname } from "../utils/signin";
 
 
-export const MuiCard = () => {
+export const DiarySignIn = () => {
     const [nickname, setNickname] = useState('');
     const [nicknameError, setNicknameError] = useState(false);
 
@@ -43,7 +43,7 @@ export const MuiCard = () => {
                         <CardContent>
                             <Typography
                                 variant='subtitle1'
-                                align='left' >Dear Diary</Typography>
+                                align='left'>Dear Diary</Typography>
                             <Typography
                                 variant='h4'
                                 color='primary.light'>Sign In</Typography>

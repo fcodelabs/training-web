@@ -1,11 +1,15 @@
 import './App.css';
-import { MuiCard } from './components/MuiCard';
+import { DiaryHome } from './components/DiaryHome';
+import { DiarySignIn } from './components/DiarySignIn';
+import {Routes,Route} from 'react-router-dom';
+
 
 
 function App() {
   return (
     <div className="App">
-      <MuiCard />
+      {/* <MuiCard />/ */}
+      <DiaryHome />
     </div>
   );
 }

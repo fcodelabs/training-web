@@ -16,7 +16,7 @@ function DiaryHome() {
   const [message, setMessage] = useState("");
 
   //onclick listenere to get textfields value when click on submit button
-  function formSubmitHnadler() {
+  function formSubmitHandler() {
     console.log(title);
     console.log(message);
     setTitle("");
@@ -42,7 +42,7 @@ function DiaryHome() {
           InputProps={{ style: rounded }}
         ></TextField>
         <Button
-          onClick={formSubmitHnadler}
+          onClick={formSubmitHandler}
           sx={{ width: "10vw" }}
           size="large"
           variant="contained"

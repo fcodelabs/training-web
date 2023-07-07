@@ -16,7 +16,7 @@ const StyledSubTitle = styled(Typography)({
     marginBottom:'10px'
 });
 
-function DairyCard(props: { description: any; title: any; subTitle: any; }) {
+function DairyCard(props: { description: String; title: String; subTitle: String; }) {
     let description  = props.description; //get the description from the props
     let [isGreater, setIsGreater] = useState(description.length > 100) //variable to check the paragh length and create a state
     

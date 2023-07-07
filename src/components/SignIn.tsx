@@ -2,6 +2,7 @@ import { Grid,Paper,Avatar, TextField,Button} from "@mui/material";
 import  React, { useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { handleClick } from '../utility/Util';
 
 
 const SignIn = () => {
@@ -19,18 +20,11 @@ const SignIn = () => {
     // for select a name in array
     const [selectedName,setSelectedName] = useState('');
 
-    // this event handler use for random btn
-    const handleClick = () => {
-        //get the indexnum in the 'names' array
-        const randomIndex = Math.floor(Math.random() * names.length);
-        const randomName = names[randomIndex];
-        //set randomNames to state
-        setSelectedName(randomName);
-        
+    //function for get the random name
+    const randomfunction = () =>{
+        handleClick(names,setSelectedName);
     }
 
-    
-    // =========================Styles start===================
 
     const paperStyle={
         padding:20,
@@ -54,8 +48,6 @@ const SignIn = () => {
         
     }
 
-    // ==========================styles end===============
-
     
     return(
         <Grid>
@@ -66,7 +58,7 @@ const SignIn = () => {
                 </Grid>
                
                 <TextField label="user name" placeholder="enter user Name" value={selectedName} required />
-                <Button variant="contained" type="submit" color="primary" style={btnStyle} onClick={handleClick}>Conform</Button>
+                <Button variant="contained" type="submit" color="primary" style={btnStyle} onClick={randomfunction}>Conform</Button>
                 <Button disabled={!selectedName} variant="contained" type="submit" color="primary" style={signbtnstyle} fullWidth onClick={navigateToHome}>SIGN IN</Button>
                 
             </Paper>

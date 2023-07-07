@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import './SigninCard.css';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import ganarateName from "../util/ganarateName";
+import { Link } from 'react-router-dom';
 
 
 
@@ -19,43 +20,25 @@ const Item = styled(Paper)(({ theme }) => ({
   
 
 
-function SigninCard({ pageHandler,nameHandler }) {
+function SigninCard({ nameHandler }) {
 
 
     // these are states for our local value
-    const [g_Name, setG_Name] = useState('');
-    // console.log(g_Name);
+    const [genarateRandomName, setGenarateRandomName] = useState('');
+    // console.log(genarateName);
 
 
-    // genarate NickNames in Array
-
-const gName = () => {
-    const names = [
-      "Name-1",
-      "Ravi",
-      "Kumar",
-      "Sarthial",
-      "John",
-      "Vicky",
-      "Stephen",
-      "Ahmed",
-      "Menaga",
-    ];
-    const randomNumber = Math.floor(Math.random() * names.length);
-    return names[randomNumber];
-};
 
 //set to ganerated name to usestate
 function g_click() { 
-  setG_Name(gName);
-  console.log('51',g_Name)
-    // nameHandler(g_Name)
+  setGenarateRandomName(ganarateName);
+  console.log('51',genarateRandomName)
 }
 
     
 // design component
   return (
-    <div className='sign-body'>
+    <div style={{ marginTop:300, justifyItems:'center'}} className='sign-body'>
        <Box
       sx={{
         display: 'flex',
@@ -88,19 +71,20 @@ function g_click() {
                           id="outlined-basic"
                           label="Name"
                           variant="outlined"
-                          value={g_Name}
-                          onChange={e => setG_Name(e.target.value)}
+                          value={genarateRandomName}
+                          onChange={e => setGenarateRandomName(e.target.value)}
                       
                       />
                      
                   </Box>
                  
-                  <Button onClick={g_click} style={{margin:20}}  variant="contained">Ganerate Name</Button>
+          <Button onClick={g_click} style={{ margin: 20 }} variant="contained">Ganerate Name</Button>
+          <Link to="home">
           <Button style={{ margin: 20 }} variant="contained" onClick={() => {
-            pageHandler()
-            nameHandler(g_Name)
+            nameHandler(genarateRandomName)
             
-                  } }>SignIn</Button>
+            }}>SignIn</Button>
+            </Link>
             </Item>
               
 

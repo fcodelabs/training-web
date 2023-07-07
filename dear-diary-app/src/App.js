@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router,Route, Routes } from 'react-router-dom';
 import "./App.css";
-import Main_Page from "./pages/Main_Page";
+import Main from "./pages/Main";
 import Signin from "./pages/Signin";
 
+
 function App() {
-  const [isFirstPage, setIsFirstPage] = useState(true);
+  
   const [name, setName] = useState('');
 
   const nameHandler = (name) => {
@@ -12,13 +14,17 @@ function App() {
     setName(name)
   }
 
-  const pageHandler = () => {
-    setIsFirstPage(state=>!state);
-  };
+  
 
-  return <div className="App">
-    {isFirstPage ? <Signin pageHandler={ pageHandler } nameHandler={nameHandler} />:<Main_Page pageHandler={ pageHandler } name={name} />}
-  </div>;
+  return (
+    <Router> 
+        <Routes>
+        <Route path="/" element={<Signin nameHandler={nameHandler} />} />
+        <Route path="/home"  element={<Main name={name} />}/>
+        </Routes>
+      </Router>
+    
+  )
 }
 
 export default App;

@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-function Main_Page() {
+function Main() {
   
   // component styles
   return (
@@ -12,4 +12,4 @@ function Main_Page() {
   );
 }
 
-export default Main_Page
+export default Main

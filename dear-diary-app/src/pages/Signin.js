@@ -2,10 +2,10 @@ import React from 'react';
 import SigninCard from "../components/SigninCard";
 
 
-function Signin({pageHandler,nameHandler}) {
+function Signin({nameHandler}) {
   return (
     <div>
-      <SigninCard pageHandler={pageHandler} nameHandler={nameHandler} />
+      <SigninCard nameHandler={nameHandler} />
     </div>
    
   )

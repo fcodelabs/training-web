@@ -25,41 +25,21 @@ const SignIn = () => {
         handleClick(names,setSelectedName);
     }
 
-
-    const paperStyle={
-        padding:20,
-        height:"50vh",
-        width:400,
-        margin:"80px auto"
-    }
-
-    const avatarStyle={
-        backgroundColor:"#3e6fc3",
-        margin: "5px auto"
-    }
-
-    const btnStyle={
-        margin:"12px 20px",
-        backgroundColor: "#3e65h2"
-    }
-
-    const signbtnstyle={
-        margin:"20px auto"
-        
-    }
-
     
     return(
         <Grid>
-            <Paper elevation={10} style={paperStyle}>
-                <Grid>
-                    <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
+            <Paper elevation={10} sx={{ padding:20,
+                                        height:"10vh",
+                                        width:400,
+                                        margin:"80px auto"}}>
+                <Grid sx={{marginTop:"-150px"}}>
+                    <Avatar sx={{backgroundColor:"#3e6fc3",margin: "50px auto"}}><LockOutlinedIcon/></Avatar>
                     <h2>Sign In</h2>
                 </Grid>
                
                 <TextField label="user name" placeholder="enter user Name" value={selectedName} required />
-                <Button variant="contained" type="submit" color="primary" style={btnStyle} onClick={randomfunction}>Conform</Button>
-                <Button disabled={!selectedName} variant="contained" type="submit" color="primary" style={signbtnstyle} fullWidth onClick={navigateToHome}>SIGN IN</Button>
+                <Button variant="contained" type="submit" color="primary" sx={{ margin:"12px 20px",backgroundColor: "#3e65h2"}} onClick={randomfunction}>Conform</Button>
+                <Button disabled={!selectedName} variant="contained" type="submit" color="primary" sx={{ margin:"20px auto"}} fullWidth onClick={navigateToHome}>SIGN IN</Button>
                 
             </Paper>
         </Grid>

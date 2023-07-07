@@ -56,11 +56,6 @@ function genarateNameClick() {
     >
       
               <Item elevation={6}>
-                  
-                  <div>
-                      
-                  </div>
-                  <div></div>
 
             <Box
                 component="form"
@@ -78,8 +73,7 @@ function genarateNameClick() {
                           value={genarateRandomName}
                           onChange={e => setGenarateRandomName(e.target.value)}
                       
-                      />
-                     
+                      /> 
                   </Box>
                  
           <Button onClick={genarateNameClick} style={{ margin: 20 }} variant="contained">Ganerate Name</Button>
@@ -89,10 +83,7 @@ function genarateNameClick() {
             
             }}>SignIn</Button>
             </Link>
-            </Item>
-              
-
-            
+            </Item>   
     </Box>
     </div>
   )

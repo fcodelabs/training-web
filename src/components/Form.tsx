@@ -6,25 +6,30 @@ import { useState } from 'react';
 
 const Form = () => {
 
+    //create use state for title
   const [title,setTitle] = useState<string>();
+  // create use state for description
   const [description,setDescription] = useState<string>();
 
+  // clear the textfields
   const clearFields = () => {
     setTitle("");
     setDescription("");
   }
 
+  //to updated the value in title
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
   
 
+  // to update the value in description
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value);
   };
   
 
-
+  // this function for print the values
   function handleSubmit  (){
     console.log(title);
     console.log(description);

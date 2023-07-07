@@ -2,8 +2,15 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import { TextField, Unstable_Grid2 } from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import { useNavigate } from "react-router-dom";
 
 export default function MyApp() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/Cards"); // Navigate to the "/other" route
+  };
+
   const [rname, setrname] = React.useState("");
 
   const handleChange = (event: {
@@ -37,6 +44,7 @@ export default function MyApp() {
           variant="contained"
           disabled={!rname}
           endIcon={<ArrowForwardRoundedIcon />}
+          onClick={handleClick}
         >
           Continue
         </Button>

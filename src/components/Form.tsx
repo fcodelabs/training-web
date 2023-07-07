@@ -49,7 +49,7 @@ const Form = () => {
 
     return(
        
-        <Container sx={{ bgcolor: '#cfe8fc', height: '100vh'}} >
+        <Container sx={{ bgcolor: '#cfe8fc', height: '100vh'}} maxWidth="xl">
           <TextField InputProps={{style:textStyles}} variant="outlined" placeholder='Submit New' id="fullWidth" value={title} onChange={handleTitleChange}  />
           <Button sx={{margin:"10px 20px auto",borderRadius:"30px",width:"150px",bgcolor:"#A0BFE0",color:"#ffffff"}} variant="outlined" type='submit' onClick={handleSubmit}>Submit</Button>
           {/* <Button variant="contained" type="submit" color="primary" sx={{ margin:"20px auto"}}>SIGN IN</Button> */}

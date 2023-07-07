@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,ReactElement } from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
@@ -20,7 +20,11 @@ const Item = styled(Paper)(({ theme }) => ({
   
 
 
-function SigninCard({ nameHandler }) {
+interface SigninCardProps {
+  nameHandler: (name: string) => void;
+}
+
+function SigninCard({ nameHandler }:SigninCardProps): ReactElement {
 
 
     // these are states for our local value

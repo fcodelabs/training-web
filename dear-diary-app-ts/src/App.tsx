@@ -7,9 +7,9 @@ import Signin from "./pages/Signin";
 
 function App() {
   
-  const [name, setName] = useState('');
+  const [name, setName] = useState<string>('');
 
-  const nameHandler = (name) => {
+  const nameHandler = (name:string) => {
     console.log(name)
     setName(name)
   }
@@ -20,7 +20,7 @@ function App() {
     <Router> 
         <Routes>
         <Route path="/" element={<Signin nameHandler={nameHandler} />} />
-        <Route path="/home"  element={<Main name={name} />}/>
+        <Route path="/home" element={<Main name={ name} />}/>
         </Routes>
       </Router>
     
@@ -28,4 +28,13 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
 

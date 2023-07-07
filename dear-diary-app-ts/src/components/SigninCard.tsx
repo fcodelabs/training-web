@@ -34,7 +34,7 @@ function SigninCard({ nameHandler }:SigninCardProps): ReactElement {
 
 
 //set to ganerated name to usestate
-function g_click() { 
+function genarateNameClick() { 
   setGenarateRandomName(ganarateName);
   console.log('51',genarateRandomName)
 }
@@ -82,7 +82,7 @@ function g_click() {
                      
                   </Box>
                  
-          <Button onClick={g_click} style={{ margin: 20 }} variant="contained">Ganerate Name</Button>
+          <Button onClick={genarateNameClick} style={{ margin: 20 }} variant="contained">Ganerate Name</Button>
           <Link to="home">
           <Button style={{ margin: 20 }} variant="contained" onClick={() => {
             nameHandler(genarateRandomName)

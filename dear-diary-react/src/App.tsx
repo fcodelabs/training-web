@@ -1,6 +1,6 @@
 import "./App.css";
-import AppRouter from "./AppRouter";
-import SignIn from "./SignIn";
+import AppRouter from "./components/AppRouter";
+import SignIn from "./SignInPage/SignIn";
 
 function App() {
   return <AppRouter />;

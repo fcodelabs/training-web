@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import ContinueButton from "./components/ContinueButton";
-import TextFieldsOutlined from "./components/TextfieldOutlined";
-import RandomButton from "./components/RandomButton";
+import logo from "../logo.svg";
+import "../App.css";
+import RandomButton from "../components/RandomButton";
 import Box from "@mui/material/Box";
 import { Grid, Typography } from "@mui/material";
 

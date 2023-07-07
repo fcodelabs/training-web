@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SignIn from "./SignIn";
-import Cards from "./Cards";
+import SignIn from "../SignInPage/SignIn";
+import DiaryHome from "../Diary/DiaryHome";
 
 function AppRouter() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<SignIn />} />
-        <Route path="/Cards" element={<Cards />} />
+        <Route path="/DiaryHome" element={<DiaryHome />} />
       </Routes>
     </Router>
   );

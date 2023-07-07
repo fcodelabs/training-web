@@ -8,7 +8,7 @@ export default function MyApp() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/Cards"); // Navigate to the "/other" route
+    navigate("/DiaryHome"); // Navigate to the "/other" route
   };
 
   const [rname, setrname] = React.useState("");

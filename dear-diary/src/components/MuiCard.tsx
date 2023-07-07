@@ -10,18 +10,12 @@ import {
 } from "@mui/material"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
+import { generateRandomNickname } from "../utils/signin";
+
 
 export const MuiCard = () => {
     const [nickname, setNickname] = useState('');
     const [nicknameError, setNicknameError] = useState(false);
-
-    const generateRandomNickname = () => {
-        const nicknames = ['William', 'Logan', 'Peter', 'Harry', 'Alex', 'Benjimin', 'Paul']
-        const randomNickname = nicknames[Math.floor(Math.random() * nicknames.length)];
-
-        const generatedNickname = `${randomNickname}`;
-        setNickname(generatedNickname);
-    }
 
     const handleContinue = () => {
         if (nickname.trim() === '') {
@@ -33,8 +27,17 @@ export const MuiCard = () => {
     }
 
     return (
-        <div className='bg'>
-            <div className='container' >
+        <Box sx={{
+            backgroundImage: 'linear-gradient(-45deg, #039BE5 0%, #039BE5 33%, #00BCD4 100%)',
+            backgroundAttachment: 'fixed',
+        }}>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                width: 'auto'
+            }} >
                 <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
                     <Card component={Box} sx={{ borderRadius: 3, padding: 2 }} >
                         <CardContent>
@@ -69,7 +72,7 @@ export const MuiCard = () => {
                                         variant='contained'
                                         size='small'
                                         sx={{ borderRadius: 25, backgroundColor: "primary.light" }}
-                                        onClick={generateRandomNickname}>Random</Button>
+                                        onClick={() => setNickname(generateRandomNickname())}> Random</Button>
                                 </Stack>
                                 <Button
                                     variant='contained'
@@ -80,7 +83,7 @@ export const MuiCard = () => {
                         </CardActions>
                     </Card>
                 </Box>
-            </div>
-        </div>
+            </Box>
+        </Box>
     )
 }

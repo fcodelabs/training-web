@@ -1,20 +1,46 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
+import { TextField, Unstable_Grid2 } from "@mui/material";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 
 export default function MyApp() {
+  const [rname, setrname] = React.useState("");
+
+  const handleChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setrname(event.target.value);
+  };
+
   return (
     <div>
+      <TextField
+        id="outlined-basic"
+        label="Your Nickname *"
+        variant="outlined"
+        value={rname}
+        onChange={handleChange}
+        sx={{ width: "300px", marginRight: "5px", marginBottom: "10px" }}
+      ></TextField>
       <Button
         variant="contained"
         sx={{ borderRadius: "20px" }}
         onClick={() => {
           const randomName = generateRandomName();
-          return randomName;
+          setrname(randomName);
         }}
       >
         Random
       </Button>
+      <div>
+        <Button
+          variant="contained"
+          disabled={!rname}
+          endIcon={<ArrowForwardRoundedIcon />}
+        >
+          Continue
+        </Button>
+      </div>
     </div>
   );
 }

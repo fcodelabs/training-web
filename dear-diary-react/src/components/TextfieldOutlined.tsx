@@ -11,6 +11,8 @@ export default function MyApp() {
         id="outlined-basic"
         label="Your Nickname *"
         variant="outlined"
+        sx={{ width: "300px" }}
+        value={RandomButton}
       />
     </div>
   );

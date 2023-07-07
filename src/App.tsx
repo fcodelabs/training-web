@@ -19,8 +19,9 @@ function App() {
             "linear-gradient(-45deg, #039BE5 0%, #039BE5 33%, #00BCD4 100%);",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          height: "100vh",
+          minHeight: "100vh",
           display: "flex",
+          flexDirection:"column",
           alignItems: "center",
           justifyContent: "center",
         }}

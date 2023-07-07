@@ -41,7 +41,7 @@ function Signin() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            borderRadius:'16px'
+            borderRadius:'16px',
           }}
         >
           <Typography

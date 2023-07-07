@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Container, TextField } from "@mui/material";
+import DiaryCard from '../../components/DiaryCard/DiaryCard';
 
 //add css to textField
 const rounded = {
@@ -60,6 +61,13 @@ function DiaryHome() {
           placeholder="Enter Description"
           variant="outlined"
         ></TextField>
+      </Container>
+      <Container maxWidth="xl" sx={{display:"flex", flexWrap: "wrap", justifyContent: "space-between"}}>
+        <DiaryCard title="Sample Title" subTitle="sub title" description="description"/>
+        <DiaryCard title="Sample Title" subTitle="sub title" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"/>
+        <DiaryCard title="Sample Title" subTitle="sub title" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"/>
+        <DiaryCard title="Sample Title" subTitle="sub title" description="description"/>
+        <DiaryCard title="Sample Title" subTitle="sub title" description="description"/>
       </Container>
     </React.Fragment>
   );

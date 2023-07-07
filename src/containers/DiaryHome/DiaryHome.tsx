@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Container, TextField } from "@mui/material";
 
+//add css to textField
 const rounded = {
   borderRadius: "20px",
   height: "43px",
@@ -9,9 +10,11 @@ const rounded = {
 };
 
 function DiaryHome() {
+  //set variables to textfields' values states
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
 
+  //onclick listenere to get textfields value when click on submit button
   function formSubmitHnadler() {
     console.log(title);
     console.log(message);
@@ -19,10 +22,12 @@ function DiaryHome() {
     setMessage("");
   }
 
+  //update input value with userState
   function onchangeTitle(event: { target: { value: any } }) {
     setTitle(event.target.value);
   }
 
+  //update input value with userState
   function onchangeMessage(event: { target: { value: any } }) {
     setMessage(event.target.value);
   }

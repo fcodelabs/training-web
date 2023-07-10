@@ -1,28 +1,25 @@
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  Input,
-  FormHelperText,
-  TextField,
-  Button,
-  Grid,
-} from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import "../index.css";
+import "../../index.css";
+import { useDispatch } from "react-redux";
+import { addCard } from "../../app/cardSlice";
+import { Cards } from "../../app/cardSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
-let inputValueOne = "";
-let inputValueTwo = "";
-const cardInputs: any[] = [];
+// let inputValueOne = "";
+// let inputValueTwo = "";
+// const cardInputs: any[] = [];
 
 export const DiaryForm = () => {
+  const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
   const [inputValue2, setInputValue2] = useState("");
   const [showCard, setShowCard] = useState(false);
+  const cards = useSelector((state: RootState) => state.card.cards);
 
   const handleChange = (event: { target: { value: any } }) => {
     setInputValue(event.target.value);
@@ -33,10 +30,14 @@ export const DiaryForm = () => {
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     // Do something with the input value
-    inputValueOne = inputValue;
-    inputValueTwo = inputValue2;
-    cardInputs.push({ inputValueOne, inputValueTwo });
-    console.log(cardInputs);
+    // inputValueOne = inputValue; //1
+    // inputValueTwo = inputValue2; //1
+    // cardInputs.push({ inputValueOne, inputValueTwo }); //1
+    const newCard: Cards = {
+      title: inputValue,
+      description: inputValue2,
+    };
+    dispatch(addCard(newCard));
     setShowCard(true);
     setInputValue("");
     setInputValue2("");
@@ -92,12 +93,28 @@ export const DiaryForm = () => {
         </form>
       </Box>
       <ul className="pizzas">
-        {showCard &&
+        {/* {showCard &&
           cardInputs.map((card) => (
             <RecipeReviewCard
               title={card.inputValueOne}
               description={card.inputValueTwo}
               key={card.inputValueOne}
+            />
+          ))} 1*/}
+        {/* {showCard &&
+          cardInputs.map((card) => (
+            <RecipeReviewCard
+              title={card.inputValueOne}
+              description={card.inputValueTwo}
+              key={card.inputValueOne}
+            />
+          ))} */}
+        {showCard &&
+          cards.map((card: any) => (
+            <RecipeReviewCard
+              title={card.title}
+              description={card.description}
+              key={card.title}
             />
           ))}
       </ul>
@@ -105,7 +122,7 @@ export const DiaryForm = () => {
   );
 };
 
-export function RecipeReviewCard(props: any) {
+export function RecipeReviewCard(props: Cards) {
   const [showDescription, setShowDescription] = useState(false);
   const handleShowMore = () => {
     setShowDescription(!showDescription);
@@ -152,7 +169,3 @@ export function RecipeReviewCard(props: any) {
     </Card>
   );
 }
-
-const addCard = function () {
-  return <RecipeReviewCard />;
-};

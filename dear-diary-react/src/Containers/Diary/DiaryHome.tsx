@@ -1,4 +1,7 @@
-import { DiaryForm, RecipeReviewCard } from "../components/DiaryForm";
+import {
+  DiaryForm,
+  RecipeReviewCard,
+} from "../../components/DiaryComponents/DiaryForm";
 
 function DiaryHome() {
   return (

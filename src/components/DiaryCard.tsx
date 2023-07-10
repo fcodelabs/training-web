@@ -8,7 +8,7 @@ const DiaryCard = (props:any) => {
             <Typography sx={{ fontSize: 25 }} color="text.secondary" gutterBottom>
                 {props.title}
             </Typography>
-            <Typography sx={{ mb: 1.5, fontSize:16, align:"left" }} color="text.secondary">
+            <Typography sx={{ mb: 1.5}} color="text.secondary">
                 {props.userName}
             </Typography>
             <Typography variant="body2">

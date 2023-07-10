@@ -2,6 +2,7 @@ import {Container,TextField,Button} from '@mui/material';
 import Textarea from '@mui/joy/Textarea';
 import  React  from "react";
 import { useState } from 'react';
+import DiaryCard from './DiaryCard';
 
 
 const Form = () => {
@@ -54,6 +55,7 @@ const Form = () => {
           <Button sx={{margin:"10px 20px auto",borderRadius:"30px",width:"150px",bgcolor:"#A0BFE0",color:"#ffffff"}} variant="outlined" type='submit' onClick={handleSubmit}>Submit</Button>
           {/* <Button variant="contained" type="submit" color="primary" sx={{ margin:"20px auto"}}>SIGN IN</Button> */}
           <Textarea minRows={2} placeholder='Enter Description...' value={description} onChange={handleDescriptionChange}  sx={{bgcolor:"#A0BFE0", marginTop:"20px"}} />
+          <DiaryCard title="Title" userName="User name" description="Description"/>
         </Container>
      
       )

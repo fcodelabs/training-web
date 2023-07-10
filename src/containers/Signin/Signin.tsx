@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Container, Card, TextField, Typography, Button } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
 import randomNameGenerate from '../../utils/randomNameGenerate';
-function Signin() {
+function Signin(props: { onSetName: (name: string) => void })  {
     // set variables for nickname and disabled state
   const [nickname, setNickname] = useState("");
   const [isDisabled, setDisabled] = useState(true);
@@ -17,7 +17,7 @@ function Signin() {
   }
 
   // Change event handler for the nickname input field
-  function changeHandler(event: { target: { value: any } }) {
+  function changeHandler(event: { target: { value: string } }) {
     setNickname(event.target.value);// Update the nickname state
     if (event.target.value !== "") {
       setDisabled(false); // If the input field is not empty, enable the "Continue" button
@@ -28,6 +28,7 @@ function Signin() {
 
    // Click event handler for the "Continue" button
   function continueHandler(){
+    props.onSetName(nickname);
     navigate('/home') // Redirect to the home page
   }
 

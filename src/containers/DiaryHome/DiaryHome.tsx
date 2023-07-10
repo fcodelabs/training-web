@@ -10,17 +10,43 @@ const rounded = {
   marginRight: "10px",
 };
 
-function DiaryHome() {
-  //set variables to textfields' values states
+//set interface to accept cardData
+interface CardData {
+  id:string
+  user: string;
+  title: string;
+  description: string;
+}
+function DiaryHome(props:{user:string}) {
+  //set variables to textfields and card values states
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
+  const [cards, setCard] =  useState<CardData[]>([]);
 
   //onclick listenere to get textfields value when click on submit button
   function formSubmitHandler() {
-    console.log(title);
-    console.log(message);
-    setTitle("");
-    setMessage("");
+    if(title === ""){//show an alert if the title is empty
+      alert("Your title field is empty. Please  fill and try again")
+    }else if(message === ""){//show an alert if the description is empty
+      alert("Your message field is empty. Please  fill and try again")
+    }
+    else{
+      //create an id to card
+      let randomIndex = Math.floor(Math.random() * 1000000)
+      let userId = randomIndex + props.user;
+      //add new card details to cards array
+      setCard(prevState => [
+        ...prevState,
+        {
+          id :userId,
+          user: props.user,
+          title: title,
+          description: message
+        }
+      ]);
+      setTitle("");
+      setMessage("");
+    }
   }
 
   //update input value with userState
@@ -34,7 +60,16 @@ function DiaryHome() {
   }
   return (
     <React.Fragment>
-      <Container>
+      <Container
+      maxWidth="xl"
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection:"column",
+        alignItems: "center",
+        justifyContent: "start",
+      }}>
+      <Container sx={{padding:"40px 0"}}>
         <TextField
           value={title}
           onChange={onchangeTitle}
@@ -62,12 +97,12 @@ function DiaryHome() {
           variant="outlined"
         ></TextField>
       </Container>
-      <Container maxWidth="xl" sx={{display:"flex", flexWrap: "wrap", justifyContent: "space-between"}}>
-        <DiaryCard title="Sample Title" subTitle="sub title" description="description"/>
-        <DiaryCard title="Sample Title" subTitle="sub title" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"/>
-        <DiaryCard title="Sample Title" subTitle="sub title" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"/>
-        <DiaryCard title="Sample Title" subTitle="sub title" description="description"/>
-        <DiaryCard title="Sample Title" subTitle="sub title" description="description"/>
+      <Container maxWidth="xl" sx={{display:"grid", justifyItems:"start",gridTemplateColumns: "repeat(4, 1fr)"}}>
+      {cards.map(card => (
+        <DiaryCard key={card.id} title={card.title} subTitle={card.user} description={card.description}
+        />
+      ))}
+      </Container>
       </Container>
     </React.Fragment>
   );

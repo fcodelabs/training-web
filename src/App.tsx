@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 import Signin from './containers/Signin/Signin';
 import DiaryHome from './containers/DiaryHome/DiaryHome';
@@ -6,19 +6,12 @@ import { Container} from "@mui/material";
 
 // Render the application with the RouterProvider and the configured router
 function App() {
-  //set variables for user state
-  const [user, setUser] = useState("");
-
   // Create a browser router configuration with routes
   const router = createBrowserRouter([
-    { path:'/', element:<Signin onSetName={getName}/>},
-    { path:'/home', element:<DiaryHome user={user}/>}
+    { path:'/', element:<Signin/>},
+    { path:'/home', element:<DiaryHome/>}
   ]);
 
-  //get user name from the signin page
-  function getName(name:string){
-    setUser(name);
-  }
 
   return (
     <Container

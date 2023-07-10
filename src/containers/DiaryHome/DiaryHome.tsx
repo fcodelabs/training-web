@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import React, { useState } from "react";
 import { Button, Container, TextField } from "@mui/material";
 import DiaryCard from '../../components/DiaryCard/DiaryCard';
@@ -17,7 +18,10 @@ interface CardData {
   title: string;
   description: string;
 }
-function DiaryHome(props:{user:string}) {
+function DiaryHome() {
+  //get user name
+  const user = useSelector((state: {user:string} ) => state.user);
+
   //set variables to textfields and card values states
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
@@ -33,13 +37,13 @@ function DiaryHome(props:{user:string}) {
     else{
       //create an id to card
       let randomIndex = Math.floor(Math.random() * 1000000)
-      let userId = randomIndex + props.user;
+      let userId = randomIndex + user;
       //add new card details to cards array
       setCard(prevState => [
         ...prevState,
         {
           id :userId,
-          user: props.user,
+          user: user,
           title: title,
           description: message
         }

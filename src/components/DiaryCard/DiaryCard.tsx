@@ -8,7 +8,8 @@ const StyledCard = styled(Card)({
     margin:'5px',
     borderRadius:'12px',
     padding:"15px",
-    minHeight:180
+    minHeight:180,
+    height: "fit-content"
 });
 
 //set Styles to sub headings

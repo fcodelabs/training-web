@@ -1,10 +1,15 @@
+import { useDispatch } from 'react-redux';
+import {userActions} from '../../redux/store/store';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import { Container, Card, TextField, Typography, Button } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
 import randomNameGenerate from '../../utils/randomNameGenerate';
-function Signin(props: { onSetName: (name: string) => void })  {
-    // set variables for nickname and disabled state
+function Signin()  {
+  //initialize dispatch to save user data
+  const dispatch = useDispatch();
+
+  // set variables for nickname and disabled state
   const [nickname, setNickname] = useState("");
   const [isDisabled, setDisabled] = useState(true);
   
@@ -28,7 +33,8 @@ function Signin(props: { onSetName: (name: string) => void })  {
 
    // Click event handler for the "Continue" button
   function continueHandler(){
-    props.onSetName(nickname);
+    //save user name
+    dispatch(userActions.saveUser(nickname))
     navigate('/home') // Redirect to the home page
   }
 

@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 
 
 
-function Todo_Form() {
+function TodoForm() {
 
     // title name set to state 
     const [input, setInput] = useState('');
@@ -115,5 +115,5 @@ function Todo_Form() {
     )
 }
 
-export default Todo_Form
+export default TodoForm
 

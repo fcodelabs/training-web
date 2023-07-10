@@ -19,7 +19,6 @@ interface TodoCardProps {
 const TodoCard: React.FC<TodoCardProps> = (props) => {
   const [showMore, setShowMore] = useState(false);
   const text = props.todo.description;
-  console.log(text, ' 567');
 
   return (
     <div style={{ padding: 5 }}>
@@ -40,7 +39,6 @@ const TodoCard: React.FC<TodoCardProps> = (props) => {
             <Button size="small" onClick={() => setShowMore(!showMore)}>
               {showMore ? 'SHOW LESS' : 'SHOW MORE'}
             </Button>
-            {/* <Button color='error' size="small"><DeleteForeverIcon /></Button> */}
           </CardActions>
         </Card>
       </Grid>

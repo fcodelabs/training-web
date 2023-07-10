@@ -1,8 +1,16 @@
 import {Button,Typography,CardContent,CardActions, Card} from '@mui/material';
 import  React  from "react";
 import { useState } from 'react';
+import { handleDescriptionClick } from '../utility/Util';
 
-const DiaryCard = (props:any) => {
+//get the passed data by interface type
+interface CardProps{
+    title:string;
+    description:string;
+    userName:string;
+ }
+
+const DiaryCard = (props:CardProps) => {
 
     //use state for show more btn
     const [showMore, setShowMore] = useState(false);
@@ -12,12 +20,9 @@ const DiaryCard = (props:any) => {
         setShowMore(!showMore);
     };
 
-    // find the characters of description less than 100
+    // find the characters of description less than 100 using util file
     const renderDescription = () => {
-        if (props.description.length <= 100 || showMore) {
-        return props.description;
-        }
-        return props.description.slice(0, 100) + '...';
+       return handleDescriptionClick(props.description,showMore)
     };
 
     // find the description how is it and return the hide or show more

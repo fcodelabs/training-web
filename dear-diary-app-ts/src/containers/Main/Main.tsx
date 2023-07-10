@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
-import Appbar from '../components/Appbar';
-import TodoForm from '../components/TodoForm';
-import TodoCard from '../components/TodoCard';
+import Appbar from '../../components/Appbar';
+import TodoForm from '../../components/TodoForm';
+import TodoCard from '../../components/TodoCard';
 import Grid from '@mui/material/Grid';
 
 interface Todo {

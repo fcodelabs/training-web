@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import SigninCard from "../components/SigninCard";
+import SigninCard from "../../components/SigninCard";
 
 interface SigninProps {
   nameHandler: (name: string) => void;

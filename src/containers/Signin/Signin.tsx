@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import {userActions} from '../../redux/store/store';
+import {userActions} from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import { Container, Card, TextField, Typography, Button } from "@mui/material";

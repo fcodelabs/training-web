@@ -35,7 +35,7 @@ function SigninCard({ nameHandler }:SigninCardProps): ReactElement {
 //set to ganerated name to usestate
 function genarateNameClick() { 
   setGenarateRandomName(ganarateName);
-  console.log('51',genarateRandomName)
+  
 }
 
     

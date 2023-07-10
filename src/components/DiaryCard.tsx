@@ -16,9 +16,7 @@ const DiaryCard = (props:any) => {
             </Typography>
         </CardContent>
         <CardActions>
-        {props.description.length > 100 && (
-          <Button>Show More</Button>
-        )}
+         <Button>Show More</Button>
         </CardActions>
     </Card>
      );

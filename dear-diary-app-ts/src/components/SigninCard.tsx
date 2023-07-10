@@ -8,7 +8,6 @@ import ganarateName from "../util/ganarateName";
 import { Link } from 'react-router-dom';
 
 
-
 // styles loging card components
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,

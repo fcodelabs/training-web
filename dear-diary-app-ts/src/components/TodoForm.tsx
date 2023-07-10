@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+
+import React, { ReactElement, useState } from 'react'
+
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -6,8 +8,15 @@ import Button from '@mui/material/Button';
 
 
 
+interface TodoFormProps { 
+    addTodo: (todoName: string, desc: string) => void
+}
 
-function TodoForm() {
+
+
+function TodoForm({ addTodo}:TodoFormProps):ReactElement{
+
+
 
     // title name set to state 
     const [input, setInput] = useState('');
@@ -73,11 +82,13 @@ function TodoForm() {
                 </Grid>
                 <Grid item xs={2} sx={{ paddingTop: 3 }} className='left_grid'>
                     {/* when click submit the button printing in console  */}
-                    
+
                     <Button disabled={!input} type="submit"  variant="contained" className='Form_sumbitbtn' onClick={() => {
                         // createToda(input, desc);
                         console.log("The todo title name : ",input);
-                        console.log("The todo description : ",desc);
+                        console.log("The todo description : ", desc);
+                        // invoke function and call ain page addTodo Function
+                        addTodo(input, desc);
                         setInput('');
                         setDescr('');
                     }}>Submit</Button>

@@ -6,6 +6,21 @@ const DiaryCard = (props:any) => {
 
     const [showMore, setShowMore] = useState(false);
 
+    const handleToggleShowMore = () => {
+        setShowMore(!showMore);
+    };
+
+    const renderDescription = () => {
+        if (props.description.length <= 100 || showMore) {
+        return props.description;
+        }
+        return props.description.slice(0, 100) + '...';
+    };
+
+    const renderButtonText = () => {
+        return showMore ? 'Hide' : 'Show more';
+    };
+
     return ( 
     <Card sx={{ width: 300, marginTop:5 }}>
         <CardContent>
@@ -16,11 +31,13 @@ const DiaryCard = (props:any) => {
                 {props.userName}
             </Typography>
             <Typography variant="body2">
-                {props.description}
+                {renderDescription()}
             </Typography>
         </CardContent>
         <CardActions>
-         <Button>Show More</Button>
+            {props.description.length > 100 && (
+            <Button onClick={handleToggleShowMore}>{renderButtonText()}</Button>
+            )}
         </CardActions>
     </Card>
      );

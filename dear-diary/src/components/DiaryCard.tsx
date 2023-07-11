@@ -1,14 +1,18 @@
 import { Box, Card, CardActions, CardContent, Typography, Button } from "@mui/material";
 import { useState } from "react";
 
-export const DiaryCard = () => {
+interface DiaryCardProps {
+    title: string;
+    username: string;
+    description: string;
+}
+
+export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
     const [showMore, setShowMore] = useState(false);
-    const description = "Description ..."
 
     function handleShowMore() {
         setShowMore(!showMore);
     }
-
 
     return (
         <div>
@@ -23,7 +27,7 @@ export const DiaryCard = () => {
                     <Typography
                         variant='h6'
                         align='left'>
-                        Sample Title
+                        {title}
                     </Typography>
                     <Typography
                         variant='subtitle1'
@@ -31,7 +35,7 @@ export const DiaryCard = () => {
                         align='left'
                         color='#696969'
                         gutterBottom>
-                        Noah
+                        {username}
                     </Typography>
                     <Typography
                         variant='body1'

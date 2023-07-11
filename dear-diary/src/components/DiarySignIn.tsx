@@ -26,7 +26,7 @@ export const DiarySignIn = () => {
         } else {
             setNicknameError(false);
             // Navigate to home
-            navigate('/home');
+            navigate('/home', { state: { nickname }});
         }
     }
 

@@ -39,7 +39,12 @@ const Form = () => {
   
 
   // this function for print the values
-  function handleSubmit  (){
+  function handleSubmit  (e:any){
+    e.preventDefault();
+    if (!title || !description) {
+      alert('Error: Please provide a title and description.');
+      return;
+    }
     if (title !== undefined && description !== undefined) {
       const newTitle = title as string;
       const newDescription = description as string;

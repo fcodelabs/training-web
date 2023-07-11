@@ -11,6 +11,8 @@ const Form = () => {
   const [title,setTitle] = useState<string>();
   // create use state for description
   const [description,setDescription] = useState<string>();
+  // create use state for set cards array
+  const [cards, setCards] = useState([]);
 
   // clear the textfields
   const clearFields = () => {

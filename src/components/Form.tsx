@@ -1,8 +1,14 @@
-import {Container,TextField,Button} from '@mui/material';
+import {Container,TextField,Button,Grid} from '@mui/material';
 import Textarea from '@mui/joy/Textarea';
 import  React  from "react";
 import { useState } from 'react';
 import DiaryCard from './DiaryCard';
+
+interface Card {
+  title: string;
+  description: string;
+  userName:string;
+}
 
 
 const Form = () => {
@@ -12,7 +18,7 @@ const Form = () => {
   // create use state for description
   const [description,setDescription] = useState<string>();
   // create use state for set cards array
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState<Card[]>([]);
 
   // clear the textfields
   const clearFields = () => {
@@ -34,9 +40,14 @@ const Form = () => {
 
   // this function for print the values
   function handleSubmit  (){
-    console.log(title);
-    console.log(description);
-    clearFields();
+    if (title !== undefined && description !== undefined) {
+      const newTitle = title as string;
+      const newDescription = description as string;
+      console.log(newTitle);
+      console.log(newDescription);
+      setCards([...cards, { title: newTitle, description: newDescription, userName: '' }]);
+      clearFields();
+    }
     
   }
 
@@ -57,14 +68,13 @@ const Form = () => {
           <Button sx={{margin:"10px 20px auto",borderRadius:"30px",width:"150px",bgcolor:"#A0BFE0",color:"#ffffff"}} variant="outlined" type='submit' onClick={handleSubmit}>Submit</Button>
           {/* <Button variant="contained" type="submit" color="primary" sx={{ margin:"20px auto"}}>SIGN IN</Button> */}
           <Textarea minRows={2} placeholder='Enter Description...' value={description} onChange={handleDescriptionChange}  sx={{bgcolor:"#A0BFE0", marginTop:"20px"}} />
-          <DiaryCard title="Title" userName="User name" description="Contrary to popular belief, Lorem Ipsum is not simply random text. 
-          It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. 
-          Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, 
-          looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. 
-          Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. 
-          The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.
-          The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. 
-          Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."/>
+          <Grid container spacing={2} sx={{ mt: 2 }}>
+            {cards.map((card, index) => (
+          <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+            <DiaryCard title={card.title} description={card.description} userName={card.userName} />
+          </Grid>
+        ))}
+      </Grid>
         </Container>
      
       )

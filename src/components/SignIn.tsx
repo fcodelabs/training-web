@@ -2,7 +2,7 @@ import { Grid,Paper,Avatar, TextField,Button} from "@mui/material";
 import  React, { useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { handleClick } from '../utility/Util';
+import { handleClick } from "../utility/util";
 import { Typography } from "@mui/joy";
 
 
@@ -17,7 +17,7 @@ const SignIn = () => {
     }
     
     //add the data using array for useSate 
-    const [names,setNames] = useState(['sip','usra','udy','baji']);
+    const names=['sip','usra','udy','baji'];
     // for select a name in array
     const [selectedName,setSelectedName] = useState('');
 
@@ -35,7 +35,7 @@ const SignIn = () => {
                                         margin:"80px auto"}}>
                 <Grid sx={{marginTop:"-150px"}}>
                     <Avatar sx={{backgroundColor:"#3e6fc3",margin: "50px auto"}}><LockOutlinedIcon/></Avatar>
-                    <Typography>Sign In</Typography>
+                    <Typography sx={{fontSize:25,fontWeight:200,marginTop:"10"}}>Sign In</Typography>
                 </Grid>
                
                 <TextField label="user name" placeholder="enter user Name" value={selectedName} required />

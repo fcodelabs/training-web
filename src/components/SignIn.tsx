@@ -3,6 +3,7 @@ import  React, { useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { handleClick } from '../utility/Util';
+import { Typography } from "@mui/joy";
 
 
 const SignIn = () => {
@@ -34,7 +35,7 @@ const SignIn = () => {
                                         margin:"80px auto"}}>
                 <Grid sx={{marginTop:"-150px"}}>
                     <Avatar sx={{backgroundColor:"#3e6fc3",margin: "50px auto"}}><LockOutlinedIcon/></Avatar>
-                    <h2>Sign In</h2>
+                    <Typography>Sign In</Typography>
                 </Grid>
                
                 <TextField label="user name" placeholder="enter user Name" value={selectedName} required />

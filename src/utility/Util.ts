@@ -5,3 +5,10 @@ export const handleClick = (names: string[], setSelectedName: React.Dispatch<Rea
     //set randomNames to state
     setSelectedName(randomName);
   };
+
+  export const handleDescriptionClick = (description:string,showMore:boolean) => {
+    if (description.length <= 100 || showMore) {
+    return description;
+    }
+    return description.slice(0, 100) + '...';
+};

@@ -70,7 +70,7 @@ const Form = () => {
           <Textarea minRows={2} placeholder='Enter Description...' value={description} onChange={handleDescriptionChange}  sx={{bgcolor:"#A0BFE0", marginTop:"20px"}} />
           <Grid container spacing={2} sx={{ mt: 2 }}>
             {cards.map((card, index) => (
-          <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+           <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
             <DiaryCard title={card.title} description={card.description} userName={card.userName} />
           </Grid>
         ))}

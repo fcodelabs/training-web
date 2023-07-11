@@ -1,6 +1,5 @@
 
 import React, { ReactElement, useState } from 'react'
-
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -9,12 +8,12 @@ import Button from '@mui/material/Button';
 
 
 interface TodoFormProps { 
-    addTodo: (todoName: string, desc: string) => void
+    addTodoDb: (todoName: string, desc: string) => void
 }
 
 
 
-function TodoForm({ addTodo}:TodoFormProps):ReactElement{
+function TodoForm({ addTodoDb}:TodoFormProps):ReactElement{
 
 
 
@@ -88,7 +87,7 @@ function TodoForm({ addTodo}:TodoFormProps):ReactElement{
                         console.log("The todo title name : ",input);
                         console.log("The todo description : ", desc);
                         // invoke function and call ain page addTodo Function
-                        addTodo(input, desc);
+                        addTodoDb(input, desc);
                         setInput('');
                         setDescr('');
                     }}>Submit</Button>

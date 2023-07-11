@@ -1,8 +1,13 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import Appbar from '../../components/Appbar';
 import TodoForm from '../../components/TodoForm';
 import TodoCard from '../../components/TodoCard';
 import Grid from '@mui/material/Grid';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTodos, addTodo } from '../../redux/todoSlice';
+import { RootState } from '../../redux/store';
+import db from '../../config/firebase';
+import { collection, addDoc } from 'firebase/firestore/lite';
 
 interface Todo {
   todo: string;
@@ -18,16 +23,25 @@ interface MainProps {
 
 function Main({ name }: MainProps): ReactElement {
 
-  // save to state todo tasks 
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const dispatch = useDispatch();
+  const todos = useSelector((state: RootState) => state.todo.todos);
 
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
 
-  // set and add todo to state 
-  function addTodo(todoName: string, desc: string) {
+  // handle add task function to database and redux 
+  const handleAddTodo = async (todoName: string, desc: string): Promise<void> => {
     const newTodo: Todo = { todo: todoName, userName: name, description: desc };
-    // console.log("54763245",todoName," ",name," ",desc);
-    setTodos([...todos, newTodo]);
-  }
+    try {
+       await addDoc(collection(db, "todos"), newTodo);
+      
+      // Dispatch the addTodo action
+      dispatch(addTodo(newTodo));
+    } catch (error) {
+      console.log('Error adding todo:', error);
+    }
+  };
 
   return (
     <div className="App">
@@ -35,7 +49,7 @@ function Main({ name }: MainProps): ReactElement {
       <Appbar />
 
       {/* todo form component */}
-      <TodoForm addTodo={addTodo} />
+      <TodoForm addTodoDb={handleAddTodo} />
 
       {/* todo card component */}
       <Grid container spacing={3}>

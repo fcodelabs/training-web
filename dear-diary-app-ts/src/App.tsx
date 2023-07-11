@@ -20,7 +20,7 @@ function App() {
     <Router> 
         <Routes>
         <Route path="/" element={<Signin nameHandler={nameHandler} />} />
-        <Route path="/home" element={<Main name={ name} />}/>
+        <Route path="home" element={<Main name={ name} />}/>
         </Routes>
       </Router>
     

@@ -38,7 +38,7 @@ const Form = () => {
   };
   
 
-  // this function for print the values
+  // this function for print the values and show error alert
   function handleSubmit  (e:any){
     e.preventDefault();
     if (!title || !description) {

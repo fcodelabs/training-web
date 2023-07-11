@@ -11,11 +11,14 @@ import {
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
 import { generateRandomNickname } from "../utils/signin";
+import { useNavigate } from "react-router-dom";
 
 
 export const DiarySignIn = () => {
     const [nickname, setNickname] = useState('');
     const [nicknameError, setNicknameError] = useState(false);
+    const navigate = useNavigate();
+    const isContinueDisabled = nickname.trim() === '';
 
     const handleContinue = () => {
         if (nickname.trim() === '') {
@@ -23,6 +26,7 @@ export const DiarySignIn = () => {
         } else {
             setNicknameError(false);
             // Navigate to home
+            navigate('/home');
         }
     }
 
@@ -78,7 +82,8 @@ export const DiarySignIn = () => {
                                     variant='contained'
                                     sx={{ borderRadius: 25, backgroundColor: "primary.light" }}
                                     endIcon={<ArrowForwardIcon />}
-                                    onClick={handleContinue}>Continue</Button>
+                                    onClick={handleContinue}
+                                    disabled={isContinueDisabled}>Continue</Button>
                             </Stack>
                         </CardActions>
                     </Card>

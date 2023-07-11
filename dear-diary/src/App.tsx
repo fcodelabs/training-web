@@ -1,15 +1,20 @@
 import './App.css';
 import { DiaryHome } from './components/DiaryHome';
 import { DiarySignIn } from './components/DiarySignIn';
-import {Routes,Route} from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 function App() {
   return (
     <div className="App">
-      {/* <MuiCard />/ */}
-      <DiaryHome />
+      {/* {<DiarySignIn />} */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<DiarySignIn />} />
+          <Route path="/home" element={<DiaryHome />} />
+        </Routes>
+      </Router>
+
     </div>
   );
 }

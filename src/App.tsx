@@ -12,7 +12,6 @@ function App() {
     { path:'/home', element:<DiaryHome/>}
   ]);
 
-
   return (
     <Container
         maxWidth="xl"

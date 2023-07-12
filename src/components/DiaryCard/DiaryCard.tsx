@@ -4,11 +4,11 @@ import { styled} from '@mui/system';
 
 //set styles to cards
 const StyledCard = styled(Card)({
-    width:270,
+    width:260,
     margin:'5px',
     borderRadius:'12px',
     padding:"15px",
-    minHeight:180,
+    minHeight:200,
     height: "fit-content"
 });
 

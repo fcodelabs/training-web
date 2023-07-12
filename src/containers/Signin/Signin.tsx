@@ -1,11 +1,13 @@
 import { useDispatch } from 'react-redux';
-import {userActions} from '../../redux/store';
+import {cardsActions} from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { Container, Card, TextField, Typography, Button } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
 import randomNameGenerate from '../../utils/randomNameGenerate';
+
 function Signin()  {
+
   //initialize dispatch to save user data
   const dispatch = useDispatch();
 
@@ -18,7 +20,7 @@ function Signin()  {
   // Click event handler for the "Random" button
   function clickHandler() {
     setNickname(randomNameGenerate);// Set a random name
-    setDisabled(false);// Enable the "Continue" button
+    setDisabled(false);
   }
 
   // Change event handler for the nickname input field
@@ -30,12 +32,11 @@ function Signin()  {
       setDisabled(true); // If the input field is empty, disable the "Continue" button
     }
   }
-
    // Click event handler for the "Continue" button
   function continueHandler(){
     //save user name
-    dispatch(userActions.saveUser(nickname))
-    navigate('/home') // Redirect to the home page
+    dispatch(cardsActions.saveUser(nickname));
+    navigate('/home'); // Redirect to the home page
   }
 
   return (

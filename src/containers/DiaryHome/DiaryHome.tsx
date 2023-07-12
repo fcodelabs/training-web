@@ -1,7 +1,13 @@
 import { useSelector } from 'react-redux';
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { Button, Container, TextField } from "@mui/material";
 import DiaryCard from '../../components/DiaryCard/DiaryCard';
+import { useDispatch } from 'react-redux';
+import {cardsActions} from '../../redux/store';
+import app from "../../config/firebase"
+import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
+
+const db = getFirestore(app);
 
 //add css to textField
 const rounded = {
@@ -19,13 +25,27 @@ interface CardData {
   description: string;
 }
 function DiaryHome() {
+  const dispatch = useDispatch();
+  
+  useEffect(() =>{
+    //fetch realtime card data from the db
+    onSnapshot(query(collection(db, 'cards'), orderBy("timeFormatted")), (snapShot) =>{
+      const cardsDocs = snapShot.docs.map(doc =>{
+        const { id,user,title, description } = doc.data();
+         return { id, user, title, description };
+      })
+        dispatch(cardsActions.getCards(cardsDocs))
+    })
+  },[]);
+  
   //get user name
   const user = useSelector((state: {user:string} ) => state.user);
+  const fetchCards = useSelector((state: {cards:CardData[]} ) => state.cards);
+  console.log(user);
 
   //set variables to textfields and card values states
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
-  const [cards, setCard] =  useState<CardData[]>([]);
 
   //onclick listenere to get textfields value when click on submit button
   function formSubmitHandler() {
@@ -36,18 +56,16 @@ function DiaryHome() {
     }
     else{
       //create an id to card
-      let randomIndex = Math.floor(Math.random() * 1000000)
-      let userId = randomIndex + user;
-      //add new card details to cards array
-      setCard(prevState => [
-        ...prevState,
+      const randomIndex = Math.floor(Math.random() * 1000000);
+      const userId = randomIndex + user;
+      dispatch(cardsActions.saveCard(
         {
           id :userId,
           user: user,
           title: title,
           description: message
         }
-      ]);
+      ));
       setTitle("");
       setMessage("");
     }
@@ -62,6 +80,7 @@ function DiaryHome() {
   function onchangeMessage(event: { target: { value: any } }) {
     setMessage(event.target.value);
   }
+  
   return (
     <React.Fragment>
       <Container
@@ -101,8 +120,8 @@ function DiaryHome() {
           variant="outlined"
         ></TextField>
       </Container>
-      <Container maxWidth="xl" sx={{display:"grid", justifyItems:"start",gridTemplateColumns: "repeat(4, 1fr)"}}>
-      {cards.map(card => (
+      <Container maxWidth="xl" sx={{display:"grid", justifyItems:"center",gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gridGap: "10px"}}>
+      {fetchCards.map(card => (
         <DiaryCard key={card.id} title={card.title} subTitle={card.user} description={card.description}
         />
       ))}

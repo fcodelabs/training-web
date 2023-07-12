@@ -17,15 +17,17 @@ export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
     return (
         <div>
             <Card sx={{
-                backgroundColor: "#b3e3f5",
+                backgroundColor: "#B9E9FF",
                 width: 350,
                 borderRadius: "15px",
                 padding: "5px",
                 minHeight: 200,
+                fontFamily: "Open Sans"
+
             }}>
                 <CardContent>
                     <Typography
-                        variant='h6'
+                        variant='h4'
                         align='left'>
                         {title}
                     </Typography>
@@ -41,6 +43,7 @@ export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
                         variant='body1'
                         fontSize='14px'
                         align='left'
+                        color='rgba(0, 0, 0, 0.87)'
                         gutterBottom>
                         {showMore ? description : description.slice(0, 100)}
                     </Typography>
@@ -59,6 +62,5 @@ export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
             </Card>
         </div>
     )
-
 
 }

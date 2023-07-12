@@ -1,7 +1,7 @@
 import './App.css';
-import { DiaryCard } from './components/DiaryCard';
-import { DiaryHome } from './components/DiaryHome';
-import { DiarySignIn } from './components/DiarySignIn';
+import { DiaryCard } from './components/DiaryCard/DiaryCard';
+import { DiaryHome } from './containers/DiaryHome/DiaryHome';
+import { DiarySignIn } from './containers/DiarySignIn/DiarySignIn';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 

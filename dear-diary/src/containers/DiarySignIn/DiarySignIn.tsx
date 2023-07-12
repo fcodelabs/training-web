@@ -10,7 +10,7 @@ import {
 } from "@mui/material"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
-import { generateRandomNickname } from "../utils/signin";
+import { generateRandomNickname } from "../../utils/GenerateRandomNames";
 import { useNavigate } from "react-router-dom";
 
 

@@ -45,13 +45,7 @@ function DiaryHome() {
   
   //fetch realtime card data from the db when loading the page
   useEffect(() =>{
-    onSnapshot(query(collection(db, 'cards'), orderBy("timeFormatted")), (snapShot) =>{
-      const cardsDocs = snapShot.docs.map(doc =>{
-        const { id,user,title, description } = doc.data();
-         return { id, user, title, description };
-      })
-        dispatch(cardsActions.getCards(cardsDocs))
-    })
+    dispatch(cardsActions.requestCards())
   },[]);
   
   //get user name

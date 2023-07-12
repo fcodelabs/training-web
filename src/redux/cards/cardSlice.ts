@@ -30,6 +30,9 @@ const cardSlice = createSlice({
       state.cards = action.payload;
     },
     saveCard(state, action){
+    },
+    requestCards(){
+
     }
   }
 });

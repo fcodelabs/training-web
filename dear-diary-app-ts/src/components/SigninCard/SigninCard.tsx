@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import ganarateName from "../util/ganarateName";
+import ganarateName from "../../util/ganarateName";
 import { Link } from 'react-router-dom';
 
 
@@ -18,12 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
   
 
-
-interface SigninCardProps {
-  nameHandler: (name: string) => void;
-}
-
-function SigninCard({ nameHandler }:SigninCardProps): ReactElement {
+function SigninCard(): ReactElement {
 
 
     // these are states for our local value
@@ -41,7 +36,7 @@ function genarateNameClick() {
     
 // design component
   return (
-    <div style={{ marginTop:300, justifyItems:'center'}} className='sign-body'>
+    <div style={{ justifyItems:'center'}} className='sign-body'>
        <Box
       sx={{
         display: 'flex',
@@ -78,7 +73,7 @@ function genarateNameClick() {
           <Button onClick={genarateNameClick} style={{ margin: 20 }} variant="contained">Ganerate Name</Button>
           <Link to="home">
           <Button style={{ margin: 20 }} variant="contained" onClick={() => {
-            nameHandler(genarateRandomName)
+            localStorage.setItem("name",genarateRandomName)
             
             }}>SignIn</Button>
             </Link>

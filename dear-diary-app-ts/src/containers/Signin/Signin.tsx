@@ -1,14 +1,14 @@
 import React, { ReactElement } from 'react';
-import SigninCard from "../../components/SigninCard";
+import SigninCard from "../../components/SigninCard/SigninCard";
+import LogoImage from '../../img/logo1.png';
 
-interface SigninProps {
-  nameHandler: (name: string) => void;
-}
-
-function Signin({ nameHandler }: SigninProps): ReactElement {
+function Signin(): ReactElement {
   return (
     <div>
-      <SigninCard nameHandler={nameHandler} />
+      <div style={{ textAlign: 'center', marginTop: '200px' }}>
+        <img src={LogoImage} alt="Logo" style={{ width: '500px', height: '150px' }} />
+      </div>
+      <SigninCard  />
     </div>
   );
 }

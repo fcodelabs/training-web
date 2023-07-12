@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect } from 'react';
-import Appbar from '../../components/Appbar';
-import TodoForm from '../../components/TodoForm';
-import TodoCard from '../../components/TodoCard';
+import Appbar from '../../components/Appbar/Appbar';
+import TodoForm from '../../components/TodoForm/TodoForm';
+import TodoCard from '../../components/TodoCard/TodoCard';
 import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTodos, addTodo } from '../../redux/todoSlice';
@@ -11,17 +11,14 @@ import { collection, addDoc } from 'firebase/firestore/lite';
 
 interface Todo {
   todo: string;
-  userName:string
+  userName: string;
   description: string;
 }
 
-interface MainProps {
-  name: string;
-}
 
 
 
-function Main({ name }: MainProps): ReactElement {
+function Main(): ReactElement {
 
   const dispatch = useDispatch();
   const todos = useSelector((state: RootState) => state.todo.todos);
@@ -32,7 +29,8 @@ function Main({ name }: MainProps): ReactElement {
 
   // handle add task function to database and redux 
   const handleAddTodo = async (todoName: string, desc: string): Promise<void> => {
-    const newTodo: Todo = { todo: todoName, userName: name, description: desc };
+    const name = localStorage.getItem("name")
+    const newTodo: Todo = { todo: todoName, userName: name || '', description: desc };
     try {
        await addDoc(collection(db, "todos"), newTodo);
       
@@ -66,3 +64,5 @@ function Main({ name }: MainProps): ReactElement {
 }
 
 export default Main;
+
+

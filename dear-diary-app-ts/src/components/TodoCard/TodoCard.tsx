@@ -20,6 +20,8 @@ const TodoCard: React.FC<TodoCardProps> = (props) => {
   const [showMore, setShowMore] = useState(false);
   const text = props.todo.description;
 
+  const shouldShowButton = text.length > 100;
+
   return (
     <div style={{ padding: 5 }}>
       <Grid item xs>
@@ -36,9 +38,11 @@ const TodoCard: React.FC<TodoCardProps> = (props) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={() => setShowMore(!showMore)}>
-              {showMore ? 'SHOW LESS' : 'SHOW MORE'}
-            </Button>
+            {shouldShowButton && (
+              <Button size="small" onClick={() => setShowMore(!showMore)}>
+                {showMore ? 'SHOW LESS' : 'SHOW MORE'}
+              </Button>
+            )}
           </CardActions>
         </Card>
       </Grid>
@@ -47,3 +51,4 @@ const TodoCard: React.FC<TodoCardProps> = (props) => {
 };
 
 export default TodoCard;
+

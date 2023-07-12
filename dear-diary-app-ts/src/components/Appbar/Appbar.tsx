@@ -28,7 +28,7 @@ function Appbar() {
                             Dear Dairy
                         </Typography>  
                         <Link to='/'>
-                            <Button color="inherit">Logout</Button>
+                            <Button onClick={() => localStorage.removeItem("name")} color="inherit">Logout</Button>
                             </Link>
                     </Toolbar>
                 </AppBar>

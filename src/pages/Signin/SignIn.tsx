@@ -2,7 +2,7 @@ import { Grid,Paper,Avatar, TextField,Button} from "@mui/material";
 import  React, { useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { handleClick } from "../utility/util";
+import { handleClick } from "../../utility/util";
 import { Typography } from "@mui/joy";
 
 

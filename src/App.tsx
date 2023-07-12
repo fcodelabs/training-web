@@ -1,6 +1,6 @@
 import './App.css';
-import SignIn from './components/SignIn';
-import Form from './pages/Form';
+import SignIn from './pages/Signin/SignIn';
+import Form from './pages/Form/Form';
 import {Routes,Route} from 'react-router-dom';
 
 function App() {

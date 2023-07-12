@@ -1,7 +1,7 @@
 import {Button,Typography,CardContent,CardActions, Card} from '@mui/material';
 import  React  from "react";
 import { useState } from 'react';
-import { handleDescriptionClick } from '../utility/util';
+import { handleDescriptionClick } from '../../utility/util';
 
 //get the passed data by interface type
 interface CardProps{

@@ -2,7 +2,7 @@ import {Container,TextField,Button,Grid} from '@mui/material';
 import Textarea from '@mui/joy/Textarea';
 import  React  from "react";
 import { useState } from 'react';
-import DiaryCard from './DiaryCard';
+import DiaryCard from '../../components/DiaryCard/DiaryCard';
 
 interface Card {
   title: string;

@@ -16,7 +16,7 @@ interface CardData {
 const initialState: UserState = { user: "demo", cards:[] };
 
 //create a slice to save the user state
-export const cardSlice = createSlice({
+const cardSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
@@ -33,3 +33,8 @@ export const cardSlice = createSlice({
     }
   }
 });
+
+const cardReducer = cardSlice.reducer;
+const cardsActions = cardSlice.actions;
+
+export {cardReducer, cardsActions};

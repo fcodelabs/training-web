@@ -14,4 +14,10 @@
     const randomNumber = Math.floor(Math.random() * names.length);
     return names[randomNumber];
   };
-  export default randomNameGenerate;
+
+  //route paths variables
+  const routePaths = {
+    home : "/home"
+  };
+
+  export {randomNameGenerate, routePaths};

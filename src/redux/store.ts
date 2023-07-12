@@ -1,18 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { cardSlice } from './cards/cardSlice';
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./rootSaga";
+import rootReducer from './rootStore';
 
 const sagaMiddleware = createSagaMiddleware();
 
 //configure store
 const store = configureStore({
-  reducer: cardSlice.reducer,
+  reducer: rootReducer,
   middleware:[sagaMiddleware]
 });
 
- // Run the rootSaga
+// Run the rootSaga
 sagaMiddleware.run(rootSaga);
 
-export const cardsActions = cardSlice.actions;
 export default store;

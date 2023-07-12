@@ -1,4 +1,4 @@
-const ganarateName = () => {
+const generateName = () => {
     const names = [
       "Name-1",
       "Ravi",
@@ -14,4 +14,4 @@ const ganarateName = () => {
     return names[randomNumber];
 };
 
-export default ganarateName;
+export default generateName;

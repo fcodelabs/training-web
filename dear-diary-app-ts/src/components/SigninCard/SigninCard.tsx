@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import ganarateName from "../../util/ganarateName";
+import generateName from "../../util/generateName";
 import { Link } from 'react-router-dom';
 
 
@@ -22,14 +22,14 @@ function SigninCard(): ReactElement {
 
 
     // these are states for our local value
-    const [genarateRandomName, setGenarateRandomName] = useState('');
+    const [generateRandomName, setGenerateRandomName] = useState('');
     // console.log(genarateName);
 
 
 
 //set to ganerated name to usestate
-function genarateNameClick() { 
-  setGenarateRandomName(ganarateName);
+function generateNameClick() { 
+  setGenerateRandomName(generateName);
   
 }
 
@@ -64,16 +64,16 @@ function genarateNameClick() {
                           id="outlined-basic"
                           label="Name"
                           variant="outlined"
-                          value={genarateRandomName}
-                          onChange={e => setGenarateRandomName(e.target.value)}
+                          value={generateRandomName}
+                          onChange={e => setGenerateRandomName(e.target.value)}
                       
                       /> 
                   </Box>
                  
-          <Button onClick={genarateNameClick} style={{ margin: 20 }} variant="contained">Ganerate Name</Button>
+          <Button onClick={generateNameClick} style={{ margin: 20 }} variant="contained">Generate Name</Button>
           <Link to="home">
           <Button style={{ margin: 20 }} variant="contained" onClick={() => {
-            localStorage.setItem("name",genarateRandomName)
+            localStorage.setItem("name",generateRandomName)
             
             }}>SignIn</Button>
             </Link>

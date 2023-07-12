@@ -6,12 +6,16 @@ import DiaryHome from "../Containers/Diary/DiaryHome";
 function AppRouter() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<SignIn />} />
-        <Route path="/DiaryHome" element={<DiaryHome />} />
-      </Routes>
+      <Routes>{routeSignInToDiaryHome}</Routes>
     </Router>
   );
 }
+
+const routeSignInToDiaryHome = (
+  <>
+    <Route path="/" element={<SignIn />} />
+    <Route path="/DiaryHome" element={<DiaryHome />} />
+  </>
+);
 
 export default AppRouter;

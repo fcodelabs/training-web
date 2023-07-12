@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { TextField, Unstable_Grid2 } from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { useNavigate } from "react-router-dom";
+import { generateRandomName } from "../../Utility/utilityRandomName";
 
 export default function MyApp() {
   const navigate = useNavigate();
@@ -53,34 +54,34 @@ export default function MyApp() {
   );
 }
 
-const names = [
-  "Liam",
-  "Olivia",
-  "Noah",
-  "Emma",
-  "Oliver",
-  "Charlotte",
-  "James",
-  "Amelia",
-  "Elijah",
-  "Sophia",
-  "William",
-  "Isabella",
-  "Henry",
-  "Ava",
-  "Lucas",
-  "Mia",
-  "Benjamin",
-  "Evelyn",
-  "Theodore",
-  "Luna",
-];
+// const names = [
+//   "Liam",
+//   "Olivia",
+//   "Noah",
+//   "Emma",
+//   "Oliver",
+//   "Charlotte",
+//   "James",
+//   "Amelia",
+//   "Elijah",
+//   "Sophia",
+//   "William",
+//   "Isabella",
+//   "Henry",
+//   "Ava",
+//   "Lucas",
+//   "Mia",
+//   "Benjamin",
+//   "Evelyn",
+//   "Theodore",
+//   "Luna",
+// ];
 
-export const generateRandomName = function () {
-  const i = getRandomInt(19);
-  return names[i];
-};
+// export const generateRandomName = function () {
+//   const i = getRandomInt(19);
+//   return names[i];
+// };
 
-function getRandomInt(max: number) {
-  return Math.floor(Math.random() * max);
-}
+// function getRandomInt(max: number) {
+//   return Math.floor(Math.random() * max);
+// }

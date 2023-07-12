@@ -9,10 +9,7 @@ import { addCard } from "../../app/cardSlice";
 import { Cards } from "../../app/cardSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-
-// let inputValueOne = "";
-// let inputValueTwo = "";
-// const cardInputs: any[] = [];
+import db from "../../firebase";
 
 export const DiaryForm = () => {
   const dispatch = useDispatch();
@@ -29,10 +26,7 @@ export const DiaryForm = () => {
   };
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    // Do something with the input value
-    // inputValueOne = inputValue; //1
-    // inputValueTwo = inputValue2; //1
-    // cardInputs.push({ inputValueOne, inputValueTwo }); //1
+
     const newCard: Cards = {
       title: inputValue,
       description: inputValue2,
@@ -93,22 +87,6 @@ export const DiaryForm = () => {
         </form>
       </Box>
       <ul className="pizzas">
-        {/* {showCard &&
-          cardInputs.map((card) => (
-            <RecipeReviewCard
-              title={card.inputValueOne}
-              description={card.inputValueTwo}
-              key={card.inputValueOne}
-            />
-          ))} 1*/}
-        {/* {showCard &&
-          cardInputs.map((card) => (
-            <RecipeReviewCard
-              title={card.inputValueOne}
-              description={card.inputValueTwo}
-              key={card.inputValueOne}
-            />
-          ))} */}
         {showCard &&
           cards.map((card: any) => (
             <RecipeReviewCard
@@ -129,7 +107,7 @@ export function RecipeReviewCard(props: Cards) {
   };
 
   const subtitle = "Card Subtitle";
-  const description = props.description; // Replace with your balance description
+  const description = props.description; // Replace with balance description
 
   const displayedDescription = showDescription
     ? description

@@ -3,12 +3,22 @@ import logo from "../../logo.svg";
 import "../../App.css";
 import RandomButton from "../../components/Buttons/RandomButton";
 import Box from "@mui/material/Box";
-import { Grid, Typography } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Container, Grid, Typography } from "@mui/material";
 
 function SignIn() {
+  const themeBackground = createTheme({
+    palette: {
+      background: {
+        default: "linear-gradient(to right bottom, #430089, #82ffa1)",
+      },
+    },
+  });
+
   return (
-    <div
-      style={{
+    <Container
+      maxWidth={false}
+      sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -26,7 +36,7 @@ function SignIn() {
           backgroundColor: "white",
         }}
       >
-        <div>
+        <Container>
           <Grid container>
             <img
               src={logo}
@@ -45,8 +55,8 @@ function SignIn() {
               Dear Diary
             </Typography>
           </Grid>
-        </div>
-        <div className="App">
+        </Container>
+        <Container sx={{ textAlign: "center" }}>
           <h1
             style={{
               fontFamily: "Arial ",
@@ -56,12 +66,12 @@ function SignIn() {
           >
             Sign In
           </h1>
-          <div>
+          <Container>
             <RandomButton />
-          </div>
-        </div>
+          </Container>
+        </Container>
       </Box>
-    </div>
+    </Container>
   );
 }
 

@@ -62,5 +62,4 @@ export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
             </Card>
         </div>
     )
-
 }

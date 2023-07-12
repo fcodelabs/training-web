@@ -1,8 +1,8 @@
 import { Box, Button, Grid, TextField, Typography, makeStyles } from '@mui/material'
-import Textarea from '@mui/joy/Textarea';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import { DiaryCard } from '../../components/DiaryCard/DiaryCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { DiaryCard } from '../../components/DiaryCard';
+import { addDiaryEntry, setDescription, setError, setSubmitText, setSubmitted } from '../../redux/diarySlice';
 
 type DiaryEntry = {
     title: string;
@@ -12,31 +12,31 @@ type DiaryEntry = {
 
 export const DiaryHome = () => {
     const location = useLocation();
-    const { nickname } = location.state?.nickname || '';
+    const { nickname } = location.state || { nickname: '' };
 
+    //Redux 
+    const diaryEntries = useSelector((state: any) => state.diary.diaryEntries);
+    const error = useSelector((state: any) => state.diary.error);
+    const submitText = useSelector((state: any) => state.diary.submitText);
+    const description = useSelector((state: any) => state.diary.description);
+    const submitted = useSelector((state: any) => state.diary.submitted);
+    const dispatch = useDispatch();
 
-    const [submitText, setSubmitText] = useState('');
-    const [description, setDescription] = useState('');
-    const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState(false);
-    const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
+    // const [error, setError] = useState(false);
+    //const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
+    // const [submitText, setSubmitText] = useState('');
+    // const [description, setDescription] = useState('');
+    // const [submitted, setSubmitted] = useState(false)
 
     function handleSubmit() {
         if (submitText.trim() === '' && description.trim() === '') {
-            setError(true);
+            dispatch(setError(true));
         } else {
-            setSubmitted(true);
-            setDiaryEntries((prevEntries) => [
-                ...prevEntries,
-                {
-                    title: submitText,
-                    username: nickname,
-                    description: description,
-                },
-            ]);
-            setSubmitText('');
-            setDescription('');
-            setError(false);
+            dispatch(addDiaryEntry({ title: submitText, username: nickname, description }));
+            dispatch(setSubmitted(true));
+            dispatch(setSubmitText(''));
+            dispatch(setDescription(''));
+            dispatch(setError(false));
         }
     }
 
@@ -82,7 +82,7 @@ export const DiaryHome = () => {
                                     },
                                 }}
                                 value={submitText}
-                                onChange={(e) => setSubmitText(e.target.value)}
+                                onChange={(e) => dispatch(setSubmitText(e.target.value))}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -97,7 +97,7 @@ export const DiaryHome = () => {
                                     maxWidth: 200,
                                     margin: 2,
                                     size: 'small',
-                                    // backgroundColor: '#2a79fa'
+                                    backgroundColor: '#2a79fa'
                                 }}
                                 onClick={handleSubmit}>
                                 Submit</Button>
@@ -117,7 +117,7 @@ export const DiaryHome = () => {
                                 multiline
                                 rows={6}
                                 value={description}
-                                onChange={(e) => setDescription(e.target.value)}
+                                onChange={(e) => dispatch(setDescription(e.target.value))}
                             />
                             {error && submitted && (
                                 <Box sx={{ textAlign: 'center', marginTop: '10px', marginLeft: '10px' }}>
@@ -130,7 +130,7 @@ export const DiaryHome = () => {
                     </Grid>
                     {diaryEntries.length > 0 && (
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginTop: '20px' }}>
-                            {diaryEntries.map((entry, index) => (
+                            {diaryEntries.map((entry: DiaryEntry, index: number) => (
                                 <Box key={index} sx={{ margin: '10px' }}>
                                     <DiaryCard
                                         title={entry.title}

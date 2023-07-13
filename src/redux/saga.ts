@@ -61,11 +61,11 @@ function* addCards(action: PayloadAction<CardData>) {
 }
 
 function* addCardSaga(){
-    yield takeEvery("cards/saveCard", addCards)
+    yield takeEvery(cardsActions.saveCard, addCards)
 }
 
 function* fetchCardSaga(){
-  yield takeEvery("cards/requestCards", fetchCards)
+  yield takeEvery(cardsActions.requestCards, fetchCards)
 }
 
 export {addCardSaga, fetchCardSaga};

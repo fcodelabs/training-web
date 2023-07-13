@@ -1,17 +1,15 @@
 import { useSelector } from 'react-redux';
 import React, { useState, useEffect} from "react";
-import { Button, Container, TextField } from "@mui/material";
+import { Button, Container, TextField, Grid } from "@mui/material";
 import DiaryCard from '../../components/DiaryCard/DiaryCard';
 import { useDispatch } from 'react-redux';
 import {cardsActions} from '../../redux/cards/cardSlice';
-import app from "../../config/firebase";
-import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 
 //add css to textField
 const rounded = {
   borderRadius: "20px",
+  width:"100%",
   height: "43px",
-  width: "70vw",
   marginRight: "10px",
 };
 
@@ -37,8 +35,6 @@ interface CardData {
   title: string;
   description: string;
 };
-
-const db = getFirestore(app);
 
 function DiaryHome() {
   const dispatch = useDispatch();
@@ -93,16 +89,21 @@ function DiaryHome() {
   return (
     <React.Fragment>
       <Container maxWidth="xl" sx={mainContainer}>
-
         <Container sx={{padding:"40px 0"}}>
           <form onSubmit={formSubmitHandler}>
-          <TextField value={title} onChange={onchangeTitle} placeholder="Enter Title" InputProps={{ style: rounded }}>
-          </TextField>
-          <Button type="submit" sx={{ width: "10vw" }} size="large" variant="contained">
-              Submit
-          </Button>
-          <TextField value={message} onChange={onchangeMessage} InputProps={{ sx: { borderRadius: "20px" } }} fullWidth multiline margin="normal" rows={4} placeholder="Enter Description" variant="outlined"></TextField>
-        
+          <Grid container spacing={2}>
+            <Grid item  xs={8} sm={10} >
+              <TextField value={title} onChange={onchangeTitle} placeholder="Enter Title" InputProps={{ style: rounded }} fullWidth></TextField>
+            </Grid>
+            <Grid item xs={4} sm={2}>
+              <Button type="submit" sx={{width:"100%" }} size="large" variant="contained">
+                  Submit
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField value={message} onChange={onchangeMessage} InputProps={{ sx: { borderRadius: "20px"} }} fullWidth multiline margin="normal" rows={4} placeholder="Enter Description" variant="outlined" ></TextField>
+            </Grid>
+          </Grid>
           </form>
         </Container>
 

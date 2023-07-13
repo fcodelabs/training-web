@@ -1,8 +1,11 @@
-import { AppBar, Box, Button, TextField, Toolbar, Typography, makeStyles } from '@mui/material'
+import { Box, Button, TextField, Typography, makeStyles } from '@mui/material'
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DiaryCard } from '../../components/DiaryCard';
 import { addDiaryEntry, setDescription, setError, setSubmitText, setSubmitted } from '../../redux/diarySlice';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../config/firebase';
+
 
 type DiaryEntry = {
     title: string;
@@ -13,6 +16,7 @@ type DiaryEntry = {
 export const DiaryHome = () => {
     const location = useLocation();
     const { nickname } = location.state || { nickname: '' };
+    const cardsCollectionRef = collection(db, 'cards')
 
     const diaryEntries = useSelector((state: any) => state.diary.diaryEntries);
     const error = useSelector((state: any) => state.diary.error);
@@ -21,7 +25,7 @@ export const DiaryHome = () => {
     const submitted = useSelector((state: any) => state.diary.submitted);
     const dispatch = useDispatch();
 
-    function handleSubmit() {
+    async function handleSubmit() {
         if (submitText.trim() === '' && description.trim() === '') {
             dispatch(setError(true));
         } else {
@@ -30,9 +34,23 @@ export const DiaryHome = () => {
             dispatch(setSubmitText(''));
             dispatch(setDescription(''));
             dispatch(setError(false));
+
+            try {
+                //save card entries to Firestore
+                const newDiaryEntry: DiaryEntry = {
+                    title: submitText,
+                    username: nickname,
+                    description: description
+                };
+
+                const docRef = await addDoc(cardsCollectionRef, newDiaryEntry);
+                console.log('Document written with ID: ', docRef.id);
+            } catch (error) {
+                console.error('Error adding document: ', error);
+
+            }
         }
     }
-
     return (
 
         <Box sx={{
@@ -42,7 +60,7 @@ export const DiaryHome = () => {
             display: 'flex',
             justifyContent: 'center',
         }}>
-            
+
 
             <Box aria-label='diary-container' sx={{
                 //backgroundColor: 'pink',
@@ -51,8 +69,14 @@ export const DiaryHome = () => {
                 height: '290px'
             }}>
                 <Box>
-                <Typography variant='h4' align='left' color='white' marginLeft={'20px'} marginTop={'5px'} fontWeight={'bold'}>Home</Typography>
-            </Box>
+                    <Typography
+                        variant='h4'
+                        align='left'
+                        color='white'
+                        marginLeft={'20px'}
+                        marginTop={'5px'}
+                        fontWeight={'bold'}>Home</Typography>
+                </Box>
                 <Box sx={{
                     //backgroundColor: 'purple',
                     height: '70px',
@@ -131,34 +155,34 @@ export const DiaryHome = () => {
                     height: 'auto',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-around' 
+                    justifyContent: 'space-around'
                 }}>
-                    
-                {diaryEntries.length > 0 && (
-                    <Box aria-label='cards-container' sx={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        margin: '10px',
-                        //backgroundColor: 'red',
-                        justifyContent: 'space-between',
-                    }}>
-                        {diaryEntries.map((entry: DiaryEntry, index: number) => (
-                            <Box aria-label='card-container'
-                            sx={{
-                                //backgroundColor: 'blue',
-                                //width: '350px',
-                                justifyContent: 'center'              
-                            }}
-                                key={index}>
-                                <DiaryCard
-                                    title={entry.title}
-                                    username={entry.username}
-                                    description={entry.description}
-                                />
-                            </Box>
-                        ))}
-                    </Box>
-                )}
+
+                    {diaryEntries.length > 0 && (
+                        <Box aria-label='cards-container' sx={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            margin: '10px',
+                            //backgroundColor: 'red',
+                            justifyContent: 'space-between',
+                        }}>
+                            {diaryEntries.map((entry: DiaryEntry, index: number) => (
+                                <Box aria-label='card-container'
+                                    sx={{
+                                        //backgroundColor: 'blue',
+                                        //width: '350px',
+                                        justifyContent: 'center'
+                                    }}
+                                    key={index}>
+                                    <DiaryCard
+                                        title={entry.title}
+                                        username={entry.username}
+                                        description={entry.description}
+                                    />
+                                </Box>
+                            ))}
+                        </Box>
+                    )}
                 </Box>
             </Box>
         </Box>

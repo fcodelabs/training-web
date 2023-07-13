@@ -1,3 +1,4 @@
+import Container from "@mui/material/Container";
 import {
   DiaryForm,
   RecipeReviewCard,
@@ -5,10 +6,17 @@ import {
 
 function DiaryHome() {
   return (
-    <div>
-      <h1>Diary Home</h1>
+    <Container
+      maxWidth={false}
+      sx={{
+        background: "linear-gradient(to right bottom, #430089, #82ffa1)",
+        minHeight: "100vh", // Set the container height to cover the whole viewport vertically
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <DiaryForm />
-    </div>
+    </Container>
   );
 }
 

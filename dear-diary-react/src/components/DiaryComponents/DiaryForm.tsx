@@ -1,35 +1,45 @@
-import { Box, TextField, Button } from "@mui/material";
-import { useState } from "react";
+import { Box, TextField, Button, Container } from "@mui/material";
+import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import "../../index.css";
 import { useDispatch } from "react-redux";
-import { addCard } from "../../app/cardSlice";
-import { Cards } from "../../app/cardSlice";
+import { addCard, fetchCards } from "./cardSlice";
+import { Cards } from "./cardSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import db from "../../firebase";
 
+let count = 1;
 export const DiaryForm = () => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
   const [inputValue2, setInputValue2] = useState("");
   const [showCard, setShowCard] = useState(false);
   const cards = useSelector((state: RootState) => state.card.cards);
+  const userName = useSelector((store: RootState) => store.createUser.userName);
 
-  const handleChange = (event: { target: { value: any } }) => {
+  // Fetch cards from Firestore when the component mounts
+  useEffect(() => {
+    dispatch(fetchCards());
+  }, [dispatch]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
-  const handleChange2 = (event: { target: { value: any } }) => {
+  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue2(event.target.value);
   };
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    if (inputValue == "" || inputValue2 == "") return alert("Enter Details");
 
     const newCard: Cards = {
+      id: "",
       title: inputValue,
       description: inputValue2,
+      userName: userName,
     };
     dispatch(addCard(newCard));
     setShowCard(true);
@@ -38,12 +48,11 @@ export const DiaryForm = () => {
   };
 
   return (
-    <div>
+    <Container maxWidth={false} sx={{}}>
       <Box
         sx={{
-          border: 1,
-          borderColor: "#3493eb",
-          background: "linear-gradient(to right bottom, #3493eb, #34d0eb)",
+          borderRadius: "25px",
+          textAlign: "center",
         }}
       >
         <form onSubmit={handleSubmit}>
@@ -53,10 +62,13 @@ export const DiaryForm = () => {
               value={inputValue}
               onChange={handleChange}
               sx={{
+                borderRadius: "30px",
+                background:
+                  "linear-gradient(to right bottom, #3493eb, #34d0eb)",
                 flex: "1",
                 marginRight: "10px",
                 marginLeft: "20px",
-                marginTop: "5px",
+                marginTop: "50px",
                 "& .MuiOutlinedInput-root": {
                   borderRadius: "30px",
                 },
@@ -70,7 +82,7 @@ export const DiaryForm = () => {
               variant="contained"
               sx={{
                 borderRadius: "30px",
-                marginTop: "5px",
+                marginTop: "50px",
               }}
             >
               Submit
@@ -80,23 +92,37 @@ export const DiaryForm = () => {
             onChange={handleChange2}
             value={inputValue2}
             label="Enter Description"
-            multiline
-            rows={4}
-            sx={{ width: "100%", marginTop: "10px" }}
+            inputProps={{
+              style: { height: "60px" },
+            }}
+            sx={{
+              borderRadius: "30px",
+              background: "linear-gradient(to right bottom, #3493eb, #34d0eb)",
+              width: "100%",
+              marginTop: "10px",
+              borderBlockEndStyle: "hidden",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "30px",
+              },
+              "& .MuiInputLabel-root": {
+                borderRadius: "30px",
+              },
+            }}
           />
         </form>
       </Box>
       <ul className="pizzas">
-        {showCard &&
-          cards.map((card: any) => (
-            <RecipeReviewCard
-              title={card.title}
-              description={card.description}
-              key={card.title}
-            />
-          ))}
+        {cards.map((card: any) => (
+          <RecipeReviewCard
+            id=""
+            title={card.title}
+            description={card.description}
+            userName={card.userName}
+            key={(count += 1)}
+          />
+        ))}
       </ul>
-    </div>
+    </Container>
   );
 };
 
@@ -106,7 +132,7 @@ export function RecipeReviewCard(props: Cards) {
     setShowDescription(!showDescription);
   };
 
-  const subtitle = "Card Subtitle";
+  const subtitle = props.userName;
   const description = props.description; // Replace with balance description
 
   const displayedDescription = showDescription

@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Cards {
+  id: string;
   title: string;
   description: string;
+  userName: string;
 }
 
-interface CardState {
+export interface CardState {
   cards: Cards[];
 }
 
@@ -20,8 +22,12 @@ const cardSlice = createSlice({
     addCard: (state, action: PayloadAction<Cards>) => {
       state.cards.push(action.payload);
     },
+    setCards: (state, action: PayloadAction<Cards[]>) => {
+      state.cards = action.payload;
+    },
+    fetchCards: () => {}, // Empty placeholder action creator
   },
 });
 
-export const { addCard } = cardSlice.actions;
+export const { addCard, setCards, fetchCards } = cardSlice.actions;
 export default cardSlice.reducer;

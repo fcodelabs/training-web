@@ -4,29 +4,33 @@ import { TextField, Unstable_Grid2 } from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { useNavigate } from "react-router-dom";
 import { generateRandomName } from "../../Utility/utilityRandomName";
+import { useDispatch } from "react-redux";
+import { createUserName } from "../../Containers/SignInFiles/signInSlice";
 
 export default function MyApp() {
   const navigate = useNavigate();
+  const dispacth = useDispatch();
+
+  const [randomName, setRandomName] = React.useState("");
 
   const handleClick = () => {
     navigate("/DiaryHome"); // Navigate to the "/other" route
+    dispacth(createUserName(randomName));
   };
-
-  const [rname, setrname] = React.useState("");
 
   const handleChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
-    setrname(event.target.value);
+    setRandomName(event.target.value);
   };
 
   return (
-    <div>
+    <form>
       <TextField
         id="outlined-basic"
         label="Your Nickname *"
         variant="outlined"
-        value={rname}
+        value={randomName}
         onChange={handleChange}
         sx={{ width: "300px", marginRight: "5px", marginBottom: "10px" }}
       ></TextField>
@@ -35,7 +39,7 @@ export default function MyApp() {
         sx={{ borderRadius: "20px" }}
         onClick={() => {
           const randomName = generateRandomName();
-          setrname(randomName);
+          setRandomName(randomName);
         }}
       >
         Random
@@ -43,45 +47,13 @@ export default function MyApp() {
       <div>
         <Button
           variant="contained"
-          disabled={!rname}
+          disabled={!randomName}
           endIcon={<ArrowForwardRoundedIcon />}
           onClick={handleClick}
         >
           Continue
         </Button>
       </div>
-    </div>
+    </form>
   );
 }
-
-// const names = [
-//   "Liam",
-//   "Olivia",
-//   "Noah",
-//   "Emma",
-//   "Oliver",
-//   "Charlotte",
-//   "James",
-//   "Amelia",
-//   "Elijah",
-//   "Sophia",
-//   "William",
-//   "Isabella",
-//   "Henry",
-//   "Ava",
-//   "Lucas",
-//   "Mia",
-//   "Benjamin",
-//   "Evelyn",
-//   "Theodore",
-//   "Luna",
-// ];
-
-// export const generateRandomName = function () {
-//   const i = getRandomInt(19);
-//   return names[i];
-// };
-
-// function getRandomInt(max: number) {
-//   return Math.floor(Math.random() * max);
-// }

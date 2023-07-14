@@ -27,8 +27,8 @@ const diarySlice = createSlice({
     name: 'diary',
     initialState,
     reducers: {
-        addDiaryEntry: (state, action: PayloadAction<DiaryEntry>) => {
-            state.diaryEntries.push(action.payload);
+        addDiaryEntry: (state, action: PayloadAction<DiaryEntry[]>) => {
+          state.diaryEntries = action.payload;
         },
         setError: (state, action: PayloadAction<boolean>) => {
             state.error = action.payload;
@@ -42,8 +42,11 @@ const diarySlice = createSlice({
           setSubmitted: (state, action: PayloadAction<boolean>) => {
             state.submitted = action.payload;
     },
+    setDiaryEntries(state, action: PayloadAction<DiaryEntry[]>) {
+      state.diaryEntries = action.payload;
+    },
     
 }})
 
-export const { addDiaryEntry, setError, setSubmitText, setDescription, setSubmitted} = diarySlice.actions;
+export const { addDiaryEntry, setError, setSubmitText, setDescription, setSubmitted, setDiaryEntries} = diarySlice.actions;
 export default diarySlice.reducer;

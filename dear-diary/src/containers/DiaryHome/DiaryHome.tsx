@@ -3,8 +3,9 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DiaryCard } from '../../components/DiaryCard';
 import { addDiaryEntry, setDescription, setError, setSubmitText, setSubmitted } from '../../redux/diarySlice';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../../config/firebase';
+import React from 'react';
 
 
 type DiaryEntry = {
@@ -25,11 +26,25 @@ export const DiaryHome = () => {
     const submitted = useSelector((state: any) => state.diary.submitted);
     const dispatch = useDispatch();
 
+    // Fetch diary entries and subscribe to real-time updates
+    React.useEffect(() => {
+        const unsubscribe = onSnapshot(cardsCollectionRef, (snapshot) => {
+            const entries: DiaryEntry[] = [];
+            snapshot.forEach((doc) => {
+                const entry = doc.data() as DiaryEntry;
+                entries.push(entry);
+            });
+            dispatch(setSubmitted(false));
+            dispatch(addDiaryEntry(entries));
+    });
+
+    return () => unsubscribe();
+  }, [dispatch]);
+
     async function handleSubmit() {
         if (submitText.trim() === '' && description.trim() === '') {
             dispatch(setError(true));
         } else {
-            dispatch(addDiaryEntry({ title: submitText, username: nickname, description }));
             dispatch(setSubmitted(true));
             dispatch(setSubmitText(''));
             dispatch(setDescription(''));
@@ -43,12 +58,11 @@ export const DiaryHome = () => {
                     description: description
                 };
 
-                const docRef = await addDoc(cardsCollectionRef, newDiaryEntry);
-                console.log('Document written with ID: ', docRef.id);
-            } catch (error) {
-                console.error('Error adding document: ', error);
-
-            }
+                await addDoc(cardsCollectionRef, newDiaryEntry);
+                
+      } catch (error) {
+        console.error('Error adding document: ', error);
+      }
         }
     }
     return (

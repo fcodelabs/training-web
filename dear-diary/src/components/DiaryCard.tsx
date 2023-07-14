@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 interface DiaryCardProps {
     title: string;
     username: string;
-    description: string;
+    description?: string;
 }
 
 export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
@@ -71,7 +71,7 @@ export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
                         color='rgba(0, 0, 0, 0.87)'
                         fontWeight= 'regular'
                         gutterBottom>
-                        {showMore ? description : description.slice(0, 100)}
+                        {showMore ? description : description?.slice(0, 100)}
                     </Typography>
                 </CardContent>
                 <CardActions>

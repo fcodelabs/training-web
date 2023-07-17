@@ -36,10 +36,10 @@ export const DiaryHome = () => {
             });
             dispatch(setSubmitted(false));
             dispatch(addDiaryEntry(entries));
-    });
+        });
 
-    return () => unsubscribe();
-  }, [dispatch]);
+        return () => unsubscribe();
+    }, [dispatch]);
 
     async function handleSubmit() {
         if (submitText.trim() === '' && description.trim() === '') {
@@ -59,10 +59,10 @@ export const DiaryHome = () => {
                 };
 
                 await addDoc(cardsCollectionRef, newDiaryEntry);
-                
-      } catch (error) {
-        console.error('Error adding document: ', error);
-      }
+
+            } catch (error) {
+                console.error('Error adding document: ', error);
+            }
         }
     }
     return (

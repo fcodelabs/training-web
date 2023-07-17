@@ -24,22 +24,16 @@ export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
 
     return (
         <div
-        style={{
-            //cursor: 'default',
-            //tabSize: 4,
-            WebkitTextSizeAdjust: '100%',
-            wordBreak: 'break-word',
-            color: '#424242',
-            fontFamily: 'Open Sans, sans-serif',
-            fontSize: '100%',
-            lineHeight: 1.5,
-            backgroundRepeat: 'no-repeat',
-            margin: '5px',
-            //boxSizing: 'border-box',
-            //flexGrow: 0,
-            //maxWidth: '50%',
-            //flexBasis: '50%',
-        }}
+            style={{
+                WebkitTextSizeAdjust: '100%',
+                wordBreak: 'break-word',
+                color: '#424242',
+                fontFamily: 'Open Sans, sans-serif',
+                fontSize: '100%',
+                lineHeight: 1.5,
+                backgroundRepeat: 'no-repeat',
+                margin: '5px',
+            }}
         >
             <Card sx={{
                 backgroundColor: "#B9E9FF",
@@ -60,7 +54,7 @@ export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
                         fontSize='14px'
                         align='left'
                         color='#717478'
-                        fontWeight= 'regular' 
+                        fontWeight='regular'
                         gutterBottom>
                         {username}
                     </Typography>
@@ -69,7 +63,7 @@ export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
                         fontSize='14px'
                         align='left'
                         color='rgba(0, 0, 0, 0.87)'
-                        fontWeight= 'regular'
+                        fontWeight='regular'
                         gutterBottom>
                         {showMore ? description : description?.slice(0, 100)}
                     </Typography>
@@ -79,10 +73,11 @@ export const DiaryCard = ({ title, username, description }: DiaryCardProps) => {
                         <Button
                             variant='text'
                             size='small'
-                            sx={{ 
-                                color: 'black', 
-                                borderRadius: '15px',  
-                                fontWeight: 700 }}
+                            sx={{
+                                color: 'black',
+                                borderRadius: '15px',
+                                fontWeight: 700
+                            }}
                             onClick={handleShowMore}>
                             {showMore ? 'Hide' : 'Show More'}
                         </Button>

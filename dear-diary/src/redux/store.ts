@@ -1,8 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import diaryReducer from './diarySlice'
+import diaryReducer from "./diarySlice";
+import createSagaMiddleware from "redux-saga";
+import diarySaga from "./diarySaga";
 
-export default configureStore({
-    reducer: {
-        diary: diaryReducer,
-    }
-})
+const sagaMiddleware = createSagaMiddleware();
+
+const store = configureStore({
+  reducer: {
+    diary: diaryReducer,
+  },
+  middleware: [sagaMiddleware],
+});
+
+sagaMiddleware.run(diarySaga);
+
+export default store;

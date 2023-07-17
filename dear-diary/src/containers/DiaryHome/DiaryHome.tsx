@@ -1,12 +1,11 @@
-import { Box, Button, TextField, Typography, makeStyles } from '@mui/material'
+import { Box, Button, TextField, Typography, useTheme } from '@mui/material'
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DiaryCard } from '../../components/DiaryCard';
-import { addDiaryEntry, setDescription, setError, setSubmitText, setSubmitted } from '../../redux/diarySlice';
+import { addDiaryEntry, clearError, setDescription, setError, setSubmitText, setSubmitted } from '../../redux/diarySlice';
 import { addDoc, collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import React from 'react';
-
 
 type DiaryEntry = {
     title: string;
@@ -14,10 +13,14 @@ type DiaryEntry = {
     description: string;
 };
 
+
 export const DiaryHome = () => {
+    const theme = useTheme();
+    
     const location = useLocation();
     const { nickname } = location.state || { nickname: '' };
     const cardsCollectionRef = collection(db, 'cards')
+    
 
     const diaryEntries = useSelector((state: any) => state.diary.diaryEntries);
     const error = useSelector((state: any) => state.diary.error);
@@ -60,24 +63,35 @@ export const DiaryHome = () => {
 
                 await addDoc(cardsCollectionRef, newDiaryEntry);
 
+                // Reset the error state and other form fields after successful submission
+      dispatch(clearError());
+      dispatch(setSubmitted(true));
+      dispatch(setSubmitText(''));
+      dispatch(setDescription(''));
+
             } catch (error) {
                 console.error('Error adding document: ', error);
             }
         }
     }
     return (
-
         <Box sx={{
             backgroundImage: 'linear-gradient(-45deg, #039BE5 0%, #039BE5 33%, #2cc7db 100%)',
             height: '100vh',
             overflowY: 'auto',
             display: 'flex',
             justifyContent: 'center',
+            [theme.breakpoints.down('sm')]: {
+                padding: theme.spacing(1),
+              },
+              [theme.breakpoints.up('md')]: {
+                padding: theme.spacing(1),
+              },
         }}>
 
 
-            <Box aria-label='diary-container' sx={{
-                //backgroundColor: 'pink',
+            <Box aria-label='diary-container' 
+            sx={{
                 margin: '20px',
                 width: '100vw',
                 height: '290px'
@@ -92,7 +106,6 @@ export const DiaryHome = () => {
                         fontWeight={'bold'}>Home</Typography>
                 </Box>
                 <Box sx={{
-                    //backgroundColor: 'purple',
                     height: '70px',
                     display: 'flex',
                     alignItems: 'center',
@@ -117,14 +130,13 @@ export const DiaryHome = () => {
                         sx={{
                             borderRadius: '40px',
                             marginRight: '20px',
-                            width: '150px',
+                            width: '120px',
                         }}
                         onClick={handleSubmit}>
                         Submit
                     </Button>
                 </Box>
                 <Box sx={{
-                    //backgroundColor: 'lightblue',
                     height: '150px',
                     display: 'flex',
                     alignItems: 'center',
@@ -148,7 +160,6 @@ export const DiaryHome = () => {
                     />
                 </Box>
                 <Box sx={{
-                    //backgroundColor: 'lightgreen',
                     height: 'auto',
                     display: 'flex',
                     alignItems: 'center',
@@ -165,7 +176,6 @@ export const DiaryHome = () => {
                     )}
                 </Box>
                 <Box sx={{
-                    //backgroundColor: 'orange',
                     height: 'auto',
                     display: 'flex',
                     alignItems: 'center',
@@ -177,14 +187,11 @@ export const DiaryHome = () => {
                             display: 'flex',
                             flexWrap: 'wrap',
                             margin: '10px',
-                            //backgroundColor: 'red',
                             justifyContent: 'space-between',
                         }}>
                             {diaryEntries.map((entry: DiaryEntry, index: number) => (
                                 <Box aria-label='card-container'
                                     sx={{
-                                        //backgroundColor: 'blue',
-                                        //width: '350px',
                                         justifyContent: 'center'
                                     }}
                                     key={index}>
@@ -200,5 +207,7 @@ export const DiaryHome = () => {
                 </Box>
             </Box>
         </Box>
+
+
     )
 }

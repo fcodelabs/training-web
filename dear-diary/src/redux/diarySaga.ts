@@ -1,8 +1,9 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { setDiaryEntries, setError, setSubmitted } from "./diarySlice";
-import { Action, PayloadAction } from "@reduxjs/toolkit";
-import { addDoc, collection } from "firebase/firestore";
+import { call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
+import { addDiaryEntry, fetchCards } from "./diarySlice";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { addDoc, collection, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from '../config/firebase'
+import { eventChannel } from "redux-saga";
 
 interface DiaryEntry {
   title: string;
@@ -10,28 +11,46 @@ interface DiaryEntry {
   description: string;
 };
 
-function* submitDiaryEntry(action: PayloadAction<DiaryEntry>) {
+// Fetch diary entries and subscribe to real-time updates
+function* fetchCardsSaga(): Generator<any, void, any> {
   try {
-    // Save card entries to Firestore
-    const { title, username, description } = action.payload;
-    const newDiaryEntry: DiaryEntry = {
-      title,
-      username,
-      description,
-    };
     const cardsCollectionRef = collection(db, 'cards');
-    yield call(addDoc, cardsCollectionRef, newDiaryEntry);
+
+    // Fetch initial data using getDocs
+    const snapshot = yield call(getDocs, cardsCollectionRef);
+    const entries: DiaryEntry[] = [];
+    snapshot.forEach((doc: { data: () => DiaryEntry }) => {
+      const entry = doc.data() as DiaryEntry;
+      entries.push(entry);
+    });
+    yield put(addDiaryEntry(entries));
+
+    // Channel to listen for real-time updates
+    const channel = eventChannel((emit) => {
+      const unsubscribe = onSnapshot(cardsCollectionRef, (querySnapshot) => {
+        const updatedEntries: DiaryEntry[] = [];
+        querySnapshot.forEach((doc) => {
+          const entry = doc.data() as DiaryEntry;
+          updatedEntries.push(entry);
+        });
+        // Emit the updated entries to the channel
+        emit(updatedEntries);
+      });
+
+      return () => unsubscribe();
+    });
+
+    // Continuously listen for real-time updates and dispatch the addDiaryEntry action
+    while (true) {
+      const updatedEntries: DiaryEntry[] = yield take(channel);
+      yield put(addDiaryEntry(updatedEntries));
+    }
 
   } catch (error) {
-    console.error('Error adding document: ', error);
+    console.error('Error fetching diary entries: ', error);
   }
 }
 
-
-function* watchSubmitDiaryEntry() {
-  yield takeLatest("diary/submitDiaryEntry", submitDiaryEntry);
-}
-
 export default function* diarySaga() {
-  yield watchSubmitDiaryEntry();
+  yield takeEvery(fetchCards.type, fetchCardsSaga);
 }

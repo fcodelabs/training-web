@@ -15,7 +15,7 @@ type DiaryEntry = {
 
 export const DiaryHome = () => {
     const theme = useTheme();
-
+  
     const location = useLocation();
     const { nickname } = location.state || { nickname: '' };
     const cardsCollectionRef = collection(db, 'cards')

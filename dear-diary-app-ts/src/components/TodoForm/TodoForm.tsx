@@ -82,7 +82,7 @@ function TodoForm({ addTodoDb}:TodoFormProps):ReactElement{
                 <Grid item xs={2} sx={{ paddingTop: 3 }} className='left_grid'>
                     {/* when click submit the button printing in console  */}
 
-                    <Button disabled={!input} type="submit"  variant="contained" className='Form_sumbitbtn' onClick={() => {
+                    <Button disabled={!input || !desc} type="submit"  variant="contained" className='Form_sumbitbtn' onClick={() => {
                         // createToda(input, desc);
                         console.log("The todo title name : ",input);
                         console.log("The todo description : ", desc);

@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignInPage from './containers/SignInPage/SingInPage';
-import DiaryPage from './containers/DiaryPage/DiaryPage';
+import DiaryHome from './containers/DiaryHome/DiaryHome';
 import { CssBaseline } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -24,7 +24,7 @@ function App() {
       <Router>
           <Routes>
               <Route path="/" element={<SignInPage />} />
-              <Route path="/Diary" element={<DiaryPage />} />
+              <Route path="/Diary" element={<DiaryHome />} />
           </Routes>
       </Router>
     </ThemeProvider>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Box } from '@mui/material';
 import PrimaryAppBar from '../../components/AppBar/AppBar';
-import DiaryForm from './DiaryForm';
+import DiaryForm from '../../components/DiaryForm/DiaryForm';
 
-const DiaryPage: React.FC = () => {
+const DiaryHome: React.FC = () => {
 
   return (
     <>
@@ -17,4 +17,4 @@ const DiaryPage: React.FC = () => {
   );
 };
 
-export default DiaryPage;
+export default DiaryHome;

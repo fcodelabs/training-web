@@ -1,8 +1,9 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignInPage from './containers/SignInPage/SingInPage';
+import DiaryHome from './containers/DiaryHome/DiaryHome';
 import { CssBaseline } from '@mui/material';
-import { green, blue } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -11,7 +12,7 @@ const theme = createTheme({
       main: blue[500],
     },
     secondary: {
-      main: green[500],
+      main: '#b9e9ff',
     },
   },
 });
@@ -23,6 +24,7 @@ function App() {
       <Router>
           <Routes>
               <Route path="/" element={<SignInPage />} />
+              <Route path="/Diary" element={<DiaryHome />} />
           </Routes>
       </Router>
     </ThemeProvider>

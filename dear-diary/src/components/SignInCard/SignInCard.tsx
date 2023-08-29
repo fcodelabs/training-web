@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import logo from '../../images/logo192.png'
 import { Stack } from '@mui/material';
+import { createRandomName } from '../../utils/randomName';
+import { routes } from '../../utils/routes';
 
 export default function SignInCard() {
     const navigate = useNavigate();
@@ -39,11 +41,11 @@ export default function SignInCard() {
         console.log({
             name: nickname,
         });
-        navigate('/Diary');
+        navigate(routes.diary);
     };
 
-    const createRandomName = () => {
-        const randomName = Math.random().toString(36).substring(7);
+    const handleRandomName = () => {
+        const randomName = createRandomName();
         setNickname(randomName);
         setIsNicknameValid(true);
     };
@@ -91,7 +93,7 @@ export default function SignInCard() {
                             height:'6vh',
                             borderRadius: 4
                         }}
-                        onClick={createRandomName}
+                        onClick={handleRandomName}
                     >
                         Random   
                     </Button>

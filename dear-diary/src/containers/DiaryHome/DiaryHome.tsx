@@ -4,7 +4,7 @@ import DiaryCard from '../../components/DiaryCard/DiaryCard';
 import PrimaryAppBar from '../../components/AppBar/AppBar';
 import DiaryForm from '../../components/DiaryForm/DiaryForm';
 
-const DiaryPage: React.FC = () => {
+const DiaryHome: React.FC = () => {
   const cardData = [
       { title: 'Card 1', username: 'thusara', content: 'Content for Card 1' },
       { title: 'Card 2', username: 'thusara', content: 'Content for Card 2' },
@@ -44,4 +44,4 @@ const DiaryPage: React.FC = () => {
   );
 };
 
-export default DiaryPage;
+export default DiaryHome;

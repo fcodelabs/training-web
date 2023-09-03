@@ -1,4 +1,5 @@
 import './App.css';
+import {useState} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignInPage from './containers/SignInPage/SingInPage';
 import DiaryHome from './containers/DiaryHome/DiaryHome';
@@ -18,13 +19,15 @@ const theme = createTheme({
 });
 
 function App() {
+  const [user, setUser] = useState<string>('');
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
           <Routes>
-              <Route path="/" element={<SignInPage />} />
-              <Route path="/Diary" element={<DiaryHome />} />
+              <Route path="/" element={<SignInPage setUser={setUser} />} />
+              <Route path="/Diary" element={<DiaryHome user={user} />} />
           </Routes>
       </Router>
     </ThemeProvider>

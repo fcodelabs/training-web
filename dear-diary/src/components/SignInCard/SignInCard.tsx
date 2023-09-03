@@ -13,7 +13,11 @@ import { Stack } from '@mui/material';
 import { createRandomName } from '../../utils/randomName';
 import { routes } from '../../utils/routes';
 
-export default function SignInCard() {
+interface signInProps {
+    setUser: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function SignInCard ({ setUser }: signInProps) {
     const navigate = useNavigate();
     const [nickname, setNickname] = useState('');
     const [isNicknameValid, setIsNicknameValid] = useState(true);
@@ -42,6 +46,7 @@ export default function SignInCard() {
             name: nickname,
         });
         navigate(routes.diary);
+        setUser(nickname)
     };
 
     const handleRandomName = () => {

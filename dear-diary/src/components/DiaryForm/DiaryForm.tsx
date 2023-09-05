@@ -1,17 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { TextField, Button, Container, Stack, Typography } from '@mui/material';
+import type { RootState } from '../../redux/store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { addCard } from '../../redux/card/cardSlice';
 
-interface DiaryFormProps {
-    setNewCardData: React.Dispatch<
-        React.SetStateAction<{ title: string; username: string; description: string }[]>
-    >;
-    user: string;
-}
-
-const DiaryForm: React.FC <DiaryFormProps> = ({ user, setNewCardData }) => {
+const DiaryForm: React.FC = () => {
     const [showForm, setShowForm] = useState(false);
     const [formError, setFormError] = useState<string | null>(null);
     const formRef = useRef(null);
+    const user = useSelector((state: RootState) => state.user.user)
+    const dispatch = useDispatch()
 
     const handleFieldClick = () => {
         setShowForm(true);
@@ -41,7 +39,7 @@ const DiaryForm: React.FC <DiaryFormProps> = ({ user, setNewCardData }) => {
                 username: user,
                 description,
             };
-            setNewCardData((prevData) => [...prevData, newDiaryEntry]);
+            dispatch(addCard(newDiaryEntry));
             (event.target as HTMLFormElement).reset();
             setShowForm(false);
         }

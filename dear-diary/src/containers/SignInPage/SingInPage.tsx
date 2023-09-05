@@ -2,11 +2,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import SignInCard from '../../components/SignInCard/SignInCard';
 
-interface signInProps {
-    setUser: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export default function SignInPage ({ setUser }: signInProps) {
+export default function SignInPage () {
     return (
         <Container component="main" maxWidth="xs" sx={{minWidth:'100vw', minHeight: '100vh', alignItems: 'center', justifyContent: 'center', backgroundColor: '#42a5f5'}}>
             <Box
@@ -17,7 +13,7 @@ export default function SignInPage ({ setUser }: signInProps) {
                     justifyContent: 'center'
                 }}
             >
-                <SignInCard setUser={setUser}/>
+                <SignInCard />
             </Box>
         </Container>
     );

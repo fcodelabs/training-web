@@ -12,16 +12,15 @@ import logo from '../../images/logo192.png'
 import { Stack } from '@mui/material';
 import { createRandomName } from '../../utils/randomName';
 import { routes } from '../../utils/routes';
+import { useDispatch } from 'react-redux'
+import { addUser } from '../../redux/user/userSlice';
 
-interface signInProps {
-    setUser: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export default function SignInCard ({ setUser }: signInProps) {
+export default function SignInCard () {
     const navigate = useNavigate();
     const [nickname, setNickname] = useState('');
     const [isNicknameValid, setIsNicknameValid] = useState(true);
     const [isDisabled, setIsDisabled] = useState(true)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (nickname.trim() === '') {
@@ -46,7 +45,7 @@ export default function SignInCard ({ setUser }: signInProps) {
             name: nickname,
         });
         navigate(routes.diary);
-        setUser(nickname)
+        dispatch(addUser(nickname));
     };
 
     const handleRandomName = () => {

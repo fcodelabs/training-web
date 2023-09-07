@@ -1,23 +1,48 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { TextField, Button, Container, Stack } from '@mui/material';
+import { TextField, Button, Container, Stack, Typography } from '@mui/material';
+import type { RootState } from '../../redux/store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { addCard } from '../../redux/card/cardSlice';
 
 const DiaryForm: React.FC = () => {
     const [showForm, setShowForm] = useState(false);
+    const [formError, setFormError] = useState<string | null>(null);
     const formRef = useRef(null);
-  
+    const user = useSelector((state: RootState) => state.user.user)
+    const dispatch = useDispatch()
+
     const handleFieldClick = () => {
-      setShowForm(true);
+        setShowForm(true);
     };
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement);
-        console.log({
-            'Title': formData.get('title'),
-            'Description': formData.get('description'),
-        });
-        (event.target as HTMLFormElement).reset();
-        setShowForm(false);
+        const title = (formData.get('title') || '').toString();
+        const description = (formData.get('description') || '').toString();
+
+        if (!title && !description) {
+            setFormError('Please provide a title and description.');
+        } else if (!title){
+            setFormError('Please provide a title.')
+        }else if (!description){
+            setFormError('Please provide a description.')
+        }else {
+            setFormError(null);
+            console.log({
+                'Title': title,
+                'User Name': user,
+                'Description': description,
+            });
+            const newDiaryEntry: { title: string; username: string; description: string } = {
+                title,
+                username: user,
+                description,
+            };
+            dispatch(addCard(newDiaryEntry));
+            (event.target as HTMLFormElement).reset();
+            setShowForm(false);
+        }
     };
 
     const handleOutsideClick = (event: MouseEvent) => {
@@ -25,32 +50,38 @@ const DiaryForm: React.FC = () => {
             setShowForm(false);
         }
     };
-    
+
     useEffect(() => {
         document.addEventListener('mousedown', handleOutsideClick);
         return () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
     }, []);
-  
+    
     return (
-      <Container>
-          <form ref={formRef} onSubmit={handleSubmit}>
+        <Container>
+        <form ref={formRef} onSubmit={handleSubmit}>
             <Stack direction="row" spacing={'4vh'} sx={{ mt: '2vh' }}>
-                <TextField label="Submit New" name="title" sx={{width:showForm ? '100%':'30%', borderRadius: 15}} margin="normal" size="small" onClick={handleFieldClick}/>
-                {showForm &&(
-                    <Button variant="contained" color="primary" type="submit" >
-                        Submit
+                <TextField label="Submit New" name="title" sx={{ width: showForm ? '100%' : '30%', borderRadius: 15 }} margin="normal" size="small" onClick={handleFieldClick} />
+                {showForm && (
+                    <Button variant="contained" color="primary" type="submit">
+                    Submit
                     </Button>
                 )}
             </Stack>
-            {showForm &&(
-                <TextField label="Enter Description" name="description" fullWidth margin="normal" size="medium" sx={{height: 50}} multiline/>
+            {showForm && (
+                <>
+                    <TextField label="Enter Description" name="description" fullWidth margin="normal" size="medium" sx={{ height: 50 }} multiline />
+                    {formError && (
+                        <Typography variant="body2" color="error">
+                            {formError}
+                        </Typography>
+                    )}
+                </>
             )}
-          </form>
-      </Container>
+        </form>
+    </Container>
     );
 };
-  
+
 export default DiaryForm;
-  

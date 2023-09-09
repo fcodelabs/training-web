@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+  margin: 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-auto-rows: minmax(200px, auto);
+  grid-gap: 20px;
+  padding: 20px 10px;
+  /* width: "100%"; */
+  /* background-color: aquamarine; */
+}
+
+.dynamic-height-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-height: 200px; /* Set a maximum height to enable scrolling if the content overflows */
+  overflow-y: auto; /* Enable vertical scrolling if the content overflows the maximum height */
+}

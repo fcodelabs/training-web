@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
-import { DiaryCardProps } from "../../types/DiaryCardProps";
 import { diaryCardColor } from "../../theme/colors";
+
+export type DiaryCardProps = {
+  title: string;
+  name: string;
+  description: string;
+};
 
 const DiaryCard = (props: DiaryCardProps) => {
   const [isView, setIsView] = useState<boolean>(false);
@@ -33,7 +38,7 @@ const DiaryCard = (props: DiaryCardProps) => {
             ? props.description.slice(0, 5) + "..."
             : props.description}
         </Typography>
-        {props.description.length > 5 ? (
+        {props.description.length > 5 && (
           <Button
             fullWidth
             sx={{ justifyContent: "end" }}
@@ -50,8 +55,6 @@ const DiaryCard = (props: DiaryCardProps) => {
               </Typography>
             )}
           </Button>
-        ) : (
-          <></>
         )}
       </Box>
     </Grid>

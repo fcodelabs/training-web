@@ -1,7 +1,7 @@
-import Context from "./containers/Context/Context";
+import Content from "./components/Content/Content";
 
 const App = () => {
-  return <Context />;
+  return <Content />;
 };
 
 export default App;

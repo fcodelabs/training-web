@@ -9,8 +9,13 @@ import {
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
-import { DiaryDetail } from "../../types/DiaryDetail";
 import theme from "../../theme/theme";
+
+export type DiaryDetail = {
+  title: string;
+  name: string;
+  description: string;
+};
 
 const HomePage = () => {
   const [title, setTitle] = useState<string>("");
@@ -81,7 +86,7 @@ const HomePage = () => {
           {isFormVisible ? "Close" : "Add New Card"}
         </Button>
 
-        {isFormVisible ? (
+        {isFormVisible && (
           <Card
             elevation={0}
             sx={{
@@ -126,8 +131,6 @@ const HomePage = () => {
               </Button>
             </Grid>
           </Card>
-        ) : (
-          <></>
         )}
       </Box>
 

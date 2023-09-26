@@ -10,12 +10,17 @@ import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
 import theme from "../../theme/theme";
-import { DiaryData } from "../../types/DiaryData";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { diaryCardActions } from "../../redux/diaryCard/diaryCardSlice";
 import { showToast } from "../../utils/NotificationUtil";
 import { backgroundColor } from "../../theme/colors";
+
+export type DiaryData = {
+  title: string;
+  username: string;
+  description: string;
+};
 
 const HomePage = () => {
   const [title, setTitle] = useState<string>("");
@@ -75,7 +80,7 @@ const HomePage = () => {
           {isFormVisible ? "Close" : "Add New Card"}
         </Button>
 
-        {isFormVisible ? (
+        {isFormVisible && (
           <Card
             elevation={0}
             sx={{
@@ -122,8 +127,6 @@ const HomePage = () => {
               </Button>
             </Grid>
           </Card>
-        ) : (
-          <></>
         )}
       </Box>
 

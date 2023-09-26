@@ -7,8 +7,23 @@ import {
   Typography,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useState } from "react";
+import randomNameGenerate from "../../util/randomNameGenerate";
 
 export default function Signin() {
+  const [nickname, setNickname] = useState<string>("");
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
+  function clickHandler() {
+    setNickname(randomNameGenerate); // set nickname to the value of randomNameGenerate
+    setIsDisabled(false); // isDisabled is false
+  }
+
+  function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    setNickname(e.target.value); // set nickname to the value of input
+    setIsDisabled(e.target.value !== "" ? false : true); // if nickname is not empty, then isDisabled is false
+  }
+
   return (
     <Card
       variant="outlined"
@@ -71,6 +86,8 @@ export default function Signin() {
         }}
       >
         <TextField
+          onChange={changeHandler}
+          value={nickname}
           size="small"
           label="Your Nickname"
           id="outlined-basic"
@@ -78,6 +95,7 @@ export default function Signin() {
           required
         />
         <Button
+          onClick={clickHandler}
           size="small"
           variant="contained"
           sx={{
@@ -91,6 +109,7 @@ export default function Signin() {
         </Button>
       </Container>
       <Button
+        disabled={isDisabled}
         size="small"
         variant="contained"
         sx={{

@@ -4,18 +4,9 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import { DiaryCardProps } from "../../type/DiaryCardProps";
 
-interface DiaryCardProps {
-  title: string;
-  username: string;
-  description: string;
-}
-
-const DiaryCard: React.FC<DiaryCardProps> = ({
-  title,
-  username,
-  description,
-}) => {
+const DiaryCard: React.FC<DiaryCardProps> = ({ title, username, description,currentUsername }) => {
   const [showMore, setShowMore] = useState(false);
 
   const toggleShowMore = () => {
@@ -23,17 +14,17 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
   };
 
   const cardStyle: React.CSSProperties = {
-    backgroundColor: "#0xD4E6F1",
+    backgroundColor: username === currentUsername ? "#63cdda" : "#0xD4E6F1",
     borderRadius: "10px",
     opacity: "0.8",
     margin: "10px",
-    height: "80%",
+    height: "90%",
   };
 
   const textareaStyle: React.CSSProperties = {
+    backgroundColor: username === currentUsername ? "#63cdda" : "#0xD4E6F1",
     width: "100%",
     border: "none",
-    borderColor: "white",
     fontSize: "0.9em",
     resize: "inline",
     fontWeight: "bold",
@@ -49,7 +40,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
             style={textareaStyle}
             readOnly={!showMore}
             rows={showMore ? 5 : 3}
-            value={showMore ? description : `${description.slice(0, 5)} ...`}
+            value={showMore ? description : `${description.slice(0, 100)} ...`}
           />
           <div
             style={{
@@ -58,7 +49,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
               marginTop: "10px",
             }}
           >
-            {!showMore && description.length > 5 && (
+            {!showMore && description.length > 100 && (
               <Button color="primary" onClick={toggleShowMore}>
                 Show More
               </Button>

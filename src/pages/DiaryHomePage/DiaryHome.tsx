@@ -1,38 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline, Snackbar } from "@mui/material";
 import { theme } from "../../theme/theme";
+import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
-import { addDiaryEntry } from "../../redux/DiarySlice";
-import DiaryCard from "../../components/DiaryCard/DiaryCard";
-
-interface DiaryEntry {
-  title: string;
-  uName: string;
-  description: string;
-}
+import { useSelector } from "react-redux";
+import { diaryCardAction } from "../../redux/DiarySlice";
+import { RootState, useAppDispatch } from "../../redux/Store";
+import { DiaryEntry } from "../../type/DiaryEntry";
 
 const DiaryHome: React.FC = () => {
   const location = useLocation();
   const { name } = location.state || {};
-  const [uName] = useState<string>(name || "");
+  const [username] = useState<string>(name || "");
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isTitleFocused, setIsTitleFocused] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
-  const diaryEntries = useSelector(
-    (state: RootState) => state.diary.diaryEntries
+  const diaryEntries: DiaryEntry[] = useSelector(
+    (state: RootState) => state.diaryEntries.diaryEntries
   );
-  const dispatch = useDispatch();
-
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(diaryCardAction.fetchDiaryEntries());
+  }, [dispatch]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -50,11 +48,11 @@ const DiaryHome: React.FC = () => {
 
     const newEntry: DiaryEntry = {
       title,
-      uName,
+      username,
       description,
     };
 
-    dispatch(addDiaryEntry(newEntry));
+    dispatch(diaryCardAction.addDiaryEntry(newEntry));
 
     setTitle("");
     setDescription("");
@@ -166,7 +164,7 @@ const DiaryHome: React.FC = () => {
             )}
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} md={8} lg={9}>
+        <Grid item xs={12} sm={12} md={8} lg={12}>
           <div
             style={{
               marginRight: "2rem",
@@ -174,14 +172,24 @@ const DiaryHome: React.FC = () => {
             }}
           >
             <div style={{ display: "flex", flexWrap: "wrap" }}>
-              {diaryEntries.map((entry, index) => (
-                <DiaryCard
-                  key={index}
-                  title={entry.title}
-                  username={entry.uName}
-                  description={entry.description}
-                />
-              ))}
+              {diaryEntries.map(
+                (
+                  entry: {
+                    title: string;
+                    username: string;
+                    description: string;
+                  },
+                  index: React.Key | null | undefined
+                ) => (
+                  <DiaryCard
+                    key={index}
+                    currentUsername={username}
+                    title={entry.title}
+                    username={entry.username}
+                    description={entry.description}
+                  />
+                )
+              )}
             </div>
           </div>
         </Grid>

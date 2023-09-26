@@ -1,13 +1,20 @@
+import createSagaMiddleware from "redux-saga";
+import { diarySaga } from "./DiarySaga";
 import { configureStore } from "@reduxjs/toolkit";
-import diaryReducer from "./DiarySlice";
+import { useDispatch } from "react-redux";
+import { diaryCardReducer } from "./DiarySlice";
 
-const store = configureStore({
+const sagaMiddleware = createSagaMiddleware();
+
+export const store = configureStore({
   reducer: {
-    diary: diaryReducer,
+    diaryEntries: diaryCardReducer,
   },
+  middleware: [sagaMiddleware],
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+sagaMiddleware.run(diarySaga);
 
-export default store;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export const useAppDispatch = () => useDispatch<AppDispatch>();

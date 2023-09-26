@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { DiaryCardProps } from "../../types/DiaryCardProps";
-import { diaryCardColor } from "../../theme/colors";
+import { normalCardColor, specialCardColor } from "../../theme/colors";
 
 const DiaryCard = (props: DiaryCardProps) => {
   const [isView, setIsView] = useState<boolean>(false);
@@ -13,20 +13,21 @@ const DiaryCard = (props: DiaryCardProps) => {
       md={5}
       lg={3}
       sx={{
-        background: diaryCardColor,
+        background:
+          localStorage.getItem("username") === props.name
+            ? normalCardColor
+            : specialCardColor,
         minHeight: 200,
         borderRadius: 2,
         p: 2,
       }}
     >
       <Box>
-        <Typography variant="h6" color={"white"}>
-          {props.title}
-        </Typography>
-        <Typography variant="body2" color={"whitesmoke"}>
+        <Typography variant="h6">{props.title}</Typography>
+        <Typography variant="body2" sx={{ mb: 2 }} color={"GrayText"}>
           {props.name}
         </Typography>
-        <Typography variant="body1" color={"AppWorkspace"}>
+        <Typography variant="body1">
           {isView
             ? props.description
             : props.description.length > 5
@@ -34,22 +35,23 @@ const DiaryCard = (props: DiaryCardProps) => {
             : props.description}
         </Typography>
         {props.description.length > 5 ? (
-          <Button
-            fullWidth
-            sx={{ justifyContent: "end" }}
-            variant="text"
-            onClick={() => setIsView(!isView)}
-          >
-            {isView ? (
-              <Typography color={"secondary"} variant="body2">
-                View Less
-              </Typography>
-            ) : (
-              <Typography color={"secondary"} variant="body2">
-                View More
-              </Typography>
-            )}
-          </Button>
+          <Grid container justifyContent="flex-end">
+            <Button
+              sx={{ justifyContent: "end" }}
+              variant="text"
+              onClick={() => setIsView(!isView)}
+            >
+              {isView ? (
+                <Typography color={"primary"} variant="body2">
+                  View Less
+                </Typography>
+              ) : (
+                <Typography color={"primary"} variant="body2">
+                  View More
+                </Typography>
+              )}
+            </Button>
+          </Grid>
         ) : (
           <></>
         )}

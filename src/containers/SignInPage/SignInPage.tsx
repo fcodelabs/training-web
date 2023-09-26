@@ -10,6 +10,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { generateRandomName } from "../../utils/RandomNameUtil";
 import theme from "../../theme/theme";
+import { backgroundColor } from "../../theme/colors";
+import { BsArrowRight } from "react-icons/bs";
 
 const SignInPage = () => {
   const [name, setName] = useState<string>("");
@@ -22,6 +24,7 @@ const SignInPage = () => {
         justifyContent="center"
         alignItems="center"
         height={"100vh"}
+        sx={{ background: backgroundColor }}
       >
         <Grid item xs={12} sm={6} md={5} lg={4}>
           <Card sx={{ px: 10, py: 5, borderRadius: 10 }}>
@@ -34,6 +37,7 @@ const SignInPage = () => {
                 label="Nick Name"
                 variant="filled"
                 fullWidth
+                color="secondary"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -55,6 +59,7 @@ const SignInPage = () => {
                   onClick={() => localStorage.setItem("username", name)}
                 >
                   Continue
+                  <BsArrowRight size={20} />
                 </Button>
               </Link>
             </Grid>

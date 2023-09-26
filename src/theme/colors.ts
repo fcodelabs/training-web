@@ -1,3 +1,4 @@
-export const diaryCardColor = "#7371fc";
-export const headerColor = "#3f51b5";
-export const backgroundGradient = "#f44336";
+export const backgroundColor = "#00b4d8";
+export const headerColor = "#03045e";
+export const normalCardColor = "#0077b6";
+export const specialCardColor = "lightblue";

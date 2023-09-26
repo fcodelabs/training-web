@@ -5,60 +5,53 @@ import {
   Grid,
   TextField,
   ThemeProvider,
+  Typography,
 } from "@mui/material";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
-import { DiaryDetail } from "../../types/DiaryDetail";
 import theme from "../../theme/theme";
+import { DiaryData } from "../../types/DiaryData";
+import { RootState, useAppDispatch } from "../../redux/store";
+import { useSelector } from "react-redux";
+import { diaryCardActions } from "../../redux/diaryCard/diaryCardSlice";
+import { showToast } from "../../utils/NotificationUtil";
+import { backgroundColor } from "../../theme/colors";
 
 const HomePage = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
-  const [diaryCards, setDiaryCards] = useState<DiaryDetail[]>([]);
+  const diaryCards: DiaryData[] = useSelector(
+    (state: RootState) => state.diaryCardList.diaryCardList
+  );
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setDiaryCards([
-      {
-        title: "Title",
-        name: "Anonymous",
-        description: "Description",
-      },
-      {
-        title: "Title",
-        name: "Anonymous",
-        description: "Description",
-      },
-      {
-        title: "Title",
-        name: "Anonymous",
-        description: "Description",
-      },
-      {
-        title: "Title",
-        name: "Anonymous",
-        description: "Description",
-      },
-    ]);
-  }, []);
+    dispatch(diaryCardActions.fetchDiaryCardList());
+  }, [dispatch]);
 
-  const handleSubmit = () => {
-    if (title == "" || description == "") {
-      alert("Please fill all the fields");
+  const addNewCard = (): void => {
+    if (title === "" || description === "") {
+      showToast("Please fill all the fields..!");
       return;
     }
-    setDiaryCards([
-      {
-        title: title,
-        name: localStorage.getItem("username") || "Anonymous",
-        description: description,
-      },
-      ...diaryCards,
-    ]);
-    setIsFormVisible(false);
+    try {
+      dispatch(
+        diaryCardActions.addDiaryCard({
+          title: title,
+          description: description,
+          username: localStorage.getItem("username") || "Anonymous",
+        })
+      );
+      showToast("Diary Card Added Successfully..!");
+    } catch (error) {
+      showToast("Something went wrong..!");
+      console.log(error);
+    }
     setTitle("");
     setDescription("");
+    setIsFormVisible(false);
   };
 
   return (
@@ -66,7 +59,6 @@ const HomePage = () => {
       <Header />
       <Box
         sx={{
-          mx: 5,
           top: 100,
           zIndex: 100,
           borderRadius: 2,
@@ -76,7 +68,10 @@ const HomePage = () => {
           variant="contained"
           color="secondary"
           sx={{ position: "fixed", top: 80, right: 10, zIndex: 100 }}
-          onClick={() => setIsFormVisible(!isFormVisible)}
+          onClick={() => {
+            setIsFormVisible(!isFormVisible);
+            window.scrollTo(0, 0);
+          }}
         >
           {isFormVisible ? "Close" : "Add New Card"}
         </Button>
@@ -86,7 +81,7 @@ const HomePage = () => {
             elevation={0}
             sx={{
               pt: 8,
-              background: "transparent",
+              background: backgroundColor,
             }}
           >
             <Grid
@@ -101,6 +96,7 @@ const HomePage = () => {
                 id="standard-basic"
                 label="Title"
                 variant="filled"
+                color="secondary"
                 fullWidth
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -109,6 +105,7 @@ const HomePage = () => {
                 id="standard-basic"
                 label="Description"
                 variant="filled"
+                color="secondary"
                 rows={4}
                 multiline
                 fullWidth
@@ -119,8 +116,8 @@ const HomePage = () => {
                 variant="contained"
                 fullWidth
                 color="secondary"
-                sx={{ borderRadius: 10, mb: 2 }}
-                onClick={handleSubmit}
+                sx={{ mb: 2 }}
+                onClick={() => addNewCard()}
               >
                 Submit
               </Button>
@@ -131,13 +128,21 @@ const HomePage = () => {
         )}
       </Box>
 
-      <Grid container spacing={2} justifyContent="center" gap={4} pt={10}>
+      <Grid
+        container
+        spacing={2}
+        justifyContent="center"
+        gap={4}
+        minHeight={"100vh"}
+        pt={10}
+        sx={{ background: backgroundColor }}
+      >
         {diaryCards.map((diaryCard, index) => {
           return (
             <DiaryCard
               key={index}
               title={diaryCard.title}
-              name={diaryCard.name}
+              name={diaryCard.username}
               description={diaryCard.description}
             />
           );

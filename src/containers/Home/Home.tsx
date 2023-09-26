@@ -1,4 +1,5 @@
 import { Box, Button, Card, Container, TextField } from "@mui/material";
+import DiaryCard from "../../components/DiaryCard";
 
 export default function Home() {
   return (
@@ -102,6 +103,68 @@ export default function Home() {
           }}
         ></TextField>
       </Card>
+
+      <Container
+        maxWidth="xl"
+        sx={{
+          overflowY: "auto",
+          maxHeight: "60vh",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          "@media (max-width: 1440px)": {
+            maxHeight: "40vh",
+          },
+          "@media (max-width: 1024px)": {
+            maxHeight: "30vh",
+          },
+          "&::-webkit-scrollbar": {
+            width: "12px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "rgba(0, 0, 0, 0.2)",
+            borderRadius: "6px",
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "rgba(0, 0, 0, 0.4)",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "rgba(0, 0, 0, 0.1)",
+          },
+          "@media (max-width: 425px)": {
+            "&::-webkit-scrollbar": {
+              width: "6px",
+            },
+          },
+        }}
+      >
+        <DiaryCard
+          title="Sample Title"
+          name="Sample Name"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"
+        />
+        <DiaryCard
+          title="Sample Title"
+          name="Sample Name"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"
+        />
+        <DiaryCard
+          title="Sample Title"
+          name="Sample Name"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"
+        />
+        <DiaryCard
+          title="Sample Title"
+          name="Sample Name"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"
+        />
+        <DiaryCard
+          title="Sample Title"
+          name="Sample Name"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"
+        />
+      </Container>
     </Box>
   );
 }

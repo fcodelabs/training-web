@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import Content from "./components/Context/Content";
+import Content from "./components/Content/Content";
 import store from "./redux/store";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";

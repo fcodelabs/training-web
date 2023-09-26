@@ -4,22 +4,16 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
-import { Box, CssBaseline, Grid } from "@mui/material";
-import { theme } from "../../theme/theme";
+import { Box, Grid } from "@mui/material";
+import { generateRandomName } from "../../util/GenerateRandomNameUtil";
+import theme from "../../theme/theme";
 
 const SignInPage: React.FC = () => {
   const [name, setName] = useState<string>("");
   const navigate = useNavigate();
 
-  const generateRandomName = () => {
-    const randomNames = ["Akila", "Kavindu","Pasan", "Charlie", "David", "Eve"];
-    const randomIndex = Math.floor(Math.random() * randomNames.length);
-    setName(randomNames[randomIndex]);
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(`Submitted name: ${name}`);
     navigate("/home", { state: { name: name } });
   };
 
@@ -27,7 +21,6 @@ const SignInPage: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <Grid
         container
         justifyContent="center"
@@ -65,7 +58,7 @@ const SignInPage: React.FC = () => {
                   }}
                   variant="contained"
                   color="primary"
-                  onClick={generateRandomName}
+                  onClick={() => setName(generateRandomName())}
                 >
                   Generate
                 </Button>

@@ -1,8 +1,9 @@
 import Content from "./components/Content/Content";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App bg-white min-h-screen">
+    <div>
       <Content />
     </div>
   );

@@ -12,7 +12,14 @@ const SignInPage: React.FC = () => {
   const navigate = useNavigate();
 
   const generateRandomName = () => {
-    const randomNames = ["Akila", "Kavindu","Pasan", "Charlie", "David", "Eve"];
+    const randomNames = [
+      "Akila",
+      "Kavindu",
+      "Pasan",
+      "Charlie",
+      "David",
+      "Eve",
+    ];
     const randomIndex = Math.floor(Math.random() * randomNames.length);
     setName(randomNames[randomIndex]);
   };

@@ -7,6 +7,9 @@ import { theme } from "../../theme/theme";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
+import { addDiaryEntry } from "../../redux/DiarySlice";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 
 interface DiaryEntry {
@@ -23,7 +26,12 @@ const DiaryHome: React.FC = () => {
   const [description, setDescription] = useState<string>("");
   const [isTitleFocused, setIsTitleFocused] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
+
+  const diaryEntries = useSelector(
+    (state: RootState) => state.diary.diaryEntries
+  );
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +54,7 @@ const DiaryHome: React.FC = () => {
       description,
     };
 
-    setDiaryEntries([...diaryEntries, newEntry]);
+    dispatch(addDiaryEntry(newEntry));
 
     setTitle("");
     setDescription("");

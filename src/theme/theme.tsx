@@ -1,16 +1,15 @@
 import { createTheme } from "@mui/material";
 
-export const theme = createTheme({
+export default createTheme({
   palette: {
-    mode: "light",
-  },
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          backgroundColor: "#2980b9",
-        },
-      },
+    primary: {
+      main: "#2980b9",
+    },
+    secondary: {
+      main: "#fff222",
+    },
+    background: {
+      default: "#2980b9",
     },
   },
 });

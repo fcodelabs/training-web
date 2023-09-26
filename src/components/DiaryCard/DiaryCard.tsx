@@ -4,14 +4,15 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import { TextField } from "@mui/material";
 
-interface DiaryCardProps {
+interface IDiaryCardProps {
   title: string;
   username: string;
   description: string;
 }
 
-const DiaryCard: React.FC<DiaryCardProps> = ({
+const DiaryCard: React.FC<IDiaryCardProps> = ({
   title,
   username,
   description,
@@ -22,34 +23,33 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
     setShowMore(!showMore);
   };
 
-  const cardStyle: React.CSSProperties = {
-    backgroundColor: "#0xD4E6F1",
-    borderRadius: "10px",
-    opacity: "0.8",
-    margin: "10px",
-    height: "80%",
-  };
-
-  const textareaStyle: React.CSSProperties = {
-    width: "100%",
-    border: "none",
-    borderColor: "white",
-    fontSize: "0.9em",
-    resize: "inline",
-    fontWeight: "bold",
-  };
-
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card style={cardStyle}>
+      <Card
+        sx={{
+          backgroundColor: "#0xD4E6F1",
+          borderRadius: "10px",
+          opacity: "0.8",
+          margin: "10px",
+          height: "80%",
+        }}
+      >
         <CardContent>
           <Typography variant="h5">{title}</Typography>
           <Typography variant="subtitle1">{username}</Typography>
-          <textarea
-            style={textareaStyle}
-            readOnly={!showMore}
+          <TextField
+            sx={{
+              width: "100%",
+              border: "none",
+              borderColor: "white",
+              fontSize: "0.9em",
+              resize: "inline",
+              fontWeight: "bold",
+            }}
+            multiline={true}
             rows={showMore ? 5 : 3}
-            value={showMore ? description : `${description.slice(0, 5)} ...`}
+            value={showMore ? description : `${description.slice(0, 100)} ...`}
+            variant="filled"
           />
           <div
             style={{
@@ -58,7 +58,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
               marginTop: "10px",
             }}
           >
-            {!showMore && description.length > 5 && (
+            {!showMore && description.length > 100 && (
               <Button color="primary" onClick={toggleShowMore}>
                 Show More
               </Button>

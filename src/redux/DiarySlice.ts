@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface DiaryEntry {
   title: string;
-  uName: string;
+  username: string;
   description: string;
 }
 

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@emotion/react";
-import { CssBaseline, Snackbar } from "@mui/material";
-import { theme } from "../../theme/theme";
+import { Snackbar } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
@@ -11,17 +10,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { addDiaryEntry } from "../../redux/DiarySlice";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
+import theme from "../../theme/theme";
 
 interface DiaryEntry {
   title: string;
-  uName: string;
+  username: string;
   description: string;
 }
 
 const DiaryHome: React.FC = () => {
   const location = useLocation();
   const { name } = location.state || {};
-  const [uName] = useState<string>(name || "");
+  const [username] = useState<string>(name || "");
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isTitleFocused, setIsTitleFocused] = useState(false);
@@ -50,7 +50,7 @@ const DiaryHome: React.FC = () => {
 
     const newEntry: DiaryEntry = {
       title,
-      uName,
+      username,
       description,
     };
 
@@ -75,8 +75,6 @@ const DiaryHome: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={12} lg={12}>
           <div style={{ margin: "2rem" }}>
@@ -178,7 +176,7 @@ const DiaryHome: React.FC = () => {
                 <DiaryCard
                   key={index}
                   title={entry.title}
-                  username={entry.uName}
+                  username={entry.username}
                   description={entry.description}
                 />
               ))}

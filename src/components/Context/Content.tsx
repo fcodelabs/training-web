@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import SignInPage from "../SignInPage/SignInPage";
-import HomePage from "../HomePage/HomePage";
+import SignInPage from "../../containers/SignInPage/SignInPage";
+import HomePage from "../../containers/HomePage/HomePage";
 import { defaultRoute, homeRoute } from "../../utils/RoutesUtil";
 
 const Content = () => {

@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Signin from "../../containers/Signin";
-import Home from "../../containers/Signin/Home";
+import Home from "../../containers/Home";
 
 export default function Content() {
   return (

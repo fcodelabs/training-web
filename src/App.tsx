@@ -1,13 +1,10 @@
-import DiaryHome from "./pages/DiaryHomePage/DiaryHome";
-
+import Content from "./components/Content/Content";
 
 function App() {
   return (
-    <>
-      <div>
-        <DiaryHome />
-      </div>
-    </>
+    <div className="App bg-white min-h-screen">
+      <Content />
+    </div>
   );
 }
 

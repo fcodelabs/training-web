@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { DiaryEntry } from "../type/DiaryEntry";
+
+interface DiaryEntry {
+  title: string;
+  username: string;
+  description: string;
+}
 
 interface DiaryState {
   diaryEntries: DiaryEntry[];

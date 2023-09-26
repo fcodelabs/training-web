@@ -4,43 +4,56 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import { DiaryCardProps } from "../../type/DiaryCardProps";
+import { TextField } from "@mui/material";
 
-const DiaryCard: React.FC<DiaryCardProps> = ({ title, username, description,currentUsername }) => {
+interface IDiaryCardProps {
+  title: string;
+  username: string;
+  description: string;
+  currentUsername: string;
+}
+
+const DiaryCard: React.FC<IDiaryCardProps> = ({
+  title,
+  username,
+  description,
+  currentUsername,
+}) => {
   const [showMore, setShowMore] = useState(false);
 
   const toggleShowMore = () => {
     setShowMore(!showMore);
   };
 
-  const cardStyle: React.CSSProperties = {
-    backgroundColor: username === currentUsername ? "#63cdda" : "#0xD4E6F1",
-    borderRadius: "10px",
-    opacity: "0.8",
-    margin: "10px",
-    height: "90%",
-  };
-
-  const textareaStyle: React.CSSProperties = {
-    backgroundColor: username === currentUsername ? "#63cdda" : "#0xD4E6F1",
-    width: "100%",
-    border: "none",
-    fontSize: "0.9em",
-    resize: "inline",
-    fontWeight: "bold",
-  };
-
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card style={cardStyle}>
+      <Card
+        sx={{
+          backgroundColor:
+            username === currentUsername ? "#63cdda" : "#0xD4E6F1",
+          borderRadius: "10px",
+          opacity: "0.8",
+          margin: "10px",
+          height: "90%",
+        }}
+      >
         <CardContent>
           <Typography variant="h5">{title}</Typography>
           <Typography variant="subtitle1">{username}</Typography>
-          <textarea
-            style={textareaStyle}
-            readOnly={!showMore}
+          <TextField
+            sx={{
+              backgroundColor:
+                username === currentUsername ? "#63cdda" : "#0xD4E6F1",
+              width: "100%",
+              border: "none",
+              fontSize: "0.9em",
+              resize: "inline",
+              fontWeight: "bold",
+            }}
+            multiline={true}
             rows={showMore ? 5 : 3}
             value={showMore ? description : `${description.slice(0, 100)} ...`}
+            variant="filled"
           />
           <div
             style={{

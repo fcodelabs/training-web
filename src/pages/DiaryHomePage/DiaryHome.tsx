@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@emotion/react";
-import { CssBaseline, Snackbar } from "@mui/material";
-import { theme } from "../../theme/theme";
+import { Snackbar } from "@mui/material";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,13 @@ import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
 import { diaryCardAction } from "../../redux/DiarySlice";
 import { RootState, useAppDispatch } from "../../redux/Store";
-import { DiaryEntry } from "../../type/DiaryEntry";
+import theme from "../../theme/theme";
+
+interface DiaryEntry {
+  title: string;
+  username: string;
+  description: string;
+}
 
 const DiaryHome: React.FC = () => {
   const location = useLocation();
@@ -73,8 +78,6 @@ const DiaryHome: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={12} lg={12}>
           <div style={{ margin: "2rem" }}>

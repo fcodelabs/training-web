@@ -3,7 +3,12 @@ import { eventChannel } from "redux-saga";
 import { db } from "../db/FirebaseConfig";
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { diaryCardAction } from "./DiarySlice";
-import { DiaryEntry } from "../type/DiaryEntry";
+
+interface DiaryEntry {
+  title: string;
+  username: string;
+  description: string;
+}
 
 function handleGetDiaryEntries(db: any) {
   return eventChannel<DiaryEntry[]>((emitter) => {

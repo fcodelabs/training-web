@@ -5,7 +5,6 @@ import {
   Grid,
   TextField,
   ThemeProvider,
-  Typography,
 } from "@mui/material";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import Header from "../../components/Header/Header";

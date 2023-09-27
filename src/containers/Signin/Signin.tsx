@@ -9,10 +9,12 @@ import {
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
 import randomNameGenerate from "../../util/randomNameGenerate";
+import { useNavigate } from "react-router-dom";
 
 export default function Signin() {
   const [nickname, setNickname] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   function clickHandler() {
     setNickname(randomNameGenerate); // set nickname to the value of randomNameGenerate

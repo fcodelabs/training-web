@@ -1,10 +1,14 @@
 import { Box, Button, Card, Container, TextField } from "@mui/material";
 import DiaryCard from "../../components/DiaryCard";
 import { useState } from "react";
+import { DiaryData } from "../../types/DiaryCardData";
 
 export default function Home() {
   const name = localStorage.getItem("name");
   const [userName] = useState<string>(name || "");
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
+  const [diaryList, setDiaryList] = useState<DiaryData[]>([]);
   
   return (
     <Box

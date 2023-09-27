@@ -14,6 +14,10 @@ export default function Home() {
     setTitle(e.target.value);
   }
 
+  function onchangeMessage(e: any) {
+    setMessage(e.target.value);
+  }
+
   return (
     <Box
       sx={{
@@ -101,6 +105,8 @@ export default function Home() {
           </Button>
         </Container>
         <TextField
+          onChange={onchangeMessage}
+          value={message}
           size="small"
           InputProps={{ sx: { borderRadius: "20px" } }}
           multiline

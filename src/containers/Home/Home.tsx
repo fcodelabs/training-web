@@ -9,7 +9,7 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [diaryList, setDiaryList] = useState<DiaryData[]>([]);
-  
+
   function onchangeTitle(e: any) {
     setTitle(e.target.value);
   }
@@ -174,31 +174,16 @@ export default function Home() {
           },
         }}
       >
-        <DiaryCard
-          title="Sample Title"
-          name="Sample Name"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"
-        />
-        <DiaryCard
-          title="Sample Title"
-          name="Sample Name"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"
-        />
-        <DiaryCard
-          title="Sample Title"
-          name="Sample Name"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"
-        />
-        <DiaryCard
-          title="Sample Title"
-          name="Sample Name"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"
-        />
-        <DiaryCard
-          title="Sample Title"
-          name="Sample Name"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lacus id augue ultrices, convallis lacinia neque facilisis. Phasellus ac dolor diam. Nam eros erat, consectetur ut feugiat nec, consectetur ut quam. Orci varius"
-        />
+        {diaryList.map((diary, index) => {
+          return (
+            <DiaryCard
+              key={index}
+              title={diary.title}
+              name={diary.username}
+              description={diary.description}
+            />
+          );
+        })}
       </Container>
     </Box>
   );

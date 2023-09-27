@@ -28,6 +28,8 @@ export default function Home() {
         description: message,
       },
     ]);
+    setTitle("");
+    setMessage("");
   }
 
   return (

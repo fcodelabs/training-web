@@ -6,16 +6,15 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
+import { DiaryCardProps } from "../../types/DiaryCardProps";
 
-export default function DiaryCard(props: {
-  title: string;
-  name: string;
-  description: string;
-}) {
+export default function DiaryCard(props: DiaryCardProps) {
   const { title, name, description } = props;
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const limitedText = isExpanded ? description : description.slice(0, 100) + "...";
+  const limitedText = isExpanded
+    ? description
+    : description.slice(0, 100) + "...";
 
   function toggleExpansion() {
     setIsExpanded(!isExpanded);

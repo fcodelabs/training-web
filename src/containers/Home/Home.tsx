@@ -18,6 +18,18 @@ export default function Home() {
     setMessage(e.target.value);
   }
 
+  function submitHandler(e: any) {
+    e.preventDefault();
+    setDiaryList((prevState) => [
+      ...prevState,
+      {
+        title: title,
+        username: userName,
+        description: message,
+      },
+    ]);
+  }
+
   return (
     <Box
       sx={{
@@ -83,6 +95,7 @@ export default function Home() {
             }}
           />
           <Button
+            onClick={submitHandler}
             size="small"
             variant="contained"
             sx={{

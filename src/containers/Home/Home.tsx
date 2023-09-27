@@ -1,7 +1,11 @@
 import { Box, Button, Card, Container, TextField } from "@mui/material";
 import DiaryCard from "../../components/DiaryCard";
+import { useState } from "react";
 
 export default function Home() {
+  const name = localStorage.getItem("name");
+  const [userName] = useState<string>(name || "");
+  
   return (
     <Box
       sx={{

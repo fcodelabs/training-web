@@ -26,6 +26,11 @@ export default function Signin() {
     setIsDisabled(e.target.value !== "" ? false : true); // if nickname is not empty, then isDisabled is false
   }
 
+  const continueHandler = () => {
+    localStorage.setItem('name', nickname);
+    navigate('/home');
+  };
+
   return (
     <Card
       variant="outlined"
@@ -122,6 +127,7 @@ export default function Signin() {
           "&:hover": { backgroundColor: "#01ACDC" },
           gap: "10px",
         }}
+        onClick={continueHandler}
       >
         Continue
         <ArrowForwardIcon />

@@ -1,14 +1,21 @@
 import { Box, Button, Card, Container, TextField } from "@mui/material";
 import DiaryCard from "../../components/DiaryCard";
 import { useState } from "react";
-import { DiaryData } from "../../types/DiaryCardData";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/DiaryCardSlice/Store";
+import { addDiaryCard } from "../../redux/DiaryCardSlice/DiaryCardSlice";
 
 export default function Home() {
   const name = localStorage.getItem("name");
   const [userName] = useState<string>(name || "");
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
-  const [diaryList, setDiaryList] = useState<DiaryData[]>([]);
+
+  const diaryCardEntries = useSelector(
+    (state: RootState) => state.diaryCardSlice.diaryCardEntries
+  );
+
+  const dispatch = useDispatch();
 
   function onchangeTitle(e: any) {
     setTitle(e.target.value);
@@ -20,14 +27,13 @@ export default function Home() {
 
   function submitHandler(e: any) {
     e.preventDefault();
-    setDiaryList((prevState) => [
-      ...prevState,
-      {
+    dispatch(
+      addDiaryCard({
         title: title,
         username: userName,
         description: message,
-      },
-    ]);
+      })
+    );
     setTitle("");
     setMessage("");
   }
@@ -174,7 +180,7 @@ export default function Home() {
           },
         }}
       >
-        {diaryList.map((diary, index) => {
+        {diaryCardEntries.map((diary, index) => {
           return (
             <DiaryCard
               key={index}

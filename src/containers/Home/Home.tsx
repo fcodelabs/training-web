@@ -10,6 +10,10 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [diaryList, setDiaryList] = useState<DiaryData[]>([]);
   
+  function onchangeTitle(e: any) {
+    setTitle(e.target.value);
+  }
+
   return (
     <Box
       sx={{
@@ -54,6 +58,8 @@ export default function Home() {
           }}
         >
           <TextField
+            onChange={onchangeTitle}
+            value={title}
             size="small"
             label="Submit Title"
             required

@@ -17,8 +17,12 @@ const diaryCardSlice = createSlice({
     addDiaryCard(state, action: PayloadAction<DiaryData>) {
       state.diaryCardEntries.push(action.payload);
     },
+    getDiaryCardEntries(state, action: PayloadAction<DiaryData[]>) {
+      state.diaryCardEntries = action.payload;
+    },
+    fetchDiaryCardEntries() {},
   },
 });
 
-export const { addDiaryCard } = diaryCardSlice.actions;
-export default diaryCardSlice.reducer;
+export const { actions: diaryCardActions, reducer: diaryCardReducer } =
+  diaryCardSlice;

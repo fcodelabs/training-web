@@ -16,7 +16,7 @@ import { diaryCardActions } from "../../redux/diaryCard/diaryCardSlice";
 import { showToast } from "../../utils/NotificationUtil";
 import { backgroundColor } from "../../theme/colors";
 
-export type DiaryData = {
+type DiaryData = {
   title: string;
   username: string;
   description: string;

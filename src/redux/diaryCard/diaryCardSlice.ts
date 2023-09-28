@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export type DiaryData = {
+type DiaryData = {
   title: string;
   username: string;
   description: string;

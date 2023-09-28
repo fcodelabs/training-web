@@ -1,11 +1,16 @@
 import { eventChannel } from "redux-saga";
-import { DiaryData } from "../../types/DiaryData";
 import { collection, onSnapshot } from "@firebase/firestore";
 import firebaseDB from "../../db/firebase";
 import { all, call, put, take, takeEvery } from "redux-saga/effects";
 import { addDoc } from "firebase/firestore";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { diaryCardActions } from "./diaryCardSlice";
+
+type DiaryData = {
+  title: string;
+  username: string;
+  description: string;
+};
 
 function snapShotChannel(db: any) {
   return eventChannel<DiaryData[]>((emitter) => {

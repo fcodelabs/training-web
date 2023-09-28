@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { normalCardColor, specialCardColor } from "../../theme/colors";
 
-export type DiaryCardProps = {
+type DiaryCardProps = {
   title: string;
   name: string;
   description: string;

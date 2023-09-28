@@ -1,9 +1,9 @@
 import { Box, Button, Card, Container, TextField } from "@mui/material";
 import DiaryCard from "../../components/DiaryCard";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
-import { addDiaryCard } from "../../redux/DiaryCardSlice/DiaryCardSlice";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "../../redux/Store";
+import { diaryCardActions } from "../../redux/DiaryCardSlice/DiaryCardSlice";
 
 export default function Home() {
   const name = localStorage.getItem("name");
@@ -15,7 +15,11 @@ export default function Home() {
     (state: RootState) => state.diaryCardSlice.diaryCardEntries
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(diaryCardActions.fetchDiaryCardEntries());
+  }, [dispatch]);
 
   function onchangeTitle(e: any) {
     setTitle(e.target.value);
@@ -25,10 +29,10 @@ export default function Home() {
     setMessage(e.target.value);
   }
 
-  function submitHandler(e: any) {
+  async function submitHandler(e: any) {
     e.preventDefault();
     dispatch(
-      addDiaryCard({
+      diaryCardActions.addDiaryCard({
         title: title,
         username: userName,
         description: message,

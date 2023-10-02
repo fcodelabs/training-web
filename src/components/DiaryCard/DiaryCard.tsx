@@ -8,6 +8,12 @@ type DiaryCardProps = {
   description: string;
 };
 
+export type DiaryCardProps = {
+  title: string;
+  name: string;
+  description: string;
+};
+
 const DiaryCard = (props: DiaryCardProps) => {
   const [isView, setIsView] = useState<boolean>(false);
   return (
@@ -57,6 +63,22 @@ const DiaryCard = (props: DiaryCardProps) => {
               )}
             </Button>
           </Grid>
+          <Button
+            fullWidth
+            sx={{ justifyContent: "end" }}
+            variant="text"
+            onClick={() => setIsView(!isView)}
+          >
+            {isView ? (
+              <Typography color={"secondary"} variant="body2">
+                View Less
+              </Typography>
+            ) : (
+              <Typography color={"secondary"} variant="body2">
+                View More
+              </Typography>
+            )}
+          </Button>
         )}
       </Box>
     </Grid>

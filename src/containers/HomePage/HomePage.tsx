@@ -22,6 +22,12 @@ type DiaryData = {
   description: string;
 };
 
+export type DiaryDetail = {
+  title: string;
+  name: string;
+  description: string;
+};
+
 const HomePage = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");

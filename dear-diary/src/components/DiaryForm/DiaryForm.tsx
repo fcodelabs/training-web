@@ -3,6 +3,9 @@ import { TextField, Button, Container, Stack, Typography } from '@mui/material';
 import type { RootState } from '../../redux/store/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCard } from '../../redux/card/cardSlice';
+import app from '../../firebase/setup';
+import { collection, getFirestore, addDoc } from 'firebase/firestore';
+const db = getFirestore(app);
 
 const DiaryForm: React.FC = () => {
     const [showForm, setShowForm] = useState(false);
@@ -15,7 +18,7 @@ const DiaryForm: React.FC = () => {
         setShowForm(true);
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
+    async function handleSubmit(event: React.FormEvent): Promise<void> {
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement);
         const title = (formData.get('title') || '').toString();
@@ -40,6 +43,10 @@ const DiaryForm: React.FC = () => {
                 description,
             };
             dispatch(addCard(newDiaryEntry));
+
+            const docRef = await addDoc(collection(db, "cards"), newDiaryEntry);
+            console.log("Document written with ID: ", docRef.id);
+
             (event.target as HTMLFormElement).reset();
             setShowForm(false);
         }

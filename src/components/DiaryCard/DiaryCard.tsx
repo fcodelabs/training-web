@@ -32,7 +32,7 @@ const DiaryCard = (props: DiaryCardProps) => {
         <Typography variant="body2" sx={{ mb: 2 }} color={"GrayText"}>
           {props.name}
         </Typography>
-        <Typography variant="body1">
+        <Typography variant="body1" sx={{ wordWrap: "break-word" }}>
           {isView
             ? props.description
             : props.description.length > 5

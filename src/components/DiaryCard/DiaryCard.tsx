@@ -58,7 +58,7 @@ const DiaryCard: React.FC<IDiaryCardProps> = ({
               marginTop: "10px",
             }}
           >
-            {!showMore && description.length > 5 && (
+            {!showMore && description.length > 100 && (
               <Button color="primary" onClick={toggleShowMore}>
                 Show More
               </Button>

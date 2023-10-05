@@ -6,24 +6,32 @@ import { Snackbar } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
+import { addDiaryEntry } from "../../redux/DiarySlice";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import theme from "../../theme/theme";
 
 interface DiaryEntry {
   title: string;
-  userName: string;
+  username: string;
   description: string;
 }
 
 const DiaryHome: React.FC = () => {
   const location = useLocation();
   const { name } = location.state || {};
-  const [userName] = useState<string>(name || "");
+  const [username] = useState<string>(name || "");
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isTitleFocused, setIsTitleFocused] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
+
+  const diaryEntries = useSelector(
+    (state: RootState) => state.diary.diaryEntries
+  );
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,11 +50,11 @@ const DiaryHome: React.FC = () => {
 
     const newEntry: DiaryEntry = {
       title,
-      userName,
+      username,
       description,
     };
 
-    setDiaryEntries([...diaryEntries, newEntry]);
+    dispatch(addDiaryEntry(newEntry));
 
     setTitle("");
     setDescription("");
@@ -168,7 +176,7 @@ const DiaryHome: React.FC = () => {
                 <DiaryCard
                   key={index}
                   title={entry.title}
-                  username={entry.userName}
+                  username={entry.username}
                   description={entry.description}
                 />
               ))}

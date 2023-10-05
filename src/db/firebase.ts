@@ -11,6 +11,4 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_ID!,
 };
 
-alert(firebaseConfig.apiKey);
-
 export default getFirestore(initializeApp(firebaseConfig));

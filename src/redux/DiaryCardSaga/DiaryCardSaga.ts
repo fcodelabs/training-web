@@ -3,8 +3,13 @@ import { collection, onSnapshot, addDoc } from "firebase/firestore";
 import { all, call, put, take, takeEvery } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { diaryCardActions }  from "../DiaryCardSlice/DiaryCardSlice";
-import { DiaryData } from "../../types/DiaryCardData";
 import { db } from "../../firebase/config";
+
+interface DiaryData {
+  title: string;
+  username: string;
+  description: string;
+}
 
 function createSnapshotChannel(db: any) {
   return eventChannel<DiaryData[]>((emitter) => {

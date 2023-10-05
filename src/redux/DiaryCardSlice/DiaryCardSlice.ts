@@ -1,14 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { DiaryData } from "../../types/DiaryCardData";
+
+interface DiaryData {
+  title: string;
+  username: string;
+  description: string;
+}
 
 interface DiaryCardState {
   diaryCardEntries: DiaryData[];
 }
 
-const initialState = {
+const initialState : DiaryCardState = {
   diaryCardEntries: [],
-} as DiaryCardState;
+}
 
 const diaryCardSlice = createSlice({
   name: "diaryCardSlice",

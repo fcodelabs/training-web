@@ -6,7 +6,12 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import { DiaryCardProps } from "../../types/DiaryCardProps";
+
+interface DiaryCardProps {
+  title: string;
+  name: string;
+  description: string;
+}
 
 export default function DiaryCard(props: DiaryCardProps) {
   const { title, name, description } = props;

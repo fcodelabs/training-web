@@ -3,7 +3,7 @@ import SignInPage from "../../containers/SignInPage/SignInPage";
 import HomePage from "../../containers/HomePage/HomePage";
 import { defaultRoute, homeRoute } from "../../utils/RoutesUtil";
 
-const Context = () => {
+const Content = () => {
   return (
     <Routes>
       <Route path={defaultRoute} element={<SignInPage />} />
@@ -12,4 +12,4 @@ const Context = () => {
   );
 };
 
-export default Context;
+export default Content;

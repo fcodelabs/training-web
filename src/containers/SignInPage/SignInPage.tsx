@@ -12,6 +12,7 @@ import { generateRandomName } from "../../utils/RandomNameUtil";
 import theme from "../../theme/theme";
 import { backgroundColor } from "../../theme/colors";
 import { BsArrowRight } from "react-icons/bs";
+import { homeRoute } from "../../utils/RoutesUtil";
 
 const SignInPage = () => {
   const [name, setName] = useState<string>("");
@@ -49,7 +50,7 @@ const SignInPage = () => {
               >
                 RANDOM
               </Button>
-              <Link to={`/home`} style={{ width: "100%" }}>
+              <Link to={homeRoute} style={{ width: "100%" }}>
                 <Button
                   variant="outlined"
                   color="secondary"

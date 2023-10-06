@@ -8,7 +8,13 @@ interface IDiaryCardProps {
   description: string;
 }
 
-const DiaryCard = (props: IDiaryCardProps) => {
+export type DiaryCardProps = {
+  title: string;
+  name: string;
+  description: string;
+};
+
+const DiaryCard = (props: DiaryCardProps) => {
   const [isView, setIsView] = useState<boolean>(false);
   return (
     <Grid
@@ -57,6 +63,22 @@ const DiaryCard = (props: IDiaryCardProps) => {
               )}
             </Button>
           </Grid>
+          <Button
+            fullWidth
+            sx={{ justifyContent: "end" }}
+            variant="text"
+            onClick={() => setIsView(!isView)}
+          >
+            {isView ? (
+              <Typography color={"secondary"} variant="body2">
+                View Less
+              </Typography>
+            ) : (
+              <Typography color={"secondary"} variant="body2">
+                View More
+              </Typography>
+            )}
+          </Button>
         )}
       </Box>
     </Grid>

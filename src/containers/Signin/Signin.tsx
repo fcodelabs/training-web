@@ -10,6 +10,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
 import randomNameGenerate from "../../util/randomNameGenerate";
 import { useNavigate } from "react-router-dom";
+import { ROUTE_HOME } from "../../util/routes";
 
 export default function Signin() {
   const [nickname, setNickname] = useState<string>("");
@@ -28,7 +29,7 @@ export default function Signin() {
 
   const continueHandler = () => {
     localStorage.setItem('name', nickname);
-    navigate('/home');
+    navigate(ROUTE_HOME);
   };
 
   return (

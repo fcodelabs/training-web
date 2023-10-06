@@ -7,13 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 
-interface DiaryCardProps {
+interface IDiaryCardProps {
   title: string;
   name: string;
   description: string;
 }
 
-export default function DiaryCard(props: DiaryCardProps) {
+export default function DiaryCard(props: IDiaryCardProps) {
   const { title, name, description } = props;
   const [isExpanded, setIsExpanded] = useState(false);
 

@@ -1,9 +1,9 @@
 import { Box, Button, Card, Container, TextField } from "@mui/material";
-import DiaryCard from "../../components/DiaryCard";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../redux/Store";
-import { diaryCardActions } from "../../redux/DiaryCardSlice/DiaryCardSlice";
+import { RootState, useAppDispatch } from "../../redux/store";
+import { diaryCardActions } from "../../redux/DiaryCardSlice/diaryCardSlice";
+import DiaryCard from "../../components/DiaryCard/DiaryCard";
 
 export default function Home() {
   const name = localStorage.getItem("name");

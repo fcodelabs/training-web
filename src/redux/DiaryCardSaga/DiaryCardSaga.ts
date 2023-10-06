@@ -2,21 +2,21 @@ import { eventChannel } from "redux-saga";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
 import { all, call, put, take, takeEvery } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { diaryCardActions }  from "../DiaryCardSlice/DiaryCardSlice";
+import { diaryCardActions }  from "../DiaryCardSlice/diaryCardSlice";
 import { db } from "../../firebase/config";
 
-interface DiaryData {
+interface IDiaryData {
   title: string;
   username: string;
   description: string;
 }
 
 function createSnapshotChannel(db: any) {
-  return eventChannel<DiaryData[]>((emitter) => {
+  return eventChannel<IDiaryData[]>((emitter) => {
     const ref = collection(db, "diary");
     const unsubscribe = onSnapshot(ref, (querySnapshot) => {
-      const updatedDiaryEntries: DiaryData[] = querySnapshot.docs.map(
-        (doc) => doc.data() as DiaryData
+      const updatedDiaryEntries: IDiaryData[] = querySnapshot.docs.map(
+        (doc) => doc.data() as IDiaryData
       );
       emitter(updatedDiaryEntries);
     });
@@ -27,26 +27,23 @@ function createSnapshotChannel(db: any) {
 function* fetchDiaryCardEntries(): Generator<any, any, any> {
   const channel = yield call(createSnapshotChannel, db);
   while (true) {
-    const diaryCardEntries: DiaryData[] = yield take(channel);
+    const diaryCardEntries: IDiaryData[] = yield take(channel);
     yield put(diaryCardActions.getDiaryCardEntries(diaryCardEntries));
   }
 }
 
-function* addDiaryCard(action: PayloadAction<DiaryData>) {
+function* addDiaryCard(action: PayloadAction<IDiaryData>) {
   try {
     const { title, username, description } = action.payload;
-    const diaryCard: DiaryData = { title, username, description };
+    const diaryCard: IDiaryData = { title, username, description };
     yield call(addDoc, collection(db, "diary"), diaryCard);
   } catch (error) {
     console.error("Error adding diary card:", error);
   }
 }
 
-function* watchAddDiaryCard() {
+function* watchAddDiaryCardAndFetchDiaryCardEntries() {
   yield takeEvery(diaryCardActions.addDiaryCard, addDiaryCard);
-}
-
-function* watchFetchDiaryCardEntries() {
   yield takeEvery(
     diaryCardActions.fetchDiaryCardEntries,
     fetchDiaryCardEntries
@@ -54,7 +51,7 @@ function* watchFetchDiaryCardEntries() {
 }
 
 function* mySaga() {
-  yield all([watchFetchDiaryCardEntries(), watchAddDiaryCard()]);
+  yield all([watchAddDiaryCardAndFetchDiaryCardEntries()]);
 }
 
 export default mySaga;

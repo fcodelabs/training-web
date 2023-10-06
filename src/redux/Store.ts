@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import mySaga from "./DiaryCardSaga/DiaryCardSaga";
-import { diaryCardReducer } from "./DiaryCardSlice/DiaryCardSlice";
+import mySaga from "./DiaryCardSaga/diaryCardSaga";
+import { diaryCardReducer } from "./DiaryCardSlice/diaryCardSlice";
 import { useDispatch } from "react-redux";
 
 const sagaMiddleware = createSagaMiddleware();

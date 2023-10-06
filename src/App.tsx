@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import imageURL from "./assets/img/bg.jpg";
-import Context from "./components/Context";
+import Context from "./components/RootRouter/Context";
 
 function App() {
   return (

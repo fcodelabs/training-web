@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import Signin from "../../containers/Signin";
-import Home from "../../containers/Home";
-import { ROUTE_HOME, ROUTE_SIGNIN } from "../../util/routeConstants";
+import { ROUTE_HOME, ROUTE_SIGNIN } from "../../util/routes";
+import Signin from "../../containers/Signin/Signin";
+import Home from "../../containers/Home/Home";
 
 export default function Content() {
   return (

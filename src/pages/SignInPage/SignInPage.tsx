@@ -5,16 +5,17 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import { Box, Grid } from "@mui/material";
-import { generateRandomName } from "../../util/GenerateRandomNameUtil";
+import { GenerateRandomName } from "../../util/generateRandomNameUtil";
 import theme from "../../theme/theme";
+import { HOME } from "../../util/routesUtil";
 
-const SignInPage: React.FC = () => {
+const SignInPage = () => {
   const [name, setName] = useState<string>("");
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("/home", { state: { name: name } });
+    navigate(HOME, { state: { name: name } });
   };
 
   const isSubmitDisabled = name.trim() === "";
@@ -58,7 +59,7 @@ const SignInPage: React.FC = () => {
                   }}
                   variant="contained"
                   color="primary"
-                  onClick={() => setName(generateRandomName())}
+                  onClick={() => setName(GenerateRandomName())}
                 >
                   Generate
                 </Button>

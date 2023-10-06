@@ -8,17 +8,18 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
-import { diaryCardAction } from "../../redux/DiarySlice";
-import { RootState, useAppDispatch } from "../../redux/Store";
 import theme from "../../theme/theme";
+import { RootState, useAppDispatch } from "../../redux/store";
+import { diaryCardAction } from "../../redux/diarySlice";
+import { SIGN_IN } from "../../util/routesUtil";
 
-interface DiaryEntry {
+interface IDiaryEntry {
   title: string;
   username: string;
   description: string;
 }
 
-const DiaryHome: React.FC = () => {
+const DiaryHome = () => {
   const location = useLocation();
   const { name } = location.state || {};
   const [username] = useState<string>(name || "");
@@ -27,7 +28,7 @@ const DiaryHome: React.FC = () => {
   const [isTitleFocused, setIsTitleFocused] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
-  const diaryEntries: DiaryEntry[] = useSelector(
+  const diaryEntries: IDiaryEntry[] = useSelector(
     (state: RootState) => state.diaryEntries.diaryEntries
   );
   const dispatch = useAppDispatch();
@@ -51,7 +52,7 @@ const DiaryHome: React.FC = () => {
       return;
     }
 
-    const newEntry: DiaryEntry = {
+    const newEntry: IDiaryEntry = {
       title,
       username,
       description,
@@ -73,7 +74,7 @@ const DiaryHome: React.FC = () => {
   };
 
   const handleLogout = () => {
-    navigate("/");
+    navigate(SIGN_IN);
   };
 
   return (

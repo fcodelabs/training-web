@@ -1,2 +1,2 @@
-export const home = "/home";
-export const signIn = "/";
+export const HOME = "/home";
+export const SIGN_IN = "/";

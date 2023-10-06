@@ -2,21 +2,21 @@ import { takeEvery, call, put, take } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
 import { db } from "../db/FirebaseConfig";
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
-import { diaryCardAction } from "./DiarySlice";
+import { diaryCardAction } from "./diarySlice";
 
-interface DiaryEntry {
+interface IDiaryEntry {
   title: string;
   username: string;
   description: string;
 }
 
 function handleGetDiaryEntries(db: any) {
-  return eventChannel<DiaryEntry[]>((emitter) => {
+  return eventChannel<IDiaryEntry[]>((emitter) => {
     const ref = collection(db, "diary_entries");
     const unsubscribe = onSnapshot(ref, (querySnapshot) => {
-      const updatedEntries: DiaryEntry[] = [];
+      const updatedEntries: IDiaryEntry[] = [];
       querySnapshot.forEach((doc) => {
-        const entry = doc.data() as DiaryEntry;
+        const entry = doc.data() as IDiaryEntry;
         updatedEntries.push(entry);
       });
       emitter(updatedEntries);
@@ -25,7 +25,7 @@ function handleGetDiaryEntries(db: any) {
   });
 }
 
-function* handleAddDiaryEntry(action: { type: string; payload: DiaryEntry }) {
+function* handleAddDiaryEntry(action: { type: string; payload: IDiaryEntry }) {
   try {
     console.log(action.payload);
     yield call(() => addDoc(collection(db, "diary_entries"), action.payload));
@@ -35,11 +35,14 @@ function* handleAddDiaryEntry(action: { type: string; payload: DiaryEntry }) {
 }
 
 function* fetchDiaryCardList(): Generator<any, any, any> {
-  const channel = yield call(handleGetDiaryEntries, db);
-  while (true) {
-    const diaryCardList: DiaryEntry[] = yield take(channel);
-    yield put(diaryCardAction.getDiaryEntries(diaryCardList));
-    console.log(diaryCardList);
+  try {
+    const channel = yield call(handleGetDiaryEntries, db);
+    while (true) {
+      const diaryCardList: IDiaryEntry[] = yield take(channel);
+      yield put(diaryCardAction.getDiaryEntries(diaryCardList));
+    }
+  } catch (error) {
+    console.error("Error fetching diary entries:", error);
   }
 }
 

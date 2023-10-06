@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface DiaryEntry {
+interface IDiaryEntry {
   title: string;
   username: string;
   description: string;
 }
 
-interface DiaryState {
-  diaryEntries: DiaryEntry[];
+interface IDiaryState {
+  diaryEntries: IDiaryEntry[];
 }
 
-const initialState: DiaryState = {
+const initialState: IDiaryState = {
   diaryEntries: [],
 };
 
@@ -18,10 +18,10 @@ export const diarySlice = createSlice({
   name: "diary",
   initialState,
   reducers: {
-    addDiaryEntry: (state, action: PayloadAction<DiaryEntry>) => {
+    addDiaryEntry: (state, action: PayloadAction<IDiaryEntry>) => {
       state.diaryEntries.push(action.payload);
     },
-    getDiaryEntries: (state, action: PayloadAction<DiaryEntry[]>) => {
+    getDiaryEntries: (state, action: PayloadAction<IDiaryEntry[]>) => {
       state.diaryEntries = action.payload;
     },
     fetchDiaryEntries: () => {},

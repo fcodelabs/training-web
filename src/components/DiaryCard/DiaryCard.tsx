@@ -13,12 +13,12 @@ interface IDiaryCardProps {
   currentUsername: string;
 }
 
-const DiaryCard: React.FC<IDiaryCardProps> = ({
+const DiaryCard = ({
   title,
   username,
   description,
   currentUsername,
-}) => {
+}: IDiaryCardProps) => {
   const [showMore, setShowMore] = useState(false);
 
   const toggleShowMore = () => {

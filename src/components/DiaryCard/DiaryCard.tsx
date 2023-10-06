@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { normalCardColor, specialCardColor } from "../../theme/colors";
 
-type DiaryCardProps = {
+interface IDiaryCardProps {
   title: string;
   name: string;
   description: string;
-};
+}
 
-const DiaryCard = (props: DiaryCardProps) => {
+const DiaryCard = (props: IDiaryCardProps) => {
   const [isView, setIsView] = useState<boolean>(false);
   return (
     <Grid

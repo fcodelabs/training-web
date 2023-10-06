@@ -6,19 +6,19 @@ import { addDoc } from "firebase/firestore";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { diaryCardActions } from "./diaryCardSlice";
 
-type DiaryData = {
+interface IDiaryData {
   title: string;
   username: string;
   description: string;
-};
+}
 
 function snapShotChannel(db: any) {
-  return eventChannel<DiaryData[]>((emitter) => {
+  return eventChannel<IDiaryData[]>((emitter) => {
     const ref = collection(db, "diary");
     const unsubscribe = onSnapshot(ref, (querySnapshot) => {
-      const updatedEntries: DiaryData[] = [];
+      const updatedEntries: IDiaryData[] = [];
       querySnapshot.forEach((doc) => {
-        const entry = doc.data() as DiaryData;
+        const entry = doc.data() as IDiaryData;
         updatedEntries.push(entry);
       });
       emitter(updatedEntries);
@@ -30,15 +30,17 @@ function snapShotChannel(db: any) {
 function* fetchDiaryCardList(): Generator<any, any, any> {
   const channel = yield call(snapShotChannel, firebaseDB);
   while (true) {
-    const diaryCardList: DiaryData[] = yield take(channel);
+    const diaryCardList: IDiaryData[] = yield take(channel);
     yield put(diaryCardActions.setDiaryCardList(diaryCardList));
   }
 }
 
-function* addDiary(action: PayloadAction<DiaryData>): Generator<any, any, any> {
+function* addDiary(
+  action: PayloadAction<IDiaryData>
+): Generator<any, any, any> {
   try {
     const { title, username, description } = action.payload;
-    const diaryCard: DiaryData = {
+    const diaryCard: IDiaryData = {
       title,
       username,
       description,

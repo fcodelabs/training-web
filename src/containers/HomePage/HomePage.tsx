@@ -9,24 +9,23 @@ import {
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
-import theme from "../../theme/theme";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { diaryCardActions } from "../../redux/diaryCard/diaryCardSlice";
-import { showToast } from "../../utils/NotificationUtil";
+import { showToast } from "../../utils/notificationUtil";
 import { backgroundColor } from "../../theme/colors";
 
-type DiaryData = {
+interface IDiaryData {
   title: string;
   username: string;
   description: string;
-};
+}
 
 const HomePage = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
-  const diaryCards: DiaryData[] = useSelector(
+  const diaryCards: IDiaryData[] = useSelector(
     (state: RootState) => state.diaryCardList.diaryCardList
   );
   const dispatch = useAppDispatch();
@@ -59,7 +58,7 @@ const HomePage = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Header />
       <Box
         sx={{
@@ -150,7 +149,7 @@ const HomePage = () => {
           );
         })}
       </Grid>
-    </ThemeProvider>
+    </>
   );
 };
 

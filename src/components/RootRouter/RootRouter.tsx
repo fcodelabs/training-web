@@ -3,7 +3,7 @@ import SignInPage from "../../pages/SignInPage/SignInPage";
 import DiaryHome from "../../pages/DiaryHomePage/DiaryHome";
 import { SIGN_IN, HOME } from "../../util/routesUtil";
 
-export default function Content() {
+export default function RootRouter() {
   return (
     <Routes>
       <Route path={SIGN_IN} element={<SignInPage />} />

@@ -1,10 +1,10 @@
-import Content from "./components/Content/Content";
+import RootRouter from "./components/RootRouter/RootRouter";
 import "./App.css";
 
 function App() {
   return (
     <div>
-      <Content />
+      <RootRouter />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { eventChannel } from "redux-saga";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
 import { all, call, put, take, takeEvery } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { diaryCardActions }  from "../DiaryCardSlice/diaryCardSlice";
+import { diaryCardActions }  from "../diaryCardSlice/diaryCardSlice";
 import { db } from "../../firebase/config";
 
 interface IDiaryData {

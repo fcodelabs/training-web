@@ -11,6 +11,7 @@ interface IDiaryData {
   description: string;
 }
 
+
 function createSnapshotChannel(db: any) {
   return eventChannel<IDiaryData[]>((emitter) => {
     const ref = collection(db, "diary");

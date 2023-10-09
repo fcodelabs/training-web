@@ -2,7 +2,7 @@ import { Box, Button, Card, Container, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../redux/store";
-import { diaryCardActions } from "../../redux/iaryCardSlice/diaryCardSlice";
+import { diaryCardActions } from "../../redux/diaryCardSlice/diaryCardSlice";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 
 export default function Home() {

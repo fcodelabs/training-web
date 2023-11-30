@@ -12,7 +12,7 @@ const SignInPage = () => {
             <div className="signin-page">
 
                 <div className="signin-page-header-background">
-                    <img src={logo} alt="logo" className="signin-page-logo"/>
+                    <img src={logo} alt="logo" className="signin-page-logo" />
                     <div className="signin-page-title">
                         Dear Diary
                     </div>
@@ -20,18 +20,22 @@ const SignInPage = () => {
 
                 <div className="signin-page-form-wrapper">
                     <div className="sign-in-title">
-                        <h2>Sign in</h2>
+                        Sign In
                     </div>
 
                     <form className="sign-in-form">
-                        <TextField id="outlined-basic" label="name" variant="outlined"className="text-field-login"/>
+                        <TextField id="outlined-basic" label="name" variant="outlined" className="text-field-login" size="small" />
                         <div className="random-button">
-                            <Button>Random</Button>
+                            <Button variant="contained" className="btn-random" style={{ textTransform: 'none' }}>
+                                Random
+                            </Button>
                         </div>
                     </form>
 
                     <div className="signin-submit-button">
-                        <Button>Continue</Button>
+                        <Button variant="contained" className="btn-continue" style={{ textTransform: 'none' }}>
+                            Random
+                        </Button>
                     </div>
                 </div>
             </div>

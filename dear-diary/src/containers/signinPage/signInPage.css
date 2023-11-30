@@ -1,4 +1,4 @@
-.signin-page-wrapper{
+.signin-page-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,11 +6,11 @@
     width: 100%;
     height: 100vh;
     z-index: 1;
-    
+
 }
 
-.signin-page{
-    
+.signin-page {
+
     display: flex;
     z-index: 1;
     flex-direction: column;
@@ -19,57 +19,71 @@
     width: 50%;
     background-color: white;
     border-radius: 5px;
-
     box-shadow: 10px 10px 10px 0px rgba(175, 175, 175, 0.244);
 }
 
-.signin-page-header-background{   
-    width: 100%;
+.signin-page-header-background {
+    width: 95%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 2% 2% 0 5%;
+    padding: 2% 2% 0 2%;
 }
 
-.signin-page-logo{
-    width: 40px;
-    height: 40px;
+.signin-page-logo {
+    width: 30px;
+    height: 30px;
     object-fit: cover;
     margin-right: 1%;
 }
-.signin-page-title{
-    font-size: 24px;
+
+.signin-page-title {
+    font-size: 20px;
     font-weight: 500;
     color: #4B465C;
 }
-.signin-page-form-wrapper{
+
+.signin-page-form-wrapper {
     width: 70%;
-    padding: 2%;
-}
-.sign-in-title{
-    font-size: 18px;
-    width: 100%;
-    text-align: center;
-   
+    padding: 2% 5% 2% 5%;
 }
 
-.sign-in-form{
+.sign-in-title {
+    text-align: center;
+    color: #0092DD;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    padding-bottom: 2%;
+
+}
+
+.sign-in-form {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 2%;
+    padding: 2% 2% 2% 2%;
 }
-.text-field-login{
+
+.text-field-login {
     width: 100%;
-    
+    font-size: '16px' 
+
 }
-.random-button{
+
+.random-button {
     margin-left: 2%;
 }
 
-.signin-submit-button{
+.btn-random{
+    font-size: 100%;
+    background: rgba(0, 146, 221, 0.16)   !important;
+    color:#0092DD !important;
+}
+
+.signin-submit-button {
     text-align: center;
     margin-top: 3%;
     width: 100%;
@@ -79,7 +93,25 @@
 @media screen and (max-width: 768px) {
     .signin-page {
         width: 90%;
-        /* transform: scale(0.9); */
     }
-  
+    .signin-page-title{
+        font-size: 100%;
+    }
+    .sign-in-title{
+        font-size: 100%;
+    }
+    .signin-page-form-wrapper{
+        width:85%;
+    }
+    .sign-in-form{
+        padding: 5% 5% 5% 0%;
+    }
+    .signin-page-logo{
+        width: 20px;
+        height: 20px;
+    }
+    .btn-continue{
+        font-size: 100%
+    }
+
 }

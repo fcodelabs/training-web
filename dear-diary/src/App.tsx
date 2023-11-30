@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import SignInPage from './containers/signinPage/Page/SignInPage';
+import SignInPage from './containers/SignInPage/Page/SignInPage';
 import HomePage from './containers/HomePage/HomePage';
 
 function App() {

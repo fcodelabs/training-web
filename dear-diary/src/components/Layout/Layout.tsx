@@ -1,6 +1,6 @@
 // common background  
 
-import "./layout.css";
+import "./Layout.css";
 
 const Layout = () => {
     return (

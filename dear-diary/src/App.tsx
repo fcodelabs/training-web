@@ -1,13 +1,14 @@
 import React from 'react';
-import Layout from './components/layout/layout';
-import SignInPage from './containers/signinPage/page/signInPage';
+import Layout from './components/Layout/Layout';
+import SignInPage from './containers/signinPage/Page/SignInPage';
+import HomePage from './containers/HomePage/HomePage';
 
 function App() {
   return (
     <div className="App">
        <Layout />
        <SignInPage />
-
+       <HomePage />
     </div>
   );
 }

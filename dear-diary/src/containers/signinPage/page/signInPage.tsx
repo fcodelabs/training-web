@@ -1,7 +1,7 @@
 
-import getrandomName from "../random/randomNameGenerator";
-import "./signInPage.css";
-import Deardiary from "../../../components/dearDiary/dearDiary";
+import getrandomName from "../Random/RandomNameGenerator";
+import "./SignInPage.css";
+import Deardiary from "../../../components/DearDiary/DearDiary";
 import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';

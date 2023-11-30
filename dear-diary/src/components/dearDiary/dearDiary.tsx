@@ -1,6 +1,6 @@
 import logo from "./logo.png"
-import "./dearDiary.css"  
-  
+import "./DearDiary.css"  
+
 const Deardiary = () => {
     return (
         <div className="signin-page-header-background">

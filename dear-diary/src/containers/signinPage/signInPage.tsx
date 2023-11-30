@@ -1,10 +1,10 @@
-// signin page is a container component that renders the signin form
-// type a const function to return signin form the background should be transparent
+
 
 import "./signInPage.css";
 import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import logo from "./logo.png"
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const SignInPage = () => {
     return (
@@ -34,7 +34,8 @@ const SignInPage = () => {
 
                     <div className="signin-submit-button">
                         <Button variant="contained" className="btn-continue" style={{ textTransform: 'none' }}>
-                            Random
+                            Continue
+                            <ArrowForwardIcon/>
                         </Button>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from './components/Layout/Layout';
+import Layout from './components/layout/layout';
 import SignInPage from './containers/signinPage/page/signInPage';
 
 function App() {

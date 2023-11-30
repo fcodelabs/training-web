@@ -21,7 +21,7 @@
     box-shadow: 10px 10px 10px 0px rgba(175, 175, 175, 0.244);
 }
 
-.signin-page-header-background {
+/* .signin-page-header-background {
     width: 95%;
     display: flex;
     flex-direction: row;
@@ -40,7 +40,7 @@
     font-size: 20px;
     font-weight: 500;
     color: #4B465C;
-}
+} */
 
 .signin-page-form-wrapper {
     width: 70%;
@@ -98,9 +98,9 @@
     .signin-page {
         width: 90%;
     }
-    .signin-page-title{
+    /* .signin-page-title{
         transform: scale(0.85);
-    }
+    } */
     .sign-in-title{
         transform: scale(0.8);
     }
@@ -110,10 +110,10 @@
     .sign-in-form{
         padding: 5% 5% 5% 0%;
     }
-    .signin-page-logo{
+    /* .signin-page-logo{
         width: 20px;
         height: 20px;
-    }
+    } */
 
     .sign-in-form{
         transform: scale(0.85);

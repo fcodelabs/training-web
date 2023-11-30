@@ -1,9 +1,9 @@
 
-import getrandomName from "../Random/randomNameGenerator";
+import getrandomName from "../random/randomNameGenerator";
 import "./signInPage.css";
+import Deardiary from "../../../components/dearDiary/dearDiary";
 import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
-import logo from "../logo.png"
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useState } from "react";
 
@@ -13,13 +13,8 @@ const SignInPage = () => {
     return (
         <div className="signin-page-wrapper">
             <div className="signin-page">
-
-                <div className="signin-page-header-background">
-                    <img src={logo} alt="logo" className="signin-page-logo" />
-                    <div className="signin-page-title">
-                        Dear Diary
-                    </div>
-                </div>
+                
+                <Deardiary/>
 
                 <div className="signin-page-form-wrapper">
                     <div className="sign-in-title">

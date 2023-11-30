@@ -1,9 +1,9 @@
 
-import getrandomName from "./Random/randomNameGenerator";
+import getrandomName from "../Random/randomNameGenerator";
 import "./signInPage.css";
 import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
-import logo from "./logo.png"
+import logo from "../logo.png"
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useState } from "react";
 
@@ -29,12 +29,13 @@ const SignInPage = () => {
                     <form className="sign-in-form">
                         <TextField
                             id="outlined-basic"
-                            label="name"
+                            label="user name"
                             variant="outlined"
                             className="text-field-login"
                             size="small"
                             value={nameRandom} 
                             onChange={(e) => SetRandomName(e.target.value)}/>
+
                         <div className="random-button">
                             <Button variant="contained" className="btn-random" style={{ textTransform: 'none' }} onClick={() => SetRandomName(getrandomName)}>
                                 Random

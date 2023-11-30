@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from './components/Layout/Layout';
-import SignInPage from './containers/signinPage/signInPage';
+import SignInPage from './containers/signinPage/page/signInPage';
 
 function App() {
   return (

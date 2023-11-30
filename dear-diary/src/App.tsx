@@ -1,16 +1,20 @@
-import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import SignInPage from './containers/signinPage/Page/SignInPage';
 import HomePage from './containers/HomePage/HomePage';
 
 function App() {
   return (
-    <div className="App">
-       <Layout />
-       <SignInPage />
-       <HomePage />
+    <div>
+      <Layout />
+      <Routes>
+        <Route path="/" element={<SignInPage />} />
+        <Route path="/home" element={<HomePage />} />
+      </Routes>
     </div>
+
   );
 }
 
 export default App;
+

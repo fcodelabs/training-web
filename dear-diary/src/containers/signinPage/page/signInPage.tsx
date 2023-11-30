@@ -6,6 +6,7 @@ import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SignInPage = () => {
     const [nameRandom, SetRandomName] = useState("")
@@ -13,8 +14,8 @@ const SignInPage = () => {
     return (
         <div className="signin-page-wrapper">
             <div className="signin-page">
-                
-                <Deardiary/>
+
+                <Deardiary />
 
                 <div className="signin-page-form-wrapper">
                     <div className="sign-in-title">
@@ -28,8 +29,8 @@ const SignInPage = () => {
                             variant="outlined"
                             className="text-field-login"
                             size="small"
-                            value={nameRandom} 
-                            onChange={(e) => SetRandomName(e.target.value)}/>
+                            value={nameRandom}
+                            onChange={(e) => SetRandomName(e.target.value)} />
 
                         <div className="random-button">
                             <Button variant="contained" className="btn-random" style={{ textTransform: 'none' }} onClick={() => SetRandomName(getrandomName)}>
@@ -39,10 +40,12 @@ const SignInPage = () => {
                     </form>
 
                     <div className="signin-submit-button">
-                        <Button variant="contained" className="btn-continue" style={{ textTransform: 'none' }}>
-                            Continue
-                            <ArrowForwardIcon />
-                        </Button>
+                        <Link to ="/home">
+                            <Button variant="contained" className="btn-continue" style={{ textTransform: 'none' }}>
+                                Continue
+                                <ArrowForwardIcon />
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,26 @@
+.profile-wrapper{
+    padding: 4% 2% 1px 10px;
+    z-index: 1;
+}
+.profile-icon{
+    z-index: 1;
+    color: rgb(0, 166, 255);
+}
+.profile-name-text{
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    color: rgb(0, 166, 255);
+}
+
+@media screen and (max-width: 768px) {
+ 
+    .profile-name-text{
+        transform: scale(0.85);
+    }
+    .profile-icon{
+        transform: scale(0.85);
+    }
+    
+}

@@ -1,0 +1,11 @@
+.layout-background {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    width: 100%; 
+    min-height: 100vh; 
+    background-image: url("./background.png");
+    background-size: cover;
+  }
+  

@@ -1,4 +1,4 @@
-import Deardiary from "../../components/DearDiary/DearDiary"
+import Deardiary from "../../components/dearDiary/DearDiary"
 import Profile from "../../components/Profile/Profile";
 import Home from "./Home";
 import "./HomePage.css"

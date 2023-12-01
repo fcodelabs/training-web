@@ -18,7 +18,7 @@ const Home: React.FC<HomeProps> = ({ showForm, reset }) => (
             </Button>
         </div>
         <div className="home-body"></div>
-        {showForm && (<SubmitForm showForm={showForm} reset={reset} />
+        {(<SubmitForm showForm={showForm} reset={reset} />
         )}
     </div>
 );

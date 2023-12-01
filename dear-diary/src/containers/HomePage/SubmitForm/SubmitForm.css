@@ -1,13 +1,33 @@
-
 .form-container {
-    transition: transform 10s ease-in-out;
-    transform: translateX(100%);
+    position: fixed;
+    top: 0;
+    right: -300px 5s ease-in-out; /* Off-screen initially */
+    width: 300px ;
+    height: 100vh;
+    background: white;
+    padding: 1%;
+    transition: transform right 5s ease-in-out; /* Transition for smooth animation */
+  }
+  
+  .form-container.show {
+    right: 0; /* Visible position */
+  }
+  
+.form-close:hover {
+    transform: scale(1.1) ;
+    cursor: pointer;
 }
 
-.form-container.show {
-    transition: transform 10s ease-in-out;
-    transform: translateX(0);
+.submit-title,
+.submit-desc {
+    transition: opacity 0.3s ease-in-out;
 }
+
+.submit-button,
+.cancel-button {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
 .header-submit{
     
     display: flex;
@@ -22,6 +42,7 @@
     font-weight: 500;
 }
 .form-close{
+    transition: transform 0.3s ease-in-out;
     background-color: rgba(170, 170, 170, 0.619);
     font-size: 20px;
     border-radius: 20%;
@@ -44,15 +65,17 @@
 }
 .submit-button{
     background-color: #0092DD !important;
-    margin: 2% 2% 2% 2% !important;
+    text-transform: none !important;
+    margin: 5% 2% 2% 2% !important;
     color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-   
+    
 }
 
 .cancel-button{
+    text-transform: none !important;
     background-color: #828282 !important;
-    margin: 2% 2% 2% 2% !important;
+    margin: 5% 2% 2% 2% !important;
     color: rgb(255, 255, 255);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
    

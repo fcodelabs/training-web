@@ -1,3 +1,5 @@
+
+
 import './SubmitForm.css';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
@@ -36,8 +38,19 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
 
         <div
             className={`form-container ${showForm ? 'show' : ''}`}
-            style={{ position: 'fixed', top: 0, right: 0, width: '300px', height: '100vh', background: 'white', padding:"1%" }}
-        >   <div className='header-submit'>
+            style={{
+                position: 'fixed',
+                top: 0,
+                right: 0,
+                transform: `translateX(${showForm ? 0 : '100%'})`,
+                width: '300px',
+                height: '100vh',
+                background: 'white',
+                padding: '1%',
+                transition: 'transform 5s ease-in-out', // Transition for smooth animation
+            }}
+        >
+            <div className='header-submit'>
                 <div className="form-title">Submit New</div>
                 <div className="form-close" onClick={handleCancel} >
                     <CloseIcon />
@@ -45,13 +58,13 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
             </div>
             <div className='submit-title'>
                 <div style={{ padding: "1%", fontSize: '15px' }}>Title</div>
-                <TextField value={title} onChange={handleTitleChange} placeholder="Enter title" size='small'style={{width:"99%"}} />
+                <TextField value={title} onChange={handleTitleChange} placeholder="Enter title" size='small' style={{ width: "99%" }} />
             </div>
 
             <div className='submit-desc'>
                 <div style={{ padding: "1%", fontSize: '15px' }}>Description</div>
-                <TextField value={title} onChange={handleTitleChange} placeholder="Descryption" multiline
-                    rows={10} style={{width:"95%"}}/>
+                <TextField value={description} onChange={handleDescriptionChange} placeholder="Descryption" multiline
+                    rows={10} style={{ width: "95%" }} />
             </div>
 
             <div >

@@ -34,7 +34,7 @@
     font-style: normal;
     font-weight: 700;
     padding-bottom: 2%;
-    padding-top: 2%;
+    padding-top: 1%;
 }
 
 .sign-in-form {
@@ -43,7 +43,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 2% 2% 2% 2%;
+    padding: 1% 2% 1% 2%;
 }
 
 .text-field-login {

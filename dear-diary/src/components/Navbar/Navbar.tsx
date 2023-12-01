@@ -7,8 +7,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Deardiary from '../DearDiary/DearDiary';
 import Profile from '../Profile/Profile';
 
-function ResponsiveAppBar() {
-
+function NavBar() {
 
     return (
         <AppBar position="static" style={{backgroundColor:'transparent', boxShadow:'none'}}>
@@ -29,4 +28,4 @@ function ResponsiveAppBar() {
         </AppBar>
     );
 }
-export default ResponsiveAppBar;
+export default NavBar;

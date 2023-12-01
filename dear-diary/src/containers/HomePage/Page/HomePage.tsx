@@ -1,6 +1,4 @@
-import Deardiary from "../../../components/DearDiary/DearDiary"
 import ResponsiveAppBar from "../../../components/Navbar/Navbar";
-import Profile from "../../../components/Profile/Profile";
 import Home from "../Homebody/Home";
 import "./HomePage.css"
 const HomePage = () => {

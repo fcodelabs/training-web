@@ -1,0 +1,30 @@
+
+.form-container {
+    transition: transform 10s ease-in-out;
+    transform: translateX(100%);
+}
+
+.form-container.show {
+    transition: transform 10s ease-in-out;
+    transform: translateX(0);
+}
+.header-submit{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 95%;
+    padding: 2% 2% 0% 2%;
+}
+.form-title{
+    font-size: 20px ;
+    color: #4B465C;
+    font-weight: 500;
+}
+.form-close{
+    background-color: rgba(170, 170, 170, 0.619);
+    font-size: 20px;
+    border-radius: 20%;
+    font-weight: 500;
+    padding: 1% 1% 0% 1%;
+}

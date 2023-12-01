@@ -2,21 +2,28 @@ import ResponsiveAppBar from "../../../components/Navbar/Navbar";
 import Home from "../Homebody/Home";
 import "./HomePage.css";
 import Skeleton from '@mui/material/Skeleton';
+import { useState } from "react";
 
 const HomePage = () => {
+    const [showForm, setShowForm] = useState(false);
+
+    const isLoading = true;  
     return (
         <div className="homepage-wrapper">
-            {true ? (
-                <><div className="header-home">
-                    <ResponsiveAppBar />
-                </div><div className="home">
-                        <Home />
-                    </div></>
+            {isLoading ? (
+                <>
+                    <div className="header-home">
+                        <ResponsiveAppBar />
+                    </div>
+                    <div className="home">
+                        <Home showForm={showForm} reset={() => setShowForm(!showForm)} />
+                    </div>
+                </>
             ) : (
                 <>
                     <Skeleton
                         animation="wave"
-                        width="10%"
+                        width="100%"  // Adjusted width
                         height="10vh"
                         style={{ top: "1%", left: "1%", position: "absolute" }}
                     />
@@ -39,3 +46,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+

@@ -6,7 +6,7 @@ import HomePage from './containers/HomePage/Page/HomePage';
 function App() {
   return (
     <div>
-      <Layout />
+      {/* <Layout /> */}
       <Routes>
         <Route path="/" element={<SignInPage />} />
         <Route path="/home" element={<HomePage />} />

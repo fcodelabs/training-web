@@ -1,5 +1,6 @@
 import './SubmitForm.css';
 import CloseIcon from '@mui/icons-material/Close';
+import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 
 interface SubmitFormProps {
@@ -35,19 +36,28 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
 
         <div
             className={`form-container ${showForm ? 'show' : ''}`}
-            style={{ position: 'fixed', top: 0, right: 0, width: '300px', height: '100vh', background: 'white' }}
+            style={{ position: 'fixed', top: 0, right: 0, width: '300px', height: '100vh', background: 'white', padding:"1%" }}
         >   <div className='header-submit'>
                 <div className="form-title">Submit New</div>
                 <div className="form-close" onClick={handleCancel} >
                     <CloseIcon />
                 </div>
             </div>
+            <div className='submit-title'>
+                <div style={{ padding: "1%", fontSize: '15px' }}>Title</div>
+                <TextField value={title} onChange={handleTitleChange} placeholder="Enter title" size='small'style={{width:"99%"}} />
+            </div>
 
+            <div className='submit-desc'>
+                <div style={{ padding: "1%", fontSize: '15px' }}>Description</div>
+                <TextField value={title} onChange={handleTitleChange} placeholder="Descryption" multiline
+                    rows={10} style={{width:"95%"}}/>
+            </div>
 
-            <input type="text" value={title} onChange={handleTitleChange} placeholder="Enter title" />
-            <textarea value={description} onChange={handleDescriptionChange} placeholder="Enter description" />
-            <button onClick={handleSubmit}>Submit</button>
-            
+            <div >
+                <Button className='submit-button' variant="contained" onClick={handleSubmit} style={{ background: "#3f51b5", color: "white" }}>Submit</Button>
+                <Button className='cancel-button' variant="contained" onClick={handleCancel} style={{ background: "#3f51b5", color: "white" }}>Cancel</Button>
+            </div>
         </div>
 
     );

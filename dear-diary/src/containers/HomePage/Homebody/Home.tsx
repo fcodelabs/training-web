@@ -7,8 +7,10 @@ import DiaryCard from "../../../components/DiaryCard/DiaryCard";
 const DiaryCardList = [
     { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
     { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's conten,and make up the bulk of the card's contentt,and make up the bulk of the card's content,and make up the bulk of the card's content,and make up the bulk of the card's content" },
+    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's conten,and make up the bulk of the card's contentt,and make up the bulk of the card's content,and make up the bulk of the card's content,and make up the bulk of the card's content" },
+    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's conten,and make up the bulk of the card's contentt,and make up the bulk of the card's content,and make up the bulk of the card's content,and make up the bulk of the card's content" },
     { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    
+
 ]
 
 interface HomeProps {
@@ -27,7 +29,7 @@ const Home: React.FC<HomeProps> = ({ showForm, reset }) => (
                 Submit New
             </Button>
         </div>
-        <div className="home-body" style={{ display: "flex", flex: "flex-wrap", justifyContent: "flex-start" }}>
+        <div className="home-body" >
 
             {DiaryCardList.map((diary, key) => (
                 <DiaryCard key={key} diary={diary} />

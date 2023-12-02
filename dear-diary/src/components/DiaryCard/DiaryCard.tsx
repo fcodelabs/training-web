@@ -13,7 +13,7 @@ const DiaryCard = ({ diary }: DiaryCardProps) => {
   const { title, body } = diary;
   const [showMore, setShowMore] = useState(false);
 
-  const truncatedBody = showMore ? body : body.slice(0, 100)+"...";
+  const truncatedBody = showMore ? body : body.slice(0, 100)+(body.length > 100 ? "..." : "");
 
   const handleToggleShowMore = () => {
     setShowMore(!showMore);

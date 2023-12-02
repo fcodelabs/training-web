@@ -1,16 +1,23 @@
+// SubmitForm.tsx
 
-// Import necessary styles
 import './SubmitForm.css';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
+interface Diary {
+    title: string;
+    body: string;
+}
 
 interface SubmitFormProps {
     showForm: boolean;
     reset: () => void;
+    diaries: Diary[];
+    setDiaries: React.Dispatch<React.SetStateAction<Diary[]>>;
 }
 
-const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
+const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset, diaries, setDiaries }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
@@ -23,15 +30,22 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
     };
 
     const handleSubmit = () => {
+        const newDiary: Diary = {
+            title: title,
+            body: description,
+        };
+
+        setDiaries((prevDiaries) => [...prevDiaries, newDiary]);
+
         setTitle('');
         setDescription('');
-        
+        reset();
     };
 
     const handleCancel = () => {
         setTitle('');
         setDescription('');
-        reset()
+        reset();
     };
 
     return (

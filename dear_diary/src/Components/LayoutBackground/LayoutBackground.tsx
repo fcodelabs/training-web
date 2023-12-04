@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 
 
 interface LayoutBackgroundProps {
-    children: ReactNode;
+    children: ReactNode; 
   }
 
 function LayoutBackground({ children }: LayoutBackgroundProps) {

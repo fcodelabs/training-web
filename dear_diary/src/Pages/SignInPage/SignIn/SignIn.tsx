@@ -11,9 +11,34 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { ArrowForward } from "@mui/icons-material";
+import { useState } from "react";
 
 
 function SignIn() {
+  
+  const [nickname, setNickname] = useState("");
+
+  const getRandomElement = (array: string[]) => {
+    return array[Math.floor(Math.random() * array.length)]; //returns a random element from the array
+  }
+
+  const generateRandomNickname = () => {
+    // Generate a random nickname from the lists of adjectives and nouns
+    const adjectives = ['Funny', 'Clever', 'Swift', 'Happy', 'Mysterious', 'Brave', 'Gentle', 'Silly', 'Daring', 'Lucky'];
+    const nouns = ['Fox', 'Rocket', 'Penguin', 'Shadow', 'Whisper', 'Star', 'Captain', 'Jester', 'Phoenix', 'Wizard'];
+  
+    const adjective = getRandomElement(adjectives);
+    const noun = getRandomElement(nouns);
+    const randomNickname = `${adjective}${noun}`;
+    setNickname(randomNickname); //set the nickname state to the random nickname
+  };
+
+  const handleRandomButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); //prevent the form from submitting
+    generateRandomNickname();
+  };
+
   return (
     
     <div className="card_div">
@@ -49,25 +74,46 @@ function SignIn() {
             </Typography>
         </div>  
         <div className="frame2">
-          <div>
           <form className="formContainer">
-      <TextField
-        label="Your Nickname*"
-        variant="outlined"
-        fullWidth
-        size="small"
-        className="nameInput"
-      />
-      <Button type="submit" variant="contained" color="primary" className="submitButton">
-        Random
-      </Button>
-      </form>
+            <div className="frame3">
+              <TextField
+                label="Your Nickname*"
+                variant="outlined"
+                fullWidth
+                size="small"
+                className="nameInput"
+                value={nickname}//set the value of the input to the nickname state
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNickname(e.target.value)}//set the nickname state to the value of the input
+
+              />
+              </div>
+              <Button 
+              type="submit" 
+              variant="contained"
+              className="submitButton"
+              style={{
+                padding: "10px, 20px",
+                background: '#0092DD29',
+                color: '#0092DD',
+              }}
+              onClick={handleRandomButtonClick}
+              >
+                Random
+              </Button>
+              
+              </form>
+            
+          
           <div className="continue">
-          <Button type="button" variant="contained" className="secondButton">
-          Another Button
+          <Button 
+            type="button" 
+            variant="contained" 
+            className="secondButton"
+            endIcon={<ArrowForward />}
+            >
+          Continue
           </Button>
           </div>  
-          </div>
         </div>
       </div>
       </CardContent>

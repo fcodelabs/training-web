@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import SignIn from './containers/pages/sign-in/card/SignIn';
+import SignIn from './containers/pages/sign-in/SignIn';
 
 
 function App() {

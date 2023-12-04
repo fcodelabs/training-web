@@ -1,7 +1,7 @@
 import "./SignIn.css";
-import logo from './../../../../images/logo.png'
-import Input from "../../../../components/Input/Input";
-import CustomizedButton from "../../../../components/Button/CustomizedButton";
+import logo from './../../../images/logo.png'
+import Input from "../../../components/Input/Input";
+import CustomizedButton from "../../../components/Button/CustomizedButton";
 
 import Card from '@mui/material/Card';
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";

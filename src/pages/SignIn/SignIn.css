@@ -1,0 +1,11 @@
+.card-container {
+    width: 742px;
+    height: 267px;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: public sans;
+  }

@@ -1,8 +1,9 @@
 import './App.css';
+import SignInPage from './Pages/SignInPage/SignInPage';
 
 function App() {
   return (
-    <div className="App"></div>
+        <SignInPage />
   );
 }
 

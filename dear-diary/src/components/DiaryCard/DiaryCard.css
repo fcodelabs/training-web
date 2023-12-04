@@ -13,10 +13,7 @@
     flex-direction: column;
     
   }
-  .card.expanded {
-    height: auto; /* Set to 'auto' when expanded */
-  }
-  
+
   
   .card-body {
     display: flex;

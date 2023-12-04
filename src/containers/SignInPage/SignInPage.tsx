@@ -6,8 +6,17 @@ import Button from '@mui/material/Button';
 import logo from '../../assets/image1.png';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import bgimage from '../../assets/bg.png';
+import { useState } from 'react';
 
 const SignIn = () => {
+
+  const [name, setName] = useState('');
+
+  const generateRandomName = () => {
+    const randomString = Math.random().toString(36).substring(7);
+    setName(randomString);
+  };
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh',
     background: `url(${bgimage}) center center / cover no-repeat` }}>
@@ -18,19 +27,23 @@ const SignIn = () => {
         </Box>
         <span style={{ color: "#0092DD", fontSize: "36px", fontWeight: "700", alignContent: "center", lineHeight: "24px", marginBottom: "10px" }}>Sign In</span>
         {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
-        <Box sx={{  alignSelf: 'center', marginBottom: '20px', marginTop: '30px' }}>
+        <Box sx={{  alignSelf: 'center', marginTop: '30px' }}>
         {/* <TextField style={{ width: '395px', borderRadius: '4px', border: '1px', color: '#DBDADE' }} id="outlined-basic" label="Your nickname*" variant="outlined" inputProps={{ style: { height: '6px' } }} /> */}
         <TextField
-            style={{ width: '395px', borderRadius: '4px', border: '1px', color: '#DBDADE', height: '35px' }}
+            style={{ width: '395px', borderRadius: '4px', border: '1px', color: '#DBDADE', fontSize: '13px', lineHeight: '21px' }}
             id="outlined-basic"
             label="Your nickname*"
             variant="outlined"
+            size='small'
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
-          <Button style={{ width: '104px', height: '35px', color: '#0092DD', backgroundColor: 'rgba(0, 146, 221, 0.16)', marginLeft: '20px', fontWeight: '500', lineHeight: '18px', fontSize: '15px', padding: '10px 20px 10px 20px' }} variant="contained">
+          <Button style={{ width: '104px', height: '35px', color: '#0092DD', backgroundColor: 'rgba(0, 146, 221, 0.16)', marginLeft: '30px', fontWeight: '500', lineHeight: '18px', fontSize: '15px', padding: '10px 20px 10px 20px' }} variant="contained"
+            onClick={generateRandomName}>
             Random
           </Button>
         </Box>
-        <Button style={{ width: '133px', height: '38px', borderRadius: '6px', color: 'white', backgroundColor: '#0092DD', alignSelf: 'center', marginTop: '20px' }} variant="contained">
+        <Button style={{ width: '133px', height: '38px', borderRadius: '6px', color: 'white', backgroundColor: '#0092DD', alignSelf: 'center', marginTop: '15px' }} variant="contained">
             Continue
             <ArrowForwardIcon style={{ height: '18px', width: '18px', marginLeft: '10px' }} />
             </Button>

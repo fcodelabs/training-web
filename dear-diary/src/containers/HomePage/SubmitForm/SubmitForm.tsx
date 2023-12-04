@@ -4,7 +4,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 
-
 interface Diary {
     title: string;
     body: string;
@@ -13,11 +12,10 @@ interface Diary {
 interface SubmitFormProps {
     showForm: boolean;
     reset: () => void;
-    diaries: Diary[];
     setDiaries: React.Dispatch<React.SetStateAction<Diary[]>>;
 }
 
-const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset, setDiaries }) => {
+const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset,setDiaries }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 

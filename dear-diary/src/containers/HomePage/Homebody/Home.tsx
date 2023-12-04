@@ -1,5 +1,3 @@
-// Home.tsx
-
 import PrimarySearchAppBar from "../../../components/SearchBar/SearchBar";
 import Button from "@mui/material/Button";
 import "./Home.css";
@@ -48,7 +46,7 @@ const Home: React.FC<HomeProps> = ({ showForm, reset }) => {
                     <DiaryCard key={key} diary={diary} />
                 ))}
             </div>
-            <SubmitForm showForm={showForm} reset={reset} diaries={diaries} setDiaries={setDiaries} />
+            <SubmitForm showForm={showForm} reset={reset} setDiaries={setDiaries} />
         </div>
     );
 };

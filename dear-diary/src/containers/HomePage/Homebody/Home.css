@@ -36,6 +36,7 @@
 .home-body {
     max-width: 100%;
     display: flex;
+    margin-top: 10px;
     flex-wrap: wrap;
     height: 60vh;
     max-height: 70vh;

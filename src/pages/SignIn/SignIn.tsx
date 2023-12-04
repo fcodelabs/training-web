@@ -1,37 +1,30 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Background from "../../components/Background/Background";
 import "./SignIn.css";
 import logo from "./logo.png"
 import { Box, Button, TextField, Typography, Card, Container, CardContent} from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-
-const randomTextsArray: string[] = [
-    "Williams",
-    "Jhon",
-    "Vihanga",
-    "David",
-    "Kane",
-    "Warner",
-    "Kate",
-    "Jane",
-  ];
+//Random Nicname array
+const randonNameArray: string[] = ["Sithum","Thambara", "Tharusha", "Munzira", "Mahinda","Ranil","Wathmi","Sajith"];
 
 const SignIn: React.FC = () => {
 
   const [text, setText] = useState<string>("");
-  const [randomText, setRandomText] = useState<string>("");
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
 
   const handleRandomButtonClick = () => {
-    const randomIndex = Math.floor(Math.random() * randomTextsArray.length);
-    setRandomText(randomTextsArray[randomIndex]);
-    setText(randomText);
+    const randomIndex = Math.floor(Math.random() * randonNameArray.length);
+    const newRandomText = randonNameArray[randomIndex];
+    setText(newRandomText);
   };
+
+  const navigate = useNavigate();
 
   return (
     <Background>
@@ -77,19 +70,27 @@ const SignIn: React.FC = () => {
               padding="10px 20px"
               gap="12px"
             >
-              <TextField variant="outlined" size="small" placeholder="Your Nickname*" 
+              <TextField variant="outlined" size="small" placeholder="Your Nickname*" autoComplete="off" spellCheck="false"
               sx={{width: '395px', height: '35px', borderRadius: '4px', padding: '7px, 10px, 7px, 10px'}}
+              value={text}
               onChange={handleTextChange}
               ></TextField>
               <Button variant="contained" 
                 onClick={handleRandomButtonClick}
-              sx={{width: '104px', height: '38px', padding:'10px, 20px,10px, 20px', gap: '12px', backgroundColor: 'rgba(0, 146, 221,0.16)', color: "#0092DD"}}>
+              sx={{width: '104px', height: '38px', padding:'10px, 20px,10px, 20px', gap: '12px', backgroundColor: 'rgba(0, 146, 221,0.16)', color: "#0092DD",
+              '&:hover': {
+                color: '#fff',
+                backgroundColor: '#0092DD',
+                opacity: '65%',
+              }}}>
                 Random
               </Button>
             </Box>
 
-            <Box display="flex" justifyContent="center" mt={2}>
-                <Button variant="contained" endIcon={<ArrowForwardIcon />} 
+            <Box display="flex" justifyContent="center" mt={1}>
+                <Button variant="contained" 
+                endIcon={<ArrowForwardIcon />} 
+                onClick={() => navigate('/home')}
                 sx={{backgroundColor: '#0092DD', opacity: '65%'}}>
                     Continue
                 </Button>

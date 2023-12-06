@@ -7,12 +7,11 @@ import TextField from '@mui/material/TextField';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../redux/store/hooks";
+import { useAppDispatch} from "../../../redux/store/hooks";
 import { setUserName } from "../../../redux/features/user/userSlice";
 
 const SignInPage = () => {
     const dispatch = useAppDispatch()
-    const name = useAppSelector((state) => state.user.userName)
     const [nameRandom, SetRandomName] = useState("")
 
     useEffect(() => {
@@ -20,7 +19,7 @@ const SignInPage = () => {
       return () => {
         dispatch(setUserName(nameRandom))
       }
-    }, [nameRandom])
+    }, [nameRandom,dispatch])
     
 
     return (

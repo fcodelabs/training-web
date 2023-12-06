@@ -3,21 +3,23 @@ import './SubmitForm.css';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { addCard } from "../../../redux/features/diarycard/diaryCardSlice";
+import { useAppDispatch } from "../../../redux/store/hooks";
 
-interface Diary {
+type Diary ={
     title: string;
     body: string;
 }
 
-interface SubmitFormProps {
+type SubmitFormProps= {
     showForm: boolean;
     reset: () => void;
-    setDiaries: React.Dispatch<React.SetStateAction<Diary[]>>;
 }
 
-const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset,setDiaries }) => {
+const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const dispatch = useAppDispatch();
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
@@ -35,8 +37,8 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset,setDiaries }) =
         if (!ValidateDiaryCard(title, description)) {
             return;
         }  
-        setDiaries((prevDiaries) => [...prevDiaries, newDiary]);
-
+        dispatch(addCard(newDiary))
+        
         setTitle('');
         setDescription('');
         reset();

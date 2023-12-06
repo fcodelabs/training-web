@@ -3,35 +3,19 @@ import Button from "@mui/material/Button";
 import "./Home.css";
 import SubmitForm from "../SubmitForm/SubmitForm";
 import DiaryCard from "../../../components/DiaryCard/DiaryCard";
-import { useState } from "react";
+import { useAppSelector } from "../../../redux/store/hooks";
+import { Box } from "@mui/material";
 
-interface Diary {
-    title: string;
-    body: string;
-}
 
-interface HomeProps {
+type HomeProps ={
     showForm: boolean;
     reset: () => void;
 }
 
-const DiaryCardList: Diary[] = [
-    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content,Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-
-];
 
 const Home: React.FC<HomeProps> = ({ showForm, reset }) => {
-    const [diaries, setDiaries] = useState<Diary[]>(DiaryCardList);
-
+    const diaries = useAppSelector((state) => state.diaryCard.cards);
+    
     return (
         <div className="home-wrapper">
             <div className="home-header">Home</div>
@@ -41,12 +25,12 @@ const Home: React.FC<HomeProps> = ({ showForm, reset }) => {
                     Submit New
                 </Button>
             </div>
-            <div className="home-body">
+            <Box className="home-body">
                 {diaries.map((diary, key) => (
-                    <DiaryCard key={key} diary={diary} />
+                    <DiaryCard key={key} diary={diary}/>
                 ))}
-            </div>
-            <SubmitForm showForm={showForm} reset={reset} setDiaries={setDiaries} />
+            </Box>
+            <SubmitForm showForm={showForm} reset={reset} />
         </div>
     );
 };

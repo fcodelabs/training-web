@@ -10,9 +10,12 @@ import Stack from "@mui/material/Stack";
 import { useMediaQuery } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { useLocation } from "react-router-dom";
 
 const HomePage: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const location = useLocation();
+  const nickname = location.state && location.state.nickname;
 
   return (
     <Box
@@ -23,7 +26,7 @@ const HomePage: React.FC = () => {
         height: "100vh",
       }}
     >
-      <Header />
+      <Header name={nickname} />
       <Box
         alignItems={isMobile ? "center" : "flex-start"}
         sx={{

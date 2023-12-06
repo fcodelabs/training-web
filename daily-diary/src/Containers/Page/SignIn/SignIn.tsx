@@ -44,7 +44,7 @@ const SignIn: React.FC = () => {
     setText(randomTextsArray[randomIndex]);
   };
   const handleContinueButtonClick = () => {
-    navigate("/home");
+    navigate("/home", { state: { nickname: text } });
   };
 
   return (

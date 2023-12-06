@@ -4,8 +4,10 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Avatar from "../../Images/Avatar.png";
-
-const Header: React.FC = () => {
+interface headerProps {
+  name: string;
+}
+const Header: React.FC<headerProps> = (props) => {
   return (
     <Stack direction="row" justifyContent="space-between">
       <Box
@@ -56,7 +58,7 @@ const Header: React.FC = () => {
             letterSpacing: "0.43px",
           }}
         >
-          Williams
+          {props.name}
         </Typography>
       </Stack>
     </Stack>

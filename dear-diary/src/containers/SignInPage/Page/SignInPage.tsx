@@ -5,11 +5,23 @@ import Deardiary from "../../../components/DearDiary/DearDiary";
 import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../redux/store/hooks";
+import { setUserName } from "../../../redux/features/user/userSlice";
 
 const SignInPage = () => {
+    const dispatch = useAppDispatch()
+    const name = useAppSelector((state) => state.user.userName)
     const [nameRandom, SetRandomName] = useState("")
+
+    useEffect(() => {
+    
+      return () => {
+        dispatch(setUserName(nameRandom))
+      }
+    }, [nameRandom])
+    
 
     return (
         <div className="signin-page-wrapper">

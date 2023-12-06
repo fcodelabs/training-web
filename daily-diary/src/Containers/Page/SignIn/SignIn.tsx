@@ -10,6 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import Logo from "../../../Images/Logo.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const containerStyle = {
   display: "flex",
@@ -31,8 +32,8 @@ const randomTextsArray: string[] = [
 ];
 
 const SignIn: React.FC = () => {
+  const navigate = useNavigate();
   const [text, setText] = useState<string>("");
-  const [randomText, setRandomText] = useState<string>("");
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -40,8 +41,10 @@ const SignIn: React.FC = () => {
 
   const handleRandomButtonClick = () => {
     const randomIndex = Math.floor(Math.random() * randomTextsArray.length);
-    setRandomText(randomTextsArray[randomIndex]);
-    setText(randomText);
+    setText(randomTextsArray[randomIndex]);
+  };
+  const handleContinueButtonClick = () => {
+    navigate("/home", { state: { nickname: text } });
   };
 
   return (
@@ -146,6 +149,7 @@ const SignIn: React.FC = () => {
               <Button
                 variant="contained"
                 endIcon={<ArrowForwardIcon />}
+                onClick={handleContinueButtonClick}
                 sx={{
                   backgroundColor: "rgba(0, 146, 221,0.65)",
                   typography: {

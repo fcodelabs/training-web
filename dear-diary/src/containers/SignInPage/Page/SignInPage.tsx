@@ -15,15 +15,9 @@ const SignInPage = () => {
     const dispatch = useAppDispatch()
     const [nameRandom, SetRandomName] = useState("")
 
-    useEffect(() => {
-
-        return () => {
-            dispatch(setUserName(nameRandom))
-        }
-    }, [nameRandom, dispatch])
 
     const handleLogin = () => {
-        dispatch(userLoggedIn())
+        dispatch(userLoggedIn(nameRandom))
         navigate('/home')
     }
 

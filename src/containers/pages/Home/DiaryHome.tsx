@@ -1,7 +1,8 @@
+import "./DiaryHome.css";
 import CustomizedButton from "../../../components/Button/CustomizedButton";
 import Header from "../../../components/Header/Header";
 import IconInput from "../../../components/Input/IconInput";
-import "./DiaryHome.css";
+
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function Home() {

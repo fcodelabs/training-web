@@ -4,30 +4,30 @@ interface ButtonProps {
   label: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
-  secondary?: boolean;
 }
 
-export default function CustomizedButton({
-  label,
+export default function RandomButton({
+    label,
   onClick,
   icon,
-  secondary,
-}: ButtonProps) {
+}: ButtonProps
+) {
   return (
     <>
       <Button
         variant="contained"
         endIcon={icon}
         sx={{ 
-          background: secondary ? '#0092DD29': '#0092DD',
+          background: '#0092DD29',
           textTransform: 'none', 
-          color: secondary ? '#0092DD': '#FFFFFF',
-          "&:hover": {background: secondary ? '#0092DD29': '#0092DD'} }}
+          color: '#0092DD',
+          "&:hover": {background: '#0092DD29'} }}
         disableElevation
         autoCapitalize="false"
+        onClick={onClick}
       >
         {label}
       </Button>
     </>
-  );
+  )
 }

@@ -1,14 +1,17 @@
-import React from 'react';
-import './App.css';
-import SignIn from './containers/pages/SignIn/SignIn';
-import Home from './containers/pages/Home/DiaryHome';
-
+import "./App.css";
+import SignIn from "./containers/SignIn/SignIn";
+import DiaryHome from "./containers/DiaryHome/DiaryHome";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div>
-       {/* <SignIn/> */}
-       <Home/>
+      <Router>
+        <Routes>
+          <Route path="/" element={<DiaryHome />} />
+          <Route path="/signin" element={<SignIn />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

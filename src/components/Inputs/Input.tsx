@@ -1,39 +1,39 @@
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
-import InputAdornment from '@mui/material/InputAdornment';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+
 
 interface InputProps {
   label: string;
-  icon?: React.ReactNode;
+  width: string | number;
+  value?: string | number; 
 }
+
 
 const useStyles = makeStyles({
   root: {
     "& .MuiOutlinedInput-root": {
-      width: "395px",
+      // width: "395px",
       height: "35px",
       backgroundColor: "white",
 
       "& fieldset": {
         borderColor: "#DBDADE",
-        
       },
+
       "&:hover fieldset": {
-        borderColor: "#DBDADE",
-        
+        borderColor: "#DBDADE",  
       },
+
       "&.Mui-focused fieldset": {
-        borderColor: "#0092DD",
-        
+        borderColor: "#0092DD",  
       },
 
       "&.MuiInputBase-input": {
         fontSize: "10px",
         color: "#0092DD", 
-        
       },
+
     },
   },
   customLabel: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Input({ label,icon }: InputProps) {
+export default function Input({ label,width,value }: InputProps) {
   const classes = useStyles();
   const [isFocused, setIsFocused] = useState(false);
 
@@ -62,26 +62,24 @@ export default function Input({ label,icon }: InputProps) {
     <>
       <TextField
         id="outlined-basic"
-        label= {!isFocused ? (label) : ""}
+        label={(isFocused && value!=null) ? "" : label}
         variant="outlined"
         className={classes.root}
         InputLabelProps={{
-          shrink: false,
+          shrink: isFocused || value !== undefined,
           classes: {
             root: classes.customLabel,
           },
         }}
         InputProps={{
           className: classes.multilineColor,
-          // startAdornment: (
-          //   <InputAdornment position="start">
-          //     <AccountCircle />
-          //   </InputAdornment>
-          // ),
         }}
         onFocus={handleFocus}
         onBlur={handleBlur}
-       
+        style={{
+          width: width,
+        }}
+        value={value}
       />
     </>
   );

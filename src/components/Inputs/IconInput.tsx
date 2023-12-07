@@ -5,13 +5,14 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 interface InputProps {
   label: string;
+  width: string | number; 
   icon: React.ReactNode;
 }
 
 const useStyles = makeStyles({
   root: {
     "& .MuiOutlinedInput-root": {
-      width: "395px",
+      // width: "395px",
       height: "35px",
       backgroundColor: "white",
 
@@ -45,7 +46,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function IconInput({ label,icon }: InputProps) {
+export default function IconInput({ label,width,icon }: InputProps) {
   const classes = useStyles();
   const [isFocused, setIsFocused] = useState(false);
 
@@ -80,7 +81,9 @@ export default function IconInput({ label,icon }: InputProps) {
         }}
         onFocus={handleFocus}
         onBlur={handleBlur}
-       
+        style={{
+          width: (width),
+        }}
       />
     </>
   );

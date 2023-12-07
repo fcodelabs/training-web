@@ -1,21 +1,31 @@
-import React from "react";
-import backgroundImage from "../../../Images/backgroundImage.png";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Header from "../../../Components/Header/Header";
-// import Container from "@mui/material/Container";
+import Header from "../../Components/Header/Header";
 import Stack from "@mui/material/Stack";
 import { useMediaQuery } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useLocation } from "react-router-dom";
+import CardAddingForm from "../../Components/CardAddingForm/CardAddingForm";
+
+const backgroundImage: string =
+  process.env.PUBLIC_URL + "Images/backgroundImage.png";
 
 const HomePage: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
   const location = useLocation();
   const nickname = location.state && location.state.nickname;
+  const [showCardAddingForm, setShowCardAddingForm] = useState<boolean>(false);
+
+  const handleShowForm = () => {
+    setShowCardAddingForm(true);
+  };
+  const handleCloseForm = () => {
+    setShowCardAddingForm(false);
+  };
 
   return (
     <Box
@@ -69,18 +79,52 @@ const HomePage: React.FC = () => {
             ),
           }}
           sx={{
-            width: { xs: "100%", sm: "75%", md: "35%" },
+            width: { xs: "100%", sm: "60%", md: "40%", lg: "40%", xl: "28%" },
           }}
         />
 
         <Button
           variant="contained"
           disableElevation
+          onClick={handleShowForm}
           sx={{ bgcolor: "#0092DD", borderRadius: "8px" }}
         >
           Submit New
         </Button>
       </Stack>
+      {showCardAddingForm && (
+        <>
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              height: "100%",
+              width: "100%",
+              backgroundColor: "rgba(75,70, 92, 0.68)",
+            }}
+          ></div>
+          <Box
+            sx={{
+              position: "fixed",
+              top: 0,
+              right: 0,
+              height: "100%",
+              width: {
+                xs: "100%",
+                sm: "40%",
+                md: "30%",
+                lg: "30%",
+                xl: "21%",
+              },
+              backgroundColor: "white",
+              overflowY: "auto",
+            }}
+          >
+            <CardAddingForm onClose={handleCloseForm} />
+          </Box>
+        </>
+      )}
     </Box>
   );
 };

@@ -1,9 +1,10 @@
 import React from "react";
-import Logo from "../../Images/Logo.png";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import Avatar from "../../Images/Avatar.png";
+
+const Logo: string = process.env.PUBLIC_URL + "Images/Logo.png";
+const Avatar: string = process.env.PUBLIC_URL + "Images/Avatar.png";
 interface headerProps {
   name: string;
 }

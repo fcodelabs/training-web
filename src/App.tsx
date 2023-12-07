@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import SignIn from './containers/pages/sign-in/SignIn';
+import SignIn from './containers/pages/SignIn/SignIn';
+import Home from './containers/pages/Home/DiaryHome';
 
 
 function App() {
   return (
     <div>
-       <SignIn/>
+       {/* <SignIn/> */}
+       <Home/>
     </div>
   );
 }

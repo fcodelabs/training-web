@@ -2,11 +2,10 @@ import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
 import InputAdornment from '@mui/material/InputAdornment';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 
 interface InputProps {
   label: string;
-  icon?: React.ReactNode;
+  icon: React.ReactNode;
 }
 
 const useStyles = makeStyles({
@@ -39,14 +38,14 @@ const useStyles = makeStyles({
   customLabel: {
     fontSize: "13px",
     transform: "translateY(80%)",
-    paddingLeft: "10px",
+    paddingLeft: "45px",
   },
   multilineColor : {
     color: "#4B465C"
   }
 });
 
-export default function Input({ label,icon }: InputProps) {
+export default function IconInput({ label,icon }: InputProps) {
   const classes = useStyles();
   const [isFocused, setIsFocused] = useState(false);
 
@@ -73,11 +72,11 @@ export default function Input({ label,icon }: InputProps) {
         }}
         InputProps={{
           className: classes.multilineColor,
-          // startAdornment: (
-          //   <InputAdornment position="start">
-          //     <AccountCircle />
-          //   </InputAdornment>
-          // ),
+          startAdornment: (
+            <InputAdornment position="start">
+              {icon}
+            </InputAdornment>
+          ),
         }}
         onFocus={handleFocus}
         onBlur={handleBlur}

@@ -12,22 +12,6 @@
     padding: 20px;
 }
 
-.header{
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.logo{
-    width: 40px;
-    height: 40px;
-}
-
-.header-title{
-    font-size: 24px;
-    font-weight: 500;
-    color: #4B465C;
-}
 
 .content{
     display: flex;

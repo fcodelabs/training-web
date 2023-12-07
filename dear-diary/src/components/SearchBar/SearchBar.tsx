@@ -34,7 +34,7 @@ const PrimarySearchAppBar = ({setFilteredList}: PrimarySearchAppBarProps ) => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         style={{
-          width: '50%',
+          width: '35%',
           boxShadow: '2px 2px 2px 0px rgba(50, 50, 50, 0.205)',
         }}
         InputProps={{

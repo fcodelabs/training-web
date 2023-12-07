@@ -1,4 +1,5 @@
 .submit-form {
+    z-index: 5;
     position: fixed;
     top: 0;
     width: 300px;

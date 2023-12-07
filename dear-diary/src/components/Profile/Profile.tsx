@@ -1,5 +1,4 @@
 
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { useAppSelector } from '../../redux/store/hooks';
 import "./Profile.css"
 
@@ -8,8 +7,8 @@ const Profile = () => {
     return (
         <div className="profile-wrapper">
             <div className="profile-name">
-                <AccountCircleRoundedIcon className="profile-icon" style={{ fontSize: 40, color: '#33A8E4' }} />
-                <div className="profile-name-text">
+                <img src={"/user-avatar.svg"} className='image-profile'></img>
+                <div className="profile-name-text"  >
                     {name}
                 </div>
             </div>

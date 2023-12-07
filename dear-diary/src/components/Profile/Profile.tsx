@@ -7,7 +7,7 @@ const Profile = () => {
     return (
         <div className="profile-wrapper">
             <div className="profile-name">
-                <img src={"/user-avatar.svg"} className='image-profile'></img>
+                <img src={"/user-avatar.svg"} alt=""className='image-profile'></img>
                 <div className="profile-name-text"  >
                     {name}
                 </div>

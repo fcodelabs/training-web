@@ -1,14 +1,13 @@
-
-import getrandomName from "../Random/RandomNameGenerator";
+import getrandomName from "../../utilities/randomNameGenerator";
 import "./SignInPage.css";
-import Deardiary from "../../../components/DearDiary/DearDiary";
+import Deardiary from "../../components/DearDiary/DearDiary";
 import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../redux/store/hooks";
-import { setUserName, userLoggedIn } from "../../../redux/features/user/userSlice";
+import { useAppDispatch } from "../../redux/store/hooks";
+import { userLoggedIn } from "../../redux/slices/userSlice";
 
 const SignInPage = () => {
     const navigate = useNavigate()

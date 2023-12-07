@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import "./SearchBar.css"
 import { useState, useEffect } from 'react';
-import { searchCards } from '../../redux/features/diarycard/diaryCardSlice';
+import { searchCards } from '../../redux/slices/diaryCardSlice';
 import { useAppSelector } from '../../redux/store/hooks';
 
 type Card = {

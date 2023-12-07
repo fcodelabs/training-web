@@ -9,7 +9,7 @@ function NavBar() {
 
     return (
         <AppBar position="static" style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
-            <Container style={{ maxWidth: "2000px", margin:"9px 0 0 0" }}>
+            <Container style={{ maxWidth: "2000px", padding:"9px 0 0 0" }}>
                 <Toolbar disableGutters>
                     {<Deardiary />}
 

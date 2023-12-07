@@ -1,9 +1,9 @@
-import ValidateDiaryCard from "../../../utility/Validation"
+import ValidateDiaryCard from "../../../utilities/validation"
 import './SubmitForm.css';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { addCard } from "../../../redux/features/diarycard/diaryCardSlice";
+import { addCard } from "../../../redux/slices/diaryCardSlice";
 import { useAppDispatch } from "../../../redux/store/hooks";
 
 type Diary ={

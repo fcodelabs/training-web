@@ -11,6 +11,7 @@ import bgimage from '../../assets/bg.png';
 import user from '../../assets/user.png';
 import { IconButton } from '@mui/material';
 import Header from '../../components/header';
+import Grid from '@mui/material/Grid';
 
 const HomePage = () => {
     return (
@@ -25,12 +26,12 @@ const HomePage = () => {
             }}
         >
             <div style={{ display: 'flex', alignItems: 'center', }}>
-                <Container className="homeHeader" sx={{ display: 'flex', alignItems: 'center', width: '100%', marginLeft: '0px', marginTop: '60px', marginRight: '60px', justifyContent: 'space-between' }}>
+                <Grid className="homeHeader" sx={{ display: 'flex', alignItems: 'center', width: '100%', marginLeft: '0px', marginTop: '60px', marginRight: '60px', justifyContent: 'space-between' }}>
                     <Header />
                     <IconButton style={{ width: '72px', height: '72px', alignSelf: 'flex-end', backgroundColor: 'rgba(1, 169, 255, 0.33)', border: '5px solid #01A9FF', borderRadius: 90, borderColor: '#01A9FF' }} color="inherit" >
                         <img src={user} alt="User Icon" />
                     </IconButton>
-                </Container>
+                </Grid>
             </div>
 
             <div
@@ -60,8 +61,8 @@ const HomePage = () => {
             </div>
             
             <div>
-            <Container
-                sx={{ display: 'flex', alignItems: 'center', width: '100%', marginLeft: '36px', marginTop: '0px', marginRight: '0px', justifyContent: 'space-between' }}
+            <Grid
+                sx={{ display: 'flex', alignItems: 'center', marginLeft: '60px', marginTop: '0px', marginRight: '60px', justifyContent: 'space-between' }}
             >
                 <TextField
                     style={{
@@ -71,9 +72,10 @@ const HomePage = () => {
                         backgroundColor: '#ffffff',
                     }}
                     id="outlined-basic"
-                    label="Placeholder"
+                    label=""
                     variant="outlined"
                     size="small"
+                    placeholder='Placeholder'
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
@@ -87,7 +89,7 @@ const HomePage = () => {
                     variant="contained"
                     color="primary"
                     style={{
-                        alignSelf: 'flex-end',
+                        // alignSelf: 'flex-end',
                         backgroundColor: '#0092DD',
                         color: '#ffffff',
                         borderRadius: '8px',
@@ -105,7 +107,7 @@ const HomePage = () => {
                 >
                     Submit New
                 </Button>
-            </Container>
+            </Grid>
             </div>
         </div>
     );

@@ -69,8 +69,9 @@ const SubmitCard: React.FC = () => {
                         backgroundColor: '#0092DD',
                         letterSpacing: '0.43px',
                         textTransform: 'none',
+                        
                     }}
-                        variant="contained" onClick={handleSubmit}>
+                        variant="contained" disableElevation onClick={handleSubmit}>
                         Submit
                     </Button>
                     <Button style={{
@@ -84,7 +85,7 @@ const SubmitCard: React.FC = () => {
                         backgroundColor: 'rgba(168, 170, 174, 0.16)',
                         letterSpacing: '0.43px',
                         textTransform: 'none',
-                    }} variant="contained" onClick={onClose}>
+                    }} variant="contained" disableElevation onClick={onClose}>
                         Cancel
                     </Button>
                 </div>

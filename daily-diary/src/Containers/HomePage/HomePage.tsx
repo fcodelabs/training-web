@@ -10,6 +10,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useLocation } from "react-router-dom";
 import CardAddingForm from "../../Components/CardAddingForm/CardAddingForm";
+// import DiaryCard from "../../Components/DiaryCard/DiaryCard";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -50,7 +51,7 @@ const HomePage: React.FC = () => {
           fontFamily="public sans"
           sx={{
             fontSize: { xs: "30px", md: "36px" },
-            fontWeight: "700",
+            fontWeight: 700,
           }}
         >
           Home
@@ -87,7 +88,11 @@ const HomePage: React.FC = () => {
           variant="contained"
           disableElevation
           onClick={handleShowForm}
-          sx={{ bgcolor: "#0092DD", borderRadius: "8px" }}
+          sx={{
+            bgcolor: "#0092DD",
+            borderRadius: "8px",
+            typography: { fontFamily: "public sans" },
+          }}
         >
           Submit New
         </Button>

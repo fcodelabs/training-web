@@ -1,5 +1,5 @@
 .profile{
-    position: fixed;
+    position: absolute;
     top: 60px;
     right: 60px;
     display: inline-flex;

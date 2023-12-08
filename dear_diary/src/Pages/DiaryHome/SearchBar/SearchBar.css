@@ -1,15 +1,14 @@
 .frame{
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     gap: 30px;
-    position: fixed;
+    position: absolute;
     top: 179px;
     left: 60px;
     right: 60px;
 }
 .home{
     display: flex;
-    width: 1800px;
     height: 39px;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +22,6 @@
 }
 
 .search{
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;

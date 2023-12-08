@@ -1,12 +1,24 @@
 import "./SearchBar.css";
-import { Button, TextField } from "@mui/material";
+import { Button, Drawer, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
+import { useState } from "react";
+import FormToAddNewDiary from "../../../Components/FormToAddNewDiary/FormToAddNewDiary";
 
 
 
 function SearchBar(){
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowOverlay(true);
+  };
+
+  const handleCloseOverlay = () => {
+    setShowOverlay(false);
+  };
+
+
     return(
         <div className="frame">
             <div className="home">
@@ -34,6 +46,7 @@ function SearchBar(){
                     type="submit" 
                     variant="contained" 
                     className="button"
+                    onClick={handleButtonClick}
                     style={{
                         padding: "13px, 26px",
                         borderRadius: "8px",
@@ -51,8 +64,14 @@ function SearchBar(){
                     Submit new
                 </Button>
                 </div>
-                
-            </div>
+            </div>  
+            <Drawer
+            anchor="right"
+            open={showOverlay}
+            onClose={handleCloseOverlay}
+            >
+              <FormToAddNewDiary onCloseOverlay={handleCloseOverlay}/>
+            </Drawer>        
         </div>
     );
 }

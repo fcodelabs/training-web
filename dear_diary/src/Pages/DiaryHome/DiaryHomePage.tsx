@@ -5,11 +5,16 @@ import SearchBar from "./SearchBar/SearchBar";
 
 function DiaryHomePage() {
   return (
-    <LayoutBackground>
-      <HeaderComponent />
-      <ProfileComponent />
-      <SearchBar />
-    </LayoutBackground>    
+    <div
+    style={{
+      width: "100%",
+    }}
+    >
+      <HeaderComponent/>
+      <SearchBar/>
+      <ProfileComponent/>
+    </div>
+      
   );
 }
 

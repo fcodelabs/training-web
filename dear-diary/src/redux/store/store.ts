@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import userReducer from "../features/user/userSlice";
-import diaryCardReducer from "../features/diarycard/diaryCardSlice";
+import userReducer from "../slices/userSlice";
+import diaryCardReducer from "../slices/diaryCardSlice";
 
 const store = configureStore({
     reducer: {

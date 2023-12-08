@@ -1,10 +1,10 @@
-import ValidateDiaryCard from "../../../utility/Validation"
+import ValidateDiaryCard from "../../../utilities/validation"
 import './SubmitForm.css';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { addCard } from "../../../redux/features/diarycard/diaryCardSlice";
 import { useAppDispatch } from "../../../redux/store/hooks";
+import { addCardToDb } from "../../../redux/slices/diaryCardSlice";
 
 type Diary ={
     title: string;
@@ -37,8 +37,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
         if (!ValidateDiaryCard(title, description)) {
             return;
         }  
-        dispatch(addCard(newDiary))
-        
+        dispatch(addCardToDb(newDiary));
         setTitle('');
         setDescription('');
         reset();
@@ -47,14 +46,19 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
     const handleCancel = () => {
         setTitle('');
         setDescription('');
-        reset();
     };
+
+    const handleClose = () => {
+        setTitle('');
+        setDescription('');
+        reset();
+    }
 
     return (
         <div className={`submit-form ${showForm ? 'expanded' : 'collapsed'}`}>
             <div className='header-submit'>
                 <div className="form-title">Submit New</div>
-                <div className="form-close" onClick={handleCancel}>
+                <div className="form-close" onClick={handleClose}>
                     <CloseIcon />
                 </div>
             </div>

@@ -3,14 +3,24 @@ import Home from "../Homebody/Home";
 import "./HomePage.css";
 import Skeleton from '@mui/material/Skeleton';
 import { useState } from "react";
+import { fetchCards } from '../../../redux/slices/diaryCardSlice';
+import { useAppDispatch,useAppSelector } from '../../../redux/store/hooks';
+import { useEffect } from 'react'
+
 
 const HomePage = () => {
     const [showForm, setShowForm] = useState(false);
+    const isLoading = useAppSelector((state) => state.diaryCard.isloading);
 
-    const isLoading = true;  
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(fetchCards())
+    }, [])
+
     return (
         <div className="homepage-wrapper">
-            {isLoading ? (
+            {!isLoading ? (
                 <>
                     <div className="header-home">
                         <ResponsiveAppBar />

@@ -8,7 +8,7 @@ type initialStateType = {
 
 const initialState: initialStateType = {
     userId: 0,
-    userName: "",
+    userName: localStorage.getItem("userName") || "",
     isLogged: false,
 }
 
@@ -22,8 +22,11 @@ const userSlice = createSlice({
         setUserName: (state, action: PayloadAction<string>) => {
             state.userName = action.payload;
         },
-        userLoggedIn: (state) => {
+        userLoggedIn: (state, action:PayloadAction<string>) => {
             state.isLogged = true;
+            state.userName = action.payload;
+            localStorage.setItem("userName", action.payload);
+            localStorage.setItem("isLogged", "true");
         }
     },
 });

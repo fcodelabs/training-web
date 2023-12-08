@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import "./SearchBar.css"
 import { useState, useEffect } from 'react';
-import { searchCards } from '../../redux/features/diarycard/diaryCardSlice';
+import { searchCards } from '../../redux/slices/diaryCardSlice';
 import { useAppSelector } from '../../redux/store/hooks';
 
 type Card = {
@@ -34,7 +34,7 @@ const PrimarySearchAppBar = ({setFilteredList}: PrimarySearchAppBarProps ) => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         style={{
-          width: '50%',
+          width: '35%',
           boxShadow: '2px 2px 2px 0px rgba(50, 50, 50, 0.205)',
         }}
         InputProps={{

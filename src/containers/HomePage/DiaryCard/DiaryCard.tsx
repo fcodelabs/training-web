@@ -5,9 +5,14 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import "@fontsource/public-sans/";
 
+interface DiaryCardProps {
+  title: string;
+  description: string;
+};
 
-const DiaryCard = ({ title = 'card title', description = 'lorewer wefwef' }) => {
+const DiaryCard : React.FC<DiaryCardProps> = ({ title , description}) => {
   const [showMore, setShowMore] = useState(false);
 
   const truncatedDescription = showMore ? description : `${description.slice(0, 100)}...`;

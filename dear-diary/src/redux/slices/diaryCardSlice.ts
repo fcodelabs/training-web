@@ -1,51 +1,56 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getFirestore, collection, getDocs, DocumentData, addDoc } from 'firebase/firestore/lite';
+import db from "../../utilities/firebaseIntegration";
 
-
-type Card={
+type Card = {
     title: string;
-    body: string
-}
+    body: string;
+};
 
-type initialStateType={
+type InitialStateType = {
     cards: Card[];
-}
-const initialState: initialStateType={
-    cards: [
-    { title: "Card Title 1", body: "Some quick example text to build on the card title and make up the bulk of the card's content, Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 2", body: "Some quick example text to build on the card title and make up the bulk of the card's content, Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 2", body: "Some quick example text to build on the card title and make up the bulk of the card's content, Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 3", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 4", body: "Some quick example text to build on the card title and make up the bulk of the card's content," },
-    { title: "Card Title 5", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 6", body: "Some quick example text to build on the card title and make up the bulk of the card's content," },
-    { title: "Card Title 7", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 9", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 10", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 11", body: "Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 12", body: "Some quick example text to build on the card title and make up the bulk of the card's content, " },
-    { title: "Card Title 13", body: "Some quick example text to build on the card title and make up the bulk of the card's content, Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 14", body: "Some quick example text to build on the card title and make up the bulk of the card's content, Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 15", body: "Some quick example text to build on the card title and make up the bulk of the card's content, Some quick example text to build on the card title and make up the bulk of the card's content" },
-    { title: "Card Title 16", body: "Some quick example text to build on the card title and make up the bulk of the card's content, Some quick example text to build on the card title and make up the bulk of the card's content" },
-  ]
-}
+    isloading: boolean;
+};
+
+const initialState: InitialStateType = {
+    cards: [],
+    isloading: true,
+};
+
+export const fetchCards = createAsyncThunk('diaryCard/fetchCards', async () => {
+    const cardsCol = collection(db, 'diary-cards');
+    const cardsSnapshot = await getDocs(cardsCol);
+    const cardsList = cardsSnapshot.docs.map(doc => doc.data() as Card);
+    return cardsList;
+});
+
+export const addCardToDb = createAsyncThunk('diaryCard/addCardToDb', async (card: Card) => {
+    const cardsCol = collection(db, 'diary-cards');
+    await addDoc(cardsCol, card);
+    return card;
+});
 
 export const searchCards = (searchText: string, cards: Card[]) => {
-    return cards.filter(card=> card.title.toLowerCase().includes(searchText.toLowerCase()));
-
-}
+    return cards.filter(card => card.title.toLowerCase().includes(searchText.toLowerCase()));
+};
 
 const diaryCardSlice = createSlice({
     name: "diaryCard",
-    initialState,
-    reducers: {
-        addCard: (state, action: PayloadAction<Card>) => {
-            state.cards.push(action.payload);
-        },
-
+    initialState: initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(addCardToDb.fulfilled, (state, action) => {
+            const payload = action.payload;
+            state.cards.push(payload);
+            });
+        builder.addCase(fetchCards.fulfilled, (state, action) => {
+            const payload = action.payload;
+            state.cards = payload;
+            state.isloading = false;
+        });
     },
 });
 
-export const { addCard } = diaryCardSlice.actions;
 
 export default diaryCardSlice.reducer;

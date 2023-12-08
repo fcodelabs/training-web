@@ -3,8 +3,8 @@ import './SubmitForm.css';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { addCard } from "../../../redux/slices/diaryCardSlice";
 import { useAppDispatch } from "../../../redux/store/hooks";
+import { addCardToDb } from "../../../redux/slices/diaryCardSlice";
 
 type Diary ={
     title: string;
@@ -37,8 +37,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
         if (!ValidateDiaryCard(title, description)) {
             return;
         }  
-        dispatch(addCard(newDiary))
-        
+        dispatch(addCardToDb(newDiary));
         setTitle('');
         setDescription('');
         reset();

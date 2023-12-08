@@ -14,8 +14,23 @@ import SubmitCard from './SubmitCard/SubmitCard';
 import "@fontsource/public-sans/";
 import { useLocation } from 'react-router-dom';
 
+interface DiaryCardProps {
+    title: string;
+    description: string;
+};
+
 const HomePage = () => {
     const [showSubmitCard, setShowSubmitCard] = useState(false);
+    const [diaryEntries, setDiaryEntries] = useState<DiaryCardProps[]>([]);
+
+    const handleOnSubmitCard = (title: string, description: string) => {
+        const newDiaryCard: DiaryCardProps = {
+            title,
+            description,
+        };
+
+        setDiaryEntries([newDiaryCard, ...diaryEntries]);
+    };
 
     const location = useLocation();
     const nickName = location.state.name || {};
@@ -189,7 +204,7 @@ const HomePage = () => {
                     </Button>
                 </Grid>
             </div>
-
+            
             <Modal
                 open={showSubmitCard}
                 onClose={handleCloseSubmitCard}
@@ -201,8 +216,11 @@ const HomePage = () => {
 
                 }}
             >
-                <SubmitCard onClose={handleCloseSubmitCard} />
+                <SubmitCard onClose={handleCloseSubmitCard} onsubmit={handleOnSubmitCard}/>
             </Modal>
+                {diaryEntries.map((diaryCard) => (
+                    <DiaryCard title={diaryCard.title} description={diaryCard.description} />
+                ))}
         </div>
     );
 };

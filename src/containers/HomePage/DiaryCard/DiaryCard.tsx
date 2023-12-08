@@ -22,14 +22,14 @@ const DiaryCard : React.FC<DiaryCardProps> = ({ title , description}) => {
   };
 
   return (
-    <Card sx={{ width: '271px', height: '170px', padding: '20px', borderRadius: '6px', alignItems: 'flex-start',  }}>
+    <Card sx={{ width: '271px', height: 'auto', padding: '20px', borderRadius: '6px', alignItems: 'flex-start',  }}>
       <CardContent>
         <Box style={{ display:'flex', height: '24px', marginBottom: '6px', alignItems: 'flex-start' }}>
           <Typography fontSize="18px" variant="h5" component="div">
             {title}
           </Typography>
         </Box>
-        <Box style={{ display:'flex', height: '66px', marginBottom: '16px', alignItems: 'flex-start' }}>
+        <Box style={{ display:'flex', height: 'auto', marginBottom: '16px', alignItems: 'flex-start' }}>
           <Typography fontSize="15px" variant="body2">
             {truncatedDescription}
           </Typography>

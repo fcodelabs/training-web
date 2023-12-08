@@ -8,9 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 interface SubmitCardProps {
     onClose: () => void;
+    onsubmit: (title: string, description: string) => void;
 }
 
-const SubmitCard: React.FC<SubmitCardProps> = ({ onClose }) => {
+const SubmitCard: React.FC<SubmitCardProps> = ({ onClose, onsubmit }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
@@ -40,6 +41,7 @@ const SubmitCard: React.FC<SubmitCardProps> = ({ onClose }) => {
         if (title !== '' && description !== '') {
             toast.success('Submitted successfully');
         };
+        onsubmit(title, description);
         onClose();
     };
 

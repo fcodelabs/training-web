@@ -46,14 +46,19 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
     const handleCancel = () => {
         setTitle('');
         setDescription('');
-        reset();
     };
+
+    const handleClose = () => {
+        setTitle('');
+        setDescription('');
+        reset();
+    }
 
     return (
         <div className={`submit-form ${showForm ? 'expanded' : 'collapsed'}`}>
             <div className='header-submit'>
                 <div className="form-title">Submit New</div>
-                <div className="form-close" onClick={handleCancel}>
+                <div className="form-close" onClick={handleClose}>
                     <CloseIcon />
                 </div>
             </div>

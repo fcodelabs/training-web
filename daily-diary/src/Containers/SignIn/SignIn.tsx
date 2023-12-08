@@ -76,7 +76,7 @@ const SignIn: React.FC = () => {
                   width: "642px",
                   height: "24px",
                   fontStyle: "normal",
-                  fontWeight: "500",
+                  fontWeight: 500,
                   fontSize: "24px",
                   lineHeight: "24px",
                 }}
@@ -88,10 +88,12 @@ const SignIn: React.FC = () => {
               <Typography
                 variant="h4"
                 color="#0092DD"
-                fontFamily="public sans"
                 textAlign="center"
-                fontWeight="700"
-                fontSize="36px"
+                sx={{
+                  fontWeight: 700,
+                  fontSize: "36px",
+                  fontFamily: "public sans",
+                }}
               >
                 Sign In
               </Typography>
@@ -126,7 +128,7 @@ const SignIn: React.FC = () => {
                     fontFamily: "public sans",
                     textTransform: "none",
                     fontSize: "15px",
-                    fontWeight: "500",
+                    fontWeight: 500,
                   },
                   "&:hover": {
                     color: "white",
@@ -156,7 +158,7 @@ const SignIn: React.FC = () => {
                     fontFamily: "public sans",
                     textTransform: "none",
                     fontSize: "15px",
-                    fontWeight: "500",
+                    fontWeight: 500,
                   },
                 }}
               >

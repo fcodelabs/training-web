@@ -6,6 +6,7 @@ import { searchCards } from '../../redux/slices/diaryCardSlice';
 import { useAppSelector } from '../../redux/store/hooks';
 
 type Card = {
+  id: string;
   title: string;
   body: string;
 }

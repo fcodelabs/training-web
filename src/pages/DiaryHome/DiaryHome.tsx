@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import Header from '../../components/Header/Header';
 import DiaryForm from './DiaryForm/DiaryForm';
+import DiaryCard from '../../components/DiaryCard/DiaryCard';
 
 const styles = {
   home:{ fontFamily:"public sans",
@@ -57,7 +58,20 @@ const styles = {
       margin: '0',
       borderRadius: '0',
     }
-  }
+  },
+
+  diaryEntries: {
+    position: 'absolute',
+    top: '300px',
+    left: '50px',
+    display: 'flex',
+    flexDirection: { xs: 'column', sm: 'row' },
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    gap: { xs: '0', sm: '35px'},
+    marginRight: '50px',
+  }  
 
 }
 
@@ -111,6 +125,13 @@ const DiaryHome = () => {
         <Dialog open={open} onClose={handleColse} sx={styles.dialog} >
             <DiaryForm onClose={handleColse} />
         </Dialog>
+
+        <Box sx={styles.diaryEntries}>
+           <DiaryCard title='Card Title' description='desaaaaa assdjh ssjhsdihisdh sshsdhsd aaaaammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'></DiaryCard>
+           <DiaryCard title='Card Title' description='desaaaaa assdjh ssjhsdihisdh sshsdhsd aaaaammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'></DiaryCard>
+           <DiaryCard title='Card Title' description='desaaaaa assdjh ssjhsdihisdh sshsdhsd aaaaammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'></DiaryCard>
+           <DiaryCard title='Card Title' description='desaaaaa assdjh ssjhsdihisdh sshsdhsd aaaaammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'></DiaryCard>
+        </Box>
 
       </Background>
     </div>

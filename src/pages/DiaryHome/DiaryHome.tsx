@@ -43,7 +43,22 @@ const styles = {
     right: '50px',
     top:'200px',
 
+  },
+
+  dialog: {
+    '& .MuiDialog-paper': {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      height: '100vh',
+      maxHeight: '100vh',
+      width: { xs: '100%', sm: '400px' },
+      padding: '0',
+      margin: '0',
+      borderRadius: '0',
+    }
   }
+
 }
 
 
@@ -93,8 +108,8 @@ const DiaryHome = () => {
           </Button>
         </Box>
         
-        <Dialog open={open} onClose={handleColse}>
-            <DiaryForm />
+        <Dialog open={open} onClose={handleColse} sx={styles.dialog} >
+            <DiaryForm onClose={handleColse} />
         </Dialog>
 
       </Background>

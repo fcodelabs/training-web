@@ -1,15 +1,23 @@
-import './App.css';
 import DiaryHomePage from './Pages/DiaryHome/DiaryHomePage';
 import SignInPage from './Pages/SignInPage/SignInPage';
 import LayoutBackground from './Components/LayoutBackground/LayoutBackground';
-import FormToAddNewDiary from './Components/FormToAddNewDiary/FormToAddNewDiary';
+import { createBrowserRouter , Route, Link, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+        <Route index element={<SignInPage/>}/>
+        <Route path="/diary-home" element={<DiaryHomePage/>}/>
+      </Route>
+  )
+)
 
 function App() {
-  return (
-    <LayoutBackground>
-    <DiaryHomePage/>
-</LayoutBackground>
+  return ( 
+    
+    <RouterProvider router={router}
+    />
+      
   );
 }
 

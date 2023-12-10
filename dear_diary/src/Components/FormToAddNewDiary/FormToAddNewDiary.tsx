@@ -1,4 +1,3 @@
-import "./FormToAddNewDiary.css";
 import { TextField,Button,CardHeader } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
@@ -36,8 +35,26 @@ function FormToAddNewDiary({ onCloseOverlay }: FormToAddNewDiaryProps){
     
     return (
         
-        <div className="form-div">
-            <div className="card">
+        <div className="form-div"
+        style={{
+            width: "400px",
+            height: "100%",
+            position: "relative",
+            right: "0px",
+            background: "#FFFFFF"
+
+        }}
+        >
+            <div 
+            className="card"
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "26px",
+                padding: "24px",
+                alignItems: "center",
+            }}
+            >
             <div
                 style={{
                     width: "100%",
@@ -62,13 +79,13 @@ function FormToAddNewDiary({ onCloseOverlay }: FormToAddNewDiaryProps){
                 action={
                     <IconButton aria-label="close">
                         <div
-                            style={{
-                                display: "flex",
-                                alignItems: "flex-start",
-                                gap: "10px",
-                                borderRadius: "6px",
-                                background: "var(--light-opacity-color-gray-gray-16, rgba(75, 70, 92, 0.16))",
-                            }}  
+                        style={{
+                            display: "flex",
+                            alignItems: "flex-start",
+                            gap: "10px",
+                            borderRadius: "6px",
+                            background: "var(--light-opacity-color-gray-gray-16, rgba(75, 70, 92, 0.16))",
+                        }}  
                         >
                             <Avatar 
                                 src={Icon} 

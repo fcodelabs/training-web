@@ -12,17 +12,19 @@ const Background: React.FC<BackgroundProps> = ({ children }) => {
         backgroundImage: `url(${process.env.PUBLIC_URL + '/background.png'})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
         opacity: 1,
-        minHeight: '100vh',
-        width: '100%',
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         right: 0,
         bottom: 0,
         left: 0,
+        zIndex: -1,
       }}
     >
-      {children}
+      <div style={{ position: 'relative', minHeight: '100vh', overflow: 'auto' }}>
+        {children}
+      </div>
     </Box>
   );
 };

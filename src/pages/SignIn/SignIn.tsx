@@ -2,13 +2,88 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Background from "../../components/Background/Background";
-import "./SignIn.css";
-import logo from "./logo.png"
-import { Box, Button, TextField, Typography, Card, Container, CardContent} from "@mui/material";
+import { Box, Button, TextField, Typography, Card, CardContent} from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import {generateRandomName} from '../../utility/generateRandomName';
 
-//Random Nicname array
-const randonNameArray: string[] = ["Sithum","Thambara", "Tharusha", "Munzira", "Mahinda","Ranil","Wathmi","Sajith"];
+const styles = {
+  card: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    boarderRadius: '6px',
+    width: { xs: '90%', md: '742px' },
+    height: { xs: 'auto', md: '267px' },
+  },
+  headingBox:{
+    display:"flex",
+    alignItems:"center",
+    marginBottom: "3px",
+    padding:"10px 10px 0px",
+    gap:"12px",
+    flexDirection:"row" ,
+    justifyContent:'flex-start'
+  },
+  headingLogo: {
+    height: '40px',
+    width: '40px',
+    marginRight: '10px',
+  },
+  headingTitle: {
+    fontFamily:"public sans",
+    color:"#4B465C",
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: "24px",
+    fontSize: { xs: '20px', sm: '24px' },
+  },
+  title: {
+    color:"#0092DD",
+    fontFamily:"public sans",
+    textAlign:"center",
+    fontWeight: '700',
+    fontSize: { xs: '30px', sm: '36px' },
+    mb: "10px"
+  },
+  formBox:{
+    color:"#0092DD",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    padding:"10px 20px",
+    gap:"12px",
+    flexDirection: { xs: 'column', sm: 'row' },
+  },
+
+  form: {
+    outlineColor: '#0092DD',
+    width: { xs: '80%', sm: '395px' },
+    height: '35px',
+    borderRadius: '4px',
+    padding: '7px, 10px, 7px, 10px',
+    mb: { xs: '10px', sm: '0px' },
+  },
+  randomButton: {
+    width: '104px',
+    height: '38px',
+    padding:'10px, 20px,10px, 20px',
+    gap: '12px',
+    backgroundColor: 'rgba(0, 146, 221,0.16)',
+    color: "#0092DD",
+    '&:hover': {
+      color: '#fff',
+      backgroundColor: '#0092DD',
+      opacity: '65%',
+    },
+  },
+  continueButton: {
+    backgroundColor: '#0092DD',
+    opacity: '65%',
+  },
+}
+
+
 
 const SignIn: React.FC = () => {
 
@@ -19,80 +94,60 @@ const SignIn: React.FC = () => {
   };
 
   const handleRandomButtonClick = () => {
-    const randomIndex = Math.floor(Math.random() * randonNameArray.length);
-    const newRandomText = randonNameArray[randomIndex];
-    setText(newRandomText);
+    setText(generateRandomName);
   };
 
   const navigate = useNavigate();
 
+  const handleContinueClick = () => {
+    if (text.trim() === '') {
+      alert('Please enter a nickname');
+    } else {
+      localStorage.setItem('nickname', text);
+      navigate('/home');
+    }
+  }
+
   return (
     <Background>
-        <Card className="card-container">
-            <CardContent sx={{width: "auto", height: "auto"}}>
-            <Box
-              display="flex"
-              alignItems="center"
-              mb={3}
-              padding="10px 10px 0px"
-              gap="12px"
-              flexDirection="row"
-            >
-              <img src={logo} alt="Logo" style={{ height: '40px', width: '40px', marginRight: '10px' }}/>
-              <Typography
-                variant="subtitle1"
-                color="#4B465C"
-                fontFamily="public sans"
-                sx={{ width: "642px", height: "24px", fontStyle: "normal", fontWeight: "500", fontSize: "24px", lineHeight: "24px"}}
-              >
+        <Card sx={styles.card}>
+            <CardContent>
+            <Box sx={styles.headingBox}>
+              <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" style={styles.headingLogo}/>
+              <Typography sx={styles.headingTitle}>
                 Dear Diary
               </Typography>
             </Box>
-
-            <Container maxWidth="sm" sx={{ mb: "10px" }}>
-              <Typography
-                variant="h4"
-                color="#0092DD"
-                fontFamily="public sans"
-                textAlign="center"
-                fontWeight="700"
-                fontSize="36px"
-              >
+              <Typography sx={styles.title}>
                 Sign In
               </Typography>
-            </Container>
 
-            <Box
-              component="form"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              padding="10px 20px"
-              gap="12px"
-            >
-              <TextField variant="outlined" size="small" placeholder="Your Nickname*" autoComplete="off" spellCheck="false"
-              sx={{width: '395px', height: '35px', borderRadius: '4px', padding: '7px, 10px, 7px, 10px'}}
-              value={text}
-              required
-              onChange={handleTextChange}
+            <Box sx={styles.formBox}>
+              <TextField 
+                variant="outlined" 
+                color="info"
+                size="small" 
+                placeholder="Your Nickname*" 
+                autoComplete="off" 
+                spellCheck="false"
+                sx={styles.form}
+                value={text}
+                required
+                onChange={handleTextChange}
               ></TextField>
-              <Button variant="contained" 
+              <Button 
+                variant="contained" 
                 onClick={handleRandomButtonClick}
-              sx={{width: '104px', height: '38px', padding:'10px, 20px,10px, 20px', gap: '12px', backgroundColor: 'rgba(0, 146, 221,0.16)', color: "#0092DD",
-              '&:hover': {
-                color: '#fff',
-                backgroundColor: '#0092DD',
-                opacity: '65%',
-              }}}>
+              sx={styles.randomButton}>
                 Random
               </Button>
             </Box>
 
-            <Box display="flex" justifyContent="center" mt={1}>
+            <Box  sx={styles.formBox} >
                 <Button variant="contained" 
                 endIcon={<ArrowForwardIcon />} 
-                onClick={() => navigate('/home')}
-                sx={{backgroundColor: '#0092DD', opacity: '65%'}}>
+                onClick={handleContinueClick}
+                sx={styles.continueButton}>
                     Continue
                 </Button>
             </Box>

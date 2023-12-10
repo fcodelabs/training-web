@@ -1,29 +1,65 @@
 import React from 'react'
-import { Box, Typography, Avatar } from '@mui/material';
-import logo from './logo.png';
+import { Box, Typography } from '@mui/material';
+
+const styles = {
+  box: {display:'flex', 
+    alignContent:'center', 
+    justifyContent:'space-between', 
+    mt:'10px', 
+    ml:'20px', 
+    padding:'24px', 
+    gap:'12px',
+  },
+
+  logo: { height: '40px', 
+    width: '40px', 
+    marginRight: '10px'
+  },
+
+  title: {fontFamily:"public sans" ,
+    color:"#4B465C",
+    height: "24px", 
+    fontWeight: "500", 
+    fontSize: "24px", 
+    lineHeight: "24px"
+  },
+
+  profile:{display:'flex',
+  flexDirection:"column", 
+  alignItems:"center", 
+  height: '98px', 
+  width: '72px', 
+  mr: '20px'},
+
+  avatar: {bgcolor: '#0092DD', 
+    width: '72px', 
+    height: '72px'
+  },
+   username:{fontFamily: 'public sans', 
+   fontWeight:'500', 
+   fontSize:'17px'
+   }
+
+}
+
 
 interface HeaderProps {
-    userName: string;
+    userName: string | null;
   }
   
 const Header: React.FC<HeaderProps> = ({ userName }) => {
   return (
     <div>
-      <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} sx={{ mt:'10px', ml:'20px', padding:'24px', gap:'12px', position: 'relative'}}>
+      <Box sx={styles.box}>
           <Box display={'flex'} alignItems={'center'} >
-            <img src={logo} alt="Logo" style={{ height: '40px', width: '40px', marginRight: '10px'}}/>
-            <Typography
-              variant="subtitle1"
-              color="#4B465C"
-              fontFamily="public sans"
-              sx={{height: "24px", fontStyle: "normal", fontWeight: "500", fontSize: "24px", lineHeight: "24px"}}
-            >
+            <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" style={styles.logo}/>
+            <Typography sx={styles.title}>
               Dear Diary
             </Typography>
           </Box>
-          <Box display={'flex'} flexDirection={'column'} alignItems={'center'} sx={{height: '98px', width: '72px', mr: '20px'}}>
-            <Avatar sx={{ bgcolor: '#0092DD', width: '72px', height: '72px' }}>S</Avatar>
-            <Typography  sx={{fontFamily: 'public sans', fontWeight:'500', fontSize:'17px'}} >
+          <Box sx={styles.profile}>
+            <img src={process.env.PUBLIC_URL + '/Avatar.png' } alt="avatar" style={styles.avatar}/>
+            <Typography  sx={styles.username} >
               {userName}
             </Typography>
           </Box>

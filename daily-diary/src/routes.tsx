@@ -1,23 +1,21 @@
-import CardAddingForm from "./Components/CardAddingForm/CardAddingForm";
 import HomePage from "./Containers/HomePage/HomePage";
 import SignIn from "./Containers/SignIn/SignIn";
 
 interface RouteConfig {
+  id: number;
   path: string;
-  element: React.ComponentType<any>;
+  element: React.ReactNode;
 }
 const routes: RouteConfig[] = [
   {
+    id: 1,
     path: "/",
-    element: SignIn,
+    element: <SignIn />,
   },
   {
+    id: 2,
     path: "/home",
-    element: HomePage,
-  },
-  {
-    path: "/addingForm",
-    element: CardAddingForm,
+    element: <HomePage />,
   },
 ];
 

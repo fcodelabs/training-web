@@ -6,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import { IconButton } from '@mui/material';
-import Header from '../../components/header';
+import Header from '../../components/Header';
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import DiaryCard from './DiaryCard/DiaryCard';
@@ -126,6 +126,15 @@ const StyledSubmitButton = styled(Button)`
     letter-spacing: 0.43px;
     text-transform: none;
 }
+`;
+
+const DiaryCardContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 20px;
+    margin-left: 60px;
+    margin-right: 60px;
 `;
 
 interface DiaryCardProps {
@@ -248,9 +257,11 @@ const HomePage = () => {
             </Modal>
 
             {/* Rendering Diary Cards */}
-            {diaryEntries.map((diaryCard) => (
-                <DiaryCard title={diaryCard.title} description={diaryCard.description} />
-            ))}
+            <DiaryCardContainer>
+                {diaryEntries.map((diaryCard) => (
+                    <DiaryCard title={diaryCard.title} description={diaryCard.description} />
+                ))}
+            </DiaryCardContainer>
         </StyledMainDiv>
     );
 };

@@ -12,6 +12,8 @@ import { useLocation } from "react-router-dom";
 import CardAddingForm from "../../Components/CardAddingForm/CardAddingForm";
 import DiaryCard from "../../Components/DiaryCard/DiaryCard";
 import Grid from "@mui/material/Grid";
+import { useSelector } from "react-redux";
+import { RootState } from "../../Redux/store";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -71,16 +73,24 @@ const homepageStyles = {
     overflowY: "auto",
   },
 };
-interface cardCreatingProps {
-  title: string;
-  description: string;
-}
+
 const HomePage: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
   const location = useLocation();
   const nickname = location.state && location.state.nickname;
   const [showCardAddingForm, setShowCardAddingForm] = useState<boolean>(false);
-  const [cards, setCards] = useState<cardCreatingProps[]>([]);
+  const [searchText, setSearchText] = useState<string>("");
+
+  const cards = useSelector((state: RootState) => {
+    if (searchText === "") {
+      return state.addCard.cards;
+    }
+    return state.addCard.cards.filter(
+      (card) =>
+        card.title.toLowerCase().includes(searchText.toLowerCase()) ||
+        card.description.toLowerCase().includes(searchText.toLowerCase())
+    );
+  });
 
   const handleShowForm = () => {
     setShowCardAddingForm(true);
@@ -89,9 +99,8 @@ const HomePage: React.FC = () => {
     setShowCardAddingForm(false);
   };
 
-  const onClose = (title: string, description: string) => {
-    handleCloseForm();
-    setCards([...cards, { title, description }]);
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value);
   };
 
   return (
@@ -112,6 +121,8 @@ const HomePage: React.FC = () => {
         sx={homepageStyles.stackStyles}
       >
         <TextField
+          value={searchText}
+          onChange={handleSearchChange}
           id="outlined-search"
           type="search"
           size="small"
@@ -148,10 +159,7 @@ const HomePage: React.FC = () => {
         <>
           <Box sx={homepageStyles.divStyles}></Box>
           <Box sx={homepageStyles.secondBoxStyles}>
-            <CardAddingForm
-              onClose={handleCloseForm}
-              closeWhenSubmit={onClose}
-            />
+            <CardAddingForm onClose={handleCloseForm} />
           </Box>
         </>
       )}

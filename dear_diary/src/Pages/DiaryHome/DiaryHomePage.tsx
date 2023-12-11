@@ -8,9 +8,7 @@ function DiaryHomePage() {
   return (
     <LayoutBackground>
     <div
-    style={{
-      width: "100%",
-    }}
+
     >
       <HeaderComponent/>
       <SearchBar/>

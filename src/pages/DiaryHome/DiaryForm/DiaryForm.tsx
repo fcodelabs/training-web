@@ -1,8 +1,8 @@
 import { Box, TextField, Button, DialogTitle, DialogContent, DialogActions, Typography } from '@mui/material';
 import DisabledByDefaultRoundedIcon from '@mui/icons-material/DisabledByDefaultRounded';
 import { useState } from 'react';
+
 const styles = {
-  
   submitNew: {
     fontFamily: 'Public Sans',
     fontSize: '18px',
@@ -53,11 +53,20 @@ close:{
   }
 };
 
-interface DiaryFormProps {
-  onClose: () => void;
+interface Diary {
+  title: string;
+  description: string;
 }
 
-const DiaryForm: React.FC<DiaryFormProps> = ({onClose}) => {
+
+interface DiaryFormProps {
+  onClose: () => void;
+  setDiaries: React.Dispatch<React.SetStateAction<Diary[]>>;
+  diaries: Diary[];
+}
+
+
+const DiaryForm: React.FC<DiaryFormProps> = ({onClose, setDiaries, diaries}) => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
@@ -68,8 +77,13 @@ const DiaryForm: React.FC<DiaryFormProps> = ({onClose}) => {
     }else{
       console.log("Title: ", title);
       console.log("Description: ", description);
+      const existingEntries = JSON.parse(localStorage.getItem("diaries") || "[]"); // Get the existing entries
+      existingEntries.push({ title, description });  // Add the new entry to the existing entries
+      localStorage.setItem("diaries", JSON.stringify(existingEntries)); // Save the updated entries to local storage
+      setDiaries([...diaries, { title, description }])
       setTitle("");
       setDescription("");
+      onClose();
     }
   };
 

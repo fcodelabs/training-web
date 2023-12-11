@@ -91,6 +91,9 @@ const DiaryHome = () => {
     setOpen(false);
   }
 
+  const [diaries, setDiaries] = React.useState(JSON.parse(localStorage.getItem("diaries") || "[]")); // Get the existing entries
+
+
   return (
     <div>
       <Background>
@@ -123,14 +126,13 @@ const DiaryHome = () => {
         </Box>
         
         <Dialog open={open} onClose={handleColse} sx={styles.dialog} >
-            <DiaryForm onClose={handleColse} />
+            <DiaryForm onClose={handleColse} setDiaries={setDiaries} diaries={diaries}/>
         </Dialog>
 
         <Box sx={styles.diaryEntries}>
-           <DiaryCard title='Card Title' description='desaaaaa assdjh ssjhsdihisdh sshsdhsd aaaaammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'></DiaryCard>
-           <DiaryCard title='Card Title' description='desaaaaa assdjh ssjhsdihisdh sshsdhsd aaaaammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'></DiaryCard>
-           <DiaryCard title='Card Title' description='desaaaaa assdjh ssjhsdihisdh sshsdhsd aaaaammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'></DiaryCard>
-           <DiaryCard title='Card Title' description='desaaaaa assdjh ssjhsdihisdh sshsdhsd aaaaammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'></DiaryCard>
+            {diaries.map((diary: { title: string; description: string })  => (
+            <DiaryCard title={diary.title} description={diary.description} />
+            ))}
         </Box>
 
       </Background>

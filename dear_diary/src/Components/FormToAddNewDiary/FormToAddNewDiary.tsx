@@ -1,14 +1,17 @@
 import { TextField,Button,CardHeader } from "@mui/material";
+import { toast, ToastContainer } from 'react-toastify';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import Icon from "./Icons.png";
 import { useState } from "react";
+import 'react-toastify/dist/ReactToastify.css';
 
 interface FormToAddNewDiaryProps {
     onCloseOverlay: () => void;
+    onSubmit: (formData:{title:string, description:string}) => void;
   }
 
-function FormToAddNewDiary({ onCloseOverlay }: FormToAddNewDiaryProps){
+function FormToAddNewDiary({ onCloseOverlay, onSubmit }: FormToAddNewDiaryProps){
         const [formData, setFormData] = useState({
           title: '',
           description: '',
@@ -22,8 +25,12 @@ function FormToAddNewDiary({ onCloseOverlay }: FormToAddNewDiaryProps){
         };
       
         const handleSubmit = () => {
-          console.log('Form Data:', formData);
-
+            if (!formData.title || !formData.description){
+                toast.error("Title and Description are required");
+            }
+            else{
+          onSubmit(formData);
+            }
           // Clear form data
           setFormData({
             title: '',
@@ -268,6 +275,10 @@ function FormToAddNewDiary({ onCloseOverlay }: FormToAddNewDiaryProps){
                 Cancel
                 </div>
                 </Button>
+
+                <ToastContainer
+                autoClose={false}
+                />
         </div>
         </div>
         </div>

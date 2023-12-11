@@ -1,14 +1,24 @@
 import "./SearchBar.css";
-import { Button, Drawer, TextField } from "@mui/material";
+import { Button, Drawer, TextField, Grid } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useState } from "react";
 import FormToAddNewDiary from "../../../Components/FormToAddNewDiary/FormToAddNewDiary";
+import DiaryCard from "../../../Components/DiaryCard/DiaryCard";
 
-
+interface DiaryEntry {
+  title: string;
+  description: string;
+}
 
 function SearchBar(){
   const [showOverlay, setShowOverlay] = useState(false);
+  const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
+
+  const handleDiarySubmit = (formData:DiaryEntry) => {
+    setDiaryEntries([...diaryEntries,formData]);
+    handleCloseOverlay();
+  }
 
   const handleButtonClick = () => {
     setShowOverlay(true);
@@ -70,8 +80,16 @@ function SearchBar(){
             open={showOverlay}
             onClose={handleCloseOverlay}
             >
-              <FormToAddNewDiary onCloseOverlay={handleCloseOverlay}/>
-            </Drawer>        
+              <FormToAddNewDiary onCloseOverlay={handleCloseOverlay} onSubmit={handleDiarySubmit}/>
+            </Drawer>   
+            <Grid container spacing={2}>
+        {diaryEntries.map((entry, index) => (
+          <Grid item key={index}>
+            <DiaryCard title={entry.title} description={entry.description} />
+          </Grid>
+        ))}
+      </Grid>
+     
         </div>
     );
 }

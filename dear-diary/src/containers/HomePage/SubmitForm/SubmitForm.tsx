@@ -65,12 +65,12 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
                 </div>
             </div>
             <div className='submit-title'>
-                <div style={{ padding: "1%", fontSize: '15px' }}>Title</div>
+                <div  className="submitform-title-bar">Title</div>
                 <TextField value={title} onChange={handleTitleChange} placeholder="Enter title" size='small' style={{ width: "99%" }} />
             </div>
 
             <div className='submit-desc'>
-                <div style={{ padding: "1%", fontSize: '15px' }}>Description</div>
+                <div  className="submitform-title-bar">Description</div>
                 <TextField value={description} onChange={handleDescriptionChange} placeholder="Descryption" multiline rows={10} style={{ width: "95%" }} />
             </div>
 

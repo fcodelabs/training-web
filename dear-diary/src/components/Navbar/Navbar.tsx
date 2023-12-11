@@ -4,12 +4,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Deardiary from '../DearDiary/DearDiary';
 import Profile from '../Profile/Profile';
+import './Navbar.css';
 
 function NavBar() {
 
     return (
-        <AppBar position="static" style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
-            <Container style={{ maxWidth: "2000px", padding:"9px 0 0 0" }}>
+        <AppBar position="static" className='appbar-main'>
+            <Container className='appbar-container'>
                 <Toolbar disableGutters>
                     {<Deardiary />}
 

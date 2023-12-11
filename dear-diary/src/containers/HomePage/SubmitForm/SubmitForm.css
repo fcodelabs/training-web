@@ -23,6 +23,10 @@
     transform: scale(1.1);
     cursor: pointer;
 }
+.submitform-title-bar{
+    padding: 1%;
+    font-size: 15px;
+}
 
 .submit-title,
 .submit-desc {

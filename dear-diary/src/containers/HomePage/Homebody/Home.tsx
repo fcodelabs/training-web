@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PrimarySearchAppBar from '../../../components/SearchBar/SearchBar';
 import Button from '@mui/material/Button';
 import './Home.css';
 import SubmitForm from '../SubmitForm/SubmitForm';
 import DiaryCard from '../../../components/DiaryCard/DiaryCard';
-import { useAppSelector } from '../../../redux/store/hooks';
+import { useAppSelector, useAppDispatch } from '../../../redux/store/hooks';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { deleteCard, editCard, addCard } from "../../../redux/slices/diaryCardSlice";
+import db from '../../../utilities/firebaseIntegration';
+import { onSnapshot, collection } from 'firebase/firestore';
+
+type Card = {
+  id:string
+  title: string;
+  body: string;
+};
 
 type HomeProps = {
+
   showForm: boolean;
   reset: () => void;
 };
 
+
 const Home: React.FC<HomeProps> = ({ showForm, reset }) => {
+  const dispatch = useAppDispatch();
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up('xl'));
   const isMediumScreen = useMediaQuery(theme.breakpoints.up('lg'));
@@ -29,23 +41,49 @@ const Home: React.FC<HomeProps> = ({ showForm, reset }) => {
   const columns = isLargeScreen
     ? 6
     : isMediumScreen
-    ? 4
-    : isSmallScreen
-    ? 3
-    : isExtraSmallScreen
-    ? 2
-    : 1;
+      ? 4
+      : isSmallScreen
+        ? 3
+        : isExtraSmallScreen
+          ? 2
+          : 1;
 
-    const handleScroll = (scrollOffset: number) => {
-      const imageList = document.getElementById('image-list');
-      if (imageList) {
-        imageList.scrollTo({
-          left: imageList.scrollLeft + scrollOffset,
-          behavior: 'smooth',
-        });
-      }
-    };
-    
+  const handleScroll = (scrollOffset: number) => {
+    const imageList = document.getElementById('image-list');
+    if (imageList) {
+      imageList.scrollTo({
+        left: imageList.scrollLeft + scrollOffset,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  useEffect(() => {
+    onSnapshot(collection(db, "diary-cards"), (snapshot) => {
+      const updatedData = snapshot.docChanges().map(change => ({
+        type: change.type,
+        doc: change.doc.data(),
+        id: change.doc.id
+      }))
+      console.log(updatedData)
+      updatedData.forEach((change) => {
+        
+        if (change.type === "added") {
+          dispatch(addCard(change.doc as Card ))
+        }
+        if (change.type === "modified") {
+          const card = {id: change.id, ...change.doc.data()}
+          dispatch(editCard(card as Card))
+        }
+        if (change.type === "removed") {
+          dispatch(deleteCard(change.id) )
+        }
+      })
+    }
+    )
+    }, [ ]);
+
+
 
   return (
     <div className="home-wrapper">

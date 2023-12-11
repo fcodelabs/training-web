@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useAppDispatch } from "../../../redux/store/hooks";
-import { addCardToDb } from "../../../redux/slices/diaryCardSlice";
+import { addCardByUser } from "../../../redux/slices/diaryCardSlice";
 
 type Diary ={
     title: string;
@@ -37,7 +37,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
         if (!ValidateDiaryCard(title, description)) {
             return;
         }  
-        dispatch(addCardToDb(newDiary));
+        dispatch(addCardByUser(newDiary));
         setTitle('');
         setDescription('');
         reset();
@@ -63,12 +63,12 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
                 </div>
             </div>
             <div className='submit-title'>
-                <div style={{ padding: "1%", fontSize: '15px' }}>Title</div>
+                <div  className="submitform-title-bar">Title</div>
                 <TextField value={title} onChange={handleTitleChange} placeholder="Enter title" size='small' style={{ width: "99%" }} />
             </div>
 
             <div className='submit-desc'>
-                <div style={{ padding: "1%", fontSize: '15px' }}>Description</div>
+                <div  className="submitform-title-bar">Description</div>
                 <TextField value={description} onChange={handleDescriptionChange} placeholder="Descryption" multiline rows={10} style={{ width: "95%" }} />
             </div>
 

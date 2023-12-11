@@ -6,6 +6,7 @@ import { searchCards } from '../../redux/slices/diaryCardSlice';
 import { useAppSelector } from '../../redux/store/hooks';
 
 type Card = {
+  id: string;
   title: string;
   body: string;
 }
@@ -24,7 +25,7 @@ const PrimarySearchAppBar = ({setFilteredList}: PrimarySearchAppBarProps ) => {
   }, [search, cards, setFilteredList]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+    <div className='searchbar-wrapper-main'>
       <TextField
         className="search-input"
         id="outlined-basic"
@@ -33,14 +34,10 @@ const PrimarySearchAppBar = ({setFilteredList}: PrimarySearchAppBarProps ) => {
         size="small"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        style={{
-          width: '35%',
-          boxShadow: '2px 2px 2px 0px rgba(50, 50, 50, 0.205)',
-        }}
         InputProps={{
           style: { backgroundColor: 'white' },
           startAdornment: (
-            <SearchIcon style={{ marginRight: '8px', color: 'gray' }} />
+            <SearchIcon sx={{ marginRight: '8px', color: 'gray' }} />
           ),
         }}
       />

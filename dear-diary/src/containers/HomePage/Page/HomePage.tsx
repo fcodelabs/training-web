@@ -16,6 +16,7 @@ const HomePage = () => {
 
     useEffect(() => {
         dispatch(fetchCards())
+        
     }, [])
 
     return (
@@ -33,13 +34,13 @@ const HomePage = () => {
                 <>
                     <Skeleton
                         animation="wave"
-                        width="100%"  // Adjusted width
+                        width="5%"  
                         height="10vh"
                         style={{ top: "1%", left: "1%", position: "absolute" }}
                     />
                     <Skeleton
                         animation="wave"
-                        width="98%"
+                        width="48%"
                         height="10vh"
                         style={{ top: "10%", left: "1%", position: "absolute" }}
                     />

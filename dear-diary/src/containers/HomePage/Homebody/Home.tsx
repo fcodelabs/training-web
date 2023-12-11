@@ -10,7 +10,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { deleteCard, editCard } from "../../../redux/slices/diaryCardSlice";
+import { deleteCard, editCard, addCard } from "../../../redux/slices/diaryCardSlice";
 import db from '../../../utilities/firebaseIntegration';
 import { onSnapshot, collection } from 'firebase/firestore';
 
@@ -62,23 +62,26 @@ const Home: React.FC<HomeProps> = ({ showForm, reset }) => {
     onSnapshot(collection(db, "diary-cards"), (snapshot) => {
       const updatedData = snapshot.docChanges().map(change => ({
         type: change.type,
-        doc: change.doc.data()
+        doc: change.doc.data(),
+        id: change.doc.id
       }))
+      console.log(updatedData)
       updatedData.forEach((change) => {
         
         if (change.type === "added") {
-          dispatch(editCard(change.doc as Card ))
+          dispatch(addCard(change.doc as Card ))
         }
         if (change.type === "modified") {
-          dispatch(editCard(change.doc as Card))
+          const card = {id: change.id, ...change.doc.data()}
+          dispatch(editCard(card as Card))
         }
         if (change.type === "removed") {
-          dispatch(deleteCard(change.doc.id) )
+          dispatch(deleteCard(change.id) )
         }
       })
     }
     )
-    }, []);
+    }, [ ]);
 
 
 

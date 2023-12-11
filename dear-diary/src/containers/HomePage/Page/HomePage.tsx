@@ -16,6 +16,7 @@ const HomePage = () => {
 
     useEffect(() => {
         dispatch(fetchCards())
+        
     }, [])
 
     return (

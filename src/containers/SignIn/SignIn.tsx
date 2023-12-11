@@ -3,17 +3,18 @@ import { useState } from "react";
 import Input from "../../components/Inputs/Input";
 import CustomizedButton from "../../components/Buttons/CustomizedButton";
 import Logo from "../../components/Logo/Logo";
+import useStyles from "./../../components/Inputs/InputStyles";
 
 import Card from "@mui/material/Card";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import RandomButton from "../../components/Buttons/RandomButton";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { TextField } from "@material-ui/core";
 
 export default function SignIn() {
-
   const [randomString, setRandomString] = useState<string>("");
   const navigate = useNavigate();
-
+  const classes = useStyles();
 
   const generateRandomString = () => {
     const characters =
@@ -28,8 +29,8 @@ export default function SignIn() {
   };
 
   const handleContinue = () => {
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   return (
     <div
@@ -75,12 +76,25 @@ export default function SignIn() {
               marginBottom: "16px",
             }}
           >
-            <Input
-              label={randomString ? "" : "Your Nickname*"}
-              width="395px"
+            <TextField
+              size="small"
+              id="outlined-basic"
+              variant="outlined"
+              placeholder="Your Nickname*"
+              className={classes.root}
+              InputLabelProps={{
+                classes: {
+                  root: classes.customLabel,
+                },
+              }}
+              InputProps={{
+                className: classes.multilineColor,
+              }}
+              style={{ width: "352px" }}
               value={randomString}
             />
             <RandomButton label="Random" onClick={generateRandomString} />
+
           </div>
           <CustomizedButton
             label="Continue"

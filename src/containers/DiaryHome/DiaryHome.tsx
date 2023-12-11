@@ -1,13 +1,18 @@
 import CustomizedButton from "../../components/Buttons/CustomizedButton";
 import Header from "../../components/Header/Header";
-import IconInput from "../../components/Inputs/IconInput";
 import CustomDrawer from "../../components/CustomDrawer/CustomDrawer";
+import useStyles from "./../../components/Inputs/InputStyles";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
+import { InputAdornment, TextField } from "@material-ui/core";
+import DiaryCard from "../../components/DiaryCard/DiaryCard";
+
+
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
+  const classes = useStyles();
 
   return (
     <div style={{ height: "100vh" }}>
@@ -31,7 +36,29 @@ export default function Home() {
           alignItems: "center",
         }}
       >
-        <IconInput label="Placeholder" icon={<SearchIcon />} width="530px" />
+
+        <TextField
+          size="small"
+          id="outlined-basic"
+          variant="outlined"
+          placeholder="Placeholder"
+          className={classes.root}
+          InputLabelProps={{
+            
+            classes: {
+              root: classes.customLabel,
+            },
+          }}
+          InputProps={{
+            className: classes.multilineColor,
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          style={{ width: "530px" }}
+        />
 
         <CustomizedButton
           label="Submit New"
@@ -40,8 +67,17 @@ export default function Home() {
             console.log("Clicked");
           }}
         />
+
       </div>
+
+      <div style={{
+        margin: "47px 60px 0 60px",
+      }}>
+        <DiaryCard/>
+      </div>
+
       <CustomDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />
+
     </div>
   );
 }

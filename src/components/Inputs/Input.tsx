@@ -40,6 +40,7 @@ const useStyles = makeStyles({
     fontSize: "13px",
     transform: "translateY(80%)",
     paddingLeft: "10px",
+    color: "#4B465C"
   },
   multilineColor : {
     color: "#4B465C"
@@ -62,24 +63,18 @@ export default function Input({ label,width,value }: InputProps) {
     <>
       <TextField
         id="outlined-basic"
-        label={(isFocused && value!=null) ? "" : label}
+        label={!isFocused ? (label) : ""}
         variant="outlined"
         className={classes.root}
         InputLabelProps={{
-          shrink: isFocused || value !== undefined,
           classes: {
             root: classes.customLabel,
           },
+          style: {
+            paddingLeft: isFocused ? "45px" : "5px",
+          },
+          
         }}
-        InputProps={{
-          className: classes.multilineColor,
-        }}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        style={{
-          width: width,
-        }}
-        value={value}
       />
     </>
   );

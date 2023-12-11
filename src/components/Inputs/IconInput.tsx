@@ -12,8 +12,7 @@ interface InputProps {
 const useStyles = makeStyles({
   root: {
     "& .MuiOutlinedInput-root": {
-      // width: "395px",
-      height: "35px",
+      
       backgroundColor: "white",
 
       "& fieldset": {
@@ -38,8 +37,7 @@ const useStyles = makeStyles({
   },
   customLabel: {
     fontSize: "13px",
-    transform: "translateY(80%)",
-    paddingLeft: "45px",
+    paddingLeft: "35px",
   },
   multilineColor : {
     color: "#4B465C"
@@ -61,12 +59,13 @@ export default function IconInput({ label,width,icon }: InputProps) {
   return (
     <>
       <TextField
+       size="small"
         id="outlined-basic"
         label= {!isFocused ? (label) : ""}
         variant="outlined"
         className={classes.root}
         InputLabelProps={{
-          shrink: false,
+          shrink: true,
           classes: {
             root: classes.customLabel,
           },
@@ -84,6 +83,7 @@ export default function IconInput({ label,width,icon }: InputProps) {
         style={{
           width: (width),
         }}
+
       />
     </>
   );

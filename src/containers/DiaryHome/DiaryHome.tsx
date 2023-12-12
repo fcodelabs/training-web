@@ -6,7 +6,7 @@ import useStyles from "./../../components/Inputs/InputStyles";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import { InputAdornment, TextField } from "@material-ui/core";
-import DiaryCard from "../../components/DiaryCard/DiaryCard";
+import DiaryCardWrapper from "../../components/DiaryCard/DiaryCardWrapper";
 
 
 
@@ -72,8 +72,9 @@ export default function Home() {
 
       <div style={{
         margin: "47px 60px 0 60px",
+  
       }}>
-        <DiaryCard/>
+        <DiaryCardWrapper/>
       </div>
 
       <CustomDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />

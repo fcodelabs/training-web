@@ -1,16 +1,38 @@
-import { Box, Drawer, TextField } from "@material-ui/core";
+import { Box, Drawer, TextField, TextareaAutosize } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomizeTextArea from "../Inputs/TextArea";
 import CustomizedButton from "../Buttons/CustomizedButton";
-import useStyles from "./../Inputs/InputStyles";
+import useStyles, { Textarea } from "./../Inputs/InputStyles";
+import { useDispatch } from "react-redux";
+import { useId, useState } from "react";
+import { addCard } from "../../redux/reducers/cardReducer";
 
 interface DrawerProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+interface Card {
+  id: string;
+  title: string;
+  description: string;
+}
+
 export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const cardId = useId();
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
+    const newCard: Card = { id: cardId, title: title, description: description };
+    dispatch<any>(addCard(newCard));
+    setTitle("");
+    setDescription("");
+
+  }
 
   return (
     <Drawer anchor="right" open={isOpen} onClose={onClose}>
@@ -86,6 +108,8 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
               className: classes.multilineColor,
             }}
             style={{ width: "352px" }}
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
         </div>
 
@@ -107,7 +131,15 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
             Description
           </div>
 
-          <CustomizeTextArea minLines={15} placeholder="Placeholder" />
+        
+
+        <Textarea
+          minRows={15}
+          placeholder="Placeholder"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+        />
+
         </div>
 
         <div
@@ -117,7 +149,7 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
             gap: "16px",
           }}
         >
-          <CustomizedButton label="Submit" onClick={() => {}} />
+          <CustomizedButton label="Submit" onClick={handleSubmit} />
           <CustomizedButton label="Cancel" onClick={onClose} secondary />
         </div>
       </Box>

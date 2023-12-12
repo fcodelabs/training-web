@@ -72,8 +72,6 @@ const signInPageStyles = {
   },
 };
 
-
-
 const SignIn: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 400px)");
   const navigate = useNavigate();

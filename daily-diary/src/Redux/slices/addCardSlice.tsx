@@ -1,4 +1,4 @@
-import { createAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface Card {
   title: string;
@@ -13,16 +13,15 @@ const initialState: InitialState = {
   cards: [],
 };
 
-export const addCard = createAction<Card>("cards/addCard");
-
 const cardsSlice = createSlice({
-  name: "cards",
+  name: "addingCards",
   initialState,
   reducers: {
-    addCard(state, action) {
+    addCard: (state, action) => {
       state.cards.push(action.payload);
     },
   },
 });
 
+export const { addCard } = cardsSlice.actions;
 export default cardsSlice.reducer;

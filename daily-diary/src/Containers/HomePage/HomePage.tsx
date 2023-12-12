@@ -83,9 +83,9 @@ const HomePage: React.FC = () => {
 
   const cards = useSelector((state: RootState) => {
     if (searchText === "") {
-      return state.addCard.cards;
+      return state.addingCards.cards;
     }
-    return state.addCard.cards.filter(
+    return state.addingCards.cards.filter(
       (card) =>
         card.title.toLowerCase().includes(searchText.toLowerCase()) ||
         card.description.toLowerCase().includes(searchText.toLowerCase())

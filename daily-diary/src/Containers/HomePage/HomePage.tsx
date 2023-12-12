@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -12,12 +12,18 @@ import { useLocation } from "react-router-dom";
 import CardAddingForm from "../../Components/CardAddingForm/CardAddingForm";
 import DiaryCard from "../../Components/DiaryCard/DiaryCard";
 import Grid from "@mui/material/Grid";
-import { useSelector } from "react-redux";
-import { RootState } from "../../Redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../Redux/store";
+import { collectionRef } from "../../firebase";
+import { onSnapshot } from "firebase/firestore";
+import { setCard } from "../../Redux/slices/addCardSlice";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
-
+interface cardInfo {
+  title: string;
+  description: string;
+}
 const homepageStyles = {
   rootStyles: {
     backgroundImage: `url(${backgroundImage})`,
@@ -80,6 +86,16 @@ const HomePage: React.FC = () => {
   const nickname = location.state && location.state.nickname;
   const [showCardAddingForm, setShowCardAddingForm] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    const getCards = onSnapshot(collectionRef, (snapshot) => {
+      const cardData = snapshot.docs.map((doc) => doc.data() as cardInfo);
+      dispatch(setCard(cardData));
+    });
+
+    return () => getCards();
+  }, []);
 
   const cards = useSelector((state: RootState) => {
     if (searchText === "") {
@@ -150,7 +166,15 @@ const HomePage: React.FC = () => {
 
       <Grid container spacing={3} sx={homepageStyles.gridStyles}>
         {cards.map((card) => (
-          <Grid item xs={12} sm={6} md={3} lg={2} xl={2}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={3}
+            lg={2}
+            xl={2}
+            key={cards.indexOf(card)}
+          >
             <DiaryCard title={card.title} description={card.description} />
           </Grid>
         ))}

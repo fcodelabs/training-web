@@ -5,20 +5,14 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useState } from "react";
 import FormToAddNewDiary from "../../../Components/FormToAddNewDiary/FormToAddNewDiary";
 import DiaryCard from "../../../Components/DiaryCard/DiaryCard";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 
-interface DiaryEntry {
-  title: string;
-  description: string;
-}
 
 function SearchBar(){
   const [showOverlay, setShowOverlay] = useState(false);
-  const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
 
-  const handleDiarySubmit = (formData:DiaryEntry) => {
-    setDiaryEntries([...diaryEntries,formData]);
-    handleCloseOverlay();
-  }
+  const diaryEntries = useSelector((state:RootState) => state.diary.entries);
 
   const handleButtonClick = () => {
     setShowOverlay(true);
@@ -80,7 +74,8 @@ function SearchBar(){
             open={showOverlay}
             onClose={handleCloseOverlay}
             >
-              <FormToAddNewDiary onCloseOverlay={handleCloseOverlay} onSubmit={handleDiarySubmit}/>
+              <FormToAddNewDiary onCloseOverlay={handleCloseOverlay} />
+              
             </Drawer>   
             <Grid container spacing={2}>
         {diaryEntries.map((entry, index) => (

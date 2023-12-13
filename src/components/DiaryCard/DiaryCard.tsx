@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
@@ -9,22 +9,47 @@ interface DiaryCardProps {
   description: string;
 }
 
+const truncateText = (text: string, maxLength: number) => {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return text.substring(0, maxLength) + '...';
+};
+
 const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
+  const [showMore, setShowMore] = useState(false);
+  const truncatedDescription = truncateText(description, 100);
+
   return (
     <div>
-      <Card sx={{ width: '271px', height: '170px' }}>
-        <CardContent >
+      <Card sx={{ width: '271px', height: 'fit-content' }}>
+        <CardContent>
           <Typography
             sx={{ fontSize: 18, fontWeight: 500, color: "#4B465C", marginBottom: '6px' }}
           >
             {title}
           </Typography>
           <Typography
-            sx={{ fontSize: 15, fontWeight: 400, color: "#4B465C", marginBottom: '16px' }}
+            sx={{
+              fontSize: 15,
+              fontWeight: 400,
+              color: "#4B465C",
+              marginBottom: '16px',
+              height: showMore ? 'auto' : 'fit-content',
+              width: 'auto',
+              overflow: 'hidden',
+              overflowWrap: 'break-word',
+            }}
           >
-            {description}
+            {showMore ? description : truncatedDescription}
           </Typography>
-          <Button  sx={{ fontSize: 15, fontWeight: 600, color: "#0092DD" }} size="small">Show More</Button>
+          <Button
+            sx={{ fontSize: 15, fontWeight: 600, color: "#0092DD" }}
+            size="small"
+            onClick={() => setShowMore(!showMore)}
+          >
+            {showMore ? 'Hide' : 'Show More'}
+          </Button>
         </CardContent>
       </Card>
     </div>

@@ -1,11 +1,12 @@
-import { Box, Drawer, TextField, TextareaAutosize } from "@material-ui/core";
+import { Box, Drawer, IconButton, Snackbar, TextField, TextareaAutosize } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomizeTextArea from "../Inputs/TextArea";
 import CustomizedButton from "../Buttons/CustomizedButton";
 import useStyles, { Textarea } from "./../Inputs/InputStyles";
 import { useDispatch } from "react-redux";
-import { useId, useState } from "react";
+import React, { useId, useState } from "react";
 import { addCard } from "../../redux/reducers/cardReducer";
+import { Alert } from "@mui/material";
 
 interface DrawerProps {
   isOpen: boolean;
@@ -24,18 +25,53 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
   const cardId = useId();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [open, setOpen] = useState(false);
+ 
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
+
+     // Validation
+     if (!title.trim()) {
+      setOpen(true);
+      return;
+    }
+
+    if (!description.trim()) {
+      setOpen(true);
+      return;
+    }
+
     const newCard: Card = { id: cardId, title: title, description: description };
     dispatch<any>(addCard(newCard));
+
     setTitle("");
     setDescription("");
 
   }
 
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+
   return (
     <Drawer anchor="right" open={isOpen} onClose={onClose}>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message="Note archived"
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        >
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            Please fill out all required fields
+          </Alert>
+        </Snackbar>
       <Box style={{ width: "400px" }} role="presentation">
         {/* Header */}
 

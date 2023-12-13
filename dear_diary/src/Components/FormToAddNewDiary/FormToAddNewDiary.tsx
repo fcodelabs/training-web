@@ -3,39 +3,39 @@ import { toast, ToastContainer } from 'react-toastify';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import Icon from "./Icons.png";
-import { useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from "react-redux";
+import { addEntry,updateCurrentEntry,clearCurrentEntry } from "../../redux/diaryReducer";
+import { RootState } from "../../redux/store";
 
 interface FormToAddNewDiaryProps {
     onCloseOverlay: () => void;
-    onSubmit: (formData:{title:string, description:string}) => void;
   }
 
-function FormToAddNewDiary({ onCloseOverlay, onSubmit }: FormToAddNewDiaryProps){
-        const [formData, setFormData] = useState({
-          title: '',
-          description: '',
-        });
+function FormToAddNewDiary({ onCloseOverlay}: FormToAddNewDiaryProps){
+
+    const dispatch = useDispatch();
+    const currentEntry= useSelector((state:RootState)=> state.diary.currentEntry);
+        
       
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-          });
+            const { name, value } = e.target;
+            dispatch(updateCurrentEntry({[name]:value}));
+       
         };
       
         const handleSubmit = () => {
-            if (!formData.title || !formData.description){
+            if (!currentEntry.title || !currentEntry.description){
                 toast.error("Title and Description are required");
             }
             else{
-          onSubmit(formData);
+                dispatch(addEntry(currentEntry));
+                
+                dispatch(clearCurrentEntry());
+
+                onCloseOverlay();
             }
-          // Clear form data
-          setFormData({
-            title: '',
-            description: '',
-          });
+
       
         };
       
@@ -162,7 +162,7 @@ function FormToAddNewDiary({ onCloseOverlay, onSubmit }: FormToAddNewDiaryProps)
 
                     }}
                     name="title"
-                    value={formData.title}
+                    value={currentEntry.title}
                     onChange={handleChange}
                     />
                 </div>
@@ -197,7 +197,7 @@ function FormToAddNewDiary({ onCloseOverlay, onSubmit }: FormToAddNewDiaryProps)
                 rows={6} 
                 variant="outlined"
                 name="description"
-                value={formData.description}
+                value={currentEntry.description}
                 onChange={handleChange}
                 />
             </div>

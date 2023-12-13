@@ -6,7 +6,6 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
-
 import { addCards } from "../../firebase";
 
 const cardAddingFromStyles = {

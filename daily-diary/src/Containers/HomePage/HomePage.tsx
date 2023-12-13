@@ -14,16 +14,11 @@ import DiaryCard from "../../Components/DiaryCard/DiaryCard";
 import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
-import { collectionRef } from "../../firebase";
-import { onSnapshot } from "firebase/firestore";
-import { setCard } from "../../Redux/slices/addCardSlice";
+import { getCard } from "../../Redux/slices/addCardSlice";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
-interface cardInfo {
-  title: string;
-  description: string;
-}
+
 const homepageStyles = {
   rootStyles: {
     backgroundImage: `url(${backgroundImage})`,
@@ -89,13 +84,8 @@ const HomePage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const getCards = onSnapshot(collectionRef, (snapshot) => {
-      const cardData = snapshot.docs.map((doc) => doc.data() as cardInfo);
-      dispatch(setCard(cardData));
-    });
-
-    return () => getCards();
-  }, []);
+    dispatch(getCard());
+  }, [dispatch]);
 
   const cards = useSelector((state: RootState) => {
     if (searchText === "") {

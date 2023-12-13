@@ -23,8 +23,11 @@ const cardsSlice = createSlice({
     setCard: (state, action: PayloadAction<Card[]>) => {
       state.cards = action.payload;
     },
+    getCard: (state) => {
+      console.log("Loading...");
+    },
   },
 });
 
-export const { addCard, setCard } = cardsSlice.actions;
+export const { addCard, setCard, getCard } = cardsSlice.actions;
 export default cardsSlice.reducer;

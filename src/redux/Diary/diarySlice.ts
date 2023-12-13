@@ -19,7 +19,9 @@ export const diaryCardSlice = createSlice({
     initialState,
     reducers: {
         addDiaryCard: (state, action: PayloadAction<DiaryCardProps>) => {
+            console.log('Adding diary card:', action.payload);
             state.diaryCardList.push(action.payload);
+            console.log('Diary card list:', state.diaryCardList);
         },
         setDiaryCardList: (state, action: PayloadAction<DiaryCardProps[]>) => {
             state.diaryCardList = action.payload;

@@ -1,4 +1,4 @@
-import { take, call, put, takeEvery } from 'redux-saga/effects';
+import { take, call, put, takeEvery, all} from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import {
     diaryCardActions
@@ -72,6 +72,5 @@ function* fetchDiaryCardListSaga(): Generator<any, any, any> {
 }
 
 export default function* diaryCardSaga() {
-    yield call(fetchDiaryCardListSaga);
-    yield call(addDiaryCardSaga);
+    yield all([addDiaryCardSaga(), fetchDiaryCardListSaga()]);
 };

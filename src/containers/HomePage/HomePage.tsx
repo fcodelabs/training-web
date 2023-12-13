@@ -158,7 +158,11 @@ const HomePage = () => {
 
     const location = useLocation();              // get location from react router dom
     const nickName = location.state.name || {};  // from that location get name
-
+    
+    useEffect(() => {
+        console.log("Diary Card List:", diaryEntries);
+    }, [diaryEntries]);
+    
     useEffect(() => {
         console.log("fetching diary card list");
         dispatch(diaryCardActions.fetchDiaryCardList(nickName));
@@ -166,6 +170,7 @@ const HomePage = () => {
     // function to handle submit card
     const handleOnSubmitCard = (title: string, description: string) => {
         // create new diary card
+        console.log('Handling submit card:', { title, description, username: nickName });
         dispatch(diaryCardActions.addDiaryCard({title, description, username: nickName}))
 
         // add new diary card to diary entries

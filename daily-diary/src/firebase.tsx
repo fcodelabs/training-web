@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 
-const fbConfig = {
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   projectId: process.env.REACT_APP_PROJECT_ID,
@@ -10,7 +10,7 @@ const fbConfig = {
   appId: process.env.REACT_APP_APP_ID,
 };
 
-const app = initializeApp(fbConfig);
+const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 
 export const collectionRef = collection(firestore, "cards");
@@ -33,3 +33,5 @@ export const getCards = async () => {
   const cardsData = data.docs.map((doc) => doc.data() as Card);
   return cardsData;
 };
+
+console.log(getCards());

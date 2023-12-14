@@ -16,10 +16,69 @@ const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
 const Logo: string = process.env.PUBLIC_URL + "Images/Logo.png";
 
+const signInPageStyles = {
+  rootStyles: {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    height: "100vh",
+  },
+  containerStyles: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    fontFamily: "public sans",
+  },
+  cardContentStyles: {
+    width: "auto",
+    height: "auto",
+  },
+  dearDiaryTextStyles: {
+    width: "642px",
+    height: "24px",
+    fontStyle: "normal",
+    fontWeight: 500,
+    fontSize: "24px",
+    lineHeight: "24px",
+  },
+  secondContainerStyles: { mb: "10px" },
+  signInTextStyles: {
+    fontWeight: 700,
+    fontSize: "36px",
+    fontFamily: "public sans",
+  },
+  randomButtonStyles: {
+    backgroundColor: "rgba(0, 146, 221,0.16)",
+    color: "rgba(0, 146, 221)",
+    typography: {
+      fontFamily: "public sans",
+      textTransform: "none",
+      fontSize: "15px",
+      fontWeight: 500,
+    },
+    "&:hover": {
+      color: "white",
+    },
+  },
+  continueButtonStyles: {
+    backgroundColor: "rgba(0, 146, 221,0.65)",
+    typography: {
+      fontFamily: "public sans",
+      textTransform: "none",
+      fontSize: "15px",
+      fontWeight: 500,
+    },
+  },
+};
+
+
+
 const SignIn: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 400px)");
   const navigate = useNavigate();
   const [text, setText] = useState<string>("");
+  const [textError, setTextError] = useState<boolean>(false);
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -29,36 +88,20 @@ const SignIn: React.FC = () => {
     setText(randomNameGenerator());
   };
   const handleContinueButtonClick = () => {
+    setTextError(false);
+    if (text === "") {
+      setTextError(true);
+    }
     if (text) {
       navigate("/home", { state: { nickname: text } });
     }
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        height: "100vh",
-      }}
-    >
-      <Container
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          fontFamily: "public sans",
-        }}
-      >
+    <div style={signInPageStyles.rootStyles}>
+      <Container sx={signInPageStyles.containerStyles}>
         <Card>
-          <CardContent
-            sx={{
-              width: "auto",
-              height: "auto",
-            }}
-          >
+          <CardContent sx={signInPageStyles.cardContentStyles}>
             <Box
               display="flex"
               alignItems="center"
@@ -72,26 +115,20 @@ const SignIn: React.FC = () => {
                 variant="subtitle1"
                 color="#4B465C"
                 fontFamily="public sans"
-                sx={{
-                  width: "642px",
-                  height: "24px",
-                  fontStyle: "normal",
-                  fontWeight: "500",
-                  fontSize: "24px",
-                  lineHeight: "24px",
-                }}
+                sx={signInPageStyles.dearDiaryTextStyles}
               >
                 Dear Diary
               </Typography>
             </Box>
-            <Container maxWidth="sm" sx={{ mb: "10px" }}>
+            <Container
+              maxWidth="sm"
+              sx={signInPageStyles.secondContainerStyles}
+            >
               <Typography
                 variant="h4"
                 color="#0092DD"
-                fontFamily="public sans"
                 textAlign="center"
-                fontWeight="700"
-                fontSize="36px"
+                sx={signInPageStyles.signInTextStyles}
               >
                 Sign In
               </Typography>
@@ -112,6 +149,8 @@ const SignIn: React.FC = () => {
                 fullWidth={isMobile}
                 placeholder="Your Nickname*"
                 onChange={handleTextChange}
+                required
+                error={textError}
                 sx={isMobile ? { width: "100%" } : { width: "50%" }}
               ></TextField>
               <Button
@@ -119,19 +158,7 @@ const SignIn: React.FC = () => {
                 onClick={handleRandomButtonClick}
                 fullWidth={isMobile}
                 disableElevation
-                sx={{
-                  backgroundColor: "rgba(0, 146, 221,0.16)",
-                  color: "rgba(0, 146, 221)",
-                  typography: {
-                    fontFamily: "public sans",
-                    textTransform: "none",
-                    fontSize: "15px",
-                    fontWeight: "500",
-                  },
-                  "&:hover": {
-                    color: "white",
-                  },
-                }}
+                sx={signInPageStyles.randomButtonStyles}
               >
                 Random
               </Button>
@@ -150,15 +177,7 @@ const SignIn: React.FC = () => {
                 endIcon={<ArrowForwardIcon />}
                 onClick={handleContinueButtonClick}
                 disableElevation
-                sx={{
-                  backgroundColor: "rgba(0, 146, 221,0.65)",
-                  typography: {
-                    fontFamily: "public sans",
-                    textTransform: "none",
-                    fontSize: "15px",
-                    fontWeight: "500",
-                  },
-                }}
+                sx={signInPageStyles.continueButtonStyles}
               >
                 Continue
               </Button>

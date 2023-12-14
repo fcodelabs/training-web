@@ -1,4 +1,4 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { delay, put, takeEvery } from "redux-saga/effects";
 
 import { getCard, setCard } from "../Redux/slices/addCardSlice";
 
@@ -16,6 +16,7 @@ export function* getCardSaga(): Generator<any> {
   );
   //   console.log(cards);
   yield put(setCard(cards));
+  yield delay(2000);
   yield put(getCard());
 }
 

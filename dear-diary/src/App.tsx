@@ -1,15 +1,20 @@
-import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import SignInPage from './containers/signinPage/page/signInPage';
+import SignInPage from './containers/SignInPage/Page/SignInPage';
+import HomePage from './containers/HomePage/Page/HomePage';
 
 function App() {
   return (
-    <div className="App">
-       <Layout />
-       <SignInPage />
-
+    <div>
+      <Layout />
+      <Routes>
+        <Route path="/" element={<SignInPage />} />
+        <Route path="/home" element={<HomePage />} />
+      </Routes>
     </div>
+
   );
 }
 
 export default App;
+

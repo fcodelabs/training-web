@@ -1,16 +1,16 @@
 import { initializeApp } from "firebase/app";
 import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBBFpbCPxTjwDx-AFolWCD73sYOKXfSqT0",
-  authDomain: "dear-diary-emailusername-24b75.firebaseapp.com",
-  projectId: "dear-diary-emailusername-24b75",
-  storageBucket: "dear-diary-emailusername-24b75.appspot.com",
-  messagingSenderId: "371728179698",
-  appId: "1:371728179698:web:b1c5afbb0fc891431b0b6b",
+const fbConfig = {
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGIN_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(fbConfig);
 export const firestore = getFirestore(app);
 
 export const collectionRef = collection(firestore, "cards");

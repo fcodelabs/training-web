@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-
 interface Diary {
   title: string;
   description: string;
@@ -14,9 +13,12 @@ const diarySlice = createSlice({
     addDiary: (state, action: PayloadAction<Diary>) => {
       state.push(action.payload);
     },
+    setDiaries: (state, action: PayloadAction<Diary[]>) => {
+      return action.payload;
+    },
   },
 });
 
-export const { addDiary } = diarySlice.actions;
+export const { addDiary, setDiaries } = diarySlice.actions;
 
 export default diarySlice.reducer;

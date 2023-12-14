@@ -1,5 +1,4 @@
 import React from "react";
-import backgroundImage from "../../../Images/backgroundImage.png";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -7,31 +6,18 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Logo from "../../../Images/Logo.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Stack, useMediaQuery } from "@mui/material";
+import randomNameGenerator from "../../utility";
 
-const containerStyle = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100vh",
-  fontFamily: "public sans",
-};
-
-const randomTextsArray: string[] = [
-  "Williams",
-  "Jhon",
-  "Vihanga",
-  "David",
-  "Kane",
-  "Warner",
-  "Kate",
-  "Jane",
-];
+const backgroundImage: string =
+  process.env.PUBLIC_URL + "Images/backgroundImage.png";
+const Logo: string = process.env.PUBLIC_URL + "Images/Logo.png";
 
 const SignIn: React.FC = () => {
+  const isMobile = useMediaQuery("(max-width: 400px)");
   const navigate = useNavigate();
   const [text, setText] = useState<string>("");
 
@@ -40,11 +26,12 @@ const SignIn: React.FC = () => {
   };
 
   const handleRandomButtonClick = () => {
-    const randomIndex = Math.floor(Math.random() * randomTextsArray.length);
-    setText(randomTextsArray[randomIndex]);
+    setText(randomNameGenerator());
   };
   const handleContinueButtonClick = () => {
-    navigate("/home", { state: { nickname: text } });
+    if (text) {
+      navigate("/home", { state: { nickname: text } });
+    }
   };
 
   return (
@@ -56,7 +43,15 @@ const SignIn: React.FC = () => {
         height: "100vh",
       }}
     >
-      <Container style={containerStyle}>
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          fontFamily: "public sans",
+        }}
+      >
         <Card>
           <CardContent
             sx={{
@@ -101,9 +96,9 @@ const SignIn: React.FC = () => {
                 Sign In
               </Typography>
             </Container>
-            <Box
+            <Stack
               component="form"
-              display="flex"
+              direction={isMobile ? "column" : "row"}
               gap="12px"
               justifyContent="center"
               alignItems="center"
@@ -114,13 +109,16 @@ const SignIn: React.FC = () => {
                 value={text}
                 variant="outlined"
                 size="small"
-                sx={{ flex: "0.75" }}
+                fullWidth={isMobile}
                 placeholder="Your Nickname*"
                 onChange={handleTextChange}
+                sx={isMobile ? { width: "100%" } : { width: "50%" }}
               ></TextField>
               <Button
                 variant="contained"
                 onClick={handleRandomButtonClick}
+                fullWidth={isMobile}
+                disableElevation
                 sx={{
                   backgroundColor: "rgba(0, 146, 221,0.16)",
                   color: "rgba(0, 146, 221)",
@@ -131,13 +129,13 @@ const SignIn: React.FC = () => {
                     fontWeight: "500",
                   },
                   "&:hover": {
-                    color: "white", // Set your desired hover color
+                    color: "white",
                   },
                 }}
               >
                 Random
               </Button>
-            </Box>
+            </Stack>
             <Box
               component="form"
               display="flex"
@@ -148,8 +146,10 @@ const SignIn: React.FC = () => {
             >
               <Button
                 variant="contained"
+                fullWidth={isMobile}
                 endIcon={<ArrowForwardIcon />}
                 onClick={handleContinueButtonClick}
+                disableElevation
                 sx={{
                   backgroundColor: "rgba(0, 146, 221,0.65)",
                   typography: {

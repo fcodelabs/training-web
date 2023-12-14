@@ -6,9 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch } from "react-redux";
-
-import { addCard } from "../../Redux/slices/addCardSlice";
+import { addCards } from "../../firebase";
 
 const cardAddingFromStyles = {
   iconButtonStyles: {
@@ -41,7 +39,6 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
   const [description, setDescription] = useState<string>("");
   const [titleError, setTitleError] = useState<boolean>(false);
   const [descriptionError, setDescriptionError] = useState<boolean>(false);
-  const dispatch = useDispatch();
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -65,7 +62,7 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
       setDescriptionError(true);
     }
     if (title && description) {
-      dispatch(addCard({ title, description }));
+      addCards(title, description);
       onClose();
       setTitle("");
       setDescription("");

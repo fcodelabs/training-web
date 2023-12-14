@@ -11,10 +11,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stack, useMediaQuery } from "@mui/material";
 import randomNameGenerator from "../../utility";
+import { useDispatch } from "react-redux";
+import { getDocs } from "firebase/firestore";
+import { collectionRef } from "../../firebase";
+import { setCard } from "../../Redux/slices/addCardSlice";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
 const Logo: string = process.env.PUBLIC_URL + "Images/Logo.png";
+
+interface cardInfo {
+  title: string;
+  description: string;
+}
 
 const signInPageStyles = {
   rootStyles: {
@@ -78,6 +87,18 @@ const SignIn: React.FC = () => {
   const [text, setText] = useState<string>("");
   const [textError, setTextError] = useState<boolean>(false);
 
+  const dispatch = useDispatch();
+
+  const getCards = async () => {
+    try {
+      const data = await getDocs(collectionRef);
+      const cardData = data.docs.map((doc) => doc.data() as cardInfo);
+      dispatch(setCard(cardData));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
@@ -91,6 +112,7 @@ const SignIn: React.FC = () => {
       setTextError(true);
     }
     if (text) {
+      getCards();
       navigate("/home", { state: { nickname: text } });
     }
   };

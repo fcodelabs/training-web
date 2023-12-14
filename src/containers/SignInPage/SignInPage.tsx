@@ -7,10 +7,21 @@ import logo from '../../assets/image1.png';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import bgimage from '../../assets/bg.png';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
 
   const [name, setName] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleContinue = () => {
+    if (name === '') {
+      alert('Please enter your name');
+    } else {
+      navigate('/home', { state: { name: name } });
+    }
+  };
 
   const generateRandomName = () => {
     const randomString = Math.random().toString(36).substring(7);
@@ -43,7 +54,8 @@ const SignIn = () => {
             Random
           </Button>
         </Box>
-        <Button style={{ width: '133px', height: '38px', borderRadius: '6px', color: 'white', backgroundColor: '#0092DD', alignSelf: 'center', marginTop: '15px' }} variant="contained">
+        <Button style={{ width: '133px', height: '38px', borderRadius: '6px', color: 'white', backgroundColor: '#0092DD', alignSelf: 'center', marginTop: '15px' }} variant="contained"
+            onClick={handleContinue}>
             Continue
             <ArrowForwardIcon style={{ height: '18px', width: '18px', marginLeft: '10px' }} />
             </Button>

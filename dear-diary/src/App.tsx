@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import SignInPage from './containers/SignInPage/SignInPage';
-import HomePage from './containers/HomePage/Page/HomePage';
+import HomePage from './containers/HomePage/HomePageContainer/HomePage';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 

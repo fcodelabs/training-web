@@ -48,11 +48,6 @@ const Home: React.FC<HomeProps> = ({ showForm, reset }) => {
     }
   };
 
-  useEffect(() => {
-
-    }, [ ]);
-
-
 
   return (
     <div className="home-wrapper">

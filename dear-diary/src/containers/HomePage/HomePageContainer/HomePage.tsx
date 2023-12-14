@@ -45,7 +45,7 @@ const HomePage = () => {
         }
         )
 
-    }, [dispatch, cards])
+    }, [])
 
     return (
         <div className="homepage-wrapper">

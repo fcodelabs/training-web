@@ -10,44 +10,153 @@ import "@fontsource/public-sans/";
 import RandomNameGenerator from '../../utility/randomNameGenerator';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url(${process.env.PUBLIC_URL}/bg.png) center center / cover no-repeat;
+`;
+
+const StyledContinueButton = styled(Button)`
+&&& {
+  font-family: public sans;
+  text-transform: none;
+  width: 133px;
+  height: 38px;
+  border-radius: 6px;
+  color: white;
+  background-color: #0092DD;
+  align-self: center;
+  margin-top: 15px;
+}
+`;
+
+const StyledImg = styled.img`
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+  margin-left: 10px;
+`;
+
+const StyledTitle = styled.span`
+  color: #0092DD;
+  font-size: 36px;
+  font-weight: 700;
+  align-content: center;
+  line-height: 24px;
+  margin-bottom: 10px;
+`;
+
+const StyledLogoText = styled.span`
+  font-family: public sans;
+  text-transform: none;
+  color: #4B465C;
+  font-size: 24px;
+  font-weight: 500; 
+  line-height: 24px;
+  margin-top: 5px;
+`;
+
+const StyledCardBox = styled(Box)`
+  background-color: #ffffff;
+  width: 742px;
+  height: 267px;
+  display: flex;
+  margin: 0 10px;
+  flex-direction: column;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.16);
+`;
+
+const StyledLogoBox = styled(Box)`
+  display: flex;
+  align-items: flex-start;
+  margin-top: 24px;
+  margin-left: 24px;
+`;
+
+const StyledInputBox = styled(Box)`
+  
+  align-self: center;
+  margin-top: 30px;
+  
+`;
+
+const StyledTextField = styled(TextField)`
+  width: 395px;
+  border-radius: 4px;
+  border: 1px;
+  color: #DBDADE;
+  font-size: 13px;
+  line-height: 21px;
+`;
+
+const StyledArrowForwardIcon = styled(ArrowForwardIcon)`
+  &&& {
+  height: 18px;
+  width: 18px;
+  margin-left: 10px;
+  }
+`;
+
+const StyledRandomButton = styled(Button)`
+  &&& {
+  font-family: public sans;
+  text-transform: none;
+  width: 104px;
+  height: 35px;
+  border-radius: 6px;
+  color: #0092DD;
+  background-color: rgba(0, 146, 221, 0.16);
+  align-self: center;
+  margin-left: 30px;
+  font-weight: 500;
+  line-height: 18px;
+  font-size: 15px;
+  padding: 10px 20px 10px 20px;
+  }
+`;
+
 
 const SignIn = () => {
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState(''); // state for name
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // navigate to home page
 
   const handleContinue = () => {
-    //
+    // check if name is empty
     if (name === '') {
       toast.error('Please enter your nick name');
       return;
     }
+    // If not , navigate to home page
     navigate('/home', { state: { name: name } });
   };
 
-  const randomName = RandomNameGenerator();
+  const randomName = RandomNameGenerator(); // generate random name using utility function
 
   const generateRandomName = () => {
+    // update name state with random name
     setName(randomName);
   };
 
   return (
-    <div style={{
-      display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh',
-      background: `url(${process.env.PUBLIC_URL}/bg.png) center center / cover no-repeat`
-    }}>
-      <Box sx={{ bgcolor: '#ffffff', width: '742px', height: '267px', display: 'flex', margin: '0 10px', flexDirection: "column", borderRadius: '6px', boxShadow: '0 0 20px rgba(0, 0, 0, 0.16)' }}>
-        <Box sx={{ display: 'flex', alignItems: 'flex-start', marginTop: '24px', marginLeft: '24px' }}>
-          <img src={process.env.PUBLIC_URL + '/image1.png'} alt="Logo" style={{ width: '40px', height: '40px', marginRight: '15px', marginLeft: '10px' }} />
-          <span style={{ fontFamily: 'public sans', textTransform: 'none', color: "#4B465C", fontSize: "24px", fontWeight: '500', lineHeight: '24px', marginTop: '5px' }}>Dear Diary</span>
-        </Box>
-        <span style={{ color: "#0092DD", fontSize: "36px", fontWeight: "700", alignContent: "center", lineHeight: "24px", marginBottom: "10px" }}>Sign In</span>
-        {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
-        <Box sx={{ alignSelf: 'center', marginTop: '30px' }}>
-          {/* <TextField style={{ width: '395px', borderRadius: '4px', border: '1px', color: '#DBDADE' }} id="outlined-basic" label="Your nickname*" variant="outlined" inputProps={{ style: { height: '6px' } }} /> */}
-          <TextField
-            style={{ width: '395px', borderRadius: '4px', border: '1px', color: '#DBDADE', fontSize: '13px', lineHeight: '21px' }}
+    <StyledDiv>
+      <StyledCardBox>
+        <StyledLogoBox>
+          <StyledImg src={process.env.PUBLIC_URL + '/image1.png'} alt="Logo" />
+          <StyledLogoText>Dear Diary</StyledLogoText>
+        </StyledLogoBox>
+        <StyledTitle>Sign In</StyledTitle>
+
+        <StyledInputBox>
+
+          <StyledTextField
+            
             id="outlined-basic"
             label="Your nickname*"
             variant="outlined"
@@ -55,19 +164,18 @@ const SignIn = () => {
             value={name}
             onChange={e => setName(e.target.value)}
           />
-          <Button style={{ fontFamily: 'public sans', textTransform: 'none', width: '104px', height: '35px', color: '#0092DD', backgroundColor: 'rgba(0, 146, 221, 0.16)', marginLeft: '30px', fontWeight: '500', lineHeight: '18px', fontSize: '15px', padding: '10px 20px 10px 20px' }} variant="contained"
-            onClick={generateRandomName}>
+          <StyledRandomButton  variant="contained" onClick={generateRandomName}>
             Random
-          </Button>
-        </Box>
-        <Button style={{ fontFamily: 'public sans', textTransform: 'none', width: '133px', height: '38px', borderRadius: '6px', color: 'white', backgroundColor: '#0092DD', alignSelf: 'center', marginTop: '15px' }} variant="contained"
+          </StyledRandomButton>
+        </StyledInputBox>
+        <StyledContinueButton variant="contained"
           onClick={handleContinue}>
           Continue
-          <ArrowForwardIcon style={{ height: '18px', width: '18px', marginLeft: '10px' }} />
-        </Button>
+          <StyledArrowForwardIcon/>
+        </StyledContinueButton>
         <ToastContainer position="top-right" autoClose={3000} />
-      </Box>
-    </div>
+      </StyledCardBox>
+    </StyledDiv>
   );
 };
 

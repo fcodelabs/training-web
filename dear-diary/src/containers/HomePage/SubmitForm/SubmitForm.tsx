@@ -1,16 +1,21 @@
-
-// Import necessary styles
+import ValidateDiaryCard from "../../../utility/Validation"
 import './SubmitForm.css';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
+interface Diary {
+    title: string;
+    body: string;
+}
 
 interface SubmitFormProps {
     showForm: boolean;
     reset: () => void;
+    setDiaries: React.Dispatch<React.SetStateAction<Diary[]>>;
 }
 
-const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
+const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset,setDiaries }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
@@ -23,15 +28,24 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
     };
 
     const handleSubmit = () => {
+        const newDiary: Diary = {
+            title: title,
+            body: description,
+        };
+        if (!ValidateDiaryCard(title, description)) {
+            return;
+        }  
+        setDiaries((prevDiaries) => [...prevDiaries, newDiary]);
+
         setTitle('');
         setDescription('');
-        
+        reset();
     };
 
     const handleCancel = () => {
         setTitle('');
         setDescription('');
-        reset()
+        reset();
     };
 
     return (

@@ -1,16 +1,17 @@
-.home-wrapper{
-    padding: 1% 4% 2% 4%;
+.home-wrapper {
+    padding: 1% 4% 0% 4%;
     display: flex;
     flex-direction: column;
 }
 
-.home-header{
+.home-header {
     font-size: 30px;
     color: #4b465c;
     font-weight: 500;
     padding-bottom: 2%;
 }
-.home-search{
+
+.home-search {
     padding-top: 2%;
     display: flex;
     flex-direction: row;
@@ -20,7 +21,7 @@
 }
 
 
-.search-button{
+.search-button {
     border: 0.1px solid black !important;
     width: 15% !important;
     min-width: 18vh !important;
@@ -31,6 +32,33 @@
     text-transform: none !important;
 
 }
-.home-body{
+
+.home-body {
+    max-width: 100%;
+    display: flex;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    height: 60vh;
+    max-height: 70vh;
+    overflow-y: scroll
+}
+
+.home-body::-webkit-scrollbar {
+    width: 1px;
+}
+
+.home-body::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.home-body::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+@media screen and (max-width :768px) {
+    .home-body {
+        height:70vh;
+        justify-content: center;
+    }
     
 }

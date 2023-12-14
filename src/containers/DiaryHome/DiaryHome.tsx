@@ -71,8 +71,7 @@ export default function Home() {
       </div>
 
       <div style={{
-        margin: "47px 60px 0 60px",
-  
+        margin: "47px 60px 0 60px",  
       }}>
         <DiaryCardWrapper/>
       </div>

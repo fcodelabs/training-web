@@ -6,7 +6,7 @@ export default function Header() {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        margin: "60px 60px 30px 60px",
+        padding: "60px 60px 30px 60px",
       }}
     >
       <Logo />

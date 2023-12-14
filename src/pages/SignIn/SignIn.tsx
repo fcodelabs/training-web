@@ -73,6 +73,7 @@ const SignIn: React.FC = () => {
               <TextField variant="outlined" size="small" placeholder="Your Nickname*" autoComplete="off" spellCheck="false"
               sx={{width: '395px', height: '35px', borderRadius: '4px', padding: '7px, 10px, 7px, 10px'}}
               value={text}
+              required
               onChange={handleTextChange}
               ></TextField>
               <Button variant="contained" 

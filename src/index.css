@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Public Sans', sans-serif;
+  background: url('./../public/images/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+code {
+  font-family: 'Public Sans', sans-serif;
+}

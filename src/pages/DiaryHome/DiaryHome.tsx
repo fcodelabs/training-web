@@ -102,11 +102,7 @@ const DiaryHome = () => {
     setOpen(false);
   }
 
-  //const [diaries, setDiaries] = React.useState(JSON.parse(localStorage.getItem("diaries") || "[]")); // Get the existing entries
-
   const diaries = useSelector((state: RootState) => state.diaries);
-
-
 
   return (
     <div>

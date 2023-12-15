@@ -1,6 +1,8 @@
 import { Box, TextField, Button, DialogTitle, DialogContent, DialogActions, Typography } from '@mui/material';
 import DisabledByDefaultRoundedIcon from '@mui/icons-material/DisabledByDefaultRounded';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addDiary } from '../../../redux/diarySlice';
 
 const styles = {
   submitNew: {
@@ -61,26 +63,35 @@ interface Diary {
 
 interface DiaryFormProps {
   onClose: () => void;
-  setDiaries: React.Dispatch<React.SetStateAction<Diary[]>>;
-  diaries: Diary[];
+  //setDiaries: React.Dispatch<React.SetStateAction<Diary[]>>;
+  //diaries: Diary[];
 }
 
 
-const DiaryForm: React.FC<DiaryFormProps> = ({onClose, setDiaries, diaries}) => {
+const DiaryForm: React.FC<DiaryFormProps> = ({onClose}) => {
+
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+
+  const dispatch = useDispatch();
 
   const onsubmit = () => {
     if (title === "" || description === "") {
       alert("Please fill out all fields");
       return;
     }else{
+      
       console.log("Title: ", title);
       console.log("Description: ", description);
-      const existingEntries = JSON.parse(localStorage.getItem("diaries") || "[]"); // Get the existing entries
-      existingEntries.push({ title, description });  // Add the new entry to the existing entries
-      localStorage.setItem("diaries", JSON.stringify(existingEntries)); // Save the updated entries to local storage
-      setDiaries([...diaries, { title, description }])
+
+      // const existingEntries = JSON.parse(localStorage.getItem("diaries") || "[]"); // Get the existing entries
+      // existingEntries.push({ title, description });  // Add the new entry to the existing entries
+      // localStorage.setItem("diaries", JSON.stringify(existingEntries)); // Save the updated entries to local storage
+
+      // setDiaries([...diaries, { title, description }]);
+      
+      dispatch(addDiary({ title, description }));
+
       setTitle("");
       setDescription("");
       onClose();

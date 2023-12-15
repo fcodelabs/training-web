@@ -6,6 +6,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Header from '../../components/Header/Header';
 import DiaryForm from './DiaryForm/DiaryForm';
 import DiaryCard from '../../components/DiaryCard/DiaryCard';
+import { useSelector } from 'react-redux';
 
 const styles = {
   home:{ fontFamily:"public sans",
@@ -75,6 +76,16 @@ const styles = {
 
 }
 
+interface Diary {
+  title: string;
+  description: string;
+}
+
+interface RootState {
+  diaries: Diary[];
+}
+
+
 
 
 const DiaryHome = () => {
@@ -91,8 +102,7 @@ const DiaryHome = () => {
     setOpen(false);
   }
 
-  const [diaries, setDiaries] = React.useState(JSON.parse(localStorage.getItem("diaries") || "[]")); // Get the existing entries
-
+  const diaries = useSelector((state: RootState) => state.diaries);
 
   return (
     <div>
@@ -126,7 +136,7 @@ const DiaryHome = () => {
         </Box>
         
         <Dialog open={open} onClose={handleColse} sx={styles.dialog} >
-            <DiaryForm onClose={handleColse} setDiaries={setDiaries} diaries={diaries}/>
+            <DiaryForm onClose={handleColse} />
         </Dialog>
 
         <Box sx={styles.diaryEntries}>

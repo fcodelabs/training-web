@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cardsSlice from "./slices/addCardSlice";
-import { watchSetCardSaga } from "../saga/cardSaga";
+import { watchSetCardSaga } from "./saga/cardSaga";
 import createSagaMiddleware from "redux-saga";
 
 const sagaMiddleware = createSagaMiddleware();

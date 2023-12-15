@@ -1,8 +1,8 @@
 import { delay, put, takeEvery } from "redux-saga/effects";
 
-import { getCard, setCard } from "../Redux/slices/addCardSlice";
+import { getCard, setCard } from "../slices/addCardSlice";
 
-import { getCards } from "../firebase";
+import { getCards } from "../../firebase";
 
 interface Card {
   title: string;

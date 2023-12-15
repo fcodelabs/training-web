@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
+import { addCards } from "../../firebase";
 
 const cardAddingFromStyles = {
   iconButtonStyles: {
@@ -31,13 +32,9 @@ const cardAddingFromStyles = {
 
 interface CardAddingFormProps {
   onClose: () => void;
-  closeWhenSubmit: (title: string, description: string) => void;
 }
 
-const CardAddingForm: React.FC<CardAddingFormProps> = ({
-  onClose,
-  closeWhenSubmit,
-}) => {
+const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [titleError, setTitleError] = useState<boolean>(false);
@@ -65,7 +62,8 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({
       setDescriptionError(true);
     }
     if (title && description) {
-      closeWhenSubmit(title, description);
+      addCards(title, description);
+      onClose();
       setTitle("");
       setDescription("");
     }

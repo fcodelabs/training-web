@@ -1,15 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import SignIn from "./Containers/SignIn/SignIn";
-import HomePage from "./Containers/HomePage/HomePage";
-import "./App.css";
+
+import routes from "./Components/Routes/routes";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SignIn />} />
-        <Route path="/home" element={<HomePage />} />
+        {routes.map((route) => (
+          <Route key={route.id} path={route.path} element={route.element} />
+        ))}
+        ;
       </Routes>
     </Router>
   );

@@ -15,6 +15,12 @@ import "@fontsource/public-sans/";
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { useEffect } from 'react';
+import { RootState, useAppDispatch } from '../../redux/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { diaryCardActions } from '../../redux/Diary/diarySlice';
+
+
 const StyledMainDiv = styled.div`
     display: flex;
     flex-direction: column;
@@ -140,27 +146,38 @@ const DiaryCardContainer = styled.div`
 interface DiaryCardProps {
     title: string;
     description: string;
+    username: string;
 };
+
 
 const HomePage = () => {
     const [showSubmitCard, setShowSubmitCard] = useState(false);            // state to track if submit card is open or not
     const [diaryEntries, setDiaryEntries] = useState<DiaryCardProps[]>([]); // state to track diary entries
 
-    // function to handle submit card
-    const handleOnSubmitCard = (title: string, description: string) => {
-        // create new diary card
-        const newDiaryCard: DiaryCardProps = {
-            title,
-            description,
-        };
-
-        // add new diary card to diary entries
-        setDiaryEntries([newDiaryCard, ...diaryEntries]);
-    };
+    const dispatch = useDispatch();  
 
     const location = useLocation();              // get location from react router dom
     const nickName = location.state.name || {};  // from that location get name
+    
+    useEffect(() => {
+        console.log("Diary Card List:", diaryEntries);
+    }, [diaryEntries]);
+    
+    useEffect(() => {
+        console.log("fetching diary card list");
+        dispatch(diaryCardActions.fetchDiaryCardList(nickName));
+    }, [dispatch, nickName]);
+    // function to handle submit card
+    const handleOnSubmitCard = (title: string, description: string) => {
+        // create new diary card
+        console.log('Handling submit card:', { title, description, username: nickName });
+        dispatch(diaryCardActions.addDiaryCard({title, description, username: nickName}))
 
+        // add new diary card to diary entries
+        // setDiaryEntries([newDiaryCard, ...diaryEntries]);
+    };
+
+    
     // function to handle submit button
     const handleSubmit = () => {
         setShowSubmitCard(true);
@@ -170,6 +187,12 @@ const HomePage = () => {
     const handleCloseSubmitCard = () => {
         setShowSubmitCard(false);
     };
+
+    const entries = useSelector((state: RootState) => state.diaryCardList.diaryCardList);
+
+    useEffect(() => {
+        setDiaryEntries(entries);
+    }, [entries]);
 
     return (
         <StyledMainDiv
@@ -258,8 +281,8 @@ const HomePage = () => {
 
             {/* Rendering Diary Cards */}
             <DiaryCardContainer>
-                {diaryEntries.map((diaryCard) => (
-                    <DiaryCard title={diaryCard.title} description={diaryCard.description} />
+                {diaryEntries.map((diaryCard, index) => (
+                    <DiaryCard key={index} title={diaryCard.title} description={diaryCard.description} />
                 ))}
             </DiaryCardContainer>
         </StyledMainDiv>

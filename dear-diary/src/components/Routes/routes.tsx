@@ -1,5 +1,5 @@
-import HomePage from "../../Containers/HomePage/HomePage";
-import SignIn from "../../Containers/SignIn/SignIn";
+import HomePage from "../../containers/HomePage/HomePage";
+import SignIn from "../../containers/SignIn/SignIn";
 
 interface RouteConfig {
   id: number;

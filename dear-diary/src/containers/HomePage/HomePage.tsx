@@ -3,18 +3,18 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Header from "../../Components/Header/Header";
+import Header from "../../components/Header/Header";
 import Stack from "@mui/material/Stack";
 import { useMediaQuery } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useLocation } from "react-router-dom";
-import CardAddingForm from "../../Components/CardAddingForm/CardAddingForm";
-import DiaryCard from "../../Components/DiaryCard/DiaryCard";
+import CardAddingForm from "../../components/CardAddingForm/CardAddingForm";
+import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../Redux/store";
-import { getCard } from "../../Redux/slices/addCardSlice";
+import { AppDispatch, RootState } from "../../redux/store";
+import { getCard } from "../../redux/slices/addCardSlice";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -154,21 +154,26 @@ const HomePage: React.FC = () => {
         </Button>
       </Stack>
 
-      <Grid container spacing={3} sx={homepageStyles.gridStyles}>
-        {cards.map((card) => (
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={3}
-            lg={2}
-            xl={2}
-            key={cards.indexOf(card)}
-          >
-            <DiaryCard title={card.title} description={card.description} />
-          </Grid>
-        ))}
-      </Grid>
+      {cards.length === 0 ? (
+        <Typography justifyContent="center">No Notes are available</Typography>
+      ) : (
+        <Grid container spacing={2} sx={homepageStyles.gridStyles}>
+          {cards.map((card) => (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              xl={2}
+              key={cards.indexOf(card)}
+            >
+              <DiaryCard title={card.title} description={card.description} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
+
       {showCardAddingForm && (
         <>
           <Box sx={homepageStyles.divStyles}></Box>

@@ -2,9 +2,8 @@ import {configureStore, Tuple
 } from '@reduxjs/toolkit';
 // import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import {diaryCardReducer} from './Diary/diarySlice';
-import signInSliceReducer from './User/signInSlice';
-import diaryCardSaga from './Diary/diarySaga';
+import {diaryCardReducer} from './diary/slice';
+import diaryCardSaga from './diary/saga';
 import { useDispatch } from 'react-redux';
 
 

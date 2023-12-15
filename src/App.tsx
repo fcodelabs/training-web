@@ -1,7 +1,7 @@
 
 import './App.css';
 
-import AppRoutes from './utility/appRoutes';
+import AppRoutes from './components/appRoutes';
 
 function App() {
   return (

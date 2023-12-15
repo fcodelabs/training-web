@@ -18,7 +18,7 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { diaryCardActions } from '../../redux/Diary/diarySlice';
+import { diaryCardActions } from '../../redux/diary/slice';
 
 
 const StyledMainDiv = styled.div`
@@ -27,7 +27,7 @@ const StyledMainDiv = styled.div`
     height: 100vh;
     width: 100%;
     position: relative;
-    background-image: url(${process.env.PUBLIC_URL}/bg.png);
+    background-image: url(/bg/bg.png);
     background-size: cover;
     background-repeat: no-repeat;
     overflow-x: hidden;
@@ -141,6 +141,7 @@ const DiaryCardContainer = styled.div`
     margin-top: 20px;
     margin-left: 60px;
     margin-right: 60px;
+    margin-bottom: 10px;
 `;
 
 interface DiaryCardProps {
@@ -154,30 +155,33 @@ const HomePage = () => {
     const [showSubmitCard, setShowSubmitCard] = useState(false);            // state to track if submit card is open or not
     const [diaryEntries, setDiaryEntries] = useState<DiaryCardProps[]>([]); // state to track diary entries
 
-    const dispatch = useDispatch();  
+    const dispatch = useDispatch();
 
     const location = useLocation();              // get location from react router dom
     const nickName = location.state.name || {};  // from that location get name
-    
+
+    // checking the diary card list array
     useEffect(() => {
         console.log("Diary Card List:", diaryEntries);
     }, [diaryEntries]);
-    
+
+    // fetching the diarycard according to the username
     useEffect(() => {
         console.log("fetching diary card list");
         dispatch(diaryCardActions.fetchDiaryCardList(nickName));
     }, [dispatch, nickName]);
+
     // function to handle submit card
     const handleOnSubmitCard = (title: string, description: string) => {
         // create new diary card
         console.log('Handling submit card:', { title, description, username: nickName });
-        dispatch(diaryCardActions.addDiaryCard({title, description, username: nickName}))
+        dispatch(diaryCardActions.addDiaryCard({ title, description, username: nickName })) // addding a new diary card to db
 
         // add new diary card to diary entries
         // setDiaryEntries([newDiaryCard, ...diaryEntries]);
     };
 
-    
+
     // function to handle submit button
     const handleSubmit = () => {
         setShowSubmitCard(true);
@@ -193,6 +197,14 @@ const HomePage = () => {
     useEffect(() => {
         setDiaryEntries(entries);
     }, [entries]);
+
+    const [searchQuery, setSearchQuery] = useState('');
+
+    // Function to filter diary entries based on search query
+    const filteredDiaryEntries = diaryEntries.filter((entry) => {
+        const searchTerms = `${entry.title} ${entry.description} ${entry.username}`.toLowerCase();
+        return searchTerms.includes(searchQuery.toLowerCase());
+    });
 
     return (
         <StyledMainDiv
@@ -221,7 +233,7 @@ const HomePage = () => {
                     <StyledUserIconDiv>
                         <StyledIconButton color="inherit" >
 
-                            <img src={process.env.PUBLIC_URL + '/user.png'} alt="User Icon" />
+                            <img src={'/homePage/user.png'} alt="User Icon" />
 
                         </StyledIconButton>
 
@@ -245,12 +257,15 @@ const HomePage = () => {
                         variant="outlined"
                         size="small"
                         placeholder="Placeholder"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
                                     <SearchIcon />
                                 </InputAdornment>
                             ),
+                            
                         }}
                     />
                     <StyledSubmitButton
@@ -281,8 +296,12 @@ const HomePage = () => {
 
             {/* Rendering Diary Cards */}
             <DiaryCardContainer>
-                {diaryEntries.map((diaryCard, index) => (
-                    <DiaryCard key={index} title={diaryCard.title} description={diaryCard.description} />
+                {filteredDiaryEntries.map((diaryCard, index) => (
+                    <DiaryCard
+                        key={index}
+                        title={diaryCard.title}
+                        description={diaryCard.description}
+                    />
                 ))}
             </DiaryCardContainer>
         </StyledMainDiv>

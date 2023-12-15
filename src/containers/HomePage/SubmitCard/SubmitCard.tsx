@@ -43,7 +43,7 @@ const StyledCloseButton = styled(IconButton)`
 `;
 
 const StyledSpan = styled.span`
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   margin-right: 330px;
   font-family: public sans;
   font-feature-settings: 'clig' off, 'liga' off;
@@ -158,17 +158,18 @@ const SubmitCard: React.FC<SubmitCardProps> = ({ onClose, onsubmit }) => {
       <StyledHeader>
         <StyledTitle>Submit New</StyledTitle>
         <StyledCloseButton color="inherit" onClick={onClose}>
-          <img src={process.env.PUBLIC_URL + 'close.svg'} alt="Close Icon" />
+          <img src={'/submitCard/close.svg'} alt="Close Icon" />
         </StyledCloseButton>
       </StyledHeader>
       <form>
         <StyledTextFieldContainer>
           <StyledSpan>Title</StyledSpan>
           <StyledTextFieldInput
-            label="Placeholder"
+            label=""
             variant="outlined"
             fullWidth
             size="small"
+            placeholder='Placeholder'
             value={title}
             onChange={handleTitleChange} // update title state
           />
@@ -176,7 +177,8 @@ const SubmitCard: React.FC<SubmitCardProps> = ({ onClose, onsubmit }) => {
         <StyledTextFieldContainer>
           <StyledSpan>Description</StyledSpan>
           <StyledTextFieldInput
-            label="Placeholder"
+            label=""
+            placeholder='Placeholder'
             variant="outlined"
             multiline
             rows={13} // set rows to 13

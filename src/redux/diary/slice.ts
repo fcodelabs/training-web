@@ -6,6 +6,7 @@ interface DiaryCardProps {
     username: string;
 }
 
+
 interface DiaryCardState {
     diaryCardList: DiaryCardProps[];
 }
@@ -19,14 +20,14 @@ export const diaryCardSlice = createSlice({
     initialState,
     reducers: {
         addDiaryCard: (state, action: PayloadAction<DiaryCardProps>) => {
-            console.log('Adding diary card:', action.payload);
-            state.diaryCardList.push(action.payload);
-            console.log('Diary card list:', state.diaryCardList);
+            // console.log('Adding diary card:', action.payload);
+            state.diaryCardList.push(action.payload);                         // add the diary card to the diary card list
+            // console.log('Diary card list:', state.diaryCardList);
         },
         setDiaryCardList: (state, action: PayloadAction<DiaryCardProps[]>) => {
-            state.diaryCardList = action.payload;
+            state.diaryCardList = action.payload;                             // set the diary card list to the updated diary card list
         },
-        fetchDiaryCardList: () => {},
+        fetchDiaryCardList: () => {},                                         // fetch the diary card list from the database
     },
 });
 

@@ -73,7 +73,7 @@ const StyledButton = styled(Button)`
   align-items: flex-start;
   border-radius: 6px;
   background-color: #ffffff;
-  box-shadow: 0 4px 18px 0pc rgba(75, 70, 92, 0.10);
+  box-shadow: 0 4px 18px 0pc rgba(75, 70, 92, 0.0);
 }
 `;
 
@@ -81,6 +81,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
   const [showMore, setShowMore] = useState(false); // state to track whether to show more or not
 
   const truncatedDescription = showMore ? description : `${description.slice(0, 100)}...`; // truncate description if showMore is false
+  const showMoreButton = description.length > 100; // only show showMore button if description is longer than 100 characters
 
   const handleToggleShowMore = () => {
     setShowMore(!showMore);
@@ -100,11 +101,14 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
           </TypographyDescription>
         </StyledBox>
       </CardContent>
-      <CardActions>
-        <StyledButton size="small" onClick={handleToggleShowMore}>
-          {showMore ? 'Hide' : 'Show More'}
-        </StyledButton>
-      </CardActions>
+      {showMoreButton && ( // conditionally render the button based on description length
+        <CardActions>
+          <StyledButton size="small" onClick={handleToggleShowMore}>
+            {showMore ? 'Hide' : 'Show More'}
+          </StyledButton>
+        </CardActions>
+      )}
+
     </StyledCard>
   );
 };

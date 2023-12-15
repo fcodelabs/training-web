@@ -17,7 +17,7 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url(${process.env.PUBLIC_URL}/bg.png) center center / cover no-repeat;
+  background: url(/bg/bg.png) center center / cover no-repeat;
 `;
 
 const StyledContinueButton = styled(Button)`
@@ -148,7 +148,7 @@ const SignIn = () => {
     <StyledDiv>
       <StyledCardBox>
         <StyledLogoBox>
-          <StyledImg src={process.env.PUBLIC_URL + '/image1.png'} alt="Logo" />
+          <StyledImg src={'/logo/image1.png'} alt="Logo" />
           <StyledLogoText>Dear Diary</StyledLogoText>
         </StyledLogoBox>
         <StyledTitle>Sign In</StyledTitle>

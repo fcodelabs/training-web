@@ -34,7 +34,7 @@ const Header = () => {
         <div>
         <Container>
         <StyledBox>
-        <StyledImg src={process.env.PUBLIC_URL+'/image1.png'} alt="Logo"/>
+        <StyledImg src={'/logo/image1.png'} alt="Logo"/>
           <StyledSpan>Dear Diary</StyledSpan>
         </StyledBox>
         

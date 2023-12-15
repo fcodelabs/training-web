@@ -18,7 +18,7 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { diaryCardActions } from '../../redux/Diary/diarySlice';
+import { diaryCardActions } from '../../redux/diary/slice';
 
 
 const StyledMainDiv = styled.div`
@@ -27,7 +27,7 @@ const StyledMainDiv = styled.div`
     height: 100vh;
     width: 100%;
     position: relative;
-    background-image: url(${process.env.PUBLIC_URL}/bg.png);
+    background-image: url(/bg/bg.png);
     background-size: cover;
     background-repeat: no-repeat;
     overflow-x: hidden;
@@ -221,7 +221,7 @@ const HomePage = () => {
                     <StyledUserIconDiv>
                         <StyledIconButton color="inherit" >
 
-                            <img src={process.env.PUBLIC_URL + '/user.png'} alt="User Icon" />
+                            <img src={'/homePage/user.png'} alt="User Icon" />
 
                         </StyledIconButton>
 

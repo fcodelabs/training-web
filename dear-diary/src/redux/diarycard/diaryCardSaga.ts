@@ -1,9 +1,9 @@
 import { takeLatest } from 'redux-saga/effects';
-import  { addCardByUser }  from '../slices/diaryCardSlice';
+import  { addCardByUser }  from './diaryCardSlice';
 import { collection, addDoc } from 'firebase/firestore';
-import db from '../../utilities/firebaseIntegration';
+import db from '../../config/firebaseIntegration';
 import { PayloadAction } from '@reduxjs/toolkit';
-import {SubmitCard} from '../slices/diaryCardSlice';
+import {SubmitCard} from './diaryCardSlice';
 
 
 function* addCardSaga(action:PayloadAction<SubmitCard > ) {

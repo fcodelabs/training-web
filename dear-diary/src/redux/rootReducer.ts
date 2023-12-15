@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import userReducer from './userSlice';
-import diaryCardReducer from './diaryCardSlice';
+import userReducer from './user/userSlice';
+import diaryCardReducer from './diarycard/diaryCardSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,

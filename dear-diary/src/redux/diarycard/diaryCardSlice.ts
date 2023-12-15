@@ -13,6 +13,7 @@ export type SubmitCard = {
 
 type InitialStateType = {
     cards: Card[];
+
 };
 
 const initialState: InitialStateType = {
@@ -31,20 +32,13 @@ const diaryCardSlice = createSlice({
         addCardByUser: (state, action: PayloadAction<SubmitCard>) => {
             //
         },
-        addCard: (state, action: PayloadAction<Card>) => {
-           state.cards.push(action.payload);
-        
-        },
-        deleteCard: (state, action: PayloadAction<string>) => {
-            state.cards = state.cards.filter((card) => card.id !== action.payload);
-        },
-        editCard: (state, action: PayloadAction<Card>) => {
-            state.cards = state.cards.filter((card) => card.id !== action.payload.id);
-            state.cards.push(action.payload);
+        addCards: (state, action: PayloadAction<Card[]>) => {
+           state.cards = action.payload;
+            
         }
 
     },
 });
 
-export const { deleteCard, editCard, addCard, addCardByUser } = diaryCardSlice.actions;
+export const { addCards, addCardByUser } = diaryCardSlice.actions;
 export default diaryCardSlice.reducer;

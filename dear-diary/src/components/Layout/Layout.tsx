@@ -1,17 +1,24 @@
-// common background  
+import styled from "styled-components";
 
-import "./Layout.css";
+export const Background = styled.div`
+      display: flex;
+      width: 100%; 
+      min-height: 100vh; 
+      background-image: url("/background.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding-bottom: 0;
+`;
+
 
 const Layout = () => {
-    return (
-      <div className="layout">
-        <div className="layout-background"></div>
-      </div>
-    );
-  };
-  
+  return (
+    <Background/>
+  );
+};
+
 export default Layout;
 
 
-  
+
 

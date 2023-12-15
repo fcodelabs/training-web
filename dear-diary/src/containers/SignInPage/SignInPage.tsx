@@ -6,8 +6,20 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { userLoggedIn } from "../../redux/user/userSlice";
-import { Background } from "../../components/Layout/Layout";
 import DearDiary from '../../components/DearDiary/DearDiary';
+
+const Background = styled.div`
+    display: flex;
+    width: 100%; 
+    min-height: 100vh; 
+    background-image: url("/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 0;
+`;
+
+
+
 
 const SignInPageWrapper = styled.div`
     display: flex;

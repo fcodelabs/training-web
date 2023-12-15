@@ -12,11 +12,11 @@ type Diary = {
 };
 
 type SubmitFormProps = {
-  showForm: boolean;
+  showform: boolean;
   reset: () => void;
 };
 
-const StyledSubmitForm = styled.div<{ showForm: boolean }>`
+const StyledSubmitForm = styled.div<{ showform: boolean }>`
   z-index: 5;
   position: fixed;
   top: 0;
@@ -24,17 +24,15 @@ const StyledSubmitForm = styled.div<{ showForm: boolean }>`
   height: 100vh;
   background-color: white;
   padding: 1%;
-  right: ${({ showForm }) => (showForm ? '0' : '-100%')};
-  transition: right 0.5s ease-in-out;
-`;
+  right: ${({ showform }) => (showform ? '0' : '-100%')};
+  transition: right 0.5s ease-in-out;`;
 
 const HeaderSubmit = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 95%;
-  padding: 2% 2% 5% 2%;
-`;
+  padding: 2% 2% 5% 2%;`;
 
 const FormClose = styled.div`
   transition: transform 0.3s ease-in-out;
@@ -47,58 +45,51 @@ const FormClose = styled.div`
   &:hover {
     transform: scale(1.1);
     cursor: pointer;
-  }
-`;
+  }`;
 
 const FormTitle = styled.div`
   font-size: 20px;
   color: #4b465c;
-  font-weight: 500;
-`;
+  font-weight: 500;`;
 
 const SubmitTitle = styled.div`
   font-size: 20px;
   color: #4b465c;
   font-weight: 500;
-  padding: 1% 2% 0% 2%;
-`;
+  padding: 1% 2% 0% 2%;`;
 
 const SubmitDesc = styled.div`
   font-size: 20px;
   color: #4b465c;
   font-weight: 500;
   width: 100%;
-  padding: 5% 2% 0% 2%;
-`;
+  padding: 5% 2% 0% 2%;`;
 
 const SubmitButton = styled(Button)`
   background-color: #0092dd !important;
   text-transform: none !important;
   margin: 5% 2% 2% 2% !important;
   color: white;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);`;
 
 const CancelButton = styled(Button)`
   text-transform: none !important;
   background-color: #828282 !important;
   margin: 5% 2% 2% 2% !important;
   color: rgb(255, 255, 255);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);`;
 
 const SubmitFormBar = styled.div`
-    padding: 1%;
-    font-size: 15px;
-`;
+  padding: 1%; 
+  font-size: 15px;`;
 
 const TextFieldSingleLine = styled(TextField)`
   width: 99%;`
 
 const TextFieldMultiLine = styled(TextField)`
-width: 95%;`  
+  width: 95%;`  
 
-const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
+const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const dispatch = useAppDispatch();
@@ -137,7 +128,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showForm, reset }) => {
   };
 
   return (
-    <StyledSubmitForm showForm={showForm}>
+    <StyledSubmitForm showform={showform}>
       <HeaderSubmit>
         <FormTitle>Submit New</FormTitle>
         <FormClose onClick={handleClose}>

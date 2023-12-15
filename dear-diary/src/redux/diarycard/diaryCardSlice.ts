@@ -12,13 +12,14 @@ export type SubmitCard = {
 };
 
 type InitialStateType = {
+    isLoading: boolean;
     cards: Card[];
 
 };
 
 const initialState: InitialStateType = {
-
-    cards: [],
+    isLoading:true,
+    cards: []
 };
 
 export const searchCards = (searchText: string, cards: Card[]) => {
@@ -29,16 +30,18 @@ const diaryCardSlice = createSlice({
     name: "diaryCard",
     initialState: initialState,
     reducers: {
-        addCardByUser: (state, action: PayloadAction<SubmitCard>) => {
-            //
-        },
-        addCards: (state, action: PayloadAction<Card[]>) => {
-           state.cards = action.payload;
-            
+        addCardByUser: (state, action: PayloadAction<SubmitCard>) => {},
+        setCards: (state, action: PayloadAction<Card[]>) => {
+            state.isLoading = false;
+            state.cards = action.payload;
+          },
+        watchingCards: (state) => {
+            state.isLoading = false;
         }
+
 
     },
 });
 
-export const { addCards, addCardByUser } = diaryCardSlice.actions;
+export const { setCards, addCardByUser, watchingCards } = diaryCardSlice.actions;
 export default diaryCardSlice.reducer;

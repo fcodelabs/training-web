@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import SubmitForm from '../SubmitForm/SubmitForm';
 import DiaryCard from '../../../components/DiaryCard/DiaryCard';
 import { useAppSelector } from '../../../redux/hooks';
-import { useMediaQuery, useTheme, Grid } from '@mui/material';
+import { useMediaQuery, useTheme, Grid, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 const HomeWrapper = styled.div`
@@ -39,11 +39,11 @@ const SubmitFormButton = styled(Button)`
     text-transform: none !important;`
 
 type HomeProps = {
-  showForm: boolean;
+  showform: boolean;
   reset: () => void;
 };
 
-const Home: React.FC<HomeProps> = ({ showForm, reset }) => {
+const Home: React.FC<HomeProps> = ({ showform, reset }) => {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up('xl'));
   const isMediumScreen = useMediaQuery(theme.breakpoints.up('lg'));
@@ -74,22 +74,26 @@ const Home: React.FC<HomeProps> = ({ showForm, reset }) => {
         </SubmitFormButton>
       </HomeSearch>
       <ScrollableGridContainer>
-        <Grid container spacing={2}>
-          {[...Array(columns)].map((_, colIndex) => (
-            <Grid key={colIndex} item xs={12} sm={6} md={4} lg={3} xl={2}>
-              {filteredList
-                .filter((_, index) => index % columns === colIndex)
-                .map((diary, key) => (
-                  <Grid key={key} item xs={12}>
-                    <DiaryCard diary={diary} />
-                  </Grid>
-                ))}
-            </Grid>
-          ))}
-        </Grid>
+
+        {filteredList.length === 0 ? (
+          <Typography>No diaries found.</Typography>
+        ) :
+          <Grid container spacing={2}>
+            {[...Array(columns)].map((_, colIndex) => (
+              <Grid key={colIndex} item xs={12} sm={6} md={4} lg={3} xl={2}>
+                {filteredList
+                  .filter((_, index) => index % columns === colIndex)
+                  .map((diary, key) => (
+                    <Grid key={key} item xs={12}>
+                      <DiaryCard diary={diary} />
+                    </Grid>
+                  ))}
+              </Grid>
+            ))}
+          </Grid>}
       </ScrollableGridContainer>
 
-      <SubmitForm showForm={showForm} reset={reset} />
+      <SubmitForm showform={showform} reset={reset} />
     </HomeWrapper>
   );
 };

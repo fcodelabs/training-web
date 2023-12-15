@@ -5,10 +5,17 @@ import Skeleton from '@mui/material/Skeleton';
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useEffect } from 'react'
-import { collection, onSnapshot } from "firebase/firestore";
-import db from "../../config/firebaseIntegration";
-import { Card } from "../../redux/diarycard/diaryCardSlice";
-import { Background } from "../../components/Layout/Layout";
+import { watchingCards } from "../../redux/diarycard/diaryCardSlice";
+
+const Background = styled.div`
+    display: flex;
+    width: 100%; 
+    min-height: 100vh; 
+    background-image: url("/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 0;
+`;
 
 const HomePageWrapper = styled.div`
     z-index: 1;
@@ -33,23 +40,14 @@ const HomeContainer = styled.div`
 `;
 
 const HomePage = () => {
-    const [showForm, setShowForm] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [showform, setShowform] = useState<boolean>(false);
+    const isLoading = useAppSelector((state) => state.diaryCard.isLoading)
     const cards = useAppSelector((state) => state.diaryCard.cards);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        onSnapshot(collection(db, "diary-cards"), (snapshot) => {
-            const updatedData = snapshot.docChanges().map(change => ({
-                doc: change.doc.data(),
-            }))
-        
-        }
+        dispatch(watchingCards())
 
-        )
-           
-            
-    
     }, [])
 
     return (
@@ -61,7 +59,7 @@ const HomePage = () => {
                             <ResponsiveAppBar />
                         </HeaderHome>
                         <HomeContainer>
-                            <Home showForm={showForm} reset={() => setShowForm(!showForm)} />
+                            <Home showform={showform} reset={() => setShowform(!showform )} />
                         </HomeContainer>
                     </>
                 ) : (

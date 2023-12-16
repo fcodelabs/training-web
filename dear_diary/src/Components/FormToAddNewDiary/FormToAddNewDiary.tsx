@@ -2,11 +2,12 @@ import { TextField,Button,CardHeader } from "@mui/material";
 import { toast, ToastContainer } from 'react-toastify';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-import Icon from "./Icons.png";
+import Icon from "../../Public/Icons.png";
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
-import { addEntry,updateCurrentEntry,clearCurrentEntry } from "../../redux/diaryReducer";
+import { addEntry,updateCurrentEntry,clearCurrentEntry } from "../../redux/slices/diaryReducer";
 import { RootState } from "../../redux/store";
+import { useEffect } from "react";
 
 interface FormToAddNewDiaryProps {
     onCloseOverlay: () => void;
@@ -16,7 +17,12 @@ function FormToAddNewDiary({ onCloseOverlay}: FormToAddNewDiaryProps){
 
     const dispatch = useDispatch();
     const currentEntry= useSelector((state:RootState)=> state.diary.currentEntry);
-        
+    const name= useSelector((state:RootState)=> state.user.nickname);
+
+        useEffect(() => {
+            const key = "user";
+            dispatch(updateCurrentEntry({[key]:name}));
+        },[name] );
       
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             const { name, value } = e.target;
@@ -29,6 +35,8 @@ function FormToAddNewDiary({ onCloseOverlay}: FormToAddNewDiaryProps){
                 toast.error("Title and Description are required");
             }
             else{
+                // const key = "user";
+                // dispatch(updateCurrentEntry({[key]:name}));
                 dispatch(addEntry(currentEntry));
                 
                 dispatch(clearCurrentEntry());

@@ -1,4 +1,4 @@
-import Logo from "./Logo.png";
+import Logo from "../../../Public/Logo.png";
 import Box from '@mui/material/Box';
 
 function HeaderComponent() {

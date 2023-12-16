@@ -1,37 +1,32 @@
-import { Box, Drawer, IconButton, Snackbar, TextField, TextareaAutosize } from "@material-ui/core";
+import { Box, Drawer, Snackbar, TextField } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
-import CustomizeTextArea from "../Inputs/TextArea";
 import CustomizedButton from "../Buttons/CustomizedButton";
 import useStyles, { Textarea } from "./../Inputs/InputStyles";
 import { useDispatch } from "react-redux";
 import React, { useId, useState } from "react";
 import { addCard } from "../../redux/reducers/cardReducer";
 import { Alert } from "@mui/material";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"; 
+import { db } from "../../firebase";
 
 interface DrawerProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-interface Card {
-  id: string;
-  title: string;
-  description: string;
-}
 
 export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const cardId = useId();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [open, setOpen] = useState(false);
  
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = async (e:any) => {
+
     e.preventDefault();
 
-     // Validation
      if (!title.trim()) {
       setOpen(true);
       return;
@@ -42,8 +37,24 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
       return;
     }
 
-    const newCard: Card = { id: cardId, title: title, description: description };
-    dispatch<any>(addCard(newCard));
+    let res;    
+
+    try{
+        res = await addDoc(collection(db, "Cards"), {
+        title: title,
+        description: description,
+        timeStamp: serverTimestamp()
+      });
+  
+      console.log(res);
+
+    }catch(err){
+      console.log(err)
+    }
+
+    if (res) {
+      dispatch(addCard({ id: res.id, title, description }));
+    }
 
     setTitle("");
     setDescription("");
@@ -54,7 +65,6 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 
@@ -71,8 +81,9 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
           <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
             Please fill out all required fields
           </Alert>
-        </Snackbar>
+      </Snackbar>
       <Box style={{ width: "400px" }} role="presentation">
+
         {/* Header */}
 
         <div

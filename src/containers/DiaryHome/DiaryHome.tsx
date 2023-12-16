@@ -5,17 +5,26 @@ import useStyles from "./../../components/Inputs/InputStyles";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
-import { InputAdornment, TextField } from "@material-ui/core";
+import { Box, CircularProgress, InputAdornment, TextField } from "@material-ui/core";
 import DiaryCardWrapper from "../../components/DiaryCard/DiaryCardWrapper";
+import { useDispatch, useSelector } from "react-redux";
 
+
+interface Card {
+  id: string;
+  title: string;
+  description: string;
+}
 
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const cards: Card[] = useSelector((state: any) => state.cards);
 
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "fit-content", paddingBottom: '20px' }}>
       <Header />
 
       <div
@@ -64,16 +73,17 @@ export default function Home() {
           label="Submit New"
           onClick={() => {
             setIsOpen(true);
-            console.log("Clicked");
           }}
         />
 
       </div>
 
       <div style={{
-        margin: "47px 60px 0 60px",  
+        margin: "47px 60px 0 60px",
       }}>
+        
         <DiaryCardWrapper/>
+        
       </div>
 
       <CustomDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />

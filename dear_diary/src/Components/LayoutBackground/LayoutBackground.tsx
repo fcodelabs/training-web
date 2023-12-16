@@ -1,9 +1,6 @@
 // import "./LayoutBackground.css";
 import React, { ReactNode } from 'react';
 
-
-
-
 interface LayoutBackgroundProps {
     children: ReactNode; 
   }
@@ -12,7 +9,7 @@ function LayoutBackground({ children }: LayoutBackgroundProps) {
   return (
         <div className="layout_bg"
         style={{
-          backgroundImage: `url(${require('./BackgroundImage.png')})`,
+          backgroundImage: `url(${require('../../Public/BackgroundImage.png')})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           position:"relative",

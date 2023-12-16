@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card,CardContent,CardHeader, TextField, Button,Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import "./SignInPage.css";
 import Logo from "../../Public/Logo.png";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -12,15 +11,34 @@ import { useState } from "react";
 import randomNickname from "../../utility/randomNickname";
 import LayoutBackground from "../../Components/LayoutBackground/LayoutBackground";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { setNickname } from "../../redux/slices/userSlice";
 
 function SignInPage() {
+  const dispatch = useDispatch();
+  const nickname = useSelector((state: RootState) => state.user.nickname);
+  const user = useSelector((state: RootState)=> state.user);
+  const [random, setRandom] = useState("")
   
-  const [nickname, setNickname] = useState("");
+  
 
   const handleRandomButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault(); //prevent the form from submitting
-    setNickname(randomNickname());
+    setRandom(randomNickname());
+    
+
+    
   };
+  const handleContinueButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+   
+      dispatch(setNickname(random));
+      try{
+        localStorage.setItem("userState", JSON.stringify({nickname:random}));
+      } catch (error) {
+        console.error("Error saving user state to localStorage:", error);
+      }
+  };
+
 
   return (
     <LayoutBackground>
@@ -106,7 +124,7 @@ function SignInPage() {
           padding: "0px 40px 0px 40px"
         }}
         >
-          <form className="formContainer"
+          <div className="formContainer"
           style={{
             width: "515px",
             display: "flex",
@@ -132,13 +150,13 @@ function SignInPage() {
                   padding: "7px, 10px, 7px, 10px"
 
                 }}
-                value={nickname}//set the value of the input to the nickname state
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNickname(e.target.value)}//set the nickname state to the value of the input
+                value = {random} //set the value of the input to the random state
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRandom(e.target.value)}//set the random state to the value of the input
 
               />
               </div>
               <Button 
-              type="submit" 
+              type="button" 
               variant="contained"
               className="submitButton"
               style={{
@@ -151,7 +169,7 @@ function SignInPage() {
                 Random
               </Button>
               
-              </form>
+              </div>
             
           
           <div className="continue"
@@ -174,6 +192,7 @@ function SignInPage() {
               backgroundColor: "#0092DD",
             }}
             endIcon={<ArrowForward />}
+            onClick={handleContinueButtonClick}
             >
           Continue
           </Button>

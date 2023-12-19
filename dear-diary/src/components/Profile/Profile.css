@@ -1,11 +1,12 @@
 .profile-wrapper{
-    padding: 5% 4% 1px 1px;
+    padding: 5px 5px 1px 1px;
     margin-top: 10px;
     z-index: 1;
 }
-.profile-icon{
+.profile-name{
     z-index: 1;
-    color: rgb(0, 166, 255);
+    width: 100%;
+    margin-right: 2%;
 }
 .profile-name-text{
     z-index: 1;
@@ -14,7 +15,13 @@
     font-size: 14px;
     color: rgb(0, 166, 255);
 }
-
+.image-profile{
+    padding: 2% 2% 2% 2%;
+    z-index: 1;
+    width: 90%;
+    border-radius: 50%;
+    object-fit: cover;
+}
 @media screen and (max-width: 768px) {
  
     .profile-name-text{

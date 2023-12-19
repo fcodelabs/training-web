@@ -1,26 +1,25 @@
-
-import getrandomName from "../Random/RandomNameGenerator";
+import getrandomName from "../../utilities/randomNameGenerator";
 import "./SignInPage.css";
-import Deardiary from "../../../components/DearDiary/DearDiary";
+import Deardiary from "../../components/DearDiary/DearDiary";
 import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useAppDispatch} from "../../../redux/store/hooks";
-import { setUserName } from "../../../redux/features/user/userSlice";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../redux/store/hooks";
+import { userLoggedIn } from "../../redux/slices/userSlice";
 
 const SignInPage = () => {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [nameRandom, SetRandomName] = useState("")
 
-    useEffect(() => {
-    
-      return () => {
-        dispatch(setUserName(nameRandom))
-      }
-    }, [nameRandom,dispatch])
-    
+
+    const handleLogin = () => {
+        dispatch(userLoggedIn(nameRandom))
+        navigate('/home')
+    }
+
 
     return (
         <div className="signin-page-wrapper">
@@ -44,19 +43,18 @@ const SignInPage = () => {
                             onChange={(e) => SetRandomName(e.target.value)} />
 
                         <div className="random-button">
-                            <Button variant="contained" className="btn-random" style={{ textTransform: 'none' }} onClick={() => SetRandomName(getrandomName)}>
+                            <Button variant="contained" className="btn-random" onClick={() => SetRandomName(getrandomName)}>
                                 Random
                             </Button>
                         </div>
                     </form>
 
                     <div className="signin-submit-button">
-                        <Link to ="/home">
-                            <Button variant="contained" className="btn-continue" style={{ textTransform: 'none' }}>
-                                Continue
-                                <ArrowForwardIcon />
-                            </Button>
-                        </Link>
+                        <Button variant="contained" className="btn-continue"  onClick={() => handleLogin()} disabled={!nameRandom}>
+                            Continue
+                            <ArrowForwardIcon />
+                        </Button>
+
                     </div>
                 </div>
             </div>

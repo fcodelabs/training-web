@@ -1,14 +1,13 @@
 .home-wrapper {
-    padding: 1% 4% 0% 4%;
+    padding: 10px 10px 10px 4px;
     display: flex;
     flex-direction: column;
 }
 
 .home-header {
-    font-size: 30px;
+    font-size: 26px;
     color: #4b465c;
     font-weight: 500;
-    padding-bottom: 2%;
 }
 
 .home-search {
@@ -20,59 +19,62 @@
     width: 100%;
 }
 
-
-.search-button {
+.submitform-button {
     border: 0.1px solid black !important;
-    width: 15% !important;
-    min-width: 18vh !important;
+    width: 12% !important;
+    min-width: 16vh !important;
     color: white !important;
     box-shadow: 0px 4px 4px 0px rgba(50, 50, 50, 0.638);
     background-color: #0092DD !important;
-    padding-right: 20px;
     text-transform: none !important;
-
 }
 
-.home-body {
-    display: grid;
+.masonry-grid {
+    row-gap: 24px;
+    margin-top: 25px;
+    height: 60vh ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     justify-items: center;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 10px;
-    height: 60vh;
-    max-height: 70vh;
-    overflow-y: scroll;
-    grid-auto-rows: 160px;
+    transition: all 0.5s ease-in-out;
 }
 
-.home-body .home-item {
+.mansory-grid-component {
+    overflow-x: scroll;
+    overflow-y: hidden; 
     width: 100%;
     height: 100%;
     transition: all 0.5s ease-in-out;
 }
-
-.home-body::-webkit-scrollbar {
-    width: 1px;
+.scroll-buttons{
+    position: absolute;
+    margin: 10px 5px;
+    bottom: 0;
 }
 
-.home-body::-webkit-scrollbar-thumb {
-    background-color: transparent;
+.mansory-grid-component::-webkit-scrollbar {
+    width: 12px;  
 }
 
-.home-body::-webkit-scrollbar-track {
-    background-color: transparent;
+.mansory-grid-component::-webkit-scrollbar-thumb {
+    background-color: transparent;  
+    border-radius: 6px;  
 }
 
-@media screen and (max-width: 768px) {
-    .home-body {
+.mansory-grid-component::-webkit-scrollbar-track {
+    background-color: transparent; 
+}
+
+
+@media screen and (max-width: 468px) {
+
+    .mansory-grid {
         height: 70vh;
         justify-content: center;
-        
+        align-items: center;
+
     }
-    .home-body {
-        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); 
-    }
-    .home-body .home-item {
-        width: 100%; 
-        
-    }
+
+
 }

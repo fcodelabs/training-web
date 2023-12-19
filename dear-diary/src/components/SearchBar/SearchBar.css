@@ -1,5 +1,15 @@
+.search-input{
+   width: 50%;
+   height: 40px;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+   box-shadow: 2px 2px 2px 0px rgba(50, 50, 50, 0.205);
+   transition: all 0.3s ease-in-out;
+}
+
 @media screen and (max-width: 768px){
 
 .search-input{
    width: 95% !important;
+   
 }}

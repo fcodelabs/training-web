@@ -33,7 +33,7 @@ const SignInPageTitle = styled.div`
 const DearDiary = () => {
   return (
     <SignInPageHeaderBackground >
-      <SignInPageLogo src={"/logo.png"} alt="logo" />
+      <SignInPageLogo src={"https://res.cloudinary.com/dzsokhvfq/image/upload/v1703007756/jvxeozqwb43syppmtayv.png"} alt="logo" />
       <SignInPageTitle >Dear Diary</SignInPageTitle>
     </SignInPageHeaderBackground>
   );

@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "dear-diary-thambara",
     "public": "build",
     "ignore": [
       "firebase.json",
@@ -11,6 +12,7 @@
         "source": "**",
         "destination": "/index.html"
       }
+      
     ]
   }
 }

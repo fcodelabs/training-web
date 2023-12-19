@@ -25,18 +25,23 @@ const HomeSearch = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-`
+    width: 100%;`;
+
 const ScrollableGridContainer = styled.div`
     overflow-y: auto;
 `
 const SubmitFormButton = styled(Button)`
     border: 0.1px solid black !important;
-    min-width: 16vh !important;
+    width : 12% ;
     color: white !important;
     box-shadow: 0px 4px 4px 0px rgba(50, 50, 50, 0.638);
     background-color: #0092DD !important;
-    text-transform: none !important;`
+    text-transform: none !important;
+
+    @media screen and (max-width: 1000px) {
+    min-width :24vh !important; 
+  }`
+
 
 type HomeProps = {
   showform: boolean;

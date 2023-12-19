@@ -6,7 +6,8 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
-import { addCards } from "../../firebase";
+import { collectionRef } from "../../configs/firebase";
+import { addDoc } from "firebase/firestore";
 
 const cardAddingFromStyles = {
   iconButtonStyles: {
@@ -62,7 +63,11 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
       setDescriptionError(true);
     }
     if (title && description) {
-      addCards(title, description);
+      try {
+        addDoc(collectionRef, { title, description });
+      } catch (error) {
+        console.error(error);
+      }
       onClose();
       setTitle("");
       setDescription("");

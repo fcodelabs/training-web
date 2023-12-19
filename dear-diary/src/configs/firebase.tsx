@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -22,16 +22,3 @@ export const addCards = async (title: string, description: string) => {
     console.error(error);
   }
 };
-
-interface Card {
-  title: string;
-  description: string;
-}
-
-export const getCards = async () => {
-  const data = await getDocs(collectionRef);
-  const cardsData = data.docs.map((doc) => doc.data() as Card);
-  return cardsData;
-};
-
-console.log(getCards());

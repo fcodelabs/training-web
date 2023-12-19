@@ -11,7 +11,7 @@ const Background = styled.div`
     display: flex;
     width: 100%; 
     min-height: 100vh; 
-    background-image: url("/background.png");
+    background-image: url("https://res.cloudinary.com/dzsokhvfq/image/upload/v1703006709/dhbvxtisextdrc9odln0.png");
     background-size: cover;
     background-repeat: no-repeat;
     padding-bottom: 0;

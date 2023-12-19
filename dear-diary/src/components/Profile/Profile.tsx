@@ -35,7 +35,7 @@ const Profile = () => {
     return (
         <ProfileWrapper>
             <ProfileName>
-                <ImageProfile src={"/user-avatar.svg"}></ImageProfile>
+                <ImageProfile src={"https://res.cloudinary.com/dzsokhvfq/image/upload/v1703007607/vpgx1dyoefgkgebbbrrs.svg"}></ImageProfile>
                 <ProfileNameText >
                     {name}
                 </ProfileNameText>

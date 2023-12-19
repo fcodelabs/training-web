@@ -7,13 +7,13 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { addCardByUser } from '../../../redux/diarycard/diaryCardSlice';
 
 type Diary = {
-  title: string;
-  body: string;
+    title: string;
+    body: string;
 };
 
 type SubmitFormProps = {
-  showform: boolean;
-  reset: () => void;
+    showform: boolean;
+    reset: () => void;
 };
 
 const StyledSubmitForm = styled.div<{ showform: boolean }>`
@@ -87,72 +87,72 @@ const TextFieldSingleLine = styled(TextField)`
   width: 99%;`
 
 const TextFieldMultiLine = styled(TextField)`
-  width: 95%;`  
+  width: 95%;`
 
 const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const dispatch = useAppDispatch();
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const dispatch = useAppDispatch();
 
-  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  };
-
-  const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDescription(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    const newDiary: Diary = {
-      title: title,
-      body: description,
+    const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(event.target.value);
     };
-    if (!ValidateDiaryCard(title, description)) {
-      return;
-    }
-    dispatch(addCardByUser(newDiary));
-    setTitle('');
-    setDescription('');
-    reset();
-  };
 
-  const handleCancel = () => {
-    setTitle('');
-    setDescription('');
-  };
+    const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setDescription(event.target.value);
+    };
 
-  const handleClose = () => {
-    setTitle('');
-    setDescription('');
-    reset();
-  };
+    const handleSubmit = () => {
+        const newDiary: Diary = {
+            title: title,
+            body: description,
+        };
+        if (!ValidateDiaryCard(title, description)) {
+            return;
+        }
+        dispatch(addCardByUser(newDiary));
+        setTitle('');
+        setDescription('');
+        reset();
+    };
 
-  return (
-    <StyledSubmitForm showform={showform}>
-      <HeaderSubmit>
-        <FormTitle>Submit New</FormTitle>
-        <FormClose onClick={handleClose}>
-          <CloseIcon />
-        </FormClose>
-      </HeaderSubmit>
-      <SubmitTitle>
-        <SubmitFormBar>Title</SubmitFormBar>
-        <TextFieldSingleLine value={title} onChange={handleTitleChange} placeholder="Enter title" size="small"  />
-      </SubmitTitle>
-      <SubmitDesc>
-        <SubmitFormBar>Description</SubmitFormBar>
-        <TextFieldMultiLine value={description} onChange={handleDescriptionChange} placeholder="Descryption" multiline rows={10} />
-      </SubmitDesc>
-      <div>
-        <SubmitButton variant="contained" onClick={handleSubmit}>
-          Submit
-        </SubmitButton>
-        <CancelButton variant="contained" onClick={handleCancel}>
-          Cancel
-        </CancelButton>
-      </div>
-    </StyledSubmitForm>
-  );
+    const handleCancel = () => {
+        setTitle('');
+        setDescription('');
+    };
+
+    const handleClose = () => {
+        setTitle('');
+        setDescription('');
+        reset();
+    };
+
+    return (
+        <StyledSubmitForm showform={showform}>
+            <HeaderSubmit>
+                <FormTitle>Submit New</FormTitle>
+                <FormClose onClick={handleClose}>
+                    <CloseIcon />
+                </FormClose>
+            </HeaderSubmit>
+            <SubmitTitle>
+                <SubmitFormBar>Title</SubmitFormBar>
+                <TextFieldSingleLine value={title} onChange={handleTitleChange} placeholder="Enter title" size="small" />
+            </SubmitTitle>
+            <SubmitDesc>
+                <SubmitFormBar>Description</SubmitFormBar>
+                <TextFieldMultiLine value={description} onChange={handleDescriptionChange} placeholder="Descryption" multiline rows={10} />
+            </SubmitDesc>
+            <div>
+                <SubmitButton variant="contained" onClick={handleSubmit}>
+                    Submit
+                </SubmitButton>
+                <CancelButton variant="contained" onClick={handleCancel}>
+                    Cancel
+                </CancelButton>
+            </div>
+        </StyledSubmitForm>
+    );
 };
 
 export default SubmitForm;

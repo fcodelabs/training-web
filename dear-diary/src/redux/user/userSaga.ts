@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { userLoggedIn, setUserName } from '../slices/userSlice';
+import { userLoggedIn, setUserName } from './userSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 function* actionUser(action: PayloadAction<string>) {

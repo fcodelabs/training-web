@@ -1,11 +1,30 @@
 import TextField from '@mui/material/TextField/TextField';
 import SearchIcon from '@mui/icons-material/Search';
-import "./SearchBar.css"
+import styled from 'styled-components'; 
 import { useState, useEffect } from 'react';
-import { searchCards } from '../../redux/slices/diaryCardSlice';
-import { useAppSelector } from '../../redux/store/hooks';
+import { searchCards } from '../../redux/diarycard/diaryCardSlice';
+import { useAppSelector } from '../../redux/hooks';
+
+const SearchBarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%`
+
+const SearchInput = styled(TextField)`
+  width: 40%;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 2px 0px rgba(50, 50, 50, 0.205);
+  transition: all 0.3s ease-in-out;
+  
+  @media screen and (max-width: 768px){
+    width: 95% !important;
+  }`  
+
 
 type Card = {
+  id: string;
   title: string;
   body: string;
 }
@@ -24,8 +43,8 @@ const PrimarySearchAppBar = ({setFilteredList}: PrimarySearchAppBarProps ) => {
   }, [search, cards, setFilteredList]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-      <TextField
+    <SearchBarWrapper>
+      <SearchInput
         className="search-input"
         id="outlined-basic"
         placeholder='place holder'
@@ -33,18 +52,14 @@ const PrimarySearchAppBar = ({setFilteredList}: PrimarySearchAppBarProps ) => {
         size="small"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        style={{
-          width: '35%',
-          boxShadow: '2px 2px 2px 0px rgba(50, 50, 50, 0.205)',
-        }}
         InputProps={{
           style: { backgroundColor: 'white' },
           startAdornment: (
-            <SearchIcon style={{ marginRight: '8px', color: 'gray' }} />
+            <SearchIcon sx={{ marginRight: '8px', color: 'gray' }} />
           ),
         }}
       />
-    </div>
+    </SearchBarWrapper>
   );
 };
 

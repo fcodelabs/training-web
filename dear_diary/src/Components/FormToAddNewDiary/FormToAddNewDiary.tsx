@@ -9,6 +9,7 @@ import { addEntry,updateCurrentEntry,clearCurrentEntry } from "../../redux/slice
 import { RootState } from "../../redux/store";
 import { useEffect } from "react";
 
+
 interface FormToAddNewDiaryProps {
     onCloseOverlay: () => void;
   }

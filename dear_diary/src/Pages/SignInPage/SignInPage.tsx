@@ -14,8 +14,11 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setNickname } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
+
 
 function SignInPage() {
+  const history = useNavigate()
   const dispatch = useDispatch();
   const nickname = useSelector((state: RootState) => state.user.nickname);
   const user = useSelector((state: RootState)=> state.user);
@@ -24,19 +27,21 @@ function SignInPage() {
   
 
   const handleRandomButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setRandom(randomNickname());
-    
-
-    
+    setRandom(randomNickname());     
   };
+
   const handleContinueButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-   
-      dispatch(setNickname(random));
+      if (random !== ""){
+        dispatch(setNickname(random));
       try{
         localStorage.setItem("userState", JSON.stringify({nickname:random}));
       } catch (error) {
         console.error("Error saving user state to localStorage:", error);
       }
+      history("/diary-home");
+      }
+
+      
   };
 
 
@@ -182,7 +187,6 @@ function SignInPage() {
             margin: "24px"
           }}
           >
-          <Link to="/diary-home">
           <Button 
             type="button" 
             variant="contained" 
@@ -196,7 +200,6 @@ function SignInPage() {
             >
           Continue
           </Button>
-          </Link>
           </div>  
         </div>
       </div>

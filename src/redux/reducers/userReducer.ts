@@ -3,7 +3,7 @@ import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 
 interface User {
-    id: string;
+    id: string | null;
     name: string;
   }
 

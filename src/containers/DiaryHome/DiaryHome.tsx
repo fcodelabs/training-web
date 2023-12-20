@@ -5,9 +5,9 @@ import useStyles from "./../../components/Inputs/InputStyles";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
-import { Box, CircularProgress, InputAdornment, TextField } from "@material-ui/core";
+import { InputAdornment, TextField } from "@material-ui/core";
 import DiaryCardWrapper from "../../components/DiaryCard/DiaryCardWrapper";
-import { useDispatch, useSelector } from "react-redux";
+
 
 
 interface Card {
@@ -20,8 +20,7 @@ interface Card {
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const cards: Card[] = useSelector((state: any) => state.cards);
+ 
 
   return (
     <div style={{ height: "fit-content", paddingBottom: '20px' }}>

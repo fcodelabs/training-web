@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import DiaryCard from "./DiaryCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCards } from "../../redux/reducers/cardReducer";
-import { Box, CircularProgress } from "@material-ui/core";
 
 interface Card {
   id: string;
@@ -12,8 +11,7 @@ interface Card {
 
 export default function DiaryCardWrapper() {
 
-  // const cards: Card[] = useSelector((state: any) => state.cards);
-
+ 
   const dispatch = useDispatch();
   const cards: Card[] = useSelector((state: any) => state.cards);
 

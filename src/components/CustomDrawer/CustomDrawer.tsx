@@ -3,7 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import CustomizedButton from "../Buttons/CustomizedButton";
 import useStyles, { Textarea } from "./../Inputs/InputStyles";
 import { useDispatch } from "react-redux";
-import React, { useId, useState } from "react";
+import React, { useState } from "react";
 import { addCard } from "../../redux/reducers/cardReducer";
 import { Alert } from "@mui/material";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"; 

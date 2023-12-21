@@ -7,10 +7,8 @@ import  { useState } from 'react';
 
 const styles = {
     card: {
-        width:{ xs: '30%', sm: '271px'},
-        padding: '20px',
         borderRadius: '6px',
-        mb: '35px',
+        padding: '10px',
     },
     title: {
         fontFamily: 'Public Sans',
@@ -52,7 +50,7 @@ function DiaryCard(DiaryCardProps: DiaryCardProps) {
         setIsExpanded(!isExpanded);
       };
 
-      const displayDescription = isExpanded ? DiaryCardProps.description : `${DiaryCardProps.description.slice(0, 100)}...`;
+      const displayDescription = isExpanded ? DiaryCardProps.description : `${DiaryCardProps.description.slice(0, 100)}`;
 
   return (
     <Card sx={styles.card}>
@@ -67,9 +65,11 @@ function DiaryCard(DiaryCardProps: DiaryCardProps) {
     </CardContent>
 
     <CardActions>
-    <Button size="small" onClick={toggleExpanded} sx={styles.button}>
-          {isExpanded ? 'Hide' : 'Show More'}
-    </Button> 
+      {DiaryCardProps.description.length > 100 && (
+        <Button size="small" onClick={toggleExpanded} sx={styles.button}>
+        {isExpanded ? 'Hide' : 'Show More'}
+        </Button> 
+      )}
     </CardActions>
   </Card>
   )

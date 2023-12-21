@@ -1,6 +1,6 @@
 import React from 'react'
 import Background from '../../components/Background/Background';
-import {  Box, Button, TextField, Typography,  Dialog} from "@mui/material";
+import {  Box, Button, TextField, Typography, Grid, Dialog} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import Header from '../../components/Header/Header';
@@ -21,30 +21,31 @@ const styles = {
 
   box:{
     display:"flex", 
-    justifyContent:"spaceBetween",
-    height: '48px', 
-    padding:'0'
-  },
-
-  textfield:{
-    width: { xs: '40%', sm: '50%' },
-    maxWidth: '50%',
-    '& .MuiInputBase-root': {
-      height: '48px', 
-    },
+    flexDirection:{xs:"column", sm:"row"},
+    justifyContent:"space-between", 
+    width: 'calc(100% - 100px)',
+    gap: '10px',
+    padding:'0',
     position: 'absolute',
     left: '50px',
     top:'200px',
   },
+  
+
+  textfield:{
+    width: { xs: '100%', sm: '50%' },
+    '& .MuiInputBase-root': {
+      height: '48px', 
+    },
+    
+    backgroundColor: 'white',
+  },
 
   submibNew:{
     backgroundColor: '#0092DD',
-    width: { xs: '30%', sm: '154px' },
+    width: { xs: '100%', sm: '154px' },
     height: '48px',
-    position: 'absolute',
-    right: '50px',
-    top:'200px',
-
+    textTransform: 'none',
   },
 
   dialog: {
@@ -61,18 +62,13 @@ const styles = {
     }
   },
 
-  diaryEntries: {
+  diaryEntries:{
+    margin: '100px 50px 50px 50px',
     position: 'absolute',
-    top: '300px',
-    left: '50px',
-    display: 'flex',
-    flexDirection: { xs: 'column', sm: 'row' },
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    gap: { xs: '0', sm: '35px'},
-    marginRight: '50px',
-  }  
+    top: { xs: '250px', sm: '200px' },
+    columnCount: { xs: 1, sm: 2, md: 3, lg: 4, xl:  6}, 
+    columnGap: '35px',
+  },
 
 }
 
@@ -118,7 +114,7 @@ const DiaryHome = () => {
         </Box>
 
         <Box sx={styles.box}>
-          <TextField placeholder = "Search" 
+          <TextField  placeholder = "Search" 
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -140,9 +136,11 @@ const DiaryHome = () => {
         </Dialog>
 
         <Box sx={styles.diaryEntries}>
-            {diaries.map((diary: { title: string; description: string })  => (
-            <DiaryCard title={diary.title} description={diary.description} />
-            ))}
+          {diaries.map((diaryEntry, index) => (
+            <Box key={index} sx={{ marginBottom: '35px' }}>
+              <DiaryCard title={diaryEntry.title} description={diaryEntry.description} />
+            </Box>
+          ))}
         </Box>
 
       </Background>

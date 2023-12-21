@@ -76,10 +76,12 @@ const styles = {
       backgroundColor: '#0092DD',
       opacity: '65%',
     },
+    textTransform: 'none',
   },
   continueButton: {
     backgroundColor: '#0092DD',
     opacity: '65%',
+    textTransform: 'none',
   },
 }
 

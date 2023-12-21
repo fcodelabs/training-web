@@ -63,11 +63,14 @@ const styles = {
   },
 
   diaryEntries:{
-    margin: '100px 50px 50px 50px',
+    width: 'calc(100% - 100px)',
+    margin: '100px 10px 10px 50px',
+    padding: '0px 0px 50px 0px',
     position: 'absolute',
     top: { xs: '250px', sm: '200px' },
     columnCount: { xs: 1, sm: 2, md: 3, lg: 4, xl:  6}, 
     columnGap: '35px',
+
   },
 
 }

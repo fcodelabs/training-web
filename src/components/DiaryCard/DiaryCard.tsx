@@ -15,6 +15,7 @@ const styles = {
         fontSize: '18px',
         fontWeight: '500',
         mb: '10px',
+        wordWrap: 'break-word',
     },
     description: {
         fontFamily: 'Public Sans',

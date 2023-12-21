@@ -116,10 +116,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
         reset();
     };
 
-    const handleCancel = () => {
-        setTitle('');
-        setDescription('');
-    };
+ 
 
     const handleClose = () => {
         setTitle('');
@@ -147,7 +144,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
                 <SubmitButton variant="contained" onClick={handleSubmit}>
                     Submit
                 </SubmitButton>
-                <CancelButton variant="contained" onClick={handleCancel}>
+                <CancelButton variant="contained" onClick={handleClose}>
                     Cancel
                 </CancelButton>
             </div>

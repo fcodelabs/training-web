@@ -9,4 +9,10 @@ function validateDiaryCard(title: string, description: string): boolean {
   return true;
 }
 
-export default  validateDiaryCard ;
+
+
+function cardAdded(): void {
+  toast.success('New diary card added successfully!');
+}
+
+export { validateDiaryCard, cardAdded };

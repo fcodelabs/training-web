@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ValidateDiaryCard from '../../../utilities/validation';
+import {validateDiaryCard} from '../../../utilities/validation';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
@@ -107,7 +107,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
             title: title,
             body: description,
         };
-        if (!ValidateDiaryCard(title, description)) {
+        if (!validateDiaryCard(title, description)) {
             return;
         }
         dispatch(addCardByUser(newDiary));

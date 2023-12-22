@@ -38,13 +38,12 @@ const HomeSearch = styled.div`
     width: 100%;`;
 
 const ScrollableGridContainer = styled.div`
+    padding-top: 1%;
     overflow-y: auto;
 `
 const SubmitFormButton = styled(Button)`
-    border: 0.1px solid black !important;
-    width : 12% ;
+    width : 11% ;
     color: white !important;
-    box-shadow: 0px 4px 4px 0px rgba(50, 50, 50, 0.638);
     background-color: #0092DD !important;
     text-transform: none !important;
 
@@ -94,7 +93,7 @@ const Home: React.FC<HomeProps> = ({ showform, reset }) => {
         {filteredList.length === 0 ? (
           <Typography>No diaries found.</Typography>
         ) :
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             {[...Array(columns)].map((_, colIndex) => (
               <Grid key={colIndex} item xs={12} sm={6} md={4} lg={3} xl={2}>
                 {filteredList

@@ -47,7 +47,7 @@ const PrimarySearchAppBar = ({setFilteredList}: PrimarySearchAppBarProps ) => {
       <SearchInput
         className="search-input"
         id="outlined-basic"
-        placeholder='place holder'
+        placeholder='Search'
         variant="outlined"
         size="small"
         value={search}

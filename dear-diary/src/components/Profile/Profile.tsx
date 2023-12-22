@@ -17,16 +17,15 @@ const ProfileNameText = styled.div`
     width: 100%;
     text-align: center;
     font-size: 14px;
-    color: rgb(0, 166, 255);
+    color: rgb(0, 0, 0);
 
     @media screen and (max-width: 768px) {
         transform: scale(0.85);
     }`
 
 const ImageProfile = styled.img`
-    padding: 2% 2% 2% 2%;
     z-index: 1;
-    width: 90%;
+    width: 95%;
     border-radius: 50%;
     object-fit: cover;`;
 

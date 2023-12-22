@@ -28,7 +28,6 @@ export const fetchUsers = () => async (dispatch: any) => {
   const usersCollection = collection(firestore, 'Users'); 
 
   try {
-    
     const querySnapshot = await getDocs(usersCollection);
     const users: User[] = [];
 
@@ -42,6 +41,7 @@ export const fetchUsers = () => async (dispatch: any) => {
     });
 
     dispatch(setUsers(users));
+    
   } catch (error) {
     console.error('Error fetching users:', error);
   }

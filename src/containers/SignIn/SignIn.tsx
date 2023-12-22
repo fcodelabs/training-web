@@ -35,7 +35,7 @@ const generateRandomString = () => {
 
 
 const characters =
-"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; 
 
 let result = "";
 
@@ -92,14 +92,14 @@ timeStamp: serverTimestamp(),
 console.log(res);
 if (res) {
 dispatch(addUser({ id: res.id, name: username }));
-navigate("/");
+navigate("/home");
 }
 } catch (err) {
 console.log(err);
 }
 } else {
 dispatch(addUser({ id: userId, name: username }));
-navigate("/");
+navigate("/home");
 }
 };
 

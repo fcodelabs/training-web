@@ -12,16 +12,16 @@ import { db } from "../../firebase";
 interface DrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  setSuccessMessage: (val:boolean)=> void;
 }
 
 
-export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
+export default function CustomDrawer({ isOpen, onClose, setSuccessMessage }: DrawerProps) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [open, setOpen] = useState(false);
- 
 
   const handleSubmit = async (e:any) => {
 
@@ -54,10 +54,16 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
 
     if (res) {
       dispatch(addCard({ id: res.id, title, description }));
+      setSuccessMessage(true);
+      
     }
+    
 
     setTitle("");
     setDescription("");
+
+    setOpen(false);
+    onClose();
 
   }
 
@@ -66,6 +72,10 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
       return;
     }
     setOpen(false);
+    setTitle(" ");
+    setDescription(" ");
+    onClose();    
+    setSuccessMessage(false);
   };
 
 
@@ -82,6 +92,8 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
             Please fill out all required fields
           </Alert>
       </Snackbar>
+
+      
       <Box style={{ width: "400px" }} role="presentation">
 
         {/* Header */}
@@ -197,7 +209,7 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
           }}
         >
           <CustomizedButton label="Submit" onClick={handleSubmit} />
-          <CustomizedButton label="Cancel" onClick={onClose} secondary />
+          <CustomizedButton label="Cancel" onClick={(e) => handleClose(e)} secondary />
         </div>
       </Box>
     </Drawer>

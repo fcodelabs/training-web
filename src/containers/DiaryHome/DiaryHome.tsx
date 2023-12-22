@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import { InputAdornment, TextField } from "@material-ui/core";
 import DiaryCardWrapper from "../../components/DiaryCard/DiaryCardWrapper";
+import { Alert, Snackbar } from "@mui/material";
 
 
 
@@ -20,7 +21,8 @@ interface Card {
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const classes = useStyles();
- 
+  const [search, setSearch] = useState('');
+  const [success, setSuccess] = useState(false);
 
   return (
     <div style={{ height: "fit-content", paddingBottom: '20px' }}>
@@ -31,6 +33,7 @@ export default function Home() {
           margin: "0 60px",
           fontSize: "36px",
           fontWeight: "700",
+          color:"#4B465C",
         }}
       >
         Home
@@ -42,6 +45,7 @@ export default function Home() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          /*flexDirection: "column", */
         }}
       >
 
@@ -61,13 +65,15 @@ export default function Home() {
             className: classes.multilineColor,
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon />
+                <SearchIcon style={{color:"#4B465C"}}/>
               </InputAdornment>
             ),
           }}
-          style={{ width: "530px" }}
+          style={{ width: "530px" ,
+        color:"#4B465C"}}
+        onChange={(e)=> {setSearch(e?.target.value)}}
         />
-
+        <br/>
         <CustomizedButton
           label="Submit New"
           onClick={() => {
@@ -81,12 +87,21 @@ export default function Home() {
         margin: "47px 60px 0 60px",
       }}>
         
-        <DiaryCardWrapper/>
+        <DiaryCardWrapper searchText={search}/>
         
       </div>
 
-      <CustomDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />
-
+      <CustomDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} setSuccessMessage = {(val:boolean)=>setSuccess(val)}/>
+      <Snackbar
+        open={success}
+        autoHideDuration={3000}
+        onClose={() => setSuccess(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <Alert onClose={() => setSuccess(false)} severity="success" sx={{ width: '100%' }}>
+          Record Saved Successfully
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

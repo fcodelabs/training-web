@@ -99,31 +99,46 @@ const SubmitButtonStyled = styled(Button)`
 `;
 
 const MediaQueryStyles = styled.div`
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1000px) {
         ${SignInPageContainer} {
             width: 95%;
             justify-content: center;
         }
 
         ${SignInTitle} {
-            transform: scale(0.75);
+            transform: scale(0.85);
         }
 
         ${SignInPageFormWrapper}{
-            width: 98%;
+            width: 90%;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        ${SignInPageFormWrapper} {
-            width: 98%;
+        ${RandomButton}{
+            margin-top: 5%;
+            margin-left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
 
         ${SignInForm} {
-            padding: 4% 4% 4% 4%;
-            transform: scale(0.85);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4% 4% 1% 4%;
         }
 
         ${SubmitButtonStyled} {
-            transform: scale(0.85);
+            min-width: 45%;
+        }
+
+        ${RandomButtonStyled}{
+            min-width: 45%;
         }
     }
 `;

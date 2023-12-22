@@ -15,9 +15,17 @@ export const firestore = getFirestore(app);
 
 export const collectionRef = collection(firestore, "cards");
 
-export const addCards = async (title: string, description: string) => {
+export const addCards = async (
+  username: string,
+  title: string,
+  description: string
+) => {
   try {
-    await addDoc(collectionRef, { title: title, description: description });
+    await addDoc(collectionRef, {
+      username: username,
+      title: title,
+      description: description,
+    });
   } catch (error) {
     console.error(error);
   }

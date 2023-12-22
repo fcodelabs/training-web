@@ -35,9 +35,13 @@ const cardAddingFromStyles = {
 
 interface CardAddingFormProps {
   onClose: () => void;
+  username: string;
 }
 
-const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
+const CardAddingForm: React.FC<CardAddingFormProps> = ({
+  onClose,
+  username,
+}) => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [titleError, setTitleError] = useState<boolean>(false);
@@ -67,7 +71,7 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
     }
     if (title && description) {
       try {
-        addDoc(collectionRef, { title, description });
+        addDoc(collectionRef, { username, title, description });
       } catch (error) {
         console.error(error);
       }

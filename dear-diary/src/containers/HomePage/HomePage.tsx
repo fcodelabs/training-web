@@ -90,8 +90,8 @@ const HomePage: React.FC = () => {
   const isSubmitted = useSelector((state: RootState) => state.submit.isSubmit);
 
   useEffect(() => {
-    dispatch(getCard());
-  }, [dispatch]);
+    dispatch(getCard(nickname));
+  }, [dispatch, nickname]);
 
   const cards = useSelector((state: RootState) => {
     if (searchText === "") {
@@ -219,7 +219,7 @@ const HomePage: React.FC = () => {
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           open={isSubmitted}
           onClose={handleCloseSnack}
-          autoHideDuration={6000}
+          autoHideDuration={3000}
           sx={{ mr: isMobile ? 0 : 3 }}
         >
           <Alert
@@ -239,7 +239,7 @@ const HomePage: React.FC = () => {
         <>
           <Box sx={homepageStyles.divStyles}></Box>
           <Box sx={homepageStyles.secondBoxStyles}>
-            <CardAddingForm onClose={handleCloseForm} />
+            <CardAddingForm onClose={handleCloseForm} username={nickname} />
           </Box>
         </>
       )}

@@ -1,5 +1,4 @@
-import React from 'react'
-import {useEffect} from 'react'
+import React from 'react';
 import Background from '../../components/Background/Background';
 import {  Box, Button, TextField, Typography, Dialog} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
@@ -8,8 +7,8 @@ import Header from '../../components/Header/Header';
 import DiaryForm from './DiaryForm/DiaryForm';
 import DiaryCard from '../../components/DiaryCard/DiaryCard';
 import SnackBar from './SnackBar/SnackBar';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchDiaries } from '../../redux/diarySlice';
+import { useSelector } from 'react-redux';
+
 const styles = {
   home:{ fontFamily:"public sans",
     color:"4B465C",
@@ -90,10 +89,6 @@ interface RootState {
 const DiaryHome = () => {
 
   const nickname = localStorage.getItem('nickname'); // get nickname from local storage
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchDiaries());
-  });
   
   const[open, setOpen] = React.useState(false); // set open state for dialog
 
@@ -111,15 +106,8 @@ const DiaryHome = () => {
     setOpenSnackbar(false);
   };
 
-  const [searchText, setSearchText] = React.useState('');
-  const diaries = useSelector((state: RootState) => state.diaries);
-  const filteredDiaries = diaries.filter((diary) => {
-    return (
-      diary.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      diary.description.toLowerCase().includes(searchText.toLowerCase())
-    );
-  });
 
+  const diaries = useSelector((state: RootState) => state.diaries);
   
   return (
     <div>
@@ -143,10 +131,9 @@ const DiaryHome = () => {
                 </InputAdornment>
               ),
             }}
-            sx={styles.textfield} 
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            sx={styles.textfield}            
           />
+
           <Button variant="contained" 
             onClick={handleSubmitNew}
             sx={styles.submibNew}>
@@ -164,7 +151,7 @@ const DiaryHome = () => {
 
         
         <Box sx={styles.diaryEntries}>
-          {filteredDiaries.map((diaryEntry, index) => (
+          {diaries.map((diaryEntry, index) => (
             <Box key={index} sx={{ marginBottom: '35px' }}>
               <DiaryCard title={diaryEntry.title} description={diaryEntry.description} />
             </Box>

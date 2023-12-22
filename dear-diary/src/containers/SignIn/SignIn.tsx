@@ -63,7 +63,16 @@ const signInPageStyles = {
       color: "white",
     },
   },
-  continueButtonStyles: {
+  continueButtonStylesEnabled: {
+    backgroundColor: "rgba(0, 146, 221,1)",
+    typography: {
+      fontFamily: "public sans",
+      textTransform: "none",
+      fontSize: "15px",
+      fontWeight: 500,
+    },
+  },
+  continueButtonStylesDisabled: {
     backgroundColor: "rgba(0, 146, 221,0.65)",
     typography: {
       fontFamily: "public sans",
@@ -75,7 +84,7 @@ const signInPageStyles = {
 };
 
 const SignIn: React.FC = () => {
-  const isMobile = useMediaQuery("(max-width: 400px)");
+  const isMobile = useMediaQuery("(max-width: 600px)");
   const navigate = useNavigate();
   const [text, setText] = useState<string>("");
   const [textError, setTextError] = useState<boolean>(false);
@@ -102,7 +111,7 @@ const SignIn: React.FC = () => {
   return (
     <div style={signInPageStyles.rootStyles}>
       <Container sx={signInPageStyles.containerStyles}>
-        <Card>
+        <Card sx={{ boxShadow: "0" }}>
           <CardContent sx={signInPageStyles.cardContentStyles}>
             <Box
               display="flex"
@@ -153,7 +162,7 @@ const SignIn: React.FC = () => {
                 onChange={handleTextChange}
                 required
                 error={textError}
-                sx={isMobile ? { width: "100%" } : { width: "50%" }}
+                sx={isMobile ? { width: "100%" } : { width: "60%" }}
               ></TextField>
               <Button
                 variant="contained"
@@ -177,10 +186,13 @@ const SignIn: React.FC = () => {
                 variant="contained"
                 fullWidth={isMobile}
                 endIcon={<ArrowForwardIcon />}
-                onClick={handleContinueButtonClick}
-                disabled={text === "" ? true : false}
+                onClick={text === "" ? () => {} : handleContinueButtonClick}
                 disableElevation
-                sx={signInPageStyles.continueButtonStyles}
+                sx={
+                  text === ""
+                    ? signInPageStyles.continueButtonStylesDisabled
+                    : signInPageStyles.continueButtonStylesEnabled
+                }
               >
                 Continue
               </Button>

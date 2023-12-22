@@ -69,7 +69,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
         </Typography>
         {description.length > 100 && (
           <Button onClick={handleShowMore} sx={diaryCardStyles.buttonStyles}>
-            {expanded ? "Show Less" : "Show More"}
+            {expanded ? "Hide" : "Show More"}
           </Button>
         )}
       </CardContent>

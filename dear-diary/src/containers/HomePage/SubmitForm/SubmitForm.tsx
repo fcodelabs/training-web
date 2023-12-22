@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import ValidateDiaryCard from '../../../utilities/validation';
+import { validateDiaryCard } from '../../../utilities/validation';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../../redux/hooks';
 import { addCardByUser } from '../../../redux/diarycard/diaryCardSlice';
@@ -20,7 +20,7 @@ const StyledSubmitForm = styled.div<{ showform: boolean }>`
   z-index: 5;
   position: fixed;
   top: 0;
-  width: 300px;
+  width: 20%;
   height: 100vh;
   background-color: white;
   padding: 1%;
@@ -36,11 +36,13 @@ const HeaderSubmit = styled.div`
 
 const FormClose = styled.div`
   transition: transform 0.3s ease-in-out;
-  background-color: rgba(170, 170, 170, 0.619);
+  background-color: rgba(168, 170, 174, 0.4) !important;
   font-size: 20px;
   border-radius: 20%;
   font-weight: 500;
   padding: 1% 1% 0% 1%;
+  color: rgb(0,0,0, 0.4) !important;
+  box-shadow: none !important;
 
   &:hover {
     transform: scale(1.1);
@@ -55,13 +57,13 @@ const FormTitle = styled.div`
 const SubmitTitle = styled.div`
   font-size: 20px;
   color: #4b465c;
-  font-weight: 500;
+  font-weight: 350;
   padding: 1% 2% 0% 2%;`;
 
 const SubmitDesc = styled.div`
   font-size: 20px;
   color: #4b465c;
-  font-weight: 500;
+  font-weight: 350;
   width: 100%;
   padding: 5% 2% 0% 2%;`;
 
@@ -70,14 +72,16 @@ const SubmitButton = styled(Button)`
   text-transform: none !important;
   margin: 5% 2% 2% 2% !important;
   color: white;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);`;
+  box-shadow: none !important;
+  `;
 
 const CancelButton = styled(Button)`
   text-transform: none !important;
-  background-color: #828282 !important;
+  background-color: rgba(168, 170, 174, 0.2) !important;
   margin: 5% 2% 2% 2% !important;
-  color: rgb(255, 255, 255);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);`;
+  color: rgb(0,0,0, 0.2) !important;
+  box-shadow: none !important;
+  `;
 
 const SubmitFormBar = styled.div`
   padding: 1%; 
@@ -87,7 +91,7 @@ const TextFieldSingleLine = styled(TextField)`
   width: 99%;`
 
 const TextFieldMultiLine = styled(TextField)`
-  width: 95%;`  
+  width: 95%;`
 
 const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
   const [title, setTitle] = useState('');
@@ -107,7 +111,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
       title: title,
       body: description,
     };
-    if (!ValidateDiaryCard(title, description)) {
+    if (!validateDiaryCard(title, description)) {
       return;
     }
     dispatch(addCardByUser(newDiary));
@@ -116,10 +120,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
     reset();
   };
 
-  const handleCancel = () => {
-    setTitle('');
-    setDescription('');
-  };
+
 
   const handleClose = () => {
     setTitle('');
@@ -137,17 +138,17 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
       </HeaderSubmit>
       <SubmitTitle>
         <SubmitFormBar>Title</SubmitFormBar>
-        <TextFieldSingleLine value={title} onChange={handleTitleChange} placeholder="Enter title" size="small"  />
+        <TextFieldSingleLine value={title} onChange={handleTitleChange} placeholder="Enter title" size="small" />
       </SubmitTitle>
       <SubmitDesc>
         <SubmitFormBar>Description</SubmitFormBar>
-        <TextFieldMultiLine value={description} onChange={handleDescriptionChange} placeholder="Descryption" multiline rows={10} />
+        <TextFieldMultiLine value={description} onChange={handleDescriptionChange} placeholder="Description" multiline rows={10} />
       </SubmitDesc>
       <div>
         <SubmitButton variant="contained" onClick={handleSubmit}>
           Submit
         </SubmitButton>
-        <CancelButton variant="contained" onClick={handleCancel}>
+        <CancelButton variant="contained" onClick={handleClose}>
           Cancel
         </CancelButton>
       </div>

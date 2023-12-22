@@ -36,7 +36,7 @@ const diaryCardSlice = createSlice({
             state.cards = action.payload;
           },
         watchingCards: (state) => {
-            state.isLoading = false;
+            
         }
 
 

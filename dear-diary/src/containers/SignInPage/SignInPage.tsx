@@ -12,7 +12,7 @@ const Background = styled.div`
     display: flex;
     width: 100%; 
     min-height: 100vh; 
-    background-image: url("/background.png");
+    background-image: url("https://res.cloudinary.com/dzsokhvfq/image/upload/v1703006709/dhbvxtisextdrc9odln0.png");
     background-size: cover;
     background-repeat: no-repeat;
     padding-bottom: 0;
@@ -37,7 +37,7 @@ const SignInPageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 40%;
     background-color: rgba(255, 255, 255, 0.796);
     border-radius: 5px;
     box-shadow: 10px 10px 10px 0px rgba(175, 175, 175, 0.244);
@@ -81,12 +81,13 @@ const RandomButtonStyled = styled(Button)`
     font-size: 100%;
     background: rgba(0, 146, 221, 0.16) !important;
     color: #0092DD !important;
+    box-shadow: none !important;
 `;
 
 const SubmitButtonWrapper = styled.div`
     text-align: center;
-    margin-top: 3%;
-    padding-bottom: 3%;
+    margin-top: 4%;
+    padding-bottom: 4%;
     width: 100%;
 `;
 
@@ -94,35 +95,50 @@ const SubmitButtonStyled = styled(Button)`
     text-transform: none !important;
     font-size: 100%;
     color: rgb(255, 255, 255) !important;
-    background: #0093dda8 !important;
+    background: #0092DD !important;
 `;
 
 const MediaQueryStyles = styled.div`
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1000px) {
         ${SignInPageContainer} {
             width: 95%;
             justify-content: center;
         }
 
         ${SignInTitle} {
-            transform: scale(0.75);
+            transform: scale(0.85);
         }
 
         ${SignInPageFormWrapper}{
-            width: 98%;
+            width: 90%;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        ${SignInPageFormWrapper} {
-            width: 98%;
+        ${RandomButton}{
+            margin-top: 5%;
+            margin-left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
 
         ${SignInForm} {
-            padding: 5% 5% 5% 0%;
-            transform: scale(0.85);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4% 4% 1% 4%;
         }
 
         ${SubmitButtonStyled} {
-            transform: scale(0.85);
+            min-width: 45%;
+        }
+
+        ${RandomButtonStyled}{
+            min-width: 45%;
         }
     }
 `;
@@ -148,7 +164,7 @@ const SignInPage = () => {
                         <SignInForm>
                             <LoginTextField
                                 id="outlined-basic"
-                                label="Random name"
+                                placeholder="Your nickname"
                                 variant="outlined"
                                 className="text-field-login"
                                 size="small"

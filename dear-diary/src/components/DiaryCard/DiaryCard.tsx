@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 const Card = styled.div`
   position: relative;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  box-shadow: 0px 0px 3px 3px rgba(50, 50, 50, 0.05);
   padding: 12px;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
   min-width: 190px;
   background-color: white;
   max-width: 280px;
@@ -17,7 +17,8 @@ const Card = styled.div`
   z-index: 1;
 
   &:hover {
-    box-shadow: 0px 4px 4px 0px rgba(50, 50, 50, 0.638);
+    box-shadow: 0px 2px 2px 2px rgba(150, 150, 150, 0.4);
+    cursor: pointer;
   }
 
   &.expanded {
@@ -45,7 +46,7 @@ const CardTitle = styled.p`
   margin-top: 0;
   color: #4b465c;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 500;
   margin-bottom: 5px;
 `;
 

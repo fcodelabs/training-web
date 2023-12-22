@@ -8,11 +8,18 @@ import { takeLatest, put, call, cancelled, take } from "redux-saga/effects";
 import { onSnapshot, collection, addDoc } from "firebase/firestore";
 import db from "../../config/firebaseIntegration";
 import { Card } from "./diaryCardSlice";
+import { cardAdded } from '../../utilities/validation';
 
 function* addCardSaga(action:PayloadAction<SubmitCard > ) {
+    try{
     const card = action.payload;
     const cardsCol = collection(db, 'diary-cards');
-    yield addDoc(cardsCol, card);
+    cardAdded();
+    
+    yield addDoc(cardsCol, card);}
+    catch(error){
+        console.log(error);
+    }
 }
 
 function createEventChannel() {

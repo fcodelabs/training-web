@@ -15,4 +15,10 @@ function cardAdded(): void {
   toast.success('New diary card added successfully!');
 }
 
-export { validateDiaryCard, cardAdded };
+
+
+function userLogged(): void {
+  toast.success('Login successfull!');
+}
+
+export { validateDiaryCard, cardAdded, userLogged };

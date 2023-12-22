@@ -45,6 +45,8 @@ const homepageStyles = {
   },
   searchBoxStyles: {
     width: { xs: "100%", sm: "60%", md: "40%", lg: "40%", xl: "28%" },
+    backgroundColor: "white",
+    shadow: "0",
   },
   submitNewButtonStyles: {
     bgcolor: "#0092DD",
@@ -138,6 +140,7 @@ const HomePage: React.FC = () => {
           value={searchText}
           onChange={handleSearchChange}
           id="outlined-search"
+          variant="outlined"
           type="search"
           size="small"
           fullWidth={isMobile}
@@ -182,7 +185,7 @@ const HomePage: React.FC = () => {
               xs={12}
               sm={6}
               md={4}
-              lg={3}
+              lg={2}
               xl={2}
               key={cards.indexOf(card)}
             >

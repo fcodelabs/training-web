@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Header from "../../components/Header/Header";
 import Stack from "@mui/material/Stack";
-import { useMediaQuery } from "@mui/material";
+import { Alert, Snackbar, useMediaQuery } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useLocation } from "react-router-dom";
@@ -13,8 +13,9 @@ import CardAddingForm from "../../components/CardAddingForm/CardAddingForm";
 import DiaryCard from "../../components/DiaryCard/DiaryCard";
 import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import { getCard } from "../../redux/slices/addCardSlice";
+import { setFalse } from "../../redux/slices/loginStateSlice";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -81,7 +82,8 @@ const HomePage: React.FC = () => {
   const nickname = location.state && location.state.nickname;
   const [showCardAddingForm, setShowCardAddingForm] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state: RootState) => state.login.isLoggedIn);
 
   useEffect(() => {
     dispatch(getCard());
@@ -103,6 +105,9 @@ const HomePage: React.FC = () => {
   };
   const handleCloseForm = () => {
     setShowCardAddingForm(false);
+  };
+  const handleClose = () => {
+    dispatch(setFalse());
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -172,6 +177,26 @@ const HomePage: React.FC = () => {
             </Grid>
           ))}
         </Grid>
+      )}
+      {isOpen && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          open={isOpen}
+          onClose={handleClose}
+          autoHideDuration={6000}
+          sx={{ mr: isMobile ? 0 : 3 }}
+        >
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{
+              fontFamily: "public Sans",
+              fontSize: isMobile ? "15px" : "18px",
+            }}
+          >
+            Login Successful
+          </Alert>
+        </Snackbar>
       )}
 
       {showCardAddingForm && (

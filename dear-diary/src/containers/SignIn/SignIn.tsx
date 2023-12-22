@@ -11,6 +11,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stack, useMediaQuery } from "@mui/material";
 import randomNameGenerator from "../../utility";
+import { useDispatch } from "react-redux";
+import { setTrue } from "../../redux/slices/loginStateSlice";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -77,6 +79,7 @@ const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const [text, setText] = useState<string>("");
   const [textError, setTextError] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -91,6 +94,7 @@ const SignIn: React.FC = () => {
       setTextError(true);
     }
     if (text) {
+      dispatch(setTrue());
       navigate("/home", { state: { nickname: text } });
     }
   };

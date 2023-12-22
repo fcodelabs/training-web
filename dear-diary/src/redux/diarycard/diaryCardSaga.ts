@@ -1,14 +1,13 @@
 import  { addCardByUser }  from './diaryCardSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { SubmitCard } from './diaryCardSlice';
 import { eventChannel } from "redux-saga";
 import { watchingCards } from "./diaryCardSlice";
 import { setCards } from './diaryCardSlice';
 import { takeLatest, put, call, cancelled, take } from "redux-saga/effects";
-import { onSnapshot, collection, addDoc } from "firebase/firestore";
+import { onSnapshot, collection, addDoc, query, where } from "firebase/firestore";
 import db from "../../config/firebaseIntegration";
-import { Card } from "./diaryCardSlice";
 import { cardAdded } from '../../utilities/validation';
+import { Card, SubmitCard } from '../../utilities/types';
 
 function* addCardSaga(action:PayloadAction<SubmitCard > ) {
     try{
@@ -22,11 +21,12 @@ function* addCardSaga(action:PayloadAction<SubmitCard > ) {
     }
 }
 
-function createEventChannel() {
+function createEventChannel(userName: PayloadAction<String>) {
+    
     return eventChannel<Card[]>((emit) => {
-        const unsubscribe = onSnapshot(
-            collection(db, "diary-cards"),
-            (snapshot) => {
+        const q = query(collection(db, "diary-cards"), where("userName", "==", userName.payload))
+        console.log(q);
+        const unsubscribe = onSnapshot(q,(snapshot) => {
                 const cards: Card[] = snapshot.docs.map((doc) => {
                     const data = doc.data() as Card;
                     return {
@@ -43,8 +43,8 @@ function createEventChannel() {
     });
 }
 
-function* watchCards(): Generator<any, void, ReturnType<typeof createEventChannel>> {
-    const channel = yield call(createEventChannel);
+function* watchCards(userName: PayloadAction<String>): Generator<any, void, ReturnType<typeof createEventChannel>> {
+    const channel = yield call(createEventChannel, userName);
     try {
         while (true) {
             const updatedCards: any = yield take(channel);

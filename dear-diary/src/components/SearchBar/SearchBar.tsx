@@ -8,7 +8,8 @@ import { useAppSelector } from '../../redux/hooks';
 const SearchBarWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 100%`
+  width: 90%`
+
 
 const SearchInput = styled(TextField)`
   width: 40%;
@@ -18,7 +19,7 @@ const SearchInput = styled(TextField)`
   box-shadow: 2px 2px 2px 0px rgba(50, 50, 50, 0.205);
   transition: all 0.3s ease-in-out;
   
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 1000px){
     width: 95% !important;
   }`  
 

@@ -35,20 +35,22 @@ const HomeSearch = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;`;
+    width: 100%;;
+   `
+  
 
 const ScrollableGridContainer = styled.div`
     padding-top: 1%;
     overflow-y: auto;
 `
 const SubmitFormButton = styled(Button)`
-    width : 11% ;
+    min-width : 15vh !important;
     color: white !important;
     background-color: #0092DD !important;
     text-transform: none !important;
 
-    @media screen and (max-width: 1000px) {
-    min-width :24vh !important; 
+    @media screen and (max-width: 800px) {
+    min-width :16vh !important; 
   }`
 
 

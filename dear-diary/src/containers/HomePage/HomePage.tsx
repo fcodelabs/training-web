@@ -42,11 +42,11 @@ const HomeContainer = styled.div`
 const HomePage = () => {
     const [showform, setShowform] = useState<boolean>(false);
     const isLoading = useAppSelector((state) => state.diaryCard.isLoading)
-    const cards = useAppSelector((state) => state.diaryCard.cards);
+    const userName = useAppSelector((state) => state.user.userName)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(watchingCards())
+        dispatch(watchingCards(userName))
 
     }, [])
 
@@ -64,9 +64,9 @@ const HomePage = () => {
                     </>
                 ) : (
                     <>
-                        <Skeleton animation="wave" width="5%" height="10vh" style={{ top: "1%", left: "1%", position: "absolute" }} />
-                        <Skeleton animation="wave" width="48%" height="10vh" style={{ top: "10%", left: "1%", position: "absolute" }} />
-                        <Skeleton animation="wave" width="98%" height="100vh" style={{ top: "0.5%", left: "1%", position: "absolute" }} />
+                        <Skeleton animation="wave" width="5%" height="10vh"  style={{ top: "1%", left: "1%", position: "absolute", minWidth:"20vh" }} />
+                        <Skeleton animation="wave" width="48%" height="10vh" style={{ top: "10%", left: "1%", position: "absolute",minWidth:"25vh"  }} />
+                        <Skeleton animation="wave" width="96%" height="100vh" style={{ top: "0.5%", left: "1%", position: "absolute" }} />
                     </>
                 )}
             </HomePageWrapper>

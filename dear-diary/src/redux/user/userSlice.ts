@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { userStateType } from "../../utilities/types";
 
-type initialStateType = {
-    userId: number;
-    userName: string;
-    isLogged: boolean;
-}
 
-const initialState: initialStateType = {
+const initialState: userStateType = {
     userId: 0,
     userName: localStorage.getItem("userName") || "",
     isLogged: false,

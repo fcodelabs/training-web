@@ -16,7 +16,6 @@ const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
 const Logo: string = process.env.PUBLIC_URL + "Images/Logo.png";
 
-
 const signInPageStyles = {
   rootStyles: {
     backgroundImage: `url(${backgroundImage})`,
@@ -175,6 +174,7 @@ const SignIn: React.FC = () => {
                 fullWidth={isMobile}
                 endIcon={<ArrowForwardIcon />}
                 onClick={handleContinueButtonClick}
+                disabled={text === "" ? true : false}
                 disableElevation
                 sx={signInPageStyles.continueButtonStyles}
               >

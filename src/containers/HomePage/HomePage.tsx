@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -14,6 +12,9 @@ import SubmitCard from './SubmitCard/SubmitCard';
 import "@fontsource/public-sans/";
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+
+import Alert from '@mui/material/Alert';
+import DoneIcon from '@mui/icons-material/Done';
 
 import { useEffect } from 'react';
 import { RootState, useAppDispatch } from '../../redux/store';
@@ -42,7 +43,7 @@ const StyledHeaderGrid = styled(Grid)`
     display: flex;
     align-items: center;
     width: 100%;
-    margin-left: 0px;
+    margin-left: 16px;
     margin-top: 60px;
     margin-right: 60px;
     justify-content: space-between;
@@ -107,12 +108,15 @@ const StyledSearchGrid = styled(Grid)`
     margin-top: 0px;
     margin-right: 60px;
     justify-content: space-between;
+    gap: 5px;
 `;
 
 const StyledTextField = styled(TextField)`
+    
     width: 530px;
     border-radius: 8px;
     background-color: #ffffff;
+    
 `;
 
 const StyledSubmitButton = styled(Button)`
@@ -137,12 +141,40 @@ const StyledSubmitButton = styled(Button)`
 const DiaryCardContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 14px;
     margin-top: 20px;
     margin-left: 60px;
-    margin-right: 60px;
+    
     margin-bottom: 10px;
+    
 `;
+
+const ToastContainerMsg = styled.span
+    `
+    color: #4B465C;
+    font-family: public sans;
+    
+    font-size: 15px;
+    
+    font-weight: 600;
+    line-height: 22px;
+    
+    
+`;
+
+const ToastContainerTime = styled.span`
+&&&{
+    color: rgba(75, 70, 92, 0.55);
+    font-family: public sans;
+    font-weight: 400;
+    font-size: 13px;
+    text-align: right;
+    margin-left: 50px;
+    line-height: 20px;
+    
+}`;
+
+
 
 interface DiaryCardProps {
     title: string;
@@ -154,6 +186,8 @@ interface DiaryCardProps {
 const HomePage = () => {
     const [showSubmitCard, setShowSubmitCard] = useState(false);            // state to track if submit card is open or not
     const [diaryEntries, setDiaryEntries] = useState<DiaryCardProps[]>([]); // state to track diary entries
+    const [showAlert, setShowAlert] = useState(false);
+    const [submitTime, setSubmitTime] = useState<Date | null>(null);
 
     const dispatch = useDispatch();
 
@@ -179,17 +213,24 @@ const HomePage = () => {
 
         // add new diary card to diary entries
         // setDiaryEntries([newDiaryCard, ...diaryEntries]);
+        setSubmitTime(new Date()); // Capture the time when the user submits the card
+        handleCloseSubmitCard();
+        // show toast
+        // showToaster();
+        setShowAlert(true);
     };
 
 
     // function to handle submit button
     const handleSubmit = () => {
         setShowSubmitCard(true);
+
     };
 
     // function to handle close submit card
     const handleCloseSubmitCard = () => {
         setShowSubmitCard(false);
+
     };
 
     const entries = useSelector((state: RootState) => state.diaryCardList.diaryCardList);
@@ -205,6 +246,27 @@ const HomePage = () => {
         const searchTerms = `${entry.title} ${entry.description} ${entry.username}`.toLowerCase();
         return searchTerms.includes(searchQuery.toLowerCase());
     });
+
+
+    const [elapsedTime, setElapsedTime] = useState<string>('');
+
+    // Function to calculate and update elapsed time
+    const updateElapsedTime = () => {
+        const timeElapsed = calculateTimeElapsed(submitTime);
+    
+        // Check if there is any time elapsed
+        if (timeElapsed) {
+            setElapsedTime(`${timeElapsed}`);
+        }
+    };
+
+    // Effect to update elapsed time every second
+    useEffect(() => {
+        const intervalId = setInterval(updateElapsedTime, 1000);
+
+        // Clear interval on component unmount
+        return () => clearInterval(intervalId);
+    }, [submitTime]);
 
     return (
         <StyledMainDiv
@@ -265,7 +327,7 @@ const HomePage = () => {
                                     <SearchIcon />
                                 </InputAdornment>
                             ),
-                            
+
                         }}
                     />
                     <StyledSubmitButton
@@ -277,6 +339,7 @@ const HomePage = () => {
                     </StyledSubmitButton>
                 </StyledSearchGrid>
             </div>
+
 
             {/* if submit card is available using Modal to visbible submit card */}
             <Modal
@@ -296,16 +359,71 @@ const HomePage = () => {
 
             {/* Rendering Diary Cards */}
             <DiaryCardContainer>
+                {filteredDiaryEntries.length === 0 && (
+                    <div>
+                        <h1>No Diary Entries Found</h1>
+                    </div>
+                )}
                 {filteredDiaryEntries.map((diaryCard, index) => (
-                    <DiaryCard
-                        key={index}
-                        title={diaryCard.title}
-                        description={diaryCard.description}
-                    />
+                    <div style={{ width: '271px' }}>
+                        <DiaryCard
+                            key={index}
+                            title={diaryCard.title}
+                            description={diaryCard.description}
+                        />
+                    </div>
                 ))}
             </DiaryCardContainer>
+
+            {/* Render Alert */}
+            <Alert
+                severity="success"
+                onClose={() => setShowAlert(false)}
+                icon={<DoneIcon />}
+                sx={{
+                    position: 'fixed',
+                    top: 148,
+                    right: 60,
+                    zIndex: 1000,
+                    width: 'auto',
+                    height: 'auto',
+                    display: showAlert ? 'flex' : 'none',
+                    backgroundColor: 'white',
+                    '& .MuiIconButton-root': {
+                        color: 'rgba(75, 70, 92, 0.55)', 
+                    },
+
+                }}
+            >
+                <ToastContainerMsg>Record Saved Successfully.</ToastContainerMsg>
+                <ToastContainerTime>{elapsedTime && `${elapsedTime} ago`}</ToastContainerTime>
+            </Alert>
+
         </StyledMainDiv>
     );
+};
+
+const calculateTimeElapsed = (submitTime: Date | null) => {
+    if (!submitTime) return '';
+
+    const currentTime = new Date();
+    const elapsedMilliseconds = currentTime.getTime() - submitTime.getTime();
+    const elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
+
+    // Calculate minutes and remaining seconds
+    const minutes = Math.floor(elapsedSeconds / 60);
+    const seconds = elapsedSeconds % 60;
+
+    // Construct the time elapsed string
+    let timeElapsedString = '';
+
+    if (minutes > 0) {
+        timeElapsedString += `${minutes} ${minutes === 1 ? 'min' : 'mins'}`;
+    } else {
+        timeElapsedString += '0 mins';
+    }
+
+    return timeElapsedString.trim();
 };
 
 export default HomePage;

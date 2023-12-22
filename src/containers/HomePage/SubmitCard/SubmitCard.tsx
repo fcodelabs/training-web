@@ -144,10 +144,7 @@ const SubmitCard: React.FC<SubmitCardProps> = ({ onClose, onsubmit }) => {
       toast.error('Please enter title and description');
       return;
     }
-    // if title and description are not empty, show toast success message
-    if (title !== '' && description !== '') {
-      toast.success('Submitted successfully');
-    }
+    
     // call onsubmit function with title and description
     onsubmit(title, description);
     onClose();

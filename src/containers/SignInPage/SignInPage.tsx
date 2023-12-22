@@ -18,6 +18,7 @@ const StyledDiv = styled.div`
   align-items: center;
   height: 100vh;
   background: url(/bg/bg.png) center center / cover no-repeat;
+  overflow: hidden;
 `;
 
 const StyledContinueButton = styled(Button)`
@@ -83,6 +84,7 @@ const StyledInputBox = styled(Box)`
   align-self: center;
   margin-top: 30px;
   
+  
 `;
 
 const StyledTextField = styled(TextField)`
@@ -92,6 +94,7 @@ const StyledTextField = styled(TextField)`
   color: #DBDADE;
   font-size: 13px;
   line-height: 21px;
+  margin-bottom: 5px;
 `;
 
 const StyledArrowForwardIcon = styled(ArrowForwardIcon)`
@@ -112,11 +115,13 @@ const StyledRandomButton = styled(Button)`
   color: #0092DD;
   background-color: rgba(0, 146, 221, 0.16);
   align-self: center;
-  margin-left: 30px;
+  margin-left: 16px;
+  margin-top: 3px;
   font-weight: 500;
   line-height: 18px;
   font-size: 15px;
   padding: 10px 20px 10px 20px;
+  
   }
 `;
 

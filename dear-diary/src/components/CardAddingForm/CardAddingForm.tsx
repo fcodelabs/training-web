@@ -101,6 +101,7 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
         </IconButton>
       </Stack>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <Typography fontFamily="public sans">Title</Typography>
         <TextField
           value={title}
           onChange={handleTitleChange}
@@ -112,6 +113,7 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
           helperText={titleError ? "Title is Required" : ""}
           sx={cardAddingFromStyles.textFieldStyles}
         ></TextField>
+        <Typography fontFamily="public sans">Description</Typography>
         <TextField
           value={description}
           onChange={handleDescriptionChange}

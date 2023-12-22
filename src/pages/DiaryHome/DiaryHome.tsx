@@ -106,8 +106,16 @@ const DiaryHome = () => {
     setOpenSnackbar(false);
   };
 
-
+  
   const diaries = useSelector((state: RootState) => state.diaries);
+  const [searchText, setSearchText] = React.useState('');
+  const filteredDiaries = diaries.filter((diary) => {
+    return (
+      diary.title.toLowerCase().includes(searchText.toLowerCase()) ||
+      diary.description.toLowerCase().includes(searchText.toLowerCase())
+    );
+  });
+
   
   return (
     <div>
@@ -131,9 +139,10 @@ const DiaryHome = () => {
                 </InputAdornment>
               ),
             }}
-            sx={styles.textfield}            
+            sx={styles.textfield} 
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
           />
-
           <Button variant="contained" 
             onClick={handleSubmitNew}
             sx={styles.submibNew}>
@@ -151,7 +160,7 @@ const DiaryHome = () => {
 
         
         <Box sx={styles.diaryEntries}>
-          {diaries.map((diaryEntry, index) => (
+          {filteredDiaries.map((diaryEntry, index) => (
             <Box key={index} sx={{ marginBottom: '35px' }}>
               <DiaryCard title={diaryEntry.title} description={diaryEntry.description} />
             </Box>

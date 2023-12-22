@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import { collectionRef } from "../../configs/firebase";
 import { addDoc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import { setSubmitTrue } from "../../redux/slices/cardSubmitSlice";
 
 const cardAddingFromStyles = {
   iconButtonStyles: {
@@ -40,6 +42,7 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
   const [description, setDescription] = useState<string>("");
   const [titleError, setTitleError] = useState<boolean>(false);
   const [descriptionError, setDescriptionError] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -68,9 +71,10 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
       } catch (error) {
         console.error(error);
       }
-      onClose();
       setTitle("");
       setDescription("");
+      dispatch(setSubmitTrue());
+      onClose();
     }
   };
 
@@ -78,6 +82,7 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
     event.preventDefault();
     setTitle("");
     setDescription("");
+    onClose();
   };
 
   return (

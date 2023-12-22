@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cardsSlice from "./slices/addCardSlice";
 import loginSlice from "./slices/loginStateSlice";
+import submitSlice from "./slices/cardSubmitSlice";
 import { watchGetCardSaga } from "./saga/cardSaga";
 import createSagaMiddleware from "redux-saga";
 
@@ -11,6 +12,7 @@ export const store = configureStore({
   reducer: {
     addingCards: cardsSlice,
     login: loginSlice,
+    submit: submitSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(middleware),

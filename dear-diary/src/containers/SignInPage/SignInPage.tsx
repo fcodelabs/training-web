@@ -37,7 +37,7 @@ const SignInPageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 40%;
     background-color: rgba(255, 255, 255, 0.796);
     border-radius: 5px;
     box-shadow: 10px 10px 10px 0px rgba(175, 175, 175, 0.244);
@@ -81,12 +81,13 @@ const RandomButtonStyled = styled(Button)`
     font-size: 100%;
     background: rgba(0, 146, 221, 0.16) !important;
     color: #0092DD !important;
+    box-shadow: none !important;
 `;
 
 const SubmitButtonWrapper = styled.div`
     text-align: center;
-    margin-top: 3%;
-    padding-bottom: 3%;
+    margin-top: 4%;
+    padding-bottom: 4%;
     width: 100%;
 `;
 
@@ -94,7 +95,7 @@ const SubmitButtonStyled = styled(Button)`
     text-transform: none !important;
     font-size: 100%;
     color: rgb(255, 255, 255) !important;
-    background: #0093dda8 !important;
+    background: #0092DD !important;
 `;
 
 const MediaQueryStyles = styled.div`
@@ -117,7 +118,7 @@ const MediaQueryStyles = styled.div`
         }
 
         ${SignInForm} {
-            padding: 5% 5% 5% 0%;
+            padding: 4% 4% 4% 4%;
             transform: scale(0.85);
         }
 
@@ -148,7 +149,7 @@ const SignInPage = () => {
                         <SignInForm>
                             <LoginTextField
                                 id="outlined-basic"
-                                label="Random name"
+                                placeholder="Your nickname"
                                 variant="outlined"
                                 className="text-field-login"
                                 size="small"

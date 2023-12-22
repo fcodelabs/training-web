@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { getCard } from "../../redux/slices/addCardSlice";
 import { setFalse } from "../../redux/slices/loginStateSlice";
+import { setSubmitFalse } from "../../redux/slices/cardSubmitSlice";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -84,6 +85,7 @@ const HomePage: React.FC = () => {
   const [searchText, setSearchText] = useState<string>("");
   const dispatch = useDispatch();
   const isOpen = useSelector((state: RootState) => state.login.isLoggedIn);
+  const isSubmitted = useSelector((state: RootState) => state.submit.isSubmit);
 
   useEffect(() => {
     dispatch(getCard());
@@ -93,10 +95,8 @@ const HomePage: React.FC = () => {
     if (searchText === "") {
       return state.addingCards.cards;
     }
-    return state.addingCards.cards.filter(
-      (card) =>
-        card.title.toLowerCase().includes(searchText.toLowerCase()) ||
-        card.description.toLowerCase().includes(searchText.toLowerCase())
+    return state.addingCards.cards.filter((card) =>
+      card.title.toLowerCase().includes(searchText.toLowerCase())
     );
   });
 
@@ -108,6 +108,9 @@ const HomePage: React.FC = () => {
   };
   const handleClose = () => {
     dispatch(setFalse());
+  };
+  const handleCloseSnack = () => {
+    dispatch(setSubmitFalse());
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -160,7 +163,17 @@ const HomePage: React.FC = () => {
       </Stack>
 
       {cards.length === 0 ? (
-        <Typography justifyContent="center">No Notes are available</Typography>
+        <Typography
+          justifyContent="center"
+          sx={{
+            fontFamily: "public sans",
+            fontSize: isMobile ? "24px" : "36px",
+            textAlign: "center",
+            color: "GrayText",
+          }}
+        >
+          No cards found
+        </Typography>
       ) : (
         <Grid container spacing={2} sx={homepageStyles.gridStyles}>
           {cards.map((card) => (
@@ -195,6 +208,26 @@ const HomePage: React.FC = () => {
             }}
           >
             Login Successful
+          </Alert>
+        </Snackbar>
+      )}
+      {isSubmitted && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          open={isSubmitted}
+          onClose={handleCloseSnack}
+          autoHideDuration={6000}
+          sx={{ mr: isMobile ? 0 : 3 }}
+        >
+          <Alert
+            onClose={handleCloseSnack}
+            severity="success"
+            sx={{
+              fontFamily: "public Sans",
+              fontSize: isMobile ? "15px" : "18px",
+            }}
+          >
+            New diary card added successfully
           </Alert>
         </Snackbar>
       )}

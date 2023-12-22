@@ -10,8 +10,18 @@ import styled from 'styled-components';
 const HomeWrapper = styled.div`
     padding: 10px 10px 10px 4px;
     display: flex;
-    flex-direction: column;
-`
+    flex-direction: column;`
+
+const BlurredBackground = styled.div<{ showForm: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2; /* Ensure it's on top of other elements */
+  display: ${(props) => (props.showForm ? 'block' : 'none')};
+`;
 const HomeHeader = styled.div`
     font-size: 26px;
     color: #4b465c;
@@ -71,6 +81,7 @@ const Home: React.FC<HomeProps> = ({ showform, reset }) => {
 
   return (
     <HomeWrapper>
+       <BlurredBackground showForm={showform} />
       <HomeHeader>Home</HomeHeader>
       <HomeSearch>
         <PrimarySearchAppBar setFilteredList={setFilteredList} />

@@ -6,7 +6,6 @@ import { Box, Button, TextField, Typography, Card, CardContent} from "@mui/mater
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {generateRandomName} from '../../utility/generateRandomName';
 
-
 const styles = {
   card: {
     position: 'absolute',
@@ -110,7 +109,6 @@ const SignIn: React.FC = () => {
       navigate('/home');
     }
   }
-
 
   return (
     <Background>

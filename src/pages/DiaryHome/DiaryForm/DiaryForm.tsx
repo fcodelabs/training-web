@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addDiary } from '../../../redux/diarySlice';
 
-
 const styles = {
   submitNew: {
     fontFamily: 'Public Sans',
@@ -56,20 +55,23 @@ close:{
   }
 };
 
-
+interface Diary {
+  title: string;
+  description: string;
+}
 
 
 interface DiaryFormProps {
   onClose: () => void;
-  onDiarySubmit: () => void;
+  //setDiaries: React.Dispatch<React.SetStateAction<Diary[]>>;
+  //diaries: Diary[];
 }
 
 
-const DiaryForm: React.FC<DiaryFormProps> = ({onClose, onDiarySubmit}) => {
+const DiaryForm: React.FC<DiaryFormProps> = ({onClose}) => {
 
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const nickname = localStorage.getItem('nickname');
 
   const dispatch = useDispatch();
 
@@ -81,15 +83,18 @@ const DiaryForm: React.FC<DiaryFormProps> = ({onClose, onDiarySubmit}) => {
       
       console.log("Title: ", title);
       console.log("Description: ", description);
+
+      // const existingEntries = JSON.parse(localStorage.getItem("diaries") || "[]"); // Get the existing entries
+      // existingEntries.push({ title, description });  // Add the new entry to the existing entries
+      // localStorage.setItem("diaries", JSON.stringify(existingEntries)); // Save the updated entries to local storage
+
+      // setDiaries([...diaries, { title, description }]);
       
-      if (nickname) {
-        dispatch(addDiary({ title, description, nickname }));
-      } 
+      dispatch(addDiary({ title, description }));
 
       setTitle("");
       setDescription("");
       onClose();
-      onDiarySubmit();
     }
   };
 

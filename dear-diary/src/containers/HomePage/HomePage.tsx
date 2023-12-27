@@ -85,9 +85,27 @@ const HomePage: React.FC = () => {
   const nickname = location.state && location.state.nickname;
   const [showCardAddingForm, setShowCardAddingForm] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
+
   const dispatch = useDispatch();
   const isOpen = useSelector((state: RootState) => state.login.isLoggedIn);
   const isSubmitted = useSelector((state: RootState) => state.submit.isSubmit);
+
+  const [secondsElapsed, setSecondsElapsed] = useState(0); // Keep track of time elapsed
+
+  useEffect(() => {
+    if (isSubmitted) {
+      const timer = setInterval(
+        () => setSecondsElapsed((secondsElapsed) => secondsElapsed + 1),
+        1000
+      );
+      return () => clearInterval(timer);
+    }
+  }, [isSubmitted]);
+
+  const getDisplayTime = () => {
+    const minutes = Math.floor(secondsElapsed / 60);
+    return `${`     ${minutes} mins ago`}`;
+  };
 
   useEffect(() => {
     dispatch(getCard(nickname));
@@ -104,6 +122,7 @@ const HomePage: React.FC = () => {
 
   const handleShowForm = () => {
     setShowCardAddingForm(true);
+    setSecondsElapsed(0);
   };
   const handleCloseForm = () => {
     setShowCardAddingForm(false);
@@ -219,18 +238,45 @@ const HomePage: React.FC = () => {
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           open={isSubmitted}
           onClose={handleCloseSnack}
-          autoHideDuration={3000}
-          sx={{ mr: isMobile ? 0 : 3 }}
+          // autoHideDuration={3000}
+          sx={{
+            mr: 0,
+            mt: isMobile ? 6 : 7,
+          }}
         >
           <Alert
             onClose={handleCloseSnack}
             severity="success"
             sx={{
-              fontFamily: "public Sans",
-              fontSize: isMobile ? "15px" : "18px",
+              borderRadius: "6px",
+              boxShadow: "0px 4px 16px 0px rgba(165, 163, 174, 0.45);",
             }}
           >
-            New diary card added successfully
+            <Stack
+              direction="row"
+              spacing={isMobile ? 3 : 6}
+              justifyContent="space-between"
+            >
+              <Typography
+                sx={{
+                  fontFamily: "public Sans",
+                  fontSize: isMobile ? "13px" : "15px",
+                  fontWeight: 600,
+                  color: "#4B465C",
+                }}
+              >
+                Record Saved successfully.
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "public Sans",
+                  fontSize: isMobile ? "11px" : "13px",
+                  color: "rgba(75, 70, 92, 0.5)",
+                }}
+              >
+                {getDisplayTime()}
+              </Typography>
+            </Stack>
           </Alert>
         </Snackbar>
       )}

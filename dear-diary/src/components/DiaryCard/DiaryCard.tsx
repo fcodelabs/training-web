@@ -48,6 +48,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
     <Card
       sx={{
         borderRadius: "6px",
+        boxShadow: "0px 4px 18px 0px rgba(75, 70, 92, 0.10)",
       }}
     >
       <CardContent>

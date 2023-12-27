@@ -46,4 +46,3 @@ const SnackBar: React.FC<snackBarProps> = ({openSnackbar, handleCloseSnackbar, s
 }
 
 export default SnackBar
-

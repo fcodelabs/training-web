@@ -1,22 +1,22 @@
 import { eventChannel } from 'redux-saga';
 import { call, put, take, takeEvery } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { query, where, collection, addDoc, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, onSnapshot, query, where } from 'firebase/firestore';
 import db from '../../utility/firebase';
 import { addDiary, setDiaries, fetchDiaries } from '../diarySlice';
 
 interface Diary {
     title: string;
     description: string;
+    nickname: string;
   }
 
 function* addDiarySaga(action: PayloadAction<Diary>) {
   const diariesCollection = collection(db, 'diaries');
   yield call(addDoc, diariesCollection, action.payload);
 }
-
-function* fetchDiariesSaga(): Generator<any, void, any> {
-  const nickname = localStorage.getItem('nickname'); // get nickname from local storage
+function* fetchDiariesSaga(action: PayloadAction<{ nickname: string }>): Generator<any, void, any> {
+  const { nickname } = action.payload;
   const diariesCollection = collection(db, 'diaries');
   const q = query(diariesCollection, where("nickname", "==", nickname));
 
@@ -28,18 +28,13 @@ function* fetchDiariesSaga(): Generator<any, void, any> {
     return () => unsubscribe();
   });
 
-  try {
-    while (true) {
-      const diariesArray = yield take(channel);
-      yield put(setDiaries(diariesArray));
-    }
-  } finally {
-    channel.close();
+  while (true) {
+    const diariesArray = yield take(channel);
+    yield put(setDiaries(diariesArray));
   }
 }
 
 export function* watchDiarySagas() {
   yield takeEvery(addDiary.type, addDiarySaga);
-  yield takeEvery(fetchDiaries.type, fetchDiariesSaga); 
-  yield call(fetchDiariesSaga);
+  yield takeEvery(fetchDiaries.type, fetchDiariesSaga);
 }

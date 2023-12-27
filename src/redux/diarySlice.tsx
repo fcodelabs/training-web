@@ -17,7 +17,7 @@ const diarySlice = createSlice({
     setDiaries: (state, action: PayloadAction<Diary[]>) => {
       return action.payload;
     },
-    fetchDiaries: () => {},
+    fetchDiaries: (state, action: PayloadAction<{ nickname: string | null }>) => {},
   },
 });
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {useEffect} from 'react'
 import Background from '../../components/Background/Background';
 import {  Box, Button, TextField, Typography, Dialog} from "@mui/material";
@@ -10,6 +10,7 @@ import DiaryCard from '../../components/DiaryCard/DiaryCard';
 import SnackBar from './SnackBar/SnackBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDiaries } from '../../redux/diarySlice';
+
 const styles = {
   home:{ fontFamily:"public sans",
     color:"4B465C",
@@ -77,24 +78,21 @@ const styles = {
 
 }
 
-
 interface Diary {
   title: string;
   description: string;
+  nickname: string;
 }
 
 interface RootState {
   diaries: Diary[];
 }
 
+
 const DiaryHome = () => {
 
   const nickname = localStorage.getItem('nickname'); // get nickname from local storage
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchDiaries());
-  });
-  
+
   const[open, setOpen] = React.useState(false); // set open state for dialog
 
   const handleSubmitNew = () => {
@@ -104,23 +102,33 @@ const DiaryHome = () => {
   const handleFormColse = () => {
     setOpen(false);
   }
-
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [submissionTime, setSubmissionTime] = React.useState<Date | null>(null);
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const nickname = localStorage.getItem('nickname');
+    dispatch(fetchDiaries({ nickname }));
+  }, []); // Empty dependency array ensures the effect runs only on mount
+  
+
   const [searchText, setSearchText] = React.useState('');
   const diaries = useSelector((state: RootState) => state.diaries);
-  const filteredDiaries = diaries.filter((diary) => {
-    return (
-      diary.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      diary.description.toLowerCase().includes(searchText.toLowerCase())
-    );
-  });
+  const [filteredDiaries, setFilteredDiaries] = React.useState<Diary[]>([]);
 
-  
+  useEffect(() => {
+    setFilteredDiaries(diaries.filter((diary) => {
+      return (
+        diary.title.toLowerCase().includes(searchText.toLowerCase()) ||
+        diary.description.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }));
+  }, [diaries, searchText]);
+
+
   return (
     <div>
       <Background>
@@ -162,7 +170,6 @@ const DiaryHome = () => {
               }}/>
         </Dialog>
 
-        
         <Box sx={styles.diaryEntries}>
           {filteredDiaries.map((diaryEntry, index) => (
             <Box key={index} sx={{ marginBottom: '35px' }}>
@@ -170,10 +177,9 @@ const DiaryHome = () => {
             </Box>
           ))}
         </Box>
-      
-        
+
         <SnackBar openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} submissionTime={submissionTime} /> 
-      
+
       </Background>
     </div>
   )

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addDiary } from '../../../redux/diarySlice';
 
-
 const styles = {
   submitNew: {
     fontFamily: 'Public Sans',
@@ -59,6 +58,7 @@ close:{
 
 
 
+
 interface DiaryFormProps {
   onClose: () => void;
   onDiarySubmit: () => void;
@@ -81,9 +81,15 @@ const DiaryForm: React.FC<DiaryFormProps> = ({onClose, onDiarySubmit}) => {
       
       console.log("Title: ", title);
       console.log("Description: ", description);
-      
+
       if (nickname) {
-        dispatch(addDiary({ title, description, nickname }));
+        interface Diary {
+          title: string;
+          description: string;
+          nickname: string;
+        }
+
+        dispatch(addDiary({ title, description, nickname } as Diary));
       } 
 
       setTitle("");

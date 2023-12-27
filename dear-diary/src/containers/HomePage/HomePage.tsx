@@ -17,6 +17,7 @@ import { RootState } from "../../redux/store";
 import { getCard } from "../../redux/slices/addCardSlice";
 import { setFalse } from "../../redux/slices/loginStateSlice";
 import { setSubmitFalse } from "../../redux/slices/cardSubmitSlice";
+import CheckIcon from "@mui/icons-material/Check";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -238,7 +239,6 @@ const HomePage: React.FC = () => {
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           open={isSubmitted}
           onClose={handleCloseSnack}
-          // autoHideDuration={3000}
           sx={{
             mr: 0,
             mt: isMobile ? 6 : 7,
@@ -246,7 +246,7 @@ const HomePage: React.FC = () => {
         >
           <Alert
             onClose={handleCloseSnack}
-            severity="success"
+            icon={<CheckIcon fontSize="inherit" sx={{ color: "#28C76F" }} />}
             sx={{
               borderRadius: "6px",
               boxShadow: "0px 4px 16px 0px rgba(165, 163, 174, 0.45);",

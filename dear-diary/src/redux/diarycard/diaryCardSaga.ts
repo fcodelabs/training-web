@@ -1,4 +1,4 @@
-import  { addCardByUser }  from './diaryCardSlice';
+import { addCardByUser } from './diaryCardSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { eventChannel } from "redux-saga";
 import { watchingCards } from "./diaryCardSlice";
@@ -9,34 +9,45 @@ import db from "../../config/firebaseIntegration";
 import { cardAdded } from '../../utilities/validation';
 import { Card, SubmitCard } from '../../utilities/types';
 
-function* addCardSaga(action:PayloadAction<SubmitCard > ) {
-    try{
-    const card = action.payload;
-    const cardsCol = collection(db, 'diary-cards');
-    cardAdded();
-    
-    yield addDoc(cardsCol, card);}
-    catch(error){
+function* addCardSaga(action: PayloadAction<SubmitCard>) {
+    try {
+
+        const card = action.payload;
+        const cardsCol = collection(db, 'diary-cards');
+
+
+
+        const startTime = new Date();
+
+        yield addDoc(cardsCol, card);
+
+        const endTime = new Date();
+
+        cardAdded(startTime, endTime);
+
+
+    }
+    catch (error) {
         console.log(error);
     }
 }
 
 function createEventChannel(userName: PayloadAction<String>) {
-    
+
     return eventChannel<Card[]>((emit) => {
         const q = query(collection(db, "diary-cards"), where("userName", "==", userName.payload))
         console.log(q);
-        const unsubscribe = onSnapshot(q,(snapshot) => {
-                const cards: Card[] = snapshot.docs.map((doc) => {
-                    const data = doc.data() as Card;
-                    return {
-                        id: doc.id,
-                        title: data.title,
-                        body: data.body,
-                    };
-                });
-                emit(cards);
-            }
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const cards: Card[] = snapshot.docs.map((doc) => {
+                const data = doc.data() as Card;
+                return {
+                    id: doc.id,
+                    title: data.title,
+                    body: data.body,
+                };
+            });
+            emit(cards);
+        }
         );
 
         return unsubscribe;
@@ -49,7 +60,7 @@ function* watchCards(userName: PayloadAction<String>): Generator<any, void, Retu
         while (true) {
             const updatedCards: any = yield take(channel);
             yield put(setCards(updatedCards));
-      }
+        }
     } finally {
         if (yield cancelled()) {
             channel.close();
@@ -59,8 +70,8 @@ function* watchCards(userName: PayloadAction<String>): Generator<any, void, Retu
 
 function* Gen() {
 
-  yield takeLatest(addCardByUser, addCardSaga);
-  yield takeLatest(watchingCards, watchCards);
+    yield takeLatest(addCardByUser, addCardSaga);
+    yield takeLatest(watchingCards, watchCards);
 }
 
 export default Gen;

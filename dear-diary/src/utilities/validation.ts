@@ -1,21 +1,23 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { calculateMinutesDifference } from './timeDifference';
 
 const toastConfig = {
-
-    style: {
-      minHeight: '50px',
-    },
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    progressStyle: { backgroundColor: 'white' }, 
-  };
+  style: { minHeight: '20px', fontSize: '13px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+  autoWidth: true,
+  autoClose: 300,
+  hideProgressBar: true,
+  closeOnClick: true,
+};
 
 function showToast(message: string, type: 'success' | 'error'): void {
   toast[type](message, toastConfig);
 }
 
+function showElapsedTimeMessage(message: string, startTime: Date, endTime: Date): void {
+  const elapsedMinutes = calculateMinutesDifference(startTime, endTime);
+  showToast(`${message}  ${elapsedMinutes} mins ago`, 'success');
+}
 
 function validateDiaryCard(title: string, description: string): boolean {
   if (!title.trim() || !description.trim()) {
@@ -26,12 +28,12 @@ function validateDiaryCard(title: string, description: string): boolean {
   return true;
 }
 
-function cardAdded(): void {
-  showToast('New diary card added successfully!', 'success');
+function cardAdded(startTime: Date, endTime: Date): void {
+  showElapsedTimeMessage('Record Saved Successfully!', startTime, endTime);
 }
 
-function userLogged(): void {
-  showToast('Login successful!', 'success');
+function userLogged(startTime: Date, endTime: Date): void {
+  showElapsedTimeMessage('Login successful!', startTime, endTime);
 }
 
 export { validateDiaryCard, cardAdded, userLogged };

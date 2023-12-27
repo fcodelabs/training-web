@@ -7,8 +7,13 @@ function* actionUser(action: PayloadAction<string>) {
   const userName = action.payload;
   localStorage.setItem("userName", userName);
   try{
+
+  const startTime = new Date();
   yield put(setUserName(userName));
-  userLogged();}
+  const endTime = new Date();
+  userLogged(startTime, endTime);
+  
+}
   catch(e){
     console.log(e);
   }

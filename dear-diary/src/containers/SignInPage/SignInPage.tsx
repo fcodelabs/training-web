@@ -95,7 +95,12 @@ const SubmitButtonStyled = styled(Button)`
     text-transform: none !important;
     font-size: 100%;
     color: rgb(255, 255, 255) !important;
-    background: #0092DD !important;
+    background-color: #0092DD !important;
+
+    &:disabled {
+        background: rgba(0, 146, 221, 0.6) !important;
+    }
+
 `;
 
 const MediaQueryStyles = styled.div`
@@ -135,6 +140,7 @@ const MediaQueryStyles = styled.div`
 
         ${SubmitButtonStyled} {
             min-width: 45%;
+
         }
 
         ${RandomButtonStyled}{
@@ -164,7 +170,7 @@ const SignInPage = () => {
                         <SignInForm>
                             <LoginTextField
                                 id="outlined-basic"
-                                placeholder="Your nickname"
+                                placeholder="Your nickname*"
                                 variant="outlined"
                                 className="text-field-login"
                                 size="small"
@@ -178,7 +184,7 @@ const SignInPage = () => {
                             </RandomButton>
                         </SignInForm>
                         <SubmitButtonWrapper>
-                            <SubmitButtonStyled variant="contained" className="btn-continue" onClick={() => handleLogin()} disabled={!nameRandom}>
+                            <SubmitButtonStyled variant="contained" onClick={() => handleLogin()} disabled={!nameRandom}>
                                 Continue
                                 <ArrowForwardIcon />
                             </SubmitButtonStyled>

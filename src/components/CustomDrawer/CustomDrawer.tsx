@@ -5,95 +5,98 @@ import useStyles, { Textarea } from "./../Inputs/InputStyles";
 import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { addCard } from "../../redux/reducers/cardReducer";
-import { Alert } from "@mui/material";
+import { Alert, AlertColor } from "@mui/material";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"; 
 import { db } from "../../firebase";
+import { useTypedSelector } from "../../redux/store/store";
 
 interface DrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  setSuccessMessage: (val:boolean)=> void;
 }
 
 
-export default function CustomDrawer({ isOpen, onClose, setSuccessMessage }: DrawerProps) {
+export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [open, setOpen] = useState(false);
+  const [snackbar, setSnackbar] = useState<{
+    open: boolean;
+    message: string;
+    severity: AlertColor;
+  }>({
+    open: false,
+    message: '',
+    severity: 'success',
+  });
 
-  const handleSubmit = async (e:any) => {
+  const currentUsername = useTypedSelector((state) => state.users.currentUsername);
 
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-     if (!title.trim()) {
-      setOpen(true);
+    if (!title.trim() || !description.trim()) {
+      setSnackbar({
+        open: true,
+        message: 'Please fill out all required fields',
+        severity: 'error',
+      });
       return;
     }
 
-    if (!description.trim()) {
-      setOpen(true);
-      return;
-    }
-
-    let res;    
-
-    try{
-        res = await addDoc(collection(db, "Cards"), {
+    try {
+      const res = await addDoc(collection(db, "Cards"), {
         title: title,
         description: description,
-        timeStamp: serverTimestamp()
+        username: currentUsername,
+        timeStamp: serverTimestamp(),
       });
-  
-      console.log(res);
 
-    }catch(err){
-      console.log(err)
+      if (res) {
+        onClose(); 
+        dispatch(addCard({ id: res.id, title, description, username: currentUsername, }));
+        setSnackbar({
+          open: true,
+          message: 'Successfully submitted',
+          severity: 'success',
+        });
+        setTitle('');
+        setDescription('');
+        
+      }
+    } catch (err) {
+      console.error(err);
+      setSnackbar({
+        open: true,
+        message: 'An error occurred',
+        severity: 'error',
+      });
     }
-
-    if (res) {
-      dispatch(addCard({ id: res.id, title, description }));
-      setSuccessMessage(true);
-      
-    }
-    
-
-    setTitle("");
-    setDescription("");
-
-    setOpen(false);
-    onClose();
-
-  }
-
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-    setTitle(" ");
-    setDescription(" ");
-    onClose();    
-    setSuccessMessage(false);
   };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar((prev) => ({ ...prev, open: false }));
+  };
+
+  
 
 
   return (
-    <Drawer anchor="right" open={isOpen} onClose={onClose}>
-      <Snackbar
-        open={open}
+    <>
+    <Snackbar
+        open={snackbar.open}
         autoHideDuration={3000}
-        onClose={handleClose}
-        message="Note archived"
+        onClose={handleCloseSnackbar}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        >
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            Please fill out all required fields
-          </Alert>
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
       </Snackbar>
-
-      
+    <Drawer anchor="right" open={isOpen} onClose={onClose}>
+       
+       
       <Box style={{ width: "400px" }} role="presentation">
 
         {/* Header */}
@@ -209,9 +212,10 @@ export default function CustomDrawer({ isOpen, onClose, setSuccessMessage }: Dra
           }}
         >
           <CustomizedButton label="Submit" onClick={handleSubmit} />
-          <CustomizedButton label="Cancel" onClick={(e) => handleClose(e)} secondary />
+          <CustomizedButton label="Cancel" onClick={onClose} secondary />
         </div>
       </Box>
     </Drawer>
+    </>
   );
 }

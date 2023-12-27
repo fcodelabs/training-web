@@ -1,42 +1,24 @@
-// userSaga.js
-import { takeLatest, call, put } from 'redux-saga/effects';
-import { getFirestore, collection, getDocs, QuerySnapshot } from 'firebase/firestore';
-import { setUsers } from './../reducers/userReducer';
+import { takeEvery, put } from 'redux-saga/effects';
+import { setCurrentUsername } from '../reducers/userReducer';
 
+export const captureUsername = (username: string) => ({
+  type: 'user/captureUsername',
+  payload: username,
+});
 
-interface User {
-id: string;
-name: string;
+function* captureUsernameSaga(action: any): Generator<any, void, any> {
+  try {
+    const { payload } = action;
+    
+    if (payload.length > 0) {
+      yield put(setCurrentUsername(payload));
+      localStorage.setItem('username', payload);
+    }
+  } catch (error) {
+    console.error('Error capturing username:', error);
+  }
 }
-
-
-function* fetchUsersSaga() {
-try {
-const firestore = getFirestore();
-const usersCollection = collection(firestore, 'Users');
-
-
-const querySnapshot: QuerySnapshot = yield call(getDocs, usersCollection);
-
-
-const users: User[] = querySnapshot.docs.map((doc) => ({
-id: doc.id,
-name: doc.data().name,
-}));
-
-
-yield put(setUsers(users));
-} catch (error) {
-console.error('Error fetching users:', error);
-}
-}
-
 
 export function* userSaga() {
-yield takeLatest('users/fetchUsers', fetchUsersSaga);
+  yield takeEvery('user/captureUsername', captureUsernameSaga);
 }
-
-
-
-
-

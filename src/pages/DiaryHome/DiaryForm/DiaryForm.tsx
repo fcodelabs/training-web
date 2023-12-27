@@ -55,23 +55,21 @@ close:{
   }
 };
 
-interface Diary {
-  title: string;
-  description: string;
-}
+
+
 
 
 interface DiaryFormProps {
   onClose: () => void;
-  //setDiaries: React.Dispatch<React.SetStateAction<Diary[]>>;
-  //diaries: Diary[];
+  onDiarySubmit: () => void;
 }
 
 
-const DiaryForm: React.FC<DiaryFormProps> = ({onClose}) => {
+const DiaryForm: React.FC<DiaryFormProps> = ({onClose, onDiarySubmit}) => {
 
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const nickname = localStorage.getItem('nickname');
 
   const dispatch = useDispatch();
 
@@ -84,17 +82,20 @@ const DiaryForm: React.FC<DiaryFormProps> = ({onClose}) => {
       console.log("Title: ", title);
       console.log("Description: ", description);
 
-      // const existingEntries = JSON.parse(localStorage.getItem("diaries") || "[]"); // Get the existing entries
-      // existingEntries.push({ title, description });  // Add the new entry to the existing entries
-      // localStorage.setItem("diaries", JSON.stringify(existingEntries)); // Save the updated entries to local storage
+      if (nickname) {
+        interface Diary {
+          title: string;
+          description: string;
+          nickname: string;
+        }
 
-      // setDiaries([...diaries, { title, description }]);
-      
-      dispatch(addDiary({ title, description }));
+        dispatch(addDiary({ title, description, nickname } as Diary));
+      } 
 
       setTitle("");
       setDescription("");
       onClose();
+      onDiarySubmit();
     }
   };
 

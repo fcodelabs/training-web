@@ -5,6 +5,8 @@ import Background from "../../components/Background/Background";
 import { Box, Button, TextField, Typography, Card, CardContent} from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {generateRandomName} from '../../utility/generateRandomName';
+import { useDispatch } from "react-redux";
+import { setDiaries } from "../../redux/diarySlice";
 
 const styles = {
   card: {
@@ -100,12 +102,13 @@ const SignIn: React.FC = () => {
   };
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleContinueClick = () => {
     if (text.trim() === '') {
       alert('Please enter a nickname');
     } else {
       localStorage.setItem('nickname', text);
+      dispatch(setDiaries([]));
       navigate('/home');
     }
   }

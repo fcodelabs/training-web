@@ -1,12 +1,15 @@
-import React from 'react'
+import React from 'react';
+import {useEffect} from 'react'
 import Background from '../../components/Background/Background';
-import {  Box, Button, TextField, Typography, Grid, Dialog} from "@mui/material";
+import {  Box, Button, TextField, Typography, Dialog} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import Header from '../../components/Header/Header';
 import DiaryForm from './DiaryForm/DiaryForm';
 import DiaryCard from '../../components/DiaryCard/DiaryCard';
-import { useSelector } from 'react-redux';
+import SnackBar from './SnackBar/SnackBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDiaries } from '../../redux/diarySlice';
 
 const styles = {
   home:{ fontFamily:"public sans",
@@ -78,13 +81,12 @@ const styles = {
 interface Diary {
   title: string;
   description: string;
+  nickname: string;
 }
 
 interface RootState {
   diaries: Diary[];
 }
-
-
 
 
 const DiaryHome = () => {
@@ -97,11 +99,35 @@ const DiaryHome = () => {
     setOpen(true);
   }
 
-  const handleColse = () => {
+  const handleFormColse = () => {
     setOpen(false);
   }
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [submissionTime, setSubmissionTime] = React.useState<Date | null>(null);
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const nickname = localStorage.getItem('nickname');
+    dispatch(fetchDiaries({ nickname }));
+  }, []); // Empty dependency array ensures the effect runs only on mount
+  
+
+  const [searchText, setSearchText] = React.useState('');
   const diaries = useSelector((state: RootState) => state.diaries);
+  const [filteredDiaries, setFilteredDiaries] = React.useState<Diary[]>([]);
+
+  useEffect(() => {
+    setFilteredDiaries(diaries.filter((diary) => {
+      return (
+        diary.title.toLowerCase().includes(searchText.toLowerCase()) ||
+        diary.description.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }));
+  }, [diaries, searchText]);
+
 
   return (
     <div>
@@ -126,6 +152,8 @@ const DiaryHome = () => {
               ),
             }}
             sx={styles.textfield} 
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
           />
           <Button variant="contained" 
             onClick={handleSubmitNew}
@@ -134,17 +162,23 @@ const DiaryHome = () => {
           </Button>
         </Box>
         
-        <Dialog open={open} onClose={handleColse} sx={styles.dialog} >
-            <DiaryForm onClose={handleColse} />
+        <Dialog open={open} onClose={handleFormColse} sx={styles.dialog} >
+            <DiaryForm onClose={handleFormColse} 
+              onDiarySubmit={() => {
+                setOpenSnackbar(true);
+                setSubmissionTime(new Date()); 
+              }}/>
         </Dialog>
 
         <Box sx={styles.diaryEntries}>
-          {diaries.map((diaryEntry, index) => (
+          {filteredDiaries.map((diaryEntry, index) => (
             <Box key={index} sx={{ marginBottom: '35px' }}>
               <DiaryCard title={diaryEntry.title} description={diaryEntry.description} />
             </Box>
           ))}
         </Box>
+
+        <SnackBar openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} submissionTime={submissionTime} /> 
 
       </Background>
     </div>

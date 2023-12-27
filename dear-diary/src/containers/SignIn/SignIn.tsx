@@ -64,21 +64,16 @@ const signInPageStyles = {
     },
   },
   continueButtonStylesEnabled: {
-    backgroundColor: "rgba(0, 146, 221,1)",
+    backgroundColor: "rgba(0, 146, 221, 1)",
     typography: {
       fontFamily: "public sans",
       textTransform: "none",
       fontSize: "15px",
       fontWeight: 500,
     },
-  },
-  continueButtonStylesDisabled: {
-    backgroundColor: "rgba(0, 146, 221,0.65)",
-    typography: {
-      fontFamily: "public sans",
-      textTransform: "none",
-      fontSize: "15px",
-      fontWeight: 500,
+    "&.Mui-disabled": {
+      background: "rgba(0, 146, 221, 0.65)",
+      color: "white",
     },
   },
 };
@@ -186,13 +181,10 @@ const SignIn: React.FC = () => {
                 variant="contained"
                 fullWidth={isMobile}
                 endIcon={<ArrowForwardIcon />}
-                onClick={text === "" ? () => {} : handleContinueButtonClick}
+                disabled={text === "" ? true : false}
+                onClick={handleContinueButtonClick}
                 disableElevation
-                sx={
-                  text === ""
-                    ? signInPageStyles.continueButtonStylesDisabled
-                    : signInPageStyles.continueButtonStylesEnabled
-                }
+                sx={signInPageStyles.continueButtonStylesEnabled}
               >
                 Continue
               </Button>

@@ -1,6 +1,8 @@
 import { Box, TextField, Button, DialogTitle, DialogContent, DialogActions, Typography } from '@mui/material';
 import DisabledByDefaultRoundedIcon from '@mui/icons-material/DisabledByDefaultRounded';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addDiary } from '../../../redux/diarySlice';
 
 const styles = {
   submitNew: {
@@ -53,37 +55,47 @@ close:{
   }
 };
 
-interface Diary {
-  title: string;
-  description: string;
-}
+
+
 
 
 interface DiaryFormProps {
   onClose: () => void;
-  setDiaries: React.Dispatch<React.SetStateAction<Diary[]>>;
-  diaries: Diary[];
+  onDiarySubmit: () => void;
 }
 
 
-const DiaryForm: React.FC<DiaryFormProps> = ({onClose, setDiaries, diaries}) => {
+const DiaryForm: React.FC<DiaryFormProps> = ({onClose, onDiarySubmit}) => {
+
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const nickname = localStorage.getItem('nickname');
+
+  const dispatch = useDispatch();
 
   const onsubmit = () => {
     if (title === "" || description === "") {
       alert("Please fill out all fields");
       return;
     }else{
+      
       console.log("Title: ", title);
       console.log("Description: ", description);
-      const existingEntries = JSON.parse(localStorage.getItem("diaries") || "[]"); // Get the existing entries
-      existingEntries.push({ title, description });  // Add the new entry to the existing entries
-      localStorage.setItem("diaries", JSON.stringify(existingEntries)); // Save the updated entries to local storage
-      setDiaries([...diaries, { title, description }])
+
+      if (nickname) {
+        interface Diary {
+          title: string;
+          description: string;
+          nickname: string;
+        }
+
+        dispatch(addDiary({ title, description, nickname } as Diary));
+      } 
+
       setTitle("");
       setDescription("");
       onClose();
+      onDiarySubmit();
     }
   };
 

@@ -92,7 +92,7 @@ export default function SignIn() {
         if (res) {
           dispatch(captureUsername(username));
           dispatch(addUser({ id: res.id, name: username }));
-          navigate("/");
+          navigate("/home");
         }
       } catch (err) {
         console.log(err);
@@ -100,7 +100,7 @@ export default function SignIn() {
     } else {
       dispatch(captureUsername(username));
       dispatch(addUser({ id: userId, name: username }));
-      navigate("/");
+      navigate("/home");
     }
   };
 

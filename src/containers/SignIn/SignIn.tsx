@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomizedButton from "../../components/Buttons/CustomizedButton";
 import Logo from "../../components/Logo/Logo";
 import useStyles from "./../../components/Inputs/InputStyles";
@@ -10,26 +10,28 @@ import { useNavigate } from "react-router-dom";
 import { Snackbar, TextField } from "@material-ui/core";
 import { Alert } from "@mui/material";
 import { addUser } from "../../redux/reducers/userReducer";
-import { addDoc, collection, getDocs, query, serverTimestamp, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  serverTimestamp,
+  where,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { captureUsername } from "../../redux/saga/userSaga";
 
-
-
 export default function SignIn() {
-
   const [username, setUsername] = useState("");
   const [open, setOpen] = useState(false);
 
-  
   const navigate = useNavigate();
   const classes = useStyles();
   const dispatch = useDispatch();
 
   //Function to generate random string
   const generateRandomString = () => {
-
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -44,13 +46,14 @@ export default function SignIn() {
     console.log(result);
   };
 
-  const checkUsernameExists = async (username: string): Promise<string | null> => {
-
+  const checkUsernameExists = async (
+    username: string
+  ): Promise<string | null> => {
     try {
       const userCollectionRef = collection(db, "Users");
       const q = query(userCollectionRef, where("name", "==", username));
       const querySnapshot = await getDocs(q);
-  
+
       if (!querySnapshot.empty) {
         // Username exists
         const userDoc = querySnapshot.docs[0];
@@ -67,8 +70,6 @@ export default function SignIn() {
       return null;
     }
   };
-  
-
 
   //function to handle login
   const handleContinue = async () => {
@@ -76,46 +77,79 @@ export default function SignIn() {
       setOpen(true);
       return;
     }
-  
+
     const userId = await checkUsernameExists(username);
 
-  
     if (userId == null) {
-      
       try {
         const res = await addDoc(collection(db, "Users"), {
           name: username,
           timeStamp: serverTimestamp(),
         });
-        
-       console.log(res);
-    
+
+        console.log(res);
+
         if (res) {
-            
           dispatch(captureUsername(username));
-           dispatch(addUser({ id: res.id, name: username }));
-          navigate("/home");
+          dispatch(addUser({ id: res.id, name: username }));
+          navigate("/");
         }
       } catch (err) {
         console.log(err);
       }
     } else {
-       dispatch(captureUsername(username));
+      dispatch(captureUsername(username));
       dispatch(addUser({ id: userId, name: username }));
-      navigate("/home");
+      navigate("/");
     }
   };
 
-  
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-
-    if (reason === 'clickaway') {
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
       return;
     }
     setOpen(false);
-
   };
 
+
+  const [flexDirection, setFlexDirection] = useState<'row' | 'column'>('row');
+  const [textFieldWidth, setTextFieldWidth] = useState('352px');
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 600) {
+        setFlexDirection('column');
+        setTextFieldWidth('fit-content')
+      } else {
+        setFlexDirection('row');
+        setTextFieldWidth('352px')
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const cardStyles = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '16px',
+    marginBottom: '16px',
+    flexDirection: flexDirection,
+  };
+
+  const textFieldStyle = {
+    width: textFieldWidth
+  }
+  
 
   return (
     <div
@@ -127,25 +161,24 @@ export default function SignIn() {
         justifyContent: "center",
       }}
     >
-
-       <Snackbar
+      <Snackbar
         open={open}
         autoHideDuration={3000}
         onClose={handleClose}
         message="Note archived"
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        >
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            Please fill out all required fields
-          </Alert>
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Please fill out all required fields
+        </Alert>
       </Snackbar>
-
 
       <Card
         style={{
           width: "fit-content",
           height: "fit-content",
           padding: "20px",
+          margin:'15px'
         }}
         sx={{ boxShadow: "0px 4px 18px 0px #4B465C1A" }}
       >
@@ -169,14 +202,8 @@ export default function SignIn() {
             Sign In
           </div>
           <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "16px",
-              marginBottom: "16px",
-            }}
+            style={cardStyles}
           >
-            
             <TextField
               size="small"
               id="outlined-basic"
@@ -191,13 +218,12 @@ export default function SignIn() {
               InputProps={{
                 className: classes.multilineColor,
               }}
-              style={{ width: "352px" }}
+              style={textFieldStyle}
               value={username}
-              onChange={(e) => setUsername(e.target.value)} 
+              onChange={(e) => setUsername(e.target.value)}
             />
 
             <RandomButton label="Random" onClick={generateRandomString} />
-
           </div>
 
           <CustomizedButton
@@ -205,7 +231,6 @@ export default function SignIn() {
             onClick={handleContinue}
             icon={<ArrowRightAltIcon />}
           />
-
         </div>
       </Card>
     </div>

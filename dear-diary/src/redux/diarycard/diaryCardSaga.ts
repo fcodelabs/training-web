@@ -6,7 +6,6 @@ import { setCards } from './diaryCardSlice';
 import { takeLatest, put, call, cancelled, take } from "redux-saga/effects";
 import { onSnapshot, collection, addDoc, query, where } from "firebase/firestore";
 import db from "../../config/firebaseIntegration";
-import { cardAdded } from '../../utilities/validation';
 import { Card, SubmitCard } from '../../utilities/types';
 
 function* addCardSaga(action: PayloadAction<SubmitCard>) {
@@ -15,15 +14,9 @@ function* addCardSaga(action: PayloadAction<SubmitCard>) {
         const card = action.payload;
         const cardsCol = collection(db, 'diary-cards');
 
-
-
-        const startTime = new Date();
-
         yield addDoc(cardsCol, card);
 
-        const endTime = new Date();
 
-        cardAdded(startTime, endTime);
 
 
     }

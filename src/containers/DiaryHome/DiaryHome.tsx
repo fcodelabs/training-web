@@ -17,7 +17,7 @@ export default function Home() {
   
 
   return (
-    <div style={{ height: "100vh", paddingBottom: '20px' }}>
+    <div style={{ height: "fit-content", paddingBottom: '20px' }}>
       <Header />
 
       <div

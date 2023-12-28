@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import DiaryCard from "./DiaryCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCardsRequest } from "../../redux/reducers/cardReducer"; 
@@ -21,7 +21,6 @@ export default function DiaryCardWrapper({ searchInput }: SearchInputProps) {
   const cards: Card[] = useSelector((state: any) => state.cards);
   const currentUsername = useTypedSelector((state) => state.users.currentUsername);
 
-
   useEffect(() => {
     dispatch(fetchCardsRequest());
   }, [dispatch]);
@@ -31,15 +30,38 @@ export default function DiaryCardWrapper({ searchInput }: SearchInputProps) {
     card.title.toLowerCase().includes(searchInput.toLowerCase())
   );
 
-  
+  const [columns, setColumns] = useState(5);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1500 && window.innerWidth > 1000) {
+        setColumns(2);
+      } else if (window.innerWidth <= 1000) {
+        setColumns(1);
+      } else {
+        setColumns(5);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const gridStyles = {
+    display: 'grid',
+    gridTemplateColumns: `repeat(${columns}, 1fr)`,
+    gap: '20px',
+  };
+
 
   return (
     <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(5, 1fr)",
-        gap: "20px",
-      }}
+    style={gridStyles}
     >
       {filteredCards.map((card: Card, index) => (
         <DiaryCard title={card.title} description={card.description} key={index} />

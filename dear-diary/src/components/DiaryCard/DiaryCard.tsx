@@ -18,6 +18,20 @@ const diaryCardStyles = {
     fontStyle: "normal",
     fontWeight: 400,
     lineHeight: "22px",
+    textOverflow: "ellipsis",
+    whiteSpace: "normal",
+    // wordBreak: "break-all",
+  },
+  descriptionStylesForOneWord: {
+    marginBottom: "16px",
+    fontFamily: "public sans",
+    fontSize: "15px",
+    fontStyle: "normal",
+    fontWeight: 400,
+    lineHeight: "22px",
+    textOverflow: "ellipsis",
+    whiteSpace: "normal",
+    wordBreak: "break-all",
   },
   buttonStyles: {
     padding: "0px",
@@ -39,6 +53,8 @@ interface DiaryCardProps {
 
 const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
   const [expanded, setExpanded] = useState(false);
+  const longWordsRegex = /\b\w{35,}\b/g;
+  const longWords = description.match(longWordsRegex);
 
   const handleShowMore = () => {
     setExpanded(!expanded);
@@ -62,7 +78,11 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
         <Typography
           variant="body2"
           color="textSecondary"
-          sx={diaryCardStyles.descriptionStyles}
+          sx={
+            longWords === null
+              ? diaryCardStyles.descriptionStyles
+              : diaryCardStyles.descriptionStylesForOneWord
+          }
         >
           {description.length <= 100 || expanded
             ? description

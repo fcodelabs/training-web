@@ -15,11 +15,11 @@ const StyledSnackbarContent = styled(SnackbarContent)`
     align-items: center;
     width: 100%;
 
-  .css-1exqwzz-MuiSnackbarContent-message {
+  .MuiSnackbarContent-message {
     padding: 0px 0px 0px 0px;
     width: 90%; }
 
-  .css-1kr9x0n-MuiSnackbarContent-action {
+  .MuiSnackbarContent-action {
     padding: 0px 0px 0px 0px !important;
     margin-left:5px
     width: 12%;
@@ -63,7 +63,6 @@ const StyledMessage = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-
     `
 const StyledText = styled.div`
     display: flex;
@@ -104,10 +103,10 @@ const Notification: React.FC = () => {
     useEffect(() => {
         let autoCloseTimeout: NodeJS.Timeout | null = null;
 
-        if (!showtime ) {
+        if (!showtime) {
             autoCloseTimeout = setTimeout(() => {
                 dispatch(hideNotification());
-            }, 3000); 
+            }, 3000);
         }
 
         return () => {

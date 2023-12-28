@@ -104,7 +104,7 @@ const Notification: React.FC = () => {
     useEffect(() => {
         let autoCloseTimeout: NodeJS.Timeout | null = null;
 
-        if (!showtime && show) {
+        if (!showtime ) {
             autoCloseTimeout = setTimeout(() => {
                 dispatch(hideNotification());
             }, 3000); 
@@ -115,7 +115,7 @@ const Notification: React.FC = () => {
                 clearTimeout(autoCloseTimeout);
             }
         };
-    }, [showtime, show]);
+    }, [showtime]);
 
     const handleCloseNotification = () => {
         dispatch(hideNotification());

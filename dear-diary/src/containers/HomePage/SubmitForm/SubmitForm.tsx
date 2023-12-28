@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { validateDiaryCard } from '../../../utilities/validation';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { addCardByUser } from '../../../redux/diarycard/diaryCardSlice';

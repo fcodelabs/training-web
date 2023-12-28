@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useEffect } from 'react'
 import { watchingCards } from "../../redux/diarycard/diaryCardSlice";
+import Notification from '../../components/Notification/Notification';
 
 const Background = styled.div`
     display: flex;
@@ -70,6 +71,9 @@ const HomePage = () => {
                     </>
                 )}
             </HomePageWrapper>
+            <Notification/>
+
+        
         </Background>
     );
 };

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { userLoggedIn } from "../../redux/user/userSlice";
 import DearDiary from '../../components/DearDiary/DearDiary';
+import { setNotification } from '../../redux/notification/notificationSlice';
 
 const Background = styled.div`
     display: flex;
@@ -156,6 +157,7 @@ const SignInPage = () => {
 
     const handleLogin = () => {
         dispatch(userLoggedIn(nameRandom));
+        dispatch(setNotification({  type: "success", message: 'Login Successful', showtime: false, show: true }));
         navigate('/home');
     };
 

@@ -1,6 +1,8 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { calculateMinutesDifference } from './timeDifference';
+import { useAppDispatch } from '../redux/hooks';
+import { setNotification } from '../redux/notification/notificationSlice';
 
 const toastConfig = {
   style: { minHeight: '20px', fontSize: '13px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
@@ -20,8 +22,8 @@ function showElapsedTimeMessage(message: string, startTime: Date, endTime: Date)
 }
 
 function validateDiaryCard(title: string, description: string): boolean {
+
   if (!title.trim() || !description.trim()) {
-    showToast('Title and description are required!', 'error');
     return false;
   }
 
@@ -33,7 +35,7 @@ function cardAdded(startTime: Date, endTime: Date): void {
 }
 
 function userLogged(startTime: Date, endTime: Date): void {
-  showElapsedTimeMessage('Login successful!', startTime, endTime);
+  // showElapsedTimeMessage('Login successful!', startTime, endTime);
 }
 
 export { validateDiaryCard, cardAdded, userLogged };

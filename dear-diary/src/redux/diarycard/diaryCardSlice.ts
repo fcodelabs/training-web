@@ -24,7 +24,6 @@ const diaryCardSlice = createSlice({
             
         }
 
-
     },
 });
 

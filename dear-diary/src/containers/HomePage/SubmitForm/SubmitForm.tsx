@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { addCardByUser } from '../../../redux/diarycard/diaryCardSlice';
 import { SubmitCard } from '../../../utilities/types';
+import { setNotification } from '../../../redux/notification/notificationSlice';
 
 
 type SubmitFormProps = {
@@ -19,10 +20,18 @@ const StyledSubmitForm = styled.div<{ showform: boolean }>`
   top: 0;
   width: 20%;
   height: 100vh;
+  min-width: 190px;
   background-color: white;
   padding: 1%;
   right: ${({ showform }) => (showform ? '0' : '-100%')};
-  transition: right 0.5s ease-in-out;`;
+  transition: right 0.5s ease-in-out;
+  
+  @media screen and (max-width: 768px) {
+    width: 99%;
+  }
+  `;
+
+
 
 const HeaderSubmit = styled.div`
   display: flex;
@@ -111,9 +120,11 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
       body: description,
     };
     if (!validateDiaryCard(title, description)) {
+      dispatch(setNotification({ type: 'error', message: 'Title and description are required!', show: true, showtime: false }));
       return;
     }
     dispatch(addCardByUser(newDiary));
+    dispatch(setNotification({ type: 'success', message: 'Record Saved Successfully', show: true, showtime: true }));
     setTitle('');
     setDescription('');
     reset();

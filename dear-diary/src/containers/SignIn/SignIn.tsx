@@ -99,6 +99,7 @@ const SignIn: React.FC = () => {
     }
     if (text) {
       dispatch(setTrue());
+      localStorage.setItem("isLoggedIn", "true");
       navigate("/home", { state: { nickname: text } });
     }
   };

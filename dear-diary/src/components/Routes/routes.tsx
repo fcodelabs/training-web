@@ -1,4 +1,4 @@
-import HomePage from "../../containers/HomePage/HomePage";
+import ProtectedHome from "../../containers/ProtectedHome/ProtectedHome";
 import SignIn from "../../containers/SignIn/SignIn";
 
 interface RouteConfig {
@@ -15,7 +15,7 @@ const routes: RouteConfig[] = [
   {
     id: 2,
     path: "/home",
-    element: <HomePage />,
+    element: <ProtectedHome />,
   },
 ];
 

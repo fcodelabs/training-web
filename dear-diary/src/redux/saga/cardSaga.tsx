@@ -1,9 +1,9 @@
-import { call, put, take, takeEvery } from "redux-saga/effects";
+import { all, call, put, take, takeEvery } from "redux-saga/effects";
 
 import { collectionRef } from "../../configs/firebase";
 
 import { setCard } from "../slices/addCardSlice";
-import { onSnapshot, query, where } from "firebase/firestore";
+import { addDoc, onSnapshot, query, where } from "firebase/firestore";
 import { END, eventChannel } from "redux-saga";
 import { PayloadAction } from "@reduxjs/toolkit";
 
@@ -32,9 +32,7 @@ function getCardSaga(username: string) {
   });
 }
 
-export function* setCardSaga(
-  action: PayloadAction<string>
-): Generator<any, any, any> {
+function* setCardSaga(action: PayloadAction<string>): Generator<any, any, any> {
   try {
     const username = action.payload;
     const channel = yield call(getCardSaga, username);
@@ -46,6 +44,26 @@ export function* setCardSaga(
     console.log(err);
   }
 }
-export function* watchGetCardSaga(): Generator<any, any, any> {
+function* watchGetCardSaga(): Generator<any, any, any> {
   yield takeEvery("addingCards/getCard", setCardSaga);
+}
+
+function* addCardSaga(action: PayloadAction<Card>): Generator<any, any, any> {
+  try {
+    const { username, title, description } = action.payload;
+    const diaryCard: Card = { username, title, description };
+    // console.log(diaryCard);
+    yield call(addDoc, collectionRef, diaryCard);
+    // console.log("done...");
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function* watchSendCardSaga(): Generator<any, any, any> {
+  yield takeEvery("addingCards/sendCard", addCardSaga);
+}
+
+export default function* watchCardSaga(): Generator<any, any, any> {
+  yield all([watchGetCardSaga(), watchSendCardSaga()]);
 }

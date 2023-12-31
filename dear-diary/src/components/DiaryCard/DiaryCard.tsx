@@ -45,6 +45,10 @@ const diaryCardStyles = {
       lineHeight: "18px",
     },
   },
+  cardStyles: {
+    borderRadius: "6px",
+    boxShadow: "0px 4px 18px 0px rgba(75, 70, 92, 0.10)",
+  },
 };
 interface DiaryCardProps {
   title: string;
@@ -61,12 +65,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
   };
 
   return (
-    <Card
-      sx={{
-        borderRadius: "6px",
-        boxShadow: "0px 4px 18px 0px rgba(75, 70, 92, 0.10)",
-      }}
-    >
+    <Card sx={diaryCardStyles.cardStyles}>
       <CardContent>
         <Typography
           variant="h5"

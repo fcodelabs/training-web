@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import cardsSlice from "./slices/addCardSlice";
 import loginSlice from "./slices/loginStateSlice";
 import submitSlice from "./slices/cardSubmitSlice";
-import { watchGetCardSaga } from "./saga/cardSaga";
+import watchCardSaga from "./saga/cardSaga";
 import createSagaMiddleware from "redux-saga";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -18,7 +18,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat(middleware),
 });
 
-sagaMiddleware.run(watchGetCardSaga);
+sagaMiddleware.run(watchCardSaga);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

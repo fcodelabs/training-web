@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { getCard } from "../../redux/slices/addCardSlice";
-import { setFalse } from "../../redux/slices/loginStateSlice";
+
 import { setSubmitFalse } from "../../redux/slices/cardSubmitSlice";
 import CheckIcon from "@mui/icons-material/Check";
 
@@ -78,6 +78,16 @@ const homepageStyles = {
     backgroundColor: "white",
     overflowY: "auto",
   },
+  loginAlertStyles: {
+    fontFamily: "public Sans",
+    fontSize: "15px",
+    borderRadius: "6px",
+    boxShadow: "0px 4px 16px 0px rgba(165, 163, 174, 0.45);",
+  },
+  recordAlertStyles: {
+    borderRadius: "6px",
+    boxShadow: "0px 4px 16px 0px rgba(165, 163, 174, 0.45);",
+  },
 };
 
 const HomePage: React.FC = () => {
@@ -91,7 +101,7 @@ const HomePage: React.FC = () => {
   const isOpen = useSelector((state: RootState) => state.login.isLoggedIn);
   const isSubmitted = useSelector((state: RootState) => state.submit.isSubmit);
 
-  const [secondsElapsed, setSecondsElapsed] = useState(0); // Keep track of time elapsed
+  const [secondsElapsed, setSecondsElapsed] = useState(0);
 
   useEffect(() => {
     if (isSubmitted) {
@@ -128,9 +138,9 @@ const HomePage: React.FC = () => {
   const handleCloseForm = () => {
     setShowCardAddingForm(false);
   };
-  const handleClose = () => {
-    dispatch(setFalse());
-  };
+  // const handleClose = () => {
+  //   dispatch(setFalse());
+  // };
   const handleCloseSnack = () => {
     dispatch(setSubmitFalse());
   };
@@ -218,18 +228,10 @@ const HomePage: React.FC = () => {
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           open={isOpen}
-          onClose={handleClose}
-          autoHideDuration={6000}
+          autoHideDuration={3000}
           sx={{ mr: isMobile ? 0 : 3 }}
         >
-          <Alert
-            onClose={handleClose}
-            severity="success"
-            sx={{
-              fontFamily: "public Sans",
-              fontSize: isMobile ? "15px" : "18px",
-            }}
-          >
+          <Alert severity="success" sx={homepageStyles.loginAlertStyles}>
             Login Successful
           </Alert>
         </Snackbar>
@@ -247,10 +249,7 @@ const HomePage: React.FC = () => {
           <Alert
             onClose={handleCloseSnack}
             icon={<CheckIcon fontSize="inherit" sx={{ color: "#28C76F" }} />}
-            sx={{
-              borderRadius: "6px",
-              boxShadow: "0px 4px 16px 0px rgba(165, 163, 174, 0.45);",
-            }}
+            sx={homepageStyles.recordAlertStyles}
           >
             <Stack
               direction="row"

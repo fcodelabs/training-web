@@ -10,25 +10,23 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 const StyledSnackbarContent = styled(SnackbarContent)`
     background-color: white !important;
     color: black !important;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    display: flex !important ;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
 
   .MuiSnackbarContent-message {
-    padding: 0px 0px 0px 0px;
-    width: 90%; }
+    padding: 0px 0px 0px 0px !important;
+    width: 90% !important;}
 
   .MuiSnackbarContent-action {
     padding: 0px 0px 0px 0px !important;
-    margin-left:5px
-    width: 12%;
   }
 
     @media screen and (max-width: 768px) {
 
-        .css-1exqwzz-MuiSnackbarContent-message {
-            width: max-content;
+        .MuiSnackbarContent-message {
+            width: max-content !important;
         }
     }
 `;

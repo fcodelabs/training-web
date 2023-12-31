@@ -25,10 +25,13 @@ const cardsSlice = createSlice({
       state.cards = action.payload;
     },
     getCard: (state) => {
-      console.log("Loading...");
+      //use to get cards from the firebase
+    },
+    sendCard: (state, action: PayloadAction<Card>) => {
+      //use to send cards to the firebase
     },
   },
 });
 
-export const { addCard, setCard, getCard } = cardsSlice.actions;
+export const { addCard, setCard, getCard, sendCard } = cardsSlice.actions;
 export default cardsSlice.reducer;

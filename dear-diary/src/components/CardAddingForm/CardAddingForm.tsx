@@ -6,14 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
-import { collectionRef } from "../../configs/firebase";
-import { addDoc } from "firebase/firestore";
-import { useDispatch} from "react-redux";
-import {
-
-  setSubmitTrue,
-} from "../../redux/slices/cardSubmitSlice";
-
+import { useDispatch } from "react-redux";
+import { setSubmitTrue } from "../../redux/slices/cardSubmitSlice";
+import { sendCard } from "../../redux/slices/addCardSlice";
 
 const cardAddingFromStyles = {
   iconButtonStyles: {
@@ -75,11 +70,7 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({
       setDescriptionError(true);
     }
     if (title && description) {
-      try {
-        addDoc(collectionRef, { username, title, description });
-      } catch (error) {
-        console.error(error);
-      }
+      dispatch(sendCard({ username, title, description }));
       setTitle("");
       setDescription("");
       dispatch(setSubmitTrue());

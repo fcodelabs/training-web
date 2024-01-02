@@ -16,7 +16,7 @@ interface Card {
 function getCardSaga(username: string) {
   return eventChannel<Card[]>((emitter) => {
     const unsubscribe = onSnapshot(
-      query(collectionRef, where("username", "==", username)),
+      query(collectionRef, where("username", "==", username)), //to get cards belongs to the logged user.
       (snapshot) => {
         const cards: Card[] = [];
         snapshot.forEach((doc) => {
@@ -52,9 +52,7 @@ function* addCardSaga(action: PayloadAction<Card>): Generator<any, any, any> {
   try {
     const { username, title, description } = action.payload;
     const diaryCard: Card = { username, title, description };
-    // console.log(diaryCard);
     yield call(addDoc, collectionRef, diaryCard);
-    // console.log("done...");
   } catch (error) {
     console.error(error);
   }

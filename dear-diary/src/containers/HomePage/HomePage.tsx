@@ -15,7 +15,6 @@ import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { getCard } from "../../redux/slices/addCardSlice";
-
 import { setSubmitFalse } from "../../redux/slices/cardSubmitSlice";
 import CheckIcon from "@mui/icons-material/Check";
 import TimeStamp from "../../components/TimeStamp/TimeStamp";
@@ -84,6 +83,7 @@ const homepageStyles = {
     fontFamily: "public Sans",
     fontSize: "15px",
     borderRadius: "6px",
+    fontWeight: 600,
     boxShadow: "0px 4px 16px 0px rgba(165, 163, 174, 0.45);",
   },
   recordAlertStyles: {
@@ -95,11 +95,10 @@ const homepageStyles = {
 const HomePage: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
   const location = useLocation();
+  const dispatch = useDispatch();
   const nickname = location.state && location.state.nickname;
   const [showCardAddingForm, setShowCardAddingForm] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
-
-  const dispatch = useDispatch();
   const isOpen = useSelector((state: RootState) => state.login.isLoggedIn);
   const isSubmitted = useSelector((state: RootState) => state.submit.isSubmit);
 
@@ -210,13 +209,15 @@ const HomePage: React.FC = () => {
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           open={isOpen}
-          autoHideDuration={3000}
+          autoHideDuration={5000}
+          onClose={() => dispatch(setFalse())}
           sx={{ mr: isMobile ? 0 : 3 }}
         >
           <Alert
             severity="success"
             sx={homepageStyles.loginAlertStyles}
             onClose={() => dispatch(setFalse())}
+            icon={<CheckIcon fontSize="inherit" sx={{ color: "#28C76F" }} />}
           >
             Login Successful
           </Alert>

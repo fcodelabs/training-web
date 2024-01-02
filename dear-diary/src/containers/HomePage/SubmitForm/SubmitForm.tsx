@@ -31,14 +31,13 @@ const StyledSubmitForm = styled.div<{ showform: boolean }>`
   }
   `;
 
-
-
 const HeaderSubmit = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 95%;
-  padding: 2% 2% 5% 2%;`;
+  padding: 2% 2% 5% 2%;
+  `;
 
 const FormClose = styled.div`
   transition: transform 0.3s ease-in-out;
@@ -58,20 +57,23 @@ const FormClose = styled.div`
 const FormTitle = styled.div`
   font-size: 20px;
   color: #4b465c;
-  font-weight: 500;`;
+  font-weight: 500;
+  `;
 
 const SubmitTitle = styled.div`
   font-size: 20px;
   color: #4b465c;
   font-weight: 350;
-  padding: 1% 2% 0% 2%;`;
+  padding: 1% 2% 0% 2%;
+  `;
 
 const SubmitDesc = styled.div`
   font-size: 20px;
   color: #4b465c;
   font-weight: 350;
   width: 100%;
-  padding: 5% 2% 0% 2%;`;
+  padding: 5% 2% 0% 2%;
+  `;
 
 const SubmitButton = styled(Button)`
   background-color: #0092dd !important;
@@ -91,13 +93,16 @@ const CancelButton = styled(Button)`
 
 const SubmitFormBar = styled.div`
   padding: 1%; 
-  font-size: 15px;`;
+  font-size: 15px;
+  `;
 
 const TextFieldSingleLine = styled(TextField)`
-  width: 99%;`
+  width: 99%;
+  `;
 
 const TextFieldMultiLine = styled(TextField)`
-  width: 95%;`
+  width: 95%;
+  `;
 
 const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
   const [title, setTitle] = useState('');

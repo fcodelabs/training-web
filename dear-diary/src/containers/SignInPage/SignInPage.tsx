@@ -19,9 +19,6 @@ const Background = styled.div`
     padding-bottom: 0;
 `;
 
-
-
-
 const SignInPageWrapper = styled.div`
     display: flex;
     flex-direction: column;

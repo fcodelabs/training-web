@@ -9,17 +9,11 @@ import db from "../../config/firebaseIntegration";
 import { Card, SubmitCard } from '../../utilities/types';
 
 function* addCardSaga(action: PayloadAction<SubmitCard>) {
+   
     try {
-
         const card = action.payload;
         const cardsCol = collection(db, 'diary-cards');
-
-        yield addDoc(cardsCol, card);
-
-
-
-
-    }
+        yield addDoc(cardsCol, card); }
     catch (error) {
         console.log(error);
     }
@@ -29,7 +23,6 @@ function createEventChannel(userName: PayloadAction<String>) {
 
     return eventChannel<Card[]>((emit) => {
         const q = query(collection(db, "diary-cards"), where("userName", "==", userName.payload))
-        console.log(q);
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const cards: Card[] = snapshot.docs.map((doc) => {
                 const data = doc.data() as Card;
@@ -40,8 +33,7 @@ function createEventChannel(userName: PayloadAction<String>) {
                 };
             });
             emit(cards);
-        }
-        );
+        });
 
         return unsubscribe;
     });

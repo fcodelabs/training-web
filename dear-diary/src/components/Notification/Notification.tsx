@@ -46,8 +46,6 @@ const StyledSnackbar = styled(Snackbar)`
         min-width: 290px !important;
         width: 96% !important;
     }
-
-
 `;
 
 const StyledMessageWrapper = styled.div`
@@ -55,13 +53,13 @@ const StyledMessageWrapper = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    `;
+`;
 
 const StyledMessage = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    `
+`;
 const StyledText = styled.div`
     display: flex;
     margin-right: 8px;
@@ -69,7 +67,8 @@ const StyledText = styled.div`
     flex-direction: row;
     font-weight: 550;
     color: rgba(75, 70, 92, 0.8);
-    align-items: center;`
+    align-items: center;
+`;
 
 const StyledTime = styled.div`
     color: rgba(75, 70, 92, 0.6);
@@ -81,17 +80,21 @@ const StyledTime = styled.div`
     
     @media screen and (max-width: 400px) {
         display: none !important;
-    }`
+    }
+`;
 
 const StyledCloseIcon = styled(CloseIcon)`
-    color: rgba(75, 70, 92, 0.6);`
+    color: rgba(75, 70, 92, 0.6);
+`;
 
 
 const StyledDonIcon = styled(DoneIcon)`
-    color: rgba(40, 199, 111, 0.6)`
+    color: rgba(40, 199, 111, 0.6)
+`;
 
 const StyledErrorIcon = styled(ErrorOutlineIcon)`
-    color: red;`
+    color: red;
+`;
 
 
 const Notification: React.FC = () => {

@@ -9,7 +9,6 @@ const Card = styled.div`
   margin-bottom: 8%;
   min-width: 190px;
   background-color: white;
-  max-width: 280px;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -22,8 +21,7 @@ const Card = styled.div`
   }
 
   &.expanded {
-    z-index: 5;
-    height: auto
+    z-index: 2;
   }
 
   @media screen and (max-width: 1600px) {

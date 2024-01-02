@@ -5,12 +5,14 @@ import styled from 'styled-components';
 const ProfileWrapper = styled.div`
     padding: 5px 5px 1px 1px;
     margin-top: 10px;
-    z-index: 1;`
+    z-index: 1;
+`;
 
 const ProfileName = styled.div`
     z-index: 1;
     width: 100%;
-    margin-right: 2%;`
+    margin-right: 2%;
+`;
 
 const ProfileNameText = styled.div`
     z-index: 1;
@@ -21,13 +23,15 @@ const ProfileNameText = styled.div`
 
     @media screen and (max-width: 768px) {
         transform: scale(0.85);
-    }`
+    }
+`;
 
 const ImageProfile = styled.img`
     z-index: 1;
     width: 95%;
     border-radius: 50%;
-    object-fit: cover;`;
+    object-fit: cover;
+`;
 
 const Profile = () => {
     const name = useAppSelector((state) => state.user.userName)

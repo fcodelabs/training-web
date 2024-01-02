@@ -23,10 +23,10 @@ const notificationSlice = createSlice({
       state.elapsedMinutes += 1;
     },
     hideNotification: (state) => {
-        state.show = false;
-        state.showtime = false;
-        state.elapsedMinutes = 0;
-        state.message = '';
+      state.show = false;
+      state.showtime = false;
+      state.elapsedMinutes = 0;
+      state.message = '';
     }
 
   },

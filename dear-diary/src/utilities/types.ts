@@ -1,6 +1,5 @@
 export type userStateType = {
-    userId: number;
-    userName: string;
+    userName: string ;
     isLogged: boolean;
 }
 
@@ -15,7 +14,6 @@ export type SubmitCard = {
     title: string;
     body: string;
 };
-
 
 export type DiaryCardStateType = {
     isLoading: boolean;

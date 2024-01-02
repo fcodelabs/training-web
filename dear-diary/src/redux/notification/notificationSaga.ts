@@ -6,11 +6,8 @@ function* updateTimestampSaga() {
     while (true) {
       yield delay(60000); 
       yield put(incrementElapsedMinutes());
-    
     }
   }
-
-
 
 export function* watchShowtime() {
     yield takeLatest(setNotification, function* (action) {

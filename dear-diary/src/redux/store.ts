@@ -4,7 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootSaga from './rootSaga';
 
-const sagaMiddleware: any = createSagaMiddleware() ;
+const sagaMiddleware: any = createSagaMiddleware();
 
 const store = configureStore({
   reducer: rootReducer,

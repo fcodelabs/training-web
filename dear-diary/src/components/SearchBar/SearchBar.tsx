@@ -8,8 +8,8 @@ import { useAppSelector } from '../../redux/hooks';
 const SearchBarWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 90%`
-
+  width: 90%
+`;
 
 const SearchInput = styled(TextField)`
   width: 40%;
@@ -20,8 +20,8 @@ const SearchInput = styled(TextField)`
   transition: all 0.3s ease-in-out;
   
   @media screen and (max-width: 1000px){
-    width: 95% !important;
-  }`  
+    width: 95% !important;}
+`; 
 
 
 type Card = {

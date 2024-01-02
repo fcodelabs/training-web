@@ -3,7 +3,7 @@ import { Card, DiaryCardStateType, SubmitCard } from "../../utilities/types";
 
 
 const initialState: DiaryCardStateType = {
-    isLoading:true,
+    isLoading: true,
     cards: []
 };
 
@@ -15,14 +15,12 @@ const diaryCardSlice = createSlice({
     name: "diaryCard",
     initialState: initialState,
     reducers: {
-        addCardByUser: (state, action: PayloadAction<SubmitCard>) => {},
+        addCardByUser: (state, action: PayloadAction<SubmitCard>) => { },
         setCards: (state, action: PayloadAction<Card[]>) => {
             state.isLoading = false;
             state.cards = action.payload;
-          },
-        watchingCards: (state, action:PayloadAction<String>) => {
-            
-        }
+        },
+        watchingCards: (state, action: PayloadAction<String>) => { }
 
     },
 });

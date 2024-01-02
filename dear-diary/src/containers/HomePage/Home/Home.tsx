@@ -8,9 +8,10 @@ import { useMediaQuery, useTheme, Grid, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 const HomeWrapper = styled.div`
-    padding: 10px 10px 10px 4px;
-    display: flex;
-    flex-direction: column;`
+  padding: 10px 10px 10px 4px;
+  display: flex;
+  flex-direction: column;
+`;
 
 const BlurredBackground = styled.div<{ showForm: boolean }>`
   position: fixed;
@@ -19,39 +20,40 @@ const BlurredBackground = styled.div<{ showForm: boolean }>`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 2; /* Ensure it's on top of other elements */
+  z-index: 3; /* Ensure it's on top of other elements */
   display: ${(props) => (props.showForm ? 'block' : 'none')};
 `;
+
 const HomeHeader = styled.div`
-    font-size: 26px;
-    color: #4b465c;
-    font-weight: 500;
+  font-size: 26px;
+  color: #4b465c;
+  font-weight: 500;
 `;
 
 const HomeSearch = styled.div`
-    padding-top: 2%;
-    padding-bottom: 15px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;;
-   `
-  
+  padding-top: 2%;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;;
+`;
 
 const ScrollableGridContainer = styled.div`
-    padding-top: 1%;
-    overflow-y: auto;
-`
-const SubmitFormButton = styled(Button)`
-    min-width : 15vh !important;
-    color: white !important;
-    background-color: #0092DD !important;
-    text-transform: none !important;
+  padding-top: 1%;
+  overflow-y: auto;
+`;
 
-    @media screen and (max-width: 800px) {
-    min-width :16vh !important; 
-  }`
+const SubmitFormButton = styled(Button)`
+  min-width : 15vh !important;
+  color: white !important;
+  background-color: #0092DD !important;
+  text-transform: none !important;
+
+  @media screen and (max-width: 800px) {
+  min-width :16vh !important; }
+`;
 
 
 type HomeProps = {
@@ -79,10 +81,9 @@ const Home: React.FC<HomeProps> = ({ showform, reset }) => {
           ? 2
           : 1;
 
-
   return (
     <HomeWrapper>
-       <BlurredBackground showForm={showform} />
+      <BlurredBackground showForm={showform} />
       <HomeHeader>Home</HomeHeader>
       <HomeSearch>
         <PrimarySearchAppBar setFilteredList={setFilteredList} />

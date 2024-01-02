@@ -205,27 +205,27 @@ const HomePage = () => {
     }, [diaryEntries]);
 
     // fetching the diarycard according to the username
-    // useEffect(() => {
-    //     console.log("fetching diary card list");
-    //     dispatch(diaryCardActions.fetchDiaryCardList(nickName));
-    // }, [dispatch, nickName]);
-
     useEffect(() => {
         if (!nickName) {
             history('/'); // Redirect to the signing page if nickname is empty
         } else {
-          dispatch(diaryCardActions.fetchDiaryCardList(nickName));
+            console.log("fetching diary card list");
+            dispatch(diaryCardActions.fetchDiaryCardList(nickName));
         }
-      }, [dispatch, history, nickName]);
+    }, [dispatch, history, nickName]);
 
     // function to handle submit card
     const handleOnSubmitCard = (title: string, description: string) => {
         // create new diary card
         console.log('Handling submit card:', { title, description, username: nickName });
+
+        // Add the new card to the beginning of the diaryEntries array
+        setDiaryEntries([{ title, description, username: nickName }, ...diaryEntries]);
+        
         dispatch(diaryCardActions.addDiaryCard({ title, description, username: nickName })) // addding a new diary card to db
 
         // add new diary card to diary entries
-        
+
         setSubmitTime(new Date()); // Capture the time when the user submits the card
         handleCloseSubmitCard();
         // show alert
@@ -251,7 +251,7 @@ const HomePage = () => {
         setDiaryEntries(entries);
     }, [entries]);
 
-    
+
 
     // Function to filter diary entries based on search query
     const filteredDiaryEntries = diaryEntries.filter((entry) => {
@@ -260,12 +260,12 @@ const HomePage = () => {
     });
 
 
-    
+
 
     // Function to calculate and update elapsed time
     const updateElapsedTime = () => {
         const timeElapsed = CalculateTimeElapsed(submitTime);
-    
+
         // Check if there is any time elapsed
         if (timeElapsed) {
             setElapsedTime(`${timeElapsed}`);
@@ -402,7 +402,7 @@ const HomePage = () => {
                     display: showAlert ? 'flex' : 'none',
                     backgroundColor: 'white',
                     '& .MuiIconButton-root': {
-                        color: 'rgba(75, 70, 92, 0.55)', 
+                        color: 'rgba(75, 70, 92, 0.55)',
                     },
 
                 }}

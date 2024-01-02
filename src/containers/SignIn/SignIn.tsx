@@ -7,74 +7,41 @@ import RandomButton from "../../components/Buttons/RandomButton";
 import Card from "@mui/material/Card";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
-import { Snackbar, TextField } from "@material-ui/core";
-import { Alert } from "@mui/material";
-import { addUser } from "../../redux/reducers/userReducer";
-import {
-  addDoc,
-  collection,
-  getDocs,
-  query,
-  serverTimestamp,
-  where,
-} from "firebase/firestore";
+import { TextField } from "@material-ui/core";
+import { AlertColor } from "@mui/material";
+
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { captureUsername } from "../../redux/saga/userSaga";
+import { generateRandomString } from "../../utility/generateRandomString";
+import { checkUsernameExists } from "../../utility/checkUsernameExists";
+import CustomSnackbar from "../../components/CustomSnackbar/CustomSnackbar";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
-  const [open, setOpen] = useState(false);
+  const [snackbar, setSnackbar] = useState<{
+    open: boolean;
+    message: string;
+    severity: AlertColor;
+  }>({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
   const navigate = useNavigate();
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  //Function to generate random string
-  const generateRandomString = () => {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    let result = "";
-
-    for (let i = 0; i < 8; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      result += characters.charAt(randomIndex);
-    }
-
-    setUsername(result);
-    console.log(result);
-  };
-
-  const checkUsernameExists = async (
-    username: string
-  ): Promise<string | null> => {
-    try {
-      const userCollectionRef = collection(db, "Users");
-      const q = query(userCollectionRef, where("name", "==", username));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        // Username exists
-        const userDoc = querySnapshot.docs[0];
-        const userId = userDoc.id;
-        console.log("Registered User", userId);
-        return userId; // Return user ID
-      } else {
-        // Username doesn't exists
-        console.log("Not a registered user");
-        return null;
-      }
-    } catch (error) {
-      console.error("Error checking username:", error);
-      return null;
-    }
-  };
-
   //function to handle login
   const handleContinue = async () => {
     if (!username.trim()) {
-      setOpen(true);
+      setSnackbar({
+        open: true,
+        message: "Please fill out all required fields",
+        severity: "error",
+      });
       return;
     }
 
@@ -91,65 +58,69 @@ export default function SignIn() {
 
         if (res) {
           dispatch(captureUsername(username));
-          dispatch(addUser({ id: res.id, name: username }));
-          navigate("/home");
+          setSnackbar({
+            open: true,
+            message: "Login Successful",
+            severity: "success",
+          });
+          setTimeout(() => {
+            navigate("/home");
+          }, 1000);
         }
       } catch (err) {
         console.log(err);
       }
     } else {
       dispatch(captureUsername(username));
-      dispatch(addUser({ id: userId, name: username }));
-      navigate("/home");
+      setSnackbar({
+        open: true,
+        message: "Login Successful",
+        severity: "success",
+      });
+      setTimeout(() => {
+        navigate("/home");
+      }, 1000);
     }
   };
 
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
+  const handleCloseSnackbar = () => {
+    setSnackbar((prev) => ({ ...prev, open: false }));
   };
 
-
-  const [flexDirection, setFlexDirection] = useState<'row' | 'column'>('row');
-  const [textFieldWidth, setTextFieldWidth] = useState('352px');
+  const [flexDirection, setFlexDirection] = useState<"row" | "column">("row");
+  const [textFieldWidth, setTextFieldWidth] = useState("352px");
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 600) {
-        setFlexDirection('column');
-        setTextFieldWidth('fit-content')
+        setFlexDirection("column");
+        setTextFieldWidth("fit-content");
       } else {
-        setFlexDirection('row');
-        setTextFieldWidth('352px')
+        setFlexDirection("row");
+        setTextFieldWidth("352px");
       }
     };
 
     handleResize();
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   const cardStyles = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '16px',
-    marginBottom: '16px',
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    marginBottom: "16px",
     flexDirection: flexDirection,
   };
 
   const textFieldStyle = {
-    width: textFieldWidth
-  }
-  
+    width: textFieldWidth,
+  };
 
   return (
     <div
@@ -161,24 +132,19 @@ export default function SignIn() {
         justifyContent: "center",
       }}
     >
-      <Snackbar
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message="Note archived"
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Please fill out all required fields
-        </Alert>
-      </Snackbar>
+      <CustomSnackbar
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        onClose={handleCloseSnackbar}
+      />
 
       <Card
         style={{
           width: "fit-content",
           height: "fit-content",
           padding: "20px",
-          margin:'15px'
+          margin: "15px",
         }}
         sx={{ boxShadow: "0px 4px 18px 0px #4B465C1A" }}
       >
@@ -201,9 +167,7 @@ export default function SignIn() {
           >
             Sign In
           </div>
-          <div
-            style={cardStyles}
-          >
+          <div style={cardStyles}>
             <TextField
               size="small"
               id="outlined-basic"
@@ -223,7 +187,10 @@ export default function SignIn() {
               onChange={(e) => setUsername(e.target.value)}
             />
 
-            <RandomButton label="Random" onClick={generateRandomString} />
+            <RandomButton
+              label="Random"
+              onClick={() => setUsername(generateRandomString())}
+            />
           </div>
 
           <CustomizedButton

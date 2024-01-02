@@ -1,22 +1,22 @@
-import { Box, Drawer, Snackbar, TextField } from "@material-ui/core";
+import { Box, Drawer, TextField } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomizedButton from "../Buttons/CustomizedButton";
 import useStyles, { Textarea } from "./../Inputs/InputStyles";
 import { useDispatch } from "react-redux";
-import React, { useState } from "react";
-import { addCard } from "../../redux/reducers/cardReducer";
-import { Alert, AlertColor } from "@mui/material";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore"; 
-import { db } from "../../firebase";
+import { useState } from "react";
+
+import { AlertColor } from "@mui/material";
 import { useTypedSelector } from "../../redux/store/store";
+import CustomSnackbar from "../CustomSnackbar/CustomSnackbar";
+import { addCardRequest } from "../../redux/reducers/cardReducer";
 
 interface DrawerProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-
 export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
+  
   const classes = useStyles();
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
@@ -46,27 +46,16 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
     }
 
     try {
-      const res = await addDoc(collection(db, "Cards"), {
-        title: title,
-        description: description,
-        username: currentUsername,
-        timeStamp: serverTimestamp(),
+      dispatch(addCardRequest(title, description, currentUsername));
+      onClose();
+      setSnackbar({
+        open: true,
+        message: 'Successfully submitted',
+        severity: 'success',
       });
-
-      if (res) {
-        onClose(); 
-        dispatch(addCard({ id: res.id, title, description, username: currentUsername, }));
-        setSnackbar({
-          open: true,
-          message: 'Successfully submitted',
-          severity: 'success',
-        });
-        setTitle('');
-        setDescription('');
-        
-      }
+      setTitle('');
+      setDescription('');
     } catch (err) {
-      console.error(err);
       setSnackbar({
         open: true,
         message: 'An error occurred',
@@ -79,24 +68,16 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
     setSnackbar((prev) => ({ ...prev, open: false }));
   };
 
-  
-
-
   return (
     <>
-    <Snackbar
+    <CustomSnackbar
         open={snackbar.open}
-        autoHideDuration={3000}
+        message={snackbar.message}
+        severity={snackbar.severity}
         onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      >
-        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
+      />
+       
     <Drawer anchor="right" open={isOpen} onClose={onClose}>
-       
-       
       <Box style={{ width: "400px" }} role="presentation">
 
         {/* Header */}

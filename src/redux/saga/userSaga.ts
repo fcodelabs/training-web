@@ -9,7 +9,7 @@ export const captureUsername = (username: string) => ({
 function* captureUsernameSaga(action: any): Generator<any, void, any> {
   try {
     const { payload } = action;
-    
+
     if (payload.length > 0) {
       yield put(setCurrentUsername(payload));
       localStorage.setItem('username', payload);

@@ -8,7 +8,7 @@ const firebaseConfig = {
   projectId: "dear-diary-emailusername-5f60d",
   storageBucket: "dear-diary-emailusername-5f60d.appspot.com",
   messagingSenderId: "71014166140",
-  appId: "1:71014166140:web:fbe2e46b2a929925ed23f9"
+  appId: process.env.REACT_APP_API_KEY,
 };
 
 const app = initializeApp(firebaseConfig);

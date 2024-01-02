@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SignInPage from "../containers/SignInPage/SignInPage";
-import HomePage from "../containers/HomePage/HomePage";
-import { SIGN_IN_PATH, HOME_PATH } from "../utility/routeConstants";
+import SignInPage from "../../containers/SignInPage/SignInPage";
+import HomePage from "../../containers/HomePage/HomePage";
+import { SIGN_IN_PATH, HOME_PATH } from "../../utility/routeConstants";
 
 const AppRoutes = () => {
     return (

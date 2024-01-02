@@ -11,6 +11,7 @@ import RandomNameGenerator from '../../utility/randomNameGenerator';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
+import { Grid } from '@mui/material';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -32,6 +33,7 @@ const StyledContinueButton = styled(Button)`
   background-color: #0092DD;
   align-self: center;
   margin-top: 15px;
+  margin-bottom: 24px;
 }
 `;
 
@@ -48,7 +50,7 @@ const StyledTitle = styled.span`
   font-weight: 700;
   align-content: center;
   line-height: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 24px;
 `;
 
 const StyledLogoText = styled.span`
@@ -64,7 +66,7 @@ const StyledLogoText = styled.span`
 const StyledCardBox = styled(Box)`
   background-color: #ffffff;
   width: 742px;
-  height: 267px;
+  height: auto;
   display: flex;
   margin: 0 10px;
   flex-direction: column;
@@ -77,25 +79,30 @@ const StyledLogoBox = styled(Box)`
   align-items: flex-start;
   margin-top: 24px;
   margin-left: 24px;
+  margin-bottom: 24px;
 `;
 
-const StyledInputBox = styled(Box)`
+const StyledInputGrid = styled(Grid)`
   
   align-self: center;
-  margin-top: 30px;
+  margin: 0 24px 0 24px;
+  width: auto;
   
   
 `;
 
 const StyledTextField = styled(TextField)`
+&&&{
   width: 395px;
   border-radius: 4px;
   border: 1px;
   color: #DBDADE;
   font-size: 13px;
   line-height: 21px;
+  margin-left: 5px;
+  margin-right: 16px;
   margin-bottom: 5px;
-`;
+}`;
 
 const StyledArrowForwardIcon = styled(ArrowForwardIcon)`
   &&& {
@@ -110,17 +117,18 @@ const StyledRandomButton = styled(Button)`
   font-family: public sans;
   text-transform: none;
   width: 104px;
-  height: 35px;
+  height: 38px;
   border-radius: 6px;
   color: #0092DD;
   background-color: rgba(0, 146, 221, 0.16);
   align-self: center;
-  margin-left: 16px;
-  margin-top: 3px;
+  margin-left: 0px;
+  margin-top: 0px;
   font-weight: 500;
   line-height: 18px;
   font-size: 15px;
   padding: 10px 20px 10px 20px;
+  
   
   }
 `;
@@ -158,7 +166,7 @@ const SignIn = () => {
         </StyledLogoBox>
         <StyledTitle>Sign In</StyledTitle>
 
-        <StyledInputBox>
+        <StyledInputGrid>
 
           <StyledTextField
             
@@ -172,7 +180,7 @@ const SignIn = () => {
           <StyledRandomButton  variant="contained" onClick={generateRandomName}>
             Random
           </StyledRandomButton>
-        </StyledInputBox>
+        </StyledInputGrid>
         <StyledContinueButton variant="contained"
           onClick={handleContinue}>
           Continue

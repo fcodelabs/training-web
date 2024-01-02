@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import { IconButton } from '@mui/material';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import DiaryCard from './DiaryCard/DiaryCard';
@@ -21,6 +21,7 @@ import { RootState, useAppDispatch } from '../../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { diaryCardActions } from '../../redux/diary/slice';
 
+import CalculateTimeElapsed from '../../utility/calculateTimeElapsed';
 
 const StyledMainDiv = styled.div`
     display: flex;
@@ -188,6 +189,8 @@ const HomePage = () => {
     const [diaryEntries, setDiaryEntries] = useState<DiaryCardProps[]>([]); // state to track diary entries
     const [showAlert, setShowAlert] = useState(false);
     const [submitTime, setSubmitTime] = useState<Date | null>(null);
+    const [elapsedTime, setElapsedTime] = useState<string>('');
+    const [searchQuery, setSearchQuery] = useState('');
 
     const dispatch = useDispatch();
 
@@ -212,11 +215,10 @@ const HomePage = () => {
         dispatch(diaryCardActions.addDiaryCard({ title, description, username: nickName })) // addding a new diary card to db
 
         // add new diary card to diary entries
-        // setDiaryEntries([newDiaryCard, ...diaryEntries]);
+        
         setSubmitTime(new Date()); // Capture the time when the user submits the card
         handleCloseSubmitCard();
-        // show toast
-        // showToaster();
+        // show alert
         setShowAlert(true);
     };
 
@@ -239,7 +241,7 @@ const HomePage = () => {
         setDiaryEntries(entries);
     }, [entries]);
 
-    const [searchQuery, setSearchQuery] = useState('');
+    
 
     // Function to filter diary entries based on search query
     const filteredDiaryEntries = diaryEntries.filter((entry) => {
@@ -248,11 +250,11 @@ const HomePage = () => {
     });
 
 
-    const [elapsedTime, setElapsedTime] = useState<string>('');
+    
 
     // Function to calculate and update elapsed time
     const updateElapsedTime = () => {
-        const timeElapsed = calculateTimeElapsed(submitTime);
+        const timeElapsed = CalculateTimeElapsed(submitTime);
     
         // Check if there is any time elapsed
         if (timeElapsed) {
@@ -403,27 +405,6 @@ const HomePage = () => {
     );
 };
 
-const calculateTimeElapsed = (submitTime: Date | null) => {
-    if (!submitTime) return '';
 
-    const currentTime = new Date();
-    const elapsedMilliseconds = currentTime.getTime() - submitTime.getTime();
-    const elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
-
-    // Calculate minutes and remaining seconds
-    const minutes = Math.floor(elapsedSeconds / 60);
-    const seconds = elapsedSeconds % 60;
-
-    // Construct the time elapsed string
-    let timeElapsedString = '';
-
-    if (minutes > 0) {
-        timeElapsedString += `${minutes} ${minutes === 1 ? 'min' : 'mins'}`;
-    } else {
-        timeElapsedString += '0 mins';
-    }
-
-    return timeElapsedString.trim();
-};
 
 export default HomePage;

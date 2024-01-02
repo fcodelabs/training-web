@@ -7,11 +7,11 @@ const ProtectedHome = () => {
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state: RootState) => state.login.isLoggedIn);
   const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
-  if (!isLoggedIn && !storedIsLoggedIn) {
+  if (!isLoggedIn && storedIsLoggedIn === "false") {
     navigate("/");
     return <Navigate to="/" replace />;
   }
-
+  localStorage.setItem("isLoggedIn", "true");
   return <HomePage />;
 };
 

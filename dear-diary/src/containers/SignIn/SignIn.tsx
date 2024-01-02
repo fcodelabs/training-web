@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -12,7 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { Stack, useMediaQuery } from "@mui/material";
 import randomNameGenerator from "../../utility";
 import { useDispatch } from "react-redux";
-import { setTrue } from "../../redux/slices/loginStateSlice";
+import { setFalse, setTrue } from "../../redux/slices/loginStateSlice";
+import { paths } from "../../components/Routes/routes";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -85,6 +86,12 @@ const SignIn: React.FC = () => {
   const [textError, setTextError] = useState<boolean>(false);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    console.log("runnnnn");
+    dispatch(setFalse());
+    localStorage.setItem("isLoggedIn", "false");
+  });
+
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
@@ -100,7 +107,7 @@ const SignIn: React.FC = () => {
     if (text) {
       dispatch(setTrue());
       localStorage.setItem("isLoggedIn", "true");
-      navigate("/home", { state: { nickname: text } });
+      navigate(paths.HomePage, { state: { nickname: text } });
     }
   };
 

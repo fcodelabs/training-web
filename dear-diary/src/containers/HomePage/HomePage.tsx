@@ -18,6 +18,7 @@ import { getCard } from "../../redux/slices/addCardSlice";
 
 import { setSubmitFalse } from "../../redux/slices/cardSubmitSlice";
 import CheckIcon from "@mui/icons-material/Check";
+import TimeStamp from "../../components/TimeStamp/TimeStamp";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -101,23 +102,6 @@ const HomePage: React.FC = () => {
   const isOpen = useSelector((state: RootState) => state.login.isLoggedIn);
   const isSubmitted = useSelector((state: RootState) => state.submit.isSubmit);
 
-  const [secondsElapsed, setSecondsElapsed] = useState(0);
-
-  useEffect(() => {
-    if (isSubmitted) {
-      const timer = setInterval(
-        () => setSecondsElapsed((secondsElapsed) => secondsElapsed + 1),
-        1000
-      );
-      return () => clearInterval(timer);
-    }
-  }, [isSubmitted]);
-
-  const getDisplayTime = () => {
-    const minutes = Math.floor(secondsElapsed / 60);
-    return `${`     ${minutes} mins ago`}`;
-  };
-
   useEffect(() => {
     dispatch(getCard(nickname));
   }, [dispatch, nickname]);
@@ -133,14 +117,11 @@ const HomePage: React.FC = () => {
 
   const handleShowForm = () => {
     setShowCardAddingForm(true);
-    setSecondsElapsed(0);
   };
   const handleCloseForm = () => {
     setShowCardAddingForm(false);
   };
-  // const handleClose = () => {
-  //   dispatch(setFalse());
-  // };
+
   const handleCloseSnack = () => {
     dispatch(setSubmitFalse());
   };
@@ -266,15 +247,7 @@ const HomePage: React.FC = () => {
               >
                 Record Saved successfully.
               </Typography>
-              <Typography
-                sx={{
-                  fontFamily: "public Sans",
-                  fontSize: isMobile ? "11px" : "13px",
-                  color: "rgba(75, 70, 92, 0.5)",
-                }}
-              >
-                {getDisplayTime()}
-              </Typography>
+              <TimeStamp />
             </Stack>
           </Alert>
         </Snackbar>

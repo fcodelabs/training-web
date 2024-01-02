@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { diaryCardActions } from '../../redux/diary/slice';
+import { useNavigate } from 'react-router-dom';
 
 import CalculateTimeElapsed from '../../utility/calculateTimeElapsed';
 
@@ -187,15 +188,16 @@ interface DiaryCardProps {
 const HomePage = () => {
     const [showSubmitCard, setShowSubmitCard] = useState(false);            // state to track if submit card is open or not
     const [diaryEntries, setDiaryEntries] = useState<DiaryCardProps[]>([]); // state to track diary entries
-    const [showAlert, setShowAlert] = useState(false);
-    const [submitTime, setSubmitTime] = useState<Date | null>(null);
-    const [elapsedTime, setElapsedTime] = useState<string>('');
-    const [searchQuery, setSearchQuery] = useState('');
+    const [showAlert, setShowAlert] = useState(false);                      // sate to track alert
+    const [submitTime, setSubmitTime] = useState<Date | null>(null);        // state to track submit time
+    const [elapsedTime, setElapsedTime] = useState<string>('');             // state to track elapsed time
+    const [searchQuery, setSearchQuery] = useState('');                     // state to track search query
 
     const dispatch = useDispatch();
+    const history = useNavigate();               // get history from react router dom
 
     const location = useLocation();              // get location from react router dom
-    const nickName = location.state.name || {};  // from that location get name
+    const nickName = location.state?.name || null;  // from that location get name
 
     // checking the diary card list array
     useEffect(() => {
@@ -203,10 +205,18 @@ const HomePage = () => {
     }, [diaryEntries]);
 
     // fetching the diarycard according to the username
+    // useEffect(() => {
+    //     console.log("fetching diary card list");
+    //     dispatch(diaryCardActions.fetchDiaryCardList(nickName));
+    // }, [dispatch, nickName]);
+
     useEffect(() => {
-        console.log("fetching diary card list");
-        dispatch(diaryCardActions.fetchDiaryCardList(nickName));
-    }, [dispatch, nickName]);
+        if (!nickName) {
+            history('/'); // Redirect to the signing page if nickname is empty
+        } else {
+          dispatch(diaryCardActions.fetchDiaryCardList(nickName));
+        }
+      }, [dispatch, history, nickName]);
 
     // function to handle submit card
     const handleOnSubmitCard = (title: string, description: string) => {

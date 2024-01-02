@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ResponsiveAppBar from "../../components/Navbar/Navbar";
-import Home from "./Home/Home";
+import Home from "./HomeBody/HomeBody";
 import Skeleton from '@mui/material/Skeleton';
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';

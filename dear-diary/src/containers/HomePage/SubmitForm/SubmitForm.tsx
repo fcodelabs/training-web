@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { addCardByUser } from '../../../redux/diarycard/diaryCardSlice';
+import { addCard } from '../../../redux/diarycard/diaryCardSlice';
 import { SubmitCard } from '../../../utilities/types';
 import { setNotification } from '../../../redux/notification/notificationSlice';
 
@@ -128,7 +128,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
       dispatch(setNotification({ type: 'error', message: 'Title and description are required!', show: true, showtime: false }));
       return;
     }
-    dispatch(addCardByUser(newDiary));
+    dispatch(addCard(newDiary));
     dispatch(setNotification({ type: 'success', message: 'Record Saved Successfully', show: true, showtime: true }));
     setTitle('');
     setDescription('');

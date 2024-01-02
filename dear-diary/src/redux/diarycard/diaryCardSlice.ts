@@ -15,7 +15,7 @@ const diaryCardSlice = createSlice({
     name: "diaryCard",
     initialState: initialState,
     reducers: {
-        addCardByUser: (state, action: PayloadAction<SubmitCard>) => { },
+        addCard: (state, action: PayloadAction<SubmitCard>) => { },
         setCards: (state, action: PayloadAction<Card[]>) => {
             state.isLoading = false;
             state.cards = action.payload;
@@ -25,5 +25,5 @@ const diaryCardSlice = createSlice({
     },
 });
 
-export const { setCards, addCardByUser, watchingCards } = diaryCardSlice.actions;
+export const { setCards, addCard, watchingCards } = diaryCardSlice.actions;
 export default diaryCardSlice.reducer;

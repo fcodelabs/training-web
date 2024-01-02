@@ -1,4 +1,4 @@
-import { addCardByUser } from './diaryCardSlice';
+import { addCard } from './diaryCardSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { eventChannel } from "redux-saga";
 import { watchingCards } from "./diaryCardSlice";
@@ -55,7 +55,7 @@ function* watchCards(userName: PayloadAction<String>): Generator<any, void, Retu
 
 function* Gen() {
 
-    yield takeLatest(addCardByUser, addCardSaga);
+    yield takeLatest(addCard, addCardSaga);
     yield takeLatest(watchingCards, watchCards);
 }
 

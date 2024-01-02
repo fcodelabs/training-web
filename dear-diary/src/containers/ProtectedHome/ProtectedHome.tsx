@@ -6,6 +6,7 @@ import HomePage from "../HomePage/HomePage";
 const ProtectedHome = () => {
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state: RootState) => state.login.isLoggedIn);
+
   const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
   if (!isLoggedIn && storedIsLoggedIn === "false") {
     navigate("/");

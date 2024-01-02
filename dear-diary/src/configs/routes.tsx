@@ -1,5 +1,5 @@
-import ProtectedHome from "../../containers/ProtectedHome/ProtectedHome";
-import SignIn from "../../containers/SignIn/SignIn";
+import SignIn from "../containers/SignIn/SignIn";
+import ProtectedHome from "../containers/ProtectedHome/ProtectedHome";
 
 interface RouteConfig {
   id: number;

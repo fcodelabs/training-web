@@ -13,7 +13,7 @@ import { Stack, useMediaQuery } from "@mui/material";
 import randomNameGenerator from "../../utility";
 import { useDispatch } from "react-redux";
 import { setFalse, setTrue } from "../../redux/slices/loginStateSlice";
-import { paths } from "../../components/Routes/routes";
+import { paths } from "../../configs/routes";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -82,12 +82,11 @@ const signInPageStyles = {
 const SignIn: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [text, setText] = useState<string>("");
   const [textError, setTextError] = useState<boolean>(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("runnnnn");
     dispatch(setFalse());
     localStorage.setItem("isLoggedIn", "false");
   });

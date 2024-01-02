@@ -19,6 +19,7 @@ import { getCard } from "../../redux/slices/addCardSlice";
 import { setSubmitFalse } from "../../redux/slices/cardSubmitSlice";
 import CheckIcon from "@mui/icons-material/Check";
 import TimeStamp from "../../components/TimeStamp/TimeStamp";
+import { setFalse } from "../../redux/slices/loginStateSlice";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
@@ -212,7 +213,11 @@ const HomePage: React.FC = () => {
           autoHideDuration={3000}
           sx={{ mr: isMobile ? 0 : 3 }}
         >
-          <Alert severity="success" sx={homepageStyles.loginAlertStyles}>
+          <Alert
+            severity="success"
+            sx={homepageStyles.loginAlertStyles}
+            onClose={() => dispatch(setFalse())}
+          >
             Login Successful
           </Alert>
         </Snackbar>

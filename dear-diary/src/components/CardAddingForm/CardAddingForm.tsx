@@ -6,8 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
-import { collectionRef } from "../../configs/firebase";
-import { addDoc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import { setSubmitTrue } from "../../redux/slices/cardSubmitSlice";
+import { sendCard } from "../../redux/slices/addCardSlice";
 
 const cardAddingFromStyles = {
   iconButtonStyles: {
@@ -33,13 +34,19 @@ const cardAddingFromStyles = {
 
 interface CardAddingFormProps {
   onClose: () => void;
+  username: string;
 }
 
-const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
+const CardAddingForm: React.FC<CardAddingFormProps> = ({
+  onClose,
+  username,
+}) => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [titleError, setTitleError] = useState<boolean>(false);
   const [descriptionError, setDescriptionError] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -63,14 +70,11 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
       setDescriptionError(true);
     }
     if (title && description) {
-      try {
-        addDoc(collectionRef, { title, description });
-      } catch (error) {
-        console.error(error);
-      }
-      onClose();
+      dispatch(sendCard({ username, title, description }));
       setTitle("");
       setDescription("");
+      dispatch(setSubmitTrue());
+      onClose();
     }
   };
 
@@ -78,6 +82,7 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
     event.preventDefault();
     setTitle("");
     setDescription("");
+    onClose();
   };
 
   return (
@@ -96,6 +101,7 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
         </IconButton>
       </Stack>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <Typography fontFamily="public sans">Title</Typography>
         <TextField
           value={title}
           onChange={handleTitleChange}
@@ -107,6 +113,7 @@ const CardAddingForm: React.FC<CardAddingFormProps> = ({ onClose }) => {
           helperText={titleError ? "Title is Required" : ""}
           sx={cardAddingFromStyles.textFieldStyles}
         ></TextField>
+        <Typography fontFamily="public sans">Description</Typography>
         <TextField
           value={description}
           onChange={handleDescriptionChange}

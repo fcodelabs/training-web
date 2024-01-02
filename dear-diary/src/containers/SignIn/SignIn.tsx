@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -11,11 +11,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stack, useMediaQuery } from "@mui/material";
 import randomNameGenerator from "../../utility";
+import { useDispatch } from "react-redux";
+import { setFalse, setTrue } from "../../redux/slices/loginStateSlice";
+import { paths } from "../../configs/routes";
 
 const backgroundImage: string =
   process.env.PUBLIC_URL + "Images/backgroundImage.png";
 const Logo: string = process.env.PUBLIC_URL + "Images/Logo.png";
-
 
 const signInPageStyles = {
   rootStyles: {
@@ -62,22 +64,32 @@ const signInPageStyles = {
       color: "white",
     },
   },
-  continueButtonStyles: {
-    backgroundColor: "rgba(0, 146, 221,0.65)",
+  continueButtonStylesEnabled: {
+    backgroundColor: "rgba(0, 146, 221, 1)",
     typography: {
       fontFamily: "public sans",
       textTransform: "none",
       fontSize: "15px",
       fontWeight: 500,
     },
+    "&.Mui-disabled": {
+      background: "rgba(0, 146, 221, 0.65)",
+      color: "white",
+    },
   },
 };
 
 const SignIn: React.FC = () => {
-  const isMobile = useMediaQuery("(max-width: 400px)");
+  const isMobile = useMediaQuery("(max-width: 600px)");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [text, setText] = useState<string>("");
   const [textError, setTextError] = useState<boolean>(false);
+
+  useEffect(() => {
+    dispatch(setFalse());
+    localStorage.setItem("isLoggedIn", "false");
+  });
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -92,14 +104,16 @@ const SignIn: React.FC = () => {
       setTextError(true);
     }
     if (text) {
-      navigate("/home", { state: { nickname: text } });
+      dispatch(setTrue());
+      localStorage.setItem("isLoggedIn", "true");
+      navigate(paths.HomePage, { state: { nickname: text } });
     }
   };
 
   return (
     <div style={signInPageStyles.rootStyles}>
       <Container sx={signInPageStyles.containerStyles}>
-        <Card>
+        <Card sx={{ boxShadow: "0" }}>
           <CardContent sx={signInPageStyles.cardContentStyles}>
             <Box
               display="flex"
@@ -150,7 +164,7 @@ const SignIn: React.FC = () => {
                 onChange={handleTextChange}
                 required
                 error={textError}
-                sx={isMobile ? { width: "100%" } : { width: "50%" }}
+                sx={isMobile ? { width: "100%" } : { width: "60%" }}
               ></TextField>
               <Button
                 variant="contained"
@@ -174,9 +188,10 @@ const SignIn: React.FC = () => {
                 variant="contained"
                 fullWidth={isMobile}
                 endIcon={<ArrowForwardIcon />}
+                disabled={text === "" ? true : false}
                 onClick={handleContinueButtonClick}
                 disableElevation
-                sx={signInPageStyles.continueButtonStyles}
+                sx={signInPageStyles.continueButtonStylesEnabled}
               >
                 Continue
               </Button>

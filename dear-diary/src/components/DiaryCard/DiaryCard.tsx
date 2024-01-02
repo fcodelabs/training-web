@@ -18,6 +18,20 @@ const diaryCardStyles = {
     fontStyle: "normal",
     fontWeight: 400,
     lineHeight: "22px",
+    textOverflow: "ellipsis",
+    whiteSpace: "normal",
+    // wordBreak: "break-all",
+  },
+  descriptionStylesForOneWord: {
+    marginBottom: "16px",
+    fontFamily: "public sans",
+    fontSize: "15px",
+    fontStyle: "normal",
+    fontWeight: 400,
+    lineHeight: "22px",
+    textOverflow: "ellipsis",
+    whiteSpace: "normal",
+    wordBreak: "break-all",
   },
   buttonStyles: {
     padding: "0px",
@@ -31,6 +45,10 @@ const diaryCardStyles = {
       lineHeight: "18px",
     },
   },
+  cardStyles: {
+    borderRadius: "6px",
+    boxShadow: "0px 4px 18px 0px rgba(75, 70, 92, 0.10)",
+  },
 };
 interface DiaryCardProps {
   title: string;
@@ -39,17 +57,15 @@ interface DiaryCardProps {
 
 const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
   const [expanded, setExpanded] = useState(false);
+  const longWordsRegex = /\b\w{35,}\b/g;
+  const longWords = description.match(longWordsRegex);
 
   const handleShowMore = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Card
-      sx={{
-        borderRadius: "6px",
-      }}
-    >
+    <Card sx={diaryCardStyles.cardStyles}>
       <CardContent>
         <Typography
           variant="h5"
@@ -61,7 +77,11 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
         <Typography
           variant="body2"
           color="textSecondary"
-          sx={diaryCardStyles.descriptionStyles}
+          sx={
+            longWords === null
+              ? diaryCardStyles.descriptionStyles
+              : diaryCardStyles.descriptionStylesForOneWord
+          }
         >
           {description.length <= 100 || expanded
             ? description
@@ -69,7 +89,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
         </Typography>
         {description.length > 100 && (
           <Button onClick={handleShowMore} sx={diaryCardStyles.buttonStyles}>
-            {expanded ? "Show Less" : "Show More"}
+            {expanded ? "Hide" : "Show More"}
           </Button>
         )}
       </CardContent>

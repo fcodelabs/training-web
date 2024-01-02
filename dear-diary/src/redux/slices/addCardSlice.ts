@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface Card {
+  username: string;
   title: string;
   description: string;
 }
@@ -17,17 +18,17 @@ const cardsSlice = createSlice({
   name: "addingCards",
   initialState,
   reducers: {
-    addCard: (state, action: PayloadAction<Card>) => {
-      state.cards.push(action.payload);
-    },
     setCard: (state, action: PayloadAction<Card[]>) => {
       state.cards = action.payload;
     },
     getCard: (state) => {
-      console.log("Loading...");
+      //use to get cards from the firebase
+    },
+    sendCard: (state, action: PayloadAction<Card>) => {
+      //use to send cards to the firebase
     },
   },
 });
 
-export const { addCard, setCard, getCard } = cardsSlice.actions;
+export const { setCard, getCard, sendCard } = cardsSlice.actions;
 export default cardsSlice.reducer;

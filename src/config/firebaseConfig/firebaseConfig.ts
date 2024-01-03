@@ -4,8 +4,8 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCduh8Bd6T3lqaMxFxihVPZQSRH7_vPODY",
-    authDomain: "dear-diary-emailusername-6a3d7.firebaseapp.com",
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
     projectId: "dear-diary-emailusername-6a3d7",
     storageBucket: "dear-diary-emailusername-6a3d7.appspot.com",
     messagingSenderId: "107317734441",

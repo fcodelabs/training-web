@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Card {
+interface ICard {
   id: string;
   title: string;
   description: string;
@@ -12,7 +12,7 @@ export const addCardRequest = (title: string, description: string, username: str
   payload: { title, description, username: username || '' },
 });
 
-export const addCardSuccess = (card: Card) => ({
+export const addCardSuccess = (card: ICard) => ({
   type: 'ADD_CARD_SUCCESS',
   payload: { card },
 });
@@ -28,9 +28,9 @@ export const fetchCardsRequest = () => ({
 
 const cardSlice = createSlice({
   name: 'cards',
-  initialState: [] as Card[],
+  initialState: [] as ICard[],
   reducers: {
-    setCards: (state, action: PayloadAction<Card[]>) => {
+    setCards: (state, action: PayloadAction<ICard[]>) => {
       return [...action.payload];
     },
   },

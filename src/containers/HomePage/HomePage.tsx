@@ -23,6 +23,7 @@ import { diaryCardActions } from '../../redux/diary/slice';
 import { useNavigate } from 'react-router-dom';
 
 import CalculateTimeElapsed from '../../utility/calculateTimeElapsed';
+import { SIGN_IN_PATH } from '../../utility/routeConstants';
 
 const StyledMainDiv = styled.div`
     display: flex;
@@ -178,7 +179,7 @@ const ToastContainerTime = styled.span`
 
 
 
-interface DiaryCardProps {
+interface IDiaryCardProps {
     title: string;
     description: string;
     username: string;
@@ -187,7 +188,7 @@ interface DiaryCardProps {
 
 const HomePage = () => {
     const [showSubmitCard, setShowSubmitCard] = useState(false);            // state to track if submit card is open or not
-    const [diaryEntries, setDiaryEntries] = useState<DiaryCardProps[]>([]); // state to track diary entries
+    const [diaryEntries, setDiaryEntries] = useState<IDiaryCardProps[]>([]); // state to track diary entries
     const [showAlert, setShowAlert] = useState(false);                      // sate to track alert
     const [submitTime, setSubmitTime] = useState<Date | null>(null);        // state to track submit time
     const [elapsedTime, setElapsedTime] = useState<string>('');             // state to track elapsed time
@@ -207,9 +208,9 @@ const HomePage = () => {
     // fetching the diarycard according to the username
     useEffect(() => {
         if (!nickName) {
-            history('/'); // Redirect to the signing page if nickname is empty
+            history(SIGN_IN_PATH); // Redirect to the signing page if nickname is empty
         } else {
-            console.log("fetching diary card list");
+            
             dispatch(diaryCardActions.fetchDiaryCardList(nickName));
         }
     }, [dispatch, history, nickName]);
@@ -217,11 +218,11 @@ const HomePage = () => {
     // function to handle submit card
     const handleOnSubmitCard = (title: string, description: string) => {
         // create new diary card
-        console.log('Handling submit card:', { title, description, username: nickName });
+        
 
         // Add the new card to the beginning of the diaryEntries array
         setDiaryEntries([{ title, description, username: nickName }, ...diaryEntries]);
-        
+
         dispatch(diaryCardActions.addDiaryCard({ title, description, username: nickName })) // addding a new diary card to db
 
         // add new diary card to diary entries

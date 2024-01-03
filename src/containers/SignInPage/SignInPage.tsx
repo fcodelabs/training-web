@@ -85,7 +85,7 @@ const StyledLogoBox = styled(Box)`
 const StyledInputGrid = styled(Grid)`
   
   align-self: center;
-  margin: 0 24px 0 24px;
+  padding: 0px 5px 0px 5px;
   width: auto;
   
   
@@ -99,7 +99,7 @@ const StyledTextField = styled(TextField)`
   color: #DBDADE;
   font-size: 13px;
   line-height: 21px;
-  margin-left: 5px;
+  margin-left: 16px;
   margin-right: 16px;
   margin-bottom: 5px;
 }`;

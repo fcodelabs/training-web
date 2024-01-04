@@ -1,78 +1,87 @@
-import { Box, Drawer, IconButton, Snackbar, TextField, TextareaAutosize } from "@material-ui/core";
+import { Box, Drawer, TextField } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
-import CustomizeTextArea from "../Inputs/TextArea";
-import CustomizedButton from "../Buttons/CustomizedButton";
-import useStyles, { Textarea } from "./../Inputs/InputStyles";
+import CustomizedButton from "../CustomizedButton/CustomizedButton";
+import useStyles, { Textarea } from "../InputStyles/InputStyles";
 import { useDispatch } from "react-redux";
-import React, { useId, useState } from "react";
-import { addCard } from "../../redux/reducers/cardReducer";
-import { Alert } from "@mui/material";
+import { useState } from "react";
+
+
+import { AlertColor } from "@mui/material";
+import { useTypedSelector } from "../../redux/store/store";
+import CustomSnackbar from "../CustomSnackbar/CustomSnackbar";
+import { addCardRequest } from "../../redux/reducers/cardReducer";
+
 
 interface DrawerProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-interface Card {
-  id: string;
-  title: string;
-  description: string;
-}
-
 export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
+  
   const classes = useStyles();
   const dispatch = useDispatch();
-  const cardId = useId();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [open, setOpen] = useState(false);
- 
+  const [snackbar, setSnackbar] = useState<{
+    open: boolean;
+    message: string;
+    severity: AlertColor;
+  }>({
+    open: false,
+    message: '',
+    severity: 'success',
+  });
 
-  const handleSubmit = (e:any) => {
+  const currentUsername = useTypedSelector((state) => state.users.currentUsername);
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-     // Validation
-     if (!title.trim()) {
-      setOpen(true);
+    if (!title.trim() || !description.trim()) {
+      setSnackbar({
+        open: true,
+        message: 'Please fill out all required fields',
+        severity: 'error',
+      });
       return;
     }
 
-    if (!description.trim()) {
-      setOpen(true);
-      return;
+    try {
+      dispatch(addCardRequest({title, description, username: currentUsername }));
+      onClose();
+      setSnackbar({
+        open: true,
+        message: 'Successfully submitted',
+        severity: 'success',
+      });
+      setTitle('');
+      setDescription('');
+    } catch (err) {
+      setSnackbar({
+        open: true,
+        message: 'An error occurred',
+        severity: 'error',
+      });
     }
-
-    const newCard: Card = { id: cardId, title: title, description: description };
-    dispatch<any>(addCard(newCard));
-
-    setTitle("");
-    setDescription("");
-
-  }
-
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
   };
 
+  const handleCloseSnackbar = () => {
+    setSnackbar((prev) => ({ ...prev, open: false }));
+  };
 
   return (
+    <>
+    <CustomSnackbar
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        onClose={handleCloseSnackbar}
+      />
+       
     <Drawer anchor="right" open={isOpen} onClose={onClose}>
-      <Snackbar
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message="Note archived"
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        >
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            Please fill out all required fields
-          </Alert>
-        </Snackbar>
       <Box style={{ width: "400px" }} role="presentation">
+
         {/* Header */}
 
         <div
@@ -190,5 +199,6 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
         </div>
       </Box>
     </Drawer>
+    </>
   );
 }

@@ -1,21 +1,56 @@
-import CustomizedButton from "../../components/Buttons/CustomizedButton";
+import CustomizedButton from "../../components/CustomizedButton/CustomizedButton";
 import Header from "../../components/Header/Header";
 import CustomDrawer from "../../components/CustomDrawer/CustomDrawer";
-import useStyles from "./../../components/Inputs/InputStyles";
+import useStyles from "../../components/InputStyles/InputStyles";
 
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InputAdornment, TextField } from "@material-ui/core";
 import DiaryCardWrapper from "../../components/DiaryCard/DiaryCardWrapper";
 
-
-
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState<string>("");
   const classes = useStyles();
 
+  const [flexDirection, setFlexDirection] = useState<"row" | "column">("row");
+  const [textFieldWidth, setTextFieldWidth] = useState("352px");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 600) {
+        setFlexDirection("column");
+        setTextFieldWidth("400px");
+      } else {
+        setFlexDirection("row");
+        setTextFieldWidth("530px");
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const divStyles = {
+    margin: "30px 60px 0 60px",
+    display: "flex",
+    flexDirection: flexDirection,
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "10px",
+  };
+
+  const textFieldStyle = {
+    width: textFieldWidth,
+  };
+
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "fit-content", paddingBottom: "20px" }}>
       <Header />
 
       <div
@@ -28,15 +63,7 @@ export default function Home() {
         Home
       </div>
 
-      <div
-        style={{
-          margin: "30px 60px 0 60px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-
+      <div style={divStyles}>
         <TextField
           size="small"
           id="outlined-basic"
@@ -44,7 +71,6 @@ export default function Home() {
           placeholder="Placeholder"
           className={classes.root}
           InputLabelProps={{
-            
             classes: {
               root: classes.customLabel,
             },
@@ -57,28 +83,27 @@ export default function Home() {
               </InputAdornment>
             ),
           }}
-          style={{ width: "530px" }}
+          style={textFieldStyle}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
 
         <CustomizedButton
           label="Submit New"
           onClick={() => {
             setIsOpen(true);
-            console.log("Clicked");
           }}
         />
-
       </div>
 
-      <div style={{
-        margin: "47px 60px 0 60px",
-  
-      }}>
-        <DiaryCardWrapper/>
+      <div
+        style={{
+          margin: "47px 60px 0 60px",
+        }}
+      >
+        <DiaryCardWrapper searchInput={searchInput} />
       </div>
 
       <CustomDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />
-
     </div>
   );
 }

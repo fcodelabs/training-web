@@ -19,6 +19,7 @@ const truncateText = (text: string, maxLength: number) => {
 const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
   const [showMore, setShowMore] = useState(false);
   const truncatedDescription = truncateText(description, 100);
+  const shouldShowButton = description.length > 100;
 
   return (
     <div>
@@ -43,6 +44,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
           >
             {showMore ? description : truncatedDescription}
           </Typography>
+          {shouldShowButton && (
           <Button
             sx={{ fontSize: 15, fontWeight: 600, color: "#0092DD" }}
             size="small"
@@ -50,6 +52,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ title, description }) => {
           >
             {showMore ? 'Hide' : 'Show More'}
           </Button>
+           )}
         </CardContent>
       </Card>
     </div>

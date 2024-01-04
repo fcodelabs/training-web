@@ -1,7 +1,7 @@
-import CustomizedButton from "../../components/Buttons/CustomizedButton";
+import CustomizedButton from "../../components/CustomizedButton/CustomizedButton";
 import Header from "../../components/Header/Header";
 import CustomDrawer from "../../components/CustomDrawer/CustomDrawer";
-import useStyles from "./../../components/Inputs/InputStyles";
+import useStyles from "../../components/InputStyles/InputStyles";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import CustomizedButton from "../../components/Buttons/CustomizedButton";
+import CustomizedButton from "../../components/CustomizedButton/CustomizedButton";
 import Logo from "../../components/Logo/Logo";
-import useStyles from "./../../components/Inputs/InputStyles";
-import RandomButton from "../../components/Buttons/RandomButton";
+import useStyles from "../../components/InputStyles/InputStyles";
+import RandomButton from "../../components/RandomButton/RandomButton";
 
 import Card from "@mui/material/Card";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";

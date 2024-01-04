@@ -22,6 +22,7 @@ export default function DiaryCardWrapper({ searchInput }: SearchInputProps) {
   const currentUsername = useTypedSelector((state) => state.users.currentUsername);
 
   useEffect(() => {
+    console.log("Dispatching fetchCardsRequest");
     dispatch(fetchCardsRequest());
   }, [dispatch]);
 

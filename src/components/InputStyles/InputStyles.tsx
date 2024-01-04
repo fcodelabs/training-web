@@ -52,5 +52,3 @@ export const Textarea = styled(BaseTextareaAutosize)(
     }
   `,
 );
-
-

@@ -1,14 +1,16 @@
 import { Box, Drawer, TextField } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
-import CustomizedButton from "../Buttons/CustomizedButton";
-import useStyles, { Textarea } from "./../Inputs/InputStyles";
+import CustomizedButton from "../CustomizedButton/CustomizedButton";
+import useStyles, { Textarea } from "../InputStyles/InputStyles";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+
 
 import { AlertColor } from "@mui/material";
 import { useTypedSelector } from "../../redux/store/store";
 import CustomSnackbar from "../CustomSnackbar/CustomSnackbar";
 import { addCardRequest } from "../../redux/reducers/cardReducer";
+
 
 interface DrawerProps {
   isOpen: boolean;
@@ -46,7 +48,7 @@ export default function CustomDrawer({ isOpen, onClose }: DrawerProps) {
     }
 
     try {
-      dispatch(addCardRequest(title, description, currentUsername));
+      dispatch(addCardRequest({title, description, username: currentUsername }));
       onClose();
       setSnackbar({
         open: true,

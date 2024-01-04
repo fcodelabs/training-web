@@ -1,29 +1,37 @@
 import { takeEvery, put, call, fork, take, cancelled, cancel } from 'redux-saga/effects';
 import { collection, onSnapshot, QuerySnapshot, DocumentSnapshot, DocumentData, serverTimestamp, addDoc } from 'firebase/firestore';
 import { eventChannel, EventChannel } from 'redux-saga';
-import { addCardSuccess, addCardFailure } from '../reducers/cardReducer';
 import { setCards } from '../reducers/cardReducer';
 import { db } from '../../firebase';
 
-interface Card {
-  id: string;
+interface ICard {
+  id?: string; 
   title: string;
   description: string;
   username: string | null;
   timestamp: Date | null;
 }
+export const addCardRequest = (title: string, description: string, username: string | null) => ({
+  type: 'cards/addCardRequest',
+  payload: { title, description, username: username || '' },
+});
+
+export const fetchCardsRequest = (cards: ICard[]) => ({
+  type: 'cards/fetchCardsRequest',
+  payload: cards,
+});
 
 function createCardsChannel(cardsCollection: any) {
-  return eventChannel<Card[]>((emit) => {
+  return eventChannel<ICard[]>((emit) => {
     const unsubscribe = onSnapshot(cardsCollection, (querySnapshot: QuerySnapshot<DocumentData>) => {
-      const cards: Card[] = [];
+      const cards: ICard[] = [];
 
       querySnapshot.forEach((doc: DocumentSnapshot<DocumentData>) => {
         const cardData = doc.data();
-        const card: Card = {
-          id: doc.id,
-          title: cardData?.title || '',
-          description: cardData?.description || '',
+        const card: ICard = {
+            id: doc.id,
+            title: cardData?.title || '',
+            description: cardData?.description || '',
           username: cardData?.username || '',
           timestamp: cardData?.timeStamp?.toDate() as Date | null,
         };
@@ -37,7 +45,8 @@ function createCardsChannel(cardsCollection: any) {
   });
 }
 
-function* watchCardsChanges(cardsChannel: EventChannel<Card[]>): Generator<any, void, any> {
+
+function* watchCardsChanges(cardsChannel: EventChannel<ICard[]>): Generator<any, void, any> {
   try {
     while (true) {
       const cards = yield take(cardsChannel);
@@ -50,27 +59,34 @@ function* watchCardsChanges(cardsChannel: EventChannel<Card[]>): Generator<any, 
   }
 }
 
+
 function* fetchCardsSaga(): Generator<any, void, any> {
+ 
   let watcher;
+ 
   try {
 
     const cardsCollection = collection(db, 'Cards');
+    
 
     const cardsChannel = yield call(createCardsChannel, cardsCollection);
+    
 
     watcher = yield fork(watchCardsChanges, cardsChannel);
 
-    yield take('FETCH_CARDS_REQUEST');
+    yield take('cards/fetchCardsRequest');
+    
 
   } finally {
-
-    // Cancel the watcher saga if it was forked
+    
+   // Cancel the watcher saga if it was forked
     if (watcher) {
       yield cancel(watcher);
     }
 
   }
 }
+
 
 function* addCardSaga(action: any): Generator<any, void, any> {
   try {
@@ -83,24 +99,15 @@ function* addCardSaga(action: any): Generator<any, void, any> {
       timeStamp: serverTimestamp(),
     });
 
-    if (res) {
-      const newCard = {
-        id: res.id,
-        title,
-        description,
-        username,
-        timestamp: new Date(),
-      };
-      yield put(addCardSuccess(newCard));
-    }
   } catch (error) {
-    yield put(addCardFailure('An error occurred while adding the card.'));
+    console.log(error)
   }
 }
 
+
 export function* cardSaga() {
-  yield takeEvery('FETCH_CARDS_REQUEST', fetchCardsSaga);
-  yield takeEvery('ADD_CARD_REQUEST', addCardSaga);
+  yield takeEvery('cards/fetchCardsRequest', fetchCardsSaga);
+  yield takeEvery('cards/addCardRequest', addCardSaga);
 }
 
 export default cardSaga;

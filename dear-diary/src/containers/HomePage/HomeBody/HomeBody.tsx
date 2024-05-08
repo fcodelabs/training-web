@@ -8,35 +8,53 @@ import { useMediaQuery, useTheme, Grid, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 const HomeWrapper = styled.div`
-    padding: 10px 10px 10px 4px;
-    display: flex;
-    flex-direction: column;
-`
+  padding: 10px 10px 10px 4px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const BlurredBackground = styled.div<{ showForm: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 3; /* Ensure it's on top of other elements */
+  display: ${(props) => (props.showForm ? 'block' : 'none')};
+`;
+
 const HomeHeader = styled.div`
-    font-size: 26px;
-    color: #4b465c;
-    font-weight: 500;
+  font-size: 26px;
+  color: #4b465c;
+  font-weight: 500;
 `;
 
 const HomeSearch = styled.div`
-    padding-top: 2%;
-    padding-bottom: 15px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-`
+  padding-top: 2%;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;;
+`;
+
 const ScrollableGridContainer = styled.div`
-    overflow-y: auto;
-`
+  padding-top: 1%;
+  overflow-y: auto;
+`;
+
 const SubmitFormButton = styled(Button)`
-    border: 0.1px solid black !important;
-    min-width: 16vh !important;
-    color: white !important;
-    box-shadow: 0px 4px 4px 0px rgba(50, 50, 50, 0.638);
-    background-color: #0092DD !important;
-    text-transform: none !important;`
+  min-width : 15vh !important;
+  color: white !important;
+  background-color: #0092DD !important;
+  text-transform: none !important;
+
+  @media screen and (max-width: 800px) {
+  min-width :16vh !important; }
+`;
+
 
 type HomeProps = {
   showform: boolean;
@@ -63,9 +81,9 @@ const Home: React.FC<HomeProps> = ({ showform, reset }) => {
           ? 2
           : 1;
 
-
   return (
     <HomeWrapper>
+      <BlurredBackground showForm={showform} />
       <HomeHeader>Home</HomeHeader>
       <HomeSearch>
         <PrimarySearchAppBar setFilteredList={setFilteredList} />
@@ -78,7 +96,7 @@ const Home: React.FC<HomeProps> = ({ showform, reset }) => {
         {filteredList.length === 0 ? (
           <Typography>No diaries found.</Typography>
         ) :
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             {[...Array(columns)].map((_, colIndex) => (
               <Grid key={colIndex} item xs={12} sm={6} md={4} lg={3} xl={2}>
                 {filteredList

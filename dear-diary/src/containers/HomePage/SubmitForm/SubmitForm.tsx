@@ -1,15 +1,13 @@
 import styled from 'styled-components';
-import ValidateDiaryCard from '../../../utilities/validation';
+import { validateDiaryCard } from '../../../utilities/validation';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { useAppDispatch } from '../../../redux/hooks';
-import { addCardByUser } from '../../../redux/diarycard/diaryCardSlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { addCard } from '../../../redux/diarycard/diaryCardSlice';
+import { SubmitCard } from '../../../utilities/types';
+import { setNotification } from '../../../redux/notification/notificationSlice';
 
-type Diary = {
-  title: string;
-  body: string;
-};
 
 type SubmitFormProps = {
   showform: boolean;
@@ -20,27 +18,36 @@ const StyledSubmitForm = styled.div<{ showform: boolean }>`
   z-index: 5;
   position: fixed;
   top: 0;
-  width: 300px;
+  width: 20%;
   height: 100vh;
+  min-width: 190px;
   background-color: white;
   padding: 1%;
   right: ${({ showform }) => (showform ? '0' : '-100%')};
-  transition: right 0.5s ease-in-out;`;
+  transition: right 0.5s ease-in-out;
+  
+  @media screen and (max-width: 768px) {
+    width: 99%;
+  }
+  `;
 
 const HeaderSubmit = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 95%;
-  padding: 2% 2% 5% 2%;`;
+  padding: 2% 2% 5% 2%;
+  `;
 
 const FormClose = styled.div`
   transition: transform 0.3s ease-in-out;
-  background-color: rgba(170, 170, 170, 0.619);
+  background-color: rgba(168, 170, 174, 0.4) !important;
   font-size: 20px;
   border-radius: 20%;
   font-weight: 500;
   padding: 1% 1% 0% 1%;
+  color: rgb(0,0,0, 0.4) !important;
+  box-shadow: none !important;
 
   &:hover {
     transform: scale(1.1);
@@ -50,48 +57,57 @@ const FormClose = styled.div`
 const FormTitle = styled.div`
   font-size: 20px;
   color: #4b465c;
-  font-weight: 500;`;
+  font-weight: 500;
+  `;
 
 const SubmitTitle = styled.div`
   font-size: 20px;
   color: #4b465c;
-  font-weight: 500;
-  padding: 1% 2% 0% 2%;`;
+  font-weight: 350;
+  padding: 1% 2% 0% 2%;
+  `;
 
 const SubmitDesc = styled.div`
   font-size: 20px;
   color: #4b465c;
-  font-weight: 500;
+  font-weight: 350;
   width: 100%;
-  padding: 5% 2% 0% 2%;`;
+  padding: 5% 2% 0% 2%;
+  `;
 
 const SubmitButton = styled(Button)`
   background-color: #0092dd !important;
   text-transform: none !important;
   margin: 5% 2% 2% 2% !important;
   color: white;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);`;
+  box-shadow: none !important;
+  `;
 
 const CancelButton = styled(Button)`
   text-transform: none !important;
-  background-color: #828282 !important;
+  background-color: rgba(168, 170, 174, 0.2) !important;
   margin: 5% 2% 2% 2% !important;
-  color: rgb(255, 255, 255);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);`;
+  color: rgb(0,0,0, 0.2) !important;
+  box-shadow: none !important;
+  `;
 
 const SubmitFormBar = styled.div`
   padding: 1%; 
-  font-size: 15px;`;
+  font-size: 15px;
+  `;
 
 const TextFieldSingleLine = styled(TextField)`
-  width: 99%;`
+  width: 99%;
+  `;
 
 const TextFieldMultiLine = styled(TextField)`
-  width: 95%;`  
+  width: 95%;
+  `;
 
 const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const userName = useAppSelector((state) => state.user.userName);
   const dispatch = useAppDispatch();
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,22 +119,20 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
   };
 
   const handleSubmit = () => {
-    const newDiary: Diary = {
+    const newDiary: SubmitCard = {
+      userName: userName,
       title: title,
       body: description,
     };
-    if (!ValidateDiaryCard(title, description)) {
+    if (!validateDiaryCard(title, description)) {
+      dispatch(setNotification({ type: 'error', message: 'Title and description are required!', show: true, showtime: false }));
       return;
     }
-    dispatch(addCardByUser(newDiary));
+    dispatch(addCard(newDiary));
+    dispatch(setNotification({ type: 'success', message: 'Record Saved Successfully', show: true, showtime: true }));
     setTitle('');
     setDescription('');
     reset();
-  };
-
-  const handleCancel = () => {
-    setTitle('');
-    setDescription('');
   };
 
   const handleClose = () => {
@@ -137,17 +151,17 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ showform, reset }) => {
       </HeaderSubmit>
       <SubmitTitle>
         <SubmitFormBar>Title</SubmitFormBar>
-        <TextFieldSingleLine value={title} onChange={handleTitleChange} placeholder="Enter title" size="small"  />
+        <TextFieldSingleLine value={title} onChange={handleTitleChange} placeholder="Enter title" size="small" />
       </SubmitTitle>
       <SubmitDesc>
         <SubmitFormBar>Description</SubmitFormBar>
-        <TextFieldMultiLine value={description} onChange={handleDescriptionChange} placeholder="Descryption" multiline rows={10} />
+        <TextFieldMultiLine value={description} onChange={handleDescriptionChange} placeholder="Description" multiline rows={10} />
       </SubmitDesc>
       <div>
         <SubmitButton variant="contained" onClick={handleSubmit}>
           Submit
         </SubmitButton>
-        <CancelButton variant="contained" onClick={handleCancel}>
+        <CancelButton variant="contained" onClick={handleClose}>
           Cancel
         </CancelButton>
       </div>

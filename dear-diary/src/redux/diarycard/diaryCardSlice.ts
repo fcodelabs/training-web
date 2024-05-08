@@ -1,24 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Card, DiaryCardStateType, SubmitCard } from "../../utilities/types";
 
-export type Card = {
-    id: string
-    title: string;
-    body: string;
-};
 
-export type SubmitCard = {
-    title: string;
-    body: string;
-};
-
-type InitialStateType = {
-    isLoading: boolean;
-    cards: Card[];
-
-};
-
-const initialState: InitialStateType = {
-    isLoading:true,
+const initialState: DiaryCardStateType = {
+    isLoading: true,
     cards: []
 };
 
@@ -30,18 +15,15 @@ const diaryCardSlice = createSlice({
     name: "diaryCard",
     initialState: initialState,
     reducers: {
-        addCardByUser: (state, action: PayloadAction<SubmitCard>) => {},
+        addCard: (state, action: PayloadAction<SubmitCard>) => { },
         setCards: (state, action: PayloadAction<Card[]>) => {
             state.isLoading = false;
             state.cards = action.payload;
-          },
-        watchingCards: (state) => {
-            state.isLoading = false;
-        }
-
+        },
+        watchingCards: (state, action: PayloadAction<String>) => { }
 
     },
 });
 
-export const { setCards, addCardByUser, watchingCards } = diaryCardSlice.actions;
+export const { setCards, addCard, watchingCards } = diaryCardSlice.actions;
 export default diaryCardSlice.reducer;
